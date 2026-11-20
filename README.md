@@ -16,10 +16,15 @@ the disk image too.
 Requirements: a C compiler, GNU make and `xz`. Python 3 with `pexpect` is
 optional but recommended (it automates the boot dialogue and sets the date).
 
+    ./build.sh
     ./run.sh
 
-The first run builds the emulator into `bin/`, unpacks the pristine disk
-image into `run/`, and boots ITS. When you see
+`build.sh` compiles the KLH10 emulator and the `itstar` tape tool from the
+source in this repository and installs them in `bin/`. It takes under a
+minute and needs no root. (`run.sh` runs it for you if `bin/` is missing.)
+
+`run.sh` unpacks the pristine disk image into `run/` on first use and boots
+ITS. When you see
 
     [ITS is up and the date is set. ...]
 
