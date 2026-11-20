@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: USRHUNK bug -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 17 Nov 82 21:18:00 GMT -->
+<!--X-Message-Id: 0a83133cab987c3a7509f0c50807a698@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>USRHUNK bug</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00743.html">Date Prev</a>][<a href="msg00741.html">Date Next</a>][<a href="msg00743.html">Thread Prev</a>][<a href="msg00741.html">Thread Next</a>][<a href="maillist.html#00742">Date Index</a>][<a href="threads.html#00742">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>USRHUNK bug</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: USRHUNK bug</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 17 Nov 82 21:18:00 GMT</li>
+<li><em>Cc</em>: KWH at MIT-MC</li>
+<li><em>Original-date</em>: 17 November 1982 16:18-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>With (STATUS USRHU) set to a predicate that always returns T.
+And (STATUS SENDI) set to a COMPLR-compiled LEXPR.
+Doing:
+
+(setq a (hunk 1 2 3))
+(delete a (list (hunk 4 5 6) a))
+
+JUMPs to location 0.  This is because .DELETE keeps the MEMBER subr in
+accumulator D, but nobody bothers to save D when calling out to the
+SENDI handler (and because the standard .LCALL stuff makes free with D).
+
+Actually I don't see any comments in the source to the effect that MEMBER,
+MEMQ, etc. are supposed to preserve D.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00743.html">LetS -- a new looping macro for lisp</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00741.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00743.html">LetS -- a new looping macro for lisp</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00741.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00742"><strong>Date</strong></a></li>
+<li><a href="threads.html#00742"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

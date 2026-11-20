@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Bug fixed in hairy interrupt table -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Wed, 1 Apr 81 16:54:00 GMT -->
+<!--X-Message-Id: eb54bdd56736e117a10849083c649c22@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Bug fixed in hairy interrupt table</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01390.html">Date Prev</a>][<a href="msg01388.html">Date Next</a>][<a href="msg01390.html">Thread Prev</a>][<a href="msg01388.html">Thread Next</a>][<a href="maillist.html#01389">Date Index</a>][<a href="threads.html#01389">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Bug fixed in hairy interrupt table</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GSB at MIT-MC, GJC at MIT-MC</li>
+<li><em>Subject</em>: Bug fixed in hairy interrupt table</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Wed, 1 Apr 81 16:54:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 1 APR 1981 1154-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The following two bugs were due to a &quot;missing fence-post&quot; in the middle
+of the hairy interrupt table (the one that demarcates intervals of special
+interrupt code action):
+From:     GSB@MIT-ML
+Date: Mon, 31 Mar 81 05:51:54 GMT
+Original-Date: 03/31/81 01:51:54 EDT
+Subject: Re: how to reproduce that jump to %ISSW.+n
+    (setq tty-return '(lambda (()) ()))
+    (progn (sleep 5) (status ospeed))
+    Then ^Z and ^P the lisp.  When ddt feeps, try to p it.
+    This apparently explains why i see it frequently;  many of my init
+    files read (status ospeed), and i often ^P them while they are loading up.
+I've tested this out, and it now works ok.  Amazingly, this bug has been
+around for months.
+    Date: 31 MAR 1981 1628-EST
+    From: GJC at MIT-MC (George J. Carrette)
+    I've got a bug that shows up when a lisp which was ^P'd wants
+    the TTY and is P'd. A PURGP error results that seems to have
+    something to do with the TTY-RETURN and the use of UNWIND-PROTECT.
+    To get it do
+    :plasma;Grtool
+    .  .  .
+    that is, use the test files specified, and alt-p when it wants the TTY. 
+I tested this one out too, and it ran ok, with none of the errors which
+were visible in the non-corrected version of LISP;  however, the output
+file which my test run produced (PLASMA;GRTOOL ARDS) is a little bigger
+than the one you (GJC) already had there, which I renamed to GRTOOL OARDS.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01390.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01388.html">Args property of INCLUDEF</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01390.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01388.html">Args property of INCLUDEF</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01389"><strong>Date</strong></a></li>
+<li><a href="threads.html#01389"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

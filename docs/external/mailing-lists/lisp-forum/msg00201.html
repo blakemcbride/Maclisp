@@ -1,0 +1,137 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Destructuring LET -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,3 Feb 81 12:09:00 EDT -->
+<!--X-Message-Id: a53c5728dc690f0055a3c63d01bf8578@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Destructuring LET</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00200.html">Date Prev</a>][<a href="msg00202.html">Date Next</a>][<a href="msg00466.html">Thread Prev</a>][<a href="msg00202.html">Thread Next</a>][<a href="maillist.html#00201">Date Index</a>][<a href="threads.html#00201">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Destructuring LET</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DLW at MIT-AI</li>
+<li><em>Subject</em>: Re: Destructuring LET</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,3 Feb 81 12:09:00 EDT</li>
+<li><em>Cc</em>: JONL at MIT-MC, LISP-FORUM at MIT-MC, DICK at MIT-AI,      Guy.Steele at CMU-10A</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 3 February 1981 03:04-EST
+    From: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;
+    Re:   Destructuring syntax
+
+	From: JONL
+
+        In the LISP RECENT note (now in the LISP NEWS file) dated &quot;Jan 27,1979&quot;
+        there was presented a very succinct bnf syntax for &quot;lambda-lists&quot;, 
+        which would take care of LET, DEFUN, DO, PROG etc... This syntax is
+	fully-upward compatible, and entirely unabmiguous (as the bnf shows);  
+
+Personally, I think the proposed bnf was terrible. I think it was a terrible
+idea to have introduced &amp;keywords into Lisp in the first place. There were
+alternative ways of specifying things that would have been much more elegant.
+But that change is in a lot of code now and there's no real way to change it.
+
+I was highly disappointed in GLS for the support he lent to that discussion 
+(2-Oct-80: Destructuring Syntax). His suggestions are usually more sound.
+Describing lisp syntax in terms of bnf is adding clutter to the language
+definition which has no reason to be there.
+
+	The fact that many ordinary users are rudely suprised when they
+	find it is unavailable on the LISPM shows that it must be a
+	&quot;natural&quot; extension too.
+
+    This is ridiculous.  All this shows is that people are using it in their
+    code.  My interpretation is simply that this &quot;destructuring lambda&quot; is
+    an easy misconception for people to have.  Just because lots of people
+    think something does not make it right.  The number of dialects that
+    support it and the number of users who, having seen the announcement of
+    the feature, started using it, does not affect my opinion.
+
+Oh, it's fair to not worry about what people are using in their code? Then
+perhaps I should push the issue of &amp;keywords again and ask people to change
+them. A number of people I have talked to agree they were a mistake, but 
+feel they are too dug in to remove. Is there a double standard here?
+
+Maclisp programmers use destructuring LET extensively. The failure of the Lisp
+Machine to provide this feature deserves strong justification, since it means
+that every time we try to transport programs to the Lisp Machine, we have to
+either clobber the system LET, put the code on a separate package, or rewrite
+a whole pile of code. None of these alternatives are very attractive. Since 
+you are not currently attaching any meaning to the syntax used by destructuring
+LET, you are in the best position to go for compatibility. I am not saying
+you should do so for the sake of compatibility, I am saying you should
+consider doing so for compatibility.
+
+Making code as compatible as possible is of large value to a lot of people.
+We really need to address that issue.
+
+At the very least, LispM lisp should provide SOME primitive with the exact
+semantics of Maclisp LET in the default system. It should preferrably be
+about 3 characters long so that major reformatting of files isn't needed. 
+I disagree that anything more than LET and LET* need to do destructuring.
+Generalizing to make DO, PROG, etc. do the same thing is silly. I would, I
+suppose, be satisfied with DLET and DLET* which could be macros. If you decided
+to do this, then I would advocate RMS' suggestion not be adopted into the
+syntax of LET, since LispM-&gt;Maclisp compatibility would be destroyed by such
+an action in the same way as Maclisp-&gt;LispM compatibility is currently mucked 
+up.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00200.html">Re: destructuring</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00202.html">Re: Disappointment</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00466.html">Re: Old IO symbols in MACSYMA</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00202.html">Re: Disappointment</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00201"><strong>Date</strong></a></li>
+<li><a href="threads.html#00201"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

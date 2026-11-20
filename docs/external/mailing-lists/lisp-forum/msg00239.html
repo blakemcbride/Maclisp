@@ -1,0 +1,120 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Why DIGITP and DIGIT&#45;WEIGHT? -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Thu ,2 Oct 80 17:27:00 EDT -->
+<!--X-Message-Id: 1d2736a12a9523f419f41e9bc746daa0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Why DIGITP and DIGIT-WEIGHT?</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00241.html">Date Prev</a>][<a href="msg00240.html">Date Next</a>][<a href="msg00238.html">Thread Prev</a>][<a href="msg00242.html">Thread Next</a>][<a href="maillist.html#00239">Date Index</a>][<a href="threads.html#00239">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Why DIGITP and DIGIT-WEIGHT?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Guy.Steele at CMU-10A</li>
+<li><em>Subject</em>: Re: Why DIGITP and DIGIT-WEIGHT?</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu ,2 Oct 80 17:27:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(APPEND A ())		      ; Obscure use of APPEND to copy top of list
+(SUBST () () A)		      ; Obscure use of SUBST to copy structure
+(LSH -1 -1)		      ; Obscure use of -1 &amp; LSH to get max pos fixnum
+(SSTATUS MACRO (PROGN I) ...) ; Obscure use of PROGN to make I EVAL
+...
+These are ugly idioms. They each have their particular application -- some
+more questionable than others, but in each case, the end result is in no way
+related to the name. APPEND should put things together. SUBST should do
+substitution. -1 should be negative 1 -- we shouldn't have to use it for its
+representation. PROGN should sequence -- it shouldn't be used to make a list
+out of something that wouldn't normally be ... 
+
+Having to say (DIGITP #/8) to get a digit's weight is annoying. It looks like
+a predicate. It may be a predicate -- sometimes. If I did:
+
+	... (WHILE (SETQ C (DIGITP (TYI))) ...) ...
+
+I might want DIGITP instead of DIGIT-WEIGHT but if I were in a routine which
+I knew had verified its input to be digits, I would want to say 
+
+	... (LET ((W (DIGIT-WEIGHT DIGIT))) ...
+
+rather than
+
+	... (LET ((W (DIGITP DIGIT))) ...
+
+Indeed, I may have been passed the DIGIT from some other routine and not
+know what his input radix was. I may only know that the caller wanted it
+treated as a digit. Then the default argument must be explicitly given (as
+36. -- sigh) and I will need
+
+	... (LET ((W (DIGITP DIGIT 36.))) ...
+
+which is even dumber if all I want is the digit weight. I'd also like to think
+that the code I was writing would work fine if there were bases above 36. Why
+should that constant have to go in.
+
+Having two functions means I can say the functionality I want and get it
+straightforwardly. The issues are subtle when there is only one function and
+they are straightforward if there are two. I vote for the straightforward
+case. The code will be there anyway; why not give the user the entry point
+he wants?
+
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00241.html">Re: DIGITP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00240.html">Re: DIGITP and DIGIT-WEIGHT</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00238.html">Re: JONL's recenbt note on DIGITP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00242.html">Re: Why DIGITP and DIGIT-WEIGHT?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00239"><strong>Date</strong></a></li>
+<li><a href="threads.html#00239"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

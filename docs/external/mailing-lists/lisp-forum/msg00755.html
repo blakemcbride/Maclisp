@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Suggested new lambda&#45;list syntax -->
+<!--X-From-R13: Dvpuneq [. Egnyyzna &#60;D[E ng [WF&#45;OW> -->
+<!--X-Date: Mon ,21 Sep 81 18:37:00 EDT -->
+<!--X-Message-Id: 5d93d191e8b1b3154160ee2d0be2754d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Suggested new lambda-list syntax</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00757.html">Date Prev</a>][<a href="msg00754.html">Date Next</a>][<a href="msg00757.html">Thread Prev</a>][<a href="msg00754.html">Thread Next</a>][<a href="maillist.html#00755">Date Index</a>][<a href="threads.html#00755">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Suggested new lambda-list syntax</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: Suggested new lambda-list syntax</li>
+<li><em>From</em>: Richard M. Stallman &lt;RMS at MIT-AI&gt;</li>
+<li><em>Date</em>: Mon ,21 Sep 81 18:37:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I'm thinking of implementing the following new syntax for argument lists,
+which I think is more Lispy than the existing one.
+
+Anything in the argument list that is a symbol is the name of an
+argument.  Anything that is a list has a car which is a keyword.
+Keywords such as OPTIONAL, REST, AUX, KEY, QUOTE are followed by any
+number of arguments (symbols or lists).  A default value is specified
+by the keyword DEFAULT, as in (DEFAULT varname value specified-flag).
+These constructs can be nested in any way that makes sense.
+
+Arglists such as (X (REST Y Z) A (OPTIONAL A B)) which are nonsensical
+would cause error messages.  
+
+This new format facilitates extensions, such as (DATA-TYPE arg type),
+(SPECIAL X Y (DEFAULT Z T)), or (LIST A B C) to do destructuring.
+(LIST A (OPTIONAL B)) is also possible, leading to an interesting
+idea: lambda-lists and SETF-able expressions can be generalized to be
+the same kind of thing.
+
+It is possible to support both this syntax and the existing one
+because in the existing one it is illegal to have a list appear unless
+&amp;OPTIONAL, &amp;KEY or &amp;AUX has appeared first.  But ideally I think it
+would be good to flush the existing one if it is ever practical to do
+so.  Then there would be no reserved words in lambda lists.
+
+Any comments?  Should the keywords have colons?  Be global like the
+existing keywords?
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00757.html">Lexical variables</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00754.html">Suggested new lambda-list syntax</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00757.html">Lexical variables</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00754.html">Suggested new lambda-list syntax</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00755"><strong>Date</strong></a></li>
+<li><a href="threads.html#00755"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

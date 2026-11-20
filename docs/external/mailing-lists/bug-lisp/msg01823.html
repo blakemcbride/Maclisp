@@ -1,0 +1,116 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Just for Fun ... -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 11 Nov 80 23:27:00 GMT -->
+<!--X-Message-Id: c093d0fd98a7ca54df00108cf30f6a07@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Just for Fun ...</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01824.html">Date Prev</a>][<a href="msg01822.html">Date Next</a>][<a href="msg01825.html">Thread Prev</a>][<a href="msg01822.html">Thread Next</a>][<a href="maillist.html#01823">Date Index</a>][<a href="threads.html#01823">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Just for Fun ...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: Just for Fun ...</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 11 Nov 80 23:27:00 GMT</li>
+<li><em>Cc</em>: JAR at MIT-MC, RICH at MIT-AI, DANIEL at MIT-AI</li>
+<li><em>Original-date</em>: 11 November 1980 18:27-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Here's a couple of cute Maclisp toys to play with ...
+
+[1] Fun with Shadowing.
+
+		(DEFMACRO FOO (X) `(CAR ,X))
+		(MAPCAR #'FOO '((A B) (C D) (E F)))
+
+      Do you know why it loses?
+
+		(DEFUN FOO (X) (FOO X))
+		(DEFMACRO FOO (X) `(CAR ,X))
+		(MAPCAR #'FOO (X) '((A B) (C D) (E F)))
+
+      Do you know why it wins?
+
+[2] Fun with Interpreted Macros.
+
+      (DEFMACRO MMAPCAR (FN L)
+	(LET ((VAR (GENSYM))
+	      (CALL (IF (AND (LISTP FN) (MEMQ (CAR FN) '(QUOTE FUNCTION)))
+			`(,(CADR FN))
+			`(FUNCALL ,FN))))
+	  `((LAMBDA (,VAR)
+	     (COND (,VAR (CONS (,@CALL (CAR ,VAR)) (MMAPCAR ,FN (CDR ,VAR))))))
+	    ,L)))
+      (SETQ GRIND-MACROEXPANDED T)
+      (DEFMACRO F (X) `(CAR ,X))
+      (MMAPCAR #'F '((A B) (C D) (E F)))
+      (SPRINTER +)
+      (DEFUN G (X) (MMAPCAR #'F X))
+      (G '((A B) (C D)))
+      (GRINDEF G)
+      (G '((A B)))
+      (GRINDEF G)
+      (G '((A B) (C D) (E F)))
+
+[3] Fun with Compiled Macros. (Extra Credit)
+
+      Why doesn't the definition of G from [2] compile? 
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01824.html">SETF</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01822.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01825.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01822.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01823"><strong>Date</strong></a></li>
+<li><a href="threads.html#01823"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

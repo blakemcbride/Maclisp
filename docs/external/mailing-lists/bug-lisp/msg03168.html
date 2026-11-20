@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: ALPHALESSP &#38; Strings -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 1 Aug 81 18:55:00 GMT -->
+<!--X-Message-Id: 3ac994274944c8cfb429b7e6eedfa1f2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ALPHALESSP &amp; Strings</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03169.html">Date Prev</a>][<a href="msg03167.html">Date Next</a>][<a href="msg03181.html">Thread Prev</a>][<a href="msg03179.html">Thread Next</a>][<a href="maillist.html#03168">Date Index</a>][<a href="threads.html#03168">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ALPHALESSP &amp; Strings</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DUFTY at MIT-MC</li>
+<li><em>Subject</em>: ALPHALESSP &amp; Strings</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 1 Aug 81 18:55:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 1 August 1981 14:55-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 30 July 1981 16:58-EDT
+    From: Dennis L. Doughty &lt;DUFTY at MIT-MC&gt;
+    I do (ALPHALESSP &quot;A&quot; 'FOO) or (ALPHALESSP 'FOO &quot;A&quot;) ... both return NIL.
+    I believe this is due to the fact that I load the STRING library, but
+    I'm not sure.  Why does this happen?
+There is a bug in the ALPHALESSP function, when given two args of 
+dissimilar type (one is a string, the other a symbol).  I can't patch
+this problem in the current lisp, since the patch area is essentially
+all used up, but I did assemble a new lisp (version 2122) and things
+are fixed in it.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03169.html">Context of &amp;OPTIONAL and &amp;AUX calculations</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03167.html">Who says, &quot;gratuitous&quot;?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03181.html">ALPHALESSP &amp; Strings</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03179.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03168"><strong>Date</strong></a></li>
+<li><a href="threads.html#03168"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

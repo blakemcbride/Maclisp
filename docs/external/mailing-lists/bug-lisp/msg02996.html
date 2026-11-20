@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Mon, 18 Jun 79 16:37:00 GMT -->
+<!--X-Message-Id: 9f1368e07a582a5cc9e8827fed40a838@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02997.html">Date Prev</a>][<a href="msg02995.html">Date Next</a>][<a href="msg02997.html">Thread Prev</a>][<a href="msg02995.html">Thread Next</a>][<a href="maillist.html#02996">Date Index</a>][<a href="threads.html#02996">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RIVEST at MIT-MC</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Mon, 18 Jun 79 16:37:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 18 JUN 1979 1237-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>SXHASH on lists
+At one time, SXHASH had a definition such that the hash of a
+cons node was not determinable from the hash's of the car and cdr
+of that node.  So we changed SAHASH, in order to make it possible
+for the function to be written easily in LISP.  Admittedly, we should
+have chosen to make it commutative in the car direction rather than
+the cdr direction.  But changeing things like that is not so easy - 
+the primary use of SXHASH is for list structure in FASL files, and
+all those file have been comiled useing the existing algorithm,
+incorporatig in the file the various sxhash numbers.  It wont
+break the code to change the algorithm, but likely many many many
+copies of a given constant expressions would be generated, whereas
+now there is just one copy of a given s-expression  for all files
+loaded.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02997.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02995.html">Re: Your reply to rwk's reply re format change</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02997.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02995.html">Re: Your reply to rwk's reply re format change</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02996"><strong>Date</strong></a></li>
+<li><a href="threads.html#02996"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

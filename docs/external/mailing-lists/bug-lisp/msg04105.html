@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: READ flushing atom delimiters -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Fri, 30 May 80 10:31:00 GMT -->
+<!--X-Message-Id: d91166677871833593a2a6235fca545a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>READ flushing atom delimiters</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04106.html">Date Prev</a>][<a href="msg04104.html">Date Next</a>][<a href="msg04106.html">Thread Prev</a>][<a href="msg04104.html">Thread Next</a>][<a href="maillist.html#04105">Date Index</a>][<a href="threads.html#04105">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>READ flushing atom delimiters</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>Subject</em>: READ flushing atom delimiters</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Fri, 30 May 80 10:31:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, INFO-LISPM at MIT-MC</li>
+<li><em>Original-date</em>: 30 MAY 1980 0631-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 30 May 1980 00:23-EDT
+    From: David A. Moon &lt;Moon at MIT-AI&gt;
+      .  .  .  I f the delimiter is a &quot;useless&quot; or &quot;whitespace&quot; character,
+    it will be thrown away, rather than being UNTYI'ed back into the stream
+    so that it can be TYI'ed later.  This will happen regardless of whether 
+    the symbol or number is seen at top level or is inside of an expression,
+      .  .  .
+    Certain programs, such as reader macros, may be broken by this.  For them,
+    a special variable which they may bind is provided.
+    If READ-PRESERVE-DELIMITERS is bound non-NIL around a call to READ,
+    all delimiters are preserved regardless of whether they are whitespace
+    or meaningful characters.  .  .  .
+    I would like to request a compatible change to Maclisp, to avoid 
+    divergence and incompatibility on this point.
+As it happens, GSB and I made this change to one version of a recent XLISP,
+probably about version 1984 or so, but had to take it back when GSB
+found he didn't have the time to accomodate his LMS and COBOL code.
+What we were hoping to do was provide an additional function, say,
+READ-AND-BREAK-CHAR, which would return both the item read and the
+termination character.  For backwards compatibility, someone may raise
+an objection to not haveing a &quot;backwards-compatible-switch&quot; (i.e.
+READ-PRESERVE-DELIMITERS), but for future use, the explicit request
+to return the termination character seems like a better approach for
+those very few programs which want it.  Any comments?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04106.html">Change to READ</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04104.html">READ flushing atom delimiters</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04106.html">Change to READ</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04104.html">READ flushing atom delimiters</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04105"><strong>Date</strong></a></li>
+<li><a href="threads.html#04105"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

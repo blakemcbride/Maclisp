@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: "open" init files from LISP -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 26 Feb 80 20:06:00 GMT -->
+<!--X-Message-Id: 7c129c8597add0131981b2915f0f5035@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>&quot;open&quot; init files from LISP</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02113.html">Date Prev</a>][<a href="msg02111.html">Date Next</a>][<a href="msg02113.html">Thread Prev</a>][<a href="msg02111.html">Thread Next</a>][<a href="maillist.html#02112">Date Index</a>][<a href="threads.html#02112">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>&quot;open&quot; init files from LISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: sjobrg at MIT-AI</li>
+<li><em>Subject</em>: &quot;open&quot; init files from LISP</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 26 Feb 80 20:06:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, bgs at MIT-AI</li>
+<li><em>Original-date</em>: 26 FEB 1980 1506-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>LOAD will normally cause a file to be closed, *** if *** it 
+successfully reads to the end;  often a person's LISP.INIT file
+will remain hanging open because there is no reason to read
+the whole file.   The trick I use for init files is to
+have the last form in the file be a PROG or something which
+will among other things explicity close INFILE.   Generally
+the need for such a &quot;trick&quot; is that the init file does some
+kind of THROW out of the loop which is &quot;loading&quot; it.
+But as for why this loser had lots of dsk channels open while
+doing multiple LOADs, maybe each load manages to abort 
+abnormally somehow?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02113.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02111.html">GRINDEF bites the bag on LET</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02113.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02111.html">GRINDEF bites the bag on LET</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02112"><strong>Date</strong></a></li>
+<li><a href="threads.html#02112"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

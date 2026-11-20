@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Twenex Maclisp wish list -->
+<!--X-From-R13: Xbanguna O. Drrf &#60;XOD ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 6 Apr 81 01:57:00 GMT -->
+<!--X-Message-Id: f8c9526c0d63416771882e22d3c759f5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Twenex Maclisp wish list</title>
+<link rev="made" href="mailto:JAR at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02633.html">Date Prev</a>][<a href="msg02630.html">Date Next</a>][<a href="msg02634.html">Thread Prev</a>][<a href="msg02630.html">Thread Next</a>][<a href="maillist.html#02632">Date Index</a>][<a href="threads.html#02632">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Twenex Maclisp wish list</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: Twenex Maclisp wish list</li>
+<li><em>From</em>: Jonathan A. Rees &lt;JAR at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 6 Apr 81 01:57:00 GMT</li>
+<li><em>Original-date</em>: 5 April 1981 20:57-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>1. Does FASLOAD or anyone else do anything about the OF%PLN bit in
+their various OPENF's?  Evidently file I/O goes incredibly faster if the
+monitor doesn't need to continually be checking the line-number-p
+bit in file words.  Perhaps for ascii files there could be an SSTATUS option
+settable on systems where you KNOW that you're never going to encounter
+a line number you'll want to ignore.
+
+2. Is there any chance that Maclisp could hack the TOPS-20 argument block
+if it's given one?  The idea is, you get this 128-word chunk of crap
+with the PRARG jsys; the first word is usually zero, and if it is, the
+rest of the words are an ASCIZ string which should be fetchable from lisp
+with STATUS JCL.  This convention is used quite a bit at Yale and perhaps
+elsewhere, especially places using Yale tools, which are spreading.
+(This is the &quot;correct&quot; way of doing things, compared to what the
+DEC EXEC does with the &quot;rescan buffer&quot; nonsense.  Actually the text
+in the PRARG, I think like the rescan buffer, gets you the entire
+command line, not just the JCL.)
+
+3. Does Maclisp do a SETSN on startup (set system name)?  If it did a
+SETSN to &quot;MACLISP,&quot; programs which cared (like statistics gatherers:
+&quot;how much time is being spent by Maclisps?&quot;) would be much happier.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02633.html">CASEQ</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02630.html">PREDICT and GRINDEF</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02634.html">more on CASEQ</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02630.html">PREDICT and GRINDEF</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02632"><strong>Date</strong></a></li>
+<li><a href="threads.html#02632"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

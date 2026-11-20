@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: readtable hacking -->
+<!--X-From-R13: "Uhl Z. Egrryr, Xe." &#60;UZE ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 21 Sep 79 01:02:00 GMT -->
+<!--X-Message-Id: f845616c266dac8830d719c487b779da@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>readtable hacking</title>
+<link rev="made" href="mailto:GLS at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02766.html">Date Prev</a>][<a href="msg02764.html">Date Next</a>][<a href="msg02766.html">Thread Prev</a>][<a href="msg02764.html">Thread Next</a>][<a href="maillist.html#02765">Date Index</a>][<a href="threads.html#02765">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>readtable hacking</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DAVE.TOURETZKY at CMU-10A</li>
+<li><em>Subject</em>: readtable hacking</li>
+<li><em>From</em>: &quot;Guy L. Steele, Jr.&quot; &lt;GLS at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 21 Sep 79 01:02:00 GMT</li>
+<li><em>Cc</em>: SCOTT.FAHLMAN at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 20 September 1979 21:02-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date:    20 Sep 1979 1743-EDT
+    From:    DAVE.TOURETZKY at CMU-10A 
+
+    I've had two requests from users for readtable hacks.  Can you tell
+    me how to do the following?
+
+    1) Make ] be both a letter and a break character.  Example: the
+    character sequence AB]CD should produce three atoms: AB, ], and CD.
+
+Make ] have &quot;single character object&quot; syntax.  The easiest way to do this
+is to say (SETSYNTAX '/] 'SINGLE ()).
+
+    2) Implement an Interlisp-style &quot;super paren&quot;, e.g. make ] or escape
+    insert enough right parens to close out the current s-expression.
+    Alternatively, it could insert some constant number of right parens,
+    providing we can make the constant big enough.
+
+This is fairly difficult to do in the current set-up.  Super-parens
+were never installed in MacLISP because you don't need them very much
+if you have a good screen editor, and they are rather ugly.  Sorry.
+
+    Thanks,  -- Dave Touretzky
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02766.html">readtable hacking</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02764.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02766.html">readtable hacking</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02764.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02765"><strong>Date</strong></a></li>
+<li><a href="threads.html#02765"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

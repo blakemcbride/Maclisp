@@ -1,0 +1,135 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: &#38;mumbles at all levels. -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,20 Apr 82 22:27:00 EDT -->
+<!--X-Message-Id: d98be6b418ffaa377a91a2b7849f56ad@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>&amp;mumbles at all levels.</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00651.html">Date Prev</a>][<a href="msg00649.html">Date Next</a>][<a href="msg00661.html">Thread Prev</a>][<a href="msg00649.html">Thread Next</a>][<a href="maillist.html#00650">Date Index</a>][<a href="threads.html#00650">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>&amp;mumbles at all levels.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISPM at MIT-MC</li>
+<li><em>Subject</em>: &amp;mumbles at all levels.</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,20 Apr 82 22:27:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, DULCEY at MIT-ML</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 04/19/82 22:30:38
+    From: DULCEY at MIT-ML
+
+    (defmacro foo ((one &amp;optional (two ''two)) &amp;body three)
+      `(list ,one ,two ',three))
+    &gt;&gt;ERROR: &amp;OPTIONAL -- unrecognized &amp; keyword in DEFMACRO.
+    While in the function ...
+
+    This probably isn't defined as working.  However, it would be useful if
+    it did.
+
+Indeed, this is currently defined to be an error.  Would anyone object if I
+actually made it act as it obviously should?  I would like to fix this, and
+simultaneously introduce a general tool for performing macro body parsing.
+
+Proposed new special form: BIND-ARGUMENTS
+
+example:
+
+(bind-arguments ((a &amp;optional (b *b*)) (foo) (barf))
+  b o d y)
+
+(approximately)==&gt;
+
+(let ((gensym (foo)))
+  (if (not (and (&lt;= (length gensym) 2)
+		(&gt;= (length gensym) 1)))
+      (barf))
+  (let ((a (car gensym))
+	(b (if (&lt; (length gensym) 2) *b* (cadr gensym))))
+    b o d y))
+
+Now, you probably would never need a macro like this directly, but suppose you
+had to write defmacro yourself:
+
+(defmacro defmacro (name pattern &amp;body body)
+  (let ((v (gensym)))
+    `(macro ,name (,v)
+       (bind-arguments (,pattern (cdr ,v) (ferror nil &quot;Bad syntax: ~S&quot; ,v))
+	 ,@body))))
+
+That was easy wasn't it!  So easy that ANYONE can do it.  This seems to be the
+right tool for bringing &amp;mumble-argument-parsing to the masses.
+
+Now I already have a working one of these (amazingly usefull in the right
+situations I must add), and I would like to install it in the LispMachine as
+the way defmacro etc work.  This would have two noticeable effects:
+
+1) &amp;keywords would start to work at all levels in defmacro patterns.  I presume
+no one objects to this?
+
+2) &amp;list-of STOPS working...  (finally I got around to the screw).  Does ANYONE
+use this feature?  I could try and duplicate it, but if noone uses it (as I
+suspect) I would rather just flush it.  What to LispMachine people think?
+(If no one raises objection, I'll ask info-lispm next.)
+
+Unnoticeable effect:
+
+3) The code produced by defmacro would be smaller and faster.  (You would be
+appalled at the code defmacro currently turns out.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00651.html">Interlisp and MacLisp (almost)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00649.html">&amp;mumbles at all levels.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00661.html">Interlisp and MacLisp (almost)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00649.html">&amp;mumbles at all levels.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00650"><strong>Date</strong></a></li>
+<li><a href="threads.html#00650"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

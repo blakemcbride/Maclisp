@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Naming -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Wed, 5 Nov 80 16:46:00 GMT -->
+<!--X-Message-Id: 6b0071a31c31b7d4b9fb57dc9fababc8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Naming</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01844.html">Date Prev</a>][<a href="msg01842.html">Date Next</a>][<a href="msg01845.html">Thread Prev</a>][<a href="msg01844.html">Thread Next</a>][<a href="maillist.html#01843">Date Index</a>][<a href="threads.html#01843">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Naming</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Guy.Steele at CMU-10A</li>
+<li><em>Subject</em>: Naming</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Wed, 5 Nov 80 16:46:00 GMT</li>
+<li><em>Cc</em>: JONL at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 5 NOV 1980 1146-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Well, it turns out that |constantp/||, etc., while internal, do also show up
+in FASL files. I believe JONL's putting them in LISP RECENT was a reaction to
+my statement that I was planning to document them (in my Maclisp manual) 
+whether anyone wanted it or not ... In particular, I feel that Lisp is a well-
+abstracted set of Assembly-Language routines (sometimes not so well...). But
+the ones that have Lisp-symbol entrypoints represent functions with calling
+conventions that can be used by users and might as well be documented so that
+users with those same applications can take advantage of them rather than 
+having them duplicate effort to write something truly obscure (as I have 
+written to identify C...R forms in the past -- there are two builtins which
+deal with this and neither is advertised) ... So RWK and I propose to name
+these reasonably and leave the funny names with EXPR indirection properties
+of the good names (and maybe at some far future date, flush the funny names). 
+When/if this happens, the COMPLR will be made to diagnose and rewrite code
+involving the funny names to code involving the pretty names ... 
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01844.html">Using * in names</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01842.html">|frobboz/||, and preferential names</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01845.html">Naming</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01844.html">Using * in names</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01843"><strong>Date</strong></a></li>
+<li><a href="threads.html#01843"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

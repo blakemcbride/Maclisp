@@ -1,0 +1,129 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: (COP pred form) -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,20 Jan 81 18:34:00 EDT -->
+<!--X-Message-Id: f4105eaba4d7d9dd9548054ec51f5d41@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: (COP pred form)</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00149.html">Date Prev</a>][<a href="msg00151.html">Date Next</a>][<a href="msg00156.html">Thread Prev</a>][<a href="msg00154.html">Thread Next</a>][<a href="maillist.html#00150">Date Index</a>][<a href="threads.html#00150">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: (COP pred form)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Guy.Steele at CMU-10A</li>
+<li><em>Subject</em>: Re: (COP pred form)</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,20 Jan 81 18:34:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>That's a cute idea. Your example ought perhaps be called MAPTREE though, since
+it really is far more general than copying (and far less constrained).
+
+Re: Your query about better semantics... 
+How about making pred have to return T if it wanted the object copied, and then
+using a standard system method for copying that object (a la typecaseq or 
+more general method or flavors or whatever) ... eg
+
+	(DEFUN COP (PRED X)
+	  (IF (NOT (FUNCALL PRED X)) X
+	      (TYPE-CASEQ X
+		((CONS PAIR LIST) (CONS (COP PRED (CAR X)) (COP PRED (CDR X))))
+		((STRING)	  (FORMAT NIL &quot;~A&quot; X))
+		... etc ...
+		(OTHERWISE	  X) ; Should this be an error?
+		)))
+
+(Please assume the obvious meaning/spelling for TYPE-CASEQ if it doesn't exist
+ or runs under some other name.)
+
+The only sad thing is that PRED will almost certainly have the form
+
+	#'(LAMBDA (X) (TYPE-CASEQ X ((....) T) (OTHERWISE NIL)))
+
+which means that the case dispatch will be done twice. Maybe a special form
+like COP-SURROGATE could be used as follows:
+
+		(COP-SURROGATE types form)
+
+where types was an unevaluated list of types to copy. So
+
+	(COP-SURROGATE (CONS STRING) form)
+
+would turn into (using the obsolete Maclisp LABEL semantics):
+
+	((LABEL COP-SURROGATE-G0001 (X)
+		(TYPE-CASEQ X
+		    ((CONS) (CONS (FUNCALL COP-SURROGATE-G0001 (CAR X))
+				  (FUNCALL COP-SURROGATE-G0001 (CDR X))))
+		    ((STRING) (FORMAT NIL &quot;~A&quot; X))
+		    (T X)))
+	 form)
+		            
+Note, type dispatch might not be the only kind of thing you want. eg,
+I might want to copy all lists, but only hunks with a (CXR 0 h) of G0002
+or something. In that case, COP-SURROGATE wouldn't be strong enough and
+I'd need the more general COP.
+
+-kmp
+
+ps I suppose COP is symmetric with ASS, MEM, etc. so that's an ok name if
+   anyone cares to put it in. COP-SURROGATE is probably not worth putting
+   in under any name (certainly not that name!), but I present it only to
+   illustrate something I expect to be true of the use of COP.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00149.html">Re: COPYALL, COPYLIST, et alia</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00151.html">Re: COPYALL, COPYLIST, et alia</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00156.html">Re: COPYALL, COPYLIST, et alia</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00154.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00150"><strong>Date</strong></a></li>
+<li><a href="threads.html#00150"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

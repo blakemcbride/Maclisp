@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 10 Feb 80 07:41:00 GMT -->
+<!--X-Message-Id: b01ed5050bdd569104a22d9271734319@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02164.html">Date Prev</a>][<a href="msg02162.html">Date Next</a>][<a href="msg02164.html">Thread Prev</a>][<a href="msg02162.html">Thread Next</a>][<a href="maillist.html#02163">Date Index</a>][<a href="threads.html#02163">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: SJOBRG at MIT-MC</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 10 Feb 80 07:41:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 10 February 1980 02:41-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 9 February 1980 08:37-EST
+    From: Robert W. Sjoberg &lt;SJOBRG at MIT-AI&gt;
+    To:   BUG-LISP at MIT-AI
+
+    Is there any easy way to have commas in a (comment ... ) without having to
+    slashify them, and without COMPLR complaining about them not being inside
+    backquotes?
+-----
+Yes, there is. You can turn off comma. This can be done by doing...
+
+(SSTATUS MACRO /, NIL)
+
+and you can re-enable it later (if you need to) with...
+
+(SSTATUS MACRO /, '|+INTERNAL-,-macro/||)
+
+I think probably if you do (SETQ |`-,-level/|| 1.) you will probably
+win also, without disabling , from its normal use.  You won't
+get error messages if you mess up with commas and use them in bad places
+but they will disappear ok when used out of context in (comment ...) unless
+they see a &quot;)&quot; right after them or something like that .... I recommend the
+'clean' way with just turning off the /, macro tho'.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02164.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02162.html">Per-file options</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02164.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02162.html">Per-file options</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02163"><strong>Date</strong></a></li>
+<li><a href="threads.html#02163"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

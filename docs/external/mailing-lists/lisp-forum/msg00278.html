@@ -1,0 +1,109 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: #\EOF ... Yes, again. -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Fri ,26 Sep 80 12:25:00 EDT -->
+<!--X-Message-Id: 1f4090c3bb79bf1c9b7c644a900c6e00@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: #\EOF ... Yes, again.</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00277.html">Date Prev</a>][<a href="msg00279.html">Date Next</a>][<a href="msg00277.html">Thread Prev</a>][<a href="msg00279.html">Thread Next</a>][<a href="maillist.html#00278">Date Index</a>][<a href="threads.html#00278">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: #\EOF ... Yes, again.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC, LISP-FORUM at MIT-MC</li>
+<li><em>Subject</em>: Re: #\EOF ... Yes, again.</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Fri ,26 Sep 80 12:25:00 EDT</li>
+<li><em>Sender</em>: dlw at CADR2 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+
+    A character is something that you can put in strings and pnames.  You
+    can TYO it.  You can hold down the meta key and type it.  #\eof fits
+    none of these descriptions.  So it must be that #\eof isn't a
+    character.  This makes it different from everything else that a
+    #\&lt;foo&gt; can be.
+    
+This is what my mail yesterday was about.  The enf-of-file indicator
+is not a character, but it is in the same name space as characters,
+and therefore it really IS elegant to use a \# construct.  See yesterday's
+letter for details.
+
+	Argument: All TYI's and TYIPEEK's return -1 at eof; why not
+		  just use that?
+    
+	Answer: (1) All TYI's and TYIPEEK's return #o101 for &quot;A&quot; being
+		typed, but #/A was thought to be more readable.
+    
+    Do I believe what I read here?  I thought that you wanted to have #/
+    and #\ return character objects.  And I thought that you wanted to
+    write code that workes on an EBCDIC machine?
+
+No, you miss his point; he is being sarcastic, saying that you should no
+more depend on the -1 than you should on the 101, even if all
+implementations now are the same, because there might be different ones
+in the future.
+
+    Nobody will ever make this mistake (making -1 a character) and live.
+    
+It doesn't matter; it is inelegant to depend on it.
+
+Golly gee, the Lisp Machine Manual really doesn't document the -1.  What
+do you know...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00277.html">Re: #\EOF ... Yes, again.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00279.html">Re: #\EOF ... Yes, again.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00277.html">Re: #\EOF ... Yes, again.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00279.html">Re: #\EOF ... Yes, again.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00278"><strong>Date</strong></a></li>
+<li><a href="threads.html#00278"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

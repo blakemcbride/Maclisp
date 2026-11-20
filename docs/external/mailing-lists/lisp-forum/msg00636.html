@@ -1,0 +1,117 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Function cells -->
+<!--X-From-R13: FW[N[WF&#45;AL -->
+<!--X-Date: Thu ,1 Sep 83 07:37:00 EDT -->
+<!--X-Message-Id: [MIT&#45;OZ].TIM. 1&#45;Sep&#45;83 07:37:32 -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Function cells</title>
+<link rev="made" href="mailto:TIM@MIT-OZ">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00637.html">Date Prev</a>][<a href="msg00635.html">Date Next</a>][<a href="msg00638.html">Thread Prev</a>][<a href="msg00635.html">Thread Next</a>][<a href="maillist.html#00636">Date Index</a>][<a href="threads.html#00636">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Function cells</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Bobrow.PA@PARC-MAXC.ARPA</li>
+<li><em>Subject</em>: Function cells</li>
+<li><em>From</em>: TIM@MIT-OZ</li>
+<li><em>Date</em>: Thu ,1 Sep 83 07:37:00 EDT</li>
+<li><em>Cc</em>: Deutsch.PA@PARC-MAXC.ARPA, lisp-forum@MIT-MC.ARPA,      Julian Padget &lt;PADGET@UTAH-20.ARPA&gt;, Teitelman.PA@PARC-MAXC.ARPA</li>
+<li><em>In-reply-to</em>: Msg of 30 Aug 1983  16:54-EDT from Bobrow.PA at PARC-MAXC.ARPA</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>For the &quot;usual case&quot; it is perfectly reasonable to have separate
+function and value cells--I make use of that feature all the time.
+But the situation changes when you start to pass functions around in
+value cells.  The awkward convention of specifying a function call by
+
+  (FUNCALL fun arg1 arg2 ...)   ;where the function is found in the
+				;value cell of FUN
+rather than
+
+  (fun arg1 arg2 ...)		;in the usual case
+
+is perpetuated by having both a function cell and a value cell.  In
+languages which do not adopt this convention (such as Gerry Sussman
+and Guy Steele's Scheme) it is possible to use the latter form in
+every case, even when FUN has been passed as an argument.  Thus
+
+  (define (foo fn a b)          ;(The slight difference in the syntax
+    (fn (* 2 a) b))		;of FOO's function spec is incidental)
+
+replaces
+
+  (defun foo (fn a b)
+    (funcall fn (* 2 a) b))
+
+I realize that the deep binding scheme in early Lisp implementations
+made it necessary to have a separate mechanism for fast function
+lookup, and that the namespace limitation of dynamic scoping makes
+having a function context and a variable context handy, but I do not
+think that the function/value dichotomy should continue into the
+lexically scoped Common Lisp.  In the case where a variable contains a
+function (in its value cell) I see little semantic distinction between
+the lookup of variables and functions.  In this respect, I fail to see
+your point about &quot;separating out mechanisms.&quot;  I see it justifiable
+only for efficiency reasons and for coping with a limited namespace.
+
+                                 Tim McNerney
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00635" href="msg00635.html">Re: Function cells</a></strong>
+<ul><li><em>From:</em> Bobrow.PA@PARC-MAXC.ARPA</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00637.html">Function cells.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00635.html">Re: Function cells</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00638.html">Re: function cells</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00635.html">Re: Function cells</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00636"><strong>Date</strong></a></li>
+<li><a href="threads.html#00636"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

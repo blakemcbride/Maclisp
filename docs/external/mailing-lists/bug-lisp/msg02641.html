@@ -1,0 +1,108 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: CASEQ doesn't do MEMQ -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 5 Apr 81 16:31:00 GMT -->
+<!--X-Message-Id: 9f8370aac258d17288aabec339669b7e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CASEQ doesn't do MEMQ</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02642.html">Date Prev</a>][<a href="msg02640.html">Date Next</a>][<a href="msg01369.html">Thread Prev</a>][<a href="msg02639.html">Thread Next</a>][<a href="maillist.html#02641">Date Index</a>][<a href="threads.html#02641">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>CASEQ doesn't do MEMQ</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: CASEQ doesn't do MEMQ</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 5 Apr 81 16:31:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 5 April 1981 11:31-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Hold it. I meant CASEQ does a MEMQ *after* some syntactic sugar
+has been applied, e.g. (CASEQ q (item ...)) =&gt; (CASEQ q ((item) ...)).
+
+You did not address the most important point, the incompatibility
+introduced between interpreter and compiler. If I write
+
+(Defun foo (form)
+       (if (atom form) form
+           (caseq (car form)
+                  ((if) (if (foo (cadr form)) (foo (caddr form)) 
+                            (foo (cadddr form))))
+                  ((quote) (cadr form))
+                  ((lambda) ..something..)
+                  (t
+                   (apply (foo (car form)) (mapcar #'foo (cdr form)))))))
+
+then it is clear what I am doing. If the car of the form is
+not EQ to one of '(IF QUOTE LAMBDA) then it gets handled by the T case.
+This includes forms like '((LAMBDA (X Y) ...) ....).
+
+I expect a simple syntactic transformation from that CASEQ,
+into (LET ((TEMP (CAR FORM)))
+          (COND ((EQ TEMP 'IF) ...)
+                ((EQ TEMP 'QUOTE) ...)
+                ((EQ TEMP 'LAMBDA) ...)
+                ('ELSE ...)))
+
+And this is what is does in the compiler!
+You had better have an INCREDIBLY good reason to give up the game here by
+writing a FEXPR for CASEQ which I can't seem to understand.
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02642.html">Why did STR:ARRAY somtimes go away</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02640.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01369.html">CASEQ doesn't do MEMQ</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02639.html">CASEQ doesn't do MEMQ</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02641"><strong>Date</strong></a></li>
+<li><a href="threads.html#02641"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>MACLIS.RPG[UP,DOC] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename MACLIS.RPG[UP,DOC]  blob <a href="MACLIS.RPG[UP,DOC]_blob">sn#500376</a> filedate 1980-03-16 generic text, type C, neo UTF8</div>
+<pre id="u8lump">COMMENT ⊗   VALID 00002 PAGES
+C REC  PAGE   DESCRIPTION
+C00001 00001
+C00002 00002		The following is a brief introduction to the use of
+C00009 ENDMK
+C⊗;
+	The following is a brief introduction to the use of
+MACLSIP at SAIL.
+	One can run MACLISP  by saying R  MACLSP; allocation is  much
+the same as in the other local  LISPs. To input a file named  FOO.BAR
+one says: (UREAD  FOO BAR) or  (UREAD FOO BAR  DSK (BLE TCH)).   This
+opens the file in  the correct mode but  does not begin reading.   In
+order to read the file, one must set the flag ↑Q (control-Q) to T, by
+either (SETQ ↑Q T), (IOC Q), OR ↑Q typed to the toplevel of  MACLISP.
+When the file is complete, the TTY becomes the input device. To  read
+from a file within  a program, one  does the same  thing, but the  ↑Q
+option fails. Unfortunately, UREAD assumes a non-E file. To UREAD  an
+E-file (or a non-E file for that matter) one can use EREAD.  When one
+does (EREAD FOO  BAR) (SETQ ↑Q  T), then all  MACLISP read  routines,
+such as (READ),(TYI), &  (TYIPEEK) will read  from the selected  disk
+file.
+	To write to a file one does (UWRITE) with no arguments;  this
+opens a file for writing with a name like 019RPG.LSP where 19 is  one
+of your job numbers and RPG is your PN. ↑R is the flag for output  to
+disk. Note that this does not shut  off output to the screen; use  ↑R
+for that. Now one must name the output file by doing (UFILE FOO BAR),
+which deletes any files  with the same name,  and renames the  output
+file to FOO.BAR. As with EREAD, all print routines will now print  to
+the selected file.
+	Sometimes you may  encounter an error, and a  breakpoint will
+occur.  Usually the information that  is typed will alert  you to the
+cause of the error; if  not, you should read HELP.DOC[AID,RPG] for  a
+description of the  debugging possibilities. However, to  get back to
+the  toplevel of MACLISP  you type: ↑G or  (IOC G).   If the error is
+unbound variable, one can say (RETURN '(&lt;VALUE>)) to continue.
+	A very useful file  to have is  HELP.FAS[MAC,LSP] if you  do:
+(HELP),(FASLOAD HELP FAS DSK  (MAC LSP)), or COPY  this file to  your
+directory and do (FASLOAD HELP) an "AUTOLOAD" property will be set up
+for all of the interesting functions mentioned in  HELP.DOC[AID,RPG].
+An AUTOLOAD property is a property  list entry which has a file  name
+as its value. If one tries to apply the function with this  property,
+and there is no such function, MACLISP will FASLOAD the file and then
+try to apply the function once  more, the point being that this  file
+should contain a FASLOADable definition of the function.
+        A feature of  BIBOP is  that  EREAD  and  HELP  already  have
+autoload   properties  set  up  from  the   outset,  so   that  doing
+(EREAD FOO BAR) will work, and (HELP) will load the HELP features.
+        At  this point you  may wonder  what FASLOAD  means. Normally
+when one compiles LISP, one gets in  return a LAP file which is  then
+read in with a  small resident assembler. This is  indeed possible to
+do  in  MACLISP, but  the compiler  can  also assemble  the  LAP file
+directly into  a  relocatable file  which  can  then be  loaded  into
+MACLISP  with an  even smaller  resident loader.  The gains  are that
+FASLOAD  file are an order of magnitude  smaller and load an order of
+magnitude faster.
+	The MACLISP compiler is called NCOMPLR  (for Number COMPiLeR)
+and  is noted for  being the  "best" LISP  compiler in  existence. In
+particular there are facilities for declaring the types of objects so
+that a  fair amount of  open-coding is  possible; this is  especially
+nice for numerical  computations (hence the "N" in NCOMPLR). For more
+information on this either locate an old MACLISP manual or ask RPG or
+WLS.
+	To compile a file do:
+		R NCOMPLR
+		&lt;target>←FN.EXT&lt;(SWITCHES)>
+
+The &lt;target>  is optional  and defaults  accordding to the  switches.
+Briefly the switches are:
+	T 	Talk: verbose mode
+	A	Assemble: take a .LAP file and assemble it
+	F	Fasload: take a source file and compile & assemble it
+	K  	Kill: take a source file and compile & assemble it but 
+		kill the LAP file
+The default names  are FN.LAP for a  compiled file and FN.FAS  for an
+assembled file.  NCOMPLR understands ALIASes.
+	Hopfully a new manual will appear from MIT, but for now there
+are  three known manuals at  SAIL. RPG and  WLS have 1  each, and the
+bookshelf which used to be  outside Lester's office has one. For  now
+you    can    read    MACLSP.DM[UP,DOC]    HELP.DOC[AID,RPG],    and
+LISP.NEW[AID,RPG], or ask RPG/WLS.
+ren
+</pre>
+</body>
+</html>

@@ -1,0 +1,431 @@
+- 10RUN, run PDP-10 maintenance.
+- 11BOOT, boot IO-11.
+- 11DDT, PDP-11 debugger.
+- 11LOGO, PDP-11 Logo.
+- 11SIM, PDP-11 emulator.
+- 11STNK, PDP-11 linker.
+- 20XCVT, convert TOPS-20 CSAVE file to PDUMP.
+- 3406, PDP-6 part of 340D.
+- 340D, Datapoint emulator for 340 display.
+- @, cross reference generation tool.
+- ACNVRT/MCNVRT/PCNVRT/UCNVRT, asciizer and binarator.
+- ACCLNK, sets com-link accept bit for specified TTY.
+- ACOUNT, dummy account program used for users from safe sites.
+- ADVENT, (Colossal Cave) Adventure by Will Crowther.
+- ADV350, 350-point Adventure.
+- ADV448, 448-point Adventure.
+- ANIMAL, an animal guessing game.
+- APLCLK, clock for Apple II.
+- APLOGO, Apple II Logo.
+- AR, PDP-11 debugger.
+- ARCCPY, copies an old-format archive, converting to new format.
+- ARCDEV, transparent file system access to archive files.
+- ARCSAL, archive salvager.
+- ARDS, ARDS to SVG converter.
+- ARGUS, alerts you when specified users login or logout.
+- ARPA, gateway from Chaosnet to Arpanet and Internet.
+- AS8748, 8748 assembler.
+- ASSV4, assemble SSV4.
+- ATSIGN CHAOS, Chaosnet support.
+- ATSIGN DEVICE, load device drivers.
+- ATSIGN TARAKA, starts dragons.
+- ATSIGN TCP, TCP support.
+- BABEL, Chaosnet server.
+- BABYL, mail reading/sending program for EMACS.
+- BABYLM, mail sending program for EMACS.
+- BALANC/MOVDIR, balances directories.
+- BANNER, make banners on line printer.
+- BASIC, DEC BASIC V17E.
+- BDAY, happy birthday demon.
+- BIG, music processor.
+- BINPRT, display information about a binary executable file.
+- BITPRT, print JCL as bits.
+- BKG, a Backgammon game.
+- BLKLDR, Imlac secondary block loader.
+- BOLIO, typesetting.
+- BOOTER, Dynamic Modeling login program.
+- BOOTVT, GT40 boot ROM.
+- BYE, say goodbye to user. Used in LOGOUT scripts.
+- CALPRT, decode a .CALL instruction's CALL block.
+- CARPET, PDP-11 remote debugger.
+- CC, C compiler.
+- CCONS, CONS console.
+- CHADEV, Chaosnet jobdev (binary only).
+- CHAHTB, Chaosnet HOSTAB server.
+- CHARFC/CHARFS, Chaos RFC.
+- CHASE, a 2-player maze game.
+- CHASTA, print Chaos NCP state.
+- CHATAB, print information on Chaosnet hosts.
+- CHATER, show com links.
+- CHATST, Chaos test.
+- CHESS, unknown chess program.
+- CHESS2, Alan Baisley's Tech II chess program.
+- CHTN/CFTP, Chaosnet TELNET and FTP support.
+- CKR, Alan Baisley's checkers program.
+- CLOCK, analogue, small, or digital clock.
+- CLOGO, Logo programming language.
+- CLU, compiled programming language.
+- COLOR HACK, display hacks for the color scope.
+- COMBAT, submit jobs to the Muddle compiler.
+- COMIFY, convert HEX to COM format.
+- COMPLR, Lisp compiler.
+- COMSAT, mail server.
+- COOKIE BEAR, prank.
+- CMD, DDT subroutines.
+- CRASH, Imlac game.
+- CRC, compute file CRC.
+- CRASH, Imlac game?
+- CREATE, creates a text file in your home directory from console input.
+- CROCK, analog watch.
+- CROSS, cross assembler for micros.
+- CRTSTY, provide display support for additional terminal types.
+- CTIMES, Chaosnet time server.
+- CTIMSR, Chaosnet time server.
+- CTN, networking "supdup" CRTSTY.
+- CUBE, Rubik's cube.
+- D, SUDS drawing program
+- DATE, print date and time.
+- DATSRV, server for RFC 867 Daytime protocol.
+- Dazzle Dart, video game.
+- DCROCK, digital watch.
+- DDTDOC, interactive DDT documentation.
+- DECUUO, TOPS-10 and WAITS emulator.
+- DEMST, demon status.
+- DEMSTR, demon starter.
+- DFTP, Datacomputer file transfer.
+- DIGEST, digestify a mailing list.
+- DIRCPY, copy directory.
+- DIRDEV, list directories, sorted or subsetted.
+- DIRED, directory editor (independent from EMACS DIRED).
+- DMPCPY, crash dump copy dragon.
+- DOCTOR, KMP's psychiatrist game.
+- DOOR, Chaosnet server to open the 9th floor door.
+- DOWNLD, print file in super-image mode to TTY.
+- DP Device, 7-bit conversions?
+- DQ Device, for doing hostname resolutions. Used by COMSAT.
+- DSKDEV/D, short disk device.
+- DSKUSE, disk usage information.
+- DUMP/LOAD, tape backup and restore.
+- ECHO, Chaosnet echo server.
+- ELIZA, the original psychiatrist game.
+- EMACS, editor.
+- ESCE, call the elevator.
+- EVACUA, encode ITS file for evacuation to Unix.
+- EXECVT, convert 20x EXE (SSAVE) file to ITS BIN (PDUMP) file.
+- EXPN/VRFY, query remote SMTP server.
+- FACTOR, factor integers.
+- FAIL, assembler from SAIL.
+- FAILSA, read FAILSAFE tapes.
+- FCDEV, talk to LispM file server.
+- FDIR, fast directory listing.
+- FED, font editor.
+- FEDUMP, KL10 front end dumper.
+- FIDO, watch for system events and bark.
+- FILE, Chaosnet file server.
+- FIND, search for files.
+- FORTH, Forth written in Maclisp.
+- FRETTY, display list of free TTYs.
+- FTPS, FTP server.
+- FTPU, FTP client.
+- GAS, particle simulation.
+- GCMAIL, delete old files from .MAIL.
+- GENSYM, generate unique values.
+- GEORGE, Locks DRAGON HOARD to hold PFTHMG at bay.
+- GETSYM, copy all symbols from running ITS to a file.
+- GLP/XGP, queue files to be printed by GLPSPL/XGPSPL.
+- GLPDEV/XGPDEV, device for viewing GLPSPL/XGPSPL printer queues.
+- GT, generate tables for C compiler.
+- GTLEM, GT40 Lunar Lander.
+- GTLOAD, load programs into GT40.
+- GO, the Go board game.
+- GOTO, go to specified terminal line.
+- GUESS, a very silly game.
+- GUNNER, gun down jobs.
+- GMSGS, copy system messages to mail file.
+- H3MAKE, a job that requests DRAGON to build host table.
+- HAUNT, a text-based adventure game written by John Laird in OPS4.
+- HEXIFY, convert COM file into Intel HEX format.
+- HOST, display information about a network host.
+- HOSTAB, display HOSTS2 format host table.
+- HOSTAT, display status for ARPANET hosts.
+- HOSTS3, the host table compiler.
+- HSNAME, displays user's HSNAME.
+- HSNDEV, HSNAME device.
+- IBMASC, read 8-bit ASCII tape file.
+- IO-11, PDP-11 I/O processor.
+- IDLE, list idle users.
+- IEC, Inter-Entity Communication.
+- IFILE, Chaosnet file service.
+- IMEDIT, Imlac text editor.
+- IMGOUT, outputs JCL in Image mode.
+- IMLOAD/IMTRAN, load or translate an Imlac program.
+- IMPRNT, image mode printer.
+- INFO, hypertext documentation.
+- INIT, a helper program for LOGIN, LOGOUT, and other script files.
+- INLINE, reads line from TTY and adds to JCL (for DDT init files).
+- INQCHK, checks to see if you have INQUIR entry and runs INQUIR if not.
+- INQEXM, examine inquir database.
+- INQREP, reap inquir database.
+- INQUIR, user account database.
+- INQCPY, copies an inquir datqbase.
+- INQPAT, allows  patching INQUIR database.
+- INQUPD, processes INQUIR change requests.
+- LSRINI, creates an empty INQUIR database.
+- INSTAL, install executables on other ITS machines.
+- IPAK, manage archives with encryption.
+- IPLJOB, plot display lists.
+- ITSDEV, ITS device server.
+- ITSTER, Donald Fisk's block-stacking puzzle game.
+- JEDGAR, counter spying tool.
+- JOBS, list jobs by category.
+- JOTTO, word-guessing game.
+- KERMIT, file transfer.
+- KLDCP, KL10 diagnostics console program.
+- KLDCPU, KL10 diagnostics console utility.
+- KLDDT, KL10 standalone debugger.
+- KLFEDR, KL10 frontend directory tool.
+- KLRUG, KL10 frontend debugger.
+- KN10, KS10 frontend software.
+- LAY, SUDS layout program.
+- LD10, Lisp display slave.
+- LINE, display wholine.
+- LINES, ...?
+- LINK-10, DEC linker.
+- LIMERI, print limericks.
+- LIMSER, Chaosnet limerick service.
+- LISP, Lisp interpreter and runtime library (autoloads only).
+- LISP11, PDP-11 Lisp.
+- LIVE, PALX Game of Life.
+- LLOGO, Logo implemented in Maclisp.
+- LMODEM, Xmodem file transfer.
+- LOADP, displays system load.
+- LOCK, shut down system.
+- LOGASS, 6502 assembler in Logo.
+- LOGO, BBN Logo.
+- LOOKUP, looks up user info in INQUIR database.
+- LORENZ, Edward Lorenz' strange attractor.
+- LOSS (device).
+- LOTCLN - LOGOUT TIMES cleanup program.
+- LSPEED, set TTY line parameters.
+- LSRDMP, dump the user database.
+- LSRPRT, print information about user groups.
+- LUSER, request help from registered list of logged-in users.
+- MBXLOC, lock a mailbox.
+- MACDMP, standalone program loader/dumper for DECtape.
+- MACN11, PDP-11 cross assembler.
+- MACN80, Z80 cross assembler.
+- MACRO-10, DEC assembler.
+- MACSYMA, symbolic manipulation system.
+- MACTAP, library for MACDMP tapes.
+- MAXTUL, tools for managing Macsyma.
+- MAGDMP, standalone program loader/dumper for magtape.
+- MAGFRM, create tapes for use with MAGDMP.
+- MAIL, mail sending client.
+- MAILS, Chaosnet mail server.
+- MAILT, allows editing mail (from :MAIL) in EMACS.
+- MARK, mark a DECtape.
+- MAZE, Maze War game.
+- MAZLIB, maze game for EMACS.
+- MCL, subsystem for compiling individual Macsyma files.
+- METER, displays system metering information.
+- MICRO, microcode assembler.
+- MINI, mini Chaosnet file server (new).
+- MINI36, mini Chaosnet file server (36-bit).
+- MINITS, mini-ITS network utility.
+- MINIC, mini Chaosnet file server (old).
+- MINSKY TRON, display hack translated from the PDP-1.
+- MLDEV/MLSLV, allows access to remote systems as devices (e.g. DB:).
+- MLIFE, Mike Speciner's Conway Life.
+- MMODEM, Xmodem file transfer.
+- MODEMS, modems dragon.
+- MONIT, lightweight ATSIGN HACTRN replacement without debugging support.
+- MSEND, send to many users.
+- MSPLIT, split a file into smaller parts.
+- MTBOOT, make bootable tapes.
+- MUDCOM/MUDCHK/MUDFND/MUDLST, compare/check/find/list Muddle files.
+- MUDDLE, MDL interpreter.
+- MUDINQ, Muddle inquirer.
+- MUNCH, TV-munching square.
+- MUNCH, munching squares for Type 340 display.
+- MUSCOM, music compiler.
+- MUSRUN, play music files.
+- NAME, shows logged in users and locations, aka FINGER.
+- NAMDRG, free TV display.
+- NETIME, network time dragon.
+- NETRFC, serve ARPANET connections.
+- NEWDEC, DECtape converter.
+- NICNAM/NICWHO, look up someone in the Arpanet directory.
+- NIMLIN, a game of unknown features.
+- NODIPS, SUDS wirelister (without DIP definitions).
+- NTSDDT, non timesharing DDT with 340 support.
+- NUDIR, create user directory.
+- NVMIDS, Nova assembler.
+- NWATCH, small watch display.
+- OBS, observe system activities.
+- OCM/C, Richard Greenblatt's Mac Hack VI chess program.
+- OCTPUS, print character representations.
+- OINIT, init program reporting last login, email.
+- OS, realtime TTY spy.
+- OPS4, a production system that supports HAUNT.
+- OTHELLO, the original Othello game -- simpler than Go.
+- OTJ6, an old version of TJ6.
+- PALX, PDP-11 cross assembler.
+- PANDA, user account management program.
+- PAPSAV, daemon to record system events in file system.
+- PC, SUDS printed circuit board program.
+- PDSET, set time and date.
+- PEEK, system monitoring.
+- PFTHMG, Puff the magic dragon.
+- PHOTO, capture STY session output.
+- PI, print pi.
+- PICK, examine Muddle locks.
+- PLAN, creates a PLAN file in your home directory from console input.
+- PONG, Imlac game.
+- PORNIS, display Steiner chains on 340 display.
+- PORTS, display free network ports.
+- PR, print out various system documentation.
+- PRINT, print long-named files.
+- PROBE, probe inside job and display various information about it.
+- PRUFD, list files on disk volume.
+- PSEND, super sender.
+- PT, pager test.
+- PTY, pseudo-tty.
+- PUNCH, punch out paper tapes in the Logo RUG format.
+- PWMAIL, a limited version of MAIL when not yet logged in under PWORD.
+- PWORD, replacement for ATSIGN HACTRN that requires registered logins.
+- QB, the game of Qubic.
+- QUOTE, prints out a random quote.
+- R, typesetting software.
+- RABBIT, Scheme compiler.
+- RALP, post processing for R line printer output files.
+- REATTA, reattaches disowned jobs to terminal.
+- RECORD, save TV display contents as text file.
+- REDRCT, redirect IP routing.
+- RIPDEV, replacement for MLDEV for no-longer-existing machines.
+- RMAIL, mail reading client.
+- RMODE, text editor.
+- RMTDEV, MLDEV for non-ITS hosts.
+- RUG, PDP-11 debugger.
+- SALV, old file system tool for KA and KL.
+- SCAN, TEX output to XGP SCAN file.
+- SCANDL, TTY output spy.
+- SCHEME, Scheme interpreter.
+- SCNV, convert plotter files to XGP scan files.
+- SCRAM, encrypt/decrypt file.
+- SCRIMP, XGP unspooler.
+- SCRMBL/UNSCR, scramble/unscramble file.
+- SEARCH, search for string in files.
+- SEND/REPLY, replacements for DDT :SEND.
+- SENDS, Chaosnet SEND server.
+- SENSOR, an alternate message receiver.
+- SENVER, Chaosnet SEND server.
+- SHELL, Unix-like command line processor.
+- SHUTDN, shut down ITS.
+- SITS, Small ITS for the Logo PDP-11/45.
+- SLOGO, PDP-11 Logo for SITS.
+- SN, snoop terminal.
+- SPCWAR, Spacewar game.
+- SPEEDY, instruction timing test.
+- SPELL/ESPELL, spell checker.
+- SPROUTS, topological game invented by Conway.
+- SRCCOM, compares/merges source files, and compares binary files.
+- SRDATE, set reference date on a file.
+- SSV, scroll saver for Imlac PDS-1.
+- SSV4, SSV for Imlac PDS-4.
+- STELNT, old TELNET server.
+- STINK, linker.
+- STINKR, new linker (binary only).
+- STTY, set terminal parameters.
+- STONE, the old African game of stones.
+- STUFF, load code into PDP-11 through 10-11 interface.
+- STY, pseudo-terminal for multiple sessions.
+- STYLOG, convert PTY output file into ASCII file.
+- SUPARD, draw ARDS graphics to SUPDUP.
+- SUPDUP, Supdup client.
+- SURGIV, survey giver demon.
+- SURSND, Arpanet survey sender demon.
+- SURVEY, survey Arpanet hosts.
+- SWAR, Imlac Spacewar.
+- SYSCHK, check up on system job.
+- SYSLOD, system load histogram.
+- SYSMSG, displays system messages.
+- SYSTEM GEN, low level DECtape formatting.
+- TAGS, generate tags table for sources.
+- TALK/WHO/WHOJ/WHOM/USERS, list users.
+- TBMOFF, turn TAC or TIP binary mode off.
+- TCTYP, set terminal type and options.
+- TEACHE, Emacs tutorial.
+- TECO, editor.
+- TELNET, Telnet client.
+- TELSER, Telnet/Supdup server.
+- TEN50, TOPS-10 emulator.
+- TENTH, toy Forth for KS10.
+- THINK, think-a-dot game.
+- TIME, displays date/time/uptime and other info.
+- TIMES, TCP time server.
+- TIMOON, displays the time and phase of the moon.
+- TIMSRV, RFC 868 network time protocol server.
+- TITLER, display text on color scope.
+- TJ6, typesetting software.
+- TMPKIL, delete old files from .TEMP.
+- TREES, list toplevel jobs.
+- TREK, Star Trek game.
+- TORTIS, toddler's own recursive turtle interpreter system.
+- TOSBLK, convert PALX binaries to SBLK.
+- TN6, line mode TELNET client with Multics features.
+- TST342, display all Type 342 characters.
+- TV-11, Knight TV PDP-11.
+- TVBUG, a bug crawling down the TV display.
+- TVEDIT, paint program.
+- TVREAD, read a bitmap file and display on TV.
+- TVWAR, Knight TV Spacewar.
+- TVWRIT, write TV display contents as bitmap file.
+- TTLOC, advertises physical location of logged in users.
+- TTY, displays TTYs with UNAME/JNAME/CORE and other info.
+- TTYLIN, Chaosnet TTYLINK server.
+- TTYSWP, swap TTYs.
+- TTYTST, echo characters exactly as typed.
+- TWDEMO, scripted demonstration of SHRDLU.
+- TYPE8, type 8-bit file.
+- UFIND, find users.
+- ULISP, Lisp in Lisp.
+- UNSPOO, line printer unspooler demon.
+- UNTALK, split-screen comm-link program.
+- UNTRAN, untranslate an Imlac program.
+- UP/DOWN, check if host is online.
+- UPTIME, Chaosnet uptime server.
+- UPTIME, record ITS uptimes.
+- UPTINI, program to create new UPTIME DATA.
+- URUG, GT40 debugger.
+- USQ/TYPESQ, unsqueeze/uncram or type a file.
+- UT, old User TELNET (client).
+- UTNAM, set DECtape name.
+- VERSA/SPOOLR, Versatec/Gould printer spooler.
+- VDIR, view directory.
+- VIEW, view file.
+- VT07, GT40 Datapoint emulator and Lisp display slave.
+- VTTIME, display running time on the terminal.
+- VV/VJ/DETREE, list jobs.
+- XHOST, tool for replacing host nicknames with real hostnames.
+- XLISP, teaches Lisp -- part of TEACH system.
+- WA, a Wumpus advisor game.
+- WAR, old Spacewar.
+- WEBSER, HTTP server.
+- WHAT, humorous quips to various "what" questions.
+- WHO%, list index/uname/jname/%time in sorted list.
+- WHOIML, wholine for Imlacs.
+- WHOLIN, mode line for display terminals (with date/time/job/etc info).
+- WHOSEN, print author of last send.
+- WL, SUDS wirelister.
+- WUMPUS, Hunt the Wumpus game.
+- X, Y, Z, remember DDT command and re-execute it.
+- XD, display XGP scan file on TV display.
+- XGP, PDP-11 controller for the Xerox Graphics Printer.
+- XGPSPL, spooler for the Xerox Graphics Printer.
+- XXFILE, feed scripted input to a STY session.
+- YACC, parser generator.
+- YAHTZE, the game of Yahtzee.
+- YOW, print Zippyisms.
+- ZAP, dump TV bitmap as an XGP scan file.
+- ZORK, text adventure game.
+- ZOTZ, instruction timing test.

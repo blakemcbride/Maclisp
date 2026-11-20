@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>THIS.NOT[MAC,LSP] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename THIS.NOT[MAC,LSP]  blob <a href="THIS.NOT[MAC,LSP]_blob">sn#383562</a> filedate 1978-09-21 generic text, type C, neo UTF8</div>
+<pre id="u8lump">COMMENT ⊗   VALID 00007 PAGES
+C REC  PAGE   DESCRIPTION
+C00001 00001
+C00002 00002	SKIP 1
+C00003 00003
+C00007 00004
+C00011 00005
+C00017 00006
+C00023 00007	@@TBSIZE 36.
+C00025 ENDMK
+C⊗;
+;SKIP 1
+;LFTMAR 300
+;KSET FONTS;31VR KST
+
+					LABORATORY FOR COMPUTER SCIENCE - AI LAB
+					Massachusetts Institute of Technology
+					545 Technology Square, Room 834
+					Cambridge MA 02139
+					June 6, 1977
+
+
+
+
+To all you winners[?] out there in TOPS-10 land!
+
+
+     Here's the latest news according to MACLISP.  
+
+		***BIBOP*** is finally here!!!
+
+As usual, the next few paragraphs rehash the same old introductions,
+but later on there are some changes because of the introduction of a
+BIBOP storage strategy for all you TOPS-10 winners.  Following, at the
+end of this letter is listing of the files on this tape, and all files
+on our DECSYS; directory should go onto your SYS: device for the
+proper operation of the AUTOLOAD  feature. 
+	Just a short note about notational conventions I commonly use,
+and about those used here at the AI Lab:
+  1) All numbers are in octal [base 8.] unless postfixed by a period,
+     in which case they are in decimal.  The word "block" means one 
+     TOPS-10 page, i.e., 0.5K of memory.  numbers typed at the 
+     initial ALLOC of LISP will ordinarily be in octal, and the 
+     meaning for the various allocations will be words of core.
+  2) Angle brackets are a meta-linguistic device, used to enclose a 
+     description for some unprintable character, and to serve as 
+     metalinguistic variables.  For example, &lt;control-Q> stands for 
+     the single ASCII character whose ASCII ordinal value is 21 [17. 
+     for those who prefer numbers in decimal], and which is usually 
+     typed on a teletype by holding down the control key at the same 
+     time as striking the "Q" key.  Also, &lt;error-msg>  would be a 
+     variable meaning some unspecified string of characters.  As in 
+     many other meta-languages, brackets enclose optional parts of 
+     a piece of syntax.
+  3) File name strings on the ITS system generally appear as:
+	[&lt;device-name>:][&lt;directory-name>;]&lt;file-name> &lt;file-extension>
+     So remember, &lt;space> separates the file-name from the extension,
+     and the extension may be up to 6 characters long [for transferral
+     to TOPS-10 systems, merely truncate the extension to 3 
+     characters].  See the cruft at the end of this note for examples.
+
+  4) We don't usually adhere strictly to conventions about the 
+     file-name extension, but a few guidelines may be helpful.
+      LSP	A source file of LISP code, usually containing EXPR 
+		definitions and possibly intermixed with some LAP 
+		code.
+      LAP	Output of the LISP compiler.  An ordinary ASCII text
+ 		file that can be loaded in by the top-level loop [after 
+		selecting the input file with UREAD]
+      FASL	Output of the FASLAP assembler - The relocatable 
+		format used by the MACLISP system.  The system 
+		subroutine FASLOAD applies a linking-loader to the 
+		requested file, and it will signal an error if the file 
+		is not in FASL format.
+      MID	A source file of MIDAS code
+      REL	Obvious
+      &lt;numerical-digits>
+		Source code for whatever language.  The digit string 
+		is considered a version number.
+
+
+     The file "LISP NEWS" is the collection of system updates
+sent out here at MAC since the publication of the MACLISP 
+reference manual in April 1974.  Even though it is sadly out of date,
+this manual is indispensible for understanding the system.  Recently,
+we published in loose-leaf form the first two parts of the MACLISP 
+manual. These should be of some help to novice users of the system.
+
+     There are a few major changes in the strategy  of the TOPS-10
+implementation, foremost of which is the way interrupt characters are 
+now done.  Control-C trapping is no longer used  -  it turned out to 
+be a verrry bad idea  -  and instead &lt;control-C> takes you back to 
+the monitor, from which the REENTER command puts you in the  interrupt
+loop.  Of course, if the program is sitting in the TTY  input wait
+loop, then control characters will be executed immediately;  but if
+the program is running and not inputting from the TTY, you  have to
+type &lt;control-C>, followed by REENTER.  This  is similar to the way
+interrupt characters are handled on MULTICS.
+The RESCAN feature of the monitor is used to get an initializer
+program running, and is invoked as follows:
+	.RUN LISP;MYFILE.INI
+or
+	.RUN LISP(MYFILE.INI)
+depending on which syntax your monitor permits.  MYFILE.INI is a file
+of LISP code, whose first form should be a (COMMENT ...) used by
+the allocator.  If ".INI" is omitted, the extension INI is assumed.
+
+
+########## look out for these paragraphs - something new is here ##########
+
+	Now, some reminders as to how to make up various systems. 
+First, note that most storage spaces can be dynamically re-allocated
+larger (i.e., LIST, FIXNUM, FLONUM, BIGNUM, SYMBOL, ARRAY, and HUNKn); 
+But Binary Program Space, as well as all the Push-down-stack (usually
+called PDLs) cannot be so expanded in the TOPS-10 version.  This is 
+the fault of the limited facility in a two-segment architecture, as 
+compared with a virtual-memory paging box.  Thus you will have to pay
+more than the usual attention to allocating these areas. 
+
+1) To make up a LISP.SHR and LISP.LOW:  First use the standard
+   DEC LOADER, to load up the LISP.REL file.  Then start it up
+   once to cause the initialization to happen.  You will probably 
+   get a message from LISP saying that the low segment begins at a bad
+   boundary point;  if that happens, use the appropriate LOADER switch
+   to set the initial low segment firstloc to the value printed out by
+   LISP.  This usually happens if you load a DDT or some other 
+   program before loading the LISP.REL;  for example, with a DDT, you
+   are asked by LISP to give the LOADER command:
+	/005140O	[or /SET:.LOW.:5140 for LINK-10]
+   After that, you can then sharable-save it, preferably on SYS. 
+   [A LISP job that has been run, and subsequently SUSPENDed, will 
+   have no HISEG; but upon start up will try to GETSEG a hiseg from 
+   the same LISP.SHR that was used originally.  Thus sharable-save 
+   dumps require no additional copies of the high segment on DSK].
+   If your system runs the newer 6.02 monitor, it is a good idea to
+   use the NSSAVE command to create a single LISP.EXE file; this will
+   make LISP load faster and help the TOPS-10 VM features to work
+   better.
+2) To make up a NCOMPLR compiler:  First allocate about 36000.
+   words for BPS.  The standard values for the other spaces are 
+   acceptable, but you may want to lessen them somewhat;  if so, some
+   values to use are:
+	REGPDL=1400
+	SPECPDL=1000
+	If you are really low on core, you might consider reducing 
+   these by a factor of 2.
+   Then do (FASLOAD NCOMPLR FAS) followed by (INITIALIZE) followed
+   by (CDUMP);  as the NCOMPLR file is being loaded, it makes a call 
+   to the ALLOC function to set the other space sizes.  At this point,
+   you are back in the monitor, at a place where you can save the 
+   compiler away;  when you start it up again, it will be in the 
+   command line parser, from which you can escape [to LISP toplevel,
+   of course] by typing a &lt;control-G>.  To re-enter the parser from 
+   toplevel, do (MAKLAP), or merely type &lt;control-caret> [or 
+   &lt;control-up-arrow>, however you call it; it is ascii 036 octal].
+   The syntax of the parser is very similar to that of almost all 
+   file-transducing programs:
+	&lt;target-file>←&lt;source-file>[(&lt;switch-letters>)]&lt;carriage-return>
+   where the brackets are here meant to be meta-syntactic, as always.
+   Multiple source-file specifications may be used to produce a single
+   target file, in which case they are separated by commas.  If only 
+   one file specification is given with no "←", then reasonable 
+   defaults are taken.
+	If enough core is available [say, 65.K or so] you might 
+   consider also loading in the FASLAP.FAS and GETMID.FAS files just
+   after FASLOADing in NCOMPLR.FAS, and taking advantage of the 
+   concurrent compilation-and-assemble now available, by specifying 
+   the "F" and "K" switches.  In this case, however, you should 
+   increase the BPS allocation to 39000., leaving the others  
+   the same.  But otherwise, if you can't get enough core, follow the
+   instructions under 3) below to get a "stand-alone" FASLAP 
+   assembler.
+
+
+3) To make up a FASLAP assembler: as for the compiler, get a 
+   LISP, allocating about 7000. words for BPS, and using the 
+   same PDL allocations as recommended under 2) above.  Then do
+		(FASLOAD FDRV FAS)
+		(FASLOAD GETMID FAS)
+		(FASLOAD FASLAP FAS)
+		(INITIALIZE)
+		(CDUMP)
+   Again, at this point, you will be back in the monitor,
+   from which you can save the job;  and again, when restarting
+   it, you will be in the command line parser.  A reminder:  If the 
+   GETMID file is not on the directory which is your currently 
+   connected directory, say maybe it is on SYS, you will have to fill 
+   in all the specifications for the MACLISP file specification. E.G.,
+		(FASLOAD GETMID FAS SYS) 
+		(FASLOAD FASLAP FAS DSK (&lt;PROJ. NO.>  &lt;PROG. NO.>))
+		&lt;ETC.>
+   Omitting the list (&lt;proj. no.> &lt;prog. no.>) will allow defaulting
+   to the previous directory used, or to the currently connected 
+   directory.  It should be possible to specify the SYS device by 
+	(FASLOAD GETMID FAS DSK (1 4))
+
+
+4) The CGOL files, located on the PRATT directory, make an
+   interesting front-end for LISP.  It has been said that if
+   you liked CLISP, you'll love CGOL.  The manual, which is
+   more or less the file CGOL DOC, is self-explanatory.  The
+   fasl files for both CGOL and CGPRIN were constructed by
+   first writing the programs in CGOL, then compiling them
+   directly using NCOMPL.
+
+5) The SCHEME files, located on the SCHEME directory, are an
+   implementation of the SCHEME language (a lexically scoped
+   dialect of LISP) which runs under MacLISP.  It is documented
+   in MIT AI Lab Memos 349, 353, 379, and others.
+
+6) If you need to assemble something from MIDAS, remember that
+   when running on the DEC system, MIDAS normally produces a 
+   REL file as output.
+   When LISP source is being assembled, it uses a feature to
+   take additional "source code" from the TTY, but what you are 
+   supposed to do here is redefine some of the standard assembly 
+   flags, such as "D10" or "BIGNUM".  Just after it says,
+		REDEFINITIONS?
+   then you can type, for example,
+		D10==1
+		ITS==0
+		BIGNUM==0
+		EDFLAG==1
+		USELESS==0
+   and when you've typed in enough, terminate the redefinitions by
+   typing a &lt;control-Z>.  Ordinarily, you will probably need only to 
+   give the redefinitions
+		D10==1
+		ITS==0
+   which signal a relocatable assembly for the TOPS-10 system;
+   but if you are strapped for core, you can eliminate some 
+   of the winning features of MACLISP by turning off the flags
+   controlling their assembly.
+	The LISP.REL on this tape is a standard full assembly,
+   but the LSPMIN.REL  has many such features omitted,
+   and is consequently about 5K smaller than if all were assembled in
+   [e.g., the "BIGNUM", or infinite-precision integer arithmetic 
+   package; the "EDIT" package; and a bunch of useless features such
+   as the Roman numeral reader!]
+
+6) @ is our source creffing program; all of our program listings are
+   generated using it.  It is used primarily for the Xerox Graphics
+   printer over here, but it also makes line printer listings.  Its
+   neatest feature is that it can make "comparison listings", ie,
+   listings of only the pages that have changed since the previous
+   version.
+
+	JONL is finally back from his leave of absence at IBM.  Work
+is picking up on the new manual; chapter three should be out fairly
+soon.  Ellen Lewis is editing the latest revisions, but she also has
+other duties.  We will bring the manual out chapter by chapter, as
+time permits. 
+
+				    Jon L. White
+				and Guy L. Steele
+@@TBSIZE 36.
+@@FBSIZE 36.
+#MC:
+
+JONL;	THIS NOTE
+
+MIDAS;	MIDAS DOC
+	MIDAS 356
+	MIDAS RELSML
+	ATSIGN DOC
+	ATSIGN 410
+	ATSIGN REL
+	ITSDFS MID
+	DECDFS MID
+	ITSBTS MID
+	DECBTS MID
+	FASDFS MID
+	TNXDFS MID
+	TWXBTS MID
+
+LISP;	LISP NEWS
+	LSPMIN REL
+	LISP REL
+	LISP 384
+
+COMLAP;	ELAP 100
+	FASLAP 288
+	FDRV 32
+	GFILE 412
+	GFN 412
+	GRILAP 15
+	NCOMPL 703
+	TRACE 59
+	NCOMPLR FAS
+	FASLAP FAS
+	FDRV FAS
+
+LIBDOC;	FORMAT LSP
+	CHOMP LSP
+	DOW LSP
+	BS LSP
+	FOR LSP
+LIBLSP;	FORMAT FASL
+	CHOMP FASL
+	DOW FASL
+	BS FAS
+	FOR FASL
+
+DECSYS;	GETMID FAS
+	SORT FAS
+	LAP FAS
+	GRINDE FAS
+	GRIND FAS
+	GRILAP FAS
+	TRACE FAS
+
+PRATT;	CGOL DOC
+	CGOL CGL
+	CGPRIN CGL
+	CGOL FASL
+	CGPRIN FASL
+
+SCHEME;	SCHSYS 17
+	SCHSYS FASL
+	SCHEME INI
+
+LSPMAN;	MANUAL ASCII
+ββββ
+</pre>
+</body>
+</html>

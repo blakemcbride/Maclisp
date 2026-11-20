@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SFA Lossage -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 27 Jan 81 08:40:00 GMT -->
+<!--X-Message-Id: e52bd4e06035a1928cfe3de07d25506a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SFA Lossage</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01672.html">Date Prev</a>][<a href="msg01670.html">Date Next</a>][<a href="msg01672.html">Thread Prev</a>][<a href="msg01669.html">Thread Next</a>][<a href="maillist.html#01671">Date Index</a>][<a href="threads.html#01671">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SFA Lossage</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RPG at SU-AI, LSP at SU-AI</li>
+<li><em>Subject</em>: SFA Lossage</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 27 Jan 81 08:40:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, ejg at SU-AI</li>
+<li><em>Original-date</em>: 27 JAN 1981 0340-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 26 Jan 1981 1529-PST
+    From: Lisp files &lt;LSP at SU-AI&gt;
+    Subject: SFA Loss 
+    Jonl, the following makes the reader lose. In particular, when it tries to
+    put together OXYZY it gets two nulls in a row. 
+    The problem centers around the (ascii (car sfa-buffer)) in that changing 
+    that to () or to (ascii 101) does not cause the lossage, which happens at 
+    MC as well.
+    .  .  . | P O OXYZY OXYZT OXYZT |  .  .  .
+Indeed, there are a number of &quot;screws&quot; that we have been finding out as
+the SFA feature gets more usage -- this one is due to the fact that the
+ASCII function will ocasionally clobber a word of the PNBUF (a 10 word
+vector which is READ's buffer for words of a forming pname).  As it
+happens, READLIST also has this side effect, so I put in a little code
+to preserve-and-restore the portion of the PNBUF which is clobbered.
+Your conjecture that some &quot;register&quot; was getting clobbered by the
+sfa function was correct -- it's just that the &quot;register&quot; was this
+writeable vector of words.  Do a SRCCOM on the latest version of
+MC:L;READER &gt;  to see how I fixed it.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01672.html">Odd case of LEXPR-FUNCALL</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01670.html">sfa error checking</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01672.html">Odd case of LEXPR-FUNCALL</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01669.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01671"><strong>Date</strong></a></li>
+<li><a href="threads.html#01671"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

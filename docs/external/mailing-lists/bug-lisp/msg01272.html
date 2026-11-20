@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Multiple&#45;value SETQ/RETURN -->
+<!--X-From-R13: Dvpuneq [. Egnyyzna &#60;D[E ng [WF&#45;OW> -->
+<!--X-Date: Sun, 24 Aug 80 05:04:00 GMT -->
+<!--X-Message-Id: a1058ed566bdbaaf668b1c29dd0e8a3f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Multiple-value SETQ/RETURN</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01273.html">Date Prev</a>][<a href="msg01271.html">Date Next</a>][<a href="msg01273.html">Thread Prev</a>][<a href="msg01268.html">Thread Next</a>][<a href="maillist.html#01272">Date Index</a>][<a href="threads.html#01272">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Multiple-value SETQ/RETURN</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC, JONL at MIT-MC</li>
+<li><em>Subject</em>: Multiple-value SETQ/RETURN</li>
+<li><em>From</em>: Richard M. Stallman &lt;RMS at MIT-AI&gt;</li>
+<li><em>Date</em>: Sun, 24 Aug 80 05:04:00 GMT</li>
+<li><em>Cc</em>: MACSMA-I at MIT-MC, NIL at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 24 August 1980 01:04-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>There may not be any need to worry about what to do about multiple
+values and PROG1.  When Moon and I made multiple values work
+consistently on the Lisp machine, we decided that it was reasonable
+for PROG1 not to return multiple values, interpreted or compiled.
+
+Only the last subform in a construct ever passes back multiple values
+on the Lisp machine.  So we have a consistent scheme for what things
+return multiple values, and as part of this scheme, PROG1 does not.
+Because this does fit into a consistent scheme, it shouldn't be called
+&quot;incorrect implementation&quot; or &quot;failing to work&quot;
+
+I'm not trying to say this is the ONLY consistent design.
+It might be possible to design another consistent scheme in which
+PROG1 would return multiple values, and that scheme might or might not
+be preferable, but if it were preferable it would be at most a minor
+improvement.  You might choose to implement such a scheme if it were
+easy to do, but it would not be worth working hard for.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01273.html">Multiple-value SETQ/RETURN</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01271.html">bug in OPEN</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01273.html">Multiple-value SETQ/RETURN</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01268.html">Multiple-value SETQ/RETURN</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01272"><strong>Date</strong></a></li>
+<li><a href="threads.html#01272"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

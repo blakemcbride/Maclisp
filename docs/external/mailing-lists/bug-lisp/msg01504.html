@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: QIV ng [WF&#45;[Q (Qney I. Vbsszna) -->
+<!--X-Date: Mon, 23 Feb 81 05:51:00 GMT -->
+<!--X-Message-Id: 0898b4b0e326ea626512362eeda12abb@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:CWH at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01505.html">Date Prev</a>][<a href="msg01503.html">Date Next</a>][<a href="msg01500.html">Thread Prev</a>][<a href="msg01502.html">Thread Next</a>][<a href="maillist.html#01504">Date Index</a>][<a href="threads.html#01504">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: CWH at MIT-MC (Carl W. Hoffman)</li>
+<li><em>Date</em>: Mon, 23 Feb 81 05:51:00 GMT</li>
+<li><em>Original-date</em>: 23 FEB 1981 0051-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From LISP RECENT:
+
+Saturday  Feb 07,1981  NM+3D.15H.34M.49S.   LISP 2071 / COMPLR 1094  -- JonL --
+
+3) Default value for DEFUN&amp;-CHECK-ARGS is now (), and whenever &amp;OPTIONAL or
+    &amp;REST args are specified, the &quot;args property&quot; of the symbol will be set.
+  [more exposition below]
+   DEFUN&amp;-CHECK-ARGS is the variable which says whether or not there should
+    be code in the function itself to do number-of-args checking. 
+   The interpreter, and &quot;UUO&quot; handler, when in *RSET mode, will check the 
+    number of arguments passed to a LSUBR/SUBR against the &quot;args property&quot;, 
+    which is retrieved and set by the ARGS function.
+
+I haven't been reading my mail lately, so I'm not aware of any discussion
+which may have preceded this change.  But I want to voice my objection to
+it.  My feeling is that the default setting for global switches such as this
+one should be that best for naive users, i.e. those not likely to have init
+files and least capable of finding information from online documentation.
+Hackers and system implementors can easily create their own environments.
+But for the naive user, receiving the error message
+
+    ; ((1 . 2) (X)) Wrong number of arguments
+
+is going to be more confusing than
+
+    ; ((FIRST &amp;OPTIONAL SECOND) (X)) Wrong number of arguments
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01505.html">exitlist in new-style DO</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01503.html">exitlist in new-style DO</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01500.html">Re: exitlist in new-style DO</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01502.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01504"><strong>Date</strong></a></li>
+<li><a href="threads.html#01504"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

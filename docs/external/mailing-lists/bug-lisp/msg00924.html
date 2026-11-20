@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Wrong result -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 8 Mar 82 15:51:00 GMT -->
+<!--X-Message-Id: 528106dadeb44001c628c7d92c18b52b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Wrong result</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00925.html">Date Prev</a>][<a href="msg00923.html">Date Next</a>][<a href="msg00925.html">Thread Prev</a>][<a href="msg00923.html">Thread Next</a>][<a href="maillist.html#00924">Date Index</a>][<a href="threads.html#00924">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Wrong result</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JSOL at USC-ECLC</li>
+<li><em>Subject</em>: Wrong result</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 8 Mar 82 15:51:00 GMT</li>
+<li><em>Cc</em>: BUG-MACLISP at MIT-MC, Feinberg at CMU-20C</li>
+<li><em>Original-date</em>: 8 March 1982 10:51-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: Friday, 5 March 1982  09:19-PST
+    From: Jonathan Alan Solomon &lt;JSOL at ECLC&gt;
+    Subject: Terminology and resolution of &quot;restricted JFN&quot; problem;  and functions OPENF and TNX-GTJFN
+    Seems to me that you can do it without &quot;restricting the JFN&quot;. If you
+    open the file &quot;restricted access&quot;, which uses the following bit
+    (excerpt from INFO's JSYS node):
+			B29(OF%RTD)   Allow restricted  access  (i.e.,  allow
+				      only one process to access the file).
+    You will get the desired results (no other process can hack the file),
+    while at the same time, INFORMATION (ABOUT) FILE will show it. Note,
+    this is for the OPENF jsys, not for the GTJFN jsys. The JFN is
+    available, but the file is locked.
+I believe that what was desired was that the JFN be &quot;protected&quot; from
+mungeing by random subforks, but that the file access *not* be restricted.
+That is, it's ok for several forks/jobs to open the file for simultaneous
+reading;  the &quot;frozen&quot; access, by default, prohibits more than one user at 
+a time from gaining write/append access.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00925.html">Restricted Access  --  of what?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00923.html">Restricted JFNs</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00925.html">Restricted Access  --  of what?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00923.html">Restricted JFNs</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00924"><strong>Date</strong></a></li>
+<li><a href="threads.html#00924"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

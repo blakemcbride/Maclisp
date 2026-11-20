@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: More on GFN -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Mon, 18 Feb 80 13:09:00 GMT -->
+<!--X-Message-Id: 817fe5fd877b749e6b8f3efc567c9515@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>More on GFN</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02135.html">Date Prev</a>][<a href="msg02133.html">Date Next</a>][<a href="msg02135.html">Thread Prev</a>][<a href="msg02133.html">Thread Next</a>][<a href="maillist.html#02134">Date Index</a>][<a href="threads.html#02134">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>More on GFN</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: More on GFN</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Mon, 18 Feb 80 13:09:00 GMT</li>
+<li><em>Cc</em>: RLB at MIT-MC, REES at MIT-MC, RWK at MIT-MC</li>
+<li><em>Original-date</em>: 18 FEB 1980 0809-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Ok, EVAL-WHEN has been made to grind correctly and the documentation at the
+head of the file has been reversed so that recent changes are at the TOP 
+where they are easy to see.
+
+As to the HUNK stuff, hopefully someone can put this info in  .INFO.;LISP NEWS
+for me when the next set of info goes into there -- I don't know what the
+format is that things have to be in if there is a standard -- but anyway:
+
+There is a variable named HUNKSPRIN1. If it is NIL, then HUNKs will be printed
+as CONS's. Additionally, if HUNKP is NIL, regardless of the setting of 
+HUNKSPRIN1, hunks will display as CONS's. If HUNKSPRIN1 is non-NIL, it should
+be set to the name of a printer which can be used to SPRINTER an s-expression.
+It follows the 'familiar' (l n m) arg convention of most of the grind package
+functions... Sprint a list l in space n leaving room for m pending parens.
+Additionally, the value of HUNKSPRIN1 should have a HUNKGFLATSIZE property
+which is a function of one arg that returns the flatsize of that object when
+sprintered. The default value of HUNKSPRIN1 is STANDARD-HUNKSPRIN1 which
+is provided to sprinter HUNKs in a nice (?) way ...
+
+Hopefully REES will shortly follow with his information about how to make
+make the **SELF-EVAL** guys display nicely using SPRINTER.
+
+The new features cost us 300 words of code. Sorry about that.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02135.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02133.html">Twenex MacLisp screw (rilly?)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02135.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02133.html">Twenex MacLisp screw (rilly?)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02134"><strong>Date</strong></a></li>
+<li><a href="threads.html#02134"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: ARRAY management in MACLISP -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Wed, 20 Sep 78 12:40:00 GMT -->
+<!--X-Message-Id: 8e7e1a23afa03e03d9af2a75382e65ad@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ARRAY management in MACLISP</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00287.html">Date Prev</a>][<a href="msg00285.html">Date Next</a>][<a href="msg00288.html">Thread Prev</a>][<a href="msg00285.html">Thread Next</a>][<a href="maillist.html#00286">Date Index</a>][<a href="threads.html#00286">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ARRAY management in MACLISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>Subject</em>: ARRAY management in MACLISP</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Wed, 20 Sep 78 12:40:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 20 SEP 1978 0840-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Yea, &quot;NORET&quot; rather than &quot;*NORET&quot;, cheers to &quot;*NOPOINT&quot;.
+But I'm aghast at your comment that fiddling NORET and GETSP slowed
+things down (or at least left an unacceptable solution) - it can't do 
+anything but reduce the number of GCs and array-relocations both.  
+One theory of HUNKs was that the overhead, both in terms of header-space 
+consumed and in time spent on memory-management (creation, relocation and 
+gc'ing) was much less than for arrays.  Certainly, setting ^D cant cause 
+any significant time loss.  Most likely, you should try setting the 
+interval (- BPEND BPORG) as large as possible, in order to reduce the 
+array-relocation incidence; this would be similar to allocating as much 
+FLONUM space as possible when you have a fastly-flonum-consing problem.  
+    But also, you may merely be victim of the gross time-overhead for 
+ARRAY creation.  In NIL, the VECTOR will most likely solve this problem 
+since their management will be essentially the same as cons cells (please,
+no &quot;black&quot; humor).  Could you try your application with HUNKs?  How did 
+you estimate the likely time the problem should take (since you said the 
+array solution seemed to take 3 times longer)?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00287.html">ARRAY relocations in MACLISP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00285.html">NTHCDR</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00288.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00285.html">NTHCDR</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00286"><strong>Date</strong></a></li>
+<li><a href="threads.html#00286"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

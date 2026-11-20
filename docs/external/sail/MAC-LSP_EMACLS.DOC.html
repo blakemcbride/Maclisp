@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>EMACLS.DOC[MAC,LSP] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename EMACLS.DOC[MAC,LSP]  blob <a href="EMACLS.DOC[MAC,LSP]_blob">sn#583848</a> filedate 1981-05-05 generic text, type C, neo UTF8</div>
+<pre id="u8lump">COMMENT ⊗   VALID 00002 PAGES
+C REC  PAGE   DESCRIPTION
+C00001 00001
+C00002 00002	αxSLISP dsk:maclsp.dmp[1,3](elisp.ini)
+C00005 ENDMK
+C⊗;
+αxSLISP dsk:maclsp.dmp[1,3](elisp.ini)
+αnαxSLISP talks to job n(10.)
+α0αxSLISP types the wholine of inferior
+α-αxSLISP murder (i.e. negotiated suicide)
+α=	send arrow line or attach buffer
+α+nα=	send next n lines
+α-nα=	send previous n lines
+
+α0α= &lt;sexp>
+     send comand line
+
+α0αxBUCKY &lt;text>
+	command line control-meta chars sent
+
+αxBUCKY current line sent as control-meta chars
+
+αxINTERRUPT B
+
+αxEVAL&lt;cr>
+      &lt;sexp1>&lt;cr>
+      &lt;sexp2>&lt;cr> ... αβ&lt;LF>
+
+αxLTYPE sends answers to Page Printer
+αxLFILE sends answers to the E Page
+αxLATTACH sends answers to the Attach buffer
+
+Protocols: (* means not actually anticipated to be used; current
+implementation knows about it but does not send and/or interpret them
+specially)
+
+From E to MacLisp
+	Mail
+	wd0:	(sixbit EPR),,Job# sending message
+	wd1:	type of message
+
+2,,0:   Continuation needed
+1,,0:	Short (fits in the next =30 words, ends with null byte
+        or falls off)
+
+0		no-op
+1		initiating a conversation
+2		ok (did the jobread)
+3		SEXPs (9-bit from E to MacLisp and 7-bits otherwise)
+4		explicit eof
+5		E commands (from MacLisp to E) 7-bits (E Macro format)
+6		interrupt. do &lt;esc>i &lt;char>
+7		close connection (suicide)
+8		from MacLisp: sends n words of readonly variable names
+		from E: return n words of name,value pairs
+
+	wd2:	-number of bytes,,address of buffer
+		
+
+Protocol is:
+	E	MacLisp
+        ---------------
+	initiate
+		ok
+
+To send a short message just a MAIL
+To send a long message MAIL then wait for JOBREAD acknowledge
+To send interrupts, just send them
+Acknowledgment is the short OK message
+
+Commands needed:
+	start DMP file
+	send control chars
+	send interrupt character (just 1 at a time)
+
+
+(ecalledp) defined in (help) tells if E called you.
+</pre>
+</body>
+</html>

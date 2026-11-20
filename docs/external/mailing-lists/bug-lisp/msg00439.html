@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: PROG&#45;LET -->
+<!--X-From-R13: [AA@ ng [WF&#45;[Q (Rnivq O. [bba) -->
+<!--X-Date: Thu, 10 May 79 03:09:00 GMT -->
+<!--X-Message-Id: b9347b32edd69cec08a9dfe969d1fead@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>PROG-LET</title>
+<link rev="made" href="mailto:MOON at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00440.html">Date Prev</a>][<a href="msg00438.html">Date Next</a>][<a href="msg00440.html">Thread Prev</a>][<a href="msg00437.html">Thread Next</a>][<a href="maillist.html#00439">Date Index</a>][<a href="threads.html#00439">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>PROG-LET</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: PROG-LET</li>
+<li><em>From</em>: MOON at MIT-MC (David A. Moon)</li>
+<li><em>Date</em>: Thu, 10 May 79 03:09:00 GMT</li>
+<li><em>Cc</em>: NIL at MIT-MC</li>
+<li><em>Original-date</em>: 9 MAY 1979 2309-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 9 MAY 1979 2021-EDT
+    From: JONL at MIT-MC (Jon L White)
+    Subject: PROG-LET
+    To: (BUG LISP) at MIT-MC
+    CC: NIL at MIT-MC
+    
+    Would any one object to a version of LET, say called &quot;LET-PROG&quot;,
+    which is like let, but does a PROG action rather than a PROGN action?
+    This would allow the destructuring provided by LET be available
+    in a PROG context.
+       (PROG-LET ((&lt;v1&gt; &lt;e1&gt;) ... (&lt;vn&gt; &lt;en&gt;)) &lt;body&gt;) 
+    turns into something like
+       (LET ((&lt;v1&gt; &lt;e1&gt;) ... (&lt;vn&gt; &lt;en&gt;))
+            (PROG () 
+    	      &lt;body&gt;))
+    If there's real argument/interest, there could also be PROG-LET*
+Wouldn't it be upward-compatible just to use PROG?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00440.html">PROG-LET</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00438.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00440.html">PROG-LET</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00437.html">PROG-LET</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00439"><strong>Date</strong></a></li>
+<li><a href="threads.html#00439"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

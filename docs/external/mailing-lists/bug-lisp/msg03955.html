@@ -1,0 +1,114 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 23 Nov 79 07:17:00 GMT -->
+<!--X-Message-Id: 9a69097e018c6b1612fca2c7de47b456@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03956.html">Date Prev</a>][<a href="msg03954.html">Date Next</a>][<a href="msg03954.html">Thread Prev</a>][<a href="msg03953.html">Thread Next</a>][<a href="maillist.html#03955">Date Index</a>][<a href="threads.html#03955">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: EB at MIT-AI</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 23 Nov 79 07:17:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 23 November 1979 02:17-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     Date:
+Date: Tue, 21 Nov 79 17:48:27 GMT
+Original-Date: 11/21/79 13:48:27 EDT
+Subject:
+    From: EB at MIT-AI
+    To:   (BUG LISP) at MIT-AI
+
+    THE FOLLOWING FILE:
+
+
+    (EVAL-WHEN (COMPILE)
+       (DEFUN FOO-HOOK (X)
+          (COND ((EQ X 'FOO) (NCONS 'FOO-SYM))
+                (T NIL)))
+       (TRACE FOO-HOOK)
+        (PUSH 'FOO-HOOK USERATOMS-HOOKS))
+
+    (DEFUN FOO (X) 'FOO)
+
+    PRODUCES THE FOLLOWING ERROR IN LISP COMPILER 900:
+
+    (COMMENT **ERROR** FOO Atomindex screw in function FOO)
+    ;%%%%%%%% COMPILER ERROR - CALL JONL %%%%%%%%
+    ;BKPT BARF
+
+    THE TEST ABOVE WAS PLAYING AROUND WITH USERATOMS-HOOKS,
+    INTENDING TO EVENTUALLY WRITE A USERATOMS-HOOK THAT PUTS SYMBOLS ON
+    A CHOICE OF OBARRAYS DEPENDING ON THE FORM OF THE SYMBOL, AND
+    USEABLE EVEN AT PLACES THAT ARE NOT GETTING EVALUATED (E.G.
+    IN (DEFUN atom (atom1) ...).
+
+Fixed in the source, and in XCOMPLR on MC.
+
+By the way, I suspect that you don't mean what you actually wrote.
+More likely:
+(DEFUN FOO-HOOK (X)
+   (COND ((EQ X 'FOO) '('FOO-SYM))))
+Note that the form you return the NCONS of is EVAL'd at load time to
+get the final atom.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03956.html">Re: SETF, PUSH, POP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03954.html">SETF, PUSH, POP</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03954.html">SETF, PUSH, POP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03953.html">&quot; on TTYSCAN-STRINGERS/|</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03955"><strong>Date</strong></a></li>
+<li><a href="threads.html#03955"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

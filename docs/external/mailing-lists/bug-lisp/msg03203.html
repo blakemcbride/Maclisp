@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SI:EXTEND&#45;LENGTH -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 25 Jul 81 12:01:00 GMT -->
+<!--X-Message-Id: cc6f5a1101977d35bf672b66a53a1c4e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SI:EXTEND-LENGTH</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03204.html">Date Prev</a>][<a href="msg03202.html">Date Next</a>][<a href="msg03204.html">Thread Prev</a>][<a href="msg03201.html">Thread Next</a>][<a href="maillist.html#03203">Date Index</a>][<a href="threads.html#03203">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SI:EXTEND-LENGTH</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: WGD at MIT-MC</li>
+<li><em>Subject</em>: SI:EXTEND-LENGTH</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 25 Jul 81 12:01:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 25 July 1981 08:01-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 20 July 1981 21:15-EDT
+    From: Richard L. Bryan &lt;RLB at MIT-MC&gt;
+    Sender: BIL at MIT-MC
+    Subject: Gobble, gobble
+    To: BUG-LISP at MIT-MC
+    The current EXTBAS has SI:EXTEND-LENGTH subr defined as
+    (defun si:extend-length (x) (si:extend-length x))
+    or something equivalent, expecting a macro definition for si:extend-length
+    to come in from EXTHUK.  It did, but after that SI:EXTEND-LENGTH was 
+     own-symbol'ified, leading to a short inner loop on si:extend-length
+    tail recursing to itself, but not terminating in finite time.
+This hasn't been fixed yet -- so I fixed it merely by removing the
+OWN-SYMBOL declaration in the EXTBAS file, and recompiling.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03204.html">PUSH, or is it SETF?  SHOVE maybe?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03202.html">DEFCONST</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03204.html">PUSH, or is it SETF?  SHOVE maybe?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03201.html">Definition of SELECTQ</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03203"><strong>Date</strong></a></li>
+<li><a href="threads.html#03203"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

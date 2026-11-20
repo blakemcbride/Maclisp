@@ -1,0 +1,108 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: TTYSCAN troubles. -->
+<!--X-From-R13: OZO@ ng [WF&#45;[Q (Oyna Pnjqra) -->
+<!--X-Date: Sat, 26 Apr 80 03:57:00 GMT -->
+<!--X-Message-Id: fec4c1da33abc8c800ad729c451e54a9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>TTYSCAN troubles.</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04184.html">Date Prev</a>][<a href="msg04182.html">Date Next</a>][<a href="msg04184.html">Thread Prev</a>][<a href="msg04182.html">Thread Next</a>][<a href="maillist.html#04183">Date Index</a>][<a href="threads.html#04183">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>TTYSCAN troubles.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: PSZ at MIT-ML</li>
+<li><em>Subject</em>: TTYSCAN troubles.</li>
+<li><em>From</em>: ALAN at MIT-MC (Alan Bawden)</li>
+<li><em>Date</em>: Sat, 26 Apr 80 03:57:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 25 APR 1980 2257-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     PSZ@MIT-ML
+Date: Fri, 26 Apr 80 02:26:59 GMT
+Original-Date: 04/25/80 22:26:59 EDT
+Subject: Re: TTYSCAN troubles. (long msg)
+
+    ...
+
+    	One solution to this kind of problem that has been proposed (and
+    implemented by GSB) is to abandon the notion of table-driven scanning
+    schemes as unworkable, and to use an &quot;inner&quot; call to read which is a
+    perfect predictor of when read will terminate on a particular string.
+    This is, of course, wasteful, as the read is done twice (though perhaps
+    some clever catch/throw scheme around the outer read could obviate the
+    need for it... but that's another story).  Worse yet, it has the nasty
+    characteristic that any side-effects performed by the reader (e.g.,
+    interning atoms, read-time creation of data structure) are
+    hard/impossible to undo, and even if some stuff is typed and then rubbed
+    out, its effect remains.
+
+    ...
+
+GSB's solution is the one used by the LispMachine reader (including a
+catch/throw scheme to prevent doing the read twice).  No one has ever
+complained about the duplication of side effect issue.  I my opinion,
+if you are doing some kind of non-repeatable side effect at readtime,
+then you are probably doing something wrong.  This solution to rubout
+processing is the cleanest imaginable and it NEVER fails!  (Users can
+write the hairyest reader macros imaginable and it works like a
+charm.)  It isn't even all that expensive since it only happens during
+interactive READing and never when reading from a file.
+
+It sure is a shame that it is too late to do it the right way in MacLisp.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04184.html">Re: TTYSCAN troubles. (long msg)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04182.html">TTYSCAN troubles.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04184.html">Re: TTYSCAN troubles. (long msg)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04182.html">TTYSCAN troubles.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04183"><strong>Date</strong></a></li>
+<li><a href="threads.html#04183"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

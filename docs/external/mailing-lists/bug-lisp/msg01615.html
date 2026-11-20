@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MULTIPLE&#45;VALUE error checking -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Fri, 6 Feb 81 22:18:00 GMT -->
+<!--X-Message-Id: 3a258649d57443311b6bee7807864f84@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MULTIPLE-VALUE error checking</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01616.html">Date Prev</a>][<a href="msg01614.html">Date Next</a>][<a href="msg01616.html">Thread Prev</a>][<a href="msg01614.html">Thread Next</a>][<a href="maillist.html#01615">Date Index</a>][<a href="threads.html#01615">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MULTIPLE-VALUE error checking</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: WGD at MIT-MC</li>
+<li><em>Subject</em>: MULTIPLE-VALUE error checking</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Fri, 6 Feb 81 22:18:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 6 FEB 1981 1718-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I've refined the error checking for MULTIPLE-VALUE/MULTIPLE-BIND:
+    Date: 5 February 1981 00:30-EST
+    From: William G. Dubuque &lt;WGD at MIT-MC&gt;
+    Why does (MULTIPLE-VALUES (A B) (VALUES 1 2)) lose? Also, why doesn't
+    (MULTIPLE-VALUE (A) ...) do the correct thing instead of losing; this
+    would be important for automatically generated code. ... also
+    for instance, we have (MULTIPLE-VALUE (A) 1) ).
+In the cases where 0 or 1 variables are being set, the expander will now 
+permit atomic evaluations, and produce a &quot;simple&quot; SETQ or LET.   The
+problem with (MULTIPLE-VALUES (A B) (VALUES 1 2)) is more subtle, and
+the correction for it is simply to special-case the &quot;evaluations&quot; which
+call VALUES or VALUES-LIST;  in particular, VALUES is a macro which
+expands into (PROG1 ...)  and in general, a PROG1 can't work there (but
+of course this specific prog1 is setting up the values vector ...)
+    .  .  .
+	    PS, MULTIPLE-VALUE should also work with () as first arg, as it
+    does on the Lispm (also with 1 arg).
+Right, fixed -- a null varlist just &quot;calls the function&quot;, or whatever.
+    .  .  .I think the sysp check should either
+    by eliminated or changed to an appropriate warning.
+It's more accurate now.  But a general problem with these system macros
+is that there are many places where &quot;abnormalities&quot; are found, and a
+specific diagnosis would require many more words of memory to store
+the specific msgs;  until we're willing to give up a lot more address
+space, we'll just have to make do with a single message saying that the
+expansion didn't make it.  LET, DEFUN&amp; and DEFMACRO are other system
+macros which come to mind.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01616.html">[SOLOMON: forwarded]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01614.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01616.html">[SOLOMON: forwarded]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01614.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01615"><strong>Date</strong></a></li>
+<li><a href="threads.html#01615"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

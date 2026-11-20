@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: History of "backquote" macro -->
+<!--X-From-R13: XA@Z.BONBODQ&#45;[OJQ.ODBO -->
+<!--X-Date: Mon ,12 Mar 84 23:49:00 EDT -->
+<!--X-Message-Id: de1f3a0d4058c5b7ccf51b0d0b38ec49@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>History of &quot;backquote&quot; macro</title>
+<link rev="made" href="mailto:JONL.PA@PARC-MAXC.ARPA">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00848.html">Date Prev</a>][<a href="msg00846.html">Date Next</a>][<a href="msg00848.html">Thread Prev</a>][<a href="msg00846.html">Thread Next</a>][<a href="maillist.html#00847">Date Index</a>][<a href="threads.html#00847">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>History of &quot;backquote&quot; macro</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: kmp@mit-mc.ARPA, Lisp-Forum@mc.ARPA</li>
+<li><em>Subject</em>: History of &quot;backquote&quot; macro</li>
+<li><em>From</em>: JONL.PA@PARC-MAXC.ARPA</li>
+<li><em>Date</em>: Mon ,12 Mar 84 23:49:00 EDT</li>
+<li><em>Cc</em>: McDermott@Yale.ARPA, Guy.Steele@cmuc.ARPA, Dick%MIT-OZ@mc.ARPA,, Hewitt@mc.ARPA, gjs@mc.ARPA, Genesereth@Score.ARPA, Masinter.PA@PARC-MAXC.ARPA, JonL.PA@PARC-MAXC.ARPA</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In response to your message sent  Mon, 12 Mar 84
+
+There are two rather distinct components to the MacLisp-Style backquote,
+which may have had varying influences from &quot;history&quot;.
+
+1) the notion of a template into which somethings were substituted existed
+   since the time of Adolfo Guzman's thesis around 1967-8;  he had Lisp-level
+   macros called QU and QU* which were essentially like QUOTE except that the
+   form was &quot;looked at&quot; by a substitution parser, which substituted for certain
+   key words (i.e., the equivalent of &quot;,&quot; and &quot;,@&quot;).  In later years (meaning
+   around the time of Muddle -- 1971-75) some people were using variants of
+   a macro-defining function that incorporated similar ideas.  Steele's
+   MACRODEF comes to mind and so does a similar package attributed to Chuck
+   Rich (both seem to have influenced DEFMACRO as well).
+
+2) the notion of a reader macro that would &quot;compile such a template on the
+   fly into Lisp code&quot;.  I vaguely remember the influence of Muddle, especially
+   for &quot;[&quot; like constructs so that you didn't need to type LIST, (and such
+   a macro has been an essential feature of BRANDX for a long time, but with
+   more serious development).  Such a reader macro wasn't in common use
+   at the MIT AI lab in 1975, but after I returned from IBM (roughly, Jan 1978)
+   I remember seeing the LispMachine people using it.  We quickly recognized
+   its usefulness, and began a parallel development for PDP-10 MacLisp and NIL.
+
+In fact, the &quot;backquote&quot; reader macro and DEFMACRO are so intertwined
+that it has often been said that one can't understand backquote until he's
+personally written a bunch of macro-producing macros using the &quot;,',&quot; and &quot;,,&quot;
+paradigms.
+
+
+The Post-1978 development as you (KMP) outlined in your note is more-or-less
+as I remember it too.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00848.html">Backquote</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00846.html">eval-while-possible</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00848.html">Backquote</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00846.html">eval-while-possible</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00847"><strong>Date</strong></a></li>
+<li><a href="threads.html#00847"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Named PROG Feature -->
+<!--X-From-R13: UZE ng EG&#45;OW (Uhl Egrryr) -->
+<!--X-Date: Wed, 7 Jun 78 20:30:00 GMT -->
+<!--X-Message-Id: c6fb212065a3e404ab1ab2d047b5e0c2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Named PROG Feature</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03325.html">Date Prev</a>][<a href="msg02206.html">Date Next</a>][<a href="msg03325.html">Thread Prev</a>][<a href="msg02206.html">Thread Next</a>][<a href="maillist.html#03322">Date Index</a>][<a href="threads.html#03322">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Named PROG Feature</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: NIL at MIT-MC</li>
+<li><em>Subject</em>: Named PROG Feature</li>
+<li><em>From</em>: GLS at SU-AI (Guy Steele)</li>
+<li><em>Date</em>: Wed, 7 Jun 78 20:30:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC, bug-lispm at MIT-AI  </li>
+<li><em>Original-date</em>: 7 Jun 1978 1330-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>It has been suggested that a feature be introduced into LISP for
+naming PROGs.  This would permit returns out of multiple levels
+of PROG, allow more precise specification of non-local GOs,
+and effectively provide the &quot;lexical CATCH&quot; notion.  Here I attempt
+to gather together all the proposals for possible syntaxes for this
+feature.  I would like to reach a prompt decision on this feature,
+so speedy feedback would be appreciated.
+
+The basic notion is that a PROG can be assigned a name by which
+RETURN and GO forms can refer to it.  As with CATCH, there is the
+issue of whether it should be permitted to compute the name.
+(I am inclined to say &quot;no&quot;, given that the feature may be intended
+to be more static in nature than CATCH).
+
+I believe that two suggestions have been put forward for the syntax
+of named PROGs:
+(1)	(PROG &lt;name&gt; ( &lt;-vars-&gt; ) ...)
+(2)	(PROG ( &lt;-vars-&gt; ) &lt;name&gt; ...)
+I happen to favor (1), just because the name is a little easier to see.
+One feature of (2) is that the name looks like a tag, which is both an
+advantage and a disadvantage.
+
+Possible syntaxes for RETURN are:
+(1)	(RETURN &lt;name&gt; &lt;value&gt;)
+(2)	(RETURN &lt;value&gt; &lt;name&gt;)
+where in each case the &lt;name&gt; can be elided, meaning the immediately
+containing PROG, as usual.  These both have the disadvantage of
+conflicting with existing LISPM multiple-value syntax.  A more
+off-the-wall possibility is:
+(3)	(RETURN &lt;value1&gt; ... &lt;valuen&gt; . &lt;name&gt;)
+where &lt;name&gt; can be elided.  This has the useless elegance that
+() means the immediately containing PROG, and so is somewhat similar
+to CATCH.  It has the severe inelegance of introducing dot notation.
+Another possibility is just introducing a new keyword for non-local
+RETURNs:
+(4)	(NLRETURN &lt;name&gt; &lt;value1&gt; ... &lt;valuen&gt;)
+
+Similar choices exist for GO:
+(1)	(GO &lt;name&gt; &lt;tag&gt;)
+(2)	(GO &lt;tag&gt; &lt;name&gt;)
+(3)	(GO &lt;tag&gt; . &lt;name&gt;)		[this hardly seems justified!]
+(4)	(NLGO &lt;name&gt; &lt;tag&gt;)
+While there is no problem with multiple-value returns, there is one
+with computed GOs.  Even without the named PROG feature, I would
+lean toward an incompatible change, and introduce a special
+COMPUTED-GO primitive, which could have its own funny syntax as
+desired and would solve the problem of having a tag in a variable
+FOO and wanting to say (GO FOO) -- the usual contortion (GO (SYMEVAL 'FOO))
+will have insurmountable interactions with local variables in NIL.
+
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03325.html">This isn't a bug -- maybe a non-feature -- Probably a hopeless case</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02206.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03325.html">This isn't a bug -- maybe a non-feature -- Probably a hopeless case</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02206.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03322"><strong>Date</strong></a></li>
+<li><a href="threads.html#03322"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

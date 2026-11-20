@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Expanding TOPS&#45;10 MACLISP -->
+<!--X-From-R13: Epbgg Tnuyzna ng Q[G&#45;10O (Q380ET50) -->
+<!--X-Date: Wed, 10 Jan 79 22:37:00 GMT -->
+<!--X-Message-Id: 10Jan79 173704 SF50@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Expanding TOPS-10 MACLISP</title>
+<link rev="made" href="mailto:Scott Fahlman at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00684.html">Date Prev</a>][<a href="msg00682.html">Date Next</a>][<a href="msg00684.html">Thread Prev</a>][<a href="msg00682.html">Thread Next</a>][<a href="maillist.html#00683">Date Index</a>][<a href="threads.html#00683">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Expanding TOPS-10 MACLISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp @ mit-ai</li>
+<li><em>Subject</em>: Expanding TOPS-10 MACLISP</li>
+<li><em>From</em>: Scott Fahlman at CMU-10A (C380SF50)</li>
+<li><em>Date</em>: Wed, 10 Jan 79 22:37:00 GMT</li>
+<li><em>Original-date</em>: 10 Jan 1979 1737-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Hi again,
+I checked with the UCI LISP hackers here to see how they get moby
+(&gt; 128K word) low segs.  It seems that our current monitor will refuse
+to LOAD a stored file with a low seg of &gt;128K, but it is perfectly
+happy to grow the low seg of a running job to whatever size is
+available (i.e. not used by the high seg).  So ALLOC ought to be able to
+ask for additional core in the low seg once it is fired up.  This would
+be a big help to us if the change could be put in without too much
+hassle.  The losing size limitation on SAVE files' low segs might
+also go away someday soon, at least here at CMU -- it seems to be a basically
+arbitrary problem rather than anything fundamental.
+
+Regards,
+Scott Fahlman
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00684.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00682.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00684.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00682.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00683"><strong>Date</strong></a></li>
+<li><a href="threads.html#00683"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

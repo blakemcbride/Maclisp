@@ -1,0 +1,140 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: EVALHOOK and STORE -->
+<!--X-From-R13: Quneyrf Dvpu &#60;DWQV ng [WF&#45;OW> -->
+<!--X-Date: Thu, 28 Feb 80 15:35:00 GMT -->
+<!--X-Message-Id: b3eb53ba830d381ff5e2cab71503ccea@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>EVALHOOK and STORE</title>
+<link rev="made" href="mailto:RICH at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02097.html">Date Prev</a>][<a href="msg02095.html">Date Next</a>][<a href="msg02097.html">Thread Prev</a>][<a href="msg02095.html">Thread Next</a>][<a href="maillist.html#02096">Date Index</a>][<a href="threads.html#02096">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>EVALHOOK and STORE</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-AI</li>
+<li><em>Subject</em>: EVALHOOK and STORE</li>
+<li><em>From</em>: Charles Rich &lt;RICH at MIT-AI&gt;</li>
+<li><em>Date</em>: Thu, 28 Feb 80 15:35:00 GMT</li>
+<li><em>Cc</em>: SJOBRG at MIT-AI</li>
+<li><em>Original-date</em>: 28 February 1980 10:35-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The interaction of EVALHOOK with the special way STORE
+treats its first argument is still not quite right, which
+causes STEP to blow up.  Let me first review the
+fix that was made to EVALHOOK a year or so ago.
+
+---------
+When EVALHOOK was initially installed, evaluation
+of the form
+
+	(STORE (ARRAYCALL NIL A I) X)
+
+caused the following sub-form to be
+passed to the EVALHOOK function for evaluation:
+
+	(ARRAYCALL NIL A I)
+
+This of course caused an error because the relationship
+between STORE and ARRAYCALL here is not really nested function
+evaluation, but a special communication hack involving leaving
+things in internal registers.
+
+So, it was decided that the correct behavior of EVALHOOK
+would be to treat STORE specially and pass only the forms &quot;A&quot; and &quot;I&quot; above to the
+EVALHOOK function for evaluation.
+----------
+
+The related new problem which has come to my atttention now
+is when a macro is used instead of ARRAYCALL above, such as
+the following
+
+	(DEFUN A MACRO (F)
+		 (LIST 'ARRAYCALL NIL 'A (CADR F)))
+
+Then calls to store look like:
+
+	(STORE (A I) X)
+
+In this case the sub-form 
+
+	(A I)
+
+is first passed to the EVALHOOK function for evaluation (which is correct,
+since the macro has to get expanded).  The evaluation of this form
+returns
+
+	(ARRAYCALL NIL A I)
+
+But at this point, the interpreter should recall that it is inside of
+STORE and behave just as it did above, i.e. pass only &quot;A&quot; and &quot;I&quot; to
+the EVALHOOK function for evaluation.  However, what is does now
+is pass this whole form to be evaluated, which causes an error
+for the reason explained above.
+
+So I would appreciate if you would fix the interpreter so that it
+watches out for this situation with STORE and does the right
+thing.  I know this is a crock, but the root of the crock is
+with STORE.
+
+Thanks, Chuck Rich.
+
+P.S. You might suggest the answer is to put code in STEP to treat
+STORE specially, but this seems like the wrong modularity.
+Furthermore, the current problem is really just an extension of the older
+problem, which was solved by fixing EVALHOOK.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02097.html">MAKHUNK, in lisp version 1978</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02095.html">Erroneous Report</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02097.html">MAKHUNK, in lisp version 1978</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02095.html">Erroneous Report</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02096"><strong>Date</strong></a></li>
+<li><a href="threads.html#02096"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

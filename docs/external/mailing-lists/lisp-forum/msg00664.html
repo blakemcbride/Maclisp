@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: 'backquote' actions -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,12 Jan 82 18:38:00 EDT -->
+<!--X-Message-Id: 5ed6d3fe13981625e49b175f62c82483@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>'backquote' actions</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00665.html">Date Prev</a>][<a href="msg00663.html">Date Next</a>][<a href="msg00665.html">Thread Prev</a>][<a href="msg00663.html">Thread Next</a>][<a href="maillist.html#00664">Date Index</a>][<a href="threads.html#00664">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>'backquote' actions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Morrison at UTAH-20</li>
+<li><em>Subject</em>: 'backquote' actions</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,12 Jan 82 18:38:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+In MacLISP, the variable BACKQUOTE-EXPAND-WHEN determines
+whether the reader-macro produces a minimal, standard, lisp form 
+which merely 'evaluates to the right thing',  or a form with extra 
+evaluator macros inserted which correspond to the places where 'commas'
+of various kinds appeared.  Of course, the latter format 'evaluates
+to the right thing' too.  
+
+The LISPM version produces a rather minimal form for evaluation, but using 
+internal function names rather than the standard lisp ones. 
+
+The point of having either the extra evaluator macros, or the special 
+internal function names, is so that a random piece of code which was 
+constructed up by the backquote macro can be re-parsed into a faithful 
+representation of the original input.  The advantage of using evaluator
+macros as opposed to internal subrs is that automatic code analyzers 
+don't have to know about these internal names (but rather would only 
+have to know about macroexpansion in general and the usual primitive 
+lisp subrs);  the disadvantage of using the evaluator macro format is 
+that it takes an extra cons cell or so for each comma in the source input.
+
+
+Note for example that there currently is no way to distinguish between the
+internal forms of the following two functions:
+    (defun FIVE+ONE (x) '6)
+    (defun SIX (x) (quote 6))
+whereas
+    (defun QUOTIFY-1 (x) `',x)
+    (defun QUOTIFY-2 (x) (list (quote QUOTE) x))
+are distinguishable when BACKQUOTE-EXPAND-WHEN is set to EVAL (or
+when other internal markers are left in).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00665.html">clarification regarding backquote query</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00663.html">minilisp</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00665.html">clarification regarding backquote query</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00663.html">minilisp</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00664"><strong>Date</strong></a></li>
+<li><a href="threads.html#00664"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

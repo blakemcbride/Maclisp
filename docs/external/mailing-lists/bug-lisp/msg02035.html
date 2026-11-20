@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: READing HUNKs -->
+<!--X-From-R13: OZO@ ng [WF&#45;[Q (Oyna Pnjqra) -->
+<!--X-Date: Sat, 22 Mar 80 02:20:00 GMT -->
+<!--X-Message-Id: b2a2c8f95c859c453f2b8a68ab75f30f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>READing HUNKs</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02036.html">Date Prev</a>][<a href="msg02034.html">Date Next</a>][<a href="msg02036.html">Thread Prev</a>][<a href="msg02034.html">Thread Next</a>][<a href="maillist.html#02035">Date Index</a>][<a href="threads.html#02035">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>READing HUNKs</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: READing HUNKs</li>
+<li><em>From</em>: ALAN at MIT-MC (Alan Bawden)</li>
+<li><em>Date</em>: Sat, 22 Mar 80 02:20:00 GMT</li>
+<li><em>Original-date</em>: 21 MAR 1980 2120-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Well If we are going to try and have READ grok hunks then the
+following should be fixed:
+
+(cons (hunk 1 2 3) (hunk 1 2 3))
+((1 . 2 . 3 .) 1 . 2 . 3 .)	;Hmmm... the printer seems to have made 
+				;an interesting optimization!
+
+'((1 . 2 . 3 .) 1 . 2 . 3 .)	;Let's see if the reader can hack it...
+((1 . 2 . 3 .) . 1 . 2 . 3 .)	;Doesn't look good...
+
+(typep *)
+HUNK4				;Nope
+
+
+Sigh.
+
+
+While I have you all listening let me plead once again for a hook in
+the printer to allow me to redefine the way hunks print.  Since many
+people have built structure packages on top of hunks, it doesn't seem
+too unreasonable to provide a simple way to change the way they print.
+I know there is such a hook now that is specific to a certain use.  I
+would hope that the people using this hook would be willing and able
+to build their hacks on top of some more general hook that the rest of
+us could use for our own purposes.  Please?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02036.html">Print strangeness</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02034.html">Files</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02036.html">Print strangeness</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02034.html">Files</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02035"><strong>Date</strong></a></li>
+<li><a href="threads.html#02035"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

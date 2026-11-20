@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: character objects &#38; representation issues -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Fri ,15 Aug 80 16:13:00 EDT -->
+<!--X-Message-Id: 709582469e0e5a7e9da949a7262ec0f5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: character objects &amp; representation issues</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00074.html">Date Prev</a>][<a href="msg00076.html">Date Next</a>][<a href="msg00080.html">Thread Prev</a>][<a href="msg00083.html">Thread Next</a>][<a href="maillist.html#00075">Date Index</a>][<a href="threads.html#00075">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: character objects &amp; representation issues</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: Re: character objects &amp; representation issues</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri ,15 Aug 80 16:13:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 14 August 1980 23:18-EDT
+    From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+
+        Transportability aside, there are good CODING STYLE arguments
+    for character objects.  It is damned useful to know by inspection
+    of the code that the 'fixnum' being handled is in reality A
+    REPRESENTATION OF A CHARACTER!
+
+Indeed, one of the reasons for &quot;#/&quot; is to flag those fixnums that are
+being used as representations of characters.  This is a &quot;good CODING
+STYLE argument&quot; for &quot;#/&quot;, not for character objects.
+
+        Even better, if your program is writing a file to be read on
+    another machine, it is nice if PRINT knows they are characters!  A
+    character is not JUST a fixnum.  A fixnum can REPRESENT a
+    character, but it does not have the IDENTITY of a character.
+
+I frequently use lists to REPRESENT things.  The lists usually don't
+have the IDENTITY of the things they represent (I don't know exactly
+what this means anyway), and they print as lists too, but this isn't
+an inconvenience.  And there is this bonus that I can use these
+functions named CAR and CDR and RPLACA to examine and modify them!
+Amazing isn't it, without adding a single new data-type or function to
+the language I can talk about new things!
+
+Of course it is true that PRINTing something from MacLisp and then
+READing it into some other machine (even a LispMachine) can produce
+problems with your character set.  But this is an amazingly rare
+occurence, and involves other problems as well...  (are #\lambda,
+#\backspace and #/H all going to be diffent (non-EQ) character
+objects?  On the LispMachine they are all different, and the last one
+isn't really a full-fledged character.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00074.html">Re: character objects &amp; randomness</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00076.html">Re: character objects</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00080.html">Re: character objects</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00083.html">Re: character objects &amp; representation issues</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00075"><strong>Date</strong></a></li>
+<li><a href="threads.html#00075"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

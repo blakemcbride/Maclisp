@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: TYIPEEK / SFA interaction changed?? -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 20 May 81 08:23:00 GMT -->
+<!--X-Message-Id: 64f042f9db1a1290b7971c5c162a0fd1@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>TYIPEEK / SFA interaction changed??</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02532.html">Date Prev</a>][<a href="msg02530.html">Date Next</a>][<a href="msg02532.html">Thread Prev</a>][<a href="msg02530.html">Thread Next</a>][<a href="maillist.html#02531">Date Index</a>][<a href="threads.html#02531">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>TYIPEEK / SFA interaction changed??</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-MACLISP at MIT-MC</li>
+<li><em>Subject</em>: TYIPEEK / SFA interaction changed??</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 20 May 81 08:23:00 GMT</li>
+<li><em>Original-date</em>: 20 May 1981 04:23-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>It used to be that the following definition
+ (DEFUN SFA-HANDLER (SELF OP DATA)
+    (CASEQ OP ((WHICH-OPERATIONS) '(TYIPEEK))
+	      ((TYIPEEK) DATA)
+	      (T (ERROR &quot;I am too dumb to do that&quot; OP))))
+ (SETQ STREAM (SFA-CREATE #'SFA-HANDLER 0. &quot;Dumb Stream&quot;))
+would allow you to do 
+ (TYIPEEK NIL STREAM)	 =&gt; -1
+ (TYIPEEK NIL STREAM -1) =&gt; -1
+ (TYIPEEK NIL STREAM -3) =&gt; -3
+even tho
+ (TYIPEEK NIL (OPEN 'NUL: 'IN) -1) =&gt; -1
+ (TYIPEEK NIL (OPEN 'NUL: 'IN) -3) =&gt; -1 ; this was a bug then and still is now
+
+Anyway, now you get the following behavior instead:
+ (TYIPEEK NIL STREAM)	 =&gt; ;NIL NON-FIXNUM VALUE
+ (TYIPEEK NIL STREAM -1) =&gt; ;NIL NON-FIXNUM VALUE
+
+In an EOF case, the TYIPEEK message to an SFA must be able to return its DATA
+argument. DATA used to get bound to #nnnnnn and somehow if you returned this,
+it magically figured out you wanted the eof value returned to the user. Now I
+would prefer that DATA be bound to the value supplied (default -1 if 
+none supplied), but that's just preference. The important thing tho' is that
+I have code that is broken until someone fixes the TYIPEEK message to pass
+some piece of data which if returned will give the right value back from 
+TYIPEEK without erring...
+
+Naturally, while you're at it you could fix that other bug wherein only -1
+can be returned from an EOF on a real file object when TYIPEEK'ing, even if
+some other arg is supplied (see the -3 case above).
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02532.html">CERROR</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02530.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02532.html">CERROR</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02530.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02531"><strong>Date</strong></a></li>
+<li><a href="threads.html#02531"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

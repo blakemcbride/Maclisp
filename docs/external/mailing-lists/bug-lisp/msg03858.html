@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: (alleged) BIGNUM BUG -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Wed, 12 Dec 79 16:38:00 GMT -->
+<!--X-Message-Id: 6a12a3a13e06f0ed47e95a3104a66232@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>(alleged) BIGNUM BUG</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03859.html">Date Prev</a>][<a href="msg03857.html">Date Next</a>][<a href="msg03859.html">Thread Prev</a>][<a href="msg03857.html">Thread Next</a>][<a href="maillist.html#03858">Date Index</a>][<a href="threads.html#03858">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>(alleged) BIGNUM BUG</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BMT at MIT-MC</li>
+<li><em>Subject</em>: (alleged) BIGNUM BUG</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Wed, 12 Dec 79 16:38:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 12 DEC 1979 1138-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 11 December 1979 13:44-EST
+    From: Barry M. Trager &lt;BMT at MIT-MC&gt;
+    (remainder c d) returns incorrect result 
+    should be zero, c and d defined in bmt;bignum bug.
+I took the liberty of editing BMT;BIGNUMB BUG slightly as follows
+    ;;; -*- Mode: LISP; Package: Macsyma; -*- Saved by BMT
+    (SETQ C 118937307725496656754857164120791261365228885. 
+	  D 6296488643826193618261. 
+	  Q (QUOTIENT C D)
+	  R (REMAINDER C D)
+	  C* (PLUS (TIMES Q D) R)
+	  BMTLOSES (EQUAL C C*)) 
+Both in LISP and in NLISP the remainder seems to have been
+calculated correctly.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03859.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03857.html">(alleged) BIGNUM BUG</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03859.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03857.html">(alleged) BIGNUM BUG</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03858"><strong>Date</strong></a></li>
+<li><a href="threads.html#03858"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

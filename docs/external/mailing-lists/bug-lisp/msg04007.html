@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: suggested feature. -->
+<!--X-From-R13: Vbjneq W. Qnaaba &#60;VWQ ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 16 Jul 80 03:41:00 GMT -->
+<!--X-Message-Id: 9103cf069bf892fc92a1e0b82a966b54@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>suggested feature.</title>
+<link rev="made" href="mailto:HIC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04005.html">Date Prev</a>][<a href="msg04006.html">Date Next</a>][<a href="msg04008.html">Thread Prev</a>][<a href="msg04005.html">Thread Next</a>][<a href="maillist.html#04007">Date Index</a>][<a href="threads.html#04007">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>suggested feature.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: PSZ at MIT-ML</li>
+<li><em>Subject</em>: suggested feature.</li>
+<li><em>From</em>: Howard I. Cannon &lt;HIC at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 16 Jul 80 03:41:00 GMT</li>
+<li><em>Cc</em>: GJC at MIT-MC, BUG-LISP at MIT-MC, BUG-LISPM at MIT-MC</li>
+<li><em>Original-date</em>: 15 July 1980 23:41-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I think that people perceive symbols when used as special variables
+as having some &quot;character&quot; that they carry around with them (much
+like declared identifiers in other languages).  If you implement
+atomic macros, then you have these symbols that have this character
+of expanding into something else when mentioned.  
+
+Now, you might argue that even though that is true, symbols when QUOTED
+don't retain any special meaning, and symbols in lambda lists and
+setq's are implictly quoted.  Therefore, they should not expand into atomic
+macros (I am not proposing that explicitly QUOTEd symbols expand, though
+there might be something pleasing about this).  I do not agree with this.
+Though it is true that symbols in those positions are not EVALUATED,
+they are certainly looked at specially (for specialness, for example,
+at least by the compiler).  I therefore think that for consistancy they
+should expand if they are atomic macros.  This may of course produce
+erroneous results in some circumstances (probably most!).  So what.
+
+Personnally, I don't like destructuring LET either, and I don't
+use it (I call it something different if that is the functionality I want).
+On the other hand, I don't see atomic macros as being the same thing at all
+(of course, I believe treating each thing individually on the basis
+of its meri makes sense).  My proposal also makes SET' different from SETQ,
+which is probably ok (though I supose there might be some sort of symmetry
+argument against the atomic macro thing here).
+
+But, I don't know why I bother explaing this, since you &quot;hate
+to see Lisp get cluttered up with bad ideas&quot;, you must have already decided
+that atomic macros is a bad idea.
+
+--Howard
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04005.html">Re: Bad ideas</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04006.html">suggested compiler feature.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04008.html">Re: suggested feature.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04005.html">Re: Bad ideas</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04007"><strong>Date</strong></a></li>
+<li><a href="threads.html#04007"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

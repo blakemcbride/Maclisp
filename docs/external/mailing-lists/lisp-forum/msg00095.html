@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Character Objects (what else!) -->
+<!--X-From-R13: FY ng [WF&#45;OW -->
+<!--X-Date: Sat ,17 Aug 80 09:23:54 EDT -->
+<!--X-Message-Id: 933c268b621ebac584de34ae8dda019e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Character Objects (what else!)</title>
+<link rev="made" href="mailto:TK at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00093.html">Date Prev</a>][<a href="msg00615.html">Date Next</a>][<a href="msg00093.html">Thread Prev</a>][<a href="msg00098.html">Thread Next</a>][<a href="maillist.html#00095">Date Index</a>][<a href="threads.html#00095">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Character Objects (what else!)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: Character Objects (what else!)</li>
+<li><em>From</em>: TK at MIT-AI</li>
+<li><em>Date</em>: Sat ,17 Aug 80 09:23:54 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Since Lisp-forum has clogged my mailbox nonstop for the past week, I
+guess there is room for my paltry contribution.  The root cause of all
+this confusion is that both sides are correct.  One wants both the
+efficiency of representing characters by numbers, so that primitive
+(and presumably fast) operations such as + work on them, and your
+debugger (and you) want them printed as characters.  This could work
+in two ways.  One is to introduce yet another &quot;hardware&quot; datatype
+which is interpreted correctly at run time by all the primitives such
+as +, &lt;, print, etc.  Another equally good way is to retain sufficient
+information from the source code, so that, despite the fact that there
+is a fixnum staring at you, you realize that it represents a
+character.
+  The second of these requires a more sophisticated debugger, along
+with good hooks into the compiler, but these same hooks are already
+necessary to support well established programming features such as
+SETF (or macros in general).
+  My conclusion is that it is overdue that we address this more
+general problem of dealing with the debugging/compiling support for
+the syntax/macro features of the language and stop trying to patch our
+way through the debugging maze by adding more hardware datatypes.
+Either approach will work for this problem, but as I mentioned above,
+we already are losing on debugger support for independent language
+features.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00093.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00615.html">Re: unwinding-scope</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00093.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00098.html">Re: Character Objects (what else!)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00095"><strong>Date</strong></a></li>
+<li><a href="threads.html#00095"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

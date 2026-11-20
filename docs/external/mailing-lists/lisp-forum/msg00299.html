@@ -1,0 +1,208 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: extended addressing -->
+<!--X-From-R13: VSRDWQY ng DGFUSDE -->
+<!--X-Date: Sun ,14 Dec 80 10:13:00 EDT -->
+<!--X-Message-Id: 56bbfec5fb1ebcbbc3dbce6a4e73921d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: extended addressing</title>
+<link rev="made" href="mailto:HEDRICK at RUTGERS">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00002.html">Date Prev</a>][<a href="msg00300.html">Date Next</a>][<a href="msg00002.html">Thread Prev</a>][<a href="msg00300.html">Thread Next</a>][<a href="maillist.html#00299">Date Index</a>][<a href="threads.html#00299">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: extended addressing</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Rindfleisch at SUMEX-AIM, HEDRICK at RUTGERS, cpr at MIT-MC,      action at SRI-KL, admin.mrc at SU-SCORE, amarel at RUTGERS,      frank at UTAH-20, geoff at SRI-KL, jonl at MIT-AI,      josh at RUTGERS, levy at RUTGERS, lisp-forum at MIT-MC,      meyers at SRI-KL, guy.steele at CMU-10A, wactlar at CMU-10A,      bboard at RUTGERS</li>
+<li><em>Subject</em>: Re: extended addressing</li>
+<li><em>From</em>: HEDRICK at RUTGERS</li>
+<li><em>Date</em>: Sun ,14 Dec 80 10:13:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In view of the varied responses to my question about extended addressing
+Lisp, I thought it would be interesting to try an experiment.  So I have
+implemented a subset of Lisp on an experiemental basis, using 2-word
+cons cells.  What I find is that most of the comments about the supposed
+disadvantages of extended addressing seem not to be true, but there are
+certainly a few holes in the support.  In more detail:
+
+The implementation is an A-List Lisp, taken right out of the Lisp 1.5
+document (McCarthy et. al).  EVAL and APPLY were coded right out of that
+book.  Enough functions were coded to make it sufficient for
+experimental purposes.   (55 of them are handcoded, and an init file is
+automatically read, to allow others to be defined in Lisp.)
+
+Here are some tentative conclusions:
+
+(1) Performance measures are hard to get, because the technology of the
+interpreter isn't good enough to provide a fair test of extended
+addressing.  (The first test showed that it was spending about 95% of
+its time in ASSOC, presumably searching the Alists for variable bindings
+and atom property lists for function definitions.)  You can get
+something that looks like a real lisp in a few days of programming, but
+it doesn't work like a real Lisp.
+
+(2) The supposed &quot;kludgey&quot; nature of extended addressing did not show
+up.  I found that it did exactly what I wanted, and I don't think any
+more code was needed than for an 18-bit implementation. As you may know,
+in principle there is a 30-bit address space. We use this as
+ - 1 mark bit
+ - 5-bit type field
+ - 30-bit data
+Having a mark bit and type field in each object makes the garbage
+collector much easier to write (and presumably more efficient). Also, it
+seems natural not to have wierd reprentations for numbers and other
+objects, since 30 bits is enough to store most of what you want (even
+atom headers, it turns out).  Basically you get global addressing only
+when you want it.  References within the code all come out as local
+automatically.  The only global addresses come from following Lisp
+pointers.  Even in 18-bit implementations, a CDR consists of
+  move a,thing
+  hlrz a,(a)
+It really is no worse to do
+  move a,thing
+  move a,1(a)
+(which is what you do, given that addresses are stored in global form,
+i.e. with the high-order bit off).
+
+(3) I have heard that private pages do not exist in extended addressing.
+There is no evidence of this.  We use the SMAP% jsys to create several
+private sections.  Once a section is created, pages appear when referred
+to, as always.
+
+(4) There are bugs and holes.  The major ones we have found are as
+follows:
+  - DDT must be fixed, or it thinks that the first 20 locations of every
+	section are in the AC's.  (Thus programs that work normally fail
+	when $X'ed.)  The address space is in fact continuous, once you
+	get above section 1.  You only get the AC's when you are making
+	a local reference, which is typically in code, not data.  That
+	is,
+	   SKIPE 1
+	will give you AC 1, even when running in section 3. But if AC 1
+	contains 10,,1
+	   MOVE 2,(1)
+	will give you address 10,,1, not AC 1.  The patch to fix this
+	has been sent to the Top-20 distribution list.
+
+  - There is some strange problem such that ^C followed by running
+	another program hangs the job.  If you ^C do a RESET command,
+	and then do something else, everything is fine, as long as you
+	wait for about a second between the ^C, then RESET, and the next
+	activity.  But if you skip the RESET, or do things too fast,
+	your job hangs for about 5 min (and then recovers).
+
+  - We got a J0NRUN while I was doing something in a particularly large
+	core image.  I conjecture that this indicates a problem,
+	although it could also be a disk hardware problem.  We will have
+	to investigate this further.
+
+  - The SSAVE jsys doesn't seem to work for extended core images. This
+	may not be a problem, since one probably needs a more compact
+	way of saving these things, more like Interlisp's sysout.  It is
+	painful for a quick hack like my existing system, though.  (I do
+	have disk I/O, so you could write a DSKOUT easily enough.)
+
+These don't seem too outlandish, given that we may be almost the first
+people to try this sort of programming.
+
+
+
+My overall conclusion is that the only real penalty for extended
+addressing is that cons cells take up twice as much space. (I don't
+think CDR-coding is practical, though someone else may have a way to do
+it.)  Other than this, it looks like the coding comes out a bit better
+than in the 18-bit implementation, because of the room for a mark bit
+and type codes.  Whether we actually do anything with this depends
+upon local priorities.
+
+By the way, I am not clear why people think that VAX has a larger
+address space than the 20 (or do people think that?)  As far as the
+architecture, the 20 has 30 bits and the VAX 31 (one bit is used by the
+system).  But clearly 30 bits of 36-bit words are more than 31 bits of
+8-bit bytes.  Now the obvious reply is that the existing 20 monitor does
+not support more than about 23 bits at the moment.  However I have done
+the following calculation to see how much one can actually use on the
+VAX.  The problem turns out to be page tables.  The VAX has a 512 byte
+page size. Suppose that one 32-bit word is required in a page table for
+each page.  This means you need almost 10% as much physical space for
+the page table as your virtual memory (4 bytes per 512 bytes). So with a
+3 Mbyte machine you can get only about 30Mbyte of virtual memory before
+filling up all of physical memory with page tables.  Of course something
+is likely to give out before that. But suppose that you can really get
+32Mbyte of virtual memory. That is in fact slightly less than the 23
+bits that are implemented on the 20 (assuming 2 words per cons cell on
+the 20 and 8 bytes on the VAX).  It seems to me that 512 bytes is a
+strange page size for a machine intended to have 31 bits of virtual
+address space.
+
+If anyone wants to try my experimental Lisp, it is lying around on line
+at the moment (though I don't know how long we will keep it). On
+&lt;HEDRICK&gt; at Rutgers, use the following files:
+  EXLISP.EXE
+  INIT.EXLISP - should be on your area - read at startup to define a few
+	useful functions.  If you don't have a file by this name, Exlisp
+	will complain at startup, though it will still work.
+  EXLISP.MID - source (compile it with Midas - it produces an .EXE file
+	directly)
+  EXLISP.DOC - documentation
+You can retrieve files from here over FTP by logging in as ANONYMOUS.
+Any password will do.  (actually at the moment FTP seems not to require
+any login to do retrieves.)
+
+PS: Please don't confuse this EXtended LISP with the new Rutgers/UCI
+Lisp, currently known as Xlisp.  It is based upon the normal 18-bit
+design.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00002.html">Re: This really has very little to do with LOOP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00300.html">Re: extended addressing</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00002.html">Re: This really has very little to do with LOOP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00300.html">Re: extended addressing</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00299"><strong>Date</strong></a></li>
+<li><a href="threads.html#00299"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

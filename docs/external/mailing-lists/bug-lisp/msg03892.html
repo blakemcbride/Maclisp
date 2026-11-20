@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sat, 1 Dec 79 18:23:00 GMT -->
+<!--X-Message-Id: f2dc171c9d6ce9fef5f0ed42f98526ff@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03893.html">Date Prev</a>][<a href="msg03891.html">Date Next</a>][<a href="msg03893.html">Thread Prev</a>][<a href="msg03891.html">Thread Next</a>][<a href="maillist.html#03892">Date Index</a>][<a href="threads.html#03892">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sat, 1 Dec 79 18:23:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 1 DEC 1979 1323-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Re:
+    Date: 21 November 1979 17:54-EST
+    From: David A. Moon &lt;MOON at MIT-MC&gt;
+    Subject: lisp; new recent
+    To: BUG-LISP at MIT-MC
+    cc: MOON at MIT-MC
+
+	. . . 
+    LOAD-BYTE and DEPOSIT-BYTE do not work exactly as documented.  The
+    documentation needs to make clear that the bit position is the number
+    of the high-order bit counting from LEFT TO RIGHT, i.e. the number of
+    bits to the left of the byte IN A FIXNUM.  Better than this crockish
+    machine-dependency would be to number the bits from right to left in
+    the standard way, as LDB and DPB do, avoiding dependency on machine
+    word-length.  Consider what LOAD-BYTE and DEPOSIT-BYTE would do in NIL.
+
+I've inserted the following into the documentation for LOAD-BYTE
+         As in standard PDP10 terminology, bits are numbered from high-order
+	 to low-order (&quot;left-to-right&quot;) with the high-order bit being 0.
+The idea here is that a fixnum is being used as a mini bit string.
+In NIL, the correspondent, BITS's, would definitely be numbered from
+left to right, and there may still be the need to have some &quot;mini bit
+string&quot; capability for FIXNUMs (no consing, etc).
+    However, you may be looking at the question in the wrong light - there
+is no more of a machine-dependency in the scheme which &quot;counts&quot; from the left 
+than in one which &quot;counts&quot; from the right.  Both are equally limited
+by the wordsize of the machine.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03893.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03891.html">STORE</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03893.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03891.html">STORE</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03892"><strong>Date</strong></a></li>
+<li><a href="threads.html#03892"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

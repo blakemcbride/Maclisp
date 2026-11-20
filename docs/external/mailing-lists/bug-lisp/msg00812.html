@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Lisp problem -->
+<!--X-From-R13: Pneel [netbyva ng [WF&#45;[GZFWQE -->
+<!--X-Date: Wed, 25 Aug 82 00:56:00 GMT -->
+<!--X-Message-Id: e9aac3f1e3cfdfe73c1c6d499611d870@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Lisp problem</title>
+<link rev="made" href="mailto:Barry Margolin at MIT-MULTICS">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00813.html">Date Prev</a>][<a href="msg00811.html">Date Next</a>][<a href="msg00813.html">Thread Prev</a>][<a href="msg00810.html">Thread Next</a>][<a href="maillist.html#00812">Date Index</a>][<a href="threads.html#00812">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Lisp problem</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Greg Skinner &lt;EE.GDS at MIT-OZ&gt;</li>
+<li><em>Subject</em>: Re: Lisp problem</li>
+<li><em>From</em>: Barry Margolin at MIT-MULTICS</li>
+<li><em>Date</em>: Wed, 25 Aug 82 00:56:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-OZ</li>
+<li><em>In-reply-to</em>: Message of 24 August 1982 20:50 edt from Greg Skinner</li>
+<li><em>Original-date</em>: 24 August 1982 20:56 edt</li>
+<li><em>Sender</em>: Margolin.Multics at MIT-MULTICS</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>There were no bugs displayed in that session.  By default, Maclisp is in
+base 8, and 15(8) = 13(10) (where the notation xx(n) means the numeral
+xx in base n), and the GCD of 5(10) and 13(10) is indeed 1.  The
+variables that control the base that numbers are input and output in are
+&quot;base&quot;, which is the base that numbers are output in, and &quot;ibase&quot;, which
+controls the input base.  Associated with these is the variable
+&quot;*nopoint&quot;, which if set to T causes the decimal point that normally
+follows decimal numbers on output to be suppressed.  Note that any
+fixnum that has a trailing decimal point (as in 100.) is also read in in
+decimal, regardless of the setting of ibase, so to initially set the
+base variables you should say:
+	(setq base 10.)
+	(setq ibase 10.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00813.html">Lisp problem</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00811.html">(SSTATUS SYNTAX #/| ...)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00813.html">Lisp problem</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00810.html">Re: new format installed on MC and OZ</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00812"><strong>Date</strong></a></li>
+<li><a href="threads.html#00812"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Optimizers and macros -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Fri ,30 Jan 81 23:06:00 EDT -->
+<!--X-Message-Id: 3b295e49ab11a944bac523b6bafb888d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Optimizers and macros</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00482.html">Date Prev</a>][<a href="msg00484.html">Date Next</a>][<a href="msg00481.html">Thread Prev</a>][<a href="msg00482.html">Thread Next</a>][<a href="maillist.html#00483">Date Index</a>][<a href="threads.html#00483">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Optimizers and macros</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: dlw at MIT-AI</li>
+<li><em>Subject</em>: Re: Optimizers and macros</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri ,30 Jan 81 23:06:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In your last note you forgot about one example of redefining system
+functions which was a very important motiviation for having a 
+SOURCE-TRANSFORMATION which had nothing to do with compilation,
+and which could not be supported via macros alone. [Does this parse?]
+The example is when somebody wants to &quot;extend&quot; a system built-in,
+not &quot;redefine it&quot;. That is, he only wants to define certain syntactical
+uses of it, but still be able to access the built-in.
+This sort of thing is very good to have in COMPATIBILITY-PACKAGES.
+e.g. (RETURN X) is still (RETURN X), but (RETURN X Y) might be
+(RETURN (VALUES X Y)) [to beat a live horse].
+
+You state &quot;users are always wanting to override system functions&quot;,
+which could be true, but I have seen that &quot;users are always wanting
+to extend system functions.&quot;
+
+-gjc
+
+p.s. I don't think we need any Axe-grinding about EQ'test vs second-value
+returning.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00482.html">Re: P.S., regarding optimizers</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00484.html">Re: Optimizers</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00481.html">Re: Optimizers and macros</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00482.html">Re: P.S., regarding optimizers</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00483"><strong>Date</strong></a></li>
+<li><a href="threads.html#00483"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

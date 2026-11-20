@@ -1,0 +1,111 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Thu, 10 Jan 80 02:28:00 GMT -->
+<!--X-Message-Id: b99113f49e6e2e5be8700999fd3cef9d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03789.html">Date Prev</a>][<a href="msg03786.html">Date Next</a>][<a href="msg03789.html">Thread Prev</a>][<a href="msg03786.html">Thread Next</a>][<a href="maillist.html#03787">Date Index</a>][<a href="threads.html#03787">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: miller at MIT-AI</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Thu, 10 Jan 80 02:28:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 9 JAN 1980 2128-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     MILLER@MIT-AI
+Date: Sun, 1 Sep 80 11:36:28 GMT
+Original-Date: 01/09/80 07:36:28 EDT
+Subject: Re:  SUPER-IMAGE Output
+	There ought to be a way to OPEN a TTY file in &quot;SUPER-IMAGE&quot; mode, or a
+    builtin &quot;RAWTYO&quot; function.  These would, on ITS, prefix any special
+    characters with a control-P.  On 20X they would put the TTY in binary mode
+    during TYO's.  The way things are, it is very difficult to write terminal
+    hacking stuff in LISP except in a very operating-system-dependent way.  I
+    have spent a lot of time changing my own code from sending control-P's to
+    instead call appropriate JSYS's on 20X.  The amount of code you'd have to
+    put in LISP to support this is probably less than a page of MIDAS.  LISP
+    ought to provide that as a primitive, even if it only works on some systems
+    initially.  Writing code which does (TYO control-P) (TYO escape) ... at the
+    user level is pretty obscure!  Regards, Mark
+I believe that the idea of the CURSORPOS function was to abstract out the
+various &quot;terminal hacking stuff&quot;, and refer to them as symbolic arguments
+(or numeric positions) to CURSORPOS.  Indeed, the maclisp implementation 
+of CURSORPOS does the appropriate &quot;lock-out&quot; so that control-p codes are
+not separated from the preceeding control-P.  Shouldn't you do that too?
+namely, just add to the code for CURSORPOS in the midas listing?  It
+may be that you will want to add more commands to account for the TOPS-20
+or TENEX terminal capabilities.   
+    I've just edited the sources to separate out the ITS-relevant parts, 
+and you will find in the file MC:LISP;*LISP &gt;  a page which has a part 
+&quot;SUBTTL&lt;tab&gt;CURSPOPOS&lt;space&gt;FUNCTION&quot;  and that should be changed whereever 
+there are conditionals marked by either  &quot;IT%&quot; (meaning, &quot;not ITS&quot;) or &quot;IT$&quot; 
+(meaning, for ITS), or &quot;IFN ITS,&quot; (also for ITS);  the only things relevant 
+there are how to read the cursorposition from the terminal, and how to move 
+it (the &quot;H&quot; and &quot;V&quot; commands from CURSORPOS).  Also, in the file MC:L;QIO &gt;
+there is a page with a part &quot;SUBTTL&lt;tab&gt;CONTROL-P&lt;space&gt;CODES&quot;, and this will 
+have to be scrutinized more carefully, since here it is that symbolic commands
+are translated into real action.
+   This new source will be the one which you (MILLER) will receive on
+the tape which is being made up this week for mailing to you.  As you remember,
+when the source is shipped out, it is &quot;unified&quot; into one long file.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03789.html">pps on PURPG</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03786.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03789.html">pps on PURPG</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03786.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03787"><strong>Date</strong></a></li>
+<li><a href="threads.html#03787"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

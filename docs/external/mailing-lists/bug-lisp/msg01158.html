@@ -1,0 +1,109 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Fri, 26 Sep 80 16:17:00 GMT -->
+<!--X-Message-Id: 30edea5c5f856ab7982fb6fc4f04ed85@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01159.html">Date Prev</a>][<a href="msg01157.html">Date Next</a>][<a href="msg01159.html">Thread Prev</a>][<a href="msg01157.html">Thread Next</a>][<a href="maillist.html#01158">Date Index</a>][<a href="threads.html#01158">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Fri, 26 Sep 80 16:17:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, BUG-LISPM at MIT-MC, MACSYMA-I at MIT-MC</li>
+<li><em>Original-date</em>: 26 September 1980 12:17-EDT</li>
+<li><em>Sender</em>: dlw at CADR2 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 26 September 1980 09:40-EDT
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    To: JPG at MIT-MC
+    cc: BUG-LISP at MIT-MC, BUG-LISPM at MIT-MC, MACSYMA-I at MIT-MC
+
+    I think its a bit of a crock that destructuring is supported in Defmacro
+    but not in Defun, for the following reason: many times one writes
+    auxiliary functions which are also syntactic in the way they take
+    their arguments. If somebody writes (defun foo ((a b)) ...)
+    it doesn't mean they are violating data-abstractions. Of course,
+    they MIGHT be violating data abstractions.
+    
+    So, when are we going to see a more general destructuring and binding
+    mechanism, one that can handle more than just lists?
+    
+    -gjc
+
+
+It is not a crock.  It is intentional. You seem to not understand the
+philosophical basis of what is going on here.  The thing after the macro
+name in a &quot;defmacro&quot; form is NOT an argument list.  The thing after the
+function name in a &quot;defun&quot; form IS an argument list.  The two are
+totally different and have nothing to do with each other.  Functions
+take arguments; macros don't take arguments.  Functions compute; macros
+translate.  A translator's job usually is to take the structure apart
+and put it back together with some new stuff in a different way.  A
+computer's job is to take several objects, compute upon them, and
+produce side effects and a result.  If the computation done by the
+computer just happens to include taking CARs and CDRs of the objects it
+is passed, that just happens to be what one function is doing, and has
+nothing to do with functions in general.  That is why LispM defuns do
+not have &quot;destructuring lambda lists&quot;, and why I belive they should not.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01159.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01157.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01159.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01157.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01158"><strong>Date</strong></a></li>
+<li><a href="threads.html#01158"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

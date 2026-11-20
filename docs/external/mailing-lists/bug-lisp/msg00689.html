@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: "(FOO . #)", where # is splicing macro -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 9 Jan 79 09:00:00 GMT -->
+<!--X-Message-Id: 1c9b7088a6b95fc21f0d3538c6cc5342@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>&quot;(FOO . #)&quot;, where # is splicing macro</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00691.html">Date Prev</a>][<a href="msg00688.html">Date Next</a>][<a href="msg00691.html">Thread Prev</a>][<a href="msg00688.html">Thread Next</a>][<a href="maillist.html#00689">Date Index</a>][<a href="threads.html#00689">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>&quot;(FOO . #)&quot;, where # is splicing macro</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: &quot;(FOO . #)&quot;, where # is splicing macro</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 9 Jan 79 09:00:00 GMT</li>
+<li><em>Cc</em>: alan at MIT-AI</li>
+<li><em>Original-date</em>: 9 JAN 1979 0400-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>1) The bug whereby &quot;(FOO . )&quot; produces &quot;(FOO . #51)&quot;, or
+   whereby &quot;(FOO . #)&quot; with # a splicing macro returning ()
+   produces the same lossage, is fixed by inserting at RDLST4
+	JUMPE T,ER2
+2) The bug whereby &quot;(FOO . #)&quot; produces &quot;(FOO BAR . #51)&quot;,  where # is
+   a splicing macro returning &quot;(BAR)&quot;, is fixed by replacing the two
+   lines at RDLS4A+4,5 with
+	HRRZ AR2A,(A)
+	JUMPE AR2A,ER2
+	HLRZ AR2A,(A)
+	HRRM A,(TT)
+	JRST RDLS4B
+   This will cause the example to produce &quot;(FOO . BAR)&quot; in accord with
+   ALAN's expectations.
+***HOWEVER***, I'm not 100% sure that having splicing macros returning
+lists of length longer than one can be ruled out - maybe there was a
+long-lost &quot;feature&quot; that made &quot;(FOO . #)&quot;  somewhat equivalent to
+&quot;(FOO #)&quot; in that case.  Lose, lose.  Anyway, I've edited in these
+changes to the reader.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00691.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00688.html">(FOO . #)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00691.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00688.html">(FOO . #)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00689"><strong>Date</strong></a></li>
+<li><a href="threads.html#00689"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

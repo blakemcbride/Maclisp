@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Point of incompatibility between MacLisp and Lispm lisp -->
+<!--X-From-R13: RQB ng [WF&#45;[Q (Rnivq Q. Byhzzre) -->
+<!--X-Date: Sat, 13 Dec 80 01:53:00 GMT -->
+<!--X-Message-Id: a605629d8ed35a947a5f181b3379e280@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Point of incompatibility between MacLisp and Lispm lisp</title>
+<link rev="made" href="mailto:DCP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03671.html">Date Prev</a>][<a href="msg03669.html">Date Next</a>][<a href="msg03631.html">Thread Prev</a>][<a href="msg03669.html">Thread Next</a>][<a href="maillist.html#03670">Date Index</a>][<a href="threads.html#03670">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Point of incompatibility between MacLisp and Lispm lisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BAK at MIT-AI</li>
+<li><em>Subject</em>: Point of incompatibility between MacLisp and Lispm lisp</li>
+<li><em>From</em>: DCP at MIT-MC (David C. Plummer)</li>
+<li><em>Date</em>: Sat, 13 Dec 80 01:53:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 12 DEC 1980 2053-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 12 DEC 1980 1453-EST
+    From: BAK at MIT-AI (William A. Kornfeld)
+
+
+    The form:      ((LAMBDA (A B A) A) 1 2 3)
+    evaluates to 1 in MacLisp and to 3 in Lispm lisp.
+
+Since such code is obviously wrong (what does it mean to bind the
+same symbol to two (supposedly different) objects AT THE SAME
+TIME?), what difference does it make what it returns?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03671.html">Re: gentemp</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03669.html">JCL to Maclisp on Twenex</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03631.html">GENTEMP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03669.html">JCL to Maclisp on Twenex</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03670"><strong>Date</strong></a></li>
+<li><a href="threads.html#03670"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

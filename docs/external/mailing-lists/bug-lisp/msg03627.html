@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Array allocation loses -->
+<!--X-From-R13: DS[ ng [WF&#45;[Q (Dboreg Sygba [nnf) -->
+<!--X-Date: Fri, 26 Dec 80 10:46:00 GMT -->
+<!--X-Message-Id: 18fea0dcbec1bb167dae1320f49d1dec@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Array allocation loses</title>
+<link rev="made" href="mailto:REM at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03628.html">Date Prev</a>][<a href="msg03626.html">Date Next</a>][<a href="msg03628.html">Thread Prev</a>][<a href="msg03620.html">Thread Next</a>][<a href="maillist.html#03627">Date Index</a>][<a href="threads.html#03627">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Array allocation loses</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Array allocation loses</li>
+<li><em>From</em>: REM at MIT-MC (Robert Elton Maas)</li>
+<li><em>Date</em>: Fri, 26 Dec 80 10:46:00 GMT</li>
+<li><em>Original-date</em>: 26 DEC 1980 0546-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I have an application which will need to allocate a large number (thousands)
+of little chunks of FIXNUMs, like FIXNUM ARRAYs of upper bound appx 10.
+I find that allocation of FIXNUMs is extremely slow.  I made a test loop
+that simply pushed a lot of similar objects onto a stack (list) and
+measured the time it took to do a thousand of them.  Scaled down to small
+numbers so you can understand them, here are the results.
+	Form evaluated to give value pushed	Time taken (octal)  net time
+	NIL					 11			  0
+	1					 11			  0
+	(SETQ N (ADD1 N)) in FIXNUM range	 13			  2
+	(SETQ N (ADD1 N)) in BIGNUM range	 15			  4
+	(MAKNAM '(A S D F))			 15			  4
+	(INTERN (MAKNAM '(A S D F)))		 20			  9
+	(ARRAY NIL FIXNUM 2)			664			653
+Thus it seems to take about a hundred times as long to allocate a new
+two-word FIXNUM array as it does to allocate a new FIXNUM or BIGNUM.
+Is there any efficient way to allocate small array-like bunches of
+FIXNUMs in MacLISP?  Since ARRAYs lose so badly I'm thinking of
+kludging something up with PNAMEs, or just using LISTs of FIXNUMs.
+Any better ideas?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03628.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03626.html">Printing EXTENDs</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03628.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03620.html">Re: Array allocation loses</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03627"><strong>Date</strong></a></li>
+<li><a href="threads.html#03627"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 26 Sep 80 13:40:00 GMT -->
+<!--X-Message-Id: cc8b859566120c93112bca41a752b20d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01160.html">Date Prev</a>][<a href="msg01158.html">Date Next</a>][<a href="msg01160.html">Thread Prev</a>][<a href="msg01158.html">Thread Next</a>][<a href="maillist.html#01159">Date Index</a>][<a href="threads.html#01159">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JPG at MIT-MC</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 26 Sep 80 13:40:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, BUG-LISPM at MIT-MC, MACSYMA-I at MIT-MC</li>
+<li><em>Original-date</em>: 26 September 1980 09:40-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 26 SEP 1980 0517-EDT
+    From: JPG at MIT-MC (Jeffrey P. Golden)
+    To:   GJC
+    cc:   (BUG LISPM), (BUG LISP), MACSYMA-I
+
+    I distinctly remember CWH saying it was ok to use this sort of 
+    argument destructuring a few months back when BMT first used it.
+    Now you say not to use it.  What gives?
+
+The compile-time environment was messed up in some way. The extra
+stuff to allow destructuring in defun's was not loaded.
+
+I think its a bit of a crock that destructuring is supported in Defmacro
+but not in Defun, for the following reason: many times one writes
+auxiliary functions which are also syntactic in the way they take
+their arguments. If somebody writes (defun foo ((a b)) ...)
+it doesn't mean they are violating data-abstractions. Of course,
+they MIGHT be violating data abstractions.
+
+So, when are we going to see a more general destructuring and binding
+mechanism, one that can handle more than just lists?
+
+-gjc
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01160.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01158.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01160.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01158.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01159"><strong>Date</strong></a></li>
+<li><a href="threads.html#01159"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

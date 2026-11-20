@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: DIY ng [WF&#45;[Q (Dboreg I. Yreaf) -->
+<!--X-Date: Thu, 31 Aug 78 11:06:00 GMT -->
+<!--X-Message-Id: 90d7a99cc3f3142da0a4e24e90517adc@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00325.html">Date Prev</a>][<a href="msg00323.html">Date Next</a>][<a href="msg00325.html">Thread Prev</a>][<a href="msg00323.html">Thread Next</a>][<a href="maillist.html#00324">Date Index</a>][<a href="threads.html#00324">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GLS at MIT-MC, RWK at MIT-MC, KGK at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: RWK at MIT-MC (Robert W. Kerns)</li>
+<li><em>Date</em>: Thu, 31 Aug 78 11:06:00 GMT</li>
+<li><em>Original-date</em>: 31 AUG 1978 0706-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 31 AUG 1978 0549-EDT
+    From: GLS at MIT-MC (Guy L. Steele, Jr.)
+    To: RWK at MIT-MC, KGK at MIT-MC, (BUG LISP) at MIT-MC
+
+
+        Date: 29 AUG 1978 2034-EDT
+        From: RWK,KGK at MIT-MC
+        Sent-by: RWK at MIT-MC
+        To: (BUG LISP) at MIT-MC
+        CC: RWK at MIT-MC, KGK at MIT-MC
+
+        (SETQ POLY-1 '(NIL NIL 5 . 6))
+        (SETQ POLY-2 '(nil nil nil nil))
+        (APPEND POLY-1 POLY-2)
+        MPV;APP1&gt;&gt;HLRZ A,(AR2A)
+
+        Please fix to either work or give an error.
+    PDP-10 MacLISP simply does not pretend to check for atoms other than
+    NIL (sorry, ()) at the end of a list, because the atom test
+    is too expensive in important inner loops like APPEND.
+Mumble.  I would agree with that philosophy in compiled code.  However, it
+makes it VERY difficult to do tutoring as to what a bug was, when the
+entire LISP dies due to the user bug.  The normal mode of operation is that
+the interpreter is used for interactive trials and debugging and similar
+things.  For those purposes, you want to detect errors.  Otherwise the
+code would be compiled!
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00325.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00323.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00325.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00323.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00324"><strong>Date</strong></a></li>
+<li><a href="threads.html#00324"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

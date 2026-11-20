@@ -1,0 +1,111 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: GET of a HUNK -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 15 Feb 81 16:39:00 GMT -->
+<!--X-Message-Id: efaa3a71848029ba06300a963ac8a5a6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>GET of a HUNK</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01570.html">Date Prev</a>][<a href="msg01568.html">Date Next</a>][<a href="msg01573.html">Thread Prev</a>][<a href="msg01566.html">Thread Next</a>][<a href="maillist.html#01569">Date Index</a>][<a href="threads.html#01569">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>GET of a HUNK</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: GET of a HUNK</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 15 Feb 81 16:39:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 15 February 1981 11:39-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 13 February 1981 20:03-EST
+    From: Jon L White &lt;JONL&gt;
+
+        Date: 12 February 1981 23:39-EST
+        From: Richard L. Bryan &lt;RLB at MIT-MC&gt;
+
+        How much cpu time have YOU wasted waiting for your program to run,
+        when it turns out it was looping infinitely, doing GET off some extend?
+
+    ...I ALWAYS SAID THAT HUNKS SHOULD PASS THE ATOM TEST!! SOOOO, I've just
+    edited in the source the code for GET and GETL to distinguish between LIST
+    non-atoms and HUNK non-atoms, and return () for the latter.
+
+It REALLY bugs me that these things aren't discussed in advance. I don't
+like this change and I would like it retracted. It is bad for two reasons:
+
+ (1) It can break code. I haven't had time to analyze my packages to see
+     if it does, but I don't use USRHUNK at all -- I like just bare hunks
+     and I have used them as CDR-able objects and as objects with plists on
+     a number of occasions. I don't know if I currently have code that cares
+     and haven't had time to look. Even if it doesn't break any code, it
+     radically changes the way in which hunks must be viewed as a tool for
+     implementation -- i think NOT for the better.
+
+ (2) It is not uniform with the treatment of non-user-hunks and the value of
+     HUNKP elsewhere in Lisp. Please do not make changes to the language 
+     which are not coherent with what little overall design philosophy there
+     is still persisting in Maclisp after all the other changes that have
+     been forced upon it to get NIL going.
+
+The correct fix would have been to make only USRHUNKs have the behavior
+you described. I would have no objection to that, as it is both safe and
+consistent.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01570.html">DEFVAR</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01568.html">GET</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01573.html">GET of a HUNK</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01566.html">Get of a Hunk</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01569"><strong>Date</strong></a></li>
+<li><a href="threads.html#01569"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

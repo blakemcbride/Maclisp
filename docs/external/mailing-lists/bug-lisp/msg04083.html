@@ -1,0 +1,123 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 9 Jun 80 06:51:00 GMT -->
+<!--X-Message-Id: d8d2f26fc9dd6746b8a4fd11ec6f04a8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04085.html">Date Prev</a>][<a href="msg04082.html">Date Next</a>][<a href="msg04085.html">Thread Prev</a>][<a href="msg04082.html">Thread Next</a>][<a href="maillist.html#04083">Date Index</a>][<a href="threads.html#04083">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 9 Jun 80 06:51:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 9 June 1980 02:51-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 9 June 1980 01:30-EDT
+    From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+
+    ...
+
+    EVAL-WHEN is truly a special form. It has a functional definition
+    only in the interpreter (ie, only (EVAL-WHEN (... EVAL ...) ...)
+    ever really gets eval'd on its on merit). The COMPLR and FASLOAD,
+    as near as I can tell empirically with TRACE, never call EVAL-WHEN
+    -- I presume they do (AND (EQ (CAR form) 'EVAL-WHEN) (MEMQ
+    interesting-state (CADR FORM)) ...)  type things.
+
+&quot;SETQ is truly a special form.  It has a functional definition only in
+the interpreter.  The COMPLR and FASLOAD, as near as I can tell
+empirically with TRACE, never call SETQ ...&quot;
+
+OK, I am convinced, EVAL-WHEN (like SETQ) is a special form.
+
+    		 Hence, EVAL-WHEN is *NOT* meaningful (read:
+    `legal') except as a toplevel form.
+
+&quot;Hence, SETQ is *NOT* meaningful except as a toplevel form.&quot;
+
+URK. Let us ignore the beginning of your note, since your conclusion
+(that EVAL-WHEN is probably only reasonable at toplevel) is valid,
+despite the faulty reasoning that got you there.  But note please,
+that I never suggested otherwise.
+
+    			Hence, its return value should be of as
+    little consequence as possible to discourage relying on it ... The
+    only use for having it return T/NIL might be in tracing of
+    EVAL-WHEN's consed up by macros, but that seems pretty marginal to
+    me.  I think I would advocate it always returning NIL. In any
+    case, I believe this all to be site-dependent as I am pretty sure
+    I didn't tell Bernie about T/NIL return-values when he was doing
+    the Multics-flavored version of this a month or two ago.  
+
+Well, in fact the Multics version also returns T/NIL just like the ITS
+version.  But, so what?  Nobody ever really cared what it returned as
+far as I could tell, so I suggested a reasonable change that would
+increase the elegance of the situation.  (PROGN 'COMPILE ...) could
+also be looked upon as such an animal, and it returns its last value.
+
+							      For
+    further `support' of this feeling, note that the compiler will not
+    allow it in function definitions.  -kmp
+
+Again, the toplevelness is not an issue here.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04085.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04082.html">eval-when's return value</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04085.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04082.html">eval-when's return value</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04083"><strong>Date</strong></a></li>
+<li><a href="threads.html#04083"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

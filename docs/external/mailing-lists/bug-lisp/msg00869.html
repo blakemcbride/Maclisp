@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: MacLisp on OZ &#45;&#45; the LISP: logical name -->
+<!--X-From-R13: XbaZ ng BODQ&#45;[OJQ -->
+<!--X-Date: Tue, 22 Jun 82 06:05:00 GMT -->
+<!--X-Message-Id: cd4542f3507c540ef7fdd5a44db009d8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: MacLisp on OZ -- the LISP: logical name</title>
+<link rev="made" href="mailto:JonL at PARC-MAXC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00870.html">Date Prev</a>][<a href="msg00868.html">Date Next</a>][<a href="msg00871.html">Thread Prev</a>][<a href="msg00868.html">Thread Next</a>][<a href="maillist.html#00869">Date Index</a>][<a href="threads.html#00869">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: MacLisp on OZ -- the LISP: logical name</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-AI</li>
+<li><em>Subject</em>: Re: MacLisp on OZ -- the LISP: logical name</li>
+<li><em>From</em>: JonL at PARC-MAXC</li>
+<li><em>Date</em>: Tue, 22 Jun 82 06:05:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-AI, bug-oz at MIT-AI</li>
+<li><em>In-reply-to</em>: ALAN's message of Sunday, 20 June 1982  23:46-EDT</li>
+<li><em>Original-date</em>: 21 Jun 1982 23:05 PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>This started before the PPN hack was generalized (the PPN hack starrted
+on TOPS-10).  MacLISP should work perfectly well without the LISP:
+device/logicalname, but if there is such, and if it doesn't point to
+the PS:&lt;MACLISP&gt; directory, then the PPN hac gets de-installed at
+startup time.  It's very highly recommended that software access system
+stuff through the lisp-leve device &quot;LISP&quot; rather than through (PS MACLISP)
+so that (ho ho) one could actually put the lisp system on say LIB:&lt;MACLISP&gt;
+rather than PS:&lt;MACLISP&gt;.  But in either case, the PPN hac is an
+independent thing (except in so far as the startup code will remove it
+if it is inconsistent).
+
+Possibly the check for &quot;consistency&quot; between a logical name LISP: and the 
+PPN property of LISP depends upon the existence of a file LISP:SITE.TXT
+[which as I mentioned before holds the value for (STATUS SITE)],  but I
+hope not.  It would probably be better to check for LISP:LISP.EXE.
+
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00870.html">MacLisp on OZ</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00868.html">LIBLSP directory on OZ</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00871.html">PS:&lt;MACLISP&gt;SITE.TXT</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00868.html">LIBLSP directory on OZ</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00869"><strong>Date</strong></a></li>
+<li><a href="threads.html#00869"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

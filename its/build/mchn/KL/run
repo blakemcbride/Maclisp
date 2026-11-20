@@ -1,0 +1,43 @@
+set console wru=034
+set cpu its
+set cpu idle
+set cpu 2048k
+set rpb dis
+set tua dis
+set lpt dis
+set dc disable
+set tty enabled
+set tty 8b
+at -u tty 10007
+# VT52
+at -u tty line=14,10018 speed=9600
+# Tektronix
+at -u tty line=13,10017 speed=9600
+# Dial-up
+at -u tty line=12,10015 speed=9600
+set pd ena
+set pd on
+set mta enabled type=b
+set rpa0 rp04
+set rpa1 rp04
+set rpa2 rp04
+at rpa0 out/pdp10-kl/rp04.0
+at rpa1 out/pdp10-kl/rp04.1
+at rpa2 out/pdp10-kl/rp04.2
+#
+set imp enabled
+set imp mac=e2:6c:84:1d:34:a3
+set imp ip=192.168.2.101/24
+set imp gw=%GW%
+set imp host=%IP%
+at imp tap:tap0
+#set imp ncp
+#at -u imp 33002:localhost:33001
+#
+set ch enabled
+set ch node=177002
+set ch peer=localhost:44041
+att ch 44042
+#
+load -i bin/kl10/boot/@.ddt
+go

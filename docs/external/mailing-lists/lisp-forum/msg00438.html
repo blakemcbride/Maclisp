@@ -1,0 +1,145 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: mode lines -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,26 Jan 81 17:03:00 EDT -->
+<!--X-Message-Id: a75d93b4f350181b509532592b3395ca@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: mode lines</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00612.html">Date Prev</a>][<a href="msg00439.html">Date Next</a>][<a href="msg00435.html">Thread Prev</a>][<a href="msg00440.html">Thread Next</a>][<a href="maillist.html#00438">Date Index</a>][<a href="threads.html#00438">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: mode lines</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: Re: mode lines</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,26 Jan 81 17:03:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, RWK at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 26 January 1981 09:55-EST
+    From: George J. Carrette &lt;GJC&gt;
+    Re:   mode lines
+
+    ... I just think the present implementation is un-necessarily crufty,
+    really a relic from ITS Emacs, and one which would take extra amounts of 
+    code to implement in maclisp, finally arriving and an inferior and weak
+    feature ...
+
+I heartily agree. This really hits the mark. The file property list in its
+present form is indeed a hard thing to find and decipher. I had formerly not
+given much thought to the situation, but indeed, there is no reason that it
+could not be given Lisp-readable syntax. In the worst case, you might have
+to write something of the form...
+
+	(FILE-PLIST Mode Lisp Package Macsyma  ...)	; -*- Lisp -*-
+
+where the -*- Lisp -*- was just for Emacs' sake and was redundant with info
+in the file property list. Indeed, suppose Zwei wanted some new mode like 
+&quot;Mode LispMLisp&quot; which Emacs didn't support [yet], you might actually want
+to be specifying the two things independently anyway...
+
+    I have nothing against putting 
+    (-*- Mode Lisp Package Macsyma Syntax Old Base 8 -*-) ...
+    The above is easier to parse, for human or computer, than
+    ;;; -*- Mode: Lisp; Package Macsyma; Base 8 -*-
+    which looks more like the syntax of Algol... What could be the objection
+    to supporting a sharp-sign feature which controlled read syntax? e.g.
+    #S(Mode Lisp Package Macsyma Syntax Old Base 8)
+
+Actually, one might oppose the use of #S on the grounds that doing
+
+    #S(Mode Lisp Package Foo Sharpsign Disabled)
+    (LOAD &quot;...&quot;)
+
+where &quot;...&quot; has a #S(...) at the top. If you take the attitude that every
+file needs to be read under default settings, then you have a problem that
+if the guy sets syntax of chars manually in a file (eg, init file), the
+effects don't stick after the load.
+
+An intermediate suggestion between GJC's and LispM's current one, would
+please me. Eg, if a file starts with 
+
+;;; -*-( ZweiMode Lisp Package Foo ...)-*-
+
+then the form after the &quot;Modes:&quot; would be in Plist form, fit for reading
+with lisp read. This would make parsing it infinitely easier. Further,
+for the sake of varying the syntax table, I suggest that people be strongly
+encouraged to put in it only symbols with alphabetic printnames, and only
+vanilla lists. No dotted pairs or funny syntaxes. This will insulate people
+ from the backslash/slash controversy, strange macro characters, lisps that
+can't read tokens like .FOO., etc.  The list be read in base 10 (maybe this
+is already done on LispM, I dunno) so that people can do
+-*-( ... Ibase 10 )-*- or -*-( ... Ibase 8 )-*- as appropriate. You might
+even want to bind the syntax table explicitly so that alpha chars were 
+read as symbols, digits as digits or extended alphabetics, and all else 
+(eg, space, tab, and even &quot;;&quot;) as whitespace. This lets you do
+
+;;; -*-( ZweiMode Lisp
+;;;      Package  Foo  )-*-
+
+and still win because the &quot;;;;&quot; would be whitespace... And lisps that didn't
+know about the convention wouldn't be confused by such an extended syntax.
+
+I really think we ought to take George's comments very seriously. I have yet
+to see elegant code to hack the file property-list. Many different languages
+have to understand these things, and the current algolish syntax has really
+been painful for me to interpret [correctly] from both Maclisp and Teco...
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00612.html">Re: trace change</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00439.html">Re: Floating hats</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00435.html">Re: mode lines</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00440.html">Re: mode lines</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00438"><strong>Date</strong></a></li>
+<li><a href="threads.html#00438"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

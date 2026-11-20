@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Scheme broken on OZ today. -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng EQDQ&#45;FS@SJ> -->
+<!--X-Date: Sun, 21 Nov 82 04:45:00 GMT -->
+<!--X-Message-Id: bc3b3f74094a929fb29cb90f7ee75160@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Scheme broken on OZ today.</title>
+<link rev="made" href="mailto:RWK at SCRC-TENEX">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00733.html">Date Prev</a>][<a href="msg00731.html">Date Next</a>][<a href="msg00733.html">Thread Prev</a>][<a href="msg00731.html">Thread Next</a>][<a href="maillist.html#00732">Date Index</a>][<a href="threads.html#00732">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Scheme broken on OZ today.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DCP at MIT-MC</li>
+<li><em>Subject</em>: Re: Scheme broken on OZ today.</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at SCRC-TENEX&gt;</li>
+<li><em>Date</em>: Sun, 21 Nov 82 04:45:00 GMT</li>
+<li><em>Cc</em>: GJC at MIT-MC, GLR at MIT-OZ, FEINBERG at MIT-OZ, HAL at MIT-OZ,    GJS at MIT-OZ, HANSON at MIT-OZ, BUG-LISP at MIT-OZ, RWK at SCRC-TENEX</li>
+<li><em>In-reply-to</em>: Your message of 20-Nov-82 2232-EST</li>
+<li><em>Original-date</em>: 20 Nov 1982 2345-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>You don't have to write a new Lisp if your DATA space is address
+space 0, at least not on CAR and CDR's account.  Your two instructions,
+one loading and the other setting the left half, already exist as
+HRRZ and HLRZ.  But there are other problems:  Arrays and lots of
+other things use indirection, which won't win.  A kludge around that
+is to map your DATA space into the upper 2/3 or whatever of every PROGRAM
+space.  Then it simply doesn't MATTER what's in the left half of AC's, and
+everything acts just like before, wrt data.
+
+That's not so hard as a real extended-address space Lisp, and means code
+no longer trades off against data, which is a real problem for MACSYMA on
+the -10.
+
+Still, I can think of better things to do with my time than fooling with
+-20's.
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00733.html">Re: Scheme broken on OZ today.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00731.html">Scheme broken on OZ today.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00733.html">Re: Scheme broken on OZ today.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00731.html">Scheme broken on OZ today.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00732"><strong>Date</strong></a></li>
+<li><a href="threads.html#00732"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

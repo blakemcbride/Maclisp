@@ -1,0 +1,140 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Function cells -->
+<!--X-From-R13: Xhyvna Bnqtrg &#60;BORUSFNGFOV&#45;20> -->
+<!--X-Date: Thu ,1 Sep 83 19:46:00 EDT -->
+<!--X-Message-Id: 9674ed1dac56808bf65ed936959f62c2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Function cells</title>
+<link rev="made" href="mailto:PADGET@UTAH-20">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00633.html">Date Prev</a>][<a href="msg00631.html">Date Next</a>][<a href="msg00633.html">Thread Prev</a>][<a href="msg00631.html">Thread Next</a>][<a href="maillist.html#00632">Date Index</a>][<a href="threads.html#00632">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Function cells</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BOBROW.PA@PARC-MAXC</li>
+<li><em>Subject</em>: Re: Function cells</li>
+<li><em>From</em>: Julian Padget &lt;PADGET@UTAH-20&gt;</li>
+<li><em>Date</em>: Thu ,1 Sep 83 19:46:00 EDT</li>
+<li><em>Cc</em>: Padget@UTAH-20, DEUTSCH.PA@PARC-MAXC, LISP-FORUM@MIT-MC,    TEITELMAN.PA@PARC-MAXC, TIM%MIT-OZ@MIT-MC</li>
+<li><em>In-reply-to</em>: Your message of 1-Sep-83 1551-MDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+   As an aside to the main discussion, I do not condone the use of both
+the function and the value cell as a programming style, I am also doubtful
+about Tim's appellation of this as a feature.
+
+   I should also remark that there are some 'real' LISPs that only provide
+one location for keeping a value associated with an id (ie no function cell),
+in particular Cambridge LISP.
+
+   I would vote with Tim to remove this dichotomy which is being continued in
+Common LISP, for reasons which are given in more detail below. However I 
+strongly suspect that the main reason for its retention in CL is not for
+aesthetic but political motives - how else is MACSYMA going to run under CL,
+the coding style therein uses this  'feature' quite a lot, and rewriting
+all the affected parts is not an overnight job.
+
+   I maintain that a function IS a value, and the distinction between value
+and function is erroneous. Although no-one would seriously regard LISP as a
+faithful implementation of the semantics of lambda calculus, it is not
+unreasonable to pay lip service to its (our??) heritage.
+
+   With respect to the question of clarity: there is a problem with the
+handling of anonymous functions (as in say the MAP functions), and in the
+case of high order functions. Although this example may seem somewhat
+contrived, it is relevant.
+
+   R-Sum and I-sum define functions to do a curried summation (I provide
+both for a little variety):
+
+(De R-Sum (a0)
+  (Function
+    (Lambda (ai)
+      (Cond ((Zerop ai) a0) (t (R-Sum (Plus a0 ai)))))))
+
+alternatively:
+
+(De I-Sum (a0)
+  (Prog (fn)
+    (Return
+      (SetQ fn
+        (Function 
+          (Lambda (ai)
+            (Cond ((Zerop ai) a0) (t (SetQ a0 (Plus a0 ai))))
+            fn))))))
+
+    now using these in a single cell system gives rise to the following
+expression:
+
+      (((((I-sum 1) 2) 3) 4) 0)
+
+    if FUNCALL must be used this becomes:
+
+      (FunCall (FunCall (FunCall (FunCall (I-sum 1) 2) 3) 4) 0)
+
+
+    In addition to being a matter of style/personal taste, it is a
+question of consistency (as Peter Deutsch remarked), each element of
+a form is treated the same way - even assuming the first element is
+evaluated repeatedly until an object which can be applied is found, since
+that is simply a recursion in eval without passing the rest of the form
+downwards.
+
+--Julian Padget.
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00633.html">Re: Function cells</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00631.html">Re: Function cells</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00633.html">Re: Function cells</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00631.html">Re: Function cells</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00632"><strong>Date</strong></a></li>
+<li><a href="threads.html#00632"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: FIXing functions -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Tue, 17 Mar 81 21:03:00 GMT -->
+<!--X-Message-Id: 17Mar81 160322 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>FIXing functions</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01427.html">Date Prev</a>][<a href="msg01426.html">Date Next</a>][<a href="msg01427.html">Thread Prev</a>][<a href="msg01423.html">Thread Next</a>][<a href="maillist.html#01425">Date Index</a>][<a href="threads.html#01425">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>FIXing functions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: info-lispm at MIT-AI</li>
+<li><em>Subject</em>: FIXing functions</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Tue, 17 Mar 81 21:03:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC</li>
+<li><em>Original-date</em>: 17 March 1981 1603-EST (Tuesday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(In the following note, I will let &quot;FX&quot; mean &quot;any one of
+FLOOR, CEIL, TRUNC, or ROUND&quot;.)
+
+I strongly support the idea that the FIXing functions
+return two values: quotient and remainder.  These are not hard
+to compile if they are appropriately special-cased.
+The compiler can easily tell what is going on in such
+situations as:
+	(FX Z)
+	(FX Z Y)
+	(MULTIPLE-VALUE (Q R) (FX Z))
+	(MULTIPLE-VALUE (() R) (FX Z))		;i.e., MOD or REMAINDER
+and generate appropriate code for each.
+
+To be more precise, it seems to me that the type of the second result
+should be floating if either argument is, and an integer if both
+arguments are integers.  Also, the one-argument case is exactly the same
+as specifying a second argument of 1; hence an appropriate
+description of the function is (DEFUN FX (X &amp;OPTIONAL (Y 1)) ...).
+Finally, the results Q and R are such that X=Q*Y+R, modulo any
+floating-point inaccuracies.
+
+Hence we have the following examples:
+		Results
+Argument(s)	FLOOR		CEIL		TRUNC		ROUND
+4.5		4  0.5		5  -0.5		4  0.5		4  0.5
+4.5  2		2  0.5		3  -0.5		2  0.5		2  0.5
+7.0  2		3  1.0		4  -1.0		3  1.0		4  -1.0
+7  2		3  1		4  -1		3  1		4  -1
+7  2.3		3  0.1		4  -2.2		3  0.1		3  0.1
+7.5  2.3	3  0.6		4  -1.7		3  0.6		3  0.6
+9		9  0		9  0		9  0		9  0
+Implementationally it is convenient to break this down into a number
+of cases.  Semantically I believe this is the most useful definition.
+
+--Guy
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01427.html">GLEEP!</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01426.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01427.html">GLEEP!</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01423.html">Re: FIXing functions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01425"><strong>Date</strong></a></li>
+<li><a href="threads.html#01425"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

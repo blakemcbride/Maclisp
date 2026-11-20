@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: NTHCDR -->
+<!--X-From-R13: UZE ng [WF&#45;[Q (Uhl Z. Egrryr, Xe.) -->
+<!--X-Date: Thu, 21 Sep 78 05:35:00 GMT -->
+<!--X-Message-Id: b0a5b3488740f62cc92eb943f019fb49@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>NTHCDR</title>
+<link rev="made" href="mailto:GLS at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00283.html">Date Prev</a>][<a href="msg00281.html">Date Next</a>][<a href="msg00285.html">Thread Prev</a>][<a href="msg00284.html">Thread Next</a>][<a href="maillist.html#00282">Date Index</a>][<a href="threads.html#00282">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>NTHCDR</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: NTHCDR</li>
+<li><em>From</em>: GLS at MIT-MC (Guy L. Steele, Jr.)</li>
+<li><em>Date</em>: Thu, 21 Sep 78 05:35:00 GMT</li>
+<li><em>Original-date</em>: 21 SEP 1978 0135-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>If you want to unroll the loop, there are yet trickier ways to do it:
+	MOVN TT,(B)		;the negation is important!
+	ASHC TT,-LOGN
+	ASH D,LOGN-43
+	AOJGE TT,BARF(D)	;the G in GE is needed if arg 2 was zeroIt is cerrtainly true that the SOJG in the tight loop would screw up
+a pipelined machine; this certainly holds for the S1.  Unfortunately
+for the S1, though, the tight sequence of HRRZ A,(A) or the equivalent
+also bottles up in the pipeline because it is hard to index off something
+you wrote into the the previous instruction.  Sigh...
+
+LOOP:	JUMPE A,CPOPJ		;optional, and may be placed later if desired
+REPEAT 1_LOGN, HRRZ A,(A)
+	AOJN TT,LOOP
+	JRST BARF(D)
+
+REPEAT 1_LOGN, HRRZ A,(A)
+BARF:	POPJ P,
+If the JUMPE test is included for early cutoff, I suggest that LOGN==3;
+otherwise probably LOGN==2 will suffice.
+By the way, it is astonishing that the compiled NCDR won, when
+you consider that is was calling %CDDDDR out-of-line!
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00283.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00281.html">Unrolling NTHCDR</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00285.html">NTHCDR</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00284.html">Re: ||</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00282"><strong>Date</strong></a></li>
+<li><a href="threads.html#00282"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

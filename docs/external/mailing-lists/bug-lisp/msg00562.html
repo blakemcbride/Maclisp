@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Confused Code -->
+<!--X-From-R13: UZE ng [WF&#45;[Q (Uhl Z. Egrryr, Xe.) -->
+<!--X-Date: Sun, 18 Feb 79 08:46:00 GMT -->
+<!--X-Message-Id: 6d4c92b256a9ec6fc3c378ea0e8b305e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Confused Code</title>
+<link rev="made" href="mailto:GLS at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00563.html">Date Prev</a>][<a href="msg00561.html">Date Next</a>][<a href="msg00563.html">Thread Prev</a>][<a href="msg00561.html">Thread Next</a>][<a href="maillist.html#00562">Date Index</a>][<a href="threads.html#00562">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Confused Code</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: Confused Code</li>
+<li><em>From</em>: GLS at MIT-MC (Guy L. Steele, Jr.)</li>
+<li><em>Date</em>: Sun, 18 Feb 79 08:46:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 18 FEB 1979 0346-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+            
+    Date: 18 FEB 1979 0326-EST
+    From: RWK at MIT-MC (Robert W. Kerns)
+    Sent-by: ___012 at MIT-MC
+
+    IOCERR+13/ HRRZ R,-3(F)
+    IOCERR+14/ SKIPL R
+    IOCERR+15/ JRST IOCER8
+
+    Is this supposed to make sense?  Since IOCER8 always clobbers R,
+    this is identical to a JRST IOCER8.  Maybe the HRRZ is spurious?
+
+Try looking at the source code.  It has some macro-ized stuff
+that arranges that a sequence involving a HRROI R, appears for
+every IOC handler declared by the code (in much the same manner as an INTPRO).
+As it happens, there are presently no such handlers in the code, so it does
+indeed produce a silly-looking sequence of instructions.  I suppose it
+could suppress the SKIPL if there are no handlers, but I was lazy when
+I wrote that code.  (I was even more lazy in not defining a handler or two!)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00563.html">Confused Code</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00561.html">Re: arrays in Maclisp</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00563.html">Confused Code</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00561.html">Re: arrays in Maclisp</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00562"><strong>Date</strong></a></li>
+<li><a href="threads.html#00562"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

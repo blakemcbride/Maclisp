@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Sun, 24 Jun 79 10:30:00 GMT -->
+<!--X-Message-Id: 50c7e49501a126c7444f80b16355f2d9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02982.html">Date Prev</a>][<a href="msg02980.html">Date Next</a>][<a href="msg02982.html">Thread Prev</a>][<a href="msg02979.html">Thread Next</a>][<a href="maillist.html#02981">Date Index</a>][<a href="threads.html#02981">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC, GJS at MIT-MC</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Sun, 24 Jun 79 10:30:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 24 JUN 1979 0630-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The new version of GRINDEF has been released. I don't think I broke anything
+and it seems to do some winning new things. 
+
+In particular, the following feature has been added: Rather than using
+FLATSIZE to tell the width of something, a function called GFLATSIZE1 is
+called.
+
+GFLATSIZE1 takes two args
+(1) An object 
+(2) A flag which should be NIL only if the 1st args is a CDR'd list 
+(ie, if it is a list whose CAR should not be treated as a functional
+object) 
+
+GFLATSIZE1 differs from FLATSIZE in that it will
+(1) never call FLATSIZE except on atoms
+(2) if the CAR of an atom has a GRINDFLATSIZE property, it should be a
+function of 1 arg which will return a fixnum saying the size of the object.
+That function may recursively call GRINDFLATSIZE1 on any of its subparts
+if it desires.
+
+` ' , ,@ all have initial GRINDFLATSIZE properties. 
+
+This fixes the bug that caused 
+'`(,a ,b ,c ,d ,e ,f ,g) 
+to print vertically on an 80 char screen because it thought it didn't have
+enough room to fit it horizontally. 
+
+Additionally, GJS's '(LAMBDA (X . Y) ...) bug is fixed in this new
+version of GRINDEF.
+
+--kmp
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02982.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02980.html">Re:  defun&amp;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02982.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02979.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02981"><strong>Date</strong></a></li>
+<li><a href="threads.html#02981"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

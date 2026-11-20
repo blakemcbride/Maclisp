@@ -1,0 +1,134 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: More concrete remarks on &#38;keywords... -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Thu ,5 Feb 81 14:09:00 EDT -->
+<!--X-Message-Id: 923298fa00e1a36c2c9c3665e2de8bdf@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: More concrete remarks on &amp;keywords...</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00055.html">Date Prev</a>][<a href="msg00056.html">Date Next</a>][<a href="msg00059.html">Thread Prev</a>][<a href="msg00530.html">Thread Next</a>][<a href="maillist.html#00224">Date Index</a>][<a href="threads.html#00224">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: More concrete remarks on &amp;keywords...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: More concrete remarks on &amp;keywords...</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu ,5 Feb 81 14:09:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>GSB: Personally, I think your LSB syntax suffers from the fact that the keyword
+ information is sticky. I still think that's a disadvantage. I would prefer to
+ make required args after optionals illegal or simply fill in optionals from
+ left to right. eg,
+   (defun f (x (opt y) z (opt w)) ...)
+	(f a b) =&gt; x:a, z:b
+	(f a b c) =&gt; x:a, y:b, z:c
+	(f a b c d) =&gt; x:a, y:b, z:c, w:d
+   (defun f (x (rest y) z (opt w)) ...)
+	(f a b) =&gt; x:a, z:b
+	(f a b c) =&gt; x:a, z:b, w:c
+	(f a b c d) =&gt; x:a, y:(b), z:c, w:d
+	(f a b c d e) =&gt; x:a, y:(b c), z:d, w:e
+ tho' I can perfectly well understand why people might not want to do this and
+ I would have no interest in pushing it ... making these odd cases illegal 
+ wouldn't bother me.
+
+RMS: Let's assume a parser were ok. Doesn't (OPTIONAL) suffer from the 
+ need for a way to specify defaults. Eg,
+	(defun f (x y (optional) (z 3) (zz) (rest) q) ...)
+ doesn't let you tell what a keyword is. Perhaps MDL's idea of strings 
+ would be a better one if you want to go this route. (Maclisp could be
+ made to win even with &quot;...&quot; becoming a symbol in the current default environ
+ since the symbol is tagged with a +internal-string-marker property...)
+
+I do have application for and would really like to see (I am re-entering
+the real world here, no longer speculating) a canonical form which programs
+could easily map over, and some primitive available to turn things into that
+form (the same primitive and canonical form in each dialect would be helpful)
+so that I could do something like:
+
+	(PARSE-DEFUN-ARGLIST '(FOO &amp;OPTIONAL &amp;QUOTE (X 3) &amp;EVAL Z &amp;REST BAR))
+	    =&gt; (FOO (OPTIONAL (QUOTE X) 3) (OPTIONAL Z) (REST BAR))
+and
+	(FORM-DEFUN-ARGLIST
+	     '(FOO (OPTIONAL (QUOTE X) 3) (OPTIONAL Z) (REST BAR)))
+	    =&gt; (FOO &amp;OPTIONAL &amp;QUOTE (X 3) &amp;EVAL Z &amp;REST BAR)
+
+This would guarantee that people would never have to write their own parsers
+for these things and that in spite of whatever hacks had been done to make the
+bvl more visually aesthetic (eg, &amp;keywords), there would be a standard 
+interpretation defined by this set of conversion primitives. Hence, one could 
+write
+
+	(DEFMACRO DEFINE (NAME-STUFF ARG-LIST &amp;REST BODY)
+	  `(DEFUN ,NAME-STUFF ,(FORM-DEFUN-ARGLIST ARG-LIST) ,@BODY))
+	(DEFINE F (X (OPTIONAL Y)) ...)
+
+and win just as well as those people who prefer the &amp;notation or whatever 
+notation alternative notation FORM-DEFUN-ARGLIST produces. Further, although
+programs can't do
+
+	(MAPCAR #'(LAMBDA (ELT) ...) ARG-LIST)
+
+when doing code-transformations, compilations, etc., they could do
+
+	(MAPCAR #'(LAMBDA (ELT) ...) (PARSE-DEFUN-ARGLIST ...))
+
+and still win -- and I don't consider this to be an excessive cost since only
+one parser function would have to be kept up to date -- the system version.
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00055.html">Re: spurious argumentation.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00056.html">Re: spurious argumentation.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00059.html">Re: spurious argumentation.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00530.html">Re: Language design online</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00224"><strong>Date</strong></a></li>
+<li><a href="threads.html#00224"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

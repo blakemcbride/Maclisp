@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 20 Mar 81 02:33:00 GMT -->
+<!--X-Message-Id: 7d59556f2bf4a3013ec2e3f5b5034a30@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01417.html">Date Prev</a>][<a href="msg01415.html">Date Next</a>][<a href="msg01417.html">Thread Prev</a>][<a href="msg01415.html">Thread Next</a>][<a href="maillist.html#01416">Date Index</a>][<a href="threads.html#01416">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GSB at MIT-ML</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 20 Mar 81 02:33:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, RWK at MIT-MC</li>
+<li><em>Original-date</em>: 19 March 1981 21:33-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 19 March 1981 09:43-EST
+    From: Glenn S. Burke &lt;GSB at MIT-ML&gt;
+
+        Date: 18 March 1981 20:23-EST
+        From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+
+            Date: 23 December 1979 04:13-EST
+            From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+	    (SSTATUS TERPRI...) also still loses for SFA's.
+	    Can we have that ask the SFA, too since it may be
+	    a TTY driver. Tnx. -kmp
+	Isn't SSTATUS TERPRI obsolete anyway?
+    It is only obsolete if you are willing to claim that ...
+-----
+Also, at the time that the bug note was sent, GRINDEF FASL
+still did a (SSTATUS TERPRI) as it loaded, causing disaster
+if TYI/TYO contained an SFA instead of its default fileobject.
+I think, however, that we should support this call on SFA's
+so that if other code makes assumptions about the FILEness
+of TYI/TYO, people will not lose.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01417.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01415.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01417.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01415.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01416"><strong>Date</strong></a></li>
+<li><a href="threads.html#01416"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

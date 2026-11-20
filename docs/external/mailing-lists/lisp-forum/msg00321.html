@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: D[E ng [WF&#45;OW (Dvpuneq [. Egnyyzna) -->
+<!--X-Date: Sun ,18 Jan 81 10:08:00 EDT -->
+<!--X-Message-Id: 9c7707d4fc117dd15965c2937778d177@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00140.html">Date Prev</a>][<a href="msg00322.html">Date Next</a>][<a href="msg00140.html">Thread Prev</a>][<a href="msg00322.html">Thread Next</a>][<a href="maillist.html#00321">Date Index</a>][<a href="threads.html#00321">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GLS at MIT-AI</li>
+<li><em>From</em>: RMS at MIT-AI (Richard M. Stallman)</li>
+<li><em>Date</em>: Sun ,18 Jan 81 10:08:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I am at a loss to see why you accused the Lisp machine of
+not making the interpreter and compiler do the same thing.
+Perhaps you meant Maclisp?
+On the Lisp machine, the interpreter and compiler agree
+that only lists starting with lambda and symbols are
+meaningful as the first element of a form.
+
+I believe this is the right behavior, as far as actual
+computed functions are concerned.  It would be useful to
+be able to use a macro call as the function, but it would be
+better if these are not the same macros that are understood
+at the expression level.  That is because those macros
+all expand into expressions, not functions.  So it would be
+better to make this a new, nonconflicting use of a symbol,
+just as functions, variables and prog tags are nonconflicting.
+
+These macros would be recognize at the start of a list which
+is supposed to be a function.  That is, in a list which is
+the car of an expression, and in a list which is the argument
+to FUNCTION, and nowhere else.
+
+It's best to have no overlap between what the user can write for a
+function and what he can write for an expression, unless they are the
+completely the same (as they are in scheme).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00140.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00322.html">Re: Problem with ((FIRST) ...)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00140.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00322.html">Re: Problem with ((FIRST) ...)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00321"><strong>Date</strong></a></li>
+<li><a href="threads.html#00321"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

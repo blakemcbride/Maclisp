@@ -1,0 +1,134 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Cretinous Stack Groups -->
+<!--X-From-R13: UZEN[WF&#45;OW -->
+<!--X-Date: Fri, 27 May 78 21:09:59 GMT -->
+<!--X-Message-Id: b04274dc243e43117a9863388bf82178@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Cretinous Stack Groups</title>
+<link rev="made" href="mailto:GLS@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03363.html">Date Prev</a>][<a href="msg03361.html">Date Next</a>][<a href="msg03363.html">Thread Prev</a>][<a href="msg03361.html">Thread Next</a>][<a href="maillist.html#03362">Date Index</a>][<a href="threads.html#03362">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Cretinous Stack Groups</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: NIL at MIT-AI</li>
+<li><em>Subject</em>: Re: Cretinous Stack Groups</li>
+<li><em>From</em>: GLS@MIT-AI</li>
+<li><em>Date</em>: Fri, 27 May 78 21:09:59 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-AI, (BUG LISPM) at MIT-AI</li>
+<li><em>Original-date</em>: 05/27/78 17:09:59 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>A cretin must contain a certain amount of state; it has the control
+stack and binding pdls for a process, and possibly much other stuff.
+Here I will not talk at all about the binding disciplines, but only about
+the control.
+Let one slot of the state of a cretin be known as the &quot;resumer&quot;.
+This slot may be empty, or may point to another cretin, in which
+case that cretin is presumably in a suspended state, waiting for a value
+to carry on with.
+Now when one cretin (a) wants to transfer control to another (b), it must
+pass a value to it; it may or may not also want to pass a resumption
+point.  If it (a) does, it may want the resumption point to be itself (a),
+its own resumer (the resumer of a), or yet a third party (c).
+Now if a does choose to pass a resumer to b, then it will be stored
+in b's resumer slot for later reference.  The resumer slot of b must
+be empty for this to occur (stipulation, to avoid losing information
+and allow error-checking).  It is permissible, however, not to pass
+b a resumption point when b'd resumer slot is empty; in this situation
+b must be smart enough not to use its resumer slot.
+We thus propose primitives of this sort:
+(CRETIN-GO value cretin resumption)
+	This transfers control to &lt;cretin&gt;, giving it &lt;value&gt;,
+and passing it &lt;resumption&gt; to be put in its resumer slot.
+Error if &lt;cretin&gt;'s resumer slot is not empty.
+(CRETIN-GO value cretin)
+	Transfers control to &lt;cretin&gt;, passing no resumption point.
+(CRETIN-JRST value cretin)
+	Transfers control to &lt;cretin&gt;, passing it my resumer as a resumption
+point, and also clearing my resumer slot.  If I have no resumer (my slot
+is already empty), then &lt;cretin&gt;'s slot will be made empty also (?).
+(CRETIN-PUSHJ value cretin)
+	Transfer control to &lt;cretin&gt;, passing myself as the resumption
+point.
+(CRETIN-POPJ value)
+	Transfer control to the cretin in my resumption slot (error if
+none), passing no resumption point.
+(MY-RESUMER)
+	Returns my resumer, and as a side-effect clears my resumer slot.
+Useful for weird hacks.
+(HIS-RESUMER cretin)
+	Returns the resumer slot of &lt;cretin&gt;.
+(CLOBBER-HIS-RESUMER cretin resumption)
+	Clobbers &lt;cretin&gt;'s resumer slot.  NIL (i.e. ()) means make empty.
+CLOBBER-MY-RESUMER??
+
+Some of these are incredibly dirty, and others are more disciplined.
+It is not hard to show that if things are initialized properly,
+and only CRETIN-PUSHJ and CRETIN-POPJ are used, then nothing bad can
+happen - no errors should be able to occur undetected.  Maybe
+this also holds if CRETIN-JRST is added - this is intended as the
+equivalent of the &quot;JRST hack&quot;.  The otherrs allow for completely
+general hair, such as may be necessary for time-slicing or distributed
+processing kinds of deals.
+Now transferring control to another cretin suspends the current one,
+putting it into a state that awaits a value.  When eventually someone
+else transfers to it, that value is returned as the value of the call
+to CRETIN-PUSHJ or whatever.  Multiple-value versions of all of
+the above can be worked out.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03363.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03361.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03363.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03361.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03362"><strong>Date</strong></a></li>
+<li><a href="threads.html#03362"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

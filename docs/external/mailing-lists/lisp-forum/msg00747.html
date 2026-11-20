@@ -1,0 +1,108 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Proposed new lambda&#45;list syntax -->
+<!--X-From-R13: Rnivq O. [bba &#60;[bba ng [WF&#45;OW> -->
+<!--X-Date: Sat ,26 Sep 81 02:12:00 EDT -->
+<!--X-Message-Id: 32fcab00fadf790b38a7c3192b01b436@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Proposed new lambda-list syntax</title>
+<link rev="made" href="mailto:Moon at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00748.html">Date Prev</a>][<a href="msg00746.html">Date Next</a>][<a href="msg00748.html">Thread Prev</a>][<a href="msg00746.html">Thread Next</a>][<a href="maillist.html#00747">Date Index</a>][<a href="threads.html#00747">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Proposed new lambda-list syntax</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RMS at MIT-AI</li>
+<li><em>Subject</em>: Proposed new lambda-list syntax</li>
+<li><em>From</em>: David A. Moon &lt;Moon at MIT-AI&gt;</li>
+<li><em>Date</em>: Sat ,26 Sep 81 02:12:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 25 September 1981 22:06-EDT
+    From: Richard M. Stallman &lt;RMS at MIT-AI&gt;
+    To: LISP-FORUM at MIT-AI
+
+    My proposed lambda-list syntax does apply sensibly to optional,
+    key, rest and aux arguments, and grinds much better than the
+    existing syntax does.
+How it grinds doesn't seem relevant since anything grinds well if the
+grinder knows how to grind it.
+
+I realized since I made the comment that the above paragraph is in reply
+to that it's not so bad for &amp;optional and so forth as I thought, since
+you allow the syntax
+	(optional a b)
+rather than
+	(optional a)
+	(optional b)
+which was the impression I had gotten from your original message.
+
+    It is not really more complicated either.  It replaces one &quot;&amp;&quot; with
+    two parentheses.  This probably makes it easier to type on a Lisp
+    machine keyboard, since &quot;&amp;&quot; is a shifted character and parentheses are
+    not.
+This is not really true, since one must say &quot;default&quot; which was not necessary
+before.
+
+Also you haven't explained how one would initialize aux variables.  When you
+do, bear in mind that currently the syntax for this is compatible with LET
+and PROG.
+
+I don't think you ever explained what this new syntax was for, other than
+saying it is more &quot;lispy&quot;, which really doesn't mean anything.  Is it
+intended to allow more syntactic space for adding some new feature?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00748.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00746.html">&amp;NO</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00748.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00746.html">&amp;NO</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00747"><strong>Date</strong></a></li>
+<li><a href="threads.html#00747"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

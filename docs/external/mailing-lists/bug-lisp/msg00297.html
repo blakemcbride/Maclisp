@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: DIY ng [WF&#45;[Q (Dboreg I. Yreaf) -->
+<!--X-Date: Sat, 16 Sep 78 20:26:00 GMT -->
+<!--X-Message-Id: aa4497ee5a422076a31e04303508a882@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00298.html">Date Prev</a>][<a href="msg00296.html">Date Next</a>][<a href="msg00298.html">Thread Prev</a>][<a href="msg00296.html">Thread Next</a>][<a href="maillist.html#00297">Date Index</a>][<a href="threads.html#00297">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: RWK at MIT-MC (Robert W. Kerns)</li>
+<li><em>Date</em>: Sat, 16 Sep 78 20:26:00 GMT</li>
+<li><em>Original-date</em>: 16 SEP 1978 1626-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>As I've often suggested before, the obvious way for things like GRINDEF and
+the like to return &quot;nothing&quot; is for them to either return some token which
+the top-level loop recognizes and doesn't print at all, or *.  It is a complete
+and total screw for || to not print when you explicitly ask it to print.
+
+How about making the top-level read-eval-print loop not print the returned
+value if it is EQ to the value of TOP-LEVEL-NO-PRINT or somesuch?  This
+allows people who actually might want to see || at top level (like if it
+were the value of some variable) to set it to (NCONS NIL), and things
+like GRINDEF should be changed to return this &quot;magical&quot; value.  Initially,
+it would be initialized to ||, but after a time it could be changed to
+be ANYTHING so long as it isn't interned.  Maybe an uninterned atom &quot;NOPRINT&quot;
+would be a good choice.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00298.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00296.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00298.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00296.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00297"><strong>Date</strong></a></li>
+<li><a href="threads.html#00297"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

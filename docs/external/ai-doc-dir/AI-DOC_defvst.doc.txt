@@ -1,0 +1,228 @@
+ DEFVST is an acronym for "DEFine a Vector-like STructure"
+ All entries in a Vector-like structure are "pointers" (FIXNUMs, LISTs, etc)
+ Future plans call for
+	DEFBST		-  "DEFine a Bitstring-like STructure", useful where
+			     the structure is an interface to some memory
+			     block required to be sequential by, say, operating
+			     system conventions, or hardware needs.
+	DEFSTRUCT 	-  "DEFine a general STRUCTure"
+ 			    which will be done by composing DEFVST and DEFBST.
+ Vector-like structures are implemented as VECTORs, which are emulated in
+	maclisp by HUNKs, and on the LISPMachine by 1-dimensional
+	ART-Q arrays;
+
+ Free (global) variables controlling actions:
+	CONSTRUCTOR-NAMESTRING-PREFIX 	- constructor name is obtained by 
+					    concatenating this string with the
+					    structure name.
+	SELECTOR-NAMESTRING-STYLE	- ()    ==> selector macro name is same
+						    as keyword (variable name).
+					- "xxx" ==> selector macro name gotten
+						    by concatenating structure 
+						    name, "xxx", and keyword.
+	DEFMACRO-DISPLACE-CALL		- whether or not macro instances should
+					  try to clobber with DISPLACE.  See
+ 					  comments in DEFMAC package.
+
+  Basic macros: 	DEFVST  for defining a structure
+			SETVST  for updating a selected component
+			  (and SETF)
+  Additional functions: STRUCT-TYPEP  for "structures", returns the given name,
+					and for non-structures, returns ().
+			|defvst-construction/|| and |defvst-typchk/|| are 
+			      internal helper functions for constructor macros.
+
+  Usage is like:
+	(DEFVST SHIP 
+		(X-POSITION /: FIXNUM) 
+		Y-POSITION 
+		(MASS = 1000.) 
+ 	 	(COST (DAY-HIGH-PRICE))
+		COLOR )
+	(SETVST (SHIP-X-POSITION QE2) 109.)
+  or alternatively, since SETF will turn to SETVST on structures,
+	(SETF (SHIP-X-POSITION QE2) 109.)
+ 
+  Note that "=" is used as a keyword in the component part to mean
+  an initialization form follows; and that a component specification
+  which is just a 2-list is expanded like 
+ 	   (<component-name> <form>)  ==>  (<component-name> = <form>)
+  This is done for compatibility of style with the LISPM defstructure.
+  See further notes below for the meaning of the ":" in the default form.
+
+
+
+  The SETVST macro (and SETF) is used in conjunction with DEFVST.  The 
+  example use of DEFVST "defines" a vector-like structure of 4 components;  
+  the generic name of this structure is "SHIP", and the components are 
+  identified by the ordering of what are called keywords -  X-POSITION, 
+  Y-POSITION, MASS, and COLOR.  Each "definition" causes the creation of 
+	1) A constructor macro, whose name (normally) is obtained by prefixing
+	   the string "CONS-A-" onto the generic name of the structure.
+	   In the example, this becomes CONS-A-SHIP.  The constructor
+	   permits installing values into the component slots at instantiation
+	   time, which are evaluated from either the (default) forms supplied 
+	   by the invocation of DEFVST, or from the forms obtained by keyword 
+	   parameters in the instantiating form.  E.g. 
+		(CONS-A-BANK DOLLARS (PLUS 300. WALLET) MANAGER '|Jones, J.|)
+	   would put the numerical value of  300.+WALLET  in the DOLLARS 
+	   component of a newly-created bank, and install |Jones, J.| as 
+	   its MANAGER.
+ 	2) N selector macros, one for each keyword (which denotes one
+	   component slot), which are obtained (normally) by concatenating
+	   the generic name, a "-", and the keyword name.  In the example,
+	   we have SHIP-X-POSITION, SHIP-Y-POSITION, SHIP-MASS, and
+	   SHIP-COLOR.
+		2a: (SHIP-X-POSITION QE2) 
+		     to obtain the x-coordinate of QE2
+		2b: (SETVST (SHIP-X-POSITION QE2) 109.)
+		     to change the x-coordinate to of QE2 to 109.
+	3) an information structure, stored as the STRUCT=INFO property
+	   of the generic name symbol.  This information has the shape
+		(DEFVST STRUCT=INFO 
+			INDICATOR+GENERIC-NAME 	
+			CONSTRUCTOR-NAME 
+			NUMBER-OF-NAMED-COMPONENTS 
+			COMPONENT-DEFAULT-INITIALIZATION-LISTS )
+
+	The indicator+generic name is a pair whose car is &STRUCT, so
+	  that there may be some chance of identifying these structures;
+	  the cdr is the name handed to DEFVST.
+	The zero'th element of the initializations is either (), or a
+	  3-list of the key-name, selector-name, and default size for the
+	  &REST component - the "block" of unnamed components in the
+	  structure.   The remaining elements of the initializations are
+	  the "initialization lists" for each named component:
+		(<key-name> <corresponding-selector>)
+				;() initial value, no restrictions
+		(<key-name> <corresponding-selector> <ini-val-form>)
+				;no restrictions
+		(<key-name> <corresponding-selector> 
+			    <ini-val-form> . <list-of-types-for-restrictions>)
+
+
+	CONSTRAINTS, and INITIAL VALUES
+	   Each of the components may be constrained to be a particular 
+	type datum, and may be initialized according to the form supplied
+	as default by the call to DEFVST.
+
+	   The syntax for a non-simple component specification is a list with
+	the first element being the key name, the item following the first 
+	"=" in the list being a form which is the default form to be evaluated
+	for that component in any creations of instances of that structure, 
+	and the element following the first ":" is either a type name or list 
+	of type names that restricts any creating instance from supplying an 
+	initial value of the wrong type.  If a key has a restriction 
+	associated with it, but no default initial-value form, then DEFVST 
+	picks some default value consistent with the restriction.
+	
+ 	Consider the example
+	    (DEFVST BANK 
+	    	(DOLLARS /: (FIXNUM FLONUM MUMBLE))
+	    	MANAGER 
+	    	(LIMIT = 1.0E6 /: (FIXNUM FLONUM))
+	    	&REST 
+	    	 VAULTS 300.)
+
+	First, the macro invocation of DEFVST would expand into
+
+  (PROGN 'COMPILE
+	(EVAL-WHEN (EVAL COMPILE LOAD)
+		   (DEFPROP BANK
+			    #((&STRUCT . BANK)
+			      CONS-A-BANK 
+			      3 
+			      #((VAULTS BANK-VAULTS 30.)
+				(DOLLARS BANK-DOLLARS 0 FIXNUM FLONUM MUMBLE)
+				(MANAGER BANK-MANAGER)
+				(LIMIT BANK-LIMIT 1.0E6 FIXNUM FLONUM)))
+			    STRUCT=INFO)
+		   (DEFPROP CONS-A-BANK BANK CONSTRUCTOR)
+		   (DEFPROP BANK-DOLLARS (BANK 1) SELECTOR)
+		   (DEFPROP BANK-MANAGER (BANK 2) SELECTOR)
+		   (DEFPROP BANK-LIMIT (BANK 3) SELECTOR)
+		   (DEFPROP BANK-VAULTS (BANK 4 &REST) SELECTOR))
+	(MACRO CONS-A-BANK (BANK-MACRO-ARG)
+		(|defvst-construction/|| 'BANK BANK-MACRO-ARG))
+	(MACRO BANK-DOLLARS (BANK-MACRO-ARG)
+		`(VREF ,(cadr bank-macro-arg) 1))
+	(MACRO BANK-MANAGER (BANK-MACRO-ARG)
+		`(VREF ,(cadr bank-macro-arg) 2))
+	(MACRO BANK-LIMIT (BANK-MACRO-ARG)
+		`(VREF ,(cadr bank-macro-arg) 3))
+	(MACRO BANK-VAULTS (BANK-MACRO-ARG)
+		 `(VREF ,(cadr bank-macro-arg)
+			(+ 4 ,(caddr bank-macro-arg)))))
+
+	which is then evaluated, producing the four macro definitions, and 
+	DEFPROPping several informational properties.  
+	After that, then, a "simple" creation instance will take default
+	values for all components with either initial value or restriction
+	specifications, and null in the unspecified components:
+	for example
+			(CONS-A-BANK)
+	then yields a vector something like
+		#( (&STRUCT . BANK) 0 () 1.0E6 () . . . () )
+	- a bank with three named components, and with 30. unnamed 
+	components which are accessed as if VAULTS were a vector name. 
+	Note that the first element of the vector is a special 
+	"structure" indicator, so that code may certify whether something 
+	is indeed a structure.	But a more complex invocation
+
+	    (CONS-A-BANK DOLLARS (CASEQ VIP 
+	    			    (FEDERAL 15.0E9)
+	    			    (SAVINGS-&-LOAN 10.0E6)
+	    			    (MICKEY-MOUSE 1))
+			 MANAGER '|Jones, J.|
+ 			 LIMIT   (BANK-DOLLARS CURRENT-CONSTRUCTION)
+ 			 VAULTS  12.)
+
+	illustrates four points of a creating instance - -
+	  (1) keywords paired with initial values are just alternating 
+	      pairs in the list, and 
+	  (2) the forms for initial values are substituted into a piece of
+	      code output by the macro, so that they are evaluated at 
+	      instantiation time, and
+	  (3) the variable CURRENT-CONSTRUCTION is temproarily bound to the
+	      structure being created so that it may be referenced; the 
+	      installing of initial values happens last.
+	  (4) components which are under a restriction, and are not constant 
+	      (at compile time) must be submitted to dynamic type checking.
+	Notice how this macro-expands -- 
+
+   (LET ((CURRENT-CONSTRUCTION (MAKE-VECTOR (1+ 15.))))	
+	(SETVST (STRUCT-TYPEP CURRENT-CONSTRUCTION)
+		(STRUCT=INFO-INDC (GET 'BANK 'STRUCT=INFO)))
+	(SETVST (BANK-DOLLARS CURRENT-CONSTRUCTION)
+		(|defvst-typchk/|| (CASEQ VIP
+  					  (FEDERAL 1.5E+10)
+  					  (SAVINGS-&-LOAN 10000000.0)
+  					  (MICKEY-MOUSE 1))
+  				   '(FIXNUM FLONUM MUMBLE)
+  				   'BANK-DOLLARS))
+	(SETVST (BANK-MANAGER CURRENT-CONSTRUCTION) '|Jones, J.|)
+	(SETVST (BANK-LIMIT CURRENT-CONSTRUCTION)
+		(|defvst-typchk/|| (BANK-DOLLARS CURRENT-CONSTRUCTION)
+  				   '(FIXNUM FLONUM)
+  				   'BANK-LIMIT))
+       CURRENT-CONSTRUCTION)
+ 
+      This code might actually not run, since it could stop on a Restriction
+  Violation if the variable VIP does not have a value among
+	  FEDERAL,  SAVINGS-&-LOAN,  MICKEY-MOUSE
+  for then it would turn up a () for the DOLLARS component, which
+  was specified to be restricted to fixnums.  
+
+      Further macro-expansion causes the "SETVST"s to become "VSET"s.
+  The line of code 
+	(SETVST (STRUCT-TYPEP 'BANK)
+		(STRUCT=INFO-INDC (GET 'BANK 'STRUCT=INFO)))
+  put an identifying component in the zeroth element of the vector - 
+  although STRUCT-TYPEP is a SUBR, it has a SETF-X property so that it can
+  be updated in this way.
+      In maclisp, VREF vecomes CXR, VSET becomes RPLACX, and MAKE-VECTOR 
+  becomes  MAKHUNK (that is how VECTORs are emulated there).   The VECTOR 
+  emulation package need not necessarily be loaded in the runtime environment 
+  of code which uses structures;  however, when a constructor macro is 
+  actually used to create another instance of a structure, the emulation 
+  package will be  needed (hopefully, autoloaded).

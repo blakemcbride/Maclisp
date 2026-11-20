@@ -1,0 +1,118 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Twenex logical device confusion -->
+<!--X-From-R13: XOD ng [WF&#45;[Q (Xbanguna O. Drrf) -->
+<!--X-Date: Sat, 10 Jan 81 22:11:00 GMT -->
+<!--X-Message-Id: 4a552ec81238d97926b77e8b4de920c0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Twenex logical device confusion</title>
+<link rev="made" href="mailto:JAR at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03587.html">Date Prev</a>][<a href="msg03585.html">Date Next</a>][<a href="msg03588.html">Thread Prev</a>][<a href="msg03585.html">Thread Next</a>][<a href="maillist.html#03586">Date Index</a>][<a href="threads.html#03586">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Twenex logical device confusion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Twenex logical device confusion</li>
+<li><em>From</em>: JAR at MIT-MC (Jonathan A. Rees)</li>
+<li><em>Date</em>: Sat, 10 Jan 81 22:11:00 GMT</li>
+<li><em>Cc</em>: JAR at MIT-MC</li>
+<li><em>Original-date</em>: 10 JAN 1981 1711-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>With a current directory of &lt;REES&gt;, and with LOGIN.CMD files
+existant on this directory and on &lt;RLB&gt; and &lt;RWK&gt;, and with the
+file X.START present on &lt;RWK&gt; but not on &lt;RLB&gt;, and with
+
+@define foo: &lt;rlb&gt;,&lt;rwk&gt;
+
+we get the following results when applying NAMELIST, NAMESTRING,
+and PROBEF to various arguments:
+
+Arg		  PROBEF
+|FOO:LOGIN.CMD|	  ((PS RLB) LOGIN CMD /2)
+((FOO) LOGIN CMD) ((PS REES) LOGIN CMD /2)	;Choke!
+|FOO:X.START|	  NIL				;Barf!
+((FOO) X START)	  NIL
+
+Arg		  NAMESTRING	    NAMELIST
+|FOO:LOGIN.CMD|	  PS:&lt;RLB&gt;LOGIN.CMD ((PS RLB) LOGIN CMD *)
+((FOO) LOGIN CMD) FOO:LOGIN.CMD	    ((FOO ||) LOGIN CMD *)
+|FOO:X.START|	  PS:&lt;RLB&gt;X.START   ((PS RLB) X START *)
+((FOO) X START)	  FOO:X.START	    ((FOO ||) X START *)
+
+This is inexcuseable, there are so many bugs here.  I hardly know
+where to begin.  Poor maclisp just doesn't know anything about Twenex
+logical names and search conventions.  Rather than try to figure out
+just what's wrong here, I'll give suggestions as to what I think the
+proper results ought to be:
+
+Arg		  PROBEF
+|FOO:LOGIN.CMD|	  ((PS RLB) LOGIN CMD /2)
+((FOO) LOGIN CMD) ((PS RLB) LOGIN CMD /2)
+|FOO:X.START|	  ((PS RWK) X START /2)
+((FOO) X START)	  ((PS RWK) X START /2)
+
+Arg		  NAMESTRING	NAMELIST
+|FOO:LOGIN.CMD|	  FOO:LOGIN.CMD ((FOO) LOGIN CMD *)  ;Or leave in the ||
+((FOO) LOGIN CMD) FOO:LOGIN.CMD	((FOO) LOGIN CMD *)  ; if you prefer.
+|FOO:X.START|	  FOO:X.START   ((FOO) X START *)
+((FOO) X START)	  FOO:X.START	((FOO) X START *)
+
+P.s. I'm not on the BUG-LISP list, but I would appreciate getting CC'ed
+any replies.  This is a real problem, about which I have had many
+complaints from the Yale users.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03587.html">Macro-Cache'ing a pure cell?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03585.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03588.html">MAKE-STRING</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03585.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03586"><strong>Date</strong></a></li>
+<li><a href="threads.html#03586"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

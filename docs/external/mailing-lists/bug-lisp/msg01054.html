@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: is it SUPPOSED to do this? -->
+<!--X-From-R13: Rnir Fbhergmxl ng Q[G&#45;10O -->
+<!--X-Date: Tue, 28 Oct 80 10:56:00 GMT -->
+<!--X-Message-Id: 675d081f155de8ea9d668ae5c47254c6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>is it SUPPOSED to do this?</title>
+<link rev="made" href="mailto:Dave Touretzky at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01055.html">Date Prev</a>][<a href="msg01053.html">Date Next</a>][<a href="msg01941.html">Thread Prev</a>][<a href="msg01053.html">Thread Next</a>][<a href="maillist.html#01054">Date Index</a>][<a href="threads.html#01054">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>is it SUPPOSED to do this?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC</li>
+<li><em>Subject</em>: is it SUPPOSED to do this?</li>
+<li><em>From</em>: Dave Touretzky at CMU-10A</li>
+<li><em>Date</em>: Tue, 28 Oct 80 10:56:00 GMT</li>
+<li><em>Cc</em>: David Goldberg at CMU-10A</li>
+<li><em>Original-date</em>: 28 October 1980 0556-EST</li>
+<li><em>Reply-to</em>: Dave Touretzky at CMU-10A</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In MacLisp with *RSET set to T, BASE and IBASE set to 10.:
+
+(setq a (^ 2 34))   =&gt;  17179869184
+
+(+ a a)   =&gt;   -34359738368		;arithmetic overflow
+
+(* 2 a)   =&gt;   0			;huh??? doesn't 2*a = a+a?
+
+(times 2 a)   =&gt;   34359738368		;correct answer, as a bignum
+
+
+I'm kind of surprised at the disparity in answers.  Doesn't *RSET
+checking involve tests for bogus arithmetic operations?  Is there
+any other way to get such testing?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01055.html">new LISP rubout processing</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01053.html">Shifted-0, Modular arithmetic</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01941.html">new LISP rubout processing</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01053.html">Shifted-0, Modular arithmetic</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01054"><strong>Date</strong></a></li>
+<li><a href="threads.html#01054"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

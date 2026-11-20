@@ -1,0 +1,120 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 16 Dec 79 14:58:00 GMT -->
+<!--X-Message-Id: 39f36c6d05373969467c9669d52a2a7e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03849.html">Date Prev</a>][<a href="msg03847.html">Date Next</a>][<a href="msg03849.html">Thread Prev</a>][<a href="msg03847.html">Thread Next</a>][<a href="maillist.html#03848">Date Index</a>][<a href="threads.html#03848">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: FREND at MIT-MC</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 16 Dec 79 14:58:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 16 December 1979 09:58-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 16 DEC 1979 0800-EST
+    From: FREND at MIT-MC (M. Alexander Bloom)
+
+    Why does (equal x '||) give T when x has been assigned '|| by setq,
+    but                    give nil when x gets (seemingly) the same
+    value from readline?
+    I tested the result from (setq x (readline t)) and got ||
+    but this failed in the (equal x '||)
+    Is there a reason for the null string to have more than one internal
+    value?
+
+This is not a bug.  First of all there is nothing magic about symbols
+whose name is &quot;&quot;.  If you try
+
+(setq a (readline))foo
+
+the value of a will be a symbol named &quot;foo&quot;.  But you will find that
+(equal '|foo| a) returns nil.  This is because there is nothing in
+lisp to prevent you from having two symbols with the same name.
+Perhaps some further explanation is in order.
+
+Symbols returned by READ are uniquized by registering them in a table
+called the &quot;obarray&quot;, this process is called &quot;interning&quot; and
+gaurantees that READ will never return two different symbols with the
+same name.  Some other functions that handle symbols also intern them,
+IMPLODE, for example, takes a list of characters (expressed as fixnums
+or symbols) and returns you an interned symbol whose name is made up
+of those characters.  There is also a function INTERN which a takes a
+symbol and returns you a symbol with the same name that is registered
+on the obarray.
+
+The function READLINE doesn't bother to return an interned symbol,
+since when you call READLINE you are probably going to do string-like
+operations on the result and so you don't care about whether you have
+a unique copy of that symbol.
+
+The function EQUAL compares symbols not by looking at their names, but
+simply by looking to see if they are the SAME object (what the
+function EQ does), this is done mostly for efficiency's sake and is a
+small price to pay since it is usually what you want (so don't suggest
+that we make THAT change).  I suspect that what you want is the
+function SAMEPNAMEP which takes two symbols and compares their names
+to see if they are the same and returns T if they are.  This is the
+function to call if you are treating symbols as just plain strings.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03849.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03847.html">All I do is complain.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03849.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03847.html">All I do is complain.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03848"><strong>Date</strong></a></li>
+<li><a href="threads.html#03848"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

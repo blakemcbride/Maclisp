@@ -1,0 +1,129 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: lisp; new recent -->
+<!--X-From-R13: [AA@ ng [WF&#45;[Q (Rnivq O. [bba) -->
+<!--X-Date: Wed, 21 Nov 79 22:54:00 GMT -->
+<!--X-Message-Id: 3b79a51504384543b25d0111c2f7c9a7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>lisp; new recent</title>
+<link rev="made" href="mailto:MOON at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03966.html">Date Prev</a>][<a href="msg03962.html">Date Next</a>][<a href="msg03966.html">Thread Prev</a>][<a href="msg03960.html">Thread Next</a>][<a href="maillist.html#03965">Date Index</a>][<a href="threads.html#03965">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>lisp; new recent</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: lisp; new recent</li>
+<li><em>From</em>: MOON at MIT-MC (David A. Moon)</li>
+<li><em>Date</em>: Wed, 21 Nov 79 22:54:00 GMT</li>
+<li><em>Cc</em>: MOON at MIT-MC</li>
+<li><em>Original-date</em>: 21 NOV 1979 1754-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>## is no longer used and should be flushed.
+#\FORM should be defined; this is what is written on the key on
+ Knight and LM keyboards, and therefore should be the preferred
+ name of the key.
+#\BACK-NEXT is missing.
+
+I don't see how the change to the order of evaluation of STORE
+can work, particularly in compiled code.  Has this really been tested?
+Does (STORE (APPLY ...) ...), which Macsyma uses, still work?
+
+SETF has to be a macro, not an FSUBR.  Or else MACROEXPAND has to know
+about it specially.  The property which controls SETF should be called
+SETF, not SETF-X.  This is for Lisp machine compatibility and because
+it is useless to introduce another name when the name of the property
+can reflect the function which it controls.
+
+LDB and DPB in the Lisp machine work on bignums.  Much of our software
+that runs in Maclisp (where they are sometimes called LOGLDB and LOGDPB)
+depends heavily on this.  Evidently yours only accept fixnums?  The pp
+field in a byte-pointer should not be limited to 2 octal digits, but should
+simply be (// ppss 64.); this is important when dealing with bignums.
+
+LOAD-BYTE and DEPOSIT-BYTE do not work exactly as documented.  The
+documentation needs to make clear that the bit position is the number
+of the high-order bit counting from LEFT TO RIGHT, i.e. the number of
+bits to the left of the byte IN A FIXNUM.  Better than this crockish
+machine-dependency would be to number the bits from right to left in
+the standard way, as LDB and DPB do, avoiding dependency on machine
+word-length.  Consider what LOAD-BYTE and DEPOSIT-BYTE would do in NIL.
+
+I fail to understand this example; &amp;WHOLE is meaningless in anything
+other than DEFMACRO.
+	    (DEFUN FOOM (&amp;WHOLE X) &lt;mumble&gt;)  would bind X just like
+	    (MACRO FOOM (X) &lt;mumble&gt;)
+
+Why do useratoms-hooks NCONS their return values, since the value,
+being a form evaluated for some kind of side-effects, will surely
+be non-NIL?
+
+The change to eliminate automatic insertion of CR's seems wrong.
+Isn't what you want to retain automatic insertion of CR's, but NEVER
+within an atom?  Thus formerly extra-long atoms would be broken with
+a CR in the middle, but now they would result in extra-long lines,
+but normal output will not contain extra-long lines.
+
+The following features seem reasonable to adopt in the Lisp machine.
+I'll put them in when I return to the east coast.
+
+SPRIN1
+EOF-COMPILE-QUEUE  (This supersedes EOC-EVAL, doesn't it?)
+STATUS FILESYSTEM-TYPE, OPSYSTEM-TYPE, SITE(?)
+Hacking of + in read-eval-print loop.
+&amp;WHOLE in DEFMACRO but not in DEFUN (we probably already have this).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03966.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03962.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03966.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03960.html">lisp; new recent</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03965"><strong>Date</strong></a></li>
+<li><a href="threads.html#03965"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

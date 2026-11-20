@@ -1,0 +1,120 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: MAKE&#45;LIST &#45;&#45; Compromise? Please, not that way ... -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,3 Nov 80 13:10:00 EDT -->
+<!--X-Message-Id: 96258046fa07a12ef498cecd8626b194@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: MAKE-LIST -- Compromise? Please, not that way ...</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00417.html">Date Prev</a>][<a href="msg00423.html">Date Next</a>][<a href="msg00417.html">Thread Prev</a>][<a href="msg00423.html">Thread Next</a>][<a href="maillist.html#00418">Date Index</a>][<a href="threads.html#00418">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: MAKE-LIST -- Compromise? Please, not that way ...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: Re: MAKE-LIST -- Compromise? Please, not that way ...</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,3 Nov 80 13:10:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 3 November 1980 06:56-EST
+    From: Jon L White &lt;JONL at MIT-MC&gt;
+
+        Date: 3 November 1980 01:52-EST
+        From: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;
+
+        Yes, the Lisp Machine MAKE-LIST should originally have been defined to
+        take the area secondly as an optional argument.  What you make Maclisp
+        do depends more on whether you are concerned with compatibility, or the
+        right thing.  Both the NIL and Lisp Machine groups seem extremely
+        reluctant to put up with language deficiencies, even minor ones, simply
+        to be compatible with the other.
+
+    In this case, the MAKE-LIST one, it seems highly unlikely that open-coding
+    is important -- why not let it be a subr which &quot;sniffs&quot; at its two
+    arguments and reverses them if the one which should be an &quot;area pointer&quot;
+    is a &quot;fixnum&quot; and vice-verse? We could then say
+
+    1) MAKE-LIST has the &quot;right&quot; definition
+
+    2) but practical implementations have a kludge which is &quot;tolerant&quot; of
+       a somewhat lazy programmer (and still is 99.99% fail safe)
+-----
+That's not the `right' definition. That's lossage. It smells of DWIM.
+I think it's far more important for these languages to have regular 
+definitions than for them to be precisely compatible. If they have regular
+definitions, they can at least be mechanically translated back and forth.
+The sort of kludge suggested here is ugly and un-called for. Alan's 
+suggestion of (MAKE-LIST #Q area fixnum) is far cleaner ... which doesn't 
+say much. You're talking about the design of two languages which attempt 
+to *correct* some of the kludgeyness in their predecessors (Maclisp) ... 
+I think this is a truly bad idea.
+
+Why is it that you can't just change the definition in NIL and recompile
+the code. I can write you a Teco macro that will do it query-replace-style
+for a buffer... If you have a tags file, I can make it map the whole file.
+I think the compromises DLW was suggesting involved actually
+having one side or the other actually concede the point and change their
+definition. NIL has little code depending on it right now -- far less than 
+LispM. The NIL source is probably the only body of code that is relying
+on a particular definition and I think it would be easier for us to change
+NIL than for LispM to change all of their code and their users' code.
+
+If compatibility is really desired, I think that's how it's to be achieved
+in this case.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00417.html">Re: Compromise?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00423.html">Re: MAKE-LIST -- compromise or not?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00417.html">Re: Compromise?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00423.html">Re: MAKE-LIST -- compromise or not?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00418"><strong>Date</strong></a></li>
+<li><a href="threads.html#00418"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

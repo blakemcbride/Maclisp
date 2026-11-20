@@ -1,0 +1,114 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: USERATOMS&#45;HOOKS -->
+<!--X-From-R13: SP ng [WF&#45;[Q (Sqjneq Pnegba) -->
+<!--X-Date: Fri, 23 Nov 79 20:03:00 GMT -->
+<!--X-Message-Id: b90b1f84d2712d6cfe08a7c131001cb7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>USERATOMS-HOOKS</title>
+<link rev="made" href="mailto:EB at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03953.html">Date Prev</a>][<a href="msg03951.html">Date Next</a>][<a href="msg03953.html">Thread Prev</a>][<a href="msg03951.html">Thread Next</a>][<a href="maillist.html#03952">Date Index</a>][<a href="threads.html#03952">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>USERATOMS-HOOKS</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: USERATOMS-HOOKS</li>
+<li><em>From</em>: EB at MIT-MC (Edward Barton)</li>
+<li><em>Date</em>: Fri, 23 Nov 79 20:03:00 GMT</li>
+<li><em>Original-date</em>: 23 NOV 1979 1503-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Consider the following file as compiled on MC with XC:
+
+
+(eval-when (compile)
+    (defun :-hook (x)
+	(let ((temp))
+	   (cond ((not (atom x)) nil)
+		 ((eq (car (setq temp (explode x))) ':)
+		  (ncons `(quote ,(implode (append '(o b $)
+						   (cdr temp))))))
+		(t nil))))
+    (push ':-hook useratoms-hooks))
+
+(defun foo (x) 1)
+
+(defun  foo1 (x) :z)
+
+(setq ob$z 'win)
+
+(defun :foo (x) 2)
+
+It seems to me that the FASL file should achieve the same effect, in
+this case, as
+
+(defun foo (x) 1) ; no problem here, of course
+(defun foo1 (x) ob$z)
+(defun ob$foo (x) 2)
+
+In fact what happens is that I get &quot;OB$Z unbound variable&quot; on
+loading the FASL file.  (If I were to put an additional QUOTE
+in the NCONS or if I were to set OB$Z to something, I would get
+file not in fasload format at load time.)
+
+If I omit the FOO1 defun, I get &quot;OB$FOO unbound variable&quot; on
+loading.  In that case, if I set OB$FOO to, say, WRONG, the effect
+is as if I had said (defun wrong (x) 2) instead of the
+:foo defun.
+
+Is all this really the way it's supposed to work?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03953.html">&quot; on TTYSCAN-STRINGERS/|</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03951.html">USERATOMS-HOOKS</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03953.html">&quot; on TTYSCAN-STRINGERS/|</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03951.html">USERATOMS-HOOKS</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03952"><strong>Date</strong></a></li>
+<li><a href="threads.html#03952"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: +INTERNAL&#45;/'&#45;MACRO -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sat, 20 Sep 80 18:41:00 GMT -->
+<!--X-Message-Id: 57237118ae3f4d6f724a8f05e843ad4f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>+INTERNAL-/'-MACRO</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01196.html">Date Prev</a>][<a href="msg01194.html">Date Next</a>][<a href="msg01197.html">Thread Prev</a>][<a href="msg01194.html">Thread Next</a>][<a href="maillist.html#01195">Date Index</a>][<a href="threads.html#01195">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>+INTERNAL-/'-MACRO</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GSB at MIT-MC</li>
+<li><em>Subject</em>: +INTERNAL-/'-MACRO</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sat, 20 Sep 80 18:41:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 20 SEP 1980 1441-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     GSB@MIT-ML
+Date: Fri, 20 Sep 80 02:46:16 GMT
+Original-Date: 09/19/80 22:46:16 EDT
+Subject: Re: fixing things
+    It seems that +INTERNAL-/'-MACRO now calls a read entry which calls
+    the read hook. .  .  . The read hook has semantics of being a &quot;toplevel&quot;
+    call and is allowed to do things like flush the character trailing a
+    character.  This isn't right for a recursive read.
+It's not entirely clear what the purpose of this read &quot;hook&quot; is -- the
+toplevel hook is another feature (READ-*-EVAL-PRINT and *-READ-EVAL-PRINT) --
+and furthermore, its not clear that we've resolved the READ-PRESERVE-DELIMITERS
+problem for maclisp;  but your comment seems right, that READ rather than 
+    (LAMBDA (X) (COND (READ (FUNCALL READ X)) ((READ X))))
+is what is desired.  So I've again patched it accordingly.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01196.html">Re: correction</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01194.html">DIGITP in NILCOM;STRING</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01197.html">Bad GRINDEF/TRACE interaction</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01194.html">DIGITP in NILCOM;STRING</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01195"><strong>Date</strong></a></li>
+<li><a href="threads.html#01195"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

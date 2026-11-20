@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DEFUN with &#38;WHOLE -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 2 Dec 80 13:19:00 GMT -->
+<!--X-Message-Id: f157ad412e80af3b7f221d3ceb436f87@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DEFUN with &amp;WHOLE</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01725.html">Date Prev</a>][<a href="msg01722.html">Date Next</a>][<a href="msg01725.html">Thread Prev</a>][<a href="msg01722.html">Thread Next</a>][<a href="maillist.html#01724">Date Index</a>][<a href="threads.html#01724">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DEFUN with &amp;WHOLE</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: WGD at MIT-MC</li>
+<li><em>Subject</em>: DEFUN with &amp;WHOLE</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 2 Dec 80 13:19:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 2 DEC 1980 0819-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Re:
+    Date: 1 December 1980 23:08-EST
+    From: William G. Dubuque &lt;WGD at MIT-MC&gt;
+    (defun foo ((&amp;whole x) y) &amp;whole) then (foo '(a b) 1) =&gt; a. But
+    (defun foo (&amp;whole x) &amp;whole) =&gt; infinite recursion.
+First, &amp;WHOLE is supposed to have absolutely no special meaning
+with DEFUN;  what happened here was that DEFUN was tricked by an
+inadvertent ordering of several atom headers (as with so many
+other places inthe LISP system, a test like (MEMQ X '(ATOM1 ATOM2 ...))
+is done merely by ensuring that the symbol headers for ATOM1, ATOM2 etc
+occupy consecutive locations, and then just doing a between-p address
+comparison.  Pooor &amp;WHOLE happened to be in the middle of some range
+which it shouldn't.  I patched XLISP, and edited the source.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01725.html">YES-OR-NO-P and friend</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01722.html">MAX not open-coded</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01725.html">YES-OR-NO-P and friend</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01722.html">MAX not open-coded</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01724"><strong>Date</strong></a></li>
+<li><a href="threads.html#01724"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

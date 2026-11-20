@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: FIRST SECOND THIRD ... (don't forget REST) -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 29 Nov 79 05:38:00 GMT -->
+<!--X-Message-Id: bfa3e3d4236d05543fa1c677e1c9e354@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>FIRST SECOND THIRD ... (don't forget REST)</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03912.html">Date Prev</a>][<a href="msg03909.html">Date Next</a>][<a href="msg03912.html">Thread Prev</a>][<a href="msg03909.html">Thread Next</a>][<a href="maillist.html#03911">Date Index</a>][<a href="threads.html#03911">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>FIRST SECOND THIRD ... (don't forget REST)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Dave.Touretzky at CMU-10A</li>
+<li><em>Subject</em>: FIRST SECOND THIRD ... (don't forget REST)</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 29 Nov 79 05:38:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, KMP at MIT-MC, HIC at MIT-MC</li>
+<li><em>Original-date</em>: 29 November 1979 00:38-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I always try to avoid situations where I'd want to write obscenities like
+SEVENTH ... why should it be the SEVENTH thing?  Better make it a macro so
+that I can change it later!  And then (SETF (FROB X) BAR) wins totally,
+while (SETF (SEVENTH X) BAR) and (SETF (CADDDR (CDDDR X)) BAR) still don't
+say why you think 7 is such a magic number.  FIRST and REST are fine, they
+say you are dealing with a homogenous list of items.  But even then, it's
+better to write (POP X Y) rather than (SETQ Y (FIRST X)) (SETQ X (REST X)).
+
+The point is that CAR/CDR are the low-level primitives of the language,
+and concepts like FIRST, REST, SECOND, THIRD, etc. are all semantic overlays on
+these basic concept, assuming left-right non-recursive character to your
+data structure.  But these don't even deal well with such simple structures as
+the ALIST.  Do you really want to write (FIRST (FIRST X)) to get the top tag
+on the ALIST, and (REST (FIRST X)) for the CDR of the top CONS, which might
+be, say, a FIXNUM?  REST is hardly apropriate there.  Even the outer FIRST
+in the first one isn't quite right, since it's hardly the first element of
+a sequence.
+
+So sure, use FIRST, SECOND, THIRD, etc. when they're apropriate.  But don't
+mistake them for being the underlying primitives of the language.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03912.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03909.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03912.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03909.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03911"><strong>Date</strong></a></li>
+<li><a href="threads.html#03911"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

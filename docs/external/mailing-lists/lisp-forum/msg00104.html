@@ -1,0 +1,121 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: D[E ng [WF&#45;OW (Dvpuneq [. Egnyyzna) -->
+<!--X-Date: Mon ,18 Aug 80 19:16:00 EDT -->
+<!--X-Message-Id: 51db049e7fcbac00e4d484352a85f901@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00619.html">Date Prev</a>][<a href="msg00105.html">Date Next</a>][<a href="msg00618.html">Thread Prev</a>][<a href="msg00105.html">Thread Next</a>][<a href="maillist.html#00104">Date Index</a>][<a href="threads.html#00104">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>From</em>: RMS at MIT-AI (Richard M. Stallman)</li>
+<li><em>Date</em>: Mon ,18 Aug 80 19:16:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>It seems strange to hear an objection to the use of &lt; for comparing
+characters based on asking whether it should ignore the font.
+When I suggest that &lt; be used instead of CHAR&lt;, I mean exactly that.
+CHPROP says clearly that CHAR&lt; doesn't ignore the font, or any
+other part of the character.  CHAR-LESSP is used for that.
+
+I can't believe the suggestion that CHAR&lt; ought to use the ASCII
+collating sequence on an EBCDIC machine is serious either.  Clearly
+anyone writing a Lisp for such a machine will make CHAR&lt; use the
+machine's own collating sequence: which is to say, he will make it be
+the same as comparing the fixnum equivalents of the characters,
+because that is what the machine's own collating sequence is.  If you
+tried to tell him to make it do ASCII comparisons, he'd probably say
+&quot;but on our system we don't use the ASCII collating sequence and I
+want comparing characters in Lisp to be compatible with comparing them
+in all the other languages on our system&quot;.
+
+What this implies is that a transportable program shouldn't
+make assumptions about the order of the collating sequence,
+regardless of whether the function is called CHAR&lt; or &lt;.
+For that matter, it must not make any assumptions about the
+collating sequence in use with CHAR-LESSP.  Please don't
+make the claim that this says anything about the suitability
+of &quot;&lt;&quot; for transportable programs unless you are willing to
+accept the conclusion for CHAR&lt; and CHAR-LESSP as well.
+In general, a program using &lt; is no more and no less transportable
+than it would be using the name CHAR&lt; instead.
+
+By the same token, making use of the fact that a character has an
+equivalent as a fixnum doesn't imply nontransportability.  It might be
+used to do something nontransportable, but that is not all it is good
+for.  For example, it might be used as an array index, or be stored in
+a numeric array.  It might be used to generate a hash code to index an
+array, if it has too many bits to use as an index as it stands.  These
+things can be done without depending on the particular value of any
+character(s).  Only arithmetic causes a problem, and then the same
+problem can occur operating on just the code part of the character.
+If it is bad to allow the entire character to be turned
+into a fixnum, it is just as bad to allow CHAR-CODE.
+
+It is true that someone might turn a character into a fixnum and then
+use LDB to extract the font.  That would be a mistake, if there is a
+convenient function for doing just that.  Similarly, it is a mistake
+to use PROG and GO to do something that is a trivial COND; but that is
+no reason not to have PROG and GO.
+
+Given that a character either IS a fixnum, or is a fixnum with a funny
+data type field, there should be no obstacle in the way of making use
+of this fact.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00619.html">Re: unwinding-scope</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00105.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00618.html">Re: UNWIND-PROTECT proposal (clarification)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00105.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00104"><strong>Date</strong></a></li>
+<li><a href="threads.html#00104"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

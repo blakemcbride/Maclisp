@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Fri, 9 Mar 79 01:31:00 GMT -->
+<!--X-Message-Id: 96e1e184bfb628937d0f45279a1376b4@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00535.html">Date Prev</a>][<a href="msg00530.html">Date Next</a>][<a href="msg00535.html">Thread Prev</a>][<a href="msg00530.html">Thread Next</a>][<a href="maillist.html#00533">Date Index</a>][<a href="threads.html#00533">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Fri, 9 Mar 79 01:31:00 GMT</li>
+<li><em>Cc</em>: JIS at MIT-MC</li>
+<li><em>Original-date</em>: 8 MAR 1979 2031-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(MAPCAR 'QUOTE '(8 7 5))
+returns an error
+;((QUOTE . 8) ?) WRONG NUMBER OF ARGS TO FSUBR
+
+This error seems to be the wrong one. ...  Should be something
+more to the effect that the arg format is wrong. .. i.e., it
+was expecting (8) (7) (5) instead of 8 7 5  (FSUBR's take args
+that are supposededly guaranteed lists.) It strikes me
+that the proper semantics is for MAPCAR to (NCONS ..) each thing
+being passed to an FSUBR ... hmmmm...
+
+Also, (FUNCALL 'QUOTE 'A) gives back
+#74012 
+with no error message. Could *RSET =&gt; T please check
+for something in this line? Maybe for general format of 
+arg in a FUNCALL of an FSUBR/FEXPR...?
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00535.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00530.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00535.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00530.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00533"><strong>Date</strong></a></li>
+<li><a href="threads.html#00533"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

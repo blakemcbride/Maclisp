@@ -1,0 +1,105 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: *****Idea! -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,5 Nov 80 14:13:00 EDT -->
+<!--X-Message-Id: dc4a2cf46a59de6084f44f112a57b125@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: *****Idea!</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00061.html">Date Prev</a>][<a href="msg00011.html">Date Next</a>][<a href="msg00061.html">Thread Prev</a>][<a href="msg00011.html">Thread Next</a>][<a href="maillist.html#00062">Date Index</a>][<a href="threads.html#00062">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: *****Idea!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC, LISP-FORUM at MIT-MC, Guy.Steele at CMU-10A</li>
+<li><em>Subject</em>: Re: *****Idea!</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,5 Nov 80 14:13:00 EDT</li>
+<li><em>Cc</em>: &quot;(FILE [DSK:LSPMAI;CATCH REPLY])&quot; at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I considered solutions like having *sym intern specially. Eg, given CATCH
+and *CATCH already on your obarray, then *******CATCH would intern as 
+*CATCH (removing redundant *'s -- the original *CATCH is of course entered
+with |*CATCH|. This would be nice when a new CATCH came along because it
+could become CATCH and *CATCH could become **CATCH and ******CATCH would now
+be interned as **CATCH so it would still win. Hence, people who want to just
+get ahold of a feature and use it and make their code really safe would use
+lots of ***'s ... eg, *******************************CATCH would intern the
+same as the oldest version of CATCH until that many *-versions were released.
+People that wanted a particular newer version would be resigning themselves to
+fight the name game -- ie, they'd use |**CATCH| or |CATCH| and they would be
+screwed when the new version comes out, but that's what they'd get for trying
+to be coding using the `current fad' in CATCH's as opposed to being happy
+with the fine functionality offered by ****...****CATCH in the first place.
+It has its disadvantages because presumably if you pick 150 *'s (a fairly
+conservative number), you will eventually (at release of version 151 of CATCH)
+have to do something. A syntax for an infinite number of *'s might be nice --
+for the person to say explicitly that he wants to be (1) maximally correct
+and (2) maximally out of date with `style' ... The other alternative is the
+more concise CATCH[0] notation which names the version number of CATCH which
+you want. This has the attractive feature of what I think it was GLS who
+suggested at one point at Lisp conference -- DWTCMY (Do What This Code
+Meant Yesterday) [if not yours, GLS, sorry -- I can't think of anyone to 
+pin it to ...] So newer versions are just added as CATCH[1], CATCH[2], etc.
+Fancy hacks to get intern to share the PNAME word of all of these could 
+probably be arranged. This also generalizes nicely to GLS's output radix
+print representation -- 555[1] is the outmoded way of expressing 15.,
+1111[2] is more recent, 17[8] is more recent, and 15[10] even more recent.
+Presumably some day we will adopt F[16] as the standard and ... well, who
+knows how far version numbers could take us.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00061.html">Re: Using * in names</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00011.html">Re: Improving the LISP working environment by taking a lesson from...</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00061.html">Re: Using * in names</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00011.html">Re: Improving the LISP working environment by taking a lesson from...</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00062"><strong>Date</strong></a></li>
+<li><a href="threads.html#00062"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

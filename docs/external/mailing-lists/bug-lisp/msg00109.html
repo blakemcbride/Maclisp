@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MACLISP on CMUA -->
+<!--X-From-R13: Epbgg Tnuyzna ng Q[G&#45;10O (Q380ET50) -->
+<!--X-Date: Wed, 22 Nov 78 19:36:00 GMT -->
+<!--X-Message-Id: 22Nov78 143625 SF50@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MACLISP on CMUA</title>
+<link rev="made" href="mailto:Scott Fahlman at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00110.html">Date Prev</a>][<a href="msg00108.html">Date Next</a>][<a href="msg00110.html">Thread Prev</a>][<a href="msg00108.html">Thread Next</a>][<a href="maillist.html#00109">Date Index</a>][<a href="threads.html#00109">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MACLISP on CMUA</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: HIC @ mit-mc</li>
+<li><em>Subject</em>: MACLISP on CMUA</li>
+<li><em>From</em>: Scott Fahlman at CMU-10A (C380SF50)</li>
+<li><em>Date</em>: Wed, 22 Nov 78 19:36:00 GMT</li>
+<li><em>Cc</em>: bug-lisp @ mit-mc</li>
+<li><em>Original-date</em>: 22 Nov 1978 1436-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Howard,
+        A month after we asked for it to be installed (slow systems
+people around here) MACLSP and COMPLR are on SYS: at CMUA, and they
+have been announced to a hungry world.  Since we still lack sections 4-n
+of the new manual (is it being worked on?) I am encouraging people with
+small problems of short duration to use the old UCI lisp and telling
+people starting major projects to go with MACLISP.
+        Dave Touretzky and Dave McDonald have done some interesting things
+to overcome the lossages of using the system here.  Look at MACLSP.DIR,
+EXAMPL.INI, and SLURP.MCL on [c380ml5p] if you are interested.  The INIT
+file fixes useful autoloads to point to the right things, and the slurp
+package is an I/O front end that does useful decoding of local PPNs.
+We have a bit of a problem with autoloads in the COMPLR, since it doesn't
+get set up by an INIT file, but we kludge around it.  The UCI-lisp editor
+has been converted, though it is far inferior to using LEDIT and EMACS.
+It saves top-level comments, but only wins with ; comments within functions
+if they occur where a random NIL is OK.  And the comments live in core,
+at present at least.  We may try to write a package that merges code from
+the core image and comments from the old file, but this will be hairy.
+        NETL runs fine here, and McDonald has converted the SRI Diamond
+parser to run in MACLISP (converted from interlisp).  Anyway, thanks again
+for your help, and let us know when and if the CDR of the manual appears.
+                                Regards,
+                                Scott Fahlman
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00110.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00108.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00110.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00108.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00109"><strong>Date</strong></a></li>
+<li><a href="threads.html#00109"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

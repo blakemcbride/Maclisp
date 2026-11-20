@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: For better or worse (likely the latter)... -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 25 Mar 82 00:47:00 GMT -->
+<!--X-Message-Id: c91714fc6fba26ccb370af6d90fa0aaf@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>For better or worse (likely the latter)...</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00915.html">Date Prev</a>][<a href="msg00913.html">Date Next</a>][<a href="msg00915.html">Thread Prev</a>][<a href="msg00913.html">Thread Next</a>][<a href="maillist.html#00914">Date Index</a>][<a href="threads.html#00914">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>For better or worse (likely the latter)...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Rees at YALE</li>
+<li><em>Subject</em>: For better or worse (likely the latter)...</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 25 Mar 82 00:47:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, Nicolau at YALE, Ruttenberg at YALE</li>
+<li><em>Original-date</em>: 24 March 1982 19:47-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Feature. There is no hardware for doing better than that on KA's, so even
+tho' KL's and 20's and such could use double precision, it isn't done. At
+least that's my understanding of why the case of PLUS errs. PLUS is defined
+to error check (sadly, if you number declare its args, it no longer will,
+but you can explain to the folks there about that, I assume). Anyway, the
+answer to your question is that +$ is defined to -- for better or worse --
+yield whatever the hardware yields for that operation, and the hardware always
+gives back some answer, it never errs. So you always get whatever trash it
+gives back when you do bounds over/under-running. Use PLUS with no declarations
+if you care about error checking. 
+--kmp
+
+ps. the same lossage applies to +, //, //$, and their spelled out counterparts.
+pps. oops. not lossage. sorry. the same &quot;feature&quot; applies...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00915.html">Floating point add</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00913.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00915.html">Floating point add</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00913.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00914"><strong>Date</strong></a></li>
+<li><a href="threads.html#00914"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

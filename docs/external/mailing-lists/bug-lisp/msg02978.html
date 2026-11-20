@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: VWQ ng [WF&#45;[Q (Vbjneq W. Qnaaba) -->
+<!--X-Date: Tue, 26 Jun 79 21:47:00 GMT -->
+<!--X-Message-Id: 9a198370eb6727b505c0ac69d5f3dc99@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:HIC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02979.html">Date Prev</a>][<a href="msg02977.html">Date Next</a>][<a href="msg02979.html">Thread Prev</a>][<a href="msg02977.html">Thread Next</a>][<a href="maillist.html#02978">Date Index</a>][<a href="threads.html#02978">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: HIC at MIT-MC (Howard I. Cannon)</li>
+<li><em>Date</em>: Tue, 26 Jun 79 21:47:00 GMT</li>
+<li><em>Cc</em>: JLS at MIT-AI</li>
+<li><em>Original-date</em>: 26 JUN 1979 1747-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+From:     JLS@MIT-AI
+Date: Sun, 18 Jun 79 19:29:02 GMT
+Original-Date: 06/18/79 15:29:02 EDT
+Subject:
+    HI,
+        I FOUND SOME STRANGE BEHAVIOR IN LISP. THE FOLLOWING IS
+    THE TYPE-IN AND TYPE-OUT AS IT APPEARED ON THE SCREEN. IT
+    SEEMS THAT THE FUNCTION TO CONSTRUCT ATOMS FROM INPUT GETS
+    CONFUSED AND PUTS IN A DELIMITER WHERE THERE IS NONE.
+
+
+    (DEFUN FOO (X Y) (PRINT (TYI)) (PRINT (READ)))
+    FOO
+    (SSTATUS TTYINT 6 'FOO)
+    FOO
+
+    BAR&lt;SPACE&gt;       ;; I TYPE IN CONTROL-F &quot;BAR&quot; AND &lt;SPACE&gt;
+    6                  ;; FOO ECHOES CONTROL-F
+    BAR HJK&lt;SPACE&gt;     ;; FOO ECHOES BAR. I TYPE &lt;SPACE&gt;HJK&lt;SPACE&gt;
+
+    ;H UNBOUND VARIABLE
+
+    ;BKPT UNBND-VRBL
+     
+    ;JK UNBOUND VARIABLE
+
+
+         CAN YOU TELL ME WHY HJK IS SPLIT UP INTO TWO ATOMS.
+
+             JIM STANSFIELD
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02979.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02977.html">HUNKS (OK, OK, so don't read the message if they upset you that much!)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02979.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02977.html">HUNKS (OK, OK, so don't read the message if they upset you that much!)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02978"><strong>Date</strong></a></li>
+<li><a href="threads.html#02978"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

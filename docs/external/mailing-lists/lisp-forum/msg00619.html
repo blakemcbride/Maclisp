@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: unwinding&#45;scope -->
+<!--X-From-R13: SP ng [WF&#45;OW (Sqjneq Pnegba) -->
+<!--X-Date: Mon ,18 Aug 80 16:03:00 EDT -->
+<!--X-Message-Id: e76121b42244c6ac47da131d51ef7641@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: unwinding-scope</title>
+<link rev="made" href="mailto:EB at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00618.html">Date Prev</a>][<a href="msg00104.html">Date Next</a>][<a href="msg00616.html">Thread Prev</a>][<a href="msg00101.html">Thread Next</a>][<a href="maillist.html#00619">Date Index</a>][<a href="threads.html#00619">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: unwinding-scope</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: Re: unwinding-scope</li>
+<li><em>From</em>: EB at MIT-AI (Edward Barton)</li>
+<li><em>Date</em>: Mon ,18 Aug 80 16:03:00 EDT</li>
+<li><em>Cc</em>: MOON5 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    MOON5@MIT-AI 08/18/80 02:02:01 Re: unwinding-scope
+    This is a ridiculous proposal.  If you want to keep track of state
+    you should keep it in variables.  Nothing says you aren't allowed
+    to have conditionals, mapcars of eval down a list, or whatever
+    else you like in your unwind-protect cleanup forms.
+
+Nothing says it isn't allowed, and neither did I since my proposal is
+built on just that sort of capability (though EVAL would be the wrong
+thing to map).  What I proposed was a uniform convention for doing
+the things I described so that if somebody wants them he doesn't have to
+re-invent them.  And so that he doesn't structure his code differently
+ from the way he really wants just so that the existing IOTA works.
+And so that something general like the proposed LOAD can be written.
+
+&quot;If you want to keep track of state you should keep it in variables.&quot;
+I'm not sure what is being proposed here.  My proposed macros do use
+variables, as does most code.  If you propose somehow putting things
+in variables rather than anywhere else, I don't see why structures,
+lists, properties, etc. are suddenly bad to use.  If you propose
+always writing something like an IOTA form, I already explained that
+you may not know in advance what or how many things will want to be
+undone; review the examples.  If you are merely making an unsupported
+statement (similar to the statement once made that if your reader
+macros have side effects then you're &quot;clearly doing something wrong&quot;)
+then the statement, of course, stands as such.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00618.html">Re: UNWIND-PROTECT proposal (clarification)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00104.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00616.html">Re: UNWINDING-SCOPE</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00101.html">Re: In reply to TK: Character Objects (what else!)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00619"><strong>Date</strong></a></li>
+<li><a href="threads.html#00619"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

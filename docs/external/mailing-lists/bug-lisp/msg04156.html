@@ -1,0 +1,137 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Autoload properties and stuff -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 1 May 80 17:18:00 GMT -->
+<!--X-Message-Id: ade3ae0a809dc2a33b69f161b12ff48c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Autoload properties and stuff</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04157.html">Date Prev</a>][<a href="msg04155.html">Date Next</a>][<a href="msg04157.html">Thread Prev</a>][<a href="msg04155.html">Thread Next</a>][<a href="maillist.html#04156">Date Index</a>][<a href="threads.html#04156">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Autoload properties and stuff</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JLK at MIT-MC, RWK at MIT-MC, GSB at MIT-MC, REES at MIT-MC,    BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: Autoload properties and stuff</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 1 May 80 17:18:00 GMT</li>
+<li><em>Original-date</em>: 1 May 1980 13:18-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Hey, can I inject a couple of points here? (Too late, by the time you send
+in your 'no' reply, I'll already have sent this) ... I think it's fine to
+decide that something is useful but even if a large number of people use it 
+I'm not sure if that should be the sole criterion for acceptance. There are
+issues of style coherence and other things like that that have to be taken 
+into account...
+
+(1) What should be primitive?
+
+    (a) Is making something autoload the same as making it primitive?
+
+        Yes. It's a statement on the part of the implementors that if 
+        something goes wrong with it (barring commitments to NIL projects
+        and silly things like that) that they will take a look at it.
+        It's an implicit endorsement of the construct (how many times have
+        you heard some novice say (eg, when you tell him not to use FEXPR's)
+        ``But if I shouldn't use it then why is it in the language?''
+
+    (b) Why shouldn't LOOP be primitive?
+
+        I believe that infix keywords have no place in primitive Lisp.
+        People that want to have such things can do so. Putting them on
+        on public directories so that others don't recreate the wheel if
+        that's what they really want is also ok. But putting them in the
+        language is just a violation of Lisp style. If people want infix-like
+        primitives, let them use Algol or CGol.
+
+        I don't believe in pretending that code is English. It gets you 
+        into bugs where you look at the code and can't figure out what's 
+        wrong with it because you're locked in a mode thinking that the 
+        wording is right so what is the matter? This doesn't always happen.
+        It just can happen. It can happen to novices more than us and they're
+        the ones most apt to use it because it will look simplest. And I
+        think that's bad. I would rather teach them to get used to DO. I don't
+        think that there is anything at all conceptually inelegant about the
+        way DO does any of its things.
+
+(2) Why does the word LOOP not want to get locked down?
+
+    I think we need to be careful about locking down namespaces to things that
+    are not really primitive. If I ever want to use the word LOOP as a name,
+    I will be stuck with redefining a system function (macro). I'll probably
+    feel forced to pick another name. I think it's a bad idea for Lisp to lock
+    down really common words for special-purpose applications. I resented the
+    introduction of IF because I (like many others) had an incompatible use 
+    with the one that became standard; but I agree that it was a reasonable
+    thing to have done anyway, because I think the IF notion which was 
+    introduced had sufficient generality that it was likely to be useful to
+    everyone in the long run. People like to write programs that use short,
+    mnemonic names. If you take all useful short names and make them do system
+    things, then people start having to write code with long hairy names. I'm
+    sure the LOOP implementors would feel the same if I showed them some of
+    my LOOP macros and suggested that my stuff become standard. They would, I
+    should hope, become indignant that they should have to give up their claim
+    to such a nice name for the sake of system compatibility.
+
+    I'd almost advocate not allowing English words to become Lisp builtins 
+    if no other short English synonyms for those words were going to be left 
+    for the user... (only half serious, but if you think hard you can probably
+    extract what I really mean from the statement.)
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04157.html">Autoload properties</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04155.html">Autoload properties and stuff</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04157.html">Autoload properties</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04155.html">Autoload properties and stuff</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04156"><strong>Date</strong></a></li>
+<li><a href="threads.html#04156"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>BCOMPL.RPG[UP,DOC] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename BCOMPL.RPG[UP,DOC]  blob <a href="BCOMPL.RPG[UP,DOC]_blob">sn#500391</a> filedate 1980-02-09 generic text, type C, neo UTF8</div>
+<pre id="u8lump">COMMENT ⊗   VALID 00002 PAGES
+C REC  PAGE   DESCRIPTION
+C00001 00001
+C00002 00002	Recently compilations have failed because the free space in NCOMPLR
+C00004 ENDMK
+C⊗;
+Recently compilations have failed because the free space in NCOMPLR
+has run out, especially with large macro files being loaded. There is
+a version of NCOMPLR called BCOMPLR with the compiler code in the
+hiseg. Since no one knows about this, I plan to make NCOMPLR really
+be BCOMPLR. The lone disadvantage is that BCOMPLR does not share
+the MacLisp hiseg, which potentially uses up an extra job slot.
+Since almost no one uses a blank MacLisp hiseg anymore (people make
+up systems with the compiled code in the hiseg anyway), this is
+not a real problem. 
+
+A compiler using PLISP, the paging version of MacLisp at SAIL.
+has finally been produced. The proposal is to make BCOMPLR be
+this version; BCOMPLR standing for BigComplr.
+
+Thus the renaming is: XCOMPLR => BCOMPLR => NCOMPLR => NUL:NCOMPLR.DMP.
+
+I plan to do this within the next week unless there are serious
+objections.
+			-rpg-
+</pre>
+</body>
+</html>

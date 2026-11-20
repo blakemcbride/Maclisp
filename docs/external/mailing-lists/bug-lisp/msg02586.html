@@ -1,0 +1,113 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: #\STOP&#45;OUTPUT in Maclisp -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Mon, 13 Apr 81 22:40:00 GMT -->
+<!--X-Message-Id: 13Apr81 174003 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: #\STOP-OUTPUT in Maclisp</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02587.html">Date Prev</a>][<a href="msg02585.html">Date Next</a>][<a href="msg02589.html">Thread Prev</a>][<a href="msg02594.html">Thread Next</a>][<a href="maillist.html#02586">Date Index</a>][<a href="threads.html#02586">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: #\STOP-OUTPUT in Maclisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC</li>
+<li><em>Subject</em>: Re: #\STOP-OUTPUT in Maclisp</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Mon, 13 Apr 81 22:40:00 GMT</li>
+<li><em>Cc</em>: dick at MIT-AI, kmp at MIT-MC, rwk at MIT-MC, soley at MIT-MC</li>
+<li><em>In-reply-to</em>: Richard Mark Soley's message of 13 Apr 81 10:17-EST</li>
+<li><em>Original-date</em>: 13 April 1981 1740-EST (Monday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>An idea that occurred to me was to introduce a notion
+of &quot;reading a form, but not really&quot;.  The problem is more
+general than #\STOP-OUTPUT.  For example, suppose one is
+reading into a MacLISP: should  #+LISPM #,(QUIT)  kill your
+LISP or not?
+So suppose that, explicitly or implicitly, READ takes a flag saying
+whether or not to *really* construct the S-expression, or just
+skip over things.  #+ and #- would set the flag to the disable
+state when reading the following form if the conditional fails.
+When the flag is in this state:
+	(1) #\ will simply read the following S-expression,
+	    and complain if it isn't a symbol, but not complain
+	    if it is not a known name.
+	(2) #, and #. will read the following S-expression in the
+	    failing state, but not evaluate.
+	(3) #+ and #- will read a following name and then an S-expression,
+	    both in the failing state; in particular, they cannot complain
+	    if the flag name following is not known.
+	(4) Numbers and symbols are pretty much undistinguished,
+	    and probably have to read as symbols.  This is in case
+	    one dialect supports different syntaxes for numbers;
+	    then one can get away with #+QuaternionLISP 3+5i-6.7j+43.7e5k .
+	(5) # followed by a character for which no macro is defined
+	    probably should just quietly disappear (with the losing
+	    character).  This mostly makes
+		#+ScribeLISP (#@Begin[Foo] ZTESCH #@End[Foo])
+	    work, though not in all cases.
+Admittedly it does more than one can do with IF-FOR-LISPM --
+but the point is to mostly let you get away with incompatible
+syntax as well as semantics.
+
+Then again, perhaps it would be more clear simply to do
+	#+LISPM[  anything with balanced brackets   ]
+?
+Sigh.
+--Guy
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02587.html">AAAAAAAAAAARGH!!!!!</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02585.html">(SSTATUS TTY ...)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02589.html">#\STOP-OUTPUT in Maclisp</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02594.html">Misleading error message</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02586"><strong>Date</strong></a></li>
+<li><a href="threads.html#02586"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: TTYSCAN troubles. -->
+<!--X-From-R13: Uyraa E. Phexr &#60;UEP ng [WF&#45;[Z> -->
+<!--X-Date: Sat, 26 Apr 80 05:40:00 GMT -->
+<!--X-Message-Id: dbc934467ea4daad81531bec4f9086c2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>TTYSCAN troubles.</title>
+<link rev="made" href="mailto:GSB at MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04183.html">Date Prev</a>][<a href="msg04181.html">Date Next</a>][<a href="msg04183.html">Thread Prev</a>][<a href="msg04181.html">Thread Next</a>][<a href="maillist.html#04182">Date Index</a>][<a href="threads.html#04182">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>TTYSCAN troubles.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: PSZ at MIT-ML</li>
+<li><em>Subject</em>: TTYSCAN troubles.</li>
+<li><em>From</em>: Glenn S. Burke &lt;GSB at MIT-ML&gt;</li>
+<li><em>Date</em>: Sat, 26 Apr 80 05:40:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 26 April 1980 00:40-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    I think i have an answer.  It will unfortunately require a little
+cooperation from Lisp -- a flag which says that the READ is not really
+for &quot;value&quot; -- it is globally NIL, but when reading to drive a prescan
+it is bound to T, and BREAK (Maclisp interrupt-bind too?) binds it
+back to NIL.  This requires that all pre-scanned reads be two-pass.
+This is already the case for the Maclisp interface.  It is trivial
+to add to a tty-prescan of this type anyway, since the second pass
+is like pretending a rubout was typed after the s-expr is completely
+read (ie, start the read over again, with this flag set to NIL - the
+tty prescan initially binds it to T).  The localized place which
+decides how to make up a data-object (which is also the place which
+decides to make a SQUID form instead) can check this flag and not
+make the data object.  This requires that the form returned by the
+readmacro or whatever not be depended on to be anything in particular
+by surrounding forms.  But this generally needs to be the case anyway,
+since in the compiler these will be SQUID forms.  For example,
+&quot;#O#,bporg&quot; will lose in the Maclisp compiler because #O is doing
+a bit too much error checking.  
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04183.html">TTYSCAN troubles.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04181.html">TTYSCAN troubles.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04183.html">TTYSCAN troubles.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04181.html">TTYSCAN troubles.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04182"><strong>Date</strong></a></li>
+<li><a href="threads.html#04182"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,25 @@
+set console wru=034
+set cpu its
+set cpu idle
+set dz 8b lines=8
+at -u dz0 10004
+#
+set imp enabled
+set imp simp
+set imp mac=e2:6c:84:1d:34:a3
+set imp ip=192.168.2.101/24
+set imp gw=%GW%
+set imp host=%IP%
+at imp tap:tap0
+#
+set ch enabled
+set ch node=177002
+set ch peer=localhost:44041
+att ch 44042
+# VT52
+at -u dz0 line=7,10018
+# GT40
+at -u dz0 line=6,10019
+set rpa0 rp06
+at rpa0 out/pdp10-ks/rp0.dsk
+b rpa0

@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MULTIPLE&#45;VALUE expander -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sat, 4 Apr 81 02:03:00 GMT -->
+<!--X-Message-Id: 64879203adb1f54dbf6f3c2ccbe1790c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MULTIPLE-VALUE expander</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01376.html">Date Prev</a>][<a href="msg01374.html">Date Next</a>][<a href="msg01376.html">Thread Prev</a>][<a href="msg01374.html">Thread Next</a>][<a href="maillist.html#01375">Date Index</a>][<a href="threads.html#01375">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MULTIPLE-VALUE expander</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: gsb at MIT-ML</li>
+<li><em>Subject</em>: MULTIPLE-VALUE expander</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sat, 4 Apr 81 02:03:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 3 APR 1981 2103-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Seems I've failed to note the correction made to MULTIPLE-VALUE ocasioned
+by your note:
+From:     GSB@MIT-ML
+Date: Mon, 24 Mar 81 01:35:42 GMT
+Original-Date: 03/23/81 21:35:42 EDT
+Subject: Re: why not flush this check entirely?
+    To: (BUG LISP) at MIT-ML
+    ;(MULTIPLE-VALUE (ANEW ACHANGEP) (IF (EQ (CAR ARG) (QUOTE QUOTE)) (READER-BQ (CADR ARG)) (READER-BQ-FUNFORM ARG))) Most System funs don't return multiple-values
+
+    (COMMENT **ERROR**  (MULTIPLE-VALUE (ANEW ACHANGEP) (IF (EQ (CAR ARG) (QUOTE QUOTE)) (READER-BQ (CADR ARG)) (READER-BQ-FUNFORM ARG))) 
+		    LISP error during MACRO expansion in function READER-BQ-FUNFORM)
+    ; DATA ERROR - TO PROCEED TYPE $P 
+    Is this really a legitimate complaint for this form??
+
+What the static checker wanted to do was &quot;walk&quot; over the form, looking for
+things which were certifiably wrong;  a COND isn't necessaryly wrong, but
+the &quot;walker&quot; should descend thru the clauses before complaining.  So I
+made it descend thru the appropriate FSUBR's, and simply stopped it 
+complaining in the case where it &quot;didn't know&quot;.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01376.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01374.html">&quot;BIBOP&quot;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01376.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01374.html">&quot;BIBOP&quot;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01375"><strong>Date</strong></a></li>
+<li><a href="threads.html#01375"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

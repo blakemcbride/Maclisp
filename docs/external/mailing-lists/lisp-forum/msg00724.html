@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LAMBDA proposals and counter&#45;proposals -->
+<!--X-From-R13: Sney O. Yvyyvna &#60;SOY ng [WF&#45;[Q> -->
+<!--X-Date: Thu ,1 Oct 81 23:21:00 EDT -->
+<!--X-Message-Id: 901eb4e7cf2815486a2e7a7ebfa23076@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LAMBDA proposals and counter-proposals</title>
+<link rev="made" href="mailto:EAK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00725.html">Date Prev</a>][<a href="msg00723.html">Date Next</a>][<a href="msg00726.html">Thread Prev</a>][<a href="msg00722.html">Thread Next</a>][<a href="maillist.html#00724">Date Index</a>][<a href="threads.html#00724">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LAMBDA proposals and counter-proposals</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: kmp at MIT-AI</li>
+<li><em>Subject</em>: LAMBDA proposals and counter-proposals</li>
+<li><em>From</em>: Earl A. Killian &lt;EAK at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu ,1 Oct 81 23:21:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I don't like the suggestion that declarations in LAMBDA lists are
+unnecessary because of LOCAL-DECLARE and DECLARE.  First of all,
+the semantics are different.  Consider
+	(LAMBDA (A (SPECIAL B))
+	  ...
+	  (LAMBDA (B) ...)
+	  ...)
+and
+	(LOCAL-DECLARE ((SPECIAL B))
+	  (LAMBDA (A B)
+	    ...
+	    (LAMBDA (B) ...)
+	    ...))
+I would expect the second B to be unspecial in the first example, and special
+in the second, and I prefer the semantics of the first.  Also, LOCAL-DECLARE
+is less readable (the LISPM manual even recomends that DECLARE be used
+instead of LOCAL-DECLARE as a result).  The problem with DECLARE
+is that it loses when you want to use it with macros that
+generate lambdas.  E.g. suppose I want to define a LET!, then I
+have to have it specially check for leading DECLARE forms and put
+them directly after the LAMBDA instead of with the rest of the
+body.
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00725.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00723.html">Mary had a moby lambda</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00726.html">LAMBDA proposals and counter-proposals</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00722.html">LAMBDA proposals and counter-proposals</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00724"><strong>Date</strong></a></li>
+<li><a href="threads.html#00724"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

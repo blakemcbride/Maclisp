@@ -1,0 +1,120 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Your recent note on MacLisp errors -->
+<!--X-From-R13: XA@Z ng BODQ&#45;[OJQ -->
+<!--X-Date: Sat, 30 Oct 82 00:00:00 GMT -->
+<!--X-Message-Id: 16e78ed8a6ab0eb19ab849b1fc56fe0b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Your recent note on MacLisp errors</title>
+<link rev="made" href="mailto:JONL at PARC-MAXC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00760.html">Date Prev</a>][<a href="msg00758.html">Date Next</a>][<a href="msg00760.html">Thread Prev</a>][<a href="msg00758.html">Thread Next</a>][<a href="maillist.html#00759">Date Index</a>][<a href="threads.html#00759">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Your recent note on MacLisp errors</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: TONYH at MIT-AI</li>
+<li><em>Subject</em>: Your recent note on MacLisp errors</li>
+<li><em>From</em>: JONL at PARC-MAXC</li>
+<li><em>Date</em>: Sat, 30 Oct 82 00:00:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 29 OCT 1982 1700-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Your questions (1) and (2) arise from misunderstanding how and
+when macros are applied (both readmacros and interpreter/compiler
+macros).
+
+  1) Macros are never &quot;called&quot; in the sense that we think of calling
+    a funciton -- they are &quot;expanded&quot; by the interpreter and compiler,
+    but of course if they are not available to the compiler when compiling
+    some file, then no expansion can be done, and the compiler will defaultly
+    assume that the unknown name stands for a function call (rather than for
+    some macro to be expanded).
+ 2) when READing a file, the s-expressions are stored as ascii text, and
+    the readmacro characters are invoked when such character is encountered
+    by the READer;  FASL files, on the contrary, store either the
+    compiled versions of programs, or a special internal-format for other
+    s-exressions.  Perhaps a reasonable approach is for the tilde macro
+    merely to append to some global list, which is then output near the end of
+    your file.  Thus both ascii files being READ and compile dFASL files would
+    have a consistent representation of what is wanted in the HELP system (namely,
+    the list of goodies which was produced by READing the ffile in the first place).
+
+
+As for deletion of the echo, it will depend on what kind of system you are using
+TOPS10 or TOPS20.  If the latter, you can turn of echoing by an appropriate STATUS
+call which sets the bits in the TOPS20 echocontrol words;  There may be some explanation
+of this (i.e., the extended STATUS calls for TOPS20) in the note which I used to
+attach to the distributed MacLisp tapes.
+
+As for the GCDAEMON reported errors, it sounds like you have a copy of the STRING
+package from early to mid 1980.  Many bugs in it were fixed in late 1980 and
+very early 1981, so these problems should go away if you can get the current
+distribution (which was supposed to have taken place just as I was leaving MIT
+in mid March of this year.)
+
+
+More hints on problems (1) and (2)
+  Thus usual procedure for using &quot;compiled&quot; macros is to seperate them out
+into a file by themselves, and have them loaded into the compiler each time
+you compile some file which might use some of them.  Admittedly this is not quite
+as nice as defining the macros where they might &quot;naturally&quot; occur, but . . .
+  Suppose you have your tilede macro collect some data into TILDELIST.  Then at the
+end of the file you could put a form
+  (SETQ DATASTUFF '#.TILDELIST)
+this wouold be one way of insureing that DATASTUFF would have the save value after
+loading the FASL file as when loading thee source file.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00760.html">[TONYH: forwarded]  (bug-PROGRAM??????)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00758.html">Message mailed to strange address</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00760.html">[TONYH: forwarded]  (bug-PROGRAM??????)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00758.html">Message mailed to strange address</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00759"><strong>Date</strong></a></li>
+<li><a href="threads.html#00759"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

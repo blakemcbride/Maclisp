@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: eval&#45;while&#45;possible -->
+<!--X-From-R13: Quevfgbcure Tel &#60;psel ng [WF&#45;AL> -->
+<!--X-Date: 30 Apr 84 00:29&#45;EDT -->
+<!--X-Message-Id: 544235738e2f9e24aa436fc546786f67@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>eval-while-possible</title>
+<link rev="made" href="mailto:cfry at MIT-OZ">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00847.html">Date Prev</a>][<a href="msg00845.html">Date Next</a>][<a href="msg00847.html">Thread Prev</a>][<a href="msg00845.html">Thread Next</a>][<a href="maillist.html#00846">Date Index</a>][<a href="threads.html#00846">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>eval-while-possible</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at MIT-OZ, lisp-forum-scrc at SCRC-TENEX</li>
+<li><em>Subject</em>: eval-while-possible</li>
+<li><em>From</em>: Christopher Fry &lt;cfry at MIT-OZ&gt;</li>
+<li><em>Date</em>: Sun ,29 Apr 84 23:30:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I've found the following function to be of general use when you're uncertain as to
+how many evaluations are necessary, or just don't want to be bothered
+in figuring it out. My own application for it is for a language
+embedded in lisp, where the user is going to be calling functions in the language
+with arguments that may be symbols, whose values are other expressions which should be
+evaled, possibly more than once.
+
+(defun eval-while-possible (expression &amp;optional (instance nil) &amp;aux values)
+  &quot;Evals expression then evals the result of the previous evaluation, and so on
+   until error, or until evaluation returns a value eq to a previous value,
+    then returns the version of expression
+   just before the error.
+   If INSTANCE is non-nil, then each evaluation
+   is performed in the context of the instance. &quot;
+  (setq values (list expression))
+  (loop	do
+	(multiple-value-bind (the-value error?)
+	    (ignore-errors
+	      (cond (instance
+		     (send instance :eval-inside-yourself (car values)))
+		    (t (eval (car values)))))
+	  (cond ((or error? (member the-value values))
+		 (return (car values)))
+		(t (push the-value values))))))
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00847.html">History of &quot;backquote&quot; macro</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00845.html">where to donate cans????</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00847.html">History of &quot;backquote&quot; macro</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00845.html">where to donate cans????</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00846"><strong>Date</strong></a></li>
+<li><a href="threads.html#00846"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

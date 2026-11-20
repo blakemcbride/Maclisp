@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Changing CR in LISP, reply/opinion -->
+<!--X-From-R13: DS[ ng [WF&#45;[Q (Dboreg Sygba [nnf) -->
+<!--X-Date: Mon, 22 Oct 79 16:57:00 GMT -->
+<!--X-Message-Id: c198825d3489ff957fa7c59c45d89fd0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Changing CR in LISP, reply/opinion</title>
+<link rev="made" href="mailto:REM at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02696.html">Date Prev</a>][<a href="msg02694.html">Date Next</a>][<a href="msg02682.html">Thread Prev</a>][<a href="msg02692.html">Thread Next</a>][<a href="maillist.html#02695">Date Index</a>][<a href="threads.html#02695">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Changing CR in LISP, reply/opinion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Changing CR in LISP, reply/opinion</li>
+<li><em>From</em>: REM at MIT-MC (Robert Elton Maas)</li>
+<li><em>Date</em>: Mon, 22 Oct 79 16:57:00 GMT</li>
+<li><em>Original-date</em>: 22 OCT 1979 1257-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I presume the original reason for CR being ignored was that data written
+out to a file with finite linelength shorter than the longest atom pname
+or numeric value could be read back in without hassle even if the data
+had been broken to make it fit.  How to you propose to handle this if the
+change is made to break atoms across crlf?  (I have some programs
+currently that generate large BIGNUMs and write them to files.  I don't
+know if they are broken across crlf, since this is masked by TCTYP width
+when I try to type it out, unless I look carefully and distinguish 72
+from 78 characters.)  I have always been bothered by crlf being ignored
+when I type in stuff, but have learned to live with it.  Living with
+the &quot;standard&quot; way instead would be interesting...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02696.html">Re: CR in LISP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02694.html">Effect of CR in symbols</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02682.html">CR in LISP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02692.html">Last minute paranoia about ignoring &lt;CR&gt;'s</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02695"><strong>Date</strong></a></li>
+<li><a href="threads.html#02695"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

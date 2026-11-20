@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: character objects &#38; randomness -->
+<!--X-From-R13: Xbanguna O. Drrf &#60;XOD ng [WF&#45;[Q> -->
+<!--X-Date: Fri ,15 Aug 80 15:25:00 EDT -->
+<!--X-Message-Id: 5cb8d414254dc5f5bc0bedcba38bd1a1@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: character objects &amp; randomness</title>
+<link rev="made" href="mailto:JAR at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00073.html">Date Prev</a>][<a href="msg00075.html">Date Next</a>][<a href="msg00073.html">Thread Prev</a>][<a href="msg00079.html">Thread Next</a>][<a href="maillist.html#00074">Date Index</a>][<a href="threads.html#00074">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: character objects &amp; randomness</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC</li>
+<li><em>Subject</em>: Re: character objects &amp; randomness</li>
+<li><em>From</em>: Jonathan A. Rees &lt;JAR at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri ,15 Aug 80 15:25:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>        Date: 14 August 1980 17:43-EDT
+        From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+
+        Character objects are a loss.  Characters are fixnums.  You perform
+        subtraction to upper case them.  You add 7 to #/0 to generate #/7.
+        You use &gt; and &lt; to determine if they are alphabetic.
+
+Not to argue the case for them once again, but a complete character
+standard includes all the primitives you want for manipulating them -
+at the lowest level, things like CHAR-CODE (to coerce to a fixnum),
+CHAR&lt; (for comparison), maybe even CHAR+ (for adding fixnums to them);
+at a higher level, CHAR-UPCASE and CHAR-DOWNCASE for case conversions,
+ALPHA-CHARP or whatever for testing alphabeticalness, UPPERCASEP for
+testing case, functions for converting digit characters to integers,
+and so on.
+
+        Would you change the MacLisp #/ to generate &quot;character objects&quot;
+        (symbols)?  That would be an amazing loss.  If we are only talking
+        about NIL, then I can live with it.
+
+I don't think that anyone (except maybe Fateman) refers to symbols
+when using the term &quot;character object.&quot;  The idea is that they're
+implemented as fixnums (hopefully immediate pointers) with a funny
+type code.  If you've been thinking they're symbols, I can see why
+you'd be grossed out.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00073.html">Re: character objects &amp; randomness</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00075.html">Re: character objects &amp; representation issues</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00073.html">Re: character objects &amp; randomness</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00079.html">Re: character objects &amp; randomness</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00074"><strong>Date</strong></a></li>
+<li><a href="threads.html#00074"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

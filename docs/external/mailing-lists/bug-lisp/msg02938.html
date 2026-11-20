@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: DS[ ng [WF&#45;[Q (Dboreg Sygba [nnf) -->
+<!--X-Date: Tue, 17 Jul 79 01:20:00 GMT -->
+<!--X-Message-Id: 526e5d1244256e6f10bfe41bf9eb8b74@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:REM at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02939.html">Date Prev</a>][<a href="msg02937.html">Date Next</a>][<a href="msg02939.html">Thread Prev</a>][<a href="msg02937.html">Thread Next</a>][<a href="maillist.html#02938">Date Index</a>][<a href="threads.html#02938">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: REM at MIT-MC (Robert Elton Maas)</li>
+<li><em>Date</em>: Tue, 17 Jul 79 01:20:00 GMT</li>
+<li><em>Original-date</em>: 16 JUL 1979 2120-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>More on that clobbered-fixnum-space bug.
+MC:REM;CY11 &gt;  and  MC:REM;CY11 FASL  are the source and compiled code
+for the latest version of my program which has an additional trap to
+see if the number of bits in a word (computed by HAKMEM shifting) is
+out of the range 0 to 36.  It hits this bugtrap rather quickly, indicating
+that the masks (all FIXNUMs) or shift-amounts (small FIXNUMs -1 -2 -3 -6
+-9 and -18) are clobbered rather quickly.
+
+JCL for making bug strike is:
+:LISP
+N
+(FASLOAD CY11)
+T 
+^G
+(REC-BD-VAL #BD T 4 1)
+
+Changing the ALLOC? answer from N to Y and giving 200000 extra FIXNUM
+space doesn't help, the program bombs out when (STATUS SPCSIZE 'FIXNUM)
+reaches 14000 just as if the alloc hadn't been done at all.  But giving
+an explicit (ALLOC '(FIXNUM (200000 200000 NIL))) after the control-G
+just before the call to (REC-BD-VAL ...) causes the bug to go away!!
+Size of FIXNUM at the time REC-BD-VAL returns the correct answer (zero)
+is about 140000.  I believe strongly this is a GC bug wherein compiled
+code doesn't get its registers (pointing to FIXNUM objects) or stacks
+(ditto) updated properly when GC is done, or other GC bug.  Anybody wan
+to tackle this one?  The fact that it works correctly when given lots
+of FIXNUM space gives me confidence it is bug in LISP rather than something
+I'm doing dumb, but of course it's still possible...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02939.html">Re: Addenda to my message of last night</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02937.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02939.html">Re: Addenda to my message of last night</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02937.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02938"><strong>Date</strong></a></li>
+<li><a href="threads.html#02938"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

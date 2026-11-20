@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Inits opening stuff -->
+<!--X-From-R13: Dvpuneq Z. Pelna &#60;DZP ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 27 Feb 80 15:54:00 GMT -->
+<!--X-Message-Id: a64c18d6e50eed251f479eb745680f71@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Inits opening stuff</title>
+<link rev="made" href="mailto:RLB at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02107.html">Date Prev</a>][<a href="msg02104.html">Date Next</a>][<a href="msg02107.html">Thread Prev</a>][<a href="msg02104.html">Thread Next</a>][<a href="maillist.html#02105">Date Index</a>][<a href="threads.html#02105">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Inits opening stuff</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: Inits opening stuff</li>
+<li><em>From</em>: Richard L. Bryan &lt;RLB at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 27 Feb 80 15:54:00 GMT</li>
+<li><em>Cc</em>: KMP at MIT-MC, BGS at MIT-AI, SJOBRG at MIT-AI, GSB at MIT-AI</li>
+<li><em>Original-date</em>: 27 February 1980 10:54-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 27 February 1980 08:23-EST
+    From: Brian G. Schunck &lt;BGS at MIT-AI&gt;
+    ...
+    That's okay for init files, but what about general loads?
+    The problem yesterday was caused by a user doing
+      (LOAD '((DSK FOO) JUNK DATA))
+    several times until he got his small, trivial file of test
+    data setup correctly for his application.  The LOAD never
+    did a CLOSE after reading in the file, and the computation
+    never got anywhere close to doing a GC, which would have
+    forced closing. ...
+
+It seems clear that LOAD should have no use for its channel after it exits.
+Error breaks, *RSET traps, etc., due to the LOAD should have INFILE available,
+but that's all still within the context of the LOAD.  Hence, the LOAD 
+internals should be &quot;in&quot; an UNWIND-PROTECT-like &quot;construct&quot; to make sure
+LOAD's channel got closed.  See KMP's IOTA.
+   If the luser insists on reLOADing from inside his error breaks, there's
+little that can be done about it, but in the common (^G) case, this would
+fix it.
+   An alternative, but harder to implement, way would be for gc to treat a
+&quot;space&quot; of I/O channels sort of the way it treats list space, etc., with
+respect to gcmin/gcmax.  If no ALLOC for IOCHAN space were done to increase
+the number of chans avbl past an initial default (3 tty + 2 dsk?) then 
+GC-OVERFLOW would run on IOCHAN space ...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02107.html">Inits opening stuff</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02104.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02107.html">Inits opening stuff</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02104.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02105"><strong>Date</strong></a></li>
+<li><a href="threads.html#02105"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

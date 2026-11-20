@@ -1,0 +1,638 @@
+                              Random  C  Documentation
+
+                    Copyright (c) 1976, 1977, 1978 by Alan Snyder
+
+
+
+          File:  ccdoc.r
+          Last Modified:  4 April 1978
+
+
+
+          1.  Compiler Structure  (28 Feb 1977)
+
+          The C compiler consists of six logical phases:
+
+                  L - lexical analysis phase (C1)
+                  P - parsing phase (C2)
+                  C - code generation phase (C3)
+                  M - macro expansion phase (C4)
+                  E - error message editing phase (C5)
+                  S - optional symbol table dumping phase (C8)
+
+          In addition, there may be a control program (CC) that invokes the
+          above  phases.    Each of the above phases may be run as separate
+          jobs.  However,  a  pair  of  configuration  options  allows  the
+          following phases to be merged into single jobs:
+
+                  L and P (called LP)
+                  E and CC (called CC)
+
+          The source files which make up the various phases are as follows:
+
+                  L: c1 c92 c95 c96
+                  P: c21 c22 c23 c24 c25 c26-xx c91 c95 c96
+                  C: c31 c32 c33 c34 c35-xx c91 c94 c95 c96
+                  M: c41 c42-xx c43-xx c92 c93 c94 c95 c96
+                  E: c5 c93 c96
+                  S: c8 c93 c95
+
+          Files with suffixes -xx are target machine dependent.  Files c25,
+          c35,  and  c43  are  constructed  from the output of GT.  (A TECO
+          macro, install.teco, is provided which does this;  if  you  don't
+          know  TECO,  simply use the provided c25, c35, and c43 files as a
+          guide.) File c42 contains the C routine macros.
+          C Documentation               - 2 -                  4 April 1978
+
+
+          2.  Intermediate Files  (28 Feb 1977)
+
+          The phases of the compiler communicate using intermediate  files.
+          These files may be of several formats:
+
+                  TEXT - consists of lines separated by NEW-LINE
+                  CHARACTER   BINARY   -   an  array  of  arbitrary
+                       characters, with no  special  interpretation
+                       for any characters
+                  INTEGER BINARY - an array of arbitrary integers
+
+          Three operations are performed on intermediate files:
+
+                  READ
+                  WRITE - causes the file to be created
+                  APPEND - prior existence of file assumed
+
+          The following routines are used to peform these operations:
+
+                  TEXT: COPEN, CGETC, CPUTC, CCLOSE
+                  CHARACTER BINARY: COPEN, CGETC, CPUTC, CCLOSE
+                  INTEGER BINARY: COPEN, GETI, PUTI, CCLOSE
+
+          The  following  table  describes  the files used by the compiler,
+          their formats,  and  which  operations  are  performed  by  which
+          phases.
+
+                  source    the  source file, provided by the user;
+                            TEXT, READ: L
+                  output    the  output   file,   whose   name   is
+                            determined  from  the source file name;
+                            TEXT, WRITE: M
+                  TOKEN     the  internal  representation  of   the
+                            program in the form of tokens (not used
+                            if  LP  merged); INTEGER BINARY, WRITE:
+                            L, READ: P
+                  CSTORE    holds the source  form  of  identifiers
+                            and floating-point constants; CHARACTER
+                            BINARY, WRITE: L, READ: M, E, S
+                  STRING    holds    character   string   literals;
+                            CHARACTER BINARY, WRITE: L, READ: M
+                  ERROR     error  messages   in   internal   form;
+                            INTEGER  BINARY,  WRITE: CC, APPEND: L,
+                            P, C, M, READ: E
+                  NODE      internal representation of  program  as
+                            syntax trees; INTEGER BINARY, WRITE: P,
+                            READ: C
+                  TYPTAB    type  table;  INTEGER BINARY, WRITE: P,
+                            READ: C, S
+                  HMAC      header macros; TEXT, WRITE: P, READ: M
+                  MAC       macros;  TEXT,  WRITE:  P,  APPEND:  C,
+                            READ: M
+          C Documentation               - 3 -                  4 April 1978
+
+
+                  SYMTAB    symbol  table, written only if a symbol
+                            table  listing  is  requested;  INTEGER
+                            BINARY, WRITE: P, READ: S
+
+          3.  Library Routines Assumed by the C Compiler
+
+          The following routines are assumed to exist in the C library when
+          the C compiler is loaded:
+
+               routine                    description
+
+               fd = copen (s, m, f)       open file for input or output
+               c = cgetc (fd)             read character from file
+               cputc (c, fd)              output character to file
+               b = ceof (fd)              test for end-of-file
+               cclose (fd)                close file
+               puti (i, fd)               output integer in internal format
+               i = geti (fd)              read integer in internal format
+               cexit (cc)                 terminate phase with completion code
+               p = getvec (n)             allocate block of storage
+               b = cisfd (x)              is X a valid file-descriptor (used by CPRINT)
+
+          The  I/O  routines must support read, write, and append mode, and
+          TEXT, CHARACTER BINARY, and  INTEGER  BINARY  formats.   For  the
+          BINARY  formats,  no formatting transformations may be performed;
+          the bits read  must  exactly  equal  the  bits  written  for  all
+          possible  values.   The  storage  allocator may be quite trivial;
+          note that the storage so allocated is never freed.
+
+          The following external variables are referenced:
+
+               name                       description
+
+               int cout;                  standard output unit
+          C Documentation               - 4 -                  4 April 1978
+
+
+          4.  Tokens
+
+          A token consists of two integer values, a TAG and an INDEX.   The
+          token tags are as follows:
+
+                             0           20           40           60
+
+                0                         /          int        entry
+                1          eof            *         char     register
+                2                         -        float       sizeof
+                3            ;            +       double         long
+                4            ~            =       struct        short
+                5            {            <         auto     unsigned
+                6            ]            >       static      typedef
+                7            [           ++       extern
+                8            )           --       return
+                9            (           ==         goto
+               10            :           !=           if
+               11            ,           <=         else
+               12            .           >=       switch
+               13            ?           <<        break
+               14            ~           >>     continue
+               15            !           ->        while          idn
+               16            &       asgnop           do       intcon
+               17            |           &&          for     floatcon
+               18            ^           ||      default       string
+               19            %                      case       lineno
+
+          The following token tags are used internal to the lexical phase:
+
+                  LEXEOF      end of compiler control line
+                  TCONTROL    start of compiler control line
+                  TMARG       <macro argument>
+
+          The interpretation of the INDEX is dependent upon the TAG:
+
+                  TIDN      index of identifier name in CSTORE
+                  TINTCON   value of integer constant
+                  TFLOATC   index of source representation of float
+                            constant in CSTORE
+                  TSTRING   index   of   source  representation  of
+                            string constant in string file ('\0' is
+                            represented as "$0", '$' as "$$")
+                  TLINENO   the line number
+                  TMARG     the argument number (first one is 0)
+                  TEQOP     an index repesenting which =op it is:
+          C Documentation               - 5 -                  4 April 1978
+
+
+                             0 =>>
+                             1 =<<
+                             2 =+
+                             3 =-
+                             4 =*
+                             5 =/
+                             6 =%
+                             7 =&
+                             8 =^
+                             9 =|
+
+                  others    the number of the line upon  which  the
+                            token appeared
+
+          5.  Token Intermediate File
+
+          The representation of a token in the token intermediate file is a
+          TAG optionally followed by an INDEX.  The various kinds of tokens
+          are described in the table below:
+
+               token     tag      index
+
+               eof       1        (none)
+               operator  tag      (none)
+               keyword   tag      (none)
+               asgnop    36       index
+               idn       75       index
+               intcon    76       value
+               floatcon  77       index
+               string    78       index
+               lineno    79       line number
+          C Documentation               - 6 -                  4 April 1978
+
+
+          6.  Syntax Tree Node Types
+
+          The node types in syntax trees are as follows:
+
+                             0           20           40           80
+
+                0                         %           =%           if
+                1          eof            /           =&         goto
+                2          idn         *(2)           =^       branch
+                3          int         -(2)           =|        label
+                4        float            +           &&     stmtlist
+                5       string            =           ||       switch
+                6         call           ==            .         case
+                7            ?           !=            :      default
+                8      ++(pre)            <            ,       return
+                9     ++(post)            >       sizeof      program
+               10      --(pre)           <=                  exprstmt
+               11     --(post)           >=                     elist
+               12         *(1)           <<
+               13         &(1)           >>
+               14         -(1)          =>>
+               15            ~          =<<
+               16            !           =+
+               17         &(2)           =-
+               18            |           =*
+               19            ^           =/
+
+          7.  Syntax Tree Nodes
+
+          A  syntax  tree  node  consists of the node type followed by some
+          number of integers and/or pointers to other  syntax  tree  nodes.
+          The  node  types  can  be  grouped  into classes according to the
+          locations of  pointers  in  the  nodes.    The  following  tables
+          describe  the  formats  of  the nodes in each of the various node
+          type classes.  The following terms are used:
+
+               <iln>     internal label number
+               <e>       pointer to expression tree
+               <s>       pointer to statement tree
+               <chain>   part of chain of case labels
+               <elist>   pointer to expression list node
+
+          Now for the descriptions:
+
+               class 0: no pointers
+
+                    FIELDNAME <index of name in cstore>
+                    IDENTIFIER <type> <class> <offset>
+                    INTEGER <value>
+                    FLOAT <index of source rep in cstore>
+                    STRING <index of value in string file>
+                    BRANCH <iln>
+          C Documentation               - 7 -                  4 April 1978
+
+
+               class 1: pointer at 2
+
+                    RETURN <lineno> <e>
+                    GOTO <lineno> <e>
+                    LABEL <iln> <s>
+                    EXPRSTMT <lineno> <e>
+
+               class 2: pointers at 2, 3, 4
+
+                    IF <lineno> <e> <s1> <s2>
+                    SWITCH <lineno> <e> <s> <chain>
+
+               class 3: pointers at 1, 2
+
+                    STMTLIST <s1> <s2>
+                    EXPRLIST <elist> <e>
+                    <BINARY-OP> <e1> <e2>
+                    FUNCTION-CALL <e> <elist>
+
+               class 4: pointer at 1
+
+                    <UNARY-OP> <e>
+                    CASE <chain> <iln> <integer>
+                    DEFAULT <chain> <iln>
+
+               class 5: pointer at 3
+
+                    PROGRAM <function-idn> <function-type> <s> <stack-size> <nargs>
+
+          8.  Looping
+
+          The parser converts the three looping constructs (DO, WHILE, FOR)
+          into statement lists with labels  and  gotos.    Labels  must  be
+          present  for the actual loop, for the continue statement, and for
+          the break statement.  These transformations are described below:
+
+               do <stmt> while (<e>); ->          {l3:
+                                                  <stmt>
+                                                  l2: if (<e>) goto l3;
+                                                  l1:;~
+
+                    where continue = goto l2 and break = goto l1.
+
+               while (<e>) <stmt> ->              {l2:
+                                                  if (e) {<stmt> goto l2;~
+                                                  l1:;~
+
+                    where continue = goto l2 and break = goto l1.
+          C Documentation               - 8 -                  4 April 1978
+
+
+               for (<e1>;<e2>;<e3>) <stmt> ->     {<e1>;
+                                                  l3: if (<e2>)
+                                                     {<stmt>
+                                                     l2: <e3>;
+                                                     goto l3;
+                                                     ~
+                                                  l1:;~
+
+                    where continue = goto l2 and break = goto l1.
+
+          9.  Symbol Table Format  (28 Feb 1977)
+
+          This section describes the format of the symbol table.  There are
+          two separate dictionaries, the global dictionary  and  the  local
+          dictionary.    The global dictionary is used to hold declarations
+          that are made at top-level (not within a function definition) and
+          all extern declarations.  The local dictionary is  used  to  hold
+          all non-extern declarations made within a function definition.
+
+          The  local  definition  is used only while processing a function;
+          when  the  processing  of  the  function  terminates,  the  local
+          dictionary is emptied.  The local dictionary grows and shrinks as
+          blocks  are  entered  and  exited.    When a block is exited, the
+          declarations local  to  that  block  are  checked  for  undefined
+          structure  types  and  unused  automatic  variables.  Entries for
+          undefined  labels  are  percolated  to  the  next  higher  level;
+          undefined labels are checked at the end of the function.
+
+          In order to minimize the number of ways that the compiler can run
+          out of space, both dictionaries are allocated in one array
+          of dictionary entries called DICT, as follows:
+
+                                   _________________________________
+                  DBEGIN      --> |                                 |
+                                  |  GLOBAL DEFINITIONS             |
+                                  |_________________________________|
+                  DGDP        --> |                                 |
+                                  |  FREE                           |
+                                  |                                 |
+                                  |_________________________________|
+                  DLDP        --> |                                 |
+                                  |  LOCAL DEFINITIONS              |
+                                  |_________________________________|
+                  DEND        -->
+          C Documentation               - 9 -                  4 April 1978
+
+
+          10.  Types  (28 Feb 1977)
+
+          All  C  types  are  represented  by  pointers  into  a type table
+          (TYPTAB).  The format of the entry consists of a TAG, a SIZE,  an
+          ALIGNMENT  class,  plus  some  other  values whose interpretation
+          depends on the TAG.  There are TAGs for  the  basic  types  (e.g.
+          INT),  plus  the  type modifiers (e.g. POINTER).  The extra value
+          for most type modifiers  is  another  TYPE  (i.e.  a  pointer  to
+          somewhere  else  in  the TYPTAB).  Types not involving structures
+          are uniquely represented, so that type equality can  be  done  by
+          comparing  the  pointers.    Type  equality  involving  recursive
+          structures is not worth the effort, and not really needed anyway.
+          An entry for a structure type contains a pointer  to  a  list  of
+          field definitions, allocated from the bottom of TYPTAB.
+
+          Writing  the  type  table  onto  an  intermediate  file  involves
+          converting the pointers to offsets.
+
+          11.  Machine Description Updates  (26 Apr 1976)
+
+          The following lists changes to the machine description language.
+
+          1.   There  is  a  new,   optional   definition   statement,
+               OFFSETRANGE,  which  specifies  allowable  offsets  (in
+               addressable units)  in  indirect  references.    Offset
+               ranges  may  be  specified for each pointer class.  The
+               default is to allow only zero offsets.  The form of the
+               statement is
+
+                offsetrange px (lo, hi), ... ;
+
+               The lo and hi are integers which specify the lowest and
+               highest allowable offsets for  indirect  references  of
+               class  px.  Either or both of lo and hi may be omitted,
+               meaning that there is no bound in that direction.   The
+               OFFSETRANGE  statement  should  immediately  follow the
+               POINTER statement.
+
+          12.  AMOP Updates  (2 Apr 1977)
+
+          The following lists changes to the set of AMOPs.
+
+          1.   There are two new AMOPs, LSEQ (0010) and COMMA  (0170).
+               Both  take  two arbitrary expressions and evaluate them
+               in order.    LSEQ  returns  its  first  operand,  COMMA
+               returns its second operand.
+
+          2.   The increment and decrement operators are now optional.
+
+          3.   New,  optional  AMOPS  have been added for ++ and -- to
+               floats and doubles.
+          C Documentation              - 10 -                  4 April 1978
+
+
+          4.   New, optional AMOPS have  been  added  to  specify  the
+               passing  of function arguments (in particular, to allow
+               pushing function arguments on a stack).  The AMOPS  are
+               .ARGI, .ARGD, .ARG0, .ARG1, .ARG2, .ARG3, for integers,
+               doubles  (if passed directly), and pointers.  Each AMOP
+               takes one operand, the actual argument, and  should  be
+               specified to leave its result in the same location.  If
+               these  AMOPs  are defined, then the code generator does
+               not allocate any stack space for argument  lists.    It
+               simply invokes one of these operators for each argument
+               (from  left to right) and assumes that they do whatever
+               is necessary.  When these  AMOPs  are  used,  the  ARGP
+               argument to the CALL macro is meaningless.
+
+          13.  Keyword Macro Updates  (3 Apr 1977)
+
+          The following lists changes to the set of keyword macros.
+
+          1.   DATA:   %DA()
+
+          The  DATA macro indicates that the following macros define impure
+          data areas which are not explicitly initialized.
+
+          2.   IMPURE:   %IM()
+
+          The IMPURE macro indicates that following  macros  define  impure
+          data  areas  which  are  not explicitly initialized (and thus are
+          implicitly initialized to zero).
+
+          3.   PDATA:   %PD()
+
+          The PDATA macro indicates that following macros define pure  data
+          areas, namely string literals.
+
+          4.   PURE:   %PU()
+
+          The PURE macro indicates that following macros define pure code.
+
+          5.   ALIGNn:   %ALn()
+
+          Instead  of  a  single  ALIGN  macro,  there  are now three ALIGN
+          macros, for alignment classes 1, 2, and 3.  Alignment class 0  is
+          the alignment for characters.
+
+          6.   ADCONn:   %An(0,BASE,OFFSET)
+
+          The  arguments to ADCON are now a base and offset, which together
+          make up a REF that describes  either  an  external  or  a  static
+          variable or function.
+          C Documentation              - 11 -                  4 April 1978
+
+
+          7.   PROLOG:   %P(FUNCNO,FUNCNAME,FNARGS)
+
+          The  FNARGS  argument  has been added: it specifies the number of
+          formal arguments to the function.
+
+          8.   RETURN:   %RT(FUNCNO)
+
+          The FUNCNO argument has been added  to  allow  reference  to  the
+          corresponding EPILOG code.
+
+          9.   STATIC:   %ST(N)
+
+          The  size  argument has been flushed, as it could not be reliably
+          computed, anyway.
+
+          10.   ELSWITCH:   %ELS(N,LBASE,LOFFSET,IBASE,IOFFSET)
+
+          This new macro terminates the lists following LSWITCH macros.
+
+          11.   ETSWITCH:   %ETS(LO,LBASE,LOFFSET,IBASE,IOFFSET,HI)
+
+          This new macro terminates the lists following TSWITCH macros.
+
+          14.  Pointer Comparison  (15 Dec 1974)
+
+          The following comparison operations are allowed on pointers:
+
+                  1. A pointer may be compared  with  any  pointer,
+                     using any of the comparison operations.
+                  2. A  pointer  may  be  tested  for  equality  or
+                     inequality with 0.
+
+          In the first case, we have the operation p1:p2 -> l, where p1 and
+          p2 are the  pointers  and  l  is  the  destination  label.    The
+          algorithm is as follows:
+
+                  if (ctype (p1) < ctype (p2)) exchange (p1, p2);
+                  if (ctype (p1) > ctype (p2))
+                          convert p1 to ctype (p2);
+                  apply operator of ctype (p2);
+
+          In  the  second  case, we have the operation p:0 -> l, where p is
+          the pointer and l is the destination label.  The  default  method
+          of  handling  such  an  operation is to convert the pointer to an
+          integer and apply the integer comparison operation.  However,  as
+          an  optimization, we allow the definition of special null-pointer
+          testing operations, ==0px and !=0px, for any pointer class x.
+
+          Note that the pointer-to-integer conversions are not supposed  to
+          really  change  anything;  their  main  purpose  is to accomplish
+          moving the pointer value from a pointer register  to  an  integer
+          register  (where  necessary).  In the case of comparing a pointer
+          to zero, this move may not be necessary as  machine  instructions
+          C Documentation              - 12 -                  4 April 1978
+
+
+          to  do  the  test on the pointer register may exist; that is what
+          the optional pointer comparison operators are for.
+
+          15.  Changes to GT  (28 Dec 1974)
+
+          Two new tables are output by GT for use by  the  code  generation
+          phase.  These tables are OPREG[] and OPMEM[].  The tables contain
+          one  word  for each AMOP; the bits of the word indicate registers
+          in OPREG and memory reference classes in OPMEM.  The bits are set
+          to indicate which locations are possible result locations for the
+          AMOPs.
+
+          The following entries are pre-defined (G indicates set by  GT,  R
+          indicates   set  by  the  code  generator  as  part  of  run-time
+          initialization):
+
+               AMOP           value                              set
+
+               *u             any indirect (of appropriate type) R
+               !, &&, ||      all integer registers              G
+               comparison     all integer registers              G
+               =, ?           any register (of appropriate type) R
+               call           retreg of appropriate type         R
+               e_int          intlit                             G
+               e_float        floatlit                           G
+               e_string       stringlit                          G
+               e_idn          appropriate idn class              R
+
+          16.  Scoring Algorithm  (28 Dec 1974)
+
+          This  section  describes  the  scoring  algorithm  used  in   the
+          selection  of  OPLOCs.    It  is based on a cost of 4 units for a
+          register-register move and 5 units for  a  register-memory  move.
+          An  impossible  situation is scored at -1000.  The total score is
+          the sum  of  all  applicable  scores  derived  by  the  following
+          algorithm:
+
+          For each clobbered register which is busy, -10 (2 RM).
+
+          Considering  the  possible  result  locations  of  the  top-level
+          operator:
+
+             If the desired result location is a label but the top-level
+             operator never has a label result,  -1000.   Otherwise,  if
+             the desired result location is register, then:
+
+                If some desired register is possible and at least one
+                possible  desired  register  is  free  or  all of the
+                desired registers are busy then 0 (there will  be  no
+                penalty  for  picking this OPLOC, on the basis of the
+                result location, at least).   Otherwise,  if  a  busy
+                desired  register  is  possible  and  not all desired
+                registers are busy, then -10 (2 RM).  Otherwise, if a
+          C Documentation              - 13 -                  4 April 1978
+
+
+                non-desired free register is  possible,  -4  (1  RR).
+                Otherwise,   if   a   non-desired  busy  register  is
+                possible, -14 (1 RR + 2 RM).  Otherwise, if memory is
+                a possible result location, -5 (1 RM).
+
+             Otherwise, if the desired result location is memory, then:
+
+                If all of the possible result locations are  desired,
+                then 0.  Otherwise, if a temporary is desirable and a
+                free  register is a possible result location, then -5
+                (1 RM).  Otherwise, if a temporary is desirable and a
+                busy register is a possible result location, then -15
+                (3 RM).  Otherwise, -1000.
+
+          Considering the possible locations of each of the operands of the
+          top-level operator:
+
+             If the operand is desired in a  register  and  the  operand
+             location   is   identically  the  result  location  of  the
+             top-level operator, then if no desired registers are  free,
+             then  -10  (2 RM).  If the operand is desired in a register
+             and the operand's top-level operator may return its  result
+             in  a  register,  then  if there is no register which meets
+             both requirements, -4 (1 RR).  If the operand is desired in
+             a register  and  the  operand's  top-level  operator  never
+             returns its result in a register, then -5 (1 RM).
+
+             If  the  operand  is desired in memory and all non-indirect
+             memory  reference  classes  are  acceptable,  then  if  the
+             operand's  top-level  operator  never returns its result in
+             memory, -5 (1 RM).  If the operand is desired in memory and
+             there are one  or  more  unacceptable  non-indirect  memory
+             reference  classes,  then  if  all  possible  memory result
+             locations of  the  operand's  top-level  operator  are  not
+             acceptable  or  if  the  operand's  top-level  operator may
+             return its result in a register and a temporary location is
+             not acceptable, -1000.
+
+          17.  Changes to GT  (31 Dec 1974)
+
+          The distinction  in  the  interpretation  of  the  #  indicators,
+          depending upon whether or not they appear in a macro call or not,
+          no  longer  exists.  The #X indicators now always refer to a call
+          on the NAME macro.   New  #'X  indicators  are  recognized  which
+          always refer to the macro argument sequences.

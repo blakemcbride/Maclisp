@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: (\ x 0) revisited, revisited, revisited -->
+<!--X-From-R13: XA@Z ng BODQ&#45;[OJQ -->
+<!--X-Date: Mon, 20 Dec 82 03:45:00 GMT -->
+<!--X-Message-Id: fef44540db8b22fc9507ee88089fbbc8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: (\ x 0) revisited, revisited, revisited</title>
+<link rev="made" href="mailto:JONL at PARC-MAXC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00705.html">Date Prev</a>][<a href="msg00703.html">Date Next</a>][<a href="msg00705.html">Thread Prev</a>][<a href="msg00703.html">Thread Next</a>][<a href="maillist.html#00704">Date Index</a>][<a href="threads.html#00704">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: (\ x 0) revisited, revisited, revisited</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC</li>
+<li><em>Subject</em>: Re: (\ x 0) revisited, revisited, revisited</li>
+<li><em>From</em>: JONL at PARC-MAXC</li>
+<li><em>Date</em>: Mon, 20 Dec 82 03:45:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, GSB at MIT-ML, JONL</li>
+<li><em>Original-date</em>: 19 DEC 1982 1945-PST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In response to your message sent  19 December 1982 21:00-EST
+
+It has always been the case that MacLisp's &quot;single-character&quot;
+arithmetic functions were driven by the desire for open-compilation.
+Thus one gives up any interpreter error checking in the compiled
+code, merely accepting what the hardware returns.  It's certainly
+no surprise, then, that the PDP10 does odd things with division by
+zero -- or do I mistake the tone of your note?
+
+By the bye, I had to bring in the generic operation, since the
+&quot;right&quot; thing for the \ subr to do is to cause an error when
+given a 0 divisor (just as it would if you gave it NIL for an arg);
+unfortunately, this may not be the right thing to do to &quot;fix&quot; the
+REMAINDER function: see the caveat in my previous msg.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00705.html">(\ x 0) revisited, revisited, revisited</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00703.html">Re: Re: (\ x 0) revisited, revisited, revisited</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00705.html">(\ x 0) revisited, revisited, revisited</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00703.html">Re: Re: (\ x 0) revisited, revisited, revisited</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00704"><strong>Date</strong></a></li>
+<li><a href="threads.html#00704"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

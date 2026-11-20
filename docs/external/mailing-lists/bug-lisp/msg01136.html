@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: (EQUAL "a" "a") &#45;> () -->
+<!--X-From-R13: [nex Z. [vyyre &#60;[WZZSD ng [WF&#45;OW> -->
+<!--X-Date: Wed, 1 Oct 80 03:49:00 GMT -->
+<!--X-Message-Id: a396df4b6062991663173670ea65caa6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>(EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()</title>
+<link rev="made" href="mailto:MILLER at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01137.html">Date Prev</a>][<a href="msg01135.html">Date Next</a>][<a href="msg01138.html">Thread Prev</a>][<a href="msg01132.html">Thread Next</a>][<a href="maillist.html#01136">Date Index</a>][<a href="threads.html#01136">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>(EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC, BARMAR at MIT-MC</li>
+<li><em>Subject</em>: (EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()</li>
+<li><em>From</em>: Mark L. Miller &lt;MILLER at MIT-AI&gt;</li>
+<li><em>Date</em>: Wed, 1 Oct 80 03:49:00 GMT</li>
+<li><em>Cc</em>: JHendler at BBNA, JShelton at BBNA, TBlocker at BBNA,    Pattermann at BBNA, Kehler at BBNA, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 30 September 1980 23:49-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Regarding this discussion:
+ Date: 29 SEP 1980 0910-EDT
+ From: KMP at MIT-MC (Kent M. Pitman)
+ The primary use of &quot;...&quot; is to get an object which prints a certain way...
+ &quot;...&quot; is defined on non-Multics Maclisp to return an UNINTERNED
+ SYMBOL which has been SETQ'd to itself (so that it self-evaluates).
+
+While I understand the reason for this situation and am capable of using
+SAMEPNAMEP (sigh) instead of EQUAL to get around it, let's not criticize
+the complaint -- it is a legitimtate gripe -- i.e., the semantic rule of
+thumb that &quot;if two things LOOK THE SAME they are almost always EQUAL&quot; has
+been violated, and thus this behavior can reasonably be called a &quot;bug&quot;.
+Off- hand I can't think of an efficient approach to solving it, but perhaps
+intern-ing &quot;strings&quot; on MacLisps that implement them as symbols should be
+considered?  I have had several bug-messages come to me (at TI) on this
+subject in the last month.  Users of other dialects such as Yale/UCI LISP
+are used to having &quot;real&quot; strings, i.e., &quot;foo&quot; works and (EQUAL &quot;a&quot; &quot;a&quot;)
+returns T -- so this is seen as a deficiency of MacLISP.  (But then the SETQ
+introduces at least a small possibility of name clash lossage -- so perhaps
+we should all stick to '|foo|, which is a true QUOTEd interned symbol -- or
+plead for true strings as a new datatype in those implementations that
+lack them.                Regards, Mark
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01137.html">Re: Macros and destructuring and functions, oh my!</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01135.html">Re: Macros and destructuring...</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01138.html">Macros and destructuring and...</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01132.html">Re: (EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01136"><strong>Date</strong></a></li>
+<li><a href="threads.html#01136"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

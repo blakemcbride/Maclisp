@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Closing Files -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 27 Feb 82 17:17:00 GMT -->
+<!--X-Message-Id: a5616d3f403f585ad3885b5cfa0f15b2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Closing Files</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00934.html">Date Prev</a>][<a href="msg00933.html">Date Next</a>][<a href="msg00938.html">Thread Prev</a>][<a href="msg00937.html">Thread Next</a>][<a href="maillist.html#00935">Date Index</a>][<a href="threads.html#00935">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Closing Files</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: feinberg at CMU-20C</li>
+<li><em>Subject</em>: Closing Files</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 27 Feb 82 17:17:00 GMT</li>
+<li><em>Cc</em>: BUG-MACLISP at MIT-MC</li>
+<li><em>Original-date</em>: 27 February 1982 12:17-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 23 February 1982  22:56-EST (Tuesday)
+    From: FEINBERG at CMU-20C
+	    Under twenex, why does Maclisp use restricted JFNs when you
+    open a file? This is very annoying when it is important to close 
+    a file, but you don't have a handle on it. . . .  Either the JFNs should 
+    be unrestricted, or there should be a lisp functions which closes all 
+    files, or you should at least be able to specify UNRESTRICTED as a file 
+    mode to OPEN.
+If a file-object is GC'd, then the GC will close it; but if you simply
+forgot how to access it (e.g., you SETQ'd it to some variable whose name
+you've forgotten, or put it in some list somewhere), then you can load
+in the ARYFIL package and call (OPEN-FILES), which will return a list
+of all currently-open file objects except (STATUS TTYIFA) and (STATUS TTYOFA) 
+which aren't GC'able.    Source for this package contains some documentation 
+of additional facilities;  it is on the CMU-20C machine as &lt;MACLISP&gt;ARYFIL.LSP.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00934.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00933.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00938.html">Closing Files</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00937.html">Closing Files.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00935"><strong>Date</strong></a></li>
+<li><a href="threads.html#00935"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

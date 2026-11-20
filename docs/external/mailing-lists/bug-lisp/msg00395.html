@@ -1,0 +1,196 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: solution to RENAMEF losing on LIB: -->
+<!--X-From-R13: Rnir Fbhergmxl &#60;Rnir.Fbhergmxl ng Q[G&#45;10O> -->
+<!--X-Date: Mon, 28 May 79 21:07:00 GMT -->
+<!--X-Message-Id: 2301a4f6f706f24dd4526c439e397e97@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>solution to RENAMEF losing on LIB:</title>
+<link rev="made" href="mailto:Dave.Touretzky at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00396.html">Date Prev</a>][<a href="msg00394.html">Date Next</a>][<a href="msg00396.html">Thread Prev</a>][<a href="msg00394.html">Thread Next</a>][<a href="maillist.html#00395">Date Index</a>][<a href="threads.html#00395">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>solution to RENAMEF losing on LIB:</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp @ ai</li>
+<li><em>Subject</em>: solution to RENAMEF losing on LIB:</li>
+<li><em>From</em>: Dave Touretzky &lt;Dave.Touretzky at CMU-10A&gt;</li>
+<li><em>Date</em>: Mon, 28 May 79 21:07:00 GMT</li>
+<li><em>Cc</em>: dm20 at CMU-10A</li>
+<li><em>Original-date</em>: 28 May 1979 1707-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I asked Craig Everhart, a local TOPS-10 wizard, what it would take to
+stop LOOKUP from looking on the LIB: device for RENAMEF, without losing
+any flexibility (such as setting an ALIAS, or using SFD's.)  His answer
+appears below.  (It's long...)
+
+
+- - - - Begin forwarded message - - - -
+Date: Mon, 28 May 79 19:40:00 GMT
+Original-Date: Monday, 28 May 1979 1540-EDT
+From: Craig.Everhart at CMU-10A
+Subject: Re: LIB me alone
+To:   DAVE.TOURETZKY at CMU-10A
+CC:   Scott.Fahlman at CMU-10A
+Message-ID: &lt;28May79 154012 CE10@CMU-10A&gt;
+In-Reply-To: DAVE.TOURETZKY's message of 27 May 79 18:40
+Origin:  C410CE10 at CMU-10A; 28 May 1979 1542-EDT
+
+The bizarre thing happens when the LOOKUP finds the file on library
+scanning; even if there is a library set, if the LOOKUP on the file
+finds it without scanning libraries, the RENAME will work.  The problem
+is that if it does find it using library search, the RENAME will fail
+with some bizarre error -- ill seq of UUOs, I believe.  Doing an ENTER
+to go into Update mode on the file will fail similarly.  And, no, there's
+no way to ask LOOKUP not to search your libraries.
+
+That's the general problem.  I've never tried to solve it in the context
+of SFDs, but the solution generalizes to them.  Basically, if you really
+want to know whether the RENAME will fail, you have to look at the place
+where the file you found came out to being; you then (by hand) compare
+that place with what you know to be the user's default directory path.
+If the file is on the default path, you know you got the file without
+resorting to library search, so you know the RENAME will fail.  If the
+file is NOT on the default path, you got it from searching libraries,
+or from searching SYS automatically, or from searching NEW, then SYS,
+automatically.
+
+The previous paragraph has an error; the directory path you compare the
+file's path to is the default path for the job ONLY if there was no
+PPN or path given to the LOOKUP.  If there was such a path, it supersedes
+the job's spec entirely.  The bogus thing is that if you give LOOKUP a PPN or
+path, the job's library, SYS, and NEW bits stay active.
+
+Therefore, the algorithm is to find the principal path used by the LOOKUP.
+This will be either the PPN or path given to the LOOKUP, or the default
+path for the job.  Then, find the path where the file really is (with a
+PATH. UUO), and see if you could have found the file using the principal
+path that the LOOKUP used.  If so, a RENAME will zap the file; if not,
+the RENAME will get some obscure error.
+
+Elaboration of the above.  Any core image that does this kind of hackery
+might as well find the job's default path at startup; you get this by
+giving the PATH. UUO an argument of -1 and remembering the block of
+directory info it gives you; this will look like a word of bits, a PPN,
+and up to six SIXBIT SFD names.  The useful bit in the word of bits is
+a bit called the scan switch.  If this is set to scanning, LOOKUPs that
+look for files in the path and don't find it in the leaf directory will
+try again in the next directory up the chain, ending in the UFD.  If the
+bit is set to no-scanning, the LOOKUP will fail after the file isn't
+found in the leaf directory.  Anyway, if the PATH. you give to determine
+the job's directory path fails, use GETPPN to find out what the job's
+default disk area is.
+
+You can feed the LOOKUP UUO either zero in the directory field (PPN
+word), or a PPN, or a pointer to a path block.  To get a path you
+can use in the comparison, use the following.  If you gave LOOKUP
+a zero (didn't specify a path or PPN), use the job's default path.
+If you gave LOOKUP a path block, use it.  If you gave LOOKUP a
+PPN, [I think] use a path block consisting of that UFD and NO
+SFDs.
+
+After a LOOKUP, you can feed PATH. a channel number, and it will tell
+you just where the file that the LOOKUP found is.  This gives you the
+requisite other path.
+
+To compare paths, first you check if they're identical from the UFD
+to the first zero or the sixth SFD.  If so, you got a match.  If not,
+and if scanning is enabled in the path you fed LOOKUP (or job default,
+etc., as above), see if the file's path is an initial subsequence of
+the path LOOKUP saw.  If so, you match; if not, or if scanning isn't
+enabled, you don't match.  If you didn't match, you then know you
+found the file through library or SYS or NEW search, and a RENAME
+(as well as an ENTER to go into update mode) will fail.
+
+Simplification in the world of no SFDs:
+If there are no SFDs in use (as at CMU), this process can be
+simplified.  In this case, nobody feeds LOOKUPs pointers to PATH
+blocks, since you can achieve the same effect by putting the PPN
+word in the place you'd stick a pointer.  Getting the job's default
+path amounts to feeding PATH. a -1, but only saving the one word
+it returns as the default directory; if this fails, GETPPN will
+work, as before.  PATH. given the channel on which a file has been
+LOOKUPed, will return the PPN where the file lives; alternately, one
+can use an extended LOOKUP, and the PPN word after one of those is
+ALWAYS the UFD where the file was found.  (The 4-wd LOOKUPs fail
+in this case since they overwrite the PPN with a perversion of the
+file size.)  The check for did-LOOKUP-have-to-search-library
+then amounts to seeing if the PPN where the file really is is
+the same as the PPN: (if gave-LOOKUP-a-PPN then PPN-I-gave-LOOKUP
+else job-default-PPN).
+
+
+This is really a mess, I know.  The case that looks at SFDs is
+particularly a mess.  The simplest thing to do may simply be to
+try the RENAME and offer some intelligent interpretation for the
+funny error code.  However, if you do the more general solution,
+you'll be able to say stuff like
+
+	File X.Y[C380ML5P] found on library search -- not deleted
+
+rather than
+
+	File X.Y found on library search -- not deleted
+
+and the user will be perhaps less confused.
+
+		Hope this clarifies your alternatives.
+
+		Craig
+- - - - End forwarded message - - - -
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00396.html">BOTCHED PATCH FIXED</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00394.html">Settting readmacro characters</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00396.html">BOTCHED PATCH FIXED</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00394.html">Settting readmacro characters</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00395"><strong>Date</strong></a></li>
+<li><a href="threads.html#00395"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

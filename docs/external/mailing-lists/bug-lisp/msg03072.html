@@ -1,0 +1,88 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: And you thought you could trace ALPHALESSP while sorting... -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 23 Sep 81 21:40:00 GMT -->
+<!--X-Message-Id: 9fa2911c83ca27925e42662c4c86997f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>And you thought you could trace ALPHALESSP while sorting...</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03073.html">Date Prev</a>][<a href="msg03071.html">Date Next</a>][<a href="msg03081.html">Thread Prev</a>][<a href="msg03080.html">Thread Next</a>][<a href="maillist.html#03072">Date Index</a>][<a href="threads.html#03072">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>And you thought you could trace ALPHALESSP while sorting...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DCP at MIT-MC</li>
+<li><em>Subject</em>: And you thought you could trace ALPHALESSP while sorting...</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 23 Sep 81 21:40:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 23 September 1981 17:40-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 20 September 1981 15:34-EDT
+    From: David C. Plummer &lt;DCP at MIT-MC&gt;
+    . . .
+    (trace alphalessp)
+    (sort '(this is a test) 'alphalessp)
+    (1 ENTER (ALPHALESSP (IS THIS))
+    (1 EXIT ALPHALESSP T)
+    PURPG; 126744&gt;&gt;HRRM 5,(11)   5/   740607   27076/  PUSH 16,6
+SORT is hand-coded and thought that it *knew* that the ALPHALESSP
+function doesn't damage certain accumulators.   But phooey on that 
+if one re-defines, or traces, ALPHALESSP;  so I've repaired that
+hole in the accumulator defences, and it works now in SORT version 13.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03073.html">'count' argument for BITS-POSQ</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03071.html">I wouldn't have believed it...</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03081.html">And you thought you could trace ALPHALESSP while sorting...</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03080.html">Why can't things ever be tested? Or, Doesn't anybody else use strings (if they are, why is this breaking for me)?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03072"><strong>Date</strong></a></li>
+<li><a href="threads.html#03072"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

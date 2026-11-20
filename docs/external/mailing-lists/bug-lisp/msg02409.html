@@ -1,0 +1,140 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: TYPECASEQ and the Type Hierarchy -->
+<!--X-From-R13: UZE ng EG&#45;OW (Uhl Egrryr) -->
+<!--X-Date: Wed, 21 Jun 78 18:36:00 GMT -->
+<!--X-Message-Id: f8166adf3d423bc2edb4b5908945bef1@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>TYPECASEQ and the Type Hierarchy</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02410.html">Date Prev</a>][<a href="msg02408.html">Date Next</a>][<a href="msg02410.html">Thread Prev</a>][<a href="msg02408.html">Thread Next</a>][<a href="maillist.html#02409">Date Index</a>][<a href="threads.html#02409">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>TYPECASEQ and the Type Hierarchy</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: nil at MIT-MC</li>
+<li><em>Subject</em>: TYPECASEQ and the Type Hierarchy</li>
+<li><em>From</em>: GLS at SU-AI (Guy Steele)</li>
+<li><em>Date</em>: Wed, 21 Jun 78 18:36:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC   </li>
+<li><em>Original-date</em>: 21 Jun 1978 1136-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I recommend the introduction of a TYPECASEQ (CASET? but that parses
+also as C-ASET or CA-SET) construction.  The advantage of it
+over simply (CASEQ (TYPEP ...) ...) is that it can permit the
+use of names for sets of types, the precise components of which
+the user is not concerned with (and indeed may not want to
+be concerned with for reasons of transportability).
+
+It is interesting to consider the hierarchy of data types in NIL;
+here is a picture (somewhat incomplete, and the names may not
+be the preferred ones):
+				OBJECT
+				/    \
+			       /       \
+			   ATOM       LIST
+			  /    \     /    \
+			 /      \   /      \
+    -------------------------  SELFLIST    PAIR (or CONS)
+    |     |     |     |     |	    | \
+   ARRAY  |  SYMBOL   | CHARACTER   () others
+	  |           |
+	VECTOR     NUMBER
+	/ | \      /  |  \
+  STRING  | etc  FIX  |  COMPLEX
+        BIT     / | FLOAT   |   \
+	    INUM  |  | \   PLAIN BIG
+	     BIGNUM  |  \
+		  FLONUM BIGFLOAT
+
+There are many other interesting relationships not shown here;
+one might divide the types into INOB and STOB; also there ought
+to be a word for a non-selflist atom.  Anyway, the point is that
+it is not a tree, but a partial order.
+
+Using these names, one might write:
+	(TYPECASEQ FOO
+		   ((NUMBER) &lt;do arithmetic&gt;)
+		   ((SYMBOL CHARACTER) &lt;be symbolic&gt;)
+		   ((LIST SEXPVEC) &lt;be recursive&gt;)
+		   (T &lt;be obnoxious&gt;))
+Now it might be convenient to permit the categories named not to be
+mutually exclusive, but to permit some overlap.  This would make it
+easy to specify exceptions; e.g. for FIX numbers to go one way,
+and all other numbers, whatever they may be, another way.  I suggest
+the discipline that overlap be allowed between two categories only
+if one is a strict superset of the other, and then it is the branch
+for the latter that is chosen.  (This prevents confusion in the
+case of, e.g., (TYPECASEQ '() ((ATOM) ...) ((LIST) ...)).)
+
+As for implementation, this can be made a macro provided that
+the macro is aware of all the types and categories and their
+relationships, and expands the clauses into a CASEQ on TYPEP
+(or whatever).  The macro would check for the superset relationship
+among categories, and then expand all categories into
+their lowest-level constituents.  It is likely that
+the types and categories distinguishable by TYPECASEQ would
+extend below the level of the main type code, and so the
+macro expansion may want to be trickier than what I have outlined.
+The implementation, whether as macro or fexpr, is likely
+to be machine-dependent because it may know about low-level types,
+and so it is desirable to institutionalize it in the language.
+Indeed, its expansion could involve a numeric CASEQ on the
+primitive storage data type, lending it speed when compiled.
+
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02410.html">QMARK</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02408.html">Local function bindings</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02410.html">QMARK</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02408.html">Local function bindings</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02409"><strong>Date</strong></a></li>
+<li><a href="threads.html#02409"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

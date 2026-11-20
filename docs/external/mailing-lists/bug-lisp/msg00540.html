@@ -1,0 +1,88 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: bug in new LISP compiler -->
+<!--X-From-R13: ROHS.FAGDSFLYK(Q410RF50) ng Q[G&#45;10O  -->
+<!--X-Date: Mon, 26 Feb 79 18:01:00 GMT -->
+<!--X-Message-Id: 5b7481dbcd3c779ef78fbe42af9987ff@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>bug in new LISP compiler</title>
+<link rev="made" href="mailto:DAVE.TOURETZKY at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00541.html">Date Prev</a>][<a href="msg00539.html">Date Next</a>][<a href="msg00541.html">Thread Prev</a>][<a href="msg00539.html">Thread Next</a>][<a href="maillist.html#00540">Date Index</a>][<a href="threads.html#00540">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>bug in new LISP compiler</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-AI</li>
+<li><em>Subject</em>: bug in new LISP compiler</li>
+<li><em>From</em>: DAVE.TOURETZKY(C410DT50) at CMU-10A </li>
+<li><em>Date</em>: Mon, 26 Feb 79 18:01:00 GMT</li>
+<li><em>Original-date</em>: 26 Feb 1979 1301-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The MacLisp compiler on [c380ml5p]/A tries to deletef the old .fas file.
+Unfortunately, if it can't find a file to delete on the regular account,
+it looks on the library account (set by the LIB command) and tries to
+delete the file there.  If such a file exists, it usually is protected,
+so the deletef fails and the compiler goes into a break.
+
+The solution to this problem is simply to restrict the compiler (or
+better yet, the deletef function itself) from looking on the library
+account if one is specified.  Of course, functions such as uread and
+fasload should still use the library.
+
+							-- Dave Touretzky
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00541.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00539.html">TENEX MACLISP</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00541.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00539.html">TENEX MACLISP</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00540"><strong>Date</strong></a></li>
+<li><a href="threads.html#00540"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

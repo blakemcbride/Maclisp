@@ -1,0 +1,82 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: INHIBIT and user interrupt frames -->
+<!--X-From-R13: DIY ng [WF&#45;[Q (Dboreg I. Yreaf) -->
+<!--X-Date: Fri, 20 Jun 80 08:36:00 GMT -->
+<!--X-Message-Id: 2eec7a214fc29a9b97ecf6ef5e750227@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>INHIBIT and user interrupt frames</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04056.html">Date Prev</a>][<a href="msg04054.html">Date Next</a>][<a href="msg04056.html">Thread Prev</a>][<a href="msg04054.html">Thread Next</a>][<a href="maillist.html#04055">Date Index</a>][<a href="threads.html#04055">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>INHIBIT and user interrupt frames</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GSB at MIT-MC, (BUG LISP) at MIT-MC, EB at MIT-MC</li>
+<li><em>Subject</em>: INHIBIT and user interrupt frames</li>
+<li><em>From</em>: RWK at MIT-MC (Robert W. Kerns)</li>
+<li><em>Date</em>: Fri, 20 Jun 80 08:36:00 GMT</li>
+<li><em>Original-date</em>: 20 JUN 1980 0436-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The .VALUE is because it gets an error while INHIBIT is set.  This is
+why autoloading from an interrupt handler often .VALUEs as well.  This
+has to be unrelated to the bug in FRETURN that I just fixed, since I know
+the autoload bug has been there for a while.  The bug I fixed was that
+my patch changed the value of UISAVT, which is referenced exactly twice,
+both times in UIBRK, which I fixed.  I have to believe this is a separate
+bug.  JONL, I tend to think this one is yours, can you look at it?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04056.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04054.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04056.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04054.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04055"><strong>Date</strong></a></li>
+<li><a href="threads.html#04055"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

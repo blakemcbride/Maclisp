@@ -1,0 +1,136 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sat ,7 Nov 81 02:17:00 EDT -->
+<!--X-Message-Id: 3d25678b8caa4e7aa74af7e946b0e8fd@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00706.html">Date Prev</a>][<a href="msg00705.html">Date Next</a>][<a href="msg00706.html">Thread Prev</a>][<a href="msg00705.html">Thread Next</a>][<a href="maillist.html#00707">Date Index</a>][<a href="threads.html#00707">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MASINTER at PARC-MAXC</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat ,7 Nov 81 02:17:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date:  5 NOV 1981 2158-PST
+    From: MASINTER at PARC-MAXC
+
+    Macros in Interlisp are a separate and powerful facility...
+    MACROS are integrated into the system. Macros get expanded during
+    interpretation...
+
+    Date: 6 Nov 1981 14:21 PST
+    From: Masinter at PARC-MAXC
+
+    ...The documentation for Interlisp macros is in the chapter on the
+    compiler.  Pages 18.12-13 explains the MACROTRAN facility which
+    expands macros during interpretation. The documentation is not
+    particularly clear that macros by default expand once at
+    interpretation..., but it does say it.
+
+    I believe the description of macros and macro expansions should
+    indeed be moved out of the compiler chapter and into a section on
+    the interpreter/functions, etc.  for the next Interlisp manual
+    revision.
+-----
+According to the Oct 78 copy of the Interlisp manual, p18.12-13
+
+    MACROTRAN is a package that enables the user to run programs
+    interpretively which contain calls to functions which are only
+    defined in terms of a compiler macro. MACROTRAN is implemented via
+    an entry on dwimuserforms (Section 17). [Footnote: and thus will not
+    work if DWIM is not enabled] When the interpreter encounters a form
+    car of which is undefined function, macrotran is called. If car of
+    the form has a MACRO property, the macro is expanded, and the result
+    of this expansion is evaluted in place of the original form...
+
+Certainly you will be hardpressed to convince me that this is
+&quot;integrated&quot; into your system. There is a clear division between the
+interpreter and the error signal/correction facility in Maclisp.
+Functions, macros, and AUTOLOAD-type things are not errors and are no
+business of any DWIM-like facility from my point of view. Coupling it to
+something so conceptually unrelated as macros is very poor modularity at
+both a conceptual and implementational level. What if someone wanted to
+turn off DWIM? Would you argue that he should have to not have macros?
+They certainly are a proven tool and I don't think that's a reasonable
+penalty to pay. I applaud your idea of moving macros out of the compiler
+section but I hope the move will involve something more than just
+picking up the text and indexing it elsewhere ...
+
+The change involves a shift in philosophy about what is undefined.
+MACROs are certainly defined. 'Tis true they cannot work in all places
+functions can, but that's far from undefined. It just means APPLY, and
+MAP have a bit of a hard time because there is no full macro form.
+The LispM's substs are constrained enough to work like functions though,
+and Macsyma's macros don't operate on whole forms so they map and apply.
+
+If macros continue as they are implied to be in current doc as a hack
+fix to essentially a bug situation in the interpreter, then I don't know
+that I'd agree that you have them at all in your language ... in your
+system perhaps, but not in your language. And I think the language is 
+where it's at. Abstraction is the stuff out of which big programs are
+built and needs to be addressed at the heart of the system, not as an
+add-on...
+
+-kmp
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00706.html">InterLISP Macros</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00705.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00706.html">InterLISP Macros</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00705.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00707"><strong>Date</strong></a></li>
+<li><a href="threads.html#00707"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

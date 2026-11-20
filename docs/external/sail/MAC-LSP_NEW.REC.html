@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>NEW.REC[MAC,LSP] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename NEW.REC[MAC,LSP]  blob <a href="NEW.REC[MAC,LSP]_blob">sn#464209</a> filedate 1979-08-10 generic text, type T, neo UTF8</div>
+<pre id="u8lump">*) TYPED-IDENTITY - new fsubr specifies type of a random quantity.
+   (TYPED-IDENTITY FIXNUM x) requires that x evaluate to something of
+   type FIXNUM;  (TYPED-IDENTITY FLONUM x) similarly requires FLONUM.
+
+
+*) ERROR-BREAK-ENVIRONMENT - sets OBARRAY/READTABLE for ↑B and error loops.
+   As a special variable, ERROR-BREAK-ENVIRONMENT holds a pair (cons pair)
+   of an obarray and readtable to use during the system-supplied ↑B break and
+   error handlers.   Its initial setting is 
+	`(,(get 'OBARRAY 'ARRAY) ,(get 'READTABLE 'ARRAY))
+
+*) DEFAULTF no longer manipulated by LOAD or FASLOAD, and new initial value.
+   This has the consequence that only the "oldio" compatibility functions
+   change DEFAULTF (namely, UREAD, UWRITE, UFILE, UKILL).  Furthermore, its 
+   initial setting will be
+	`((DSK ,(status udir)) * >)	;ITS
+	`((DSK ,(status udir)) * LSP)	;TOPS-10/CMU
+	`((PS  ,(status udir)) * LSP)	;TOPS-20/TENEX
+	`((DSK ,(status udir)) * ←←←)	;SAIL (kludge, meaning no extension)
+
+*) Splicing macros which return a singleton list may now appear at top level.
+   also may appear just after a "dot" for a dotted pair.
+   At top level, if a splicing macro returns a list of one element,
+   then READ returns that element just as if it were read primitively;
+   the same holds true for splicing macros just after a dotted-pair dot.
+   E.g., if "}" is defined as (SETSYNTAX '/} 'SPLICING '(LAMBDA () (READ)))
+   then   (A . }(B))  reads in the same as  (A . B)
+
+*) DEFMACRO usages no longer cause automatic loading of DEFMAX file.
+   Since LISPs prior to about version 1832 did not have autoload properties
+   for the auxillary functions needed by DEFMACRO-defined macros, then
+   each such macro explicitly tried to load the DEFMAX file if not already
+   loaded.  If you see a message about 
+	"|forget-macromemos/|| Undefined Function"
+   it is probably because you are using DEFMACRO output in an old LISP
+   (and some of the system code does depend upon DEFMACRO, e.g. LET)
+
+
+*) DEFUN& and DEFMACRO admits a "supplied-p" variable for &OPTIONAL variables.
+   The format "(binding default-value flag-variable)"  used in a place where a
+   &OPTIONAL variable would be used, causes the symbol "flag-variable" to be
+   bound to T if that optional argument is actually supplied, and to null
+   otherwise.  Example:
+	(DEFUN FOO (&OPTIONAL (Z () ZP?)) ... )
+   causes "ZP?" to be non-null for those calls to FOO with an argument.
+
+*) New COMPLR switch "}", controlling the variable QUIT-ON-ERROR
+   Generally, if an *error* (as opposed to a warning condition)
+   is discovered, the COMPLR will go into a BREAK loop, awaiting
+   further intervention by the user.  But if the value of the
+   variable QUIT-ON-ERROR is non-null, it will merely do a (QUIT);
+   The initial value of this variable is ().
+
+*) New UUO "STRT7" for typing out ascii strings.  Works similar to "STRT".
+   Compiler variable "USE-STRT7", controlled by the "7" switch, selects
+   the use "STRT7" rather than "STRT" (which is for sixbit formats).ββ</pre>
+</body>
+</html>

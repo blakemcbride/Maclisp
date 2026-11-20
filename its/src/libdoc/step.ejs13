@@ -1,0 +1,138 @@
+
+
+;;;			LISP Stepping Package
+;;;
+;;; <comments and problems accepted>              Charles Rich, TS-824
+;;;						  x3-6032
+;;;					          AI: RICH
+;;;
+;;; For complete instructions see .INFO.;STEP INFO
+;;;
+;;; Rewritten 11/03/76
+;;;
+;;;
+;;; User Interface Function
+;;;
+;;;		Valid Forms:				set EVALHOOK*
+;;;				(STEP)			NIL
+;;;				(STEP T)		T
+;;;				(STEP NIL)		NIL
+;;;				(STEP FOO1 FOO2 ...)	(FOO1 FOO2)
+;;;			
+
+(eval-when (compile)
+  (setsyntax '/# 'macro nil))
+
+(declare (special evalhook evalhook* evalhook# prinlevel prinlength)
+         (fixnum i n indent cmd)
+         (macros nil))
+
+;; First Some Macros
+
+(defun 7BIT macro (s)
+       ;; (7BIT n c) tests if n is ascii for c
+       (list '= (list 'boole 1 127. (cadr s)) (caddr s)))
+
+(defun PRINT* macro (s)
+          ;; print with indentation
+         '(do ((i 1 (1+ i))
+               (indent (* 2 evalhook#))
+               (prinlevel 3)
+               (prinlength 5))
+              ((> i indent)(cond (prin1 (funcall prin1 form))
+                                 (t (prin1 form))))
+              (tyo 32.)))
+
+(DEFUN STEP FEXPR (ARG) 
+       (COND ((OR (NULL ARG) (CAR ARG))
+	      (SETQ *RSET T)				;must be on for hook to work
+	      (SSTATUS EVALHOOK T)			;also
+	      (SETQ EVALHOOK# 0.)				       ;initialize depth count
+
+	      (SETQ EVALHOOK NIL)				       ;for safety
+	      (SETQ EVALHOOK*
+		    (COND ((NULL ARG) NIL)
+                          ((EQ (CAR ARG) T))
+                          (ARG)))
+	      (SETQ EVALHOOK 'EVALHOOK*))		               ;turn system hook to my function
+	     (T (SETQ EVALHOOK* NIL)
+	        (SETQ EVALHOOK NIL)
+		(SSTATUS EVALHOOK NIL)))) 
+
+
+;;;
+;;; LISP evaluator comes here whenever EVALHOOK is Non-NIL and points here
+;;; It expects me to do the evaluation and return the value.
+;;;
+
+(defun EVALHOOK* (form)
+       ;; returns evaluation of form
+       (cond (evalhook*
+              ;; see if selective feature kicks in here
+              (and (not (atom form))
+                   (not (eq evalhook* t))
+                   (memq (car form) evalhook*)
+                   (setq evalhook* t))
+              (cond ((eq evalhook* t)
+                     ;; printq out form before evaluation
+                     (terpri)
+                     (print*)
+                     (cond ((atom form)
+                            (cond ((not (or (numberp form)(null form)(eq form t)))
+                                   (princ '| = |)
+                                   ((lambda (prinlevel prinlength)
+                                            (setq form (evalhook form nil))
+                                            (cond (prin1 (funcall prin1 form))
+                                                  (t (prin1 form))))
+                                    3 5))))
+                           (t ; s-expression
+                            (prog (cmd hookfn)
+                        cmdlp  (setq cmd (tyi tyi))
+                               ;; uppercase alphabetics
+                               (cond (((lambda (n)(and (> n 64.)(< n 91.)))
+				       (boole 2. 32. (boole 1 127. cmd)))
+				      (setq cmd (boole 2 32. cmd))))
+                               ;; dispatch on command character
+                               (cond ((7bit cmd 32.)	;<sp> continue, but suppress
+                                      (cond ((and (not (atom form))
+                                                  (eq (car (getl (car form)  
+                                                           '(expr fexpr lexpr subr fsubr lsubr macro)))
+                                                 'macro))
+                                             ;; do macro expansion
+                                             (setq form (funcall (get (car form) 'macro)
+                                                                 form))
+                                             (terpri)
+                                             (print*)
+                                             (go cmdlp))
+                                            (t (setq hookfn 'evalhook*))))
+                                     ((7bit cmd 80.)	; "P" print in full
+                                      (prog (prinlevel prinlength)
+                                            (cond (prin1 (terpri)(funcall prin1 form))
+                                                  (t (print form))))
+                                      (go cmdlp))
+                                     ((or (7bit cmd 9.)(7bit cmd 13.)) ;<tab> or <cr>
+                                      (setq evalhook* nil	       ;stop everything
+                                            hookfn nil))
+                                     ((7bit cmd 127.)		;<rubout> no deeper
+                                      (setq hookfn nil))
+                                     ((7bit cmd 77.)	; "M" continue including macro expansion
+                                      (setq hookfn 'evalhook*))
+                                     ((7bit cmd 66.)	; "B" give breakpoint
+                                      (break step)
+                                      (print*)
+                                      (go cmdlp))
+                                     (t (tyo 7.)(go cmdlp)))
+                               ;; evaluate form
+			       ((lambda (evalhook#)
+					(setq form (evalhook form hookfn)))
+				(1+ evalhook#))
+                               ;; print out evaluated form
+                               (cond ((and evalhook* (not (zerop evalhook#)))
+                                      (terpri) (print*))))))
+                     ;;return evaluated form
+                     form)
+                    (t  (evalhook form 'evalhook*))))   ; keep looking
+             (t (evalhook form 'evalhook*))))			; skip out quick
+             
+                                     
+                                             

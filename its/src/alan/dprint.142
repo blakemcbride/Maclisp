@@ -1,0 +1,685 @@
+;;;-*-Lisp-*-
+
+(declare (load '((alan) lspenv init)))
+
+(deflap (alan/;dprint-usrhu subr)
+	(movei a 't)
+	(popj p))
+
+(deflap (alan/;dprint-sendi lsubr)
+	(movn tt t)
+	(hrl tt tt)		;TT: <nargs>,,<nargs>
+	(addi t 0 p)		;T: pointer to args
+	(move a 2 t)		;A: key
+	(cain a 'equal)
+	 (jrst 0 equ)
+	(caie a '/:print-self)
+	 (cain a 'print)
+	  (jrst 0 prt)
+	(cain a 'flatsize)
+	 (jrst 0 flat)
+	(cain a '/:gformat-self)
+	 (jrst 0 gfmt)
+	(caie a '/:which-operations)
+	 (cain a 'which-operations)
+	  (jrst 0 which)
+	(cain a 'eval)
+	 (jrst 0 ev)
+	(movni t 0 tt)		;T: -<nargs>
+	(jcall 16 'alan/;dprint-unknown-message)
+
+equ	(setzi a)
+	(sub p tt)
+	(popj p)
+
+ev	(skipa a 1 t)
+ret0	 (movei a '0)
+	(sub p tt)
+	(popj p)
+
+flat	(skipe 0 3 t)
+	 (jrst 0 ret0)
+	(move a 1 t)
+	(move b 4 t)
+	(move c 5 t)
+	(sub p tt)
+	(jcall 3 'dprint-flatsize-hunk)
+
+gfmt	(move a 1 t)
+	(sub p tt)
+	(jcall 1 'dprint-gformat-hunk)
+
+which	(move a 1 t)
+	(sub p tt)
+	(jcall 1 'dprint-which-operations)
+
+prt	(move a 1 t)
+	(move b 3 t)
+	(move c 4 t)
+	(move 4 5 t)
+	(sub p tt)
+	(jcall 4 'dprint-hunk))
+
+(declare (or (get 'defstruct-description-named-p 'macro)
+	     (load '((alan) struct))))
+
+(defun dprint-hunk (h stream level slashify-p)
+  (let ((newlevel (1+ level))
+	(tem))
+    (cond ((and (symbolp (car h))
+		(setq tem (get (car h) 'named-hunk-printer)))
+	   (funcall tem h stream))
+	  ((and (symbolp (car h))
+		(setq tem (get (car h) 'defstruct-description))
+		(defstruct-description-named-p tem))
+	   (let ((base 8))
+	     (tyo #/# stream)
+	     (prin1 (car h) stream)
+	     (tyo #/- stream)
+	     (prin1 (maknum h) stream)))
+	  ((or (null prinlevel)
+	       (< newlevel prinlevel))
+	   (tyo #/[ stream)
+		(print-object (cxr 0 h) newlevel slashify-p stream)
+		(do ((i 1 (1+ i))
+		     (size (hunksize h)))
+		    ((= i size))
+		  (tyo #\space stream)
+		  (print-object (cxr i h) newlevel slashify-p stream))
+		(tyo #/] stream))
+	  (t (tyo #/# stream)))))
+
+(defun dprint-which-operations (h)
+  (if (or (not (symbolp (car h)))
+	  (get (car h) 'named-hunk-gformat)
+	  (not (getl (car h) '(named-hunk-printer defstruct-description))))
+      '(/:gformat-self /:print-self print flatsize equal eval)
+      '(/:print-self print flatsize equal eval)))
+
+(defun dprint-gformat-hunk (h)
+  (let ((f (get (car h) 'named-hunk-gformat)))
+    (cond ((not (null f))
+	   (funcall f h))
+	  (t (GF |{1'['*| (cxr 0 h))
+	     (do ((i 1 (1+ i))
+		  (size (hunksize h)))
+		 ((not (< i size)))
+	       (GF |,*| (cxr i h)))
+	     (GF |']'}|)))))
+
+(defun alan/;dprint-unknown-message n
+  (error "-- Unknown message to hunk." (listify n)))
+
+(defvar *dprint-flatsize-count*)
+
+(defun dprint-flatsize-stream (sfa op arg)
+  sfa	;ignored
+  arg	;ignored
+  (caseq op
+    (tyo (setq *dprint-flatsize-count* (1+ *dprint-flatsize-count*)))
+    (which-operations '(tyo))
+    (t (error "-- unsolicited operation to flatsize SFA." op))))
+
+(defvar *dprint-flatsize-stream*
+  (sfa-create 'dprint-flatsize-stream 0 'dprint-flatsize-stream))
+
+(defun dprint-flatsize-hunk (h level slashify-p)
+  (let ((*dprint-flatsize-count* 0))
+    (dprint-hunk h *dprint-flatsize-stream* level slashify-p)
+    *dprint-flatsize-count*))
+
+(defun dprint (flag)
+  (cond ((null flag)
+	 (cond ((eq (status usrhu) 'alan/;dprint-usrhu)
+		(sstatus usrhu nil)
+		(sstatus sendi nil)
+		(sstatus calli nil))))
+	((eq (status usrhu) 'alan/;dprint-usrhu))
+	((or (null (status usrhu))
+	     (eq flag 'screw))
+	 (sstatus usrhu 'alan/;dprint-usrhu)
+	 (sstatus sendi 'alan/;dprint-sendi)
+	 (sstatus calli nil))
+	(t (format t "~&~
+;;;You must use the SCREW flag if you wish to screw yourself!
+;;;(The USRHUNK feature is already in use by some other cretin.)")))
+  *)
+
+(defstruct (describe-internal-sfa (type sfa)
+				  conc-name default-pointer
+				  (eval-when (eval compile))
+				  )
+	   stream
+	   linel
+	   external-sfa
+	   )
+
+(defun describe-internal-sfa (describe-internal-sfa op arg)
+  (caseq op
+    (tyo (or (minusp arg)
+	     (= arg #\lf)
+	     (if (= arg #\cr)
+		 (describe-terpri (describe-internal-sfa-external-sfa))
+		 (if (< (charpos (describe-internal-sfa-stream))
+			(describe-internal-sfa-linel))
+		     (tyo arg (describe-internal-sfa-stream))
+		     (*throw 'describe-sfa 't)))))
+    (which-operations '(tyo))
+    (t (error "-- unsolicited operation to describe SFA." op))))
+
+(defstruct (describe-sfa (type sfa)
+			 conc-name default-pointer
+			 (constructor make-describe-sfa-1)
+			 (eval-when (eval compile))
+			 )
+	   internal-sfa
+	   stream
+	   linel
+	   listen
+	   pagel
+	   )
+
+(defun describe-sfa (describe-sfa op arg)
+  (caseq op
+    (tyo (or (minusp arg)
+	     (= arg #\lf)
+	     (if (= arg #\cr)
+		 (describe-terpri describe-sfa)
+		 (and (< (charpos (describe-sfa-stream))
+			 (describe-sfa-linel))
+		      (tyo arg (describe-sfa-stream))))))
+    (prin1
+      (*catch 'describe-sfa
+	      (prin1 arg (describe-sfa-internal-sfa))))
+    (print
+      (describe-terpri describe-sfa)
+      (*catch 'describe-sfa
+	      (progn (prin1 arg (describe-sfa-internal-sfa))
+		     (tyo 40 (describe-sfa-internal-sfa)))))
+    (princ
+      (*catch 'describe-sfa
+	      (princ arg (describe-sfa-internal-sfa))))
+    (which-operations '(tyo prin1 print princ))
+    (charpos (charpos (describe-sfa-stream)))	;unsolicited damnit!
+    (t (error "-- unsolicited operation to describe SFA." op))))
+
+(defun make-describe-sfa (stream)
+  (let ((linel 79.)
+	(pagel nil)
+	(listen nil))
+    (cond ((memq 'tty (car (status filemode stream)))
+	   (setq listen (status ttycons stream))
+	   (let ((size (status ttysize stream)))
+	     ;;write around some bugs.
+	     (setq linel (abs (cdr size)))
+	     (setq pagel (abs (car size)))
+	     (if (and (> pagel linel)
+		      (< pagel 200.))
+		 (setq pagel (prog1 linel (setq linel pagel)))))))
+    (let ((describe-sfa
+	    (make-describe-sfa-1
+		stream stream
+		linel linel
+		listen listen
+		pagel (and pagel (- pagel 2))))
+	  (describe-internal-sfa
+	    (make-describe-internal-sfa
+		stream stream
+		linel linel)))
+      (setf (describe-sfa-internal-sfa) describe-internal-sfa)
+      (setf (describe-internal-sfa-external-sfa) describe-sfa)
+      describe-sfa)))
+
+(defvar describe-indentation 0)
+
+(defun describe-terpri (describe-sfa)
+  (let ((stream (describe-sfa-stream))
+	(listen (describe-sfa-listen))
+	(pagel (describe-sfa-pagel)))
+    (or (null listen)
+	(zerop (listen listen))
+	(member (tyipeek nil listen) '(#\space #\cr #\lf #\tab))
+	(*throw 'describe-punt 't))
+    (terpri stream)
+    (or (null pagel)
+	(< (car (cursorpos stream)) pagel)
+	(progn (princ "(More)" stream)
+	       (or (member (tyipeek nil listen) '(#\space #\cr #\lf #\tab))
+		   (*throw 'describe-punt 't))
+	       (tyi listen)
+	       (describe-home stream)))
+    (do tabs (// describe-indentation 8) (1- tabs) (zerop tabs)
+	(tyo #\tab stream))
+    (do spaces (\ describe-indentation 8) (1- spaces) (zerop spaces)
+	(tyo #\space stream))))
+
+(defun describe-home (stream)
+  (cursorpos 'E stream)
+  (cursorpos 'T stream)
+  (cursorpos 'L stream))
+
+(defvar describe-sfa-cache (make-describe-sfa-1 stream 'foobar))
+
+(defvar describe-output)
+
+(defvar describe-level 0)
+
+(defvar describe-level-limit 2)
+
+(defvar described-already)
+
+(defvar describe-toplevel-p t)
+
+(defvar describe-next)
+
+(declare (special *))
+
+(defun describe n
+  (let ((arg1 (if (zerop n) * (arg 1))))
+    (let ((describe-next 'describe-next)
+	  (described-already (list arg1))
+	  (describe-output
+	   (let ((f (if (> n 1) (arg 2) tyo)))
+	     (if (eq f (describe-sfa-stream describe-sfa-cache))
+		 describe-sfa-cache
+		 (setq describe-sfa-cache (make-describe-sfa f))))))
+      (or (null (describe-sfa-pagel describe-output))
+	  (< (car (cursorpos (describe-sfa-stream describe-output)))
+	     (- (describe-sfa-pagel describe-output) 5))
+	  (describe-home (describe-sfa-stream describe-output)))
+      (*catch 'describe-punt (describe-1 arg1))
+      arg1)))
+
+(args 'describe '(0 . 2))
+
+(defun describe-next (x ind)
+  (prin1 x describe-output)
+  (if (memq x described-already)
+      (or (symbolp x)
+	  (numberp x)
+	  (princ "  {*}" describe-output))
+      (and (< describe-level describe-level-limit)
+	   (let ((describe-level (1+ describe-level))
+		 (describe-indentation (+ ind describe-indentation))
+		 (describe-toplevel-p nil))
+	     (push x described-already)
+	     (describe-1 x)))))
+
+(defun describe-1 (x)
+  (cond ((hunkp x)
+	 (let ((name (car x)))
+	   (if (and (symbolp name)
+		    (or (get name 'named-hunk-describer)
+			(defstruct-description-named-p
+			  (get name 'defstruct-description))))
+	       (describe-defstruct-1 x name)
+	       (describe-hunk x))))
+	((not (atom x)) (describe-cons x))
+	((symbolp x) (describe-symbol x))
+	((arrayp x) (describe-array x))
+	(describe-toplevel-p
+	 (format describe-output
+		 "~&~S is an object of type ~S."
+		 x
+		 (typep x)))))
+
+(defun describe-defstruct n
+  (let ((describe-next 'describe-next)
+	(described-already (list (arg 1)))
+	(describe-output
+	  (let ((f (if (> n 2) (arg 3) tyo)))
+	    (if (eq f (describe-sfa-stream describe-sfa-cache))
+		describe-sfa-cache
+		(setq describe-sfa-cache (make-describe-sfa f))))))
+    (or (null (describe-sfa-pagel describe-output))
+	(< (car (cursorpos (describe-sfa-stream describe-output)))
+	   (- (describe-sfa-pagel describe-output) 5))
+	(describe-home (describe-sfa-stream describe-output)))
+    (*catch 'describe-punt (describe-defstruct-1 (arg 1) (arg 2)))
+    (arg 1)))
+
+(args 'describe-defstruct '(2 . 3))
+
+(defun describe-defstruct-1 (x name)
+  (let ((hook (get name 'named-hunk-describer)))
+    (if (not (null hook))
+	(funcall hook x)
+	(let* ((description
+		 (or (get name 'defstruct-description)
+		     (error "-- not the name of any defstruct." name)))
+	       (l (defstruct-description-slot-alist)))
+	  (if describe-toplevel-p
+	      (if (hunkp x)
+		  (format describe-output
+		    "~&~S is a structure of type ~S.~@
+		       It is implemented as a hunk of length ~R (type ~S).~@
+		       Its components are:"
+		    x name (hunksize x) (typep x))
+		  (format describe-output
+			  "~&~S is a structure of type ~S.~@
+			     It is implemented as a ~S.~@
+			     Its components are:"
+			  x name (typep x)))
+	      (format describe-output
+		      "~&~S's components are (~S):"
+		      x (car x)))
+	  (let ((maxl 0))
+	    (dolist (p l)
+	      (setq maxl (max maxl (flatsize (car p)))))
+	    (dolist (p l)
+	      (format describe-output
+		      "~&~S: ~vX"
+		      (car p)
+		      (- maxl (flatsize (car p))))
+	      (funcall describe-next
+		       (defstruct-examine x name (car p))
+		       3)))))))
+
+(or (fboundp 'defstruct-examine)
+    (get 'defstruct-examine 'autoload)
+    (defprop defstruct-examine ((lisp) struct) autoload))
+
+(defun describe-hunk (x)
+  (cond (describe-toplevel-p
+	  (let ((size (hunksize x)))
+	    (format describe-output
+		    "~&This is a hunk of length ~R (type ~S).~@
+		       Its elements are:"
+		    size (typep x))
+	    (do ((maxl (flatsize (1- size)))
+		 (i 0 (1+ i)))
+		((= i size))
+	      (format describe-output
+		      "~&~S: ~vX"
+		      i (- maxl (flatsize i)))
+	      (funcall describe-next (cxr i x) 3))))))
+
+(defun describe-cons (x)
+  (cond (describe-toplevel-p
+	  (format describe-output "~&(~&  ")
+	  (funcall describe-next (car x) 5)
+	  (describe-cdr (cdr x)))))
+
+(defun describe-cdr (x)
+  (cond ((null x)
+	 (format describe-output "~&)"))
+	((or (atom x) (hunkp x))
+	 (format describe-output "~&.~&  ")
+	 (funcall describe-next x 5)
+	 (format describe-output "~&)"))
+	(t
+	 (format describe-output "~&  ")
+	 (funcall describe-next (car x) 5)
+	 (describe-cdr (cdr x)))))
+
+(defun describe-symbol (x)
+  (let ((it-flag nil))
+    (cond ((or (not (memq x '(nil t)))		;NIL and T are boring
+	       describe-toplevel-p)
+	   (cond (describe-toplevel-p
+		  (format describe-output "~&~S is a symbol." x)
+		  (setq it-flag t)))
+	   (cond ((not (memq x (aref obarray (\ (sxhash x) #O777))))
+		  (format describe-output "~&~:[~S~;It~] is NOT interned."
+			  it-flag x)
+		  (setq it-flag t)))
+	   (and (boundp x)
+		(let ((y (symeval x)))
+		  (format describe-output "~&~:[~S's~;Its~] binding is: "
+			  it-flag x)
+		  (setq it-flag t)
+		  (funcall describe-next y 3)))
+	   (let ((sysp (sysp x))
+		 (args (args x))
+		 (plist (do ((l (plist x) (cddr l))
+			     (nl nil
+				 (if (memq (car l)
+					   '(variable-documentation
+					     documentation))
+				     nl
+				     (cons (cons (car l) (cadr l)) nl))))
+			    ((null l) (nreverse nl))))
+		 (def (car (getl x '(subr lsubr fsubr expr fexpr
+				     macro array autoload))))
+		 (vdoc (get x 'variable-documentation))
+		 (doc (get x 'documentation)))
+	     (or (null sysp)
+		 (format describe-output
+			 "~&~:[~S~;~*It~] is a system ~S."
+			 it-flag x sysp))
+	     (or (null def)
+		 (eq def sysp)
+		 (format describe-output
+			 "~&~:[~S~;~*It~] is defined as a ~S."
+			 it-flag x def))
+	     (setq it-flag (or it-flag sysp def))
+	     (cond ((not (null args))
+		    (format describe-output
+			    "~:[~&~;  ~]~:[~S~;It~] takes "
+			    (or sysp def) it-flag x)
+		    (if (equal (cdr args) #o776)
+			(format describe-output
+				"at least ~R argument~:P."
+				(car args))
+			(format describe-output
+				"~@[from ~R to ~]~R argument~:P."
+				(car args)
+				(cdr args)))
+		    (setq it-flag t)))
+	     (cond ((not (null vdoc))
+		    (format describe-output
+			    "~&~:[~S~;It~] is documented as a variable:"
+			    it-flag x)
+		    (describe-documentation vdoc)
+		    (setq it-flag t)
+		    (when (not (null doc))
+		      (format describe-output "~&It is further documented:")
+		      (describe-documentation doc)))
+		   ((not (null doc))
+		    (format describe-output
+			    "~&~:[~S~;It~] is documented:"
+			    it-flag x)
+		    (describe-documentation doc)
+		    (setq it-flag t)))		   
+	     (or (not describe-toplevel-p)
+		 (null plist)
+		 (let ((maxl 0))
+		   (format describe-output
+			   "~&~:[~S~;It~] has the following properties:"
+			   it-flag x)
+		   (do ((l plist (cdr l)))
+		       ((null l))
+		     (setq maxl (max maxl (flatsize (caar l)))))
+		   (do ((l plist (cdr l)))
+		       ((null l))
+		     (format describe-output
+			     "~&~S: ~vX"
+			     (caar l)
+			     (- maxl (flatsize (caar l))))
+		       (funcall describe-next (cdar l) 3)))))))))
+
+(defun describe-documentation (doc)
+  (let ((describe-indentation (+ describe-indentation 4)))
+    (terpri describe-output)
+    (format describe-output doc)))
+
+(defvar describe-array-size-limit 20.)
+
+(defun describe-array (x)
+  (let* ((dims (arraydims x))
+	 (dl (cdr dims))
+	 (size (apply #'times dl)))
+    (and describe-toplevel-p
+	 (format describe-output
+		 "~&~S is a ~R dimensional array of type ~S.~@
+		    Its dimensions are: ~{~S~^ x ~}"
+		 x (length dl) (car dims) dl))
+    (cond ((and (not (zerop size))	;readtables for example...
+		(< size describe-array-size-limit))
+	   (format describe-output
+	     "~&~:[~S's~;~*Its~] elements are:"
+	     describe-toplevel-p x)
+	   (print-array-1 x)))))
+
+(defvar print-array-level-limit 1)
+
+(defun print-array n
+  (let ((describe-next 'describe-next)
+	(described-already (list (arg 1)))
+	(describe-level-limit print-array-level-limit)
+	(describe-output
+	  (let ((f (if (> n 1) (arg 2) tyo)))
+	    (if (eq f (describe-sfa-stream describe-sfa-cache))
+		describe-sfa-cache
+		(setq describe-sfa-cache (make-describe-sfa f))))))
+    (or (null (describe-sfa-pagel describe-output))
+	(< (car (cursorpos (describe-sfa-stream describe-output)))
+	   (- (describe-sfa-pagel describe-output) 5))
+	(describe-home (describe-sfa-stream describe-output)))
+    (*catch 'describe-punt (print-array-1 (arg 1)))
+    (arg 1)))
+
+(args 'print-array '(1 . 2))
+
+(defun print-array-1 (x)
+  (let ((dl (cdr (arraydims x)))
+	(maxl 2))
+    (if (zerop (apply #'times dl))
+	(format describe-output "~&~S is an array of length zero." x)
+	(do ((l dl (cdr l))
+	     (i nil (cons 0 i)))
+	    ((null l)
+	     (prog (el)
+		 L (setq el (apply x i))
+		   (format describe-output "~&~S~vX" i (- maxl (flatsize i)))
+		   (funcall describe-next el 3)
+		   (and (print-array-inc-index i dl)
+			(go L))))
+	  (setq maxl (+ 1 maxl (flatsize (1- (car l))))))))
+  x)
+
+(defun print-array-inc-index (i lim)
+  (and (not (null i))
+       (or (print-array-inc-index (cdr i) (cdr lim))
+	   (let ((n (1+ (car i))))
+	     (cond ((< n (car lim))
+		    (rplaca i n)
+		    t)
+		   (t
+		    (rplaca i 0)
+		    nil))))))
+
+(defvar inspect-history)
+
+(defvar inspect-n)
+
+(defvar inspect-l)
+
+;;;Needed features:
+;;; describe as instance of a defstruct
+;;; print an array
+
+(defun inspect n
+  (let ((describe-next 'inspect-next)
+	(inspect-history nil)
+	(describe-output
+	  (if (eq tyo (describe-sfa-stream describe-sfa-cache))
+	      describe-sfa-cache
+	      (setq describe-sfa-cache (make-describe-sfa tyo)))))
+    (do ((x (if (zerop n) * (arg 1)) next)
+	 (next) (inspect-n) (inspect-l) (c))
+	(nil)
+ DISP (cursorpos 'C)
+      (*catch 'describe-punt (progn (setq inspect-n 0)
+				    (setq inspect-l nil)
+				    (describe-1 x)
+				    (go P)))
+      (go NP)
+  ERR (princ " ??? ")
+    P (terpri)
+      (princ "-> ")
+   NP (setq c (tyi))
+      (or (< c #/a)
+	  (> c #/z)
+	  (setq c (- c #o40)))
+      (if (or (< c #/0)
+	      (> c #/9))
+	  (caseq c
+	    (#/J (princ " -> ")
+		 (let ((n (let ((ibase 10.)) (read))))
+		   (if (or (not (fixp n))
+			   (< n 0)
+			   (not (< n (length inspect-l))))
+		       (go ERR)
+		       (setq next (nth n (nreverse inspect-l))))))
+	    (#/L (cond ((null inspect-history)
+			(princ " No more.")
+			(go P))
+		       (t (setq next (pop inspect-history))
+			  (go L))))
+	    (#/I (terpri)
+		 (princ "Form to evaluate and inspect: ")
+		 (errset
+		   (setq next (let ((* x))
+				(declare (special *))
+				(eval (read))))))
+	    (#/E (terpri)
+		 (princ "Form to evaluate: ")
+		 (errset
+		   (let ((* x))
+		     (declare (special *))
+		     (print (eval (read)))))
+		 (go P))
+	    (#/S (terpri)
+		 (princ "Symbol to set to current object: ")
+		 (let ((s (read)))
+		   (or (symbolp s) (go ERR))
+		   (set s x))
+		 (go P))
+	    (#/A (terpri)
+		 (princ "Apropos: ")
+		 (setq next (sort (apropos (read)) 'alphalessp)))
+	    (#/G (or (get 'gprint1 'lsubr)
+		     (load '((liblsp) gprint fasl)))
+		 (cursorpos 'C)
+		 (gprint1 x nil nil nil nil nil nil)
+		 (go P))
+	    (#/D (cursorpos 'C)
+		 (describe x)
+		 (go P))
+	    (#/H (setq next (cons x inspect-history)))
+	    (#/Q (return x))
+	    (#\form (go DISP))
+	    (#/? (princ "
+Inspector commands:
+(numbers in square brackets are base 10.)
+
+0 - 9	Jump to the object with that number.
+J	Jump to a numbered object.  prompts for a number.
+L	Last object.
+I	evaluate form and Inspect result.  * bound to current object.
+S	Set some symbol's value to be the current object.
+E	Evaluate form and print result.  * bound to current object.
+D	Describe current object.
+G	Grind current object.
+H	History list.
+A	Apropos.
+Q	Quit. inspector returns current object.
+^L	Redisplay current object.")
+		 (go P))
+	    ((#\space #\cr #\lf #\rubout) (go NP))
+	    (t (go ERR)))
+	  (if (< (- c #/0) (length inspect-l))
+	      (setq next (nth (- c #/0) (nreverse inspect-l)))
+	      (go ERR)))
+      (push x inspect-history)
+    L )))
+
+(args 'inspect '(0 . 1))
+
+(defun inspect-next (x ignore)
+  (format describe-output "[~2D] ~S" inspect-n x)
+  (setq inspect-n (1+ inspect-n))
+  (push x inspect-l))
+
+(sstatus feature alan/;dprint)

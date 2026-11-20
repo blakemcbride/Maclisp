@@ -1,0 +1,183 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Benchmark &#45; PERQ CL vs Apollo T -->
+<!--X-From-R13: Quneyrf Rbyna &#60;pcqNGQZO&#45;ZAQGE.ODBO> -->
+<!--X-Date: Mon ,8 Oct 84 13:17:49 EDT -->
+<!--X-Message-Id: 193c14bd13b4c8487377151de4e308f1@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Benchmark - PERQ CL vs Apollo T</title>
+<link rev="made" href="mailto:cpd@UCLA-LOCUS.ARPA">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00840.html">Date Prev</a>][<a href="msg00839.html">Date Next</a>][<a href="msg00840.html">Thread Prev</a>][<a href="msg00839.html">Thread Next</a>][<a href="maillist.html#00841">Date Index</a>][<a href="threads.html#00841">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Benchmark - PERQ CL vs Apollo T</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: T-Users@Yale, Lisp-Forum@MIT-MC, Common-Lisp@Su-AI</li>
+<li><em>Subject</em>: Benchmark - PERQ CL vs Apollo T</li>
+<li><em>From</em>: Charles Dolan &lt;cpd@UCLA-LOCUS.ARPA&gt;</li>
+<li><em>Date</em>: Mon ,8 Oct 84 13:17:49 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>UCLA has a demo unit of the new PERQ 68000 based workstation
+running Common Lisp. We are currently using Apollo workstations
+and T. I compared the workstations on the following points:
+
+	standard shell startup,
+	standard editor startup,
+	lisp editor startup,
+	compilation,
+	(fact 100) - recursive factorial,
+	(tak 18 12 6) - code given below,
+	(reverse1 *long-list*) - recursive reverse of a 100
+				 element list, and
+	(reverse2 *long-list*) - recursive reverse of a 100
+				 element list using closures.
+
+
+The DN300 is Apollo's low end workstation. It had 1.5 MB and no
+local disk. The DN460 is Apollo's bit-slice implementation of the
+68000 instruciton set.
+
+		PERQ		DN300		DN460
+
+shell		10 sec		2/5.5 sec [5]	1/3 sec [5]
+editor		7 sec		1 sec		1 sec
+lisp editor [1]	14/1.5 sec	23.3/3 sec	10.5/1.8 sec
+compilation [4]	11 sec		54 sec		24 sec
+
+(fact 100)	2.1 sec		1.12 sec	0.61 sec
+(tak ...) [3]	6.3 sec		3.4/6.3 sec [2]	1/2.7 sec [2]
+(reverse1 ...)	2.2 sec		1.2 sec		0.42 sec
+(reverse2 ...)	2.7 sec		1.6 sec		0.67 sec
+
+All times were computed by running the funciton is a loop 30
+times and dividing the wall clock time by 30.
+
+[1] Since the lisp editors are embedded in the lisp environment
+    two times are given. The first is for the initial startup of
+    the editor the first time it is invoked. The second is for
+    subsequent invocations.
+
+[2] The faster of the two times times is for the case when block
+    complilation is used. Here the recursive calls to (tak ...)
+    are compiled as jumps.
+
+[3] In the T code explicit calls to the FIXNUM arithmetic
+    routines 'FX&lt;' and 'FX-' were used.
+
+[4] The which was compiled is the code below plus one auxiliary
+    function for each benchmark which performed the loop.
+
+[5] The first time is for the AEGIS shell. The Second is for the
+    AUX cshell.
+
+The code follows.
+
+T:
+	(define (fact i) (cond ((eq? i 0) 1)
+        	               (T (* i (fact (-1+ i))))))
+
+Common Lisp:
+	(defun fact (i) (cond ((eq i 0) 1)
+			      (T (* i (fact (1- i))))))
+
+T:
+	(define (tak x y z)
+	        (cond ((not (fx&lt; y x)) z)
+	              (T
+	                 (tak (tak (fx- x 1) y z)
+        	              (tak (fx- y 1) z x)
+	                      (tak (fx- z 1) x y)))))
+
+Common Lisp:
+	(defun tak (x y z)
+		(declare (type integer x)
+			 (type integer y)
+			 (type integer z))
+		(cond ((not (&lt; y x) z)
+		      (T
+			 (tak (tak (- x 1) y z)
+			      (tak (- y 1) z x)
+			      (tak (- z 1) x y)))))
+
+T:
+	(define (reverse1 l) 
+		(cond ((null? l) nil)
+                      (T (append (reverse1 (cdr l)) (list (car l))))))
+
+Common Lisp:
+	(defun reverse1 (l)
+	       (cond ((null l) nil)
+		     (T (append (reverse1 (cdr l )) (list (car l)))))
+
+T:
+	(define (reverse2 l) 
+	   (cond ((null? l) (lambda () l))
+	         (T (lambda () (append (apply (reverse2 (cdr l)) ())
+	                                (list (car l)))))))
+
+Common Lisp:
+	(defun reverse2 (l)
+	  (cond ((null l) (function (lambda () l)))
+		(T (function
+		    (lamda () (append (apply (reverse2 (cdr l)) ())
+				      (list (car l))))))))
+
+
+
+	-Charlie Dolan
+	 cpd@UCLA-LOCUS.ARPA
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00840.html">Benchmark - PERQ CL vs Apollo T</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00839.html">Concept-LNZ manual</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00840.html">Benchmark - PERQ CL vs Apollo T</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00839.html">Concept-LNZ manual</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00841"><strong>Date</strong></a></li>
+<li><a href="threads.html#00841"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

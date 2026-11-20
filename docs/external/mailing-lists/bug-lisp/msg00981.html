@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 12 Dec 81 08:19:00 GMT -->
+<!--X-Message-Id: 9e8f997f3505485ed6c8e9cd6c01cc73@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00982.html">Date Prev</a>][<a href="msg00980.html">Date Next</a>][<a href="msg00982.html">Thread Prev</a>][<a href="msg00980.html">Thread Next</a>][<a href="maillist.html#00981">Date Index</a>][<a href="threads.html#00981">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 12 Dec 81 08:19:00 GMT</li>
+<li><em>Original-date</em>: 12 December 1981 03:19-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>This a bug in the GRIND/SPRINTer:
+
+b 
+(LAMBDA (RETURN-17) (CLOSED) ((LAMBDA (X) (ENV RETURN-17) (SETQ X (LAMBDA (C-20 Y) (CLOSED X) (SETQ X (LAMBDA (C-21) (CLOSED Y) (C-21 Y)) C-20)) RETURN-17)) (QUOTE 1))) 
+(sprinter b)
+
+(LAMBDA (RETURN-17) 
+  (CLOSED)
+  ((LAMBDA (X) 
+     (ENV RETURN-17)
+     (
+;(RETURN-17) SETQ-PREDICT
+
+;BKPT WRNG-NO-ARGS
+
+
+Now, I will admit that that happens to look like a three &quot;argument&quot;
+SETQ, but I don't think that just because I happen to have some list
+structure that LOOKS like code (but isn't) I should be treated this
+way.  That isn't a very comprehensible error message, and just why
+does it claim to be a WRNG-NO-ARGS error?  (It's not actually going to
+let me return something to continue with is it?)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00982.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00980.html">Lisp 2022 on a Tops-10</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00982.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00980.html">Lisp 2022 on a Tops-10</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00981"><strong>Date</strong></a></li>
+<li><a href="threads.html#00981"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

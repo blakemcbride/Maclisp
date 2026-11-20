@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MacLisp on OZ -->
+<!--X-From-R13: OZO@ ng [WF&#45;AL -->
+<!--X-Date: Mon, 21 Jun 82 03:46:00 GMT -->
+<!--X-Message-Id: 3cb580704d431ca1f19bb99e577e8132@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MacLisp on OZ</title>
+<link rev="made" href="mailto:ALAN at MIT-OZ">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00874.html">Date Prev</a>][<a href="msg00872.html">Date Next</a>][<a href="msg00874.html">Thread Prev</a>][<a href="msg00870.html">Thread Next</a>][<a href="maillist.html#00873">Date Index</a>][<a href="threads.html#00873">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MacLisp on OZ</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-OZ, bug-oz at MIT-OZ</li>
+<li><em>Subject</em>: MacLisp on OZ</li>
+<li><em>From</em>: ALAN at MIT-OZ</li>
+<li><em>Date</em>: Mon, 21 Jun 82 03:46:00 GMT</li>
+<li><em>Original-date</em>: Sunday, 20 June 1982  23:46-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Would it be useful to move the LIBLSP directory from ITS to OZ?  Some of the
+more useful things are already present in &lt;maclisp&gt; (such as STEP and APROPOS)
+but people may have come to depend on some of the other, less commonly used
+utilities.  Also people are liable to have things like (load '((liblsp) frob))
+in their code, and it would be nice to make the transition easy for them.  (I
+just moved the DRIBBLE package into &lt;maclisp&gt;, it has a tendency to name files
+&quot;dribbl.&gt;.1&quot;, but it is still useful.)
+
+On EE there is a LISP: logical-name for ps:&lt;maclisp&gt;.  I presume this is so
+that the MacLisp specific hack where ((LISP) FOO) gets translated to 
+((PS MACLISP) FOO) by virtue of the symbol LISP having a PPN property of
+(PS MACLISP) will work in the entire Twenex environment.  This sounds like a
+good idea, perhaps OZ should have it to. 
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00874.html">OZ</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00872.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00874.html">OZ</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00870.html">MacLisp on OZ</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00873"><strong>Date</strong></a></li>
+<li><a href="threads.html#00873"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: OZO@N[WF&#45;OW -->
+<!--X-Date: Wed, 15 Jun 78 00:09:07 GMT -->
+<!--X-Message-Id: 03a00b5c05847c4b630054d675df7217@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:ALAN@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03285.html">Date Prev</a>][<a href="msg03283.html">Date Next</a>][<a href="msg03285.html">Thread Prev</a>][<a href="msg03283.html">Thread Next</a>][<a href="maillist.html#03284">Date Index</a>][<a href="threads.html#03284">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-AI	You see the problem with DISPLACE is that suppose you do the following:</li>
+<li><em>Subject</em>: </li>
+<li><em>From</em>: ALAN@MIT-AI</li>
+<li><em>Date</em>: Wed, 15 Jun 78 00:09:07 GMT</li>
+<li><em>Original-date</em>: 06/14/78 20:09:07 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(setq a '(q w e r))
+(setq b 'cons)
+(displace a b)
+
+then the value of a is this list &quot;(#73100 subr #13302)&quot;.  Even better I can use DISPLACE
+to change the printname, valuecell, propertylist etc. of a symbol!  If we really
+want this thing to help macro hackers, then the thing should check for
+an atomic second arg and replace it with &quot;(progn &lt;thing&gt;)&quot;. And in any case shouldn't
+the first arg be checked for atomicness?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03285.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03283.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03285.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03283.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03284"><strong>Date</strong></a></li>
+<li><a href="threads.html#03284"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

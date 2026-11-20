@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Out&#45;of&#45;core maclisp system stuff -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Wed, 6 Feb 80 14:47:00 GMT -->
+<!--X-Message-Id: 92eb89ce511552037351d1f82f2a757d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Out-of-core maclisp system stuff</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02172.html">Date Prev</a>][<a href="msg02168.html">Date Next</a>][<a href="msg02172.html">Thread Prev</a>][<a href="msg02168.html">Thread Next</a>][<a href="maillist.html#02171">Date Index</a>][<a href="threads.html#02171">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Out-of-core maclisp system stuff</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC</li>
+<li><em>Subject</em>: Out-of-core maclisp system stuff</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Wed, 6 Feb 80 14:47:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 6 FEB 1980 0947-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 5 February 1980 22:38-EST
+    From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+    I consider it a bug that the DEFMAX package must be loaded in order
+    ...  Why should a utility function like FORMAT require such runtime
+    support? ... If these functions are really all that necessary then perhaps
+    we should make them part of the default MacLisp world instead of
+    pussyfooting around with this autoloading gubbish.  
+Aside from the fact that DEFMAX is about .3K words and FORMAT is about 3K,
+isn't this part of your complaint satisfactorily answered by the second
+part of it?
+    ... Just looking at the source of DEFMAX I don't see any reason that 
+    these functions should
+    be polluting my lisp environment since I no longer even use the
+    standard DEFMACRO.
+By the bye, did you ever use the &quot;standard&quot; DEFMACRO?  Apart from
+coalescing the two main streams of &quot;memoizing/displaceing&quot; prevalent
+around the labs here, it does it destructuring by defaulting to LET,
+thereby modularizing the destructuring component.  I see also that
+the LISPM  system-supplied version of DISPLACE is inadequate for doing
+the &quot;updating&quot; kind of macroexpansion suggested by Ken Kahn - namely
+that if you redefine a macro (admittedly by use of DEFMACRO rather
+than MACRO), all previous expansions are automatically invalidated.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02172.html">Bridging the colon gap</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02168.html">Echo suppression?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02172.html">Bridging the colon gap</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02168.html">Echo suppression?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02171"><strong>Date</strong></a></li>
+<li><a href="threads.html#02171"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,51 @@
+[submodule "itstar"]
+	path = tools/itstar
+	url = https://github.com/PDP-10/itstar
+[submodule "tapeutils"]
+	path = tools/tapeutils
+	url = https://github.com/brouhaha/tapeutils
+[submodule "tools/dasm"]
+	path = tools/dasm
+	url = https://github.com/larsbrinkhoff/pdp10-its-disassembler
+[submodule "tools/klh10"]
+	path = tools/klh10
+	url = https://github.com/PDP-10/klh10
+[submodule "tools/simh"]
+	path = tools/simh
+	url = https://github.com/open-simh/simh
+[submodule "tools/supdup"]
+	path = tools/supdup
+	url = https://github.com/PDP-10/supdup
+[submodule "tools/mldev"]
+	path = tools/mldev
+	url = https://github.com/larsbrinkhoff/mldev
+[submodule "tools/sims"]
+	path = tools/sims
+	url = https://github.com/larsbrinkhoff/ka10-simh
+[submodule "tools/tv11"]
+	path = tools/tv11
+	url = https://github.com/aap/pdp11
+[submodule "tools/pdp6"]
+	path = tools/pdp6
+	url = https://github.com/aap/pdp6
+[submodule "tools/vt05"]
+	path = tools/vt05
+	url = https://github.com/aap/vt05
+[submodule "tools/tek4010"]
+	path = tools/tek4010
+	url = https://github.com/rricharz/Tek4010
+[submodule "tools/simlac"]
+	path = tools/simlac
+	url = https://github.com/jdersch/sImlac
+[submodule "tools/sim-h"]
+	path = tools/sim-h
+	url = https://github.com/open-simh/simh
+[submodule "tools/cbridge"]
+	path = tools/cbridge
+	url = https://github.com/bictorv/chaosnet-bridge
+[submodule "tools/chaosnet-tools"]
+	path = tools/chaosnet-tools
+	url = https://github.com/Chaosnet/chaosnet-tools
+[submodule "tools/ncp"]
+	path = tools/ncp
+	url = https://github.com/larsbrinkhoff/linux-ncp

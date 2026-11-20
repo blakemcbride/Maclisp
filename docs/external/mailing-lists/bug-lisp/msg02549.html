@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: upcoming format, fyi -->
+<!--X-From-R13: UEPN[WF&#45;[Z -->
+<!--X-Date: Sun, 5 Jan 81 04:40:59 GMT -->
+<!--X-Message-Id: 58db2a2f6b0aa6a718d8f1023e7f1388@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: upcoming format, fyi</title>
+<link rev="made" href="mailto:GSB@MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03606.html">Date Prev</a>][<a href="msg03605.html">Date Next</a>][<a href="msg03606.html">Thread Prev</a>][<a href="msg03605.html">Thread Next</a>][<a href="maillist.html#02549">Date Index</a>][<a href="threads.html#02549">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: upcoming format, fyi</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-ML    I wrote out a new SHARPM, with the entries of    I will install the new format on ML tonight;  i'd like to leave it  FORMAT FASL - the usual  FORMAT NUM  - all of the ~R code.  FORMAT BRACK - ~&lt; and ~{ stuff  FORMAT FLOAT - ~F, ~E, ~$ - floating point stuff.  FORMAT INVOKE - contains the format-invoke function, which exists for    compatibly defining format operators in implementations which do not    have SFAs.  FORMAT UMACS - user-macros;  define-format-op, etc.</li>
+<li><em>Subject</em>: Re: upcoming format, fyi</li>
+<li><em>From</em>: GSB@MIT-ML</li>
+<li><em>Date</em>: Sun, 5 Jan 81 04:40:59 GMT</li>
+<li><em>Original-date</em>: 05/01/81 00:40:59 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Some of the stuff has been remodularized, and some random data-structure
+has been flushed, so some stuff (notably the justification hair for
+~A, ~S, ~D, ~O) has been moved back into the main fasl file.
+
+~C has been changed to be more compatible with the current Lispm
+definition.  Approximately:
+  ~C just outputs the arg (coerced to a character code)
+  ~@C does a # inversion, eg &quot;#\return&quot;, &quot;#/A&quot;
+  ~:C tries to print the character in human-readable form.  Uses the
+      same name inversion as ~@C does.  eg, &quot;Return&quot;, &quot;Meta-A&quot;.
+  ~:@C is ~@C plus parenthetically states how the character can be
+      typed on the user's keyboard.  There is a hook for this, and
+      no action is supplied by default.
+
+The floating-point operators are under development, and i will not
+commit myself to detailed specifications other than the following:
+  ~nF = output the flonum arg in n digits
+  ~nE = output the flonum arg in exponential format in n digits
+  ~r,l$ = output the flonum arg in fixed format with exactly r digits
+    to the right of the decimal point, and at least l to the left
+    (default r = 2, l = 1, as in &quot;dollars&quot;)
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03606.html">That's not a bug, that's a feature!</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03605.html">Filemode of a closed file</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03606.html">That's not a bug, that's a feature!</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03605.html">Filemode of a closed file</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02549"><strong>Date</strong></a></li>
+<li><a href="threads.html#02549"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

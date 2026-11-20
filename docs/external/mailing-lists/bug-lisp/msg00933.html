@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 27 Feb 82 18:28:00 GMT -->
+<!--X-Message-Id: 8b3ffd17e5f48f258f762884b736e3f8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00935.html">Date Prev</a>][<a href="msg00932.html">Date Next</a>][<a href="msg00934.html">Thread Prev</a>][<a href="msg00932.html">Thread Next</a>][<a href="maillist.html#00933">Date Index</a>][<a href="threads.html#00933">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: eb at MIT-ML</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 27 Feb 82 18:28:00 GMT</li>
+<li><em>Cc</em>: BUG-MACLISP at MIT-MC, feinberg at CMU-20C</li>
+<li><em>Original-date</em>: 27 February 1982 13:28-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     EB@MIT-ML
+Date: Fri, 27 Feb 82 16:58:24 GMT
+Original-Date: 02/27/82 12:58:24 EDT
+Subject:
+    ARYFIL and such are all very nice, but why does it use restricted
+    JFN's in the first place?????
+They aren't &quot;restricted&quot; -- they are &quot;frozen&quot; accesses.  I suspect that
+Feinberg was confused.  &quot;Frozen&quot; means that any number of readers can gain 
+access, but at most one writer can have APPEND access (I don't think you 
+can get random write access from within LISP).  A file opened for ordinary 
+write access isn't visible in the catalogue until it is closed;  maybe 
+that's what caused Feinberg to think it was &quot;restricted&quot;.  Any comments Neal?
+
+P.S.: I'm using version 2129 at MIT-XX -- I notice that CMUC still has version
+    2122 from last fall;  hopefully this won't make a diference, but I'll
+    send a note to Zubkoff to suggest the possibility of an update for CMUC.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00935.html">Closing Files</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00932.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00934.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00932.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00933"><strong>Date</strong></a></li>
+<li><a href="threads.html#00933"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

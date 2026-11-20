@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SUBFORK module (LEDIT) -->
+<!--X-From-R13: Rnivq Sccfgrva &#60;QER.Yebaw ng EG&#45;EQADS> -->
+<!--X-Date: Mon, 1 Nov 82 08:55:00 GMT -->
+<!--X-Message-Id: 3cf0b91a1705461b69b6855a3305f5ed@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SUBFORK module (LEDIT)</title>
+<link rev="made" href="mailto:CSD.Kronj at SU-SCORE">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00755.html">Date Prev</a>][<a href="msg00753.html">Date Next</a>][<a href="msg00755.html">Thread Prev</a>][<a href="msg00753.html">Thread Next</a>][<a href="maillist.html#00754">Date Index</a>][<a href="threads.html#00754">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SUBFORK module (LEDIT)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Bug-LISP at MIT-MC</li>
+<li><em>Subject</em>: SUBFORK module (LEDIT)</li>
+<li><em>From</em>: David Eppstein &lt;CSD.Kronj at SU-SCORE&gt;</li>
+<li><em>Date</em>: Mon, 1 Nov 82 08:55:00 GMT</li>
+<li><em>Original-date</em>: 1 Nov 1982 0055-PST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The lines in SI:GIVUP-TTYINTS that set the inferior fork's capabilities
+are switched, so that the fork gets no caps, causing LEDIT to lose big.
+
+Old code:
+    (jsys #.EPCAP handle
+	  (boole 2 1_18 cap_inferior)
+	  (boole 2 1_18 cap_poss_inf)
+	  1)
+Correct code:
+    (jsys #.EPCAP handle
+	  (boole 2 1_18 cap_poss_inf)
+	  (boole 2 1_18 cap_inferior)
+	  1)
+					David
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00755.html">lossage after lossage</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00753.html">[TONYH: forwarded]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00755.html">lossage after lossage</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00753.html">[TONYH: forwarded]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00754"><strong>Date</strong></a></li>
+<li><a href="threads.html#00754"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

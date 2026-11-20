@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: /\ Mess. -->
+<!--X-From-R13: Rnir Oaqer &#60;RZO ng [WF&#45;SSQE> -->
+<!--X-Date: Sun ,25 Jan 81 06:15:00 EDT -->
+<!--X-Message-Id: fb19beebfd9f5c9095f94c92e77f10da@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: /\ Mess.</title>
+<link rev="made" href="mailto:DLA at MIT-EECS">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00427.html">Date Prev</a>][<a href="msg00571.html">Date Next</a>][<a href="msg00573.html">Thread Prev</a>][<a href="msg00429.html">Thread Next</a>][<a href="maillist.html#00428">Date Index</a>][<a href="threads.html#00428">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: /\ Mess.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: Re: /\ Mess.</li>
+<li><em>From</em>: Dave Andre &lt;DLA at MIT-EECS&gt;</li>
+<li><em>Date</em>: Sun ,25 Jan 81 06:15:00 EDT</li>
+<li><em>Cc</em>: DLA at MIT-EECS</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I vote for the change.  &quot;/&quot; is just to common a character to be a
+quote character, and &quot;\&quot; really has no other use.
+
+In a winning file system, all files would have arbitrary properties,
+and for the transition, a new property which tells lisp readers of the
+file whether the format is &quot;new&quot; or &quot;old&quot; would be the answer.
+Currently file properties such as this are kept with the text, on the
+-*- line.  This has the obvious disadvantage that, in order to change
+the file's properties, one has to change the text.  However, since it
+is the only property facility that exists at the moment, it's probably
+the right thing to use.
+
+So I propose that, at some point in time, anything which uses lisp
+code check for a &quot;Format: New&quot; in the file's property list, and if
+it's not, offer to translate the file before &quot;using&quot; it.  The problem
+with this scheme is that not all people use the -*- stuff at the
+beginning of a file, and some might want to flush it after it has been
+written out by the translator.
+
+As I see it, the only other viable option to determine the file's
+format is to use the file's date, as suggested before.  The problem
+with this is that people may write code using the old quoting
+mechanism after the magic date.  I see the problems with my scheme as
+easier to cope with.
+
+			-- Dave
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00427.html">Re: /\</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00571.html">Re: /\</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00573.html">Re: /\</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00429.html">Re: /\ Mess, upward compatibility</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00428"><strong>Date</strong></a></li>
+<li><a href="threads.html#00428"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: 128K+ Low segs on TOPS&#45;10 -->
+<!--X-From-R13: Epbgg Tnuyzna ng Q[G&#45;10O (Q380ET50) -->
+<!--X-Date: Fri, 12 Jan 79 18:50:00 GMT -->
+<!--X-Message-Id: 12Jan79 135049 SF50@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>128K+ Low segs on TOPS-10</title>
+<link rev="made" href="mailto:Scott Fahlman at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00667.html">Date Prev</a>][<a href="msg03890.html">Date Next</a>][<a href="msg00664.html">Thread Prev</a>][<a href="msg03890.html">Thread Next</a>][<a href="maillist.html#00666">Date Index</a>][<a href="threads.html#00666">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>128K+ Low segs on TOPS-10</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP @ MIT-MC</li>
+<li><em>Subject</em>: 128K+ Low segs on TOPS-10</li>
+<li><em>From</em>: Scott Fahlman at CMU-10A (C380SF50)</li>
+<li><em>Date</em>: Fri, 12 Jan 79 18:50:00 GMT</li>
+<li><em>Original-date</em>: 12 Jan 1979 1350-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Jonl,
+It seems that landing the high seg at other than 400000 octal
+is handled by the loader on the KL system (note that none of
+this applies to KA systems).  The lisp assembly source (in
+MACRO-10) sets a parameter SHRST to 600000 if the assembly is for
+CMUA, then does a TWOSEG SHRST and a RELOC SHRST to get stuff to
+the right place.  I guess these are equivalent to .DECTWO and
+.DECREL in MIDAS.
+Other ways to accomplish the same goal are to use the TOPS-10
+LINK program with a switch of /SET:.HIGH.:600000  or to
+use the REMAP system call from within LISP at runtime.  But it
+does look like the assembly and loading must be done with a high
+seg at 600000 in mind at the time.  I think this would be the best
+place for the high seg on CMUA as a default -- it would leave some room
+for additional pure stuff, but would give us 1.5 times the available
+space for user core.  If this does not seem to work for some reason,
+I will get Cris Perdue to give you a call to bash out details.  He has
+been the principal UCI-lisp hacker here, and is now moving to New
+Hampshire to work for Ed Berg.
+The inability to load SSAVE files with &gt; 128K lowsegs is due to a
+monitor bug.  A fix has been promised, but such things typically take a
+year here.
+
+-- Scott
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00667.html">^G while inside UNWIND-PROTECT</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03890.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00664.html">^G while inside UNWIND-PROTECT</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03890.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00666"><strong>Date</strong></a></li>
+<li><a href="threads.html#00666"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

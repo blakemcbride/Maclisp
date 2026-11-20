@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: simple and useful demonstrative case -->
+<!--X-From-R13: RQB ng [WF&#45;[Q (Rnivq Q. Byhzzre) -->
+<!--X-Date: Fri, 30 Jan 81 20:56:00 GMT -->
+<!--X-Message-Id: 3cd0747a68a6f9e0a179f3e594a23d90@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>simple and useful demonstrative case</title>
+<link rev="made" href="mailto:DCP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01649.html">Date Prev</a>][<a href="msg01652.html">Date Next</a>][<a href="msg01649.html">Thread Prev</a>][<a href="msg01652.html">Thread Next</a>][<a href="maillist.html#01653">Date Index</a>][<a href="threads.html#01653">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>simple and useful demonstrative case</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: simple and useful demonstrative case</li>
+<li><em>From</em>: DCP at MIT-MC (David C. Plummer)</li>
+<li><em>Date</em>: Fri, 30 Jan 81 20:56:00 GMT</li>
+<li><em>Original-date</em>: 30 JAN 1981 1556-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+(defun fib (n)
+       (do ((old 0 new)
+	    (new 1 (+ old new))
+	    (i 0 (1+ i)))
+	   ((= i n) old)))
+
+This is our friend the fibonacci numbers. I want to demonstrate
+it to people and compile it for my own use. I know it uses
+fixnums, but that's ok.
+
+Run it interpretted:
+   (setq base (setq ibase 10.))
+   (fib 20)
+   6765.				; the AI phone number
+demonstrate the compiler: (compiled function loaded of course)
+   (fib 20)
+   524288.				; phone number??
+
+A naive user would be totally lost at such a response from such a
+simple (and useful) function.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01649.html">Re: offensive incompatibility</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01652.html">DEFUN&amp;-CHECK-ARGS</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01649.html">Re: offensive incompatibility</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01652.html">DEFUN&amp;-CHECK-ARGS</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01653"><strong>Date</strong></a></li>
+<li><a href="threads.html#01653"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MacLISP recidivus! -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Mon, 16 Feb 81 02:04:00 GMT -->
+<!--X-Message-Id: cff73708ed2ed44ee7a492e106518e30@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MacLISP recidivus!</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01568.html">Date Prev</a>][<a href="msg01566.html">Date Next</a>][<a href="msg01571.html">Thread Prev</a>][<a href="msg01565.html">Thread Next</a>][<a href="maillist.html#01567">Date Index</a>][<a href="threads.html#01567">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MacLISP recidivus!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: MacLISP recidivus!</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Mon, 16 Feb 81 02:04:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 15 FEB 1981 2104-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I thought I'd give this old dog a new try, by combinng the
+dump of the SHARABLE file along with all the MACLISP^K stuff -- 
+see the loader file LISP;MACLISP LISP for what all went into it.
+Apparently the &quot;round off&quot; of pure pages costs about 4K just
+at the cascade level of the SHARAB, so doing things this way
+saves a bit;  it means that the MACDMP file will be first in
+*SHARING-FILE-LIST* rather than any SHBDMP.  Anyway, it might
+be worth another try, to see how much we can share again.
+Not yet distributed to other ITS's due to network lossage.
+
+A COMPLR composed of such a MACLISP does take 10K more than
+one composed with absolutely bare essentials;  however,
+it is possible that only the GRINDEF file is &quot;dross&quot; for
+the COMPLR, and that accounts for about 4K.  NILAID shows
+a loss of only 2K now, so it seems reasomable to let
+it be composed over MACLISP rather than SHARAB.  How
+about some of y our dumps?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01568.html">GET</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01566.html">Get of a Hunk</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01571.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01565.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01567"><strong>Date</strong></a></li>
+<li><a href="threads.html#01567"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LIST* and ` -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Fri, 28 Jul 78 21:20:00 GMT -->
+<!--X-Message-Id: 50acadf860db4444b474a6eed1a1f13c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LIST* and `</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02224.html">Date Prev</a>][<a href="msg02222.html">Date Next</a>][<a href="msg02224.html">Thread Prev</a>][<a href="msg02226.html">Thread Next</a>][<a href="maillist.html#02223">Date Index</a>][<a href="threads.html#02223">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LIST* and `</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KLE at MIT-MC, NIL at MIT-MC, (BUG LISPM) at MIT-MC</li>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: LIST* and `</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Fri, 28 Jul 78 21:20:00 GMT</li>
+<li><em>Original-date</em>: 28 JUL 1978 1720-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+From:     KLE@MIT-AI
+Date: Thu, 28 Jul 78 17:59:12 GMT
+Original-Date: 07/28/78 13:59:12 EDT
+Subject: Re: LIST* and `
+    To: JONL at MIT-MC, NIL at MIT-MC, (BUG LISPM) at MIT-MC
+    To: (BUG LISP) at MIT-MC
+
+    I am not sure about the LISPM approach but I believe it is the case that at
+    least in the version of backquote which I use in Maclisp, that coma [sic]
+    and @ are defined in such a way that they only have thier magic effect
+    when found within backquoted expressions.  That is '(2 , 4 , 3) still
+    returns (2 4 3) and '(3 ,@ 4) still returns (3 @4) since neither of
+    these expressions backquoted. I think that if this is also done I would
+    not be unhappy with the LISPM approach of having ` defined in the standard
+    readtable.  Making all three chars reader macros however, with , and @
+    returning error messages if not used within a backquote I would consider
+    an ursurping of too many valuable characters. 
+
+Although I agree in spirit that probably this could be engineered (the
+multiple definitions of &quot;,&quot; and &quot;@&quot;), it hardly seems appropriate to the
+mood of cleanliness and readability we need to establish. In order to
+maintain maximal readability of code written with these macros, it would
+be nice to have &quot;,&quot; only useable in that context (so that there is no need
+to search outward to see your context in order to interpret this).
+
+Certainly making those two chars be an error out of context is a complete
+loss, and I hope no one is pushing that. If so, I wish they would pick
+a less used symbol than &quot;,&quot; ...
+
+Proposal:
+
+I might suggest that the global syntax for &quot;,&quot; should be an abbreviation
+for (EVAL (READ)) and that the global syntax for &quot;@&quot; should be as splicing
+macro. So that saying ,A&lt;Space&gt; at Lisp would be like saying (EVAL A)
+and saying @(A B C) would be like entering A, B, and C in sequence (almost
+like A,B,C&lt;Space&gt; in lisp does now. This could be useful if typing several
+things that you didn't want to get snarfed until you were sure you had
+the whole list ready and typed the &quot;)&quot; on it... A,B,C suffers from the loss
+that it delays action from the Lisp because it doesn't wake up the lisp,
+but when you try to rub out over the , you find you have awakened it
+and all is lost.  It would have to be a context error for a non-list to
+follow an @ by this scheme unless some way of defining it i consistently
+were come up with.
+
+My point is that if this scheme or something similar were adopted, it
+would replace some of the consistency that might otherwise be lost in
+current plans for back-quote.
+
+If something along this lines seems to unreasonable to accept, then I
+would sooner have @ and , just have normal chracter syntax outside of
+` context than have optional secondary meanings for them as there are now.
+
+Comments?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02224.html">Re: LIST* and `</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02222.html">IF macro</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02224.html">Re: LIST* and `</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02226.html">` and , as initial macro characters</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02223"><strong>Date</strong></a></li>
+<li><a href="threads.html#02223"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

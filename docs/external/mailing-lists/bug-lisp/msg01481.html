@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: wanted: opinions on a benchmark. -->
+<!--X-From-R13: [AA@ ng [WF&#45;[Q (Rnivq O. [bba) -->
+<!--X-Date: Fri, 6 Mar 81 08:24:00 GMT -->
+<!--X-Message-Id: 125336366e0d65f2f745ff40eab57f33@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: wanted: opinions on a benchmark.</title>
+<link rev="made" href="mailto:MOON at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01482.html">Date Prev</a>][<a href="msg01480.html">Date Next</a>][<a href="msg01483.html">Thread Prev</a>][<a href="msg01480.html">Thread Next</a>][<a href="maillist.html#01481">Date Index</a>][<a href="threads.html#01481">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: wanted: opinions on a benchmark.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: Re: wanted: opinions on a benchmark.</li>
+<li><em>From</em>: MOON at MIT-MC (David A. Moon)</li>
+<li><em>Date</em>: Fri, 6 Mar 81 08:24:00 GMT</li>
+<li><em>Cc</em>: NIL-I at MIT-MC, (BUG LISP) at MIT-MC, (BUG LISPM) at MIT-MC</li>
+<li><em>Original-date</em>: 6 MAR 1981 0324-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date:  5 MAR 1981 1835-EST
+    From: GJC at MIT-MC (George J. Carrette)
+
+    p.s. On the Lispm the timing difference is much greater,
+    which is disturbing.
+
+This is not a very good benchmark.  It gets a division by zero error.
+On the Lisp machine it mostly tests the speed of RANDOM (e.g. the ALAN-CLIPPER
+test spends 79% of its time in the function RANDOM).  Having fixed those
+problems, I find that ALAN-CLIPPER takes 190 microseconds on MC and 340
+microseconds on the Lisp machine, while CLIPPER-CALL takes 315 microseconds
+on MC and 1250 microseconds on the Lisp machine.  The ratio is 1.6 on MC
+and 3.8 on the Lisp machine.  As best as I could measure the twice as large
+ratio on the Lisp machine is because on MC function calling and array referencing
+are similar in speed to arithmetic (maybe twice as slow), while on the Lisp
+machine they are much slower because they do a lot more checking.  Function calling
+is definitely too slow on the Lisp machine--I wish that weren't so.
+The CLIPPER-CALL also looks like it should be doing bignum arithmetic
+due to fixnum overflow in all those multiplications it does, but I
+couldn't find any evidence that it actually did get into any bignums.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01482.html">y-or-n-p, yes-or-no-p</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01480.html">wanted: opinions on a benchmark.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01483.html">wanted: opinions on a benchmark.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01480.html">wanted: opinions on a benchmark.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01481"><strong>Date</strong></a></li>
+<li><a href="threads.html#01481"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

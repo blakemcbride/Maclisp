@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Why is the value NIL special? -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 23 Aug 81 05:41:00 GMT -->
+<!--X-Message-Id: 1fa0bb983acc3bfd50b620c3bd47e44d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Why is the value NIL special?</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03116.html">Date Prev</a>][<a href="msg03114.html">Date Next</a>][<a href="msg03109.html">Thread Prev</a>][<a href="msg03113.html">Thread Next</a>][<a href="maillist.html#03115">Date Index</a>][<a href="threads.html#03115">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Why is the value NIL special?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: Why is the value NIL special?</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 23 Aug 81 05:41:00 GMT</li>
+<li><em>Original-date</em>: 23 August 1981 01:41-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(SETQ MACRO-EXPANSION-USE 'MACROMEMO)
+(DEFMACRO F1 (X) (PRINT X) ())
+(DEFMACRO F2 (X) (PRINT X) '(QUOTE ()))
+(DEFUN G1 () (F1 &quot;FOOBAR&quot;))
+(DEFUN G2 () (F2 &quot;FOOBAR&quot;))
+
+(G1) ; prints &quot;FOOBAR&quot;
+(G1) ; continues to print &quot;FOOBAR&quot;
+(G2) ; prints &quot;FOOBAR&quot;
+(G2) ; doesn't print &quot;FOOBAR&quot; because the MEMOIZING worked.
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03116.html">LISP;LOCK MAIL</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03114.html">Re: Multiple values</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03109.html">Re: Multiple values</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03113.html">SETF and sequence updater's return values</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03115"><strong>Date</strong></a></li>
+<li><a href="threads.html#03115"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

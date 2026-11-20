@@ -1,0 +1,139 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: bugs in tops&#45;10 lisp (from FININ@mit&#45;ai) -->
+<!--X-From-R13: RSIAZT ng IBOTP&#45;OTOZ -->
+<!--X-Date: Wed, 11 Apr 79 17:35:00 GMT -->
+<!--X-Message-Id: b8f88cf22f55f8cabfa0f808f06f4c40@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>bugs in tops-10 lisp (from FININ@mit-ai)</title>
+<link rev="made" href="mailto:DEWOLF at WPAFB-AFAL">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00486.html">Date Prev</a>][<a href="msg00483.html">Date Next</a>][<a href="msg00490.html">Thread Prev</a>][<a href="msg00478.html">Thread Next</a>][<a href="maillist.html#00484">Date Index</a>][<a href="threads.html#00484">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>bugs in tops-10 lisp (from FININ@mit-ai)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: jonl at MIT-AI, bug-lisp at MIT-AI</li>
+<li><em>Subject</em>: bugs in tops-10 lisp (from FININ@mit-ai)</li>
+<li><em>From</em>: DEWOLF at WPAFB-AFAL</li>
+<li><em>Date</em>: Wed, 11 Apr 79 17:35:00 GMT</li>
+<li><em>Original-date</em>: 11 Apr 1979 (Wednesday) 1235-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Dear Jonl et. al.;
+
+I'm enclosing a file which describes some of the problems
+that we've encountered in the new lisp.  The major one
+has to do with the reading of .INI files.  Lisp seems to
+get garbled characters when it reads one.
+
+--------------------------------------------------------------
+This file documents bugs and problems in the new Lisp.  
+
+[1] .INI files
+   Initialization files are not being read properly.  More
+   often than not, some characters in a .INI file are mis-read.
+
+[2] Supressing a .INI file
+   There is no way to supress the reading of a .INI file.  Specifically,
+	RUN COM:NLISP;
+	RUN COM:NLISP; . 
+   do not work.
+
+[3] BPS space fixed
+  From Peter Dewolf[1,762] on April 5, 1979 at 2:33 PM
+  sigh.    One would have hoped that the bibopification of tops-10 lisp
+  would not have precluded expansion of bps.
+
+   From Maclisp[5,720] on April 5, 1979 at 2:44 PM
+   MIT claims that this is due to a misfeature of TOPS-10.  On ITS, List
+   spaces grow from one end of core and BPS space grows from another.  BPS
+   space should always be contiguous.  As I have been told, on TOPS-10, one
+   can only expand core in one direction.
+
+   From Peter Dewolf[1,762] on April 5, 1979 at 2:44 PM
+   I recall seeing (during my scan of lisp.new) that they were adding assembly
+   conditionals based on processor type--ka, ki, kl.   If you are on a ki or kl
+   running under a virtual memory monitor, you can do core allocation with PAGE.
+   UUOs, which allow you to allocate a page anywhere you want.  The only thing
+   you have to be careful of doing is shrinking core with a CORE UUO, which will
+   deallocate the non-contiguous pages too.  Given this fact, I wonder why they
+   complain about tops-10?  Maybe they don7t want to do much work on a tops-10
+   version of maclisp, and hence do not want to have to write code that will
+   check if you are using a vm monitor (which is easy to check) and do page. uuo
+   core allocation if so.  (another probelm with that is that individual users
+   may or may not have the ability to go virtual.  I would hope that they could
+   use page. uuos within their physical cormax, though!)
+   
+
+[4]  ^U disabled
+  From Peter Dewolf[1,762] on April 5, 1979 at 2:36 PM
+  is it my imagination, or does ^U no longer work in nlisp to erase the
+  current line?
+ 
+ Yes indeed, ^U has been disabled.  I don't know if there is a substitute,
+ or if one can be programed easily.
+ 
+	Tim
+
+--------------------------------------------------------------
+
+As a whole, this versions seems to run pretty well.
+
+Tim
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00486.html">FORMAT</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00483.html">SYSCALL of two args</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00490.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00478.html">bugs in tops-10 lisp (from FININ@mit-ai)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00484"><strong>Date</strong></a></li>
+<li><a href="threads.html#00484"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

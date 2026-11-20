@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Defun&#38; -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 19 Apr 80 21:05:00 GMT -->
+<!--X-Message-Id: 96d2b9964478d0daa51874f33ca5b47d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Defun&amp;</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04200.html">Date Prev</a>][<a href="msg04198.html">Date Next</a>][<a href="msg04200.html">Thread Prev</a>][<a href="msg01668.html">Thread Next</a>][<a href="maillist.html#04199">Date Index</a>][<a href="threads.html#04199">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Defun&amp;</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: Defun&amp;</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 19 Apr 80 21:05:00 GMT</li>
+<li><em>Cc</em>: RLB at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 19 April 1980 16:05-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 19 April 1980 12:48-EST
+    From: Jon L White &lt;JONL at MIT-MC&gt;
+    To:   RLB
+    cc:   BUG-LISP
+    Re:   defun&amp;
+
+        Date: 17 April 1980 12:52-EST
+        From: Richard L. Bryan &lt;RLB at MIT-MC&gt;
+        Subject: DEFUN&amp; strikes again!
+        Macroexpansion of the following code binds SUBRS to (), then does
+        (DESETQ SUBRS (REVERSE SUBRS)) which is purely wrong...
+
+    Indeed, any case like (DEFUN FOO (&amp;OPT (BAR BAR)) ...)  is not correctly
+    handled - only if a variable is being being bound to *previous* variables
+    in the varlist does it work right.  This could be fixed, without loss of
+    other optimizations, if anyone is really interested.
+----
+Yes, I am interested. I have this CODE-SUBST program I would like to release
+but am hesitant to do so until DEFUN&amp; starts working as documented so that I
+can be compatible with something correct.
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04200.html">defun&amp;</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04198.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04200.html">defun&amp;</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01668.html">DEFUN&amp;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04199"><strong>Date</strong></a></li>
+<li><a href="threads.html#04199"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

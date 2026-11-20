@@ -1,0 +1,132 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: lisp; new recent -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 22 Nov 79 05:28:00 GMT -->
+<!--X-Message-Id: a2cc10fbd3bd174326695ccd883dc648@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>lisp; new recent</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03961.html">Date Prev</a>][<a href="msg03959.html">Date Next</a>][<a href="msg03965.html">Thread Prev</a>][<a href="msg03958.html">Thread Next</a>][<a href="maillist.html#03960">Date Index</a>][<a href="threads.html#03960">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>lisp; new recent</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>Subject</em>: lisp; new recent</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 22 Nov 79 05:28:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 22 November 1979 00:28-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Some things I leave to JONL to answer, but...
+    Date: 21 November 1979 17:54-EST
+    From: David A. Moon &lt;MOON at MIT-MC&gt;
+    To:   BUG-LISP
+    cc:   MOON
+    Re:   lisp; new recent
+
+
+    SETF has to be a macro, not an FSUBR.  Or else MACROEXPAND has to know
+    about it specially.
+I assume you hold the same view of PUSH and POP?  I sort of feel the same way,
+but don't have good arguments.  Perhaps you can supply same.  In particular,
+why is it important that MACROEXPAND expand SETF/PUSH/POP ?  I'd really feel
+much better if you could convince us.
+
+    The property which controls SETF should be called
+    SETF, not SETF-X.  This is for Lisp machine compatibility and because
+    it is useless to introduce another name when the name of the property
+    can reflect the function which it controls.
+
+The main reason for it being a different name is because it operates
+differently.  It's rather complicated, so I'll write it up elsewhere, but what
+it's all about is avoiding multiple evaluations of arguments to PUSH and POP.
+DEFSETF hides this hair from the user.
+
+    LDB and DPB in the Lisp machine work on bignums.  Much of our software
+    that runs in Maclisp (where they are sometimes called LOGLDB and LOGDPB)
+    depends heavily on this.  Evidently yours only accept fixnums?  The pp
+    field in a byte-pointer should not be limited to 2 octal digits, but should
+    simply be (// ppss 64.); this is important when dealing with bignums.
+
+Should we make + work on bignums too, like the Lisp Machine?  Admitedly, this
+isn't quite as clear as that, but I'm not sure we want to give up the
+efficiency...  Maybe optimizing the case where the arguments are declared
+fixnums is enough though.
+
+    Why do useratoms-hooks NCONS their return values, since the value,
+    being a form evaluated for some kind of side-effects, will surely
+    be non-NIL?
+I don't know why you think the value will be a form evaluated for some kind of
+side-effects!!
+
+    The change to eliminate automatic insertion of CR's seems wrong.
+    Isn't what you want to retain automatic insertion of CR's, but NEVER
+    within an atom?  Thus formerly extra-long atoms would be broken with
+    a CR in the middle, but now they would result in extra-long lines,
+    but normal output will not contain extra-long lines.
+Yes, I thought this was what JONL and I agreed was the right thing.
+
+    EOF-COMPILE-QUEUE  (This supersedes EOC-EVAL, doesn't it?)
+I dunno.  I never did figure out what EOC-EVAL was for, so I don't know
+if it superscedes it.  It might be kind of awkward to use EOF-COMPILE-QUEUE
+for EOC-EVAL's.
+
+    &amp;WHOLE in DEFMACRO but not in DEFUN (we probably already have this).
+I think &amp;WHOLE in DEFUN was a documentation bug.  I'll change it.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03961.html">ASSOQ and ASSQ and atoms</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03959.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03965.html">lisp; new recent</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03958.html">lisp; new recent</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03960"><strong>Date</strong></a></li>
+<li><a href="threads.html#03960"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

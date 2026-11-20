@@ -1,0 +1,10 @@
+*~
+*.o
+*.d
+tapecopy
+tapedump
+taperead
+tapewrite
+read20
+t10backup
+tapex

@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Labelled PROGs (and DOs) -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 20 Jun 78 22:13:00 GMT -->
+<!--X-Message-Id: 895c77d62fc51624138e151e882dcbab@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Labelled PROGs (and DOs)</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02421.html">Date Prev</a>][<a href="msg02419.html">Date Next</a>][<a href="msg02421.html">Thread Prev</a>][<a href="msg02414.html">Thread Next</a>][<a href="maillist.html#02420">Date Index</a>][<a href="threads.html#02420">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Labelled PROGs (and DOs)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Labelled PROGs (and DOs)</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 20 Jun 78 22:13:00 GMT</li>
+<li><em>Cc</em>: NIL at MIT-MC</li>
+<li><em>Original-date</em>: 20 JUN 1978 1813-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The suggestion has come to me recently to use as an identifying
+label for a PROG merely the first prog label in that prog.  This is
+completely retrofittable without any worry for existing code, and 
+since it is attacking a lexical problem, there is no need to worry 
+about &quot;what if some one wants to name one PROG 'foo' and has another
+PROG with a tag 'foo' . . .&quot;.  For example, the prog
+(PROG (X Y)
+  FOO (SETQ X (MUMBLE))
+      . . .
+      (RETURN Y))
+CAN EASILY BE TRANSFORMED, AT ANY TIME, TO 
+(PROG (X Y)
+  UNIQUE-LABEL-1
+  FOO (SETQ X (MUMBLE))
+      ...  (DO &lt; ... &gt;  (GO &lt;tag&gt; UNIQUE-LABLE-1))
+      (RETURN Y))
+Thus I propose to extend the syntax of GO as follows
+  1) flush computed GOs, possibly introducing a new primitive for this
+    [foolish] purpose, and advertising CASEQ
+  2) permitting an identifying tag as second arg, which would uniquely
+   identify the prog level at which to GO
+Also the same point as (2) would be done for RETURN, thereby
+causing the multiple-return mechanism to have another name
+and format.  This is acceptable, since it doesn't involve any
+large body of existing code (such as for the PDP10), and on the
+LISPM, if such a decision were made, then probably a TECO macro
+could find all instances of (RETURN &lt;value1&gt; . . . &lt;valuen&gt;)
+for n &gt; 1, and convert them to (MRETURN 'prog_id &lt;value1&gt; . . .)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02421.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02419.html">RMS and the problem of macro-expansion during compilation</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02421.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02414.html">Labelled PROGs (and DOs)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02420"><strong>Date</strong></a></li>
+<li><a href="threads.html#02420"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Query -->
+<!--X-From-R13: YW[.wxsNPrexryrl (Xbua Tbqreneb) -->
+<!--X-Date: Sat ,6 Dec 81 18:46:32 EDT -->
+<!--X-Message-Id: efe39b1d52e3cf1063d55206678c5c70@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Query</title>
+<link rev="made" href="mailto:KIM.jkf@Berkeley">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00684.html">Date Prev</a>][<a href="msg00682.html">Date Next</a>][<a href="msg00685.html">Thread Prev</a>][<a href="msg00682.html">Thread Next</a>][<a href="maillist.html#00683">Date Index</a>][<a href="threads.html#00683">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Query</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM@MIT-MC</li>
+<li><em>Subject</em>: Re: Query</li>
+<li><em>From</em>: KIM.jkf@Berkeley (John Foderaro)</li>
+<li><em>Date</em>: Sat ,6 Dec 81 18:46:32 EDT</li>
+<li><em>In-reply-to</em>: Your message of 6 December 1981 15:57-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Alan,
+  We only have setf in the maclisp compatibility package.  If it were to
+become part of the standard system, it would have to handle all c*r cases,
+which would not be too hard.
+
+GJC,
+  I agree completely that there are things to be fixed up in Franz.  Some
+are out of our control since we use the unix C libraries and some
+are things we haven't gotten around to fixing.  That code that gets printed
+out after a reader error was inserted for debugging purpose a while back
+and should have been replaced by explanatory text before the lisp was
+distributed.  
+  Needless to say, I disgree that the only c*r functions that should be 
+defined are car and cdr, and that if the user types (car (car x)) then
+the compiler changes this to a call to an internal caar. Surely you have to
+admit that (caddr x) is more readable than (car (car (cdr x))) and 
+certainly easier to type (and remember that the system exists purely for
+the benefit of the USER, if you insist that only car and cdr are defined
+then you will have a nice clean system but no one will use it).
+
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00684.html">c*r</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00682.html">C*R and language design</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00685.html">Query</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00682.html">C*R and language design</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00683"><strong>Date</strong></a></li>
+<li><a href="threads.html#00683"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

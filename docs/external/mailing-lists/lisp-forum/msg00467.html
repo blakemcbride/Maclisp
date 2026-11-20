@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Compatible? with whom? -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Fri ,30 Jan 81 11:00:00 EDT -->
+<!--X-Message-Id: 5d22e3eac778878ea5b294c2036ae6ed@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Compatible? with whom?</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00444.html">Date Prev</a>][<a href="msg00468.html">Date Next</a>][<a href="msg00444.html">Thread Prev</a>][<a href="msg00468.html">Thread Next</a>][<a href="maillist.html#00467">Date Index</a>][<a href="threads.html#00467">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Compatible? with whom?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RMS at MIT-MC</li>
+<li><em>Subject</em>: Re: Compatible? with whom?</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri ,30 Jan 81 11:00:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I presume your note below wanted to go to LISP-FORUM rather than BUG-LISP.
+    Date: 30 January 1981 00:34-EST
+    From: Richard M. Stallman &lt;RMS at MIT-AI&gt;
+    I hear that Maclisp now has something like the Lisp machine's
+    user-supplied compiler optimizers.  But it is not compatible
+    with the Lisp machine.
+    I think it ought to be changed to be compatible,
+    especially since it isn't in use by users yet.
+How about letting the LISPM fix its idea of &quot;optimizers&quot; first?  
+For example,  
+  1) each &quot;optimizing/trans' function should return two values, the second 
+     saying whether or not it did anything.  (displacing macros are still 
+     used in the MacLISP world, so EQ tests can't be relied upon.)
+  2) Let's get a common DEFTRANS name, which not only push's something onto
+     the appropriate property of a symbol, but also takes some other action
+     if the symbol is not FBOUNDP (e.g. defining a MACRO for it which warns
+     you in interpretive code when you try to use it; subsequent SUBR 
+     definitions would 'wipe-out' this warning macro).
+  3) DEFMACRO could check for &quot;optimizers/trans&quot; properties;  or alternatively
+     the DEFTRANS feature could put a MACRO property (in MacLISP).
+  4) &quot;optimizers&quot; is a bad misnomer -- these things are purely source to 
+     source transformations, and have nothing to do with optimizing
+     (and in fact aren't even limited to compilation, although that seems
+     to be a reasonable convention for now).  How about SOURCE-TRANS?
+     or maybe even COMPILATION-MACRO?
+In fact, if item 2 is adopted, then it doesn't matter what the property 
+name is called, since it should remain invisible to the user.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00444.html">Re: more on file prop lists</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00468.html">Re: Compatible? with whom?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00444.html">Re: more on file prop lists</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00468.html">Re: Compatible? with whom?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00467"><strong>Date</strong></a></li>
+<li><a href="threads.html#00467"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

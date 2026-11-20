@@ -1,0 +1,83 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: 'WRITEABLEP' and macro&#45;expansion&#45;cache -->
+<!--X-From-R13: DIY ng [WF&#45;[Q (Dboreg I. Yreaf) -->
+<!--X-Date: Thu, 8 Jan 81 17:36:00 GMT -->
+<!--X-Message-Id: d37f931fd021661dd1b27af92df4e557@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>'WRITEABLEP' and macro-expansion-cache</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03602.html">Date Prev</a>][<a href="msg03600.html">Date Next</a>][<a href="msg03602.html">Thread Prev</a>][<a href="msg03600.html">Thread Next</a>][<a href="maillist.html#03601">Date Index</a>][<a href="threads.html#03601">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>'WRITEABLEP' and macro-expansion-cache</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: 'WRITEABLEP' and macro-expansion-cache</li>
+<li><em>From</em>: RWK at MIT-MC (Robert W. Kerns)</li>
+<li><em>Date</em>: Thu, 8 Jan 81 17:36:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 8 JAN 1981 1236-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Actually, it is PUREP which MACROMEMO calls.  Even if pure code is
+writable, you don't want to put pointers to impure code in it because it
+won't be GC protected.  I hope you haven't changed it.
+
+Note that this is the right thing for MACROMEMO to do, independently of
+changing DISPLACE.  MACROMEMO wants to do something else rather than just
+become a NOP in that case.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03602.html">PUREP/WRITEABLEP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03600.html">'WRITEABLEP'</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03602.html">PUREP/WRITEABLEP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03600.html">'WRITEABLEP'</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03601"><strong>Date</strong></a></li>
+<li><a href="threads.html#03601"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: sfa error checking -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 27 Jan 81 10:26:00 GMT -->
+<!--X-Message-Id: 6af88d786c08370aaad765448b63cf2c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>sfa error checking</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01671.html">Date Prev</a>][<a href="msg01669.html">Date Next</a>][<a href="msg03636.html">Thread Prev</a>][<a href="msg01665.html">Thread Next</a>][<a href="maillist.html#01670">Date Index</a>][<a href="threads.html#01670">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>sfa error checking</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GZ at MIT-MC</li>
+<li><em>Subject</em>: sfa error checking</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 27 Jan 81 10:26:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 27 January 1981 05:26-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 20 December 1980 08:48-EST
+    From: Gail Zacharias &lt;GZ&gt;
+    Re:   sfa error checking
+
+    Consider the following session:
+        (defun nothin N '())
+        NOTHIN 
+        (setq test (sfa-create #'nothin 17. 'testing))
+					=&gt;	#SFA-|TESTING|-70766 
+        (open test)			=&gt;	NIL 
+        (close test)			=&gt;	NIL 
+        (deletef test)			=&gt;	NIL 
+        (filepos test 13.)		=&gt;	NIL 
+        (sfa-call test #'untyi ())	=&gt;	NIL 
+        (tyo 3 test)			=&gt;	T 
+        (out test 2)			=&gt;	NIL 
+        (force-output test)		=&gt;	NIL 
+        (prin1 1 test)			=&gt;	T 
+        (princ 'a test)			=&gt;	T 
+        (print 'foo test)		=&gt;	T 
+        (cursorpos test)		=&gt;	NIL 
+        (in test)			=&gt;	;NIL NON-FIXNUM VALUE
+					   ;; Well, at least this one errs out
+      
+    Do I have to define all these operations just to have them err out?
+    TYI is the only one that actually complains that it is not supported.
+-----
+Yes. For the time being at least, a common way of handling this problem 
+is:
+
+  (DEFUN NOTHING (SELF OP DATA)
+	 (CASEQ OP
+		((WHICH-OPERATIONS) '(TYO CLOSE))
+		((TYO)		    ...code...)
+		(T
+		 (ERROR &quot;Unsupported SFA Operation&quot;
+			(LIST 'SFA-CALL SELF OP DATA)))))
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01671.html">SFA Lossage</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01669.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03636.html">sfa error checking</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01665.html">sfa error checking</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01670"><strong>Date</strong></a></li>
+<li><a href="threads.html#01670"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

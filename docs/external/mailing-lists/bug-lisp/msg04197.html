@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Automatic Conversion -->
+<!--X-From-R13: [nex Z. [vyyre &#60;[WZZSD ng [WF&#45;OW> -->
+<!--X-Date: Sun, 20 Apr 80 22:17:00 GMT -->
+<!--X-Message-Id: 43bacf909c43757935b40b3e988f3857@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Automatic Conversion</title>
+<link rev="made" href="mailto:MILLER at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04198.html">Date Prev</a>][<a href="msg04195.html">Date Next</a>][<a href="msg04198.html">Thread Prev</a>][<a href="msg04193.html">Thread Next</a>][<a href="maillist.html#04197">Date Index</a>][<a href="threads.html#04197">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Automatic Conversion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JPG at MIT-MC, JONL at MIT-MC</li>
+<li><em>Subject</em>: Automatic Conversion</li>
+<li><em>From</em>: Mark L. Miller &lt;MILLER at MIT-AI&gt;</li>
+<li><em>Date</em>: Sun, 20 Apr 80 22:17:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-AI, BUG-LISPM at MIT-AI, EJS at MIT-MC, H at MIT-MC,    KMP at MIT-MC, HENRY at MIT-MC</li>
+<li><em>Original-date</em>: 20 April 1980 17:17-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Why not a several stage conversion process as follows:
+0.  The current state of affairs (one DO supports both old and new).
+1.  Rename the current function POSSIBLE-OLD-STYLE-DO and keep supporting it.
+    Users wanting automatic upwards-compatibility can use MM REPLACE to
+    change their current code to that.  (Using Query Replace, one could even
+    optionally chose to NOT rename obviously-new-style DO's.)
+    POSSIBLE-OLD-STYLE-DO would do what DO does now, but be autoloading
+    and not necessarily efficient.  Keep current DO also for a while.
+2.  Redefine DO to support only the new style after much warning.
+3.  Eventually delete the autoload property for POSSIBLE-OLD-STYLE-DO from the
+    default environment.
+This sort of scheme might turn out to be useful for other changes as well.
+Regards, Mark
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04198.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04195.html">Re: lap</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04198.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04193.html">Re: trace</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04197"><strong>Date</strong></a></li>
+<li><a href="threads.html#04197"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

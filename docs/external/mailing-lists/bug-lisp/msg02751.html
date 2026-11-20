@@ -1,0 +1,147 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Incompatibility -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 30 Sep 79 21:20:00 GMT -->
+<!--X-Message-Id: 4a6c4d1177a8f37e1d1543582c6aade9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Incompatibility</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02752.html">Date Prev</a>][<a href="msg02750.html">Date Next</a>][<a href="msg02752.html">Thread Prev</a>][<a href="msg02750.html">Thread Next</a>][<a href="maillist.html#02751">Date Index</a>][<a href="threads.html#02751">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Incompatibility</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MILLER at MIT-AI</li>
+<li><em>Subject</em>: Incompatibility</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 30 Sep 79 21:20:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 30 September 1979 17:20-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I did have a long spiel in my first reply about how you're basing complaints of
+incompatability on Tops-20 MacLisp is wrong.  I deleted it on the grounds of
+uneeded flaming on the obvious, but...
+
+It is definately true that many very useful things which suffer from an
+operating-system dependence in their implementation (ledit, etc) have never
+been implemented on Twenex.  Tops-20 MacLisp is rather new, and hasn't had
+the large amount of work done on it that ITS MacLisp has.  That CANNOT be
+considered a problem with upwards compatibility; on the contrary, that is a
+DOWNWARDS compatability problem.  You are trying to transport heavily
+machine-dependent code to a less-complete MacLisp system.  If you were to write
+an ALLFILES for 20x, the apropriate hackery for LEDIT, etc. we'd be HAPPY to
+distribute them, but until someone writes the code, it can't happen.
+Certainly, it's absurd to suggest that this reflects on our philosopy of
+upwards-compatibility.  It does say that we are not providing ideal support for
+Tops-20 MacLisp.  We cannot; we lack the manpower.
+
+If you have a solution to the problem of new features added conflicting with
+people's older features, I'd like to hear it.  I do not believe it exists.
+However, just because there is a new LET should not break your code.  It is
+perfectly possible to redefine LET.  If it's incompatble with the standard LET
+it may cause some confusion for people reading your code, but that is part of
+the reason there has been this effort on standardizing features like LET, etc.
+This is part of what is necessary to be able to write transportable code.
+There was a proliferation of LET's, backquotes, and sharpsign-macros before,
+all of them slightly different.  THAT was a REAL source of incompatibilities.
+Indeed, the biggest reason for use of the sharpsign-macro is to allow the
+writing of transportable code from one operating-system to another, to allow
+the user to make use of things which are operating-system or machine dependent,
+or to take advantage of features which don't exist everywhere.  But as you
+know, these things autoload, and if you redefine them, a little confusion may
+result but the code will work.  The only incompatible change among them is
+that you cannot use comma in random places anymore (it is no longer treated
+like whitespace).  Certainly it can't hurt you much to have to delete your
+commas.
+
+Only 3 characters have been changed:  backquote, comma, and sharpsign.
+
+As for some of the specific Twenex things you mention in your note:
+^C is like ^Z on ITS.  Or are you putting your LISP in some mode to trap ^Cs?
+I'd suggest you do the same thing EMACS does ... exchange the functions of
+^Z and ^C in your program's.  I.e. don't expect to see any ^C's get tyi'd.
+Note you'll have to do (sstatus ttyint 26. NIL) to turn off the interrupt
+function normally on ^Z.
+
+I'm not certain, but I think the IMAGE output problem is just one of the
+little problems that hasn't been made to work yet.
+
+If you don't know how defun works, I recommend the section in the Lisp Machine
+Manaul on it.  It is indeed unfortunate that this is all the better we can do
+for documentation.
+
+MacLisp is not going to take over the world -- the 10 is not an adaquate
+vehicle for AI research.  Certainly, it cannot support the kinds of
+user-interface and programming aids that we would like, and continue to support
+such large systems as Macsyma.  Most of the additional features being added to
+MacLisp these days are for backward compatibility and transportability,
+since everybody here is engaged in, or soon to be engaged in moving their
+software to larger LISPs.  It is NOT a case of AI not tolerating the existance
+of other sites trying to do similar work!  On the contrary, that's why TOPS-20
+MacLisp exists at all.  That's why we're working on NIL, since not everyone can
+get a LISP Machine.  That's one of the uses of the # macro, to write code which
+can be transported elsewhere.
+
+In short, I think many of your complaints are justified agonizing on the
+lack of some features away from M.I.T., but not relevant to questions of
+compatibility in NIL and LISPM.  And remember, those features you're agonizing
+about not having cost lots of effort to obtain on ITS.  We've given you MacLisp
+on Tops-20 with our own effort, but I don't think it is unreasonable to expect
+that extended features like Ledit should be written by a Tops-20 user just as
+the original was written by an ITS user (not a LISP maintainer!!).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02752.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02750.html">Mark Miller's comments about LISP compatability</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02752.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02750.html">Mark Miller's comments about LISP compatability</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02751"><strong>Date</strong></a></li>
+<li><a href="threads.html#02751"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: function cells -->
+<!--X-From-R13: Rrhgfpu.BONBODQ&#45;[OJQ.ODBO -->
+<!--X-Date: Tue ,23 Aug 83 17:13:00 EDT -->
+<!--X-Message-Id: 049c62dbca6b870bf1deb9e7566d1fa4@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: function cells</title>
+<link rev="made" href="mailto:Deutsch.PA@PARC-MAXC.ARPA">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00640.html">Date Prev</a>][<a href="msg00638.html">Date Next</a>][<a href="msg00640.html">Thread Prev</a>][<a href="msg00638.html">Thread Next</a>][<a href="maillist.html#00639">Date Index</a>][<a href="threads.html#00639">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: function cells</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Julian Padget &lt;PADGET@UTAH-20.ARPA&gt;</li>
+<li><em>Subject</em>: Re: function cells</li>
+<li><em>From</em>: Deutsch.PA@PARC-MAXC.ARPA</li>
+<li><em>Date</em>: Tue ,23 Aug 83 17:13:00 EDT</li>
+<li><em>Cc</em>: lisp-forum@MIT-MC.ARPA, Bobrow.PA@PARC-MAXC.ARPA, Teitelman.PA@PARC-MAXC.ARPA</li>
+<li><em>In-reply-to</em>: &quot;PADGET@UTAH-20.ARPA's message of 23 Aug 83 11:35 MDT&quot;</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Lisp 1.5 stored function definitions on the property list.  To my
+knowledge, the first Lisp that used an independent function cell was the
+PDP-1 implementation of BBN-Lisp, the precursor of Interlisp.  Dan
+Bobrow may be able to confirm or add details.  This would have been
+around 1965.  He and I were the principal architects of this system; I
+would trust his word about who invented what.  You may find other
+interesting historical information in the Information International Inc.
+Lisp system book, edited by Edmund C. Berkeley and also published
+sometime around 1965.  It doesn't describe BBN-Lisp, but it describes
+some other systems, and one of them may have function cells -- I don't
+really remember.
+
+I don't know what alternatives you want a justification with respect to.
+The changeover from property list representation was primarily for
+efficiency.  The distinction between &quot;function context&quot; and &quot;variable
+context&quot; for interpreting names was a bad idea inherited from Lisp 1.5:
+it was retained for a very long time because doing free variable lookups
+for every function name (which are normally only bound at the top level)
+would have been atrociously slow.  It was only with the invention of
+shallow binding that people started to look seriously at re-merging
+function and variable binding.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00640.html">function cells</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00638.html">Re: function cells</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00640.html">function cells</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00638.html">Re: function cells</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00639"><strong>Date</strong></a></li>
+<li><a href="threads.html#00639"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: B.S. -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Thu ,1 Oct 81 00:07:00 EDT -->
+<!--X-Message-Id: 01Oct81 000733 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>B.S.</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00729.html">Date Prev</a>][<a href="msg00727.html">Date Next</a>][<a href="msg00732.html">Thread Prev</a>][<a href="msg00726.html">Thread Next</a>][<a href="maillist.html#00728">Date Index</a>][<a href="threads.html#00728">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>B.S.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Eric Benson &lt;BENSON at UTAH-20&gt; </li>
+<li><em>Subject</em>: B.S.</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Thu ,1 Oct 81 00:07:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+<li><em>In-reply-to</em>: Eric Benson's message of 30 Sep 81 15:39-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Maybe infix syntax *is* easier to read -- it is certainly more concise --
+when there are no more than a couple of dozen functions involved, and
+none takes more than two arguments, and there are enough symbols to go
+around.  Indeed, there are not enough ASCII characters to go arond
+even for the common operators, so PASCAL must use the abomination &quot;&lt;&gt;&quot;
+for &quot;not equals&quot;.  (Why an abomination?  Because for some of the types
+in PASCAL to which &quot;&lt;&gt;&quot; applies, the concept of &quot;not equal&quot; is not the
+same as the idea of &quot;&lt; or &gt;&quot;!  Sets are an example.)  Similarly FORTRAN
+uses &quot;.AND.&quot;, &quot;.LE.&quot;, and so on.
+
+When you have an extensible language, however, such as LISP is, one
+quickly runs out of meaningful symbols.  I have had some experience with
+a LISP-like language with a user-extensible ALGOL-like syntax, namely
+EL1 at Harvard.  Maybe you can tell what A * X + C &gt; Z is supposed to
+mean, but how about A @&gt; B &lt;= C &lt;==&gt; D ?  Could you really remember the
+precedences of ten new operators just defined on the preceding two
+pages of a program you were reading?  Probably not.  And you have to have
+precedence rules of some sort; otherwise everything must be
+parenthesized anyway anyway, and you lose the advantage of infix over
+prefix.  Can you even remember the nine precedence levels of PL/I?
+That's why APL, which doesn't even let the user define special symbols,
+has no relative precedences, but only a uniform right-to-left parsing rule.
+
+When you have functions of more than two arguments, infix syntax breaks down,
+and you have to use prefix after all in most algebraic languages.  (In APL
+you simply are not permitted to have functions of more than two arguments!)
+
+In closing, let me quote two more experienced people than I.  McCarthy,
+in his paper on the history of LISP for the ACM History of Programming
+Languages Conference, explains that LISP was intended to have an
+infix-style syntax for programs, the parenthesized format being used
+only for data.  A data parser (READ) was written to accompany other
+system functions such as CONS and ASSOC.  It was only then that it was
+realized a universal interpreter (EVAL) could be written which would
+treat data objects as programs.  This was much easier to code than the
+program parser, and once it existed it caught on and no one ever got
+around to writing the infix parser.  Moreover, McCarthy speculates that
+this very accident was one of the important reasons for the persistence
+of LISP for twenty years, because it made it so much easier to realize
+that programs and data could be intermingled, which is of great
+importance in many LISP applications, expecially in AI.
+
+The second quote:  at the APL '79 conference, Alan Perlis, a great fan
+of APL, got up to speak on the differences between LISP and APL.  The
+conclusion of his talk was as follows (I paraphrase):  &quot;There are two
+lessons APL must learn from LISP to thrive.  (1) Functions must become
+manipulable data objects of the language.  (2) We have to get rid of the
+crappy infix syntax!&quot;
+
+--Guy
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00729.html">Re: LAMBDA syntax counter-proposal</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00727.html">LAMBDA syntax counter-proposal</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00732.html">LAMBDA syntax counter-counter-proposal</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00726.html">LAMBDA proposals and counter-proposals</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00728"><strong>Date</strong></a></li>
+<li><a href="threads.html#00728"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

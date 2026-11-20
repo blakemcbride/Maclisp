@@ -1,0 +1,113 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SETF on macro&#45;expanded forms -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 3 Jul 79 06:27:00 GMT -->
+<!--X-Message-Id: 088d6de6f142564cb8182e5b00d465b1@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SETF on macro-expanded forms</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00579.html">Date Prev</a>][<a href="msg02961.html">Date Next</a>][<a href="msg00579.html">Thread Prev</a>][<a href="msg02961.html">Thread Next</a>][<a href="maillist.html#02962">Date Index</a>][<a href="threads.html#02962">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SETF on macro-expanded forms</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: gls at SU-AI</li>
+<li><em>Subject</em>: SETF on macro-expanded forms</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 3 Jul 79 06:27:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 3 JUL 1979 0227-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 19 Jun 1979 0112-PDT
+    From: Guy Steele &lt;GLS at SU-AI&gt;
+    Subject: Screw with DEFVST (which otherwise works fine)   
+    To:   bug-lisp at MIT-MC
+
+    (DEFVST GRUNT FOO BAR BAZ)
+    (DEFMACRO CLOBBER (FROB) `(SETF ,FROB (CLOBBERIFIER ,FROB)) )
+    (CLOBBER (GRUNT-BAR MY-FAVORITE-GRUNT))
+    
+    This fails to work because the two occurrences of FROB (i.e. of
+    (GRUNT-BAR MY-FAVORITE-GRUNT)) in the generated SETF
+    form will be EQ.  The second occurrence is evaluated first,
+    and macro-expanded in the process.  As a result, the SETF
+    (i.e. SETVST) sees a form as its first argument whose car
+    is MACROEXPANDED rather than GRUNT-BAR, so it gets very unhappy.
+    I am fixing this by writing instead
+	    `(SETF ,(APPEND FROB '()) (CLOBBERIFIER ,FROB))
+    but this seems to be a crock.  Is there any hope of a reasonable
+    general solution to this problem?
+
+Yes, there are several general solutions to this problem, which is
+not unique to DEFVST
+1) simply, during the runtime environment, set MACRO-EXPANSION-USE
+   to something other than MACROEXPANDED;  like, say, (), or
+   DISPLACE, or MACROMEMO.
+2) during the definition of the structure, use the &quot;temporary override&quot;
+   feature for DEFMACRO-DISPLACE-CALL;  see the latest two LISP RECENTs
+   to see how (DEFMACRO (foo flag-name flag-value ...) ...)  differes
+   from (DEFMACRO foo ...).  DEFVST permits the same kind of temproary
+   settings for the various &quot;flag-name&quot;s.  WARNING!  A bug in DEFVST
+   caused this to fail for DEFVST, but I just fixed that;  so try FTP'ing
+   over to SAIL the latest LIBLSP;DEFVST FASL.   With the corrected
+   DEFVST, I tried &quot;(DEFVST (GRUNT DEFMACRO-DISPLACE-CALL ()) ...)
+   and won properly.
+3) push for a general acceptance of SETF in the maclisp community
+   (which your function CLOBBER seems to be going in that direction),
+   and let SETF know specifically about MACROEXPANDED.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00579.html">Re: iocins</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02961.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00579.html">Re: iocins</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02961.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02962"><strong>Date</strong></a></li>
+<li><a href="threads.html#02962"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

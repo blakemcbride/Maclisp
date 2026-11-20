@@ -1,0 +1,121 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Benchmark &#45; PERQ CL vs Apollo T -->
+<!--X-From-R13: Exrs Iubyrl &#60;IubyrlNQ[G&#45;QE&#45;Q.ODBO> -->
+<!--X-Date: Mon 8 Oct 84 15:51:34&#45;EDT -->
+<!--X-Message-Id: WHOLEY.12053860153.BABYL@CMU&#45;CS&#45;C.ARPA -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: cpd at UCLA&#45;LOCUS.ARPA -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Benchmark - PERQ CL vs Apollo T</title>
+<link rev="made" href="mailto:Wholey@CMU-CS-C.ARPA">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00842.html">Date Prev</a>][<a href="msg00841.html">Date Next</a>][<a href="msg00842.html">Thread Prev</a>][<a href="msg00841.html">Thread Next</a>][<a href="maillist.html#00840">Date Index</a>][<a href="threads.html#00840">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Benchmark - PERQ CL vs Apollo T</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Charles Dolan &lt;cpd@UCLA-LOCUS.ARPA&gt;</li>
+<li><em>Subject</em>: Benchmark - PERQ CL vs Apollo T</li>
+<li><em>From</em>: Skef Wholey &lt;Wholey@CMU-CS-C.ARPA&gt;</li>
+<li><em>Date</em>: Mon ,8 Oct 84 15:51:00 EDT</li>
+<li><em>Cc</em>: Common-Lisp@SU-AI.ARPA, Lisp-Forum@MIT-MC.ARPA, T-Users@YALE.ARPA</li>
+<li><em>In-reply-to</em>: Msg of 8 Oct 1984  13:17-EDT from Charles Dolan &lt;cpd at UCLA-LOCUS.ARPA&gt;</li>
+<li><em>Sender</em>: WHOLEY@CMU-CS-C.ARPA</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: Monday, 8 October 1984  13:17-EDT
+    From: Charles Dolan &lt;cpd at UCLA-LOCUS.ARPA&gt;
+
+    UCLA has a demo unit of the new PERQ 68000 based workstation
+    running Common Lisp.
+
+The PERQ is not a 68000 based machine.  There's a bit-sliced processor inside
+of it.  It's basically a 16-bit machine.
+
+    		PERQ		DN300		DN460
+
+    (tak ...) [3]	6.3 sec		3.4/6.3 sec [2]	1/2.7 sec [2]
+
+Tak runs in under 5 seconds on my Perq.  The Perq Common Lisp implementation
+has been undergoing extensive tuning during the past few months, and I bet
+you've got a somewhat old version.
+
+The current situation is that people at CMU are still doing most of the
+development work, while the Lisp people at Perq systems are doing things like
+getting better interfaces to the operating system servers up.
+
+Over the past two weeks I've added register instructions to the Lisp
+instruction set (full runtime type-checking, by the way).  Some benchmarky
+things have improved dramatically, for example,
+	(dotimes (i 1000000))	; That's one million
+took over 20 seconds before the addition of registers, and now takes 5.5
+seconds.  I bet the register instructions will help some of your other
+benchmarks as well.
+
+&quot;Benchmarking is, at best, a black art.&quot;  I'd like to see some large bechmarks
+run on a large number of machines (something like OPS5).  I like things along
+the lines of compilation speed and how fast the editor reads and writes files.
+Those are things that most people do a lot, and spend time waiting for.
+
+Common Lisp and T are very different languages, and I bet I could devise some
+benchmarks that ran significantly faster on the Perq than on the Apollo
+machines.  Have you tried CTAK (TAK using catch and throw)?
+
+I don't want to thwart your benchmarking effort, and I'm not offended or
+anything, but I felt I should mention that the Perq Lisp system is still in the
+tuning phase.
+
+--Skef
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00842.html">[MJackson.Wbst: Why Your Pascal and Modula-2 Programs Don't Work]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00841.html">Benchmark - PERQ CL vs Apollo T</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00842.html">[MJackson.Wbst: Why Your Pascal and Modula-2 Programs Don't Work]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00841.html">Benchmark - PERQ CL vs Apollo T</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00840"><strong>Date</strong></a></li>
+<li><a href="threads.html#00840"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

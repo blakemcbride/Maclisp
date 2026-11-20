@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MACROEXPANDED not working with SETF (??) -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Wed, 29 Oct 80 15:04:00 GMT -->
+<!--X-Message-Id: c2a922cf2b3e9d7905d56afbcc8501ca@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MACROEXPANDED not working with SETF (??)</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01940.html">Date Prev</a>][<a href="msg01938.html">Date Next</a>][<a href="msg01940.html">Thread Prev</a>][<a href="msg01937.html">Thread Next</a>][<a href="maillist.html#01939">Date Index</a>][<a href="threads.html#01939">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MACROEXPANDED not working with SETF (??)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: MACROEXPANDED not working with SETF (??)</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Wed, 29 Oct 80 15:04:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 29 OCT 1980 1004-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The subject line of this note is not the right characterization of the 
+problem -- what's going wrong here is that any macro-expansion which
+has been &quot;memoized&quot; one way or other may need to be invalidated
+by operations other than that of merely redefining the macro.
+Thus I think, George, your sense of despair needn't be taken so badly:
+    Date: 28 October 1980 18:25-EDT
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    . . .
+    ; Might as well not bother with the MACROMEMO scheme and just have
+    ; all macros displace if it isn't going to work in the one of
+    ; the most common cases, SETF.
+If you had, in fact, been using the MACROMEMO scheme instead of the
+MACROEXPANDED scheme, then there would have been a  trivial way to win.  
+But more importantly, one has to be able to recognize when a condition has 
+occurred which *may concievably* invalidate some macor expansion.   For 
+example, consider
+   (DEFMACRO PROJECT-IT (X) `(FIND-PROJECTION ,x MAIN-AXIS))
+What happens if the value of the global-variable MAIN-AXIS is
+changed?  Well, one could just say (|forget-macromemos/|| 'PROJECT-IT),
+but in general he may not know what all macros will be affected.
+    If MACRO-EXPANSION-USE is set to MACROMEMO, then on can easily and
+simply invalidate all &quot;memoized&quot; expansions of all macros  by merely
+doing (RPLACD MACROMEMO () ).  The problem is more complex when one is 
+using the MACROEXPANDED scheme and doesn't wish to change over to the 
+MACROMEMO scheme;  but still he could do 
+    (MAPATOMS '(LAMBDA (X) (REMPROP X 'MACROEXPANDED)))
+Both of these tactics are somewhat akin to doing (SSTATUS UUOLI),
+and I'm sure that if someone wanted to spend a few weeks researching
+how to be more selecitve in the unsnapping, it could be done.
+   But as Alfred E. Neuman used to say, &quot;Not to worry . . .&quot;
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01940.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01938.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01940.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01937.html">MACROEXPANDED not working with SETF (??)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01939"><strong>Date</strong></a></li>
+<li><a href="threads.html#01939"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

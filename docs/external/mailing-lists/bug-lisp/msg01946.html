@@ -1,0 +1,84 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Shifted&#45;0, Modular arithmetic -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Tue, 28 Oct 80 18:38:00 GMT -->
+<!--X-Message-Id: 28Oct80 133814 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Shifted-0, Modular arithmetic</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01947.html">Date Prev</a>][<a href="msg01945.html">Date Next</a>][<a href="msg01053.html">Thread Prev</a>][<a href="msg01052.html">Thread Next</a>][<a href="maillist.html#01946">Date Index</a>][<a href="threads.html#01946">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Shifted-0, Modular arithmetic</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Subject</em>: Re: Shifted-0, Modular arithmetic</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Tue, 28 Oct 80 18:38:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC, Dave.Touretzky at CMU-10A, David.Goldberg at CMU-10A</li>
+<li><em>In-reply-to</em>: JONL@MIT-MC's message of 28 Oct 80 06:25-EST</li>
+<li><em>Original-date</em>: 28 October 1980 1338-EST (Tuesday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Of course, part of the complaint is that the PDP-10 instruction
+set doesn't even implement the ring you described, but only
+an approximation to it.  If it were a true ring then indeed
+(* x 2) would be the same as (+ x x).  However, the PDP-10
+IMUL instruction does not store the 36 low-order bits,
+but the 35 low-order bits plus the correct sign.  That's why
+(* 2 2_34.) =&gt; 0 instead of -2_35.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01947.html">new LISP rubout processing</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01945.html">MACROEXPANDED not working with SETF</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01053.html">Shifted-0, Modular arithmetic</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01052.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01946"><strong>Date</strong></a></li>
+<li><a href="threads.html#01946"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

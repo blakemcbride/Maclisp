@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Odd case of LEXPR&#45;FUNCALL -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Mon, 26 Jan 81 22:39:00 GMT -->
+<!--X-Message-Id: aca5ae38484e27bb6c5ea513917ff4d8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Odd case of LEXPR-FUNCALL</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01673.html">Date Prev</a>][<a href="msg01671.html">Date Next</a>][<a href="msg01664.html">Thread Prev</a>][<a href="msg01671.html">Thread Next</a>][<a href="maillist.html#01672">Date Index</a>][<a href="threads.html#01672">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Odd case of LEXPR-FUNCALL</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Odd case of LEXPR-FUNCALL</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Mon, 26 Jan 81 22:39:00 GMT</li>
+<li><em>Original-date</em>: 26 JAN 1981 1739-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I don't really care if LEXPR-FUNCALL supports FSUBRs. In fact, I'd prefer
+if it didn't bother running the code to get those props, as I think it
+is totally awful for anyone to actually LEXPR-FUNCALL a FEXPR ... 
+
+HOWEVER, I do wonder why if 
+
+	(LEXPR-FUNCALL #'QUOTE '((F))) =&gt; F ;win
+	(LEXPR-FUNCALL #'QUOTE '(F))   =&gt; #74332 ; ie, (CAR 'F) -- reasonable
+
+then how could
+
+	(LEXPR-FUNCALL #'QUOTE NIL) =&gt; #100346 
+
+since if QUOTE did any arg checking, it would know it had been given a bad
+arg, and since if you did 2 extra CARs of NIL, you'd get NIL, not #100346 ...
+
+What kind of nonsense is it doing that gets me such an obscure return value?
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01673.html">what gives?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01671.html">SFA Lossage</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01664.html">what gives?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01671.html">SFA Lossage</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01672"><strong>Date</strong></a></li>
+<li><a href="threads.html#01672"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

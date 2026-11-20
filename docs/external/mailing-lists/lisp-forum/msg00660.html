@@ -1,0 +1,154 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Two little suggestions for macroexpansion -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,27 Jan 82 18:24:00 EDT -->
+<!--X-Message-Id: 150243ba6d3f655aba78e73a830773b7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Two little suggestions for macroexpansion</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00662.html">Date Prev</a>][<a href="msg00659.html">Date Next</a>][<a href="msg00662.html">Thread Prev</a>][<a href="msg00659.html">Thread Next</a>][<a href="maillist.html#00660">Date Index</a>][<a href="threads.html#00660">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Two little suggestions for macroexpansion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-MC</li>
+<li><em>Subject</em>: Two little suggestions for macroexpansion</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,27 Jan 82 18:24:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Several times in the COMMON LISP discussions, individuals have
+proffered a &quot;functional&quot; format to alleviate having lots of
+keywords for simple operations: E.g. GLS's suggestion on page 137
+of &quot;Decisions on the First Draft Common Lisp Manual&quot;, which would
+allow one to write 
+  ((fposition #'equal x) s 0 7)  for  (position x s 0 7)
+  ((fposition #'eq x) s 0 7)     for  (posq x s 0 7)
+
+This format looks similar to something I've wanted for a long time
+when macroexpanding, namely, for a form  
+	foo = ((&lt;something&gt; . . .) a1 a2) 
+then, provided that &lt;something&gt; isn't one of the special words for this 
+context [like LAMBDA or (shudder!) LABEL] why not first expand 
+(&lt;something&gt; . . .), yielding say &lt;more&gt;, and then try again on the form  
+(&lt;more&gt; a1 a1).    Of course, (&lt;something&gt; . . .) may not indicate any 
+macros, and &lt;more&gt; will just be eq to it.   The MacLISP function MACROEXPAND 
+does do this, but EVAL doesn't call it in this circumstance (rather EVAL does 
+a recursive sub-evaluation)
+
+FIRST SUGGESTION:
+     In the context of ((&lt;something&gt; . . .) a1 a2),  have EVAL macroexpand 
+ the part (&lt;something&gt; . . .) before recursively evaluating it.
+
+  This will have the incompatible effect that
+    (defmacro foo () 'LIST)
+    ((foo) 1 2)
+  no longer causes an error (unbound variable for LIST), but will rather
+  first expand into (list 1 2), which then evaluates to (1 2).
+  Similarly, the sequence
+    (defun foo () 'LIST)
+    ((foo) 1 2)
+  would now, incompatibly, result in an error.
+  [Yes, I'd like to see COMMON LISP flush the aforesaid recursive evaluation, 
+   but that's another kettle of worms we don't need to worry about now.]
+
+
+SECOND SUGGESTION
+    Let FMACRO have special significance for macroexpansion in the context
+ ((FMACRO . &lt;fun&gt;) . . .), such that this form is a macro call which is
+ expanded by calling &lt;fun&gt; on the whole form.
+
+
+As a result of these two changes, many of the &quot;functional programming
+style&quot; examples could easily be implemented by macros.  E.g.
+  (defmacro FPOSITION (predfun arg)
+    `(FMACRO . (LAMBDA (FORM) 
+		 `(SI:POS-HACKER ,',arg 
+				 ,@(cdr form) 
+				 ':PREDICATE 
+				 ,',predfun))))
+where SI:POS-HACKER is a version of POSITION which accepts keyword arguments
+to direct the actions, at the right end of the argument list.
+Notice how 
+
+    ((fposition #'equal x) a1 a2) 
+==&gt;
+    ((fmacro . (lambda (form) 
+		  `(SI:POS-HACKER X ,@(cdr form) ':PREDICATE #'EQUAL)))
+	  a1
+	  s2)
+==&gt;
+    (SI:POS-HACKER X A1 A2 ':PREDICATE #'EQUAL)
+
+If any macroexpansion &quot;cache'ing&quot; is going on, then the original form 
+((fposition #'equal x) a1 a2)  will be paired with the final
+result (SI:POS-HACKER X A1 A2 ':PREDICATE PREDFUN) -- e.g., either
+by DISPLACEing, or by hashtable'ing such as MACROMEMO in PDP10 MacLISP.
+
+Now unfortunately, this suggestion doesn't completely subsume the 
+functional programming style, for it doesn't directly help with the
+case mentioned by GLS:
+  ((fposition (fnot #'numberp)) s)  for (pos-if-not #'numberp s)
+Nor does it provide an easy way to use MAPCAR etc, since
+  (MAPCAR (fposition #'equal x) ...)
+doesn't have (fposition #'equal x) in the proper context.
+[Foo, why not use DOLIST or LOOP anyway?]   Nevertheless, I've had many 
+ocasions where I wanted such a facility, especially when worrying about 
+speed of compiled code.  
+
+Any coments?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00662.html">Interlisp and MacLisp</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00659.html">Two little suggestions for macroexpansion</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00662.html">Interlisp and MacLisp</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00659.html">Two little suggestions for macroexpansion</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00660"><strong>Date</strong></a></li>
+<li><a href="threads.html#00660"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

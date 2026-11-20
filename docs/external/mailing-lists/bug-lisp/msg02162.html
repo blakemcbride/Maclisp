@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Per&#45;file options -->
+<!--X-From-R13: Sqjneq Pnegba &#60;SP ng [WF&#45;OW> -->
+<!--X-Date: Sun, 10 Feb 80 19:55:00 GMT -->
+<!--X-Message-Id: 89bbc128e7b6e4bff7e99673f7fa8c75@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Per-file options</title>
+<link rev="made" href="mailto:EB at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02163.html">Date Prev</a>][<a href="msg02161.html">Date Next</a>][<a href="msg02163.html">Thread Prev</a>][<a href="msg02161.html">Thread Next</a>][<a href="maillist.html#02162">Date Index</a>][<a href="threads.html#02162">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Per-file options</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-AI</li>
+<li><em>Subject</em>: Per-file options</li>
+<li><em>From</em>: Edward Barton &lt;EB at MIT-AI&gt;</li>
+<li><em>Date</em>: Sun, 10 Feb 80 19:55:00 GMT</li>
+<li><em>Original-date</em>: 10 February 1980 14:55-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>A recent reply to someone asking about commas in (comment ...) 
+constructions recommended doing (SSTATUS MACRO ...) to turn off
+the commas, then possibly later re-enabling commas with another
+(SSTATUS MACRO ..) call.  In order to turn off mcommas for a particular
+file only, presumably there would be a SSTATUS at the beginning and
+another at the end of the file.
+
+If loading of that file is then aborted, naturally commas will be left
+turned off.  This illustrates a general problem; namely, there is no
+way that I know of to make certain changes temporarily in loading,
+compiling, or whatever a file, without leaving things wrong or
+inconsistent if there is a quit.
+
+Would it be unreasonable to have some variable AFTER-LOAD-FORMS or
+something which loading functions would bind, initially to NIL,
+and then mapcar eval'ing down when loading is complete?  There
+could also be an UNWIND-PROTECT in LOAD which would do the same
+things, perhaps with there being some way for forms to tell whether
+a normal load-termination or a quit was occurring.  This would allow
+users to push forms onto AFTER-LOAD-FORMS and be sure they would
+be evaluated, regardless of whether there was a quit or whether loading
+terminated normally.  Then they could reset the things that they clobber
+and truly make things per-file.  A similar list could be used by the
+compiler, and perhaps other things that I haven't thought of.
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02163.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02161.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02163.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02161.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02162"><strong>Date</strong></a></li>
+<li><a href="threads.html#02162"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

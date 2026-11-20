@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: #\EOF -->
+<!--X-From-R13: Rnivq O. [bba &#60;[AA@ ng [WF&#45;[Q> -->
+<!--X-Date: Sat ,27 Sep 80 17:15:00 EDT -->
+<!--X-Message-Id: c0034e8422cc37dfd187ca04dbe3c3ea@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: #\EOF</title>
+<link rev="made" href="mailto:MOON at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00283.html">Date Prev</a>][<a href="msg00184.html">Date Next</a>][<a href="msg00281.html">Thread Prev</a>][<a href="msg00269.html">Thread Next</a>][<a href="maillist.html#00282">Date Index</a>][<a href="threads.html#00282">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: #\EOF</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: Re: #\EOF</li>
+<li><em>From</em>: David A. Moon &lt;MOON at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat ,27 Sep 80 17:15:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 26 SEP 1980 2317-EDT
+    From: KMP at MIT-MC (Kent M. Pitman)
+    ...
+    The :TYI operation is documented to return () iff the end-of-file value
+    requested is not given or is (). I would like a fixnum value that I can
+    feed as the end-of-file value which is not in the character set. I hope
+    that :TYI will not force a () on me if I specify the 2nd arg to that
+    operation.
+I don't know what document you're reading, this is not what the Lisp
+machine manual which I would assume to be the definitive document on
+Lisp machine streams says.
+
+The problem with having a &quot;character&quot; called #\EOF is that not
+all sources of characters want to indicate EOF in the same way.
+If it wasn't for the unfortunate presence of data types in Maclisp,
+such that TYI must always return a fixnum, I would advocate making
+NIL the end of file indication in everything, since it is clearly
+not a character and is the standard indicator of emptiness.
+
+Under the circumstances I think it would be misleading and confusing
+to introduce a &quot;#\EOF&quot; syntax because it would only work with some
+and not all functions.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00283.html">Re: &quot;What are you going to do about...&quot;</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00184.html">Re: destructuring and &amp;mumbles</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00281.html">Re: #\EOF</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00269.html">Re: #\EOF  (look before you leap)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00282"><strong>Date</strong></a></li>
+<li><a href="threads.html#00282"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

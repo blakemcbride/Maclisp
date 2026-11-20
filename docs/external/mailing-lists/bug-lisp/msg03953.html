@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: " on TTYSCAN&#45;STRINGERS/| -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Fri, 23 Nov 79 17:04:00 GMT -->
+<!--X-Message-Id: 7645135579dddf864413cd05a5990cf3@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>&quot; on TTYSCAN-STRINGERS/|</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03954.html">Date Prev</a>][<a href="msg03952.html">Date Next</a>][<a href="msg03955.html">Thread Prev</a>][<a href="msg03952.html">Thread Next</a>][<a href="maillist.html#03953">Date Index</a>][<a href="threads.html#03953">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>&quot; on TTYSCAN-STRINGERS/|</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC</li>
+<li><em>Subject</em>: &quot; on TTYSCAN-STRINGERS/|</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Fri, 23 Nov 79 17:04:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 23 NOV 1979 1204-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     ALAN@MIT-AI
+Date: Tue, 21 Nov 79 12:11:57 GMT
+Original-Date: 11/21/79 08:11:57 EDT
+Subject: Re: XLISP variable TTYSCAN-STRINGERS/|
+    To: (BUG LISP) at MIT-AI
+    has the pair (#/&quot; . #/&quot;) by default.
+    This would seem to be wrong if (status macro #/&quot;)
+    is nil by default.
+No, the list held by TTYSCAN-STRINGERS/| is only for read-macro chars - 
+the crucial line of the documentation is
+   &quot;tty prescan function can know about which (read macro) characters are&quot;
+but indeed if  you would like to make &quot;&quot;&quot; a non-stringer macro char,
+you would have to remove it from TTYSCAN-STRINGERS/|.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03954.html">SETF, PUSH, POP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03952.html">USERATOMS-HOOKS</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03955.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03952.html">USERATOMS-HOOKS</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03953"><strong>Date</strong></a></li>
+<li><a href="threads.html#03953"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

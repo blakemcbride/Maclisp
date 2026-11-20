@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,4 Feb 81 13:23:00 EDT -->
+<!--X-Message-Id: 5754d6aeb36338283242967e25e80994@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00215.html">Date Prev</a>][<a href="msg00217.html">Date Next</a>][<a href="msg00215.html">Thread Prev</a>][<a href="msg00217.html">Thread Next</a>][<a href="maillist.html#00216">Date Index</a>][<a href="threads.html#00216">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RMS at MIT-AI</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,4 Feb 81 13:23:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Having (OPTIONAL) with no variable name mean &quot;following variables are
+optional by default&quot; has the same problem problem as &amp;kewords.
+That is, it forces a kind of parsing on any function-defining special form.
+More parenthetical would be 
+((OPTIONAL X) (OPTIONAL Y)) &lt;=&gt; (OPTIONALS X Y). You can even have
+AUX variables with no problem, (AUX FOO) or (AUXS FOO BAR BAZ).
+Also, this gives a way of saying
+
+(DEFUN FOO (X Y (AUX Z (+ X Y)) P Q (OPTIONAL R (* Z 4))) ...)
+
+Think about how often the syntax of a language limits the
+possible things one can say in it. It may make the things
+one says most often shorter to say, but it is still nice to
+have a uniform, very lispy semantic level.
+
+Here is a paraphrased quote from the CGOL manual (of all things) :
+&quot;one of the best things about CGOL is that it allows you to escape
+ into lisp syntax easily, with the &quot;!&quot; operator, for those cases
+ where you can't easily figure out how to say what you want to
+ say in the CGOL syntax&quot;
+
+On that note, what is the feeling on having &quot;&amp;&quot; be a readmacro?
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00215.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00217.html">Re: &amp; as a reader macro.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00215.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00217.html">Re: &amp; as a reader macro.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00216"><strong>Date</strong></a></li>
+<li><a href="threads.html#00216"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

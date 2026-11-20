@@ -1,0 +1,176 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LAMBDA proposals and counter&#45;proposals -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;xzc ng [WF&#45;OW> -->
+<!--X-Date: Thu ,1 Oct 81 19:49:00 EDT -->
+<!--X-Message-Id: 007b2ce1d9e4cea1abcf2766f285833a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LAMBDA proposals and counter-proposals</title>
+<link rev="made" href="mailto:kmp at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00727.html">Date Prev</a>][<a href="msg00725.html">Date Next</a>][<a href="msg00728.html">Thread Prev</a>][<a href="msg00724.html">Thread Next</a>][<a href="maillist.html#00726">Date Index</a>][<a href="threads.html#00726">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LAMBDA proposals and counter-proposals</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-AI, Guy.Steele at CMU-10A, EAK at MIT-MC</li>
+<li><em>Subject</em>: LAMBDA proposals and counter-proposals</li>
+<li><em>From</em>: Kent M. Pitman &lt;kmp at MIT-AI&gt;</li>
+<li><em>Date</em>: Thu ,1 Oct 81 19:49:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>There are MANY issues being addressed at once here. In the end,
+all will have to be addressed. However, it might be of help for
+people to clearly argue for or against one issue at a time, rather
+than mixing them. Here is a sampling of the kinds of issues that
+I feel are becoming too confused with each other; I think discussing
+the sub-issues separately will help us build a better foundation for
+a later discussion of the whole issue -- I fear we are currently trying
+to solve too much all at once...
+
+* HOW SHOULD EXTENSIONS BE INTRODUCED INTO THE LANGUAGE? If we
+  have one hairy construct to which we continue to add subtle,
+  concise additions to, is that the right thing? (eg, the 
+  introduction of new &amp;keywords) Or are we better off with slightly
+  more verbose constructs each of which has an independent function?
+  (eg, using LET instead of &amp;AUX, LOCAL-DECLARE instead of &amp;SPECIAL,
+  etc.)
+
+  This question is made more complex by the possibility of making
+  DEFUN and perhaps even LAMBDA macroexpand from concise though
+  syntactically hairy constructs into larger but syntactically
+  more transparent underlying forms. ie, one might write 
+  (DEFUN F (X &amp;AUX Y) ...)   but get  (DEFUN F (X) (LET* (Y) ..)).
+
+  This is an important issue because it decides whether Earl's
+  note about his concern over extensibility is worthwhile to consider.
+  It is only worthwhile to worry about boxing yourself into a corner
+  with respect to extension if you believe that extension comes from
+  modifying existing operators/special-forms rather than creating
+  new ones. This is an issue for which I do not believe we have
+  a clear answer.
+
+* WHAT EVEN BELONGS IN THE LAMBDA LIST?  My feelings are that
+  a lambda list is a place for naming formal quantities that are
+  not known about locally. There are surely opposing viewpoints.
+  There are several isolatable sub-issues:
+
+  * &amp;AUX variables are of a clearly different nature and do not,
+    in my opinion, have any business being in the lambda list at all.
+  
+  * Destructuring. Is this part of the specification of the formal
+    quantities or not? I am very wishy-washy about this, but lean toward
+    the side of not wanting it in the bound variable list.
+
+  * What about advice to the evaluator? This has separable sub-issues
+    as well:
+
+    * Eval/Quote information.
+      This has to do with stuff that is to be done before the lambda
+      expression ever gets hold of things, so is not rightly part of the
+      things the lambda should contain. eg, fine if DEFUN wants to know
+      about &amp;QUOTE and you want to type in (DEFUN F (X &amp;QUOTE Y) ...)
+      but I would prefer that this macroexpand into
+       (PROGN (ASSOCIATE-EVALUATION-INFORMATION 'F '(EVAL QUOTE))
+	      (SETF #'F #'(LAMBDA (X Y) ...)))
+      keeping the actual lambda list clear of such worthless clutter.
+      It is silly for an anonymous lambda expression to bother holding
+      onto information about EVAL and QUOTE since it can't do anything
+      useful with it.
+
+    * Keywording
+      Information about keywords and how to handle them correctly
+      is VERY complex and I don't think there is any kind of good theory
+      of that available at all. I would recommend not cluttering primitive
+      lambda lists with keyword information that is not well-agreed to be
+      the obvious right thing.
+
+    * Declarations, Argument type-checking
+      This hasn't been recently addressed by anyone, but probably should be.
+      These kinds of things may want to happen elsewhere besides at binding
+      points, so need special forms like LOCAL-DECLARE, DECLARE, etc. Having
+      their own special forms, is it reasonable to clutter the bound variable
+      list with a new notation for inferring things that could already be
+      expressed elsewise.
+
+    * Kinds of bindings: &amp;FUNCTION, &amp;SPECIAL, ...?
+      Where do these belong? Are they part of the specification of the
+      formal quantities? Is &amp;FUNCTION F anything more than another 
+      dimension on the namespace issue? Should it be treated as such?
+
+* HOW SHOULD SYNTAX MANIFEST ITSELF IN A LANGUAGE?
+  Dave gives me the impression that he feels that infix syntax
+  at the lowest level is acceptable if it buys convenience. There are 
+  others who clearly do not see that this should be so. The LOOP
+  macro buys such syntactic convenience without any modification to
+  the notion that the underlying representation can be parse-free.
+  Even Pratt's CGOL, which redefines all of the syntax of Lisp in a
+  rather questionable way, does not have any problem coming up with
+  appropriate parse-free underlying representations. Whether the lowest
+  level of the language must be something one can fathom only with the
+  aid of a parser or not seems to be of critical importance.
+
+As a closing note, I should add that I muchly support GLS's alternate
+lambda list proposal. I have had similar ideas in the past and
+I feel that any loss of expressive power it has can be made back up
+primarily by use of other existing primitives (like LET, DECLARE, ...)
+and possibly introduction of a small number of new primitives with
+special-purpose tasks. I also agreed with DLW's recent reply to EAK's and
+GLS's notes.
+
+-kmp
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00727.html">LAMBDA syntax counter-proposal</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00725.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00728.html">B.S.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00724.html">LAMBDA proposals and counter-proposals</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00726"><strong>Date</strong></a></li>
+<li><a href="threads.html#00726"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

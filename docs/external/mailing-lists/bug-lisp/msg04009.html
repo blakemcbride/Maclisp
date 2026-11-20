@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: suggested compiler feature. -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 16 Jul 80 02:43:00 GMT -->
+<!--X-Message-Id: 8944d60e25e7860df69899763e546987@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>suggested compiler feature.</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04008.html">Date Prev</a>][<a href="msg04005.html">Date Next</a>][<a href="msg04011.html">Thread Prev</a>][<a href="msg04006.html">Thread Next</a>][<a href="maillist.html#04009">Date Index</a>][<a href="threads.html#04009">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>suggested compiler feature.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: HIC at MIT-MC</li>
+<li><em>Subject</em>: suggested compiler feature.</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 16 Jul 80 02:43:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, BUG-LISPM at MIT-MC</li>
+<li><em>Original-date</em>: 15 July 1980 22:43-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 15 July 1980 16:13-EDT
+    From: Howard I. Cannon &lt;HIC at MIT-MC&gt;
+    To:   GJC
+    cc:   BUG-LISP, BUG-LISPM
+    Re:   suggested compiler feature.
+
+    I meant to imply in my previous message that I think that GJC's
+    lambda-list sggstion is also wrong.
+
+I might have to agree with you on that. The reason that I suggested
+that LAMBDA push away atomic macro properties is to meet the
+objection of EB, that is, that (SETQ &lt;ATOM&gt; ...) only mean to
+setq a variable. In the case of a lexically apparent variable
+EB could be confident that (SETQ &lt;ATOM&gt; ...)  meant only
+a very efficient and simple thing. SETQ of a special variable
+would be another thing entirely. 
+
+Implementing the lambda-list suggestion in the interpreter
+would be non-trivial. All lambda expressions would have to
+have a pointer to the lexical contour in which they
+where created. 
+
+Anyway, what is the right thing to do in lambda-lists?
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04008.html">Re: suggested feature.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04005.html">Re: Bad ideas</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04011.html">suggested compiler feature.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04006.html">suggested compiler feature.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04009"><strong>Date</strong></a></li>
+<li><a href="threads.html#04009"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

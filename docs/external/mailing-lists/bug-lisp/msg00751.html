@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: RvpxN[WF&#45;[Q -->
+<!--X-Date: Thu, 4 Nov 82 19:28:00 GMT -->
+<!--X-Message-Id: b0059b67e9225085e8c941570493abe5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:Dick@MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00752.html">Date Prev</a>][<a href="msg00750.html">Date Next</a>][<a href="msg00752.html">Thread Prev</a>][<a href="msg00750.html">Thread Next</a>][<a href="maillist.html#00751">Date Index</a>][<a href="threads.html#00751">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-maclisp at MIT-OZ</li>
+<li><em>From</em>: Dick@MIT-MC</li>
+<li><em>Date</em>: Thu, 4 Nov 82 19:28:00 GMT</li>
+<li><em>Original-date</em>: Thursday, 4 November 1982  14:28-EST</li>
+<li><em>Sender</em>: DICK at MIT-OZ</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On the 20 (i.e. OZ) both lisp and the complr open their files in a
+restricted mode that makes it impossible for anything else to touch
+the files.  For example, the exec won't even show that they exist or 
+anything.  
+
+Most of the time this dosn't matter, but consider the following situation.
+The compiler dies in a strange state, and you are trying to figure out what
+is going on.  Under ITS you could always go into ddt and look at the _unfa_
+file in order to get some idea about what was going on.  On OZ you cannot
+do that becuase though the file is there, it is restricted and you cannot 
+touch it.  In particular, you cannot close it, so when the complr fork
+is killed, the file is automatically deleted.
+
+It seems to me that things would be a great deal more convenient if
+lisp in general and the complr in particular just opened files normally.
+
+			Dick Waters
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00752.html">4th level indirection -- maybe you haven't yet seen this?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00750.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00752.html">4th level indirection -- maybe you haven't yet seen this?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00750.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00751"><strong>Date</strong></a></li>
+<li><a href="threads.html#00751"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

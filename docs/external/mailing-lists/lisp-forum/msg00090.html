@@ -1,0 +1,163 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: "completely wrong" -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Sat ,16 Aug 80 21:23:00 EDT -->
+<!--X-Message-Id: dafd18b82e6cee267d64fcfa46c3c21a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: &quot;completely wrong&quot;</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00089.html">Date Prev</a>][<a href="msg00091.html">Date Next</a>][<a href="msg00097.html">Thread Prev</a>][<a href="msg00091.html">Thread Next</a>][<a href="maillist.html#00090">Date Index</a>][<a href="threads.html#00090">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: &quot;completely wrong&quot;</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JAR at MIT-MC</li>
+<li><em>Subject</em>: Re: &quot;completely wrong&quot;</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat ,16 Aug 80 21:23:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 15 August 1980 14:58-EDT
+    From: Jonathan A. Rees &lt;JAR at MIT-MC&gt;
+    To:   RWK
+    cc:   ALAN, LISP-FORUM
+    Re:   character objects &amp; randomness
+
+        Date: 14 August 1980 23:18-EDT
+        From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+
+            Would you change the MacLisp #/ to generate &quot;character objects&quot;
+            (symbols)?  That would be an amazing loss.  If we are only talking
+            about NIL, then I can live with it.
+
+        As in my previous note, this is somebody's brain bubble.
+        Nobody, absolutely nobody, has ever suggested to my knowledge
+        making #/ generate &quot;character objects&quot;.
+
+    Kerns, you are completely wrong that no one has suggested a different
+    meaning for #/.  Steele proposed over a year ago that #/ return
+    &quot;characters,&quot; which on systems that provoided them would mean
+    &quot;character objects,&quot; but would otherwise probably mean &quot;fixnums.&quot;
+    (Please read MC: NIL; CHPROP &gt;.)  I have been pushing this for months.
+
+    (I agree with Alan that Maclisp should NOT provide character
+    objects as such.  But adherence to a character standard is an
+    independent issue from that of the existence of character objects.)
+
+Hey, the context was the discussion, not &quot;has ever suggested it anywhere&quot;, and
+I have already acknowledged that CWH had suggested it in the discussion and I
+was wrong.  Inaccurate.  Full of shit.  Whatever.  I am aware that the idea was
+brought up a year-and-a-half ago or whenever, and laid to rest.  I would like
+to lay it back to rest.  (The specific idea the #/ and TYI return CHAROBS).
+
+[Also, I have read CHPROP several times.  Your wording seems to imply that you
+have been trying to get me to read it for months.  I don't think that is what
+you intended to imply, but the ordering of your words implies it.]
+
+Jonathan's note points out a problem with CHPROP -- it uses the term &quot;character
+object&quot; to denote whatever representation of a character you're using, a
+fixnum, symbol (ugh) or whatever.  This conflicts with the meaning that I think
+everyone in this discussion uses (at least most of the time) of a special
+datatype just for characters.  If I'm wrong, it just proves the point;
+confusion results.  But as JAR has pointed out on many occasions, it doesn't
+actually require that a given machine implement a special datatype; you can use
+fixnums if you want to.  If you read it carefully it carefully defines
+&quot;character object&quot; for the purpose of the paper.  It is a &quot;standard&quot;, and it
+takes pains to be LISPM compatible, MacLisp compatible, etc.  I add my voice to
+JAR's in urging people to read and adopt it.
+
+    Date: 16 August 1980 19:20-EDT
+    From: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;
+    Subject: character objects &amp; representation issues
+    To: RWK at MIT-MC
+    cc: LISP-FORUM at MIT-MC
+
+    Ah.  I see.  You mention to motivations for character objects; one
+    works fine in &quot;my&quot; proposal (the one I construed out of what I think
+    GLS is saying; I take no credit), but the other has problems.
+
+    First, you want character objects for debugging, so that when you see a
+    capital A you can tell that it is a capital A rather than a 101 octal.
+    With &quot;my&quot; proposal, you do indeed get this, so long as you do your
+    debugging in NIL rather than on the Lisp Machine.  I don't think
+    anyone has objections to this.
+
+    Secondly, you want character objects to print differently.  Presumably
+    a capital A prints as #/A, rather than as 101.  This would not work in
+    &quot;my&quot; proposal.  If you ran the portable FOOBAR on the LispM, and it
+    prints a data structure, and then you run FOOBAR in NIL and it reads it
+    back in, then character objects can get converted to fixnums.  I don't
+    see any solution to this problem, other than to meekly suggest that
+    maybe it is just not a very common thing.  Code that wants to print
+    character for human eyes can be made portable by going through a FORMAT
+    control option whenever printing character objects, rather than ever
+    using PRINT directly.
+If the information as to what's a character and what's a fixnum is lost, no
+amount of TECO-MADNESS-FORMAT-TWIDDLY-CONTROL-STRING can fix it back up.
+Anyway, I have stated (several times, but it got lost in the verbiage) that
+I do not think #/A should return anything othr than 101.  ~A is the
+representation for a character object (or #~A if you like).  Too much code
+already expects #/A to be a fixnum.  But of course, if you run portable FOOBAR
+on the LispM you can't expect to get all the features of running in NIL.  But
+only two things would be hurt by it:  Human eyes, and transporting to someplace
+with a different character set.  As you say, not too important.
+
+So anyway, I'll run and shout &quot;CHAROBS WIN, CHAROBS WIN!&quot;, but if the LISPM
+people don't want them, it's pretty clear I won't sit in a hole and cry.
+But I think that we DO have a crying need for a standard like MC:NIL;CHPROP &gt;.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00089.html">Re: characters</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00091.html">Re: &quot;And even if you don't like your code to be readable (sorry)&quot;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00097.html">Re: characters</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00091.html">Re: &quot;And even if you don't like your code to be readable (sorry)&quot;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00090"><strong>Date</strong></a></li>
+<li><a href="threads.html#00090"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

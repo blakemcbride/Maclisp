@@ -1,0 +1,83 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: TOPS&#45;10 I/O lossage. -->
+<!--X-From-R13: Epbgg Tnuyzna ng Q[G&#45;10O (Q380ET50) -->
+<!--X-Date: Thu, 25 Jan 79 05:54:00 GMT -->
+<!--X-Message-Id: 25Jan79 005401 SF50@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>TOPS-10 I/O lossage.</title>
+<link rev="made" href="mailto:Scott Fahlman at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00635.html">Date Prev</a>][<a href="msg00634.html">Date Next</a>][<a href="msg00635.html">Thread Prev</a>][<a href="msg00634.html">Thread Next</a>][<a href="maillist.html#00636">Date Index</a>][<a href="threads.html#00636">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>TOPS-10 I/O lossage.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp @ mit-mc</li>
+<li><em>Subject</em>: TOPS-10 I/O lossage.</li>
+<li><em>From</em>: Scott Fahlman at CMU-10A (C380SF50)</li>
+<li><em>Date</em>: Thu, 25 Jan 79 05:54:00 GMT</li>
+<li><em>Original-date</em>: 25 Jan 1979 0054-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+The situation is even worse than I reported earlier.  On input from
+a fixnum file in block mode, the halt seems to occur as soon as a
+new block must be read, not just at end of file.  Also, using IN
+to pull in fixnums from a file in block mode seems to read all of
+the first block of the file, but then reads the same block in over again
+instead of slurping a new one.  Sigh!
+-- Scott
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00635.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00634.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00635.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00634.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00636"><strong>Date</strong></a></li>
+<li><a href="threads.html#00636"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

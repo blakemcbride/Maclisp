@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: I DON'T BELIEVE IT !!! -->
+<!--X-From-R13: RQB ng [WF&#45;[Q (Rnivq Q. Byhzzre) -->
+<!--X-Date: Mon, 12 Jan 81 04:33:00 GMT -->
+<!--X-Message-Id: f8ff212a7f12be4204ff78dac1cf3dbf@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>I DON'T BELIEVE IT !!!</title>
+<link rev="made" href="mailto:DCP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03580.html">Date Prev</a>][<a href="msg03578.html">Date Next</a>][<a href="msg03580.html">Thread Prev</a>][<a href="msg01700.html">Thread Next</a>][<a href="maillist.html#03579">Date Index</a>][<a href="threads.html#03579">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>I DON'T BELIEVE IT !!!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: I DON'T BELIEVE IT !!!</li>
+<li><em>From</em>: DCP at MIT-MC (David C. Plummer)</li>
+<li><em>Date</em>: Mon, 12 Jan 81 04:33:00 GMT</li>
+<li><em>Original-date</em>: 11 JAN 1981 2333-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+WEDGE WEDGE  --- WARNING -- DON'T TRUST COMPLR
+
+
+(defun foo (n)
+       (print (eval `(- ,n #/A -13)))
+       (print (eval `(+ (- ,n #/A) 13)))
+       (print (- n #/A -13))
+       (print (+ (- n #/A) 13)))
+ 
+
+Compile this, and load it into your favorite lisp (base 8. of course)
+
+(foo 101)
+13 
+13
+13
+13
+t
+
+(foo 102)
+14
+14
+12	&lt;=======  look at this folks !!!!!!!!!!!!!!!!!!!!		
+14
+t
+
+I DON'T BELIEVE IT !!!  I MAY HAVE LOST FAITH !!
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03580.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03578.html">Twenex Midas FASL assembly</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03580.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01700.html">I DON'T BELIEVE IT !!!</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03579"><strong>Date</strong></a></li>
+<li><a href="threads.html#03579"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

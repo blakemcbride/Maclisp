@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: OZO@N[WF&#45;OW -->
+<!--X-Date: Wed, 25 Jan 79 04:57:50 GMT -->
+<!--X-Message-Id: 3d392449355bc3fa7808af83f4c35363@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:ALAN@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00637.html">Date Prev</a>][<a href="msg00636.html">Date Next</a>][<a href="msg00637.html">Thread Prev</a>][<a href="msg00636.html">Thread Next</a>][<a href="maillist.html#00635">Date Index</a>][<a href="threads.html#00635">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: CWH at MIT-MC</li>
+<li><em>Subject</em>: </li>
+<li><em>From</em>: ALAN@MIT-AI</li>
+<li><em>Date</em>: Wed, 25 Jan 79 04:57:50 GMT</li>
+<li><em>Cc</em>: (BUG LISPM) at MIT-AI, (BUG LISP) at MIT-AI</li>
+<li><em>Original-date</em>: 01/25/79 00:57:50 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     CWH@MIT-MC
+Date: Wed, 25 Jan 79 01:50:24 GMT
+Original-Date: 01/24/79 21:50:24 EDT
+Subject:
+    Is there any reason why the # reader macro in LISPM2;MACROS can't be
+    rewritten to win on toplevel forms when used as #m or #q?  The reason
+    it loses right now is that it reads the form following the #m regardless
+    of whether it is running in maclisp or on the Lisp Machine.  Can't it decide
+    beforehand?
+
+This is because the # macro is a splicing macro (it has to
+be in order to make #q and #m work). MacLisp ignores all
+splicing macros at top level.  I suggested (because of a
+similar problem with using # after a &quot;.&quot; as in (#/a . #/z))
+that when a splicing macro returns a list of one thing it
+should be treated as if it was non-splicing. This was
+adopted for the case of being after a dot (since previously
+it had errored out in a wierd way) but it was left the same
+at toplevel.
+
+I will change the # macro to work at toplevel by not reading
+the next form untill it is sure it wants to make it go away,
+but I should say that this is somewhat of a kludge since it
+means that this all splicing macros can do at toplevel. (It
+would be impossible to have a splicing macro that DID
+something to the following form work at toplevel.) 
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00637.html">Correction to previous message.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00636.html">TOPS-10 I/O lossage.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00637.html">Correction to previous message.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00636.html">TOPS-10 I/O lossage.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00635"><strong>Date</strong></a></li>
+<li><a href="threads.html#00635"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

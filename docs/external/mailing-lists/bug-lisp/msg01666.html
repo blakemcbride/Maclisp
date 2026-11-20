@@ -1,0 +1,88 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Bugs in LISTARRAY with 2 args -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Wed, 28 Jan 81 09:37:00 GMT -->
+<!--X-Message-Id: 3654170a0f022c80c4c74849699a480e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Bugs in LISTARRAY with 2 args</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01667.html">Date Prev</a>][<a href="msg01665.html">Date Next</a>][<a href="msg01667.html">Thread Prev</a>][<a href="msg01662.html">Thread Next</a>][<a href="maillist.html#01666">Date Index</a>][<a href="threads.html#01666">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Bugs in LISTARRAY with 2 args</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Bugs in LISTARRAY with 2 args</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Wed, 28 Jan 81 09:37:00 GMT</li>
+<li><em>Original-date</em>: 28 JAN 1981 0437-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In a bare lisp,
+ (SETQ A (*ARRAY NIL T 100)) =&gt; #T-100-70776
+ (LISTARRAY A 1)             =&gt; NIL
+ (LISTARRAY A 0)	     =&gt; MPV;LISTA1&gt;&gt;HRRZ B,@A(C)  B/ 0  530157/ ??
+In a new bare lisp,
+ (SETQ A (*ARRAY NIL 'FIXNUM 100)) =&gt; #T-100-70776
+ (LISTARRAY A 1)		   =&gt; (0)
+ (LISTARRAY A 0)		   =&gt; (100)
+
+Both of these behaviors seem a bit silly. I would like VERY much if 
+(LISTARRAY array n) for n=0 returned NIL. It is otherwise much less useful
+than it might be. (n=-1 seems to get the whole array.)
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01667.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01665.html">sfa error checking</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01667.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01662.html">SETF losing on FIX-I stuff...</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01666"><strong>Date</strong></a></li>
+<li><a href="threads.html#01666"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

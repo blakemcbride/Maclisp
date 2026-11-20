@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: defsubst in Maclisp -->
+<!--X-From-R13: Pneel [netbyva &#60;[netbyvaN[WF&#45;[GZFWQE.ODBO> -->
+<!--X-Date: 20 MAR 85 18:30:58 EST -->
+<!--X-Message-Id: 850320233024.242229@MIT&#45;MULTICS.ARPA -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>defsubst in Maclisp</title>
+<link rev="made" href="mailto:Margolin@MIT-MULTICS.ARPA">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00834.html">Date Prev</a>][<a href="msg00832.html">Date Next</a>][<a href="msg00834.html">Thread Prev</a>][<a href="msg00832.html">Thread Next</a>][<a href="maillist.html#00833">Date Index</a>][<a href="threads.html#00833">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>defsubst in Maclisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum@MIT-MC.ARPA</li>
+<li><em>Subject</em>: defsubst in Maclisp</li>
+<li><em>From</em>: Barry Margolin &lt;Margolin@MIT-MULTICS.ARPA&gt;</li>
+<li><em>Date</em>: Wed ,20 Mar 85 19:30:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Has anyone written a DEFSUBST for Maclisp (or a similar dialect)?  (See
+the Chineual for a description of DEFSUBST.)  I have been trying to
+write one for several days, mostly just as an academic exercise.  I
+managed to implement a pretty simple one, which doesn't handle &amp;keywords
+(&amp;optional, &amp;rest, etc) pretty quickly (it expands into an equivalent
+DEFUN at (load eval) time, and a DEFMACRO at compile-time).  I was in
+the process of modifying it to deal with &amp;keywords when I realized that
+it should then also do destructuring, in order to be completely
+compatible with DEFUN.  At this point I gave up.
+
+I don't really need this, but I am curious whether anyone has done it,
+and what the compile-time code looks like.
+                                        barmar
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00832" href="msg00832.html">defsubst in Maclisp</a></strong>
+<ul><li><em>From:</em> Kent M Pitman &lt;KMP@SCRC-STONY-BROOK.ARPA&gt;</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00834.html">6871 partners wanted</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00832.html">defsubst in Maclisp</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00834.html">6871 partners wanted</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00832.html">defsubst in Maclisp</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00833"><strong>Date</strong></a></li>
+<li><a href="threads.html#00833"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

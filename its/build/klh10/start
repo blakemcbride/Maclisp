@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# Optional; needed for networking.
+SUDO=sudo
+#NET_DEFAULT_IF=eth1
+
+EXIT=:
+trap "" QUIT INT TERM
+
+started() {
+    EXIT="$EXIT;stop \"$1\" $2"
+    trap "$EXIT" EXIT
+    echo "$1 started, pid $2"
+}
+
+stop() {
+    echo -n "Stopping $1... "
+    kill "$2" 2> /dev/null
+    sleep 2
+    kill -9 "$2" 2> /dev/null
+    echo "OK"
+}
+
+chaosnet() {
+    (sleep 2; tools/cbridge/cbridge -c build/cbridge.conf >cbridge.log 2>&1) &
+    started "Chaosnet bridge" "$!"
+}
+
+help() {
+    cat <<EOF
+This start script takes several command line arguments:
+
+help - Display this help text.
+chaosnet - Start a local Chaosnet.
+
+EOF
+
+    touch out/klh10/nohelp
+}
+
+test -f out/klh10/nohelp || help
+
+while test -n "$1"; do
+    "$1"
+    shift
+done
+
+cd build/klh10
+rm -f dskdmp.ini
+ln -s ../../out/klh10/dskdmp.ini .
+$SUDO KLH10_NET_DEFAULT_IF=$NET_DEFAULT_IF ./kn10-ks-its dskdmp.ini

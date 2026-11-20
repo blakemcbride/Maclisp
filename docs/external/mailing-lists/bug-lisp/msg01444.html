@@ -1,0 +1,128 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sun, 15 Mar 81 05:16:00 GMT -->
+<!--X-Message-Id: 944534d5691f78e235d7282b51941768@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01445.html">Date Prev</a>][<a href="msg01443.html">Date Next</a>][<a href="msg01445.html">Thread Prev</a>][<a href="msg01443.html">Thread Next</a>][<a href="maillist.html#01444">Date Index</a>][<a href="threads.html#01444">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC, DLA at MIT-EECS</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sun, 15 Mar 81 05:16:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, INFO-LISPM at MIT-MC</li>
+<li><em>Original-date</em>: 15 MAR 1981 0016-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 14 March 1981 00:36-EST
+    From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+	Date: 14 Mar 1981 0007-EST
+	From: David L. Andre &lt;DLA at MIT-EECS&gt;
+	Is it possible to get, in a single operation, both the quotient and
+	remainder in a fixnum division?  I have often wanted to do something
+	like:
+	(MULTIPLE-VALUE (QUO REM)
+	  (FLOOR A B))
+    So have I.  Unfortunately it is rather difficult to get this to work
+    since arithmetic is performed in microcode, and it is difficult to get
+    multiple values out from microcode. .  .  .
+I can appreciate your comments about how the hardware loses -- the IBM370
+produces a floating-division result much like the PDP-10 FDVL instruction,
+and then proceeds to round according to its own fixed rule.  During my
+time working for there, I needed to experiment with some alternate
+rounding schemes, and was chagrin'd to discover that there was no
+way to get the &quot;remainder&quot; part out of the &quot;internal&quot; registers and
+into a place where the  macro-code instructions could access it.
+  foo.
+  I've implemented some internal fixnum functions for NIL, so that 
+generic arithemetic can be fully-implemented in LISP -- basically they
+represent the four rational operations as implemented by most 2's-
+complement computers.  For a real NIL, the compiler is open-coding them 
+&quot;by special discernment&quot;, rather than by doing a multiple-value-returning
+function call; so it only is a matter of being able to get at all the bits 
+implicit in the two results.  I've coded up this stuff for the PDP10 too, 
+but the COMPLR doesn't open-compile these funs; rather, it calls some
+quick, handy little LAP subrs.  Below is reproduced the documentation on 
+them from file  MC:NIL;NEWFUN &gt;
+
+SI:FULLADD  (SI:FULLADD x y carry_in) ==&gt; [sum.x+y+carry_in, carry_out]
+SI:FULLSUB  (SI:FULLSUB x y carry_in) ==&gt; [difference.x-y+carry_in, carry_out]
+  Where the sum and difference indicated are two's complement results,
+  and the &quot;carry&quot;s are all restricted to -1, 0 and +1.  Since true
+  integer addition cannot be restricted to a finite range, there must be
+  &quot;wrap-around&quot; even in these functions.  Thus, let n+1 be the number
+  of bits in the FIXNUM (two's-complement) representation;  then
+	mx  :==   2^n - 1	;maximum representible (positive) FIXNUM
+	mnx :==  -2^n	 	;minimum representible (negative) FIXNUM
+  Then both (SI:FULLADD mnx mnx -1) and (SI:FULLSUB mx mnx 1) will
+  &quot;wrap-around&quot; (i.e., &quot;overflow&quot;).  Thus a fail-safe, but slightly
+  pessimistic, test for &quot;overflow&quot; is merely to test the second argument
+  for being equal to &quot;mnx&quot;.   Happily, the most important system
+  usages of these two have an explicit 0 carry_in, but at a few places
+  in the BIGNUM implementation they require the full generality.
+SI:FULLMUL  (SI:FULLMUL x y carry_in) ==&gt; let productsum == x*y+carry_in
+		[productsum.rem.by.2^n,  productsum.div.by.2^n]
+  Note that if both x and y are equal to &quot;mnx&quot; as described above, the
+  the result will &quot;overflow&quot;.
+SI:FULLDIV  (SI:FULLDIV low hi divsr) ==&gt; [quotient, remainder]
+  The division indicated is  (hi*2^n+low)/divsr
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01445.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01443.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01445.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01443.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01444"><strong>Date</strong></a></li>
+<li><a href="threads.html#01444"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

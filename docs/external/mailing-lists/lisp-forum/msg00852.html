@@ -1,0 +1,115 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Backquote history -->
+<!--X-From-R13: "Oyyna Q. Irpufyre" &#60;npj%EQQ&#45;IOWYOFAN[WF&#45;[Q.ODBO> -->
+<!--X-Date: Mon ,12 Mar 84 13:10:00 EDT -->
+<!--X-Message-Id: 28a6600736dcdfe7bc84370732979181@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Backquote history</title>
+<link rev="made" href="mailto:acw%SCC-WAIKATO@MIT-MC.ARPA">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00849.html">Date Prev</a>][<a href="msg00851.html">Date Next</a>][<a href="msg00849.html">Thread Prev</a>][<a href="msg00850.html">Thread Next</a>][<a href="maillist.html#00852">Date Index</a>][<a href="threads.html#00852">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Backquote history</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MASINTER.PA@PARC-MAXC.ARPA, lisp-forum@MIT-MC.ARPA</li>
+<li><em>Subject</em>: Backquote history</li>
+<li><em>From</em>: &quot;Allan C. Wechsler&quot; &lt;acw%SCC-WAIKATO@MIT-MC.ARPA&gt;</li>
+<li><em>Date</em>: Mon ,12 Mar 84 13:10:00 EDT</li>
+<li><em>In-reply-to</em>: The message of 11 Mar 84 14:38-EST from MASINTER.PA at PARC-MAXC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I think the original ideas come from MDL.  In MDL, lists and forms are
+two different data types.  Lists (written with parens) self-evaluate,
+and forms (written with angle brackets) evaluate like forms do in Lisp.
+
+(+ 2 3) =&gt; (1 2 3)
+&lt;+ 2 3&gt; =&gt; 5
+
+Then there is a weird mapping convention -- evaluation distributes over
+lists.
+
+(+ &lt;+ 2 3&gt; 5) =&gt; (+ 5 5)
+
+There is a quote for those rare occasions where you don't want to
+evaluate a form yet, but usually the things you would be quoting are
+lists so you don't need the quote anyway.
+
+Symbols self-evaluate in MDL -- you have to tell it you want the value
+of a variable.
+
+&lt;SETG FOO 100&gt;  =&gt;  100
+FOO =&gt; FOO
+,FOO =&gt; 100
+
+So you can imagine:
+
+(4 ,FOO 5) =&gt; (4 100 5)
+
+Finally, instead of comma-atsign they have exclamation:
+
+&lt;SETG FOO (1 2 3)&gt; =&gt; (1 2 3)
+(3 4 !,FOO 5) =&gt; (3 4 1 2 3 5)
+(3 4 !&lt;REST ,FOO&gt; 5) =&gt; (3 4 2 3 5)
+
+This stuff is sort of basic to MDL's evaluation philosophy, and they
+have probably had it since their beginning in the early 70's.
+
+Ref.  &quot;The MDL Programming Language&quot;, S.W. Galley and Greg Pfister,
+1979, MIT Lab for Computer Science.
+
+   --- Allan
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00849.html">Re: Backquote history</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00851.html">[GJS: Backquote history]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00849.html">Re: Backquote history</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00850.html">Backquote history</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00852"><strong>Date</strong></a></li>
+<li><a href="threads.html#00852"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

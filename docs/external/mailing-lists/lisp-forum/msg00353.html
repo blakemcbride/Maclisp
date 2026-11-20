@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Line numbers and finite&#45;state machines in LISP -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Fri ,24 Oct 80 18:12:00 EDT -->
+<!--X-Message-Id: b64ac35781956c118b7446cad77439d3@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Line numbers and finite-state machines in LISP</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00352.html">Date Prev</a>][<a href="msg00174.html">Date Next</a>][<a href="msg00351.html">Thread Prev</a>][<a href="msg00174.html">Thread Next</a>][<a href="maillist.html#00353">Date Index</a>][<a href="threads.html#00353">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Line numbers and finite-state machines in LISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Subject</em>: Re: Line numbers and finite-state machines in LISP</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Fri ,24 Oct 80 18:12:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Actually, I have always found it most convenient to express
+finite-state machines in LISP by using mutually recursive
+functions, passing the state around as an argument.  This is
+the main programming-style reason for wanting a tail-recursive
+implementation.  If LABELS is available to package up these
+functions, so much the better.  If the state is too
+unwielfy to pass as arguments, then PROG is fine, more or less.
+
+As for GOSUB, functional variables 
+seem to be an easy way to express that idea.  Smart compilers
+(ha!) can figure them out and use JSP instead of PUSHJ even, though
+it is indeed a lot of work.  But if we lobby for the labnguage
+feature and it gets used a lot, then eventually the compiler *will*
+become smart enough... if we wantg it to be that way (a subject for debate).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00352.html">Re: Line numbers</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00174.html">Re: Twenex CURSORPOS</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00351.html">Re: Incompatibility</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00174.html">Re: Twenex CURSORPOS</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00353"><strong>Date</strong></a></li>
+<li><a href="threads.html#00353"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

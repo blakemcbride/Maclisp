@@ -1,0 +1,85 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Rawtyo and cursorpos -->
+<!--X-From-R13: UL ng [WF&#45;[Q (Unvy Lnpunevnf) -->
+<!--X-Date: Fri, 14 Mar 80 02:55:00 GMT -->
+<!--X-Message-Id: 553ef73ac16fbca00cff884cffaf0c5c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Rawtyo and cursorpos</title>
+<link rev="made" href="mailto:GZ at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02068.html">Date Prev</a>][<a href="msg02065.html">Date Next</a>][<a href="msg02068.html">Thread Prev</a>][<a href="msg02065.html">Thread Next</a>][<a href="maillist.html#02066">Date Index</a>][<a href="threads.html#02066">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Rawtyo and cursorpos</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC, MILLER at MIT-AI</li>
+<li><em>Subject</em>: Rawtyo and cursorpos</li>
+<li><em>From</em>: GZ at MIT-MC (Gail Zacharias)</li>
+<li><em>Date</em>: Fri, 14 Mar 80 02:55:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 13 MAR 1980 2155-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Not only is cursorpos not always sufficient, it is often unreliable.
+For example, contrary to its documentation, (cursorpos 'b) when in column
+0 will *NOT* just wrap around to the right margin but move up one line also,
+at least on a Teleray.  Same for 'x. (I would assume that accounts for the
+rubout-past-continuation-line bug in lisp read functions).  Additionally,
+when the previous line was a continuation line (&quot;!&quot; in last column), 
+(cursorpos 'b) seems to sometimes move past the !, sometimes not, sometimes
+not move at all.  Basically at this point I don't trust (cursorpos) to
+do anything for me in the borders of the screen (first/last line/column).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02068.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02065.html">Re: Compiler Error</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02068.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02065.html">Re: Compiler Error</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02066"><strong>Date</strong></a></li>
+<li><a href="threads.html#02066"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

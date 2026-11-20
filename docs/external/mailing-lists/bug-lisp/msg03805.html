@@ -1,0 +1,121 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Loading of DEFMAX -->
+<!--X-From-R13: Qney I. Vbsszna &#60;QIV ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 30 Dec 79 01:12:00 GMT -->
+<!--X-Message-Id: 7e0795e1d5023cd9056b365278c806aa@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Loading of DEFMAX</title>
+<link rev="made" href="mailto:CWH at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03806.html">Date Prev</a>][<a href="msg03804.html">Date Next</a>][<a href="msg03806.html">Thread Prev</a>][<a href="msg03804.html">Thread Next</a>][<a href="maillist.html#03805">Date Index</a>][<a href="threads.html#03805">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Loading of DEFMAX</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: Loading of DEFMAX</li>
+<li><em>From</em>: Carl W. Hoffman &lt;CWH at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 30 Dec 79 01:12:00 GMT</li>
+<li><em>Cc</em>: JPG at MIT-MC</li>
+<li><em>Original-date</em>: 29 December 1979 20:12-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 27 DEC 1979 0436-EST
+    From: JPG at MIT-MC (Jeffrey P. Golden)
+    Why does L^K  (LOAD '|MACSYM;GRAMI FASL|)  cause the DEFMAX 
+    stuff to be loaded in?  [Ignore the error message about MDISPATCH 
+    which occurs afterwards.]  After all this is a FASL file!  The 
+    previous version of MACSYM;GRAMI FASL (which I can retrieve from tape 
+    if such is desired) did not require the loading in of the DEFMAX stuff 
+    while creating a new version of MACSYMA.
+
+This happens not only with MRG;GRAM, but with any file containing a
+DEFMACRO, even if the DEFMACRO-FOR-COMPILING switch is turned off, which is
+clearly wrong.  The DEFMACRO-DISPLACE-CALL switch should not be the one to
+control whether the FORGET-MACROMEMOS form is present in the fasl file.  The
+DEFMACRO-FOR-COMPILING switch should control this.  If the macro is not
+present in the fasl file, then there is no need to communicate any
+information about it to the memoizer, so the FORGET-MACROMEMOS form
+shouldn't be present.  Likewise, if the macro is present in the fasl file,
+the FORGET-MACROMEMOS form should be there, regardless of the setting of
+DEFMACRO-DISPLACE-CALL at compile time.
+
+    Date: 27 DEC 1979 1158-EST
+    From: JONL at MIT-MC (Jon L White)
+    I've edited the one line necessary into MRG;GRAM &gt;, and will leave it to you
+    to redo the splitting and rebuilding of MACSYMA.  the needed line is
+    (declare  (setq defmacro-displace-call () )).
+
+Did you really make this change?  MRG;GRAM &gt; was last updated by JPG.  In
+any case, I put the form in LIBMAX;PRELUD &gt;, which is the correct place for
+it.  This way it will affect all Macsyma files which use DEFMACRO.
+    
+    In case you are still wondering, if you use DEFMACRO with intention
+    of using any of the MACROMEMO features at runtime, then you need the
+    runtime support package (which is only about 333. words); the default
+    is to have DEFMACRO-DISPLACE-CALL non-null, but you clearly don't want
+    to be bothered with that for the two little macros MATCH and TELL.
+
+Why don't you code FORGET-MACROMEMOS as a small subr which looks to see if
+MACROMEMOS is non-NIL before loading the macromemo package.  Alternately,
+the macromemo displacer could keep track of the macro properties of symbols
+and check to see if they've changed.  In any case, I suspect that
+the MACROEXPANDED scheme is used most of the time and the macromemo package
+shouldn't be loaded whenever DEFMACRO is used.
+
+Incidentally, why is the DEFMACRO-DISPLACE-CALL switch needed at all?
+Isn't the same thing accomplished by setting MACRO-EXPANSION-USE to NIL?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03806.html">compilation of BOUNDP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03804.html">DEFMACRO-DISPLACE-CALL</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03806.html">compilation of BOUNDP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03804.html">DEFMACRO-DISPLACE-CALL</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03805"><strong>Date</strong></a></li>
+<li><a href="threads.html#03805"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

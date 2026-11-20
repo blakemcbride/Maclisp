@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Query about proposed slight change to FIX and FIXR functions -->
+<!--X-From-R13: Rnivq O. [bba &#60;[bba ng [WF&#45;OW> -->
+<!--X-Date: Wed, 11 Mar 81 22:58:00 GMT -->
+<!--X-Message-Id: 4aa64e9221aad88e4891f048a29aee93@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Query about proposed slight change to FIX and FIXR functions</title>
+<link rev="made" href="mailto:Moon at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01464.html">Date Prev</a>][<a href="msg01462.html">Date Next</a>][<a href="msg01465.html">Thread Prev</a>][<a href="msg01458.html">Thread Next</a>][<a href="maillist.html#01463">Date Index</a>][<a href="threads.html#01463">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Query about proposed slight change to FIX and FIXR functions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: INFO-LISPM at MIT-AI, BUG-LISP at MIT-AI</li>
+<li><em>Subject</em>: Query about proposed slight change to FIX and FIXR functions</li>
+<li><em>From</em>: David A. Moon &lt;Moon at MIT-AI&gt;</li>
+<li><em>Date</em>: Wed, 11 Mar 81 22:58:00 GMT</li>
+<li><em>Cc</em>: RWG at MIT-AI</li>
+<li><em>Original-date</em>: 11 March 1981 17:58-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>While editing the manual, I noticed that the FIX and FIXR functions round
+in a ridiculous fashion.  FIX truncates towards negative infinity,
+rather than towards zero (i.e. (FIX -1.5) is -2 rather than -1).  This may
+be hard to change since this function exists in Maclisp and its functionality
+may be dictated by the way particular pdp-10 instructions work.  FIXR adds
+0.5 and then does FIX.  (FIXR does not exist in Maclisp.)
+
+I would like to propose that FIX be changed to truncate towards zero rather
+than negative infinity, and that FIXR be changed to round stably as all the
+rest of the floating-point operations do.  To elucidate:
+	Operation	Now yields	Proposed to yield
+	(fixr 1.5)	2		2
+	(fixr 2.5)	3		2
+	(fixr -1.5)	-1		-2
+	(fixr -2.5)	-2		-2
+	(fix -1.5)	-2		-1
+
+Any comments?  Change FIXR but not FIX?
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01464.html">#+ ... vs (IF-FOR-LISPM ...), etc.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01462.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01465.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01458.html">Re: Query about proposed slight change to FIX and FIXR functions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01463"><strong>Date</strong></a></li>
+<li><a href="threads.html#01463"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

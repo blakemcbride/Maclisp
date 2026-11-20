@@ -1,0 +1,85 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: VECTORs -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 11 Aug 81 19:09:00 GMT -->
+<!--X-Message-Id: 97af4bbd182f38c7b15363cc36d710d6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>VECTORs</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03142.html">Date Prev</a>][<a href="msg03140.html">Date Next</a>][<a href="msg03142.html">Thread Prev</a>][<a href="msg03633.html">Thread Next</a>][<a href="maillist.html#03141">Date Index</a>][<a href="threads.html#03141">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>VECTORs</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC</li>
+<li><em>Subject</em>: VECTORs</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 11 Aug 81 19:09:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 11 August 1981 15:09-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 9 August 1981 23:49-EDT
+    From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+    (sprinter (vector 1 2 3)) prints:
+    (1 2 3)
+    notice the lack of a leading &quot;#&quot;.  Also (set-vector-length v n) seems to
+    always get an MPV trying to write a #777777 into nowhere.
+Fixed now, in VECTOR 71.  Problem with SPRINT method was merely missing
+output of #, and with SET-VECTOR-LENGTH was a 'twiddle' in the args to
+RPLACX.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03142.html">vectors</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03140.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03142.html">vectors</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03633.html">CGOL bugging out in new MACLISP</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03141"><strong>Date</strong></a></li>
+<li><a href="threads.html#03141"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

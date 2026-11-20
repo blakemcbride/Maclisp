@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: VWQN[WF&#45;[Q -->
+<!--X-Date: Sun, 3 Sep 79 11:22:58 GMT -->
+<!--X-Message-Id: f546a9c526d36ac3611fc25c1ada1459@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:HIC@MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00532.html">Date Prev</a>][<a href="msg02818.html">Date Next</a>][<a href="msg00532.html">Thread Prev</a>][<a href="msg02818.html">Thread Next</a>][<a href="maillist.html#00531">Date Index</a>][<a href="threads.html#00531">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: PRATT at MIT-AI, (BUG LISP) at MIT-AI</li>
+<li><em>Subject</em>: </li>
+<li><em>From</em>: HIC@MIT-MC</li>
+<li><em>Date</em>: Sun, 3 Sep 79 11:22:58 GMT</li>
+<li><em>Original-date</em>: 03/09/79 07:22:58 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     PRATT@MIT-AI (Sent by PRATT1@MIT-AI)
+Date: Sun, 3 Sep 79 04:31:24 GMT
+Original-Date: 03/09/79 00:31:24 EDT
+Subject:
+    (funcall '(lambda (x) x) 0)
+    0
+    That much I understand.
+    (funcall ''(lambda (x) x) 0)
+    0
+    Funny, I expected an error message.  Oh well, I guess LISP keeps eval'ing
+    the first arg to funcall till it is a function.  Kludgy, but consistent with
+    earlier practice.
+    (funcall '''(lambda (x) x) 0)
+    ;(QUOTE (QUOTE (LAMBDA (X) X))) UNDEFINED FUNCTION OBJECT
+    Oh my god, what's going on here?
+--------
+There is this completely and utterly wierd code in eval in the interpreter that allows
+a form in the functional position to be evaluated ONE extra time (though it could be set
+differently).  This is a compoletely wierd crock and I don't know why whoever decided to
+implement did so, but....arg, is this poor!!
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00532.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02818.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00532.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02818.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00531"><strong>Date</strong></a></li>
+<li><a href="threads.html#00531"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Default PDL allocations -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Thu, 9 Oct 80 14:14:00 GMT -->
+<!--X-Message-Id: 09Oct80 101431 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Default PDL allocations</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01236.html">Date Prev</a>][<a href="msg01105.html">Date Next</a>][<a href="msg01109.html">Thread Prev</a>][<a href="msg01108.html">Thread Next</a>][<a href="maillist.html#01106">Date Index</a>][<a href="threads.html#01106">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Default PDL allocations</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Subject</em>: Re: Default PDL allocations</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Thu, 9 Oct 80 14:14:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC</li>
+<li><em>In-reply-to</em>: JONL@MIT-MC's message of 8 Oct 80 16:35-EST</li>
+<li><em>Original-date</em>: 9 October 1980 1014-EDT (Thursday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>No, you don't want PDL sizes to go all haywire just because you
+change SEGSIZ; SEGSIZ is meant to affect the granularity of
+allocation for expandible spaces, not the size of fixed things.
+No doubt this is an ancient spazz on my part.  I suggest that
+some fixed large number be chosen instead (i.e. replace PAGSIZ
+by 2000 octal).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01236.html">Re: lexpr-funcall, evalframe, etc.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01105.html">Re: side effects and a complr bug.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01109.html">Default PDL allocations</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01108.html">side effects and a complr bug.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01106"><strong>Date</strong></a></li>
+<li><a href="threads.html#01106"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

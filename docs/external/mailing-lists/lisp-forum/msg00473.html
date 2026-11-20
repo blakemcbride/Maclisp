@@ -1,0 +1,108 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: FILTERs: Source&#45;to&#45;source code transformers -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Fri ,30 Jan 81 18:31:00 EDT -->
+<!--X-Message-Id: 476f4a26807b0897c35bcef0a5541383@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: FILTERs: Source-to-source code transformers</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00472.html">Date Prev</a>][<a href="msg00474.html">Date Next</a>][<a href="msg00494.html">Thread Prev</a>][<a href="msg00475.html">Thread Next</a>][<a href="maillist.html#00473">Date Index</a>][<a href="threads.html#00473">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: FILTERs: Source-to-source code transformers</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RMS at MIT-MC</li>
+<li><em>Subject</em>: Re: FILTERs: Source-to-source code transformers</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri ,30 Jan 81 18:31:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Re your note about &quot;can't understand ... [things] .. wrong with optimizers 
+on the Lispm.&quot; 
+
+Although I mentioned displace-ings in MacLISP, there are far more
+   general side-effects than that (like updating a data-base);  true, 
+   one could always frivously copy the cons-cell in order to signal that 
+   something was done, but isn't this the out-dated way of returning
+   two items of information? (see point 4 below).
+
+I believe you may not fully appreciate why users, as opposed to the 
+   compiler-maintainers, want such a feature.  Such a thing is &quot;in demand&quot; 
+   with users because they want a chance to &quot;filter&quot; certain source-code 
+   expressions without usurping any prior functional definitions;
+   otherwise, a macro-definition would be just dandy.   Thus one could 
+   transform (RETURN X Y) into (RETURN (VALUES X Y)) without getting into 
+   the kind of loop that a macro-definition for RETURN would cause.
+
+InterLISP, for over a decade, has had three varieties of macros,
+   one of which corresponds roughtly to what I'm now calling &quot;Filters&quot;.
+   Its a loss that their Compiler Macros don't interpret;  just ask any 
+   InteLISP user.   As QUUX pointed out, there may be genuine interest in 
+   making these things interpretable -- the fact that YOU haven't used them 
+   that way doesn't argue against it.  
+
+Such a &quot;Filter&quot; can do everything that a LISPM &quot;optimizer&quot; can -- if
+   it's the intention of the LISPM community not to have the more general
+   mechanism, then that seems reason enough to let the more general,
+   user-oriented facility have a different name.
+
+Your postscript seems to imply that there is something wrong with multiple
+   value;  Really?  Don't they work on the LISPM?
+  &quot;PS. The reason why just returning the transformed form is better
+   for compatibility is that it doesn't require multiple values.&quot;
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00472.html">Re: optimizers</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00474.html">Re: Optimizers</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00494.html">Re: Optimizers</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00475.html">Re: Use of MULTIPLE-VALUE and VALUES</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00473"><strong>Date</strong></a></li>
+<li><a href="threads.html#00473"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

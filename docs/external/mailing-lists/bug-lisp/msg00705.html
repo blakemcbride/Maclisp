@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: (\ x 0) revisited, revisited, revisited -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 20 Dec 82 02:00:00 GMT -->
+<!--X-Message-Id: c709b63b1010041d63dfecab2594994a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: GSB at MIT&#45;ML -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>(\ x 0) revisited, revisited, revisited</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00706.html">Date Prev</a>][<a href="msg00704.html">Date Next</a>][<a href="msg00706.html">Thread Prev</a>][<a href="msg00704.html">Thread Next</a>][<a href="maillist.html#00705">Date Index</a>][<a href="threads.html#00705">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>(\ x 0) revisited, revisited, revisited</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: jonl at PARC-MAXC</li>
+<li><em>Subject</em>: (\ x 0) revisited, revisited, revisited</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 20 Dec 82 02:00:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, GSB at MIT-ML</li>
+<li><em>In-reply-to</em>: The message of 19 Dec 1982 17:48-EST from Glenn S. Burke &lt;GSB at MIT-ML&gt;</li>
+<li><em>Original-date</em>: 19 December 1982 21:00-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The IDIV instruction deals with division by zero by doing nothing.  AC and
+AC+1 are left with their original contents, and the Overflow and No Divide
+bits are set.  This may be the right thing for division, but since the IDIV
+instruction is also the way to get a remainder, and since the remainder is
+perfectly well-defined for the 0 case, this means that there is a hole in
+the basic instruction-set.  I would say that AC+1 should get loaded with
+the contents of AC in this case.  So this really is DEC's bug!
+
+Now I presume that the contract of &quot;\&quot; is to &quot;do what the hardware does&quot;,
+just like &quot;+&quot; is defined to do what the ADD instruction does.  This is a
+pretty strange contract given that the hardware just hands you back
+whatever happens to be in AC+1, which could be anything!  This is
+exactly what code produced by COMPLR is doing.  But the &quot;\&quot; SUBR
+returns the first argument in this case.
+
+This has NOTHING to do with generic vs. specific arithmetic functions.
+Nobody has yet mentioned the REMAINDER function.  It is simply a bug.  The
+&quot;\&quot; function does different things interpreted and compiled.
+
+An easy fix is to change the &quot;\&quot; SUBR to return a randomly chosen value if
+you tried to remainder by 0.
+
+A harder fix is to fix COMPLR to output the extra instruction necessary to
+make the check in compiled code.
+
+Actually another discrepancy I just noticed is that 
+(eq (get '\ 'subr) (get 'remainder 'subr)) =&gt; T!  So we can also haul up
+the &quot;\&quot; SUBR on charges of not doing enough error checking!
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00706.html">Re: (\ x 0) revisited, revisited</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00704.html">Re: (\ x 0) revisited, revisited, revisited</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00706.html">Re: (\ x 0) revisited, revisited</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00704.html">Re: (\ x 0) revisited, revisited, revisited</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00705"><strong>Date</strong></a></li>
+<li><a href="threads.html#00705"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,47 @@
+	TITLE Munching Squares
+
+A=1
+INSN=2
+V=10
+X=11
+Y=X+1
+P=17
+
+APR==0
+DIS==130
+
+;Type 340 instructions.
+POINT==020000		;Go to point mode.
+P%INT==002000		;In point mode: intensify.
+P%HOR==000000		;In point mode: set horizontal position.
+P%VER==200000		;In point mode: set vertical position.
+INIT==POINT+17+<5_4>	;Set intentity and scale, go to point mode.
+DRAW==POINT+P%HOR,,POINT+P%VER+P%INT
+
+LOC 41
+	JRST NTS		;Out of timesharing, .IOTLSR will go here.
+
+LOC 100
+GO:	SETO A,			;Get into IOT luser mode.
+	.IOTLSR A,
+NTS:	CONO DIS,100		;Reset display.
+	MOVEI INSN,INIT
+	JSP P,SEND
+	MOVE INSN,[DRAW]	;Two 340 instructions to draw a point.
+	MOVEI P,LOOP		;For SEND to loop back.
+	SETZ Y,
+
+LOOP:	DATAI APR,X		;Get console switches.
+	SKIPN X
+	 MOVE X,[2345]		;If switches all clear, use a default.
+	ADDB X,V		;Munching squares algorithm.
+	ROTC X,-22
+	XOR X,V
+	DPB X,[221200,,INSN]	;Update coordinates in 340 instructions.
+	DPB Y,[001200,,INSN]
+SEND:	CONSO DIS,200		;Wait for display.
+	 JRST .-1
+	DATAO DIS,INSN		;Send two instructions.
+	JRST (P)
+
+END GO

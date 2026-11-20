@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Control characters in # macro. -->
+<!--X-From-R13: Dvpuneq [. Egnyyzna &#60;D[E ng [WF&#45;OW> -->
+<!--X-Date: Wed, 12 Sep 79 08:04:00 GMT -->
+<!--X-Message-Id: 04ac6be4bc7fa2213abf0d1b42a37772@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Control characters in # macro.</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02789.html">Date Prev</a>][<a href="msg02787.html">Date Next</a>][<a href="msg02790.html">Thread Prev</a>][<a href="msg02785.html">Thread Next</a>][<a href="maillist.html#02788">Date Index</a>][<a href="threads.html#02788">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Control characters in # macro.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-AI, CWH at MIT-MC, NIL at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: Control characters in # macro.</li>
+<li><em>From</em>: Richard M. Stallman &lt;RMS at MIT-AI&gt;</li>
+<li><em>Date</em>: Wed, 12 Sep 79 08:04:00 GMT</li>
+<li><em>Original-date</em>: 12 September 1979 04:04-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>My opinion is that #^A should be read on the Lisp machine
+the same as #/A, while #/A should read in Maclisp as
+a 9-bit character.  This achieves these goals:
+1) A simpleminded program that wants to define C-A as a command and
+presumably uses 7-bit input on ITS can use #^A and work on both machines.
+2) A hairier program that wants to deal with the control and meta bits
+can use #/A and work on both machines.
+3) In Maclisp, then, you can specify a character in either character
+set and no other switch is required for specifying which.
+
+As for NIL, if it is going to define non-ASCII characters at all
+then it should define #/A to produce one.  Otherwise, it should not
+accept #/A.  It should accept #^A as the ASCII control character.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02789.html">UUO for MACLISP TOPS-10 TTY output</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02787.html">Fasload error</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02790.html">Control characters in # macro.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02785.html">Control characters in # macro.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02788"><strong>Date</strong></a></li>
+<li><a href="threads.html#02788"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

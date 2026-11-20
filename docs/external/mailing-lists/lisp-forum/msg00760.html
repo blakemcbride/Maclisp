@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: GENSYM/GENTEMP -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,2 Sep 81 23:54:00 EDT -->
+<!--X-Message-Id: 8f5c1d8bb38f231e60dfb7a7020f6963@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>GENSYM/GENTEMP</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00759.html">Date Prev</a>][<a href="msg00758.html">Date Next</a>][<a href="msg00762.html">Thread Prev</a>][<a href="msg00761.html">Thread Next</a>][<a href="maillist.html#00760">Date Index</a>][<a href="threads.html#00760">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>GENSYM/GENTEMP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC, RWK at MIT-MC</li>
+<li><em>Subject</em>: GENSYM/GENTEMP</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,2 Sep 81 23:54:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Hold on a second.  At least on proposed solution to this problem
+doesn't involve any noticeable changes in GENSYM at all.  That is the
+one where we fix FASDUMP/FASLOAD to respect the non-interned nature of
+gensyms.  Now it may be that this is hard in MacLisp for some reason,
+but I haven't heard that reason yet.  It also might be unacceptable
+for some reason, but the only objection I have heard so far is that
+you can fix FASDUMP/FASLOAD but you cannot fix READ/PRINT which
+doesn't strike me as a signifigant argument given the nature of the
+problem.
+
+To carry out this plan involves:
+
+1) Extending FASL file format to cover non-interned symbols.  I don't know
+if FASL file format is &quot;used up&quot; in any way that would prevent this.
+
+2) Providing some easy way to recognize a gensym at FASDUMP time.  (On
+the Lisp Machine this is easy because of the package cell.)  Looking
+in the obarray for each symbol dumped might be acceptable, but it
+might be incorrect if the user is doing something funny with obarrays.
+(It also might be slow?  Takes no longer than it does to intern...
+Note that you can compute the sxhash of a gensym reliably quickly!).
+Perhaps there is some clever way to have gensym &quot;brand&quot; each symbol it
+creates?  A magic property is out due to reasons already noted by KMP,
+but perhaps some other hack?  (Any symbol with a one-fixnum pname is a
+good candidate to be a gensym!)
+
+Perhaps whatever gensym does along these lines maknam should do too?
+
+Before we go off extending the language some more, I would like to
+hear some reasons why this cannot be treated as a (fixable) bug in the
+current language.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00759.html">GEN(whatever)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00758.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00762.html">GENSYM/GENTEMP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00761.html">GENSYM in MacLisp</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00760"><strong>Date</strong></a></li>
+<li><a href="threads.html#00760"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

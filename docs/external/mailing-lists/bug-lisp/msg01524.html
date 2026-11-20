@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: (GET (HUNK ...) ...) -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 19 Feb 81 04:28:00 GMT -->
+<!--X-Message-Id: a143686d7d55f9c6edef09b054df9d04@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>(GET (HUNK ...) ...)</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01525.html">Date Prev</a>][<a href="msg01523.html">Date Next</a>][<a href="msg01526.html">Thread Prev</a>][<a href="msg01522.html">Thread Next</a>][<a href="maillist.html#01524">Date Index</a>][<a href="threads.html#01524">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>(GET (HUNK ...) ...)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: (GET (HUNK ...) ...)</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 19 Feb 81 04:28:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 18 February 1981 23:28-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 18 February 1981 22:47-EST
+    From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+
+    While I don't really understand the point to doing GET on hunks, I can
+    tell you I often do the MEMQ hack on them.  It would break lots of my
+    code, including probably EXTEND, to change MEMQ in the same way.  Why
+    not just make GET give an error on things that pass the USRHNP test?
+
+I really hate to get into this discussion, but this is not an
+acceptable fix to the &quot;problem&quot;.  If you are using GET on hunks as a
+way of giving your structures property lists, this would prevent you
+from making your structures USRHUNKs as well.  Better (but hardly
+best) would be to actually send a GET message.  This way you have a
+chance of winning (slowly and inefficiently).  Best would be to put
+things back the way they were before and move the class object out of
+the CDR in your stuff.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01525.html">Request for more input</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01523.html">Gratuitous incompatibilities</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01526.html">Re: multiple-value-return</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01522.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01524"><strong>Date</strong></a></li>
+<li><a href="threads.html#01524"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Comparison of "lambda&#45;macros" and my "Two little suggestions ..." -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat ,30 Jan 82 17:55:00 EDT -->
+<!--X-Message-Id: 854324f336cb39f6c02bd242455c7584@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Comparison of &quot;lambda-macros&quot; and my &quot;Two little suggestions ...&quot;</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00657.html">Date Prev</a>][<a href="msg00654.html">Date Next</a>][<a href="msg00657.html">Thread Prev</a>][<a href="msg00654.html">Thread Next</a>][<a href="maillist.html#00655">Date Index</a>][<a href="threads.html#00655">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Comparison of &quot;lambda-macros&quot; and my &quot;Two little suggestions ...&quot;</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC, hic at SCRC-TENEX</li>
+<li><em>Subject</em>: Comparison of &quot;lambda-macros&quot; and my &quot;Two little suggestions ...&quot;</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat ,30 Jan 82 17:55:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, common-lisp at SU-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>[Apologies for double mailings -- could we agree on a name for a
+ mailing list to be kept at SU-AI which would just be those 
+ individuals in COMMON-LISP@SU-AI which are not also on LISP-FORUM@MC]
+
+There were two suggestions in my note, and lambda-macros relate
+to only one of then, namely the first one
+
+    FIRST SUGGESTION:
+	 In the context of ((&lt;something&gt; . . .) a1 a2),  have EVAL macroexpand 
+     the part (&lt;something&gt; . . .) and &quot;try again&quot; before recursively 
+     evaluating it. This will have the incompatible effect that
+	(defmacro foo () 'LIST)
+	((foo) 1 2)
+     no longer causes an error (unbound variable for LIST), but will rather
+     first expand into (list 1 2), which then evaluates to (1 2).
+
+Note that for clarity, I've added the phrase &quot;try again&quot;, meaning to
+look at the form as see if it is recognized explicitly as, say, some
+special form, or some subr application.
+
+The discussion from last year, which resulted in the name &quot;lambda-macros&quot;
+centered around finding a separate (but equal?) mechanism for code-expansion
+for non-atomic forms which appear in a function place;  my first suggestion 
+is to change EVAL (and compiler if necessary) to call the regular macroexpander
+on any form which looks like some kind of function composition, and thus
+implement a notion of &quot;Meta-Composition&quot; which is context free.  It would be 
+a logical consequence of this notion that eval'ing (FUNCTION (FROTZ 1)) must
+first macroexpand (FROTZ 1), so that #'(FPOSITION ...) could work in the 
+contexts cited about MAP.  However, it is my second suggestion that would
+not work in the context of an APPLY -- it is intended only for the EVAL-
+of-a-form context -- and I'm not sure if that has been fully appreciated
+since only RMS appears to have alluded to it.
+
+However, I'd like to offer some commentary on why context-free 
+&quot;meta-composition&quot; is good for eval, yet why context-free &quot;evaluation&quot; 
+is bad:
+  1) Context-free &quot;evaluation&quot; is SCHEME.  SCHEME is not bad, but it is
+     not LISP either.  For the present, I believe the LISP community wants
+     to be able to write functions like:
+	(DEFUN SEMI-SORT (LIST)
+	  (IF (GREATERP (FIRST LIST) (SECOND LIST))
+	      LIST 
+	      (LIST (SECOND LIST) (FIRST LIST))))
+     Correct interpretation of the last line means doing (FSYMEVAL 'LIST)
+     for the instance of LIST in the &quot;function&quot; position, but doing (more
+     or less) (SYMEVAL 'LIST) for the others -- i.e., EVAL acts differently
+     depending upon whether the context is &quot;function&quot; or &quot;expression-value&quot;.
+ 2) Context-free &quot;Meta-composition&quot; is just source-code re-writing, and
+    there is no ambiguity of reference such as occured with &quot;LIST&quot; in the 
+    above example.  Take this example:
+	(DEFMACRO GET-SI (STRING)
+	  (SETQ STRING (TO-STRING STRING))
+	  (INTERN STRING 'SI))
+        (DEFUN SEE-IF-NEW-ATOM-LIST (LIST)
+	  ((GET-SI &quot;LIST&quot;)  LIST  (GET-SI &quot;LIST&quot;)))
+    Note that the context for (GET-SI &quot;LIST&quot;) doesn't matter (sure, there
+    are other ways to write equivalent code but . . .)
+    Even the following macro definition for GET-SI results in perfectly
+    good, unambiguous results:
+	(DEFMACRO GET-SI (STRING)
+	  `(LAMBDA (X Y) (,(intern (to-string string) 'SI) X Y)))
+    For example, assuming that (LAMBDA ...) =&gt; #'(LAMBDA ...),
+      (SEE-IF-NEW-ATOM-LIST 35)   =&gt;   (35  #'(LAMBDA (X Y) (LIST X Y)))
+
+The latter (bletcherous) example shows a case where a user ** perhaps **
+did not intend to use (GET-SI...) anywhere but in function context --
+he simply put in some buggy code.   The lambda-macro mechanism would require
+a user to state unequivocally that a macro-defintion in precisely one
+context;  I'd rather not be encumbered with separate-but-parallel machinery
+and documentation -- why not have this sort of restriction on macro usage
+contexts be some kind of optional declaration?
+
+Yet my second suggestion involves a form which could not at all be interpreted
+in &quot;expression-value&quot; context:
+    SECOND SUGGESTION
+	Let FMACRO have special significance for macroexpansion in the context
+     ((FMACRO . &lt;fun&gt;) . . .), such that this form is a macro call which is
+     expanded by calling &lt;fun&gt; on the whole form.
+Thus (LIST 3 (FMACRO . &lt;fun&gt;)) would cause an error.  I believe this 
+restriction is more akin to that which prevents MACROs from working
+with APPLY.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00657.html">Those two little suggestions for macroexpansion</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00654.html">The format ((MACRO . f) ...)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00657.html">Those two little suggestions for macroexpansion</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00654.html">The format ((MACRO . f) ...)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00655"><strong>Date</strong></a></li>
+<li><a href="threads.html#00655"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

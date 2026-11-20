@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: your STRING gripes -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 3 Sep 81 02:48:00 GMT -->
+<!--X-Message-Id: 99d67455e7efa6dc06145e7a7a7a7224@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>your STRING gripes</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03095.html">Date Prev</a>][<a href="msg03093.html">Date Next</a>][<a href="msg03095.html">Thread Prev</a>][<a href="msg03093.html">Thread Next</a>][<a href="maillist.html#03094">Date Index</a>][<a href="threads.html#03094">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>your STRING gripes</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: WGD at MIT-MC</li>
+<li><em>Subject</em>: your STRING gripes</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 3 Sep 81 02:48:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 2 September 1981 22:48-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+The following two bugs were due to a fence-post-at-0-count error
+in STRING-REPLACE (now fixed in STRING 165):
+    Date: 31 August 1981 14:34-EDT
+    From: William G. Dubuque &lt;WGD at MIT-MC&gt;
+    (STRING-SUBSEQ &quot;FOO&quot; 0 0) =&gt; error, why not &quot;&quot; ??
+    Date: 24 August 1981 13:25-EDT
+    From: William G. Dubuque &lt;WGD at MIT-MC&gt;
+    (string-subseq &quot;a&quot; 0 0) will get an error from string-replace while
+    trying (string-replace &quot;&quot; &quot;a&quot; 0 0 0) 
+
+Following fence-post bug is also fixed now in STRING-MISMATCHQ
+    Date: 30 August 1981 23:22-EDT
+    From: William G. Dubuque &lt;WGD at MIT-MC&gt;
+    (STRING-MISMATCHQ &quot;SI:FOO&quot; &quot;SI&quot;) =&gt; 2
+    but
+    (STRING-MISMATCHQ &quot;SI&quot; &quot;SI:FOO&quot;) =&gt; () ?
+    Shouldn't the latter also be 2 ?
+
+Following was due to a bug in the open-compilation of FIXNUMP (as opposed 
+to FIXP), which was fixed before the current COMPLR was dumped.
+    Date: 25 August 1981 07:23-EDT
+    From: William G. Dubuque &lt;WGD at MIT-MC&gt;
+    (set-string-length &quot;abc&quot; 2) gives an error. It appears that the compilation
+    of the (&lt;= 0 new-length old-length) has been optimized into () by COMPLR.
+Actualy, to losing clause was the (FIXNUMP new-length) just before that.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03095.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03093.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03095.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03093.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03094"><strong>Date</strong></a></li>
+<li><a href="threads.html#03094"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>NEWIO.RPG[UP,DOC] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename NEWIO.RPG[UP,DOC]  blob <a href="NEWIO.RPG[UP,DOC]_blob">sn#512364</a> filedate 1980-05-28 generic text, type C, neo UTF8</div>
+<pre id="u8lump">COMMENT ⊗   VALID 00002 PAGES
+C REC  PAGE   DESCRIPTION
+C00001 00001
+C00002 00002	NEWIO is here. This file contains some basic changeover information to
+C00016 ENDMK
+C⊗;
+NEWIO is here. This file contains some basic changeover information to
+help your OLDIO programs run in NEWIO. For general information, READ LISP
+and READ LSPARC.
+
+NEWIO supports all of the OLDIO routines such as UREAD, EREAD, UWRITE,
+etc.  The file defaulting mechanism (in particular, the ">" hacks and null
+extensions on files) might fail occasionally due to bugs. ITS does not
+recognize null extensions, so the MacLisp file defaulting system assumes
+that no one else does, either. This hack is so perpetuated through the
+system that the (awful) solution was to use the extension "←←←" (sixbit
+777777) to mean the null extension internally. Then before every LOOKUP
+(ENTER) it checks to see if the extension is "←←←" and nullifies it
+(terrible).  Therefore, if you see "←←←" as an extension in some error
+message, this means the null extension. Sometime this message (if not this
+crox) will go away.
+
+Internally, NEWIO doesn't think of your file names the same way that OLDIO
+did. OLDIO thinks that a typical file name is (garb age dsk (zte sch)),
+while NEWIO thinks it would be ((dsk (zte sch)) garb age), so you might
+see a message like "((dsk (zte sch)) garb age) - FILE NOT FOUND" after you
+tried to do (EREAD GARB AGE). This new form is called a "namelist".
+
+When you do an OPEN by yourself, the value will be something like:
+
+	#FILE-IN-|DSK:GARB.AGE|-7770
+
+This oddity can then be used in READs, TYI's etc as a second argument to
+specify which file to read from (of those open). So you can do:
+
+(setq obscure-file-name (open '((dsk (zte sch)) garb age)))
+		.
+		.
+		.
+	(read eof obscure-file-name)
+		.
+		.
+		.
+
+To OPEN E files, you simply do EOPEN instead of OPEN.
+
+Files can be opened for input or output. The syntax:
+
+	(OPEN &lt;FILE> 'IN)
+
+opens an ascii input file,
+
+	(OPEN &lt;FILE> 'OUT)
+
+opens an ascii output file, and
+
+	(OPEN &lt;FILE> 'FIXNUM)
+
+opens an input file in image mode. Actually, the second argument (the
+mode) can be a list. So (OPEN &lt;FILE> 'FIXNUM) can be written as (OPEN
+&lt;FILE> '(IN FIXNUM)). Therefore (OPEN &lt;FILE> '(OUT FIXNUM)) is valid.
+
+REQUIRE exists as an autoloadable utility which simply does an INCLUDE.
+That is, (REQUIRE FOO BAR DSK (MUM BLE)) does
+
+		  (INCLUDE '((DSK (MUM BLE)) FOO BAR))
+
+This actually pushes the state of the channel you are on, so to return
+from this file early, you can evaluate (inpush -1). In general, one closes
+a file named NAME by (CLOSE NAME).
+
+When compiling a file with REQUIREs in it, you experence some weird
+messages (though in pretty format). For instance, when the COMPLR runs
+across a REQUIRE (INCLUDE), it pushes to that file and compiles it. When
+it finishes with the REQUIRE'd file it will say something like:
+
+		;End of file |DSK:MUMBLE.7|
+
+In addition, it will say the same type of thing when it finishes the main
+file ONLY WHEN A REQUIRE OCCURS. If you redfine a macro that the compiler
+thinks that it knows about, then it will print a message to that effect.
+It is only a warning and does not mean that it didn't like what you did.
+Currently the compiler thinks it knows about LET, PUSH, POP, and CASEQ.
+Via other means, the SAIL version of the compiler will not warn about LET,
+PUSH, and POP.
+
+The form |dsk;mumble.7[foo,bar]| is called a "namestring", and most every
+NEWIO IO function that takes a namelist will take a namestring.  So you
+can do:
+
+	(OPEN '|DSK:GARB.AGE[ZTE,SCH]|) 
+
+as well as:
+
+	(OPEN '((DSK (ZTE SCH)) GARB AGE))
+
+And (NAMELIST &lt;namestring>); (NAMESTRING &lt;namelist>) convert the two.
+
+Lisp programs compiled by the OLDIO compiler (708) will generally run in
+NEWIO, but almost any program compiled by the NEWIO compiler will not run
+in OLDIO. This is due, not to the NEWIO itself so much as, to the fact
+that a number of new entry points into the interpreter have been added to
+the existent ones that the compiler knows about. So the NEWIO compiler
+will happily produce code that wil jump to non-existent labels in the
+OLDIO interpreter.
+
+To compile a file in NEWIO you do tha same things you did in OLDIO,
+EXCEPT, there are new switch possiblilities and one important new default.
+The new default is that if you specify "A" in your switchtable, then the
+LAP file is DELETED unless you say "A-K". That is, you can negate switch
+settings in the NEWIO compiler. In addition, the switchtable is available
+as the GLOBAL "SWITCHTABLE". READ LSPARC for details.
+
+There have been some changes to the interrupt system with NEWIO. First of
+all, NEWIO uses the spiffy New-Style interrupt system. Second, interrupts
+that used to be defined via the (SSTATUS INTERRUPT n form) are now set up
+with (SETQ handler-name form), where these handler names are in the
+various manuals. Most people don't do this sort of thing, so there is no
+need to explain it all here.
+
+Along similar lines are the TTYINTs.  (STATUS TTYINT &lt;char> &lt;input tty>)
+(SSTATUS TTYINT &lt;char> &lt;function> &lt;input tty>) These STATUS functions are
+used to set up and examine interrupt character functions for TTY input
+files (the TTY is considered as an input file, by the way, which will help
+you read the documentation).  If &lt;file> is omitted, T (the standard TTY)
+is assumed (i.e., you can have a number of "TTY files" which have various
+characteristics).  &lt;char> should be either a numeric ASCII value, or a
+single charaterd object.(like /q). Note that &lt;char> is ALWAYS evaluated,
+unlike (STATUS CHTRAN), for example.  &lt;function> should be either a
+function of two arguments or a fixnum.  If it is a function, then when the
+interrupt occurs it receives as arguments the file (tty file) on which the
+interrupt occurred, and the character typed, as a fixnum.  If the function
+is a fixnum, it represents the internal systemic interrupt initially
+associated with that character.  Thus, for example:
+
+	(SSTATUS TTYINT 307
+		 '(LAMBDA (F CH) (PRINC '|WHY DID YOU TYPE ↑G? |)))
+	(SSTATUS TTYINT 306 7)
+
+
+will cause ↑F to do a "↑G QUIT", and ↑G merely to print the message "WHY
+DID YOU TYPE ↑G? ".  Note that an interrupt can be associated with any
+ascii character, not just control characters.  (For a frustrating
+experience, set ")" to be a "↑G quit".)  In order to get the proper
+effect, however, the system activation table must be updated to activate
+on non-control/meta characters.  The meaningful systemic interrupt values
+are:
+
+  OCTAL VALUE	CHAR	WHAT IT DOES		INTERNAL INTERRUPT NUMBER
+      303	↑C	(SETQ ↑D NIL)			     3
+      304	↑D	(SETQ ↑D T)			     4
+      307	↑G	↑G QUIT				     7
+      347	↑g	↑G QUIT				     7
+      322	↑R	(SETQ ↑R T)			    22
+      324	↑T	(SETQ ↑R NIL)			    24
+      326	↑V	(SETQ ↑W NIL)			    26
+      327	↑W	(SETQ ↑W T)			    27
+      330	↑X	↑X QUIT				    30
+      332	↑Z	GO TO DDT (if present; 		    32
+			   	   ALTP↑G to continue)
+      372	↑z	RETURN TO DDT			    32
+
+The difference between (SSTATUS TTYINT 1 4) and (SSTATUS TTYINT 1 '(LAMBDA
+(F CH) (SETQ ↑D T))) is that the former will let the interrupt happen and
+take effect even is in a place where a general user function may not be
+run, e.g in the middle of a garbage collection.  Note that initially ↑S is
+set to be like ↑W as an interrupt character (see below).
+
+↑Q is no longer initially an interrupt character, but a splicing macro and
+force-feed whose definition is (LAMBDA NIL (SETQ ↑Q T) NIL).  This has the
+same effect when typed at the keyboard as before, but prevents certain
+timing screws.
+
+↑S no longer does (SETQ ↑Q NIL).  Instead, it is the same as ↑W as an
+interrupt character.  Unlike ↑W, it is also a splicing macro and
+force-feed, with the definition (LAMBDA NIL (SETQ ↑W NIL) (TERPRI) NIL).
+Thus if a long printout is coming at you, just type &lt;esc>I, ↑S and you
+will see a TERPRI when control returns to the keyboard.
+
+↑B AND ↑E do not toggle LPT output.  Losers can program this for
+themselves.
+
+↑H is alphabetic in NEWIO, for compatibility with MULTICS.
+
+↑B in NEWIO gives a "↑B break", which is the same as the "↑H break" of
+OLDIO.
+
+To get "instant macros" instead of simply doing:
+
+	(SETSYNTAx 768 'MACRO '(LAMBDA ...))
+
+you need to do:
+
+	(SETSYNTAX 768 'MACRO '(LAMBDA ...))
+	(SSTATUS SYNTAX 768 198976.)
+
+The later makes the character a "force feed"also.
+
+</pre>
+</body>
+</html>

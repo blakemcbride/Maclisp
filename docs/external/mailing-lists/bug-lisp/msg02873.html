@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Suggestion for LET extensions -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 14 Aug 79 10:53:00 GMT -->
+<!--X-Message-Id: 96d08cc3b89dfae3d60bb256020009f6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Suggestion for LET extensions</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02874.html">Date Prev</a>][<a href="msg02872.html">Date Next</a>][<a href="msg02874.html">Thread Prev</a>][<a href="msg02872.html">Thread Next</a>][<a href="maillist.html#02873">Date Index</a>][<a href="threads.html#02873">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Suggestion for LET extensions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: byron at MIT-ML</li>
+<li><em>Subject</em>: Suggestion for LET extensions</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 14 Aug 79 10:53:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 14 AUG 1979 0653-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     BYRON@MIT-ML
+Date: Sun, 13 Aug 79 20:11:32 GMT
+Original-Date: 08/13/79 16:11:32 EDT
+Subject:
+    To: (BUG LISP) at MIT-ML
+	I have a suggestion for augmenting LET in the direction of
+    type declaration.  Instead of limiting LET to variables
+    or (variable-structure init-val), how about adding a third
+    item which would be a type declaration?  Separate
+    declare statements would then be less necessary.
+    E.G.
+    (let ((x (plus a b) flonum)
+	  ((u v w) (foo a b c) (flonum notype fixnum)))
+	 &lt;compute&gt;)
+    would bind x with initial value (plus a b) and type flonum, and
+    would bind u, v, and w to the car, cadr, and caddr of (foo a b c)
+    and declare them to have the types indicated.
+
+The part about a third item in the LETlist, &quot;(x (plus a b) flonum)&quot;
+sounds good to me, but the compound form &quot;((u v w) (foo a b c) ...)&quot;
+loses since it conflicts with the &quot;destructuring&quot; syntax of LET; i.e.,
+this should mean &quot;bind u to the CAR of the value of (foo a b c), bind
+v to the CADR,  and bind w to the CADDR&quot;.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02874.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02872.html">Your bug note of Jul 26</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02874.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02872.html">Your bug note of Jul 26</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02873"><strong>Date</strong></a></li>
+<li><a href="threads.html#02873"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

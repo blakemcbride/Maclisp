@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Rnivq Z. Oaqer &#60;RZO ng [WF&#45;SSQE> -->
+<!--X-Date: Mon ,27 Apr 81 11:23:00 EDT -->
+<!--X-Message-Id: 657ae8773dbfc60e8dfad3b9a87c78a2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:DLA at MIT-EECS">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00816.html">Date Prev</a>][<a href="msg00814.html">Date Next</a>][<a href="msg00816.html">Thread Prev</a>][<a href="msg00814.html">Thread Next</a>][<a href="maillist.html#00815">Date Index</a>][<a href="threads.html#00815">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: dlw at MIT-AI</li>
+<li><em>From</em>: David L. Andre &lt;DLA at MIT-EECS&gt;</li>
+<li><em>Date</em>: Mon ,27 Apr 81 11:23:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI, BUG-LISPM at MIT-AI, DLA at MIT-EECS</li>
+<li><em>In-reply-to</em>: Your message of 27-Apr-81 0048-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Oh, well, I guess I shouldn't send messages when I'm totally burned out,
+because you're not the first to say you couldn't read my message...
+
+The difference between the kind of keyword arguments that OPEN takes and
+the kind of keyword arguments which other functions such as MAKE-ARRAY,
+LOAD-PATCHES, etc use, is that OPEN takes a LIST of keywords, whereas the other
+examples take an evaluated &amp;rest arg.  My comment was basically, why don't you
+reach some kind of convention in keyword arguments rather than have this difference?
+
+So OPEN would translate to OPENF as follows:
+
+(OPEN &quot;DLA; ILLIT ERATE&quot; '(:NOERROR :READ :BYTE-SIZE 4) 'MY-EXCEPTION-HANDLER)
+(OPENF &quot;DLA; ILLIT ERATE&quot;
+       ':NOERROR ':READ
+       ':BYTE-SIZE 4
+       ':EXCEPTION-HANDLER 'MY-EXCEPTION-HANDLER)
+
+Actually, this illustrates yet another inconsistency in keyword arguments, in that
+some functions (like LOAD-PATCHES) have keywords which optionally take arguments,
+and others (like MAKE-ARRAY) take keywords which ALWAYS take arguments.  I personally
+like the &quot;optionally taking arguments&quot;, but I've heard differently from others...
+
+		-- Dave
+-------
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00816.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00814.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00816.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00814.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00815"><strong>Date</strong></a></li>
+<li><a href="threads.html#00815"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Splicing macros -->
+<!--X-From-R13: OZO@N[WF&#45;OW -->
+<!--X-Date: Fri, 1 Sep 79 06:49:09 GMT -->
+<!--X-Message-Id: e212ebe4e470c0edf2c6c81fc3273150@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Splicing macros</title>
+<link rev="made" href="mailto:ALAN@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02824.html">Date Prev</a>][<a href="msg02823.html">Date Next</a>][<a href="msg02824.html">Thread Prev</a>][<a href="msg03143.html">Thread Next</a>][<a href="maillist.html#00690">Date Index</a>][<a href="threads.html#00690">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Splicing macros</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-AI</li>
+<li><em>Subject</em>: Re: Splicing macros</li>
+<li><em>From</em>: ALAN@MIT-AI</li>
+<li><em>Date</em>: Fri, 1 Sep 79 06:49:09 GMT</li>
+<li><em>Original-date</em>: 01/09/79 02:49:09 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>	After a dot a splicing macro that returns nil (&quot;nothing&quot;) should
+cause the next thing to be read in as if it wern't there (this is what the
+current scheme thinks it is doing except there is no check for a &quot;)&quot;).
+	If it returns a list of exactly one thing, then that thing should
+be tacked on to the end of the list and there better be a close paren next!
+(or perhaps a splicing macro that returns nil first!)
+	If it returns more than one thing then barf.
+
+Is there any good reason why things can't work this way? Shouldn't splicing
+macros at toplevel also work in a similar way? In any case an error should
+be reported if the thing is going to continue to do what it does now.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02824.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02823.html">ALLFIL etc.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02824.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03143.html">Splicing macros</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00690"><strong>Date</strong></a></li>
+<li><a href="threads.html#00690"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

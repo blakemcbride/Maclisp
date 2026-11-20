@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Fri, 14 Jul 78 20:34:00 GMT -->
+<!--X-Message-Id: 5992346d8192859cb324db742af88e8d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02275.html">Date Prev</a>][<a href="msg02273.html">Date Next</a>][<a href="msg02275.html">Thread Prev</a>][<a href="msg02273.html">Thread Next</a>][<a href="maillist.html#02274">Date Index</a>][<a href="threads.html#02274">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC, bruc at MIT-ML</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Fri, 14 Jul 78 20:34:00 GMT</li>
+<li><em>Original-date</em>: 14 JUL 1978 1634-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Yes, the new COMPLR permits the user to redefine most system
+SUBRs and FSUBRs as macros, either by fasloading in a macros file
+in his init (or from inside a DECLARE), or by haveing the macro
+definitions lexically present.  There is one minor lossage with
+redefining the system functions necessary for the operation of the
+compiler itself, so recently we have invented a new declaration
+OWN-SYMBOL which has the effect of removing from the COBARRAY the
+declared symbols, and installing thereon  new symbols with the
+same pname;  thus as a users file is read in he gets reference to
+a symbol that is not connected with the system one. E.g.
+
+(DECLARE (OWN-SYMBOL PUSH POP XCONS))
+(DEFUN PUSH MACRO . . . )
+(DEFUN POP MACRO . . . )
+(DEFUN XCONS MACRO . . . )
+&lt;lotsa functions using weird definitions for these three&gt;
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02275.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02273.html">Clarification on OWN-SYMBOL</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02275.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02273.html">Clarification on OWN-SYMBOL</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02274"><strong>Date</strong></a></li>
+<li><a href="threads.html#02274"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

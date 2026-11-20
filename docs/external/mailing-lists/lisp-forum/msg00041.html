@@ -1,0 +1,144 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: more on mixed case -->
+<!--X-From-R13: QEHOJ.wxs ng Prexryrl -->
+<!--X-Date: Sun ,1 Feb 81 19:51:56 EDT -->
+<!--X-Message-Id: 696ccc58c8c3569c2b382017f9bf25d0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: more on mixed case</title>
+<link rev="made" href="mailto:CSVAX.jkf at Berkeley">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00042.html">Date Prev</a>][<a href="msg00043.html">Date Next</a>][<a href="msg00051.html">Thread Prev</a>][<a href="msg00048.html">Thread Next</a>][<a href="maillist.html#00041">Date Index</a>][<a href="threads.html#00041">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: more on mixed case</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: more on mixed case</li>
+<li><em>From</em>: CSVAX.jkf at Berkeley</li>
+<li><em>Date</em>: Sun ,1 Feb 81 19:51:56 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>  People will always establish conventions which permit them to get their
+ideas across in the shortest amount of time.  The function KMP wrote
+named `Car' would be pronounced `capital car' here and there would
+be no confusion between that and the one pronounced `car'.  Admittedly
+there is no convention for pronouncing `cAr' but if we every found 
+ourselves writing things like this, then someone would find a way to
+pronounce it.  I think that you are exaggerating the communication problem.
+Suppose I wrote this function:
+ (defun macrop (FunctionName)
+	(and (getd FunctionName) 
+	     (or (and (bcdp (getd FunctionName))
+		      (eq 'macro (getdisc (getd FunctionName))))
+		 (and (dtpr (getd FunctionName))
+		      (eq 'macro (car (getd FunctionName)))))))
+
+Now suppose word gets around about my great new function to tell if a
+function is a macro or not. Someone asks me how it works. I say &quot;
+it takes functionname as an argument, checks to make sure functionname
+has a function binding and then if its binding is a binary object ...&quot;
+I don't have to tell him that functionname is written FunctionName,
+that is totally irrevalent.  And in fact, most of the symbols in most
+lisp programs are local variables, and many functions in lisp
+files are local to one file and thus the author should be able to
+write them for maximum readability to himself.  
+  Ok, you never use GRIND anymore (neither do we), but you do use 
+compilers and I believe that the error messages from the compiler 
+should use the representation the programmer used when printing errors 
+and warning. 
+  While the case doesn't affect the meaning in English, it does convey
+information.  There is a difference between writing &quot;you are wrong&quot; and 
+&quot;YOU ARE WRONG&quot;.  Aren't you a bit offended when someone writes a passage
+in capital letters, ISN'T IT JUST LIKE THEY ARE YELLING AT YOU?
+The use of the same letters with different casification (??) can be very
+helpful in distinguishing functions with the subtle differences in 
+meaning. I can see someone wanting to use KMP's Car function in his
+code as well as the standard car.  In a one system where the default
+is to single case things, you would have to call Car something else
+or have to escape the lower case characters, both options would
+result in an uglier program (very personal opinion).
+  Multics has had some growing pains but that is to be expected. 
+The use of both cases in names which must be used by many users
+or between computers must be controlled.  I guess that we have
+done pretty well here because I haven't heard any complaints.
+ 
+ This whole issue extends beyond Lisp.  The other languages we run
+here treat cases distinctly (except Fortran and Pascal when it is
+put in `Standard Pascal' mode).  Most people tend to use mixed
+cases in their code although there are very few places in the
+system libraries where mixed code is used.  One convention in 
+C is to use all upper case to denote a macro.  I have randomly
+searched through directories and come up with a segment from
+a typical C program and a typical Model program to demonstate 
+their use.  Most typical is the use of case to delimit words rather
+than other seperators, such as underscore.
+
+C program segment:
+
+    (void) PSetPath(&quot;/dev&quot;);
+    if (display == NULL) error(&quot;no display specified (-g&lt;display&gt;)&quot;);
+    grtty = POpen(display, &quot;w&quot;, (char *) NULL, (char **) NULL);
+    if (grtty == NULL) error(&quot;couldn't open display&quot;);
+    (void) PSetPath(path);
+
+
+Model program segment:
+MakeCopyOnly inline beginproc
+	formal copyOnly{t, s} c (varies); integer i (varies); noresult;
+	copyOnlyData temp;
+	temp.data := i;
+	c := temp \ copyOnly{t, s};
+endproc;
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00042.html">Re: More case</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00043.html">Re: a quick question about cases</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00051.html">Re: Casifying at output time wins for what I want it to do.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00048.html">Re: more on mixed case</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00041"><strong>Date</strong></a></li>
+<li><a href="threads.html#00041"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

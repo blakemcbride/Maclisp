@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>BIBOP.RPG[UP,DOC] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename BIBOP.RPG[UP,DOC]  blob <a href="BIBOP.RPG[UP,DOC]_blob">sn#682293</a> filedate 1982-10-19 generic text, type C, neo UTF8</div>
+<pre id="u8lump">COMMENT ⊗   VALID 00023 PAGES
+C REC  PAGE   DESCRIPTION
+C00001 00001
+C00004 00002	    BIBOP is  the  dynamically expandable  version  of MACLISP,  the  SAIL
+C00011 00003	$$$$$$$$$$$$$$$   ANNOUNCING THE ONE, THE ONLY   $$$$$$$$$$$$$$$
+C00015 00004	Bibop LISP - Section I. - For the Average LISP User - page 2
+C00018 00005	Bibop LISP - Section I. - For the Average LISP User - page 3
+C00021 00006	Bibop LISP - Section I. - For the Average LISP User - page 4
+C00025 00007	Bibop LISP - Section I. - For the Average LISP User - page 5
+C00028 00008	Bibop LISP - Section II. - For Sophisticated LISP Users - page 6
+C00033 00009	Bibop LISP - Section II. - For Sophisticated LISP Users - page 7
+C00036 00010	Bibop LISP - Section II. - For Sophisticated LISP Users - page 8
+C00039 00011	Bibop LISP - Section II. - For Sophisticated LISP Users - page 9
+C00043 00012	Bibop LISP - Section II. - For Sophisticated LISP Users - page 10
+C00047 00013	Bibop LISP - Section II. - For Sophisticated LISP Users - page 11
+C00048 00014	Bibop LISP - Section II. - For Sophisticated LISP Users - page 12
+C00051 00015	Bibop LISP - Section III. - For LISP System Hackers - page 13
+C00055 00016	Bibop LISP - Section III. - For LISP System Hackers - page 14
+C00059 00017	Bibop LISP - Section III. - For LISP System Hackers - page 15
+C00064 00018	Bibop LISP - Section III. - For LISP System Hackers - page 16
+C00068 00019	Bibop LISP - Section III. - For LISP System Hackers - page 17
+C00072 00020	Bibop LISP - Section III. - For LISP System Hackers - page 18
+C00077 00021	Bibop LISP - Section III. - For LISP System Hackers - page 19
+C00081 00022	Bibop LISP - Section III. - For LISP System Hackers - page 20
+C00083 00023	 STORAGE LAYOUT FOR ITS BIBOP
+C00086 ENDMK
+C⊗;
+    BIBOP is  the  dynamically expandable  version  of MACLISP,  the  SAIL
+standard MACLISP.   Essentially,  the  main advantage  of  BIBOP  is  that
+whenever one of the expandable spaces runs out of space, BIBOP requests  a
+larger core allocation from the monitor and the delinquent space grows  in
+the allocated memory.
+	Expandable spaces are:
+ 
+	LIST
+	FLONUM
+	FIXNUM
+	BIGNUM
+	ARRAY
+	SYMBOL
+ 
+	Non-expandable spaces are:
+	
+	BPS
+	REGPDL
+	SPECPDL
+	FXPDL
+	FLPDL
+	DDTSYMS
+ 
+    It is  possible  to  control  the  ratio  of  garbage  collections  to
+expansions with the ALLOC function (a subr).  A call to ALLOC looks like:
+	(ALLOC '(LIST (40000 40000 0.25) FIXNUM (1000 20000 0.10)
+		FLONUM (0 2000 NIL) BIGNUM (...) ...))
+That is, the argument to ALLOC is a list whose elements alternate  between
+expandable  space  names  and  3-lists.    The  3-list  consists  of   the
+specifications of GCSIZE, GCMAX, & GCMIN.  GCSIZE is the expected size  of
+the space; BIBOP will grow that space without garbage collection until  it
+is of size  GCSIZE.  Once  the space has  exceeded this  size, BIBOP  will
+garbage collect before  expansion. GCMIN  specifies either  the number  of
+cells to be free (a FIXNUM) or the percentage (a FLONUM) of free cells  to
+total space size after a garbage collection in order that the space not be
+expanded. That is, if the amount of cells specified by GCMIN are not  free
+after a garbage  collection has  occurred, an expansion  will take  place.
+GCMAX specifies the largest size to which a space can expand. If a garbage
+collection cannot collect enough free cells, and an expansion is  required
+which will cause  the space to  exceed GCMAX in  size, then a  GC-OVERFLOW
+error will be signalled. At this point, the luser can perform an ALLOC and
+$P (alt-P) to continue. Also, this is user interrupt 13, whose argument is
+the name of the space  that overflowed. A NIL  in any position means  that
+the value for that parameter will not be altered.
+	Some status functions of interest are:
+	
+	(STATUS SPCNAMES)		return the expandable space names
+	(STATUS SPCSIZE space)		returns the size of the space,
+					space (evaluated)
+	(STATUS PDLSIZE space)		return the number of words on the 
+					specified pdl (evaluated)
+	(STATUS PDLROOM space)		returns the maximum size to which the
+					pdl can grow (evaluated)
+	(STATUS GCMIN space)		returns GCMIN for space (evaluated)
+	(STATUS GCMAX space)		returns GCMAX for space (evaluated)
+	(STATUS GCSIZE space)		returns GCSIZE for space (evaluated)
+ 
+    The GC-LOSSAGE error  occurs when  BIBOP cannot  obtain the  necessary
+memory allocation from the monitor (interrupt 10.).
+    A useful feature of MACLISP (either  BIBOP or MACLSP) is the  LISP.INI
+file. This  file (non-E)  contains initial  allocation and  initialization
+commands,  and is  invoked  at  allocation  time by responding ↑Q or ↑W to
+the ALLOC? request.
+    The first expression in the  file must be a  COMMENT which is used  to
+answer the questions that the allocator asks. For instance:
+    (COMMENT FXS 4000 BPS 13000.)  will allocte 4000 to FXS and 13000.  to
+BPS. Not  every space  need  be specified  in  the COMMENT  (MACLISP  will
+default it), nor does every space mentioned have to exist (so you can  use
+the same file  for BIBOP and  MACLSP).  All other  expressions are  EVALed
+after the allocation phase.  A useful LISP.INI file might look like:
+ 
+	(COMMENT BPS 13000.)
+	(ALLOC '(LIST (0 NIL 0.10) FIXNUM (0 NIL 0.10)))
+	(EDIT)
+ 
+Initially LIST has  GCSIZE=GCMAX=40000, which means  that LIST space  (and
+BIBOP) will expand quite a bit before garbage collection.
+    Additional  features  of  BIBOP  are   the  HUNK  package  (refer   to
+LISP.RPG[S,DOC])and the  fact that EREAD and  HELP
+have   initial    autoload   properties    (see   HELP.DOC[AID,RPG])
+    In order  to obtain  a BIBOP  large  enough for  the EDITOR  and  some
+auxilliary routines, BPS should  be at least  13000.  (decimal). Also,  in
+BIBOP, MACDMP no longer exists, the function SUSPEND should be used in its
+place.
+$$$$$$$$$$$$$$$   ANNOUNCING THE ONE, THE ONLY   $$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$        >>> BIBOP LISP &lt;&lt;&lt;        $$$$$$$$$$$$$$$
+
+December 1973;  updated March 1974 
+
+The (in)famous "Bibop" (pronounced "bee-bop") LISP scheme
+has been available for some time now and seems to be more or
+less reliable.  Bibop means "BIg Bag Of Pages", a reference
+to the method of memory management used to take advantage of
+the memory paging features of ITS.  The average LISP user
+should not be greatly affected in converting to this new
+LISP (which very eventually will become the standard LISP,
+say in a few months).  
+
+This document is divided into three sections:  
+        I.   What the average user will need to know.  This
+             section is very short (about four pages) and
+             should be read by everyone who wants to use
+             Bibop LISP.  
+        II.  What sophisticated users (e.g. those who
+             construct and dump systems like MACSYMA and
+             CONNIVER) will need to know.  This section
+             details general storage strategies and other
+             features of Bibop, and describes at length how
+             to exploit them.  
+        III. What only LISP system hackers and the insanely
+             curious will need to know.  This section
+             describes some of the internal workings of
+             Bibop LISP, and is intended primarily as an aid
+             to LISP system hackers.  
+Hopefully most people will need to read only the first
+section to use Bibop successfully.  
+
+Much effort has been expended to keep Bibop and non-Bibop
+LISPs compatible.  In particular, if LISP code written for
+non-Bibop LISP also works "as is" in Bibop LISP, then so
+will the corresponding LAP and FASL files;  that is, the
+compiler output is completely compatible (and will be kept
+so).  Unless you must alter source code for Bibop LISP,
+there is no need to recompile.  
+
+I apologize in advance for the confusion this document will
+undoubtedly cause.  Questions, comments, and complaints may
+be registered by saying mailing such to RPG.
+
+
+
+                                -- Guy Steele (GLS)
+				-- RPG
+Bibop LISP - Section I. - For the Average LISP User - page 2
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$ I. INFORMATION FOR THE AVERAGE USER $$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+$$$$$ [1] $$$$$ Atomic Symbols Are Different $$$$$
+
+Atomic symbols in Bibop LISP are very different from those
+in non-Bibop LISP.  The PNAME, ARGS, and VALUE "properties"
+are not stored on the property list, but in a secret hidden
+place.  The ARGS property can be examined and altered with
+the function ARGS as in non-Bibop LISP, the VALUE property
+with EVAL, SET, SETQ, and BOUNDP, and the PNAME property
+with EXPLODE, GETCHAR, etc.  
+
+The car of an atomic symbol is not -1 (#777777) in Bibop
+LISP.  The cdr of an atomic symbol is still the property
+list, however;  using RPLACD on an atom, though hackish,
+also works as before.  EXPR and SUBR properties are kept on
+the property list as in non-Bibop LISP.  
+
+Note well:  (CONS (CAR NIL) &lt;property-list>) is most
+definitely not a good way to construct a new atomic symbol
+(in Bibop, the result won't be an atom at all, but a dotted
+pair or whatever).  If it is necessary to create a new
+atomic symbol in this manner, use the function COPYSYMBOL,
+which works as described in LISP.ARC[AID,RPG] in both Bibop and
+non-Bibop LISPs.  
+
+
+$$$$$ [2] $$$$$ The Allocator Is Different $$$$$
+
+When a Bibop LISP starts up, it says:  
+
+        BIBOP LISP &lt;version number>
+        ALLOC?
+
+All the usual responses have their usual effects;  ↑Q, ↑W,
+space, Y, N, etc. work as in non-Bibop LISP.  Some questions
+asked are different, however, and they are presented in a
+different order.  Questions and their default values look
+something like:  
+Bibop LISP - Section I. - For the Average LISP User - page 3
+
+
+	# BPS = 13000
+	# REGPDL = 3000
+	# SPECPDL = 1400
+	# FXPDL = 1000
+	# FLPDL = 1000
+	# DDTSYMS = 100
+	 LIST = 40000
+	 SYMBOL = 3000
+	 FIXNUM = 3000
+	 FLONUM = 1000
+	 BIGNUM = 1000
+	 ARRAY = 1000
+
+
+The six parameters control the maximum size for each of
+six "spaces" used to contain various objects.  They are:  
+
+        LIST    lists and dotted pairs 
+        FIXNUM  fixnums (like FXS in non-Bibop LISP) 
+        FLONUM  flonums (like FLS in non-Bibop LISP) 
+        BIGNUM  bignums (actually, just the bignum headers,
+                which hold the sign and point to the rest) 
+        SYMBOL  atomic symbols (this is why you can't use
+                CONS to create symbols;  they are not in
+                LIST space!) 
+        ARRAY   array pointers (seen primarily on property
+                lists as values of ARRAY properties;  the
+                allocation for these need not be large) 
+
+Initially, you start off with much less core than you
+specify, but Bibop will "grow" each space to the specified
+size as soon as it is convenient and/or necessary.  If the
+total amount of core you specify is greater than the total
+of the individual parts plus the size of the initial LISP
+system, Bibop will portion out the remainder to deserving
+spaces (like list and fixnum) in order to make the total
+size of the LISP be what you asked for.  
+
+The four pdl parameters are upper limits to the sizes (in
+PDP-10 words) of the four push-down stacks in LISP.  These
+parameters cannot be expanded in the DEC-10 (SAIL) versions
+of BIBOP.
+
+As in non-Bibop LISP, if you type ↑Q or other magic
+characters at the ALLOC? question, your LISP.INI file
+Bibop LISP - Section I. - For the Average LISP User - page 4
+
+
+will be read.  The first form should be a comment, as usual.
+The names of the spaces should be the same as the names used
+by ALLOC given above.  Note that supplying nonexistent space
+names in the comment doesn't hurt, so you can use the same
+comment in non-Bibop LISPs as well as Bibop LISPs;  for
+example, the comment 
+
+        (COMMENT FXS 4000 FIXNUM 5000 FLS 2000
+                SYMBOL 4000 FLONUM 2000 BIGNUM 1400)
+
+will for non-Bibop set the size for FXS=4000, FLS=2000 and
+for Bibop will set FIXNUM=5000, FLONUM=2000, SYMBOL=4000,
+BIGNUM=1400.  
+
+
+$$$$$ [3] $$$$$ The ALLOC Function $$$$$
+
+The primary feature of Bibop is that it allows you to expand
+memory dynamically.  It does this automatically to a certain
+extent;  however, the user may explicitly alter the sizes of
+memory spaces with the function ALLOC.  This is a subr whose
+single argument should look like the comment form given in a
+LISP.INI file.  Example:  
+
+        (ALLOC '(LIST 40000 FIXNUM 6000 SYMBOL 5000))
+
+will dynamically re-allocate LIST space to be 40000 words,
+etc.  (Note that LIST space will not actually expand to the
+specified size until the next time a garbage collection for
+LIST space is invoked.) At present Bibop can only expand
+memory, not shrink it, so if you specify a size for a space
+smaller than its current actual size, your request is
+ignored for that space.  ALLOC returns T. 
+
+(The ALLOC function is actually considerably more
+complicated, but the above description should suffice for
+the purposes of most users.  An extended description of
+ALLOC may be found in section II.[3].) 
+
+
+$$$$$ [4] $$$$$ A Few New Messages $$$$$
+
+If you should run out of memory for any reason, you will see
+a message similar to that in non-Bibop LISP, e.g.:  
+
+        FIXNUM STORAGE CAPACITY EXCEEDED
+        ;BKPT GC-LOSSAGE
+
+This indicates that you have run out of address space and
+therefore cannot add any more memory.  However, in Bibop
+LISP another kind of break may occur:  
+Bibop LISP - Section I. - For the Average LISP User - page 5
+
+
+        ;BKPT GC-OVERFLOW
+
+this indicates that some space has reached the maximum
+specified by ALLOC; the name of the space which got too
+large is the value of the variable ARGS, as usual.  Now all
+is not lost at this point in a Bibop LISP;  you may call the
+function ALLOC to make FIXNUM space bigger, then say $P to
+continue the computation.  (Note that this is not really an
+error break, but more like a daemon; therefore $P does not
+error out to top level the way it would for, say, a FAIL-ACT
+break).  To abort the computation, use ↑G.  
+
+If you see a message that looks something like 
+
+        ;ADDING A NEW FIXNUM SEGMENT - FIXNUM SPACE NOW 2000 WORDS
+
+it merely means that the garbage collector has decided to
+add more memory.  You will only see this if you have typed
+↑D to see the garbage collector statistics (as in
+non-Bibop).  
+
+Yet another message you may see (which also does not exist
+in non-Bibop LISP) is:  
+
+        ;BKPT PDL-OVERFLOW
+
+This means that you have used excessive amounts of pdl (by
+exceeding the specified PDLMAX parameter - see section
+II.6), and therefore are probably stuck in infinite
+recursion or something.  If you want to keep going, just say
+$P and Bibop will try to extend the pdl if it can.  To abort
+the computation, use ↑G.  (This procedure is similar to that
+for GC-OVERFLOW - see above.) 
+
+Bibop LISP - Section II. - For Sophisticated LISP Users - page 6
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$ II. INFORMATION FOR SOPHISTICATED USERS $$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+$$$$$ [1] $$$$$ The Garbage Collector Explained $$$$$
+
+For each memory space (presently these are LIST, FIXNUM,
+FLONUM, BIGNUM, SYMBOL, and ARRAY) there are three
+parameters controlling when and how to expand it.  These are
+called the GCSIZE, GCMIN, and GCMAX parameters.  The GCSIZE
+parameter indicates the size that space is normally expected
+to be;  GCMIN indicates the minimum number of words free
+after a garbage collection;  and GCMAX indicates the maximum
+size to which the space is permitted to expand.  
+
+The garbage collector is invoked whenever no free cells are
+left for a space.  (We shall ignore the case where the user
+explicitly invokes it.) The algorithm for getting free cells
+is roughly as follows:  
+        [a] If the total size of the space under question is
+            less than its GCSIZE parameter, then add some
+            more memory to that space and return
+            immediately, without doing a full-blown garbage
+            collection.  (If possible, enough memory will be
+            added to bring the total size of the space up to
+            its GCSIZE.) However, if the total size already
+            exceeds the GCSIZE, or if adding more memory
+            would cause the space to exceed the GCMAX
+            parameter, do not add any memory yet, but go on
+            to step [b] instead.  
+        [b] Do a garbage collection.  If the number of words
+            free is less than the GCMIN parameter, then add
+            enough core to satisfy GCMIN (see below).
+            (However, if satisfying the GCMIN would cause
+            GCMAX to be exceeded for that space, then only
+            as much as GCMAX allows will be added.  On the
+            other hand, at least "some" (as described above)
+            will be added.) 
+        [c] If GC can't get more memory (the LISP is huge,
+            or ITS won't give LISP any core), then a
+            GC-LOSSAGE interrupt occurs.  
+        [d] If the total size of the space exceeds the GCMAX
+            parameter, then a GC-OVERFLOW interrupt occurs.
+            Note that this is not an error interrupt; it is
+            rather more like the GC-DAEMON interrupt, and
+            will not be trapped by ERRSET.  
+
+The purpose of the GCSIZE parameter is to allow storage
+spaces to swell quickly to a predetermined size, e.g. while
+loading a package of functions.  When more memory is needed,
+it is added immediately, without a time-consuming garbage
+collection.  
+Bibop LISP - Section II. - For Sophisticated LISP Users - page 7
+
+
+
+The GCMIN parameter takes over when a storage space becomes
+larger than GCSIZE.  GCMIN may be either a fixnum or a
+flonum.  If it is a fixnum, then more memory is added
+whenever the number of words reclaimed is less than that.
+If the GCMIN is a flonum, then more memory is added whenever
+the number of words reclaimed is less than the GCMIN times
+the total size of the space.  Thus a GCMIN of 2000 for some
+space says to add more memory if fewer than 2000 words are
+reclaimed for that space;  while a GCMIN of 0.25 says the
+space should be kept 25% free, adding more memory when
+necessary to maintain that percentage.  Values of 0.2 to 0.4
+are recommended for LIST, FIXNUM, and FLONUM spaces;  100.
+to 500. is recommended for BIGNUM, SYMBOL, and SAR spaces.
+(If your application involves creating and throwing away
+large numbers of SYMBOLs, you might be well-advised to use
+0.3 or so for the SYMBOL GCMIN.) 
+
+The GCMAX parameter is used primarily to keep tabs on
+programs which might go out of control and use up unlimited
+amounts of memory;  this is a problem only because a space,
+once expanded, may not be shrunk again.  A user-supplied
+GC-OVERFLOW interrupt function may be used to keep track of
+memory expansions (see section II.[4] below).  
+Bibop LISP - Section II. - For Sophisticated LISP Users - page 8
+
+
+$$$$$ [2] $$$$$ The ALLOC Function Extended $$$$$
+
+An extended form of the ALLOC function may be used to set
+the various parameters for spaces.  Essentially, one may
+replace the number for a space by a 3-list of the GCSIZE,
+GCMAX, and GCMIN parameters (in that order).  A NIL for any
+parameter means "don't change the current setting".
+Example:  
+
+        (ALLOC '(LIST (40000 60000 0.2) FIXNUM (4000 7000 NIL)))
+
+means to set the LIST GCSIZE to 40000 words, the LIST GCMAX
+to 60000 words, and the LIST GCMIN to 0.2 (meaning "keep
+LIST space 20% free");  and to set the FIXNUM GCSIZE and
+GCMAX to 4000 and 7000, and don't change the FIXNUM GCMIN.
+A typical call for a LISP with a maximum size of about 100K
+words might be:  
+
+        (ALLOC '(LIST (30000. 50000. 0.25)
+                 FIXNUM (6000. 11000. 0.2)
+                 FLONUM (1500. 2500. 0.2)
+                 BIGNUM (1000. 2000. 500.)
+                 SYMBOL (4000. 5000. 0.15)
+                 ARRAY (100. 600. 40.)))
+
+As a special hack, saying (ALLOC T) will get you back a list
+of this form, such that you could give it back to ALLOC to
+set the parameters.  Thus, if you forget how to give
+arguments to ALLOC, just type (ALLOC T) at a Bibop LISP and
+figure it out!  
+
+Specifying a value for a pdl sets that pdl's PDLMAX
+parameter.  Note that you may specify only a fixnum for a
+pdl, not a 3-list.  
+
+The following example of the use of ALLOC simulates the mode
+of typein at initial allocation time, and calls the ALLOC
+function to set parameters for the various spaces:  
+Bibop LISP - Section II. - For Sophisticated LISP Users - page 9
+
+
+(DEFUN ALLOC! NIL 
+       (TERPRI)
+       (PRINC 'BIBOP/ LISP/ )
+       (PRINC (STATUS LISPVERSION))
+       (TERPRI)
+       (PRINC 'ALLOC!)
+       (TERPRI)
+       (DO ((Q (ALLOC T) (CDDR Q)) (Y))
+           ((OR (NULL Q) (EQ Y '$)) (TERPRI) '*)
+           (TERPRI)
+           (PRINC (CAR Q))
+           (PRINC '/ =/ )
+           (PRINC (CADR Q))
+           (DO NIL ((NOT (&lt; (- LINEL CHRCT) 40))) (PRINC '/ ))
+           (AND (MEMQ (TYPEP (SETQ Y (READ))) '(LIST FIXNUM))
+                (ALLOC (LIST (CAR Q) Y)))))
+
+The interaction when this function is invoked would look
+like this (note that the user must type CR after a number
+or $, and that the user may type a 3-list instead of a
+number when appropriate):  
+
+        BIBOP LISP 1239
+        ALLOC!
+
+        LIST = (20000 20263 0.25)       44444 
+        FIXNUM = (5000 5046 0.2)        (4000 6000 .4)
+        FLONUM = (1000 1007 0.15)       NIL
+        BIGNUM = (1000 1000 100)        (NIL NIL .2)
+        SYMBOL = (4000 4036 40)         NIL
+        ARRAY = (300 400 10)            350
+        REGPDL = 13160                  20000
+        FLPDL = 2620                    $ 
+        *
+
+This function is in the file ML:GLS;BIBOP ALLOC! if you want
+to play with it.  
+
+
+$$$$$ [3] $$$$$ Use of GC-OVERFLOW and GC-DAEMON Interrupts $$$$$
+
+If you are concerned with building a system like MACSYMA or
+CONNIVER, you may want to be more friendly to the user than
+LISP is when some memory space overflows.  For example, you
+might want to write a function which decides whether or not
+to add more memory, or asks the user politely, or something.
+This can be done by supplying a GC-OVERFLOW interrupt
+function (user interrupt number 13.).  This function will be
+run whenever GC can't add more memory by itself (an
+explanation of this condition is given in section II.[1]
+above).  It receives an argument which is the name of the
+space that overflowed.  Within this interrupt function  more
+memory probably can be obtained if desired (this is
+Bibop LISP - Section II. - For Sophisticated LISP Users - page 10
+
+
+explained below).  Here is an example of what a GC-OVERFLOW
+function might look like:  
+
+(SETQ GC-OVERFLOW
+ '(LAMBDA (X) 
+   (IOG NIL
+    (TERPRI)
+    (PRINC 'YOU/ HAVE/ RUN/ OUT/ OF/ )
+    (PRINC X)
+    (PRINC '/ SPACE/./ MORE?:/ )        ;Ask if more memory desired.
+    (COND ((MEMQ (READ) '(NIL N NO NEIN NYET))
+           (ERROR 'SPACE/ CAN/'T/ BE/ EXPANDED X 'GC-LOSSAGE))
+          (T (PRINC '/ OK/./ /()        ;If so, allocate some.
+             (ALLOC (LIST X (LIST NIL
+                                  (PRINC (+ (CDR (SASSQ X
+                                                   '((LIST . 1400)
+                                                     (FIXNUM . 1400)
+                                                     (FLONUM . 600)
+                                                     (BIGNUM . 400)
+                                                     (SYMBOL . 400))
+                                                   '(LAMBDA NIL
+                                                     '(NIL . 400))))
+                                            (CADR (GET (CONS NIL
+                                                             (ALLOC T))
+                                                       X))))
+                                   NIL)))
+                 (PRINC '/ WORDS/))
+                 (TERPRI))))))
+
+This function tells the user what's happening and asks
+whether to go on or not.  If the answer is affirmative, it
+increases the amount of core and returns to continue;
+otherwise it calls the ERROR function to cause a GC-LOSSAGE
+error.  Note that SASSQ is used so that in case some new
+kind of space is implemented (and this may happen!) the
+function will still work properly.  The interaction might
+look like this:  
+
+        YOU HAVE RUN OUT OF FIXNUM SPACE. MORE?: YES  OK. (5000 WORDS)
+
+        YOU HAVE RUN OUT OF LIST SPACE. MORE?: JA  OK. (22000 WORDS)
+
+        YOU HAVE RUN OUT OF FLONUM SPACE. MORE?: NO
+        FLONUM SPACE CAN'T BE EXPANDED
+
+        ;BKPT GC-LOSSAGE
+
+
+where the user typed "YES " to the first question, "JA " to
+the second, and "NO " to the third.  Naturally, even more
+imaginative things may be done.  This function is in the
+file ML:GLS;BIBOP GCOVER if you want to play with it.  
+Bibop LISP - Section II. - For Sophisticated LISP Users - page 11
+
+
+
+The GC-DAEMON user interrupt (number 20.) may be used to
+monitor the results of garbage collection as in a non-Bibop
+LISP.  The argument to the GC-DAEMON function is a list of
+space items, where a space item is of the form (&lt;name>
+&lt;before> . &lt;after>) where &lt;name> is the name of the space,
+&lt;before> is a fixnum denoting the number of cells free just
+before the garbage collection, and &lt;after> is a fixnum
+denoting the number of cells free after garbage collection.
+(This is the same GC-DAEMON argument format now used by
+non-Bibop LISP.) 
+Bibop LISP - Section II. - For Sophisticated LISP Users - page 12
+
+
+$$$$$ [4] $$$$$ New STATUS/SSTATUS Calls $$$$$
+
+There are many STATUS functions in Bibop for examining and
+altering the various parameters described above.  In the
+following, &lt;space> must evaluate to one of LIST, FIXNUM,
+FLONUM, BIGNUM, SYMBOL, or ARRAY, unless otherwise
+specified.  (Actually, some Bibop LISPs may not have all
+these spaces;  in particular BIGNUM may be missing.) To
+determine what spaces are available, and thus what space
+names are valid arguments, say:  
+
+        (STATUS SPCNAMES)
+
+to get a list of them.  
+
+Recall that the space parameters described in section II.[1]
+do not control the actual size of a storage space, but
+merely specify how to expand it.  To find the actual current
+size of a storage space, say:  
+
+        (STATUS SPCSIZE &lt;space>)
+
+To find the total size of some pure space, say:  
+
+        (STATUS PURSIZE &lt;space>)
+
+where in this latter context &lt;space> must evaluate to one of
+LIST, FIXNUM, FLONUM, or BIGNUM.  Note that the initial LISP
+system has some pure LIST and FIXNUM storage.  
+
+To find the current number of words on some pdl, say:  
+
+        (STATUS PDLSIZE &lt;pdlname>)
+
+where &lt;pdlname> should evaluate to REGPDL, FLPDL, FXPDL, or
+SPECPDL.  Note that some random variation is introduced by
+the fact that the call to STATUS uses some pdl, but this is
+only a few words.  
+
+To find the absolute maximum for the size of a pdl (this is
+the quantity defined once and for all at initial allocation
+time), say:  
+
+        (STATUS PDLROOM &lt;pdlname>)
+
+where &lt;pdlname> is as above.  This quantity will generally
+be larger than the number given to the initial ALLOC;  the
+latter number is made the initial PDLMAX, and PDLROOM is
+made larger so that the PDL-OVERFLOW user interrupt handler
+will have some extra pdl to work in.  
+Bibop LISP - Section III. - For LISP System Hackers - page 13
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$ III. INFORMATION FOR THE SUPER-HACKERS $$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+The information in this section is primarily for the use of ITS
+system hackers, and is for the most part subject to change
+without notice when implementation requires.  This section
+makes no pretense at being self-explanatory; it should be
+read in conjunction with a listing of LISP.  
+
+
+$$$$$ [1] $$$$$ The Segment Table $$$$$
+
+At the heart of the Bibop scheme is the Segment Table (ST).
+The entire address space is divided into "segments" which
+are some fraction of 1K (typically 1/2K;  the size is
+SEGSIZ=&lt;1←SEGLOG>, where SEGLOG is an assembly parameter).
+The Segment Table contains one word for each segment;  the
+contents of this word indicate what that segment may
+contain.  A Segment Table entry is of this form:  
+
+      BIT #   BIT NAME      BIT DESCRIPTION
+        4.9     LS      1=list structure, 0=atomic 
+        4.8     $FS     free storage (bit 4.9 should be on also)
+        4.7     $FX     fixnum storage (but not fixnum pdl)
+        4.6     $FL     flonum storage (but not flonum pdl)
+        4.5     BN      bignum header storage
+        4.4     SY      symbol header storage
+        4.3     SA      sar (array pointer) storage
+        4.2     VC      value cell storage (bit 4.9 should be on also)
+        4.1     $FXP    fixnum pdl area
+        3.9     $FLP    flonum pdl area
+        3.8     $XM     existent (random) area
+        3.7     $NXM    nonexistent (random) area
+        3.6     PUR     pure space (one of bits 4.8-4.5 should be on)
+        3.5-3.1 unused
+        2.9-1.1 address of one of these seven items:
+                    QLIST, QFIXNUM, QFLONUM, QBIGNUM,
+                    QSYMBOL, QRANDOM, QARRAY
+                Note that these items occupy consecutive memory
+                locations and thus numerically encode the page type.
+
+The basic algorithm for getting a Segment Table entry and
+testing it (given an address in, say, accumulator A) is:  
+
+        MOVEI TT,(A)            ;in case we must save A
+        LSH TT,-SEGLOG          ;look at top few bits of address
+        MOVE TT,ST(TT)          ;fetch Segment Table entry
+        TLNN TT,&lt;BITS>          ;or maybe TLNE, or something
+
+Instead of the TLNN, one may also have something like:  
+Bibop LISP - Section III. - For LISP System Hackers - page 14
+
+
+        JRST @JTABLE-QLIST(TT)  ;n-way JRST on TYPEP
+
+where JTABLE is a table of addresses.  Since bignums are not
+always present in the system, one ordinarily writes somthing
+like:  
+
+JTABLE: JLIST           ;jump to JLIST if TYPEP=LIST, etc.
+        JFIXNUM
+        JFLONUM
+IFN BIGNUM, JBIGNUM
+        JSYMBOL
+        JRANDOM
+        JARRAY
+
+Various efficiencies can be introduced in special cases.
+The above sequence of code is so common that there is a
+macro called SKOTT (SKip On TT) which produces the above
+sequence, with a TLNN.  (If &lt;bits> is merely LS, however,
+then the MOVE and TLNN are collapsed into a SKIPL.) 
+
+There is another Segment Table which is used by the garbage
+collector and related routines;  it is called GCST.  Its
+format is quite hairy:  the positions and sizes of the bits
+and bytes in each entry are dependent on SEGLOG (for the
+sake of an efficiency hack in the GC mark phase).
+Basically, it indicates the address of the bit table, if
+any, for marking items in that segment, and also has a link
+field so that GCST entries may be strung together;  there
+are also random bits telling GC how to mark items in the
+segment.  If a segment requires no bit table, then its GCST
+entry has 0 as the bit table address.  Exception:  a segment
+which contains bit tables uses its GCST entry to aid
+allocation and initialization of the bit tables within the
+segment.  
+
+As an example, if SEGLOG=11 (octal), the usual case, then
+the format of GCST entries is as follows:  
+
+      BIT #   BIT NAME      BIT DESCRIPTION
+        4.9     GCBMRK  items in this page are markable
+        4.8     GCBVC   this page contains value cells
+        4.7     GCBSYM  this page contains symbol headers
+        4.6     GCBSAR  this page contains array pointers
+        4.5     GCBCDR  mark from cdrs of items
+        4.4     GCBCAR  mark from cars (only if 4.5 also on)
+        3.4-2.5 SEGBYT  field for chaining entries
+        2.4-1.1 ----    segment table address, lsh'ed
+
+Bibop additionally maintains a table called PURTBL, which
+has a two-bit byte for every page (that's right, not
+segment, but page) of possible address space.  A zero means
+the page should be non-existent;  a one, that the page
+should be impure;  a two, that it should be pure;  and a
+Bibop LISP - Section III. - For LISP System Hackers - page 15
+
+
+three, that the page is some special case like a pdl page.
+These bits reflect what the pages should be, not what they
+are;  indeed, what PURIFY$G does is to force the actual
+pages to conform to PURTBL!  
+$$$$$ [2] $$$$$ Storage Spaces in Bibop $$$$$
+
+Since Segment Table entries are used to determine TYPEP of
+objects, clearly things like atomic symbols may not reside
+in LIST space, as in a non-Bibop LISP.  Furthermore, pure
+and impure objects must be not only in different segments,
+but on different pages.  Thus Bibop distinguishes many kinds
+of segments and pages.  All segments of a given type
+comprise a storage space.  
+
+Non-Bibop LISP has five primary storage spaces:  LIST,
+FIXNUM, FLONUM, ARRAY, and Binary Program Space (arrays are
+kept in BPS also, as opposed to array pointers, which are
+kept in ARRAY space.) Bibop LISP has many:  LIST (pure and
+impure), FIXNUM (pure and impure), FLONUM (pure and impure),
+BIGNUM (pure and impure), SYMBOL, ARRAY, and Binary Program
+Space.  The LIST, FIXNUM, FLONUM, and ARRAY spaces are
+analogous to those in non-Bibop LISP.  The BIGNUM space
+actually holds only bignum headers, which contain the sign
+of a bignum in the sign bit, and a pointer to a list of
+fixnums, identical to that in non-Bibop LISP, in the right
+half.  (Actually the left half must contain 0 or 777777;
+much code depends on it!) Note that with this
+representation, the sign of any LISP number, be it FIXNUM,
+FLONUM, or BIGNUM, may be determined by testing the sign of
+the word addressed by the LISP pointer to that number.  
+
+SYMBOL space has a very peculiar format:  it is actually
+sectioned into two spaces.  One is called symbol header
+space, and is the space referred to by the garbage collector
+statistics.  One word of symbol header space is required per
+symbol;  thus when GC says 500 SYMBOL words free, it is
+possible to create 500 more symbols, even though symbols
+occupy more than one word in Bibop LISP.  The other is
+called symbol block space, and is allocated in two-word
+chunks.  Each symbol block is therefore at an even address.
+These symbol blocks are not garbage collected, but rather
+follow an explicit return discipline.  Symbol blocks may be
+purified, while symbol headers may never be purified.  Thus
+there are actually two symbol block spaces, pure and impure,
+though this is transparent to the user.  Whenever a new
+symbol is created, a fresh symbol header is taken from
+symbol header space, and a fresh symbol block from impure
+symbol block space, unless the variable *PURE is non-nil, in
+which case a pure symbol block is used.  Impure symbol
+blocks are also used when the contents of a pure symbol
+block must be altered;  the contents of the pure symbol
+block are copied to a fresh impure one and the pure one
+forgotten forever.  Pure symbol blocks are never returned
+Bibop LISP - Section III. - For LISP System Hackers - page 16
+
+
+once used;  impure symbol blocks are returned when their
+corresponding symbols are garbage collected.  The symbol
+header has the property list in its right half (thus the cdr
+of an atomic symbol is its property list, as usual), and a
+pointer to the symbol block in its left half.  The symbol
+block has two words.  The left half of the first word
+contains random bits, including one which is on iff the
+symbol block is pure, and one which says that compiled code
+needs the symbol (and that therefore the symbol may never be
+garbage collected).  This bit cannot be turned on in a pure
+symbol block, so whenever a pure symbol block is copied, the
+compiled-code-need-me bit is turned on in the copy - better
+to be safe than sorry!  The index and indirect bits are zero
+(see below).  The right half of the first word points to the
+value cell for that symbol.  If the symbol does not have a
+value cell of its own, it points to SUNBOUND, the Standard
+UNBOUND value cell.  (Such symbols are heliocentric.) In
+this way, one can indirect through the symbol block to get
+the symbol's value, saving an instruction.  The left half of
+the second word contains the ARGS property for the symbol,
+in the format used by FASLOAD, i.e. as two nine-bit bytes.
+The PNAME of the symbol is in the right half of the second
+word.  Note that the garbage collector does not mark symbol
+blocks per se, but only symbol headers;  thus keeping a
+pointer to a symbol block in a marked accumulator does not
+guarantee that the symbol block will not go away!  Another
+garbage collector hack is that one cannot use the symbol
+block for the gc mark bit, since it may be pure.  However,
+the pointer in the left half of the symbol header must
+always be even, since symbol blocks have even addresses.
+Thus bit 3.1 of the symbol header is used as the mark bit.
+Of course, GC must reset these bits as it does the final
+sweep through symbol header space.  Before the mark phase it
+sets a switch (MUNGP) and resets it after the sweep;  if
+somehow ERINIT is reached before GC finishes, it will notice
+the switch and reset the mark bits.  
+
+Bibop stores array pointers (also known as sars) in the same
+manner as non-Bibop lisp;  the relevant information appears
+here for convenience.  Sars consist of two words;  the first
+is called the ASAR, and the second the TTSAR.  A pointer to
+a sar points to the ASAR.  The ASAR has the following
+format:  
+Bibop LISP - Section III. - For LISP System Hackers - page 17
+
+
+      BIT #   BIT NAMER     BIT DESCRIPTION
+        4.3     AS.FIL  this is a file array (for new i/o)
+        4.2     AS.RDT  this is a readtable
+        4.1     AS.OBA  this is an obarray
+        3.9     AS.SX   this array holds s-expressions, 2/wd
+        3.8     AS.FX   this array holds fixnums
+        3.7     AS.FL   this array holds flonums
+        3.6     AS.GCP  GC should mark array entries
+        3.5-3.1 ----    must be zero
+        2.9-1.1 ----    address of array header
+
+Bits 3.9-3.7 should be mutually exclusive - they define the
+type of array access mechanism to be used.  Bit 3.6 is
+independent of this consideration;  for example, a readtable
+has AS.FX set, but it also wants its macro character list
+garbage collected.  GC only marks as many words of entries
+as specified by the aobjn pointer just before the array
+header.  Bits 3.5-3.1 must be zero because compiled code
+does indirect PUSHJs through the ASAR to reach the array
+header, which computes subscript information.  
+
+The format of the TTSAR is as follows:  
+
+      BIT #   BIT NAME     BIT DESCRIPTION
+        4.9-4.7 TTSDIM  number of dimensions (1-5)
+        3.7     TTS.CN  compiled code needs this sar
+        3.6     TTS.GC  mark bit used by GC
+        3.5-3.1 ----    must contain (TT)
+        2.9-1.1 ----    address of first word of array data
+
+The indirect and index bits are such that indirecting
+through the TTSAR causes indexing by accumulator TT.
+Compiled code uses this fact to open-access arrays.  
+
+Pure spaces are identical in function to impure spaces, but
+are allocated on separate pages so that they may be
+purified.  
+
+Value cells are also kept in a space of their own for
+various reasons.  They are also kept contiguous, but if the
+region reserved for value cells (a hole in memory of about
+3k words) is ever exhausted, cells from LIST space will be
+used to create value cells.  TYPEP of a value cell is indeed
+LIST.  Value cells in the value cell region follow an
+explicit return discipline.  The function MAKUNBOUND will
+return the specified symbol's value cell unless the symbol's
+compiled-code-needs-me bit is set (which might indicate that
+compiled code references the value cell).  The garbage
+collector will return a value cell if the symbol pointing to
+it is swept up.  
+Bibop LISP - Section III. - For LISP System Hackers - page 18
+
+
+$$$$$ [3] $$$$$ Storage Layout and Strategy $$$$$
+
+The initial Bibop LISP system is laid out something like
+this:  
+
+---------------------------------------------------- &lt; 0
+|        low page - impure (acs, temps, etc.)      |
+---------------------------------------------------- &lt; BSYSSG
+|                                                  |
+|                initial LISP system               |
+|                                                  |
+|                 (executable code)                |
+|                                                  |
+---------------------------------------------------- &lt; BSARSG
+|    initial SARs (for READTABLE, OBARRAY, etc.)   |
+---------------------------------------------------- &lt; BVCSG
+|     initial value cells (plus expansion room)    |
+---------------------------------------------------- &lt; BSYMSG
+|              initial atomic symbols              |
+---------------------------------------------------- &lt; BPFSSG
+|     initial list structure and numbers - pure    |
+---------------------------------------------------- &lt; BIFSSG
+|    initial list structure and numbers - impure   |
+---------------------------------------------------- &lt; BSTSG
+|            segment tables (ST and GCST)          |
+---------------------------------------------------- &lt; BBPSSG
+|       Binary Program Space (expands upward)      | &lt; V(BPORG)
+---,----,----,----,----,----,----,----,----,----,--- &lt; V(BPEND)
+|            arrays (float at top of BPS)          |
+---,----,----,----,----,----,----,----,----,----,--- &lt; C(BPSH)
+|    /    /    /    /    /    /    /    /    /    /|
+|   /    /    /    /    /    /    /    /    /    / |
+|  /    /  big hole of nonexistent memory  /    /  |
+| /    /    /  (the "big bag of pages")   /    /   |
+|/    /    /    /    /    /    /    /    /    /    |
+|    /    /    /    /    /    /    /    /    /    /| &lt; C(HINXM)
+---'----'----'----'----'----'----'----'----'----'---
+|   new storage space segments (expands downward)  |
+---------------------------------------------------- &lt; C(FXC2)
+|        push-down lists (FXP, FLP, P, SP)         |
+|        (sizes allocated by initial ALLOC)        |
+---------------------------------------------------- &lt; BSCRSG
+|      scratch pages (for PDP-6 slave, etc.)       |
+---------------------------------------------------- &lt; 776000
+| /    /    /  high page - never used  /    /    / |
+---------------------------------------------------- &lt; 777777
+                                                       -------
+    Legend:  C(foo) = contents of location foo         Address
+             V(foo) = fixnum value of symbol foo
+
+
+Note that "downward" means toward lower addresses, and thus
+up the diagram (too bad if you don't like it!) 
+Bibop LISP - Section III. - For LISP System Hackers - page 19
+
+
+
+The basic strategy is to allocate new storage segments from
+the top of memory downward, so that this area and Binary
+Program Space grow toward each other.  Extra hair is
+involved to ensure that pure and impure segments stay on
+separate pages.  
+
+The Bibop memory management routines maintain a table of
+two-bit bytes called PURTBL.  Each byte describes the state
+of one page.  For a further description, see TBLPUR$X below.
+
+Bibop only allocates pdl pages when necessary.  Whenever
+ERINIT is called ($G startup, ↑G quit, error to top level)
+all pdl pages are flushed, and the pdl pointers are all made
+to point to a one-word pdl called FAKPDL.  Whenever pdl
+overflow occurs, the internal pdl overflow interrupt handler
+extends the pdl, getting a new page if necessary and
+possible.  (If it is necessary but not possible, an
+uncorrectable error occurs).  If the pdl's PDLMAX has been
+exceeded, the PDLMAX is temporarily pushed up some and a
+PDL-OVERFLOW use interrupt is signaled.  The value returned
+from this interrupt is ignored;  the mere fact of its
+returning indicates that the computation should be
+continued.  The internal pdl overflow handler goes to some
+trouble to make sure a little pdl (about 8 words) is always
+available, even if the pdl overflow interrupt is temporarily
+inhibited (e.g. inside the internal interrupt dispatcher).
+It also uses two very small pdls called FAKP and FAKFXP for
+some purposes of its own.  
+
+
+$$$$$ [4] $$$$$ Hairy STATUS Calls $$$$$
+
+These STATUS calls are to ease debugging, and may be flushed
+in the future.  BEWARE!!!  
+
+The GCSIZE, GCMAX, and GCMIN parameters for storage spaces
+may be hacked en masse by the ALLOC function (see above), or
+individually by these calls:  
+
+        (STATUS GCSIZE &lt;space>)
+        (STATUS GCMAX &lt;space>)
+        (STATUS GCMIN &lt;space>)
+        (SSTATUS GCSIZE &lt;space> &lt;size>)
+        (SSTATUS GCMAX &lt;space> &lt;size>)
+        (SSTATUS GCMIN &lt;space> &lt;fixnum-or-flonum>)
+
+Note that if a flonum GCMIN is specified, it should be
+between 0.5 and 0.005.  The SSTATUS versions return T if
+they succeed in setting the parameter, otherwise NIL.  Bibop
+may fiddle with the parameters to keep them consistent.  
+Bibop LISP - Section III. - For LISP System Hackers - page 20
+
+
+To examine and set the PDLMAX parameter for some pdl, say:  
+
+        (STATUS PDLMAX &lt;pdlname>)
+        (SSTATUS PDLMAX &lt;pdlname> &lt;maxsiz>)
+
+where &lt;maxsiz> is a fixnum.  
+
+
+$$$$$ [5] $$$$$ Super Random Items about Bibop $$$$$
+
+The following STATUS calls do not exist in Bibop:  
+
+        (STATUS FS)
+        (STATUS FWS)
+        (STATUS BT)
+
+The following additional status calls exist in Bibop:  
+
+        (STATUS SEGLOG) This is the log base 2 of the amount
+                        of memory by which a storage space
+                        may be incremented.  Typically this
+                        is 10 or 11 octal.  
+        (STATUS HINXM)  This is the highest address of the
+                        "hole" in memory the top of Binary
+;;; STORAGE LAYOUT FOR ITS BIBOP
+;;;
+;;; 0		LOW PAGES
+;;;			ACCUMULATORS, TEMPORARY VARIABLES,
+;;;			INITIAL READTABLE AND OBARRAY
+;;; BSYSSG	INITIAL SYSTEM CODE (PURE)
+;;; BSARSG	INITIAL SAR SPACE
+;;; BVCSG	INITIAL VALUE CELL SPACE
+;;;	... INITIAL LIST STRUCTURE ...
+;;; ST		SEGMENT TABLES
+;;; BBITSG	BIT BLOCKS FOR GC
+;;; BBPSSG	START OF BINARY PROGRAM SPACE
+;;;		(ALLOC IS IN THIS AREA)
+;;; V(BPORG)	START OF BPS UNUSED FOR PROGRAMS
+;;; V(BPEND)	ARRAYS START NO LOWER THAN THIS
+;;; C(BPSH)	LAST WORD OF BPS
+;;;	... BINARY PROGRAM SPACE GROWS UPWARD ...
+;;; C(HINXM)	LAST WORD OF GROSS HOLE IN MEMORY
+;;;	... LIST STRUCTURE GROWS DOWNWARD ...
+;;; PUSHDOWN LISTS WITH HOLES BETWEEN:
+;;;	FXP, FLP, P, SP
+;;;
+;;; C(NPDLL)	LOW WORD OF NUMBER PDL (LOW OF FXP)
+;;; C(NPDLH)	HIGH WORD OF NUMBER PDL + 1 (HIGH+1 OF FLP)
+;;;
+;;; PATCH AREA IS IN SYSTEM PAGE WITH MOST ROOM
+
+
+;;; STORAGE LAYOUT FOR DEC10 BIBOP
+;;;
+;;; ***** LOW SEGMENT *****
+;;; 0		LOW PAGES
+;;;			ACCUMULATORS, TEMPORARY VARIABLES,
+;;;			INITIAL READTABLE AND OBARRAY
+;;; ST		SEGMENT TABLES
+;;; PATCH	PATCH AREA
+;;; BSARSG	INITIAL SAR SPACE
+;;; BVCSG	INITIAL VALUE CELL SPACE
+;;;	... INITIAL IMPURE LIST STRUCTURE ...
+;;; BBITSG	BIT BLOCKS FOR GC
+;;; BBPSSG	START OF BINARY PROGRAM SPACE
+;;;		(ALLOC IS IN THIS AREA)
+;;; V(BPORG)	START OF BPS UNUSED FOR PROGRAMS
+;;; V(BPEND)	ARRAYS START NO LOWER THAN THIS
+;;; C(BPSH)	LAST WORD OF BPS (FIXED, SET BY ALLOC)
+;;; PUSHDOWN LISTS:
+;;;	FXP, FLP, P, SP
+;;; C(NPDLL)	LOW WORD OF NUMBER PDL (LOW OF FXP)
+;;; C(NPDLH)	HIGH WORD OF NUMBER PDL + 1 (HIGH+1 OF FLP)
+;;; C(LONXM)	LOW WORD OF HOLE IN MEMORY ABOVE LOW SEGMENT
+;;; MAXNXM	HIGHEST WORD OF NXM THAT MAY BE USED
+;;;
+;;; ***** HIGH SEGMENT *****
+;;; BSYSSG	INITIAL SYSTEM CODE (PURE)
+;;; BPFSSG	INITIAL PURE LIST STRUCTURE
+</pre>
+</body>
+</html>

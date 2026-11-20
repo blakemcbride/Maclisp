@@ -1,0 +1,165 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,4 Feb 81 11:10:00 EDT -->
+<!--X-Message-Id: 20d119b2fd4deaf73a20c3f8883d181f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00214.html">Date Prev</a>][<a href="msg00216.html">Date Next</a>][<a href="msg00214.html">Thread Prev</a>][<a href="msg00216.html">Thread Next</a>][<a href="maillist.html#00215">Date Index</a>][<a href="threads.html#00215">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,4 Feb 81 11:10:00 EDT</li>
+<li><em>Cc</em>: RMS at MIT-MC, GJC at MIT-MC, LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Re your query:
+  Date: 3 February 1981 18:37-EST
+  From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+  I would like to hear strong arguments opposing the following syntax 
+  .  .  .
+   A bvl is either a symbol or a list. If it is a list, then the car of the
+   list is a declaration, the cadr is the object of the declaration (which must
+   be a symbol or another declaration), and the remainder are various attribute
+  .  .  .
+Say, wasn't it you who objected to BNF presentation of syntax?  Aren't you
+now using an informal, and hence less precise, version thereof?
+
+But seriously, there are two important considertions, the first being 
+succinctness of program presentation, and I'd like to offer a critical 
+comment as well as a constructive suggestion related to &quot;succinctness&quot;.
+To begin with, I can't agree that the huge difference in &quot;amount of paper&quot; 
+needed to present the argument list in
+   (DEFUN PROBABLY-SEVEN (&amp;OPTIONAL (X 3) (Y 4))
+	  (DECLARE (FIXNUM X Y))
+	  (+ X Y))
+and that needed in
+ (DEFUN PROBABLY-SEVEN ((FIXNUM (OPTIONAL X 3))
+			(FIXNUM (OPTIONAL Y 4)))
+	(+ X Y))
+is on a par with the loss of &quot;X+Y&quot; to &quot;(+ X Y)&quot;
+Neither is the notion of being &quot;pre-parsed&quot; important -- there should clearly 
+already be some function which takes a DEFUN arglist (and another function
+taking a DEFMACRO arglist) and standardizing it into a LAMBDA or LET
+format.   Another example of succinctness is in the &quot;destructuring&quot; notion
+which has been bandied about recently: notice the difference in coding between
+the MacLISP/NIL format
+   (DEFUN FOO ((A B C) Y) 
+	  ...)
+and without it
+   (DEFUN FOO (X Y)
+     (LET (A B C)
+	(SETQ A (CAR Y))
+	(SETQ B (CADR Y))
+	(SETQ C (CADDR Y))
+	...))
+*** suggestion ***, wouldn't it be desirable to take another # character and 
+use it for generating the kind of argument declaration wanted?  That way, 
+people who like the &quot;stickiness&quot; of the existing &amp;keyword style should be 
+kept happy, and a compatible extension of the data-directed destructuring
+could be done without disrupting anyone's existing code.  For example,
+let us suppose that the data-directed destructuring format as shown 
+above &quot;loses favor&quot; with users, and they really need some program-
+directed format, e.g.
+   (DEFUN (`(,A ,B ,C) Y) 
+	  ...)
+Of course it's pointless to introduce, incompatibly, such a program-directed 
+format if its only use it to re-do the data-directed format with more input 
+characters required.  But for sake of discussion, let us suppose that
+some extension is to be done.  Then, maybe we could let #@ generate the
+declaration for program-directed destructuring, and #&amp;x, #&amp;f, #&amp;o, #&amp;s,
+and #&amp;r as a prefix for other &quot;declarations&quot;, respectively &quot;fixnum&quot;,
+&quot;flonum&quot;, &quot;optional&quot;, &quot;special&quot;, and &quot;rest&quot;.  E.g.
+
+   (DEFUN FOO (#@`(,A ,B ,C) #&amp;x Y #&amp;o #&amp;f Z ((Q . R) (INIT))) 
+	  ...)
+
+would read into your proposed format like
+
+   (DEFUN FOO ( (destructure (list (quote A) (quote B) (quote C)))  
+		(fixnum Y) 
+		(optional (flonum Z))
+		(optional (destructure `(,Q . ,R)) (INIT)) )
+	...)
+[Incidentally, notice my convention of using case information to help 
+ distinguish true variables being bound from the declarational &quot;words&quot;]
+
+Now, in order to dissuade the usual inane replies about how awful this
+# syntax appears, let me say as did GLS that pointing out possibilities
+doesn't mean hot advocacy.  The point is that the succinctness and
+&quot;stickiness&quot; of the old style can be preserved by read-macro-ifying
+into your list style;  I don't like typing 4 lines and 142. characters
+when 1 line and 48. characters is just as clear.  Automatic program
+analyzers, like GRINDEF, could display either format, just as it
+now has the option of printing either `(,A ,B ,C) or (LIST A B C);
+thus I as a user would like to be able to write my code either in
+terse or in verbose format.
+
+Now to my second consideration.  The proposal for program-directed 
+destructuring as opposed to data-directed, was made partly on the 
+supposition that someone, somday, might want to LAMBDA-bind some 
+random car of some list cell (as opposed to binding the variable 
+found in the data pattern).  This would be a true extension, not 
+now primitively obtainable.   Does your proposed syntax buy us 
+anything new?  If not, why try to force everyone to conform to it 
+-- why not just provide a macro facility which expands your format 
+into existing primitives?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00214.html">Re: Definition Syntax</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00216.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00214.html">Re: Definition Syntax</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00216.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00215"><strong>Date</strong></a></li>
+<li><a href="threads.html#00215"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

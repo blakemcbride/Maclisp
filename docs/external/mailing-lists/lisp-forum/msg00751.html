@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Suggested new lambda&#45;list syntax -->
+<!--X-From-R13: Rnivq O. [bba &#60;[AA@ ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,23 Sep 81 20:28:00 EDT -->
+<!--X-Message-Id: 5c95c98410c00b7ac05173b360c7e1e1@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Suggested new lambda-list syntax</title>
+<link rev="made" href="mailto:MOON at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00752.html">Date Prev</a>][<a href="msg00750.html">Date Next</a>][<a href="msg00753.html">Thread Prev</a>][<a href="msg00749.html">Thread Next</a>][<a href="maillist.html#00751">Date Index</a>][<a href="threads.html#00751">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Suggested new lambda-list syntax</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-MC</li>
+<li><em>Subject</em>: Suggested new lambda-list syntax</li>
+<li><em>From</em>: David A. Moon &lt;MOON at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,23 Sep 81 20:28:00 EDT</li>
+<li><em>Cc</em>: RMS at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I think &amp;OPTIONAL, &amp;REST, &amp;AUX, and &amp;KEY are quite different from the other
+lambda-list keywords.  Those four keywords delimit boundaries between
+various sublists, which could have been written as separate lists except
+that that would be a mess.  Your proposal doesn't really apply sensibly to
+those four keywords.  For other ones like &amp;QUOTE, &amp;SPECIAL, etc. it would
+be an improvement.
+
+A separate point: I don't think it makes sense to complicate the syntax in
+order to get rid of the reserved words.  Reserved words in this context cause
+no harmful effects, whereas a syntax with more parentheses and more noise
+words would decrease readability, and in a very central, heavily-used part
+of the language too.
+
+The reserved words could be :-prefixed rather than &amp;-prefixed except that
+:-prefixed keywords can sometimes be EQ to ordinary symbols, which -would-
+make the reserved words difficult to live with.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00752.html">Lambda List Syntax</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00750.html">Lists for REST, OPTIONAL and AUX look nice</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00753.html">Re: Suggested new lambda-list syntax</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00749.html">Suggested new lambda-list syntax</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00751"><strong>Date</strong></a></li>
+<li><a href="threads.html#00751"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

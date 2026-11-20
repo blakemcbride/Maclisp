@@ -1,0 +1,118 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Base&#45;10? -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 29 Nov 79 07:48:00 GMT -->
+<!--X-Message-Id: f1b4cb0cb3c1ab9fe4f57c07b44c9953@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Base-10?</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03906.html">Date Prev</a>][<a href="msg03904.html">Date Next</a>][<a href="msg03906.html">Thread Prev</a>][<a href="msg03904.html">Thread Next</a>][<a href="maillist.html#03905">Date Index</a>][<a href="threads.html#03905">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Base-10?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC, KMP at MIT-MC, GSB at MIT-ML</li>
+<li><em>Subject</em>: Base-10?</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 29 Nov 79 07:48:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 29 November 1979 02:48-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Perhaps instead of changing the base lisp PRINTS numbers we
+should consider changing the base lisp STORES numbers.  I
+propose base i-1 (that's i=sqrt(-1)).  This has the
+interesting property that you can represent all complex
+integers uniquely using just the digits 0 and 1.  Thus you
+could use a 36 bit word to store a complex number.
+Examples:
+
+1100 = (i-1)^3+(i-1)^2 = (2+2i)+(-2i) = 2
+
+11100 = (i-1)^4+(i-1)^3+(i-1)^2 = -2
+
+11 = i
+
+111011101 = 7
+
+11000001 = -7
+
+1000111 = 7i
+
+11101000011 = -7i
+
+Note that there is no kludgy &quot;two's complement&quot;
+representation for negative numbers, they have nice finite
+representations just like all the rest of the numbers.
+Wouldn't it be nice to have complex integers in lisp?
+
+Of course there are bugs:  The portion of the complex plane
+covered by a 36 bit word is a rather odd shape (it IS
+connected).  The representation is not easily groked by the
+user (if we were all taught in grade school ....).  The
+algorithms for addition and subtraction and multiplication,
+although not difficult, are not supported by any hardware
+that I know of.  I have been unable to devise a satisfactory
+division algorithm.  We would still have to decide how to
+PRINT the damn things!
+
+Of course we would have to recompile all the FASL files in
+the world (since the compiler could no longer output
+instructions such as ADD or IMUL), but that is a small price
+to pay for such a winning extension to the language
+(right?). 
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03906.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03904.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03906.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03904.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03905"><strong>Date</strong></a></li>
+<li><a href="threads.html#03905"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

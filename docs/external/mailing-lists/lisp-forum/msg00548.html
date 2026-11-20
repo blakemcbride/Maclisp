@@ -1,0 +1,121 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Forwarded message and reply -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Tue ,30 Dec 80 13:22:00 EDT -->
+<!--X-Message-Id: 69bcec6022cae11f2923d82628e567e9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Forwarded message and reply</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00509.html">Date Prev</a>][<a href="msg00511.html">Date Next</a>][<a href="msg00513.html">Thread Prev</a>][<a href="msg00511.html">Thread Next</a>][<a href="maillist.html#00548">Date Index</a>][<a href="threads.html#00548">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Forwarded message and reply</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: Forwarded message and reply</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Tue ,30 Dec 80 13:22:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 21 December 1980 14:46-EST
+    From: Carl W. Hoffman &lt;CWH at MIT-MC&gt;
+    Subject: Once again a plea for slash
+	From: Guy.Steele at CMU-10A
+	I am firmly convinced that the MacLISP-and-sons community would be
+	much better off if we were to change the &quot;slash&quot; character to something
+    	other than &quot;/&quot;.  The sooner we do it, the better.
+
+    I agree with everything you say in this proposal.  I am even willing to
+    convert Macsyma and help convert Multics Emacs, which would be two of the
+    larger bodies of code affected, as well as all of my own programs.
+
+    I would make one change, however.  If we adopt \ as our quoting character,
+    then I would make the &quot;character reader&quot; be #/.  If we stick with / as the
+    quoting character, then the character reader should be #\.
+
+    My reason?  I would like to define the quoting character (let's call it /
+    for now) as follows: When a / is encountered, the following character is
+    read and is treated as if it had the same syntax as an uppercase
+    alphabetic.  This is almost what the current definition is, with the
+    exception of the treatment of #/.  That is, I feel that #/A should be the
+    same thing as #A.
+
+    Take a look at the Lisp Machine reader.  / has the definition I gave
+    above.  / is processed at a very low level.  As a result, #/ is defined
+    using a kludge.  The regular expressions which recognize #q, #o, and #\
+    forms look something like
+
+	# Q &lt;form&gt;
+	# O &lt;integer&gt;
+	# \ &lt;symbol&gt;
+    
+    This of course is highly schematic.  However, the expression which
+    recognizes #/ looks like
+    
+	# &lt;slashified-character&gt;
+    
+    Do you see what I'm driving at?  Slashification is done before the
+    tokenizing FSM is run.  The definition I would like to adopt would also
+    simplify the coding of editors and other programs which parse Lisp code.
+
+Of course, the reason that #/ was used in the first place is that,
+while it makes it harder if you did indeed put /-handling at that low
+a level, it makes it much easier for very simple-minded parsers (like
+EMACS) to deal with the syntax.  Maybe the current organization of the
+LISPM reader isn't appropriate to the task?  The trouble is that it
+treats #/A as #[/A] rather than as [#/]A.  The idea is that #/ is an odd
+kind of /, just as #' is an odd kind of '.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00509.html">Re: Quotation concerning rational arithmetic</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00511.html">Re: Division in Smalltalk</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00513.html">Re: Quotation concerning rational arithmetic</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00511.html">Re: Division in Smalltalk</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00548"><strong>Date</strong></a></li>
+<li><a href="threads.html#00548"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

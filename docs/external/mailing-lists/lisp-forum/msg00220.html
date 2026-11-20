@@ -1,0 +1,174 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: (OPTIONAL ...) &#38;RELATED&#45;ISSUES -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,4 Feb 81 18:10:00 EDT -->
+<!--X-Message-Id: 0ea61d9e03ed548e4f5eef17829fc39f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: (OPTIONAL ...) &amp;RELATED-ISSUES</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00219.html">Date Prev</a>][<a href="msg00221.html">Date Next</a>][<a href="msg00219.html">Thread Prev</a>][<a href="msg00221.html">Thread Next</a>][<a href="maillist.html#00220">Date Index</a>][<a href="threads.html#00220">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: (OPTIONAL ...) &amp;RELATED-ISSUES</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: (OPTIONAL ...) &amp;RELATED-ISSUES</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,4 Feb 81 18:10:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Gads, I have a pile of mail from people responding to KMP's proposed change
+of &amp;keywords. I am glad for the support and I would love to not have to use
+&amp;optional and &amp;rest, but I feel I should note that my original note didn't
+propose changing things -- I was discussing an imaginary implementation where
+no existing code cared.
+
+Anyway, I have a few comments on mail that went by today...
+
+ * It's hard to tell what they are. There's no actual rule forbidding &amp;'s in
+   symbols. Imagine how
+		 #'(lambda (&amp;bigfloat x) (list &amp;bigfloat x))
+   behaves functionally on the LispM now, and how it might behave someday
+   if bigfloats were ever introduced. That's the bad thing about parsers.
+
+ * It's hard to tell what the scope is. While visually, 
+		(a &amp;optional x y &amp;rest z)
+   might be easy to scan, imagine how a poor program feels about it. It needs
+   a parser. Think about this. In your mind, you had grouping around the x and
+   the y, then you threw it away when you wrote it down because you figured the
+   program should be able to infer easily what you meant. Heck, the reason we
+   use (+ X (* Y Z)) instead of X+Y*Z is that it's what we mean and we know
+   it's what we mean and there is no sense in throwing away info that you have.
+
+ DLA,
+   GJC's suggestions of an &amp;-readmacro comes close, but it still means you are
+   throwing away info you had and then asking the readmacro to reconstruct it.
+   Note this is info you *really* were conscious of at the time you wrote it
+   down. Please don't hit me with ``but if you don't want to trust the machine,
+   why not specify bit patterns?'' because that is something that i am *not*
+   conscious of -- that is something it would take me work to figure out.
+   Besides, I think GJC's &amp;-readmacro thing would parse 
+		(&amp;quote x &amp;eval &amp;rest y)
+   as
+		((quote x) (eval) (rest y))
+   which serves to illustrate my point. A little parentheses go a long way.
+
+ RMS, 
+   I agree 99.2% with GJC's comment that (OPTIONAL) is as bad as &amp;OPTIONAL.
+   Suppose I tell you there is a new keyword &amp;FOO. Does my use of
+		(&amp;foo x y)
+   tell you whether I mean ((foo x) (foo y)) or ((foo x) y)? I don't think
+   it does. Suppose I were doing:
+	(defun foo (flag &amp;foo x y) 
+	   (if flag ...code involving x only...
+		    ...code involving y only...))
+   then if you knew flag was always nil, you might be able to look at the code
+   and not worry about what the foo declaration was at all, if you knew that
+   &amp;foo wasn't a sticky flag. If I said
+	(defun foo (flag (foo x) y)
+	   (if flag ...code involving x only...
+		    ...code involving y only...))
+   then you don't have to know what the foo declaration  does at all, as long
+   as you know flag is nil.
+
+   This, by the way, is related to why CASEQ is such a winner and computed
+   GO's are such a loss. Other than grouping, there really isn't a lot of 
+   difference between them -- but boy does that sort of constraint buy you
+   a lot!
+
+ GJC,
+   Your suggestion of (OPTIONALS ...) and (REST ...) is better visually, but
+   has the disadvantage that it is not so nicely recursive in nature. It
+   looks to me like my definitional syntax:
+	(defun f (x y (optional (fixnum x) x-default x-p)
+		      (optional w)
+		      (optional (fixnum ww) w-default)
+		      (rest (special r))) ...)
+   would look like:
+	(defun f (x y (optionals ((fixnum x) x-default x-p)
+				 w
+				 ((fixnum ww) w-default))
+		      (rest (special r))) ...)
+   which is bad because in mine the body of the OPTIONAL and REST clauses
+   take the same sorts of fillers, but in yours, the bodies have different
+   types of things in them. This seems to me to be a rather severe weakness.
+
+   Additionally, yours is hard to do certain code-transformations on using
+   a single level of MAPC/MAPCAR/MAP's. It requires mapping down the 
+   subcomponents in a way I think is much hairier.
+
+It might well be reasonable to make certain common declarations shorter.
+eg,
+	(defun f (x y (opt x xd xp) (opt y) (rest z)) ...)
+instead of
+	(defun f (x y (optional x xd xp) (optional y) (rest z)) ...)
+might go a long way.
+
+Also, a readmacro char that really did specify what you wanted ...
+	(defun f (x y #:2O (x xd xp) y #:R z) ...)
+That might take some getting used to. Note that it allows for LSB's 
+one-or-more-of hack by things like:
+	#:1,O  ; means 1 required, up to infinity allowed
+        #:2,5O ; means 2 required, up to 5 allowed
+
+These are just ideas. I agree that the problem of repeating the key is
+an annoying one, but I feel that it's not the most severe problem being
+addressed. This loss of ability to MAPCAR down them because they need to
+be parsed and indeed the need for a parser to begin with is a more severe
+issue in my mind.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00219.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00221.html">Re: (OPTIONAL ...) &amp;RELATED-ISSUES</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00219.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00221.html">Re: (OPTIONAL ...) &amp;RELATED-ISSUES</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00220"><strong>Date</strong></a></li>
+<li><a href="threads.html#00220"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

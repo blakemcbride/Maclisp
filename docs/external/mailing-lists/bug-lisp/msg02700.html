@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XBU ng [WF&#45;[Q (Xrsserl B. Ubyqra) -->
+<!--X-Date: Mon, 22 Oct 79 07:31:00 GMT -->
+<!--X-Message-Id: ecc407c66d0208b719aa43311464e5b4@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JPG at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02701.html">Date Prev</a>][<a href="msg02699.html">Date Next</a>][<a href="msg02701.html">Thread Prev</a>][<a href="msg02699.html">Thread Next</a>][<a href="maillist.html#02700">Date Index</a>][<a href="threads.html#02700">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: JPG at MIT-MC (Jeffrey P. Golden)</li>
+<li><em>Date</em>: Mon, 22 Oct 79 07:31:00 GMT</li>
+<li><em>Cc</em>: RJF at MIT-MC, RWK at MIT-MC, JPG at MIT-MC</li>
+<li><em>Original-date</em>: 22 OCT 1979 0331-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I am in favor of the proposed CR change.  However, it would 
+certainly cause some trouble to MACSYMA if things were changed.  
+(1) MACSYMA SAVE files are written to by using PRINT and CRs are generated 
+by default in LISP when very long atoms (e.g. numbers) are printed.
+I do not relish having to mend user's SAVE files to support this change.
+Perhaps if any change here were switchable at least for some reasonable 
+period of time while LISP stopped behaving in TERPRI NIL mode wrt 
+printing very long atoms, things would be ok.
+(2) A similar problem occurs on the user input end.  People would have 
+to train themselves to overflow lines without typing CR when inputting 
+long atoms.  I suppose this is not too much to ask.
+(3) When I used to use ML's LPT, it used to overprint horribly when 
+outputting atoms &gt; its linel in length.  (I.e. when no newlines were used.)
+Is it really the case that there are no similar lossages today, that if 
+one tries to print out a very long atom that one will win no matter what 
+the output device is, i.e. no obliterating overprinting will occur?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02701.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02699.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02701.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02699.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02700"><strong>Date</strong></a></li>
+<li><a href="threads.html#02700"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

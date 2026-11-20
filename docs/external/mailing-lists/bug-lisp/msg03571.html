@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: DIY ng [WF&#45;[Q (Dboreg I. Yreaf) -->
+<!--X-Date: Thu, 20 Apr 78 04:55:00 GMT -->
+<!--X-Message-Id: 55a885f21f09d4bb6c4a8112c10332cf@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03572.html">Date Prev</a>][<a href="msg03570.html">Date Next</a>][<a href="msg03572.html">Thread Prev</a>][<a href="msg03570.html">Thread Next</a>][<a href="maillist.html#03571">Date Index</a>][<a href="threads.html#03571">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: HIC at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: RWK at MIT-MC (Robert W. Kerns)</li>
+<li><em>Date</em>: Thu, 20 Apr 78 04:55:00 GMT</li>
+<li><em>Original-date</em>: 19 APR 1978 2355-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>HIC seems to believe that  (OPEN (RENAMEF ...)) is the same
+as (RENAMEF ...) that does not close.  This is clearly false, in at least
+two ways.
+
+An open file is a sort of string, preventing randomness from causing
+file to go away or be modified.
+
+An output file cannot be re-opened in winning way.  A real equivalent,
+modulo the previous objection is more like:
+(bind ((pos (filepos foo)))
+      (open (renamef foo ...) '(append))
+      (filepos foo pos))
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03572.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03570.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03572.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03570.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03571"><strong>Date</strong></a></li>
+<li><a href="threads.html#03571"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

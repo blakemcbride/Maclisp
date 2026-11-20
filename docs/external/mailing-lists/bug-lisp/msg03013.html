@@ -1,0 +1,141 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Uhl Egrryr &#60;UZE ng EG&#45;OW> -->
+<!--X-Date: Tue, 12 Jun 79 21:04:00 GMT -->
+<!--X-Message-Id: 397782954067dd659623480e63e698fe@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03014.html">Date Prev</a>][<a href="msg03871.html">Date Next</a>][<a href="msg03014.html">Thread Prev</a>][<a href="msg03871.html">Thread Next</a>][<a href="maillist.html#03013">Date Index</a>][<a href="threads.html#03013">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: henry at MIT-AI</li>
+<li><em>From</em>: Guy Steele &lt;GLS at SU-AI&gt;</li>
+<li><em>Date</em>: Tue, 12 Jun 79 21:04:00 GMT</li>
+<li><em>Cc</em>: GLS at SU-AI, bug-lisp at MIT-AI, bug-lispm at MIT-AI </li>
+<li><em>Original-date</em>: 12 Jun 1979 1404-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    11-Jun-79  1907        HENRY at MIT-AI (Henry Lieberman)       CASEGO    
+    Date: 11 JUN 1979 2209-EDT
+    From: HENRY at MIT-AI (Henry Lieberman)
+    Subject: CASEGO
+    To: GLS at SU-AI
+
+    What you really have in the examples you give to show
+    the use of CASEGO is a loop. I think it should be coded
+    as such, either by the use of DO or auxiliary functions
+    rather than your proposed CASEGO.
+
+    (DEFUN CASEGO-EXAMPLE (THE-FROB)
+	   (CASEQ THE-FROB
+		  ((BAR) ...)
+		  ((FOO))
+		  (T (... &quot;I'll assume BAR&quot;) (CASEGO-EXAMPLE 'BAR))))
+
+    I think your proposal is like coding a loop using GO, which
+    is generally acknowledged to be less winning.
+
+This is true, although what you have written is not semantically
+equivalent (though functionally equivalent) in that it re-performs
+the dispatch needlessly.  This corresponds to the situation with the
+famous Boehm-Jacopini &quot;theorem&quot;, which shows that any program can
+be made &quot;structured&quot; provided that a number of boolean variables
+and redundant tests are introduced.  Also, without LABEL or LABELS
+or some such I can't write the above in MacLISP &quot;in place&quot;.
+
+A better way around the problem using functions would be just to do
+	(CASEQ THE-FROB
+	       ((BAR) (BAR-CASE))
+	       ((FOO) ...)
+	       ...
+	       (T (... &quot;assume BAR&quot;) (BAR-CASE)))
+	...
+	(DEFUN BAR-CASE ...)
+Again, in MacLISP I can't really write this &quot;in place&quot; and take
+advantage of local variables.
+
+I just used the name GO by analogy with the behavior in a PROG.
+Actually, I might phrase my request entirely without reference to
+GO (because some people dislike GO), and say that I want a construct
+CASERETRY such that
+	(CASEQ FROB
+	       ((FOO) FOO1)
+	       ((BAR) BAR1 (CASERETRY HUNOZ))
+	       ((BAZ QUUX) BAZQUUX1)
+	       (T BARF (CASERETRY 'BAR))
+expands into
+	(LABELS ((FOO-CASE (LAMBDA () FOO1))
+		 (BAR-CASE (LAMBDA () BAR1 (DISPATCH HUNOZ)))
+		 (BAZQUUX-CASE (LAMBDA () BAZQUUX1))
+		 (DEFAULT-CASE (LAMBDA () BARF (BAR-CASE)))
+		 (DISPATCH (LAMBDA (X)
+				   (SELECTQ X
+					    ((FOO) (FOO-CASE))
+					    ((BAR) (BAR-CASE))
+					    ((BAZ QUUX) (BAZQUUX-CASE))
+					    (T (DEFAULT-CASE))))))
+		(DISPATCH FROB))
+where SELECTQ represents the more primitive simple-dispatch operation.
+Now this uses no GOs, and therefore must be generally acknowledged to be
+more winning, right?
+
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03014.html">TOPS-20 maclisp memory errors, and (STATUS UDIR)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03871.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03014.html">TOPS-20 maclisp memory errors, and (STATUS UDIR)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03871.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03013"><strong>Date</strong></a></li>
+<li><a href="threads.html#03013"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

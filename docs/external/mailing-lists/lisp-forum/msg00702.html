@@ -1,0 +1,113 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: macros in Interlisp -->
+<!--X-From-R13: [nfvagre ng BODQ&#45;[OJQ -->
+<!--X-Date: Mon ,9 Nov 81 14:10:00 EDT -->
+<!--X-Message-Id: be6ae87ef9b0d169c8604b46e00cb971@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>macros in Interlisp</title>
+<link rev="made" href="mailto:Masinter at PARC-MAXC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00703.html">Date Prev</a>][<a href="msg00700.html">Date Next</a>][<a href="msg00711.html">Thread Prev</a>][<a href="msg00710.html">Thread Next</a>][<a href="maillist.html#00702">Date Index</a>][<a href="threads.html#00702">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>macros in Interlisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: macros in Interlisp</li>
+<li><em>From</em>: Masinter at PARC-MAXC</li>
+<li><em>Date</em>: Mon ,9 Nov 81 14:10:00 EDT</li>
+<li><em>In-reply-to</em>: Guy.Steele@CMU-10A's message of  6 November 1981 1815-EST</li>
+<li><em>In-reply-to</em>: KMP@MIT-MC's message of 7 November 1981 01:17-EST</li>
+<li><em>In-reply-to</em>: BENSON@UTAH-10's message of 7 Nov 1981 2027-MST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+The problem seems to be a matter of terminology rather than the effect that the
+user sees or the actual implementation of macro translation.
+
+There is a misunderstanding that &quot;DWIM&quot; in Interlisp means &quot;error&quot; correction.
+The term &quot;DWIM&quot; has been overloaded to include many different mechanisms,
+some of which are an integral part of &quot;normal&quot; execution, including macro
+translation, the record package, iteratives, etc. This doesn't mean that the
+implementation isn't modular, only that the documentation calls all of them by
+the same name rather than making up new names for every little feature. 
+
+The mechanism by which macros get translated, functions get auto-loaded, etc. is
+a &quot;fault handler&quot; rather than an &quot;error handler&quot; (e.g., the interface to the
+interpreter is via FAULTEVAL and FAULTAPPLY).  An analogy can be drawn
+to the implementation of virtual memory: the hardware may do virtual to real
+translation for some pages, but if the page is not in real memory, it goes outside
+of the emulator/microcode to a macrocode pagefault handler. One can think of
+macros, auto-load, etc. as extensions to the &quot;virtual&quot; definition space.
+Once a macro gets translated, the fault handler is no longer called.
+
+It has been useful to have the fault-handler user accessible, for a variety of
+syntax extensions which have not always been prefix-driven.  
+
+In one light, the problem might be that there is not in Interlisp a &quot;clear division
+between the interpreter and the error signal/correction facility [as] in Maclisp.&quot;
+I am uncertain where this division should be: is auto-load part of the interpreter?
+I can imagine situations where you might want to include some sort of data-base
+lookup to find out where to do the auto-load from -- is that database lookup part
+of the interpreter too?
+
+Finally, I don't think that making the interface from the interpreter to the fault
+handler compatible was a major problem in producing compatible Interlisps for
+any of the current implementations, compared to the magnitude of the total task.
+
+Larry
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00703.html">Re: &quot;Until you try to implement it&quot;</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00700.html">please add me to the mailing list</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00711.html">Macros in Interlisp</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00710.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00702"><strong>Date</strong></a></li>
+<li><a href="threads.html#00702"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

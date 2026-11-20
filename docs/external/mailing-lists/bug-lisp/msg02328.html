@@ -1,0 +1,145 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Motes, singles, and other issues of array theory for LISP -->
+<!--X-From-R13: UZE ng EG&#45;OW (Uhl Egrryr) -->
+<!--X-Date: Mon, 3 Jul 78 22:36:00 GMT -->
+<!--X-Message-Id: 1c5e19848542ae156eb1d64513e7b00f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Motes, singles, and other issues of array theory for LISP</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02329.html">Date Prev</a>][<a href="msg02327.html">Date Next</a>][<a href="msg02329.html">Thread Prev</a>][<a href="msg02327.html">Thread Next</a>][<a href="maillist.html#02328">Date Index</a>][<a href="threads.html#02328">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Motes, singles, and other issues of array theory for LISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: kle at MIT-AI, L.DIS[1,GLS]:    </li>
+<li><em>Subject</em>: Motes, singles, and other issues of array theory for LISP</li>
+<li><em>From</em>: GLS at SU-AI (Guy Steele)</li>
+<li><em>Date</em>: Mon, 3 Jul 78 22:36:00 GMT</li>
+<li><em>Original-date</em>: 3 Jul 1978 1536-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Here are a few thoughts regarding the treatment of motes
+and singles in LISP for the purposes of the implementation
+of More-type array-theoretic functions.  I would appreciate
+commants with regard to suitability of concept and requirements
+of implementation.  I bring this up because the design of
+of the appropriate data types is a pending issue for NIL.
+
+Arrays in general in NIL ought to work for boundary cases and
+have no artificial limits if possible.  Thus, arrays should
+be allowed to have axes of zero length, and to have zero
+axes.  The latter situation is given an interpretation by array
+theory by considering it to be a cell, for which there is
+precisely one valid index tuple, namely the empty index tuple.
+(If one realizes that the number of elements in a rectangular
+array is the product of the axis lengths, then a zero-axis
+array clearly has one element, and the index tuple for that element
+has no indices.)  In array theory, More calls such a zero-axis
+array a *single*.
+
+Such zero-axis arrays could be implemented by a special type,
+and used for various interesting purposes.  For example,
+a dynamic variable holding a flonum cell (a single whose
+element is always a flonum) could solve the PDLNMK-with-
+SPECIAL-variables problem.  Alternatively, it could just be
+in the standard array format.  (RMS has suggested that one-dimensional
+arrays, presumably with standard bounds 0:n-1, be implemented
+as simple vectors.  This sounds fine to me except for one glitch,
+namely that one-dimensional arrays with leaders or other funny
+stuff would not be interchangeable with arrays (i.e. vectors)
+which did not have such junk.)
+
+Now array theory takes all primitive data types (numbers,
+characters, etc.) to be classes of objects each of which
+is a single whose sole element is itself.  (Such objects
+More calls *motes*.)  Thus, for purposes
+of generalized indexing, element extraction, etc.,
+a number or character is considered to be a zero-dimensional
+array.  This causes no problem for array-theoretic functions
+implemented in NIL, which can just check for such data types
+and treat them specially.
+
+What worries me is the treatment of motes and singles in
+a way that is implementationally and computationally convenient,
+especially in the presence of array assignment, and yet
+consistent with the treatment of array theory.  For example,
+a single containing a mote is considered to be equivalent
+to the mote itself.  Suppose such a single A is created.
+As an array, its element can be assigned to (using STORE
+or whatever).  If a mote is assigned to it, there is no
+convenient way to make it be the mote itself, at least
+in the sense of EQ or even EQUAL.  Alternatively, suppose
+one were to say (STORE (AR-0 43) 'foo), i.e. store 'foo
+into the single (mote) 43.  It is clearly not desirable
+to allow the alteration of 43!  I guess it may suffice
+merely to decree that array assignment to motes is illegal.
+
+By the way, motes remind me an awful lot of self-lists.
+In a cdr-coded scheme, such a self-list could occupy
+one cell, and we could decree that the car of a self-list
+would be itself and its cdr be ().  Then singles (cells)
+would be the generalization of this analogous to the
+definition of 1-hunks on the PDP-10.
+
+It is unfortunate that More chose to use the word *list*
+for a purpose in array theory.  Aside from that there are
+almost no conflicts with LISP terminology.  This in turn
+raises the question of whether LISP lists are to be
+considered motes by the array-theoretic functions or not.
+
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02329.html">Extension to merge sort</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02327.html">SORT exchange operator</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02329.html">Extension to merge sort</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02327.html">SORT exchange operator</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02328"><strong>Date</strong></a></li>
+<li><a href="threads.html#02328"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

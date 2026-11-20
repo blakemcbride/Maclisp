@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Moon's proposed incompatible change to PUTPROP -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Mon ,24 Nov 80 15:41:00 EDT -->
+<!--X-Message-Id: 18e943e336451816102e176360fcc63f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Moon's proposed incompatible change to PUTPROP</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00305.html">Date Prev</a>][<a href="msg00389.html">Date Next</a>][<a href="msg00305.html">Thread Prev</a>][<a href="msg00389.html">Thread Next</a>][<a href="maillist.html#00501">Date Index</a>][<a href="threads.html#00501">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Moon's proposed incompatible change to PUTPROP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Moon at MIT-AI (David A. Moon)</li>
+<li><em>Subject</em>: Re: Moon's proposed incompatible change to PUTPROP</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Mon ,24 Nov 80 15:41:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Oddly enough, I have been thinking about incompatible changes to
+the property list functions also.  I would like to suggest that
+disembodied property lists never be rearranged, but that property
+lists of symbols be arbitrarily mangleable.  (For example, GET might
+even try the bubble-up-the-list optimization hack.)  However,
+I realize that this disparate treatment of lists and symbols
+is not too pleasant.
+Actually, what one really wants often for lists is not GET,
+but MEMQ-ALTERNATE, and so on.  Maybe it was a mistake ever to
+let GET and PUTPROP work on lists (based as it was on the old &quot;fact&quot;
+that the PLIST was the CDR of a symbol).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00305.html">Re: (more) problems with (STATUS FEATURES)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00389.html">Re: macro expansion</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00305.html">Re: (more) problems with (STATUS FEATURES)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00389.html">Re: macro expansion</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00501"><strong>Date</strong></a></li>
+<li><a href="threads.html#00501"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

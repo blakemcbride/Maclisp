@@ -1,0 +1,220 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Function cells -->
+<!--X-From-R13: LHA@ON[WF&#45;AL -->
+<!--X-Date: Mon ,5 Sep 83 13:41:00 EDT -->
+<!--X-Message-Id: [MIT&#45;OZ].ZVONA. 5&#45;Sep&#45;83 13:41:00 -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: RWK at SCRC -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Function cells</title>
+<link rev="made" href="mailto:ZVONA@MIT-OZ">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00627.html">Date Prev</a>][<a href="msg00626.html">Date Next</a>][<a href="msg00627.html">Thread Prev</a>][<a href="msg00626.html">Thread Next</a>][<a href="maillist.html#00628">Date Index</a>][<a href="threads.html#00628">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Function cells</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Robert W. Kerns &lt;RWK@SCRC-TENEX&gt;</li>
+<li><em>Subject</em>: Function cells</li>
+<li><em>From</em>: ZVONA@MIT-OZ</li>
+<li><em>Date</em>: Mon ,5 Sep 83 13:41:00 EDT</li>
+<li><em>Cc</em>: BENSON@SPA-Nimbus.ARPA, Bobrow.PA@PARC-MAXC, Deutsch.PA@PARC-MAXC,      lisp-forum@MIT-MC, PADGET@UTAH-20, Teitelman.PA@PARC-MAXC,      TIM%MIT-OZ@MIT-MC</li>
+<li><em>In-reply-to</em>: Msg of 3 Sep 1983 21:06-EDT from Robert W. Kerns &lt;RWK at SCRC&gt;</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Well.  There are probably people who can argue this better, but none
+have stepped forward, so...
+
+    What I don't understand is why everybody goes on about the FUNCTION cell
+    in favor of the VALUE cell.  Why isn't anybody proposing we do away with
+    the VALUE cell.  The history of the VALUE cell in MacLisp *IS THE SAME
+    AS THAT OF THE FUNCTION CELL*.  Really, let's not go half-way.
+    Let's take the argument for merging the VALUE and FUNCTION
+    properties to its logical extreme, and eliminate the property-list
+    altogether! 
+
+I think that is a good idea.  (This step was seriously discussed in
+the design of T.)  The whole idea of symbols is overloaded and
+bankrupt.  The different uses and features of symbols ought to be
+separated out.  First, there is the idea of INTERNED STRINGS, a useful
+user-interface feature.  So we'll have such a datatype.  Then there is
+the separate idea of NAMES: any object can name another; to an object,
+you can associate a value and retrieve it efficiently.  (T lets you
+associate a value with any S-expression.)  Quite another idea is that
+of PROPERTIES; Brand-X and (I think) MIT-scheme allow any object to
+have properties associated with it; there is nothing special about
+``symbols''.  I never use properties, myself; I think that they are
+almost always an artifact of unclear thought, and that you'd do better
+to use something else.  The main uses are in user interface, when a
+user uses a symbol to name a structure, in which case you'd do better
+to use a hashtable that maps symbols to their associated structure;
+and in storing random crufties, in which case you should probably be
+using DEFSTRUCT.
+
+Unfortunately, naming is currently all mixed up with EVAL, which is
+pretty much bankrupt itself.  The reason that currently symbols have
+values and not other things is that the main thing that gets values is
+EVAL, and other things mean something special to EVAL.  So lists, for
+example, will not have their values used much, and from what I can
+see, T makes no use of the extended variable feature.
+
+Brian Smith's thesis straightens this particular mess out by replacing
+EVAL with two things: NORMALIZE, and DOWN-ARROW.  DOWN-ARROW gets the
+``value'' of something: the thing that is designated by its argument.
+NORMALIZE simplifies expressions.  If you want to understand what
+QUOTE is really for, and how naming should work, you should read his
+thesis (it's an LCS TR).  But his 2-LISP is probably too outre' to
+discuss on this mailing list.
+
+    ... You can view (FUNCTION ...) as meaning
+    &quot;do what you do to the CAR of a combination to get the function to be
+    performed&quot;.  It doesn't buy you much to say that what you do with
+    the FIRST of a form should be the same as what you do the the SECOND.
+    It just isn't true after you get your hands on the function, especially
+    in the case of macros.
+
+Your point here (which must be the crux of your argument) is not quite
+clear to me.  Obviously the car of all forms can not be treated the
+same way as the other subforms; but in the case of special forms such
+as SETQ, various non-car subforms are treated in different ways
+anyway.  The issue is meaningful only for forms that are simple
+combinations, i.e. function applications.  [FUNCTION of a symbol that
+refers to a macro returns something completely random on the lisp
+machine, anyway.  What does your last sentence mean?]  The fact is
+that even for simple combinations, the CAR is treated specially, since
+it is the one that is applied to all the others.  The claim is not
+that the uniformity of handling at this level is especially winning.
+The uniformity really arises from the fact that there is only one
+thing going on here, and that is NAMING.  And the names of functions
+are no different from the names of anything else.
+
+    I have seen many users of lisps without function
+    cells SCREW THEMSELVES TO THE WALL by using something as a temporary
+    variable that happens to also be a function name.  LIST is the most
+    common offender.  (This is made worse by lisps which defaultly use
+    dynamic scoping, but people also have screwed themselves doing
+    (SETQ LIST (GET-ITEM-LIST 'FOO)) at top level).
+
+There are lots of ways to screw yourself when you are first learning
+Lisp.  (Try tracing PRINT.)  In a language that is lexically scoped
+and in which the system functions are locked and sacred (as, I
+believe, they are in MIT scheme) the danger is much reduced, and not
+worth making the language counter-intuitive over.
+
+        because it is intuitively clearer if the defining and using forms have
+        the same syntax.  Moreover, this eliminates all the overhead of
+        function specs.  And then defun again has a clear macroexpansion: it
+        is really just sugar for setf!  
+    Bullshit.  DEFUN started out life as sugar for DEFPROP, not PUTPROP.
+    The difference is that the compiler was then considered free to compile
+    things defined with DEFPROP.  In more modern times, the compiler is
+    considered free to compile things &quot;quoted&quot; with FUNCTION rather than
+    QUOTE.  So...
+
+In an ideal world (which is not even particularly hard to achieve --
+the MIT scheme implementation, at least, succeeds) there should be no
+difference between code to be compiled and code to be interpreted
+(except for declarations that will allow the compiler to optimize code
+without changing the semantics).  It should never be necessary for the
+user to reason about differences between the behaviors of his program
+compiled and interpreted.  Any sort of ``compilable contexts'' kludge
+such as #', special handling of DEFPROP, and (PROGN 'COMPILE ...)
+makes it much less clear what the compiler is doing, and harder to
+think about how to write code.
+
+    You can't argue that because
+    ((:property snabozzle quibbix) . args) doesn't work that the
+    idea of a function spec is inelegant!  At most you can say that
+    a piece of it that should work doesn't.
+
+Certainly it would be an incremental improvement if this worked.
+
+    In the current scheme,
+
+    (DEFUN (:PROPERTY FOO :FUN-PROP) (X) (BAR X))  ==&gt;
+
+    (SETF #'(:PROPERTY FOO :FUN-PROP) #'(LAMBDA (X) (BAR X)))
+
+This doesn't work currently on the lisp machine.  Presumably it does
+in the incomplete Common Lisp function spec proposal.
+
+        (defun (symbol-value symbol) ...)
+
+    ARGH!  This does nobody any favors.  It is every bit as bad as you
+    imagine distinguishing between functions and values is.
+
+OK, fair enough, this sucked.
+
+    Most of the people involved with Common Lisp have faced this issue and
+    been thinking about it for 5 years or more.  
+
+So have the Scheme people; so have I, for that matter.  [Disclaimer: I
+do not work on any brand of Scheme, and am quite skeptical of all
+existing implementations.  I use lisp machines, which are clearly a
+vastly superior programming system, even though the Lisp they are
+based on is a little crufty.]
+
+    Most of the arguments against [function cells] are based on an
+    unstated assumption that saying (FUNCALL X ...) is
+    an unwanted complexity rather than a helpful clarification, or that
+    the slight simplification of eliminating the function cell is worth
+    sacraficing the clarity, or that the slight simplification of calling
+    EVAL on the CAR of the form is worth anything at all.
+
+These assumptions aren't really unstated; they are firm convictions of
+many people.  Some people that have programmed in languages both with
+and without funtion cells find those without to be much clearer; no
+sacrifice is involved.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00627.html">Function cells</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00626.html">Re: Function cells</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00627.html">Function cells</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00626.html">Re: Function cells</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00628"><strong>Date</strong></a></li>
+<li><a href="threads.html#00628"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

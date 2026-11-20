@@ -1,0 +1,121 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: CASEQ with no T clause -->
+<!--X-From-R13: UZE ng EG&#45;OW (Uhl Egrryr) -->
+<!--X-Date: Wed, 28 Jun 78 19:26:00 GMT -->
+<!--X-Message-Id: df2fc722de572efccb99f2441843513f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CASEQ with no T clause</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02353.html">Date Prev</a>][<a href="msg02351.html">Date Next</a>][<a href="msg02353.html">Thread Prev</a>][<a href="msg02351.html">Thread Next</a>][<a href="maillist.html#02352">Date Index</a>][<a href="threads.html#02352">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>CASEQ with no T clause</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC</li>
+<li><em>Subject</em>: CASEQ with no T clause</li>
+<li><em>From</em>: GLS at SU-AI (Guy Steele)</li>
+<li><em>Date</em>: Wed, 28 Jun 78 19:26:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-AI, nil at MIT-MC, GLS   </li>
+<li><em>Original-date</em>: 28 Jun 1978 1226-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I recommend that a CASEQ which &quot;falls through&quot; not return NIL,
+but give an error and recycle with the new thing returned from
+the error.  This may seem like a throwback to the days when a
+COND which fell off the end (*except* in a PROG - what a kludge!)
+was likewise an error.  However, I suggest that if a CASEQ falls
+off the end, it was more likely the result of an unanticipated bug,
+giving it something it could not handle.  Thus I would have CASEQ
+expand into something like:
+	(PROG (GNARDS)
+	      (SETQ GNARDS THE-THING)
+	 BARF &lt;THE-MOBY-COND&gt;
+	      (SETQ GNARDS (ERROR '|X{BULLET,DUST,BAG}: CASEQ BIT X|
+				  GNARDS
+				  'WRNG-TYPE-ARG)))  ;UNSEEN-GO-TAG ??
+or, pseudo-equivalently:
+	((LABEL PHROG
+		(LAMBDA (GNARDS)
+			(COND &lt;CLAUSES&gt;
+			      (T (PHROG (ERROR ... GNARDS 'WRNG-TYPE-ARG))))))
+	 THE-THING)
+depending on whether you prefer a statement-style or functional-style
+approach.  In any case, I find that *most* CASEQ's I write want to have
+this kind of error recovery loop wrapped around them, and it's a pain to
+have to write each one out explicitly.
+
+A related idea, which I have seen in some Algol-like proposals (SIGPLAN
+Notices?  but I can't locate a reference), is a kind of statement called,
+say, CASEGO; it effectively recognizes that CASEQ clauses are &quot;labelled&quot;
+in a manner similar to PROG statements, and provides a way to go to
+a specified clause by mentioning a &quot;label&quot;:
+	(CASEQ A-FIXNUM
+	       ((0 4 6 8) (HACK-EVEN))
+	       ((1 9) (BORING))
+	       ((3 5 7) (MUNCH-PRIME))
+	       ((2) (HACK-EVEN) (CASEGO 3)))	;2 IS ALSO PRIME
+This is semi-ransom, though probably not all that hard to compile
+or interpret.  I brought it up only because the first problem has
+a solution expressible as:
+	(CASEQ the-thing
+	       ...
+	       (T (CASEGO (ERROR ... the-thing 'WRNG-TYPE-ARG))))
+CASEGO as such doesn't excite me - it's just random.  But the first
+problem deserves some thought.
+
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02353.html">SAIL NEWIO</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02351.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02353.html">SAIL NEWIO</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02351.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02352"><strong>Date</strong></a></li>
+<li><a href="threads.html#02352"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

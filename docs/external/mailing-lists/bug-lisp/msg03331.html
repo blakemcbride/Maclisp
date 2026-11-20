@@ -1,0 +1,251 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: This note is an attempt to summarize the discussion JONL and I -->
+<!--X-From-R13: UZE ng EG&#45;OW (Uhl Egrryr) -->
+<!--X-Date: Mon, 5 Jun 78 07:28:00 GMT -->
+<!--X-Message-Id: 48573e542389523a17f56aad78d8eeab@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>This note is an attempt to summarize the discussion JONL and I</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03465.html">Date Prev</a>][<a href="msg03464.html">Date Next</a>][<a href="msg03465.html">Thread Prev</a>][<a href="msg03464.html">Thread Next</a>][<a href="maillist.html#03331">Date Index</a>][<a href="threads.html#03331">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>This note is an attempt to summarize the discussion JONL and I</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: nil at MIT-MC</li>
+<li><em>Subject</em>: This note is an attempt to summarize the discussion JONL and I</li>
+<li><em>From</em>: GLS at SU-AI (Guy Steele)</li>
+<li><em>Date</em>: Mon, 5 Jun 78 07:28:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC, bug-lispm at MIT-AI  </li>
+<li><em>Original-date</em>: 5 Jun 1978 0028-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>and others had about the nature of variable bindings and references
+in NIL.  If I have made any mistakes, or failed to represent the
+consensus of opinion, please let me know.  I am going to try to
+mention the alternatives that were considered, and also contrast
+NIL, MacLISP, LISP 1.5, and SCHEME.
+&quot;Variables&quot; in NIL are used for at least three different purposes:
+[1] as the names of &quot;globally&quot; defined procedures, e.g. CONS.
+[2] as &quot;local&quot; names of data objects.
+[3] as &quot;global&quot; (i.e. dynamic) names of data objects.
+Now the names of functions are normally thought of as being
+&quot;constant&quot;, while global names of data objects are though of
+as varying over time.  It may be a useful notion, we have said,
+to allow binding of global function cells.  Conversely, LISP 1.5
+had a notion of a globally constant data object name (APVALs).
+Now one problem with APVALs was that they were checked for BEFORE
+the a-list was searched -- there was no way to &quot;shadow&quot; them.
+Besides the issue of binding function names, there is also the
+issue of wanting to treat functions per se as data objects.
+
+In any case, we assume there are three sorts of variables (at least
+-- one could for example complete the symmetry and imagine local
+functional variables as well as global ones).  Now if gross screws
+are to be avoided, there must be a way for the user to precisely
+specify which variable is to be bound and which variable is to be
+referenced at any point in his program.
+
+In MacLISP, functions are not really first class data objects.
+The model is that there are two distinct &quot;evaluation contexts&quot;
+for names.  One is the function position of the combination,
+and the other is essentially all other places.  In the function
+position, an atomic symbol is interpreted as a reference to
+the function cell, unless undefined, in which case the dynamic
+value is used (modulo EVALPUNT, and the fact that a function as such
+cannot live in a value cell, but only a symbol).  I have no idea
+what happens when you write (FUNCTION symbol) in the function
+position, either interpreted or compiled.  There is no good way
+to refer to a function object in a local or dynamic variable
+from the functional context -- instead, the FUNCALL construction
+must be used.
+In non-functional contexts, the &quot;function cell&quot; can be referred
+to by writing the construct (FUNCTION symbol), and a plain atomic
+symbol refers to a dynamic value.  (MacLISP has no consistent notion
+of a local variable.  The interpreter cannot handle them correctly.
+The compiler assumes that variables are by default local, leading
+to a non-robustness, because by default interpreted and compiled
+versions of the same program are likely to have radically differing
+behaviors.)
+MacLISP has only one kind of variable binding (dynamic, local
+being excluded as above).  There is no way to bind a function
+cell.
+
+In SCHEME, there is (or ought to be) a consistent notion of
+a global function cell, a dynamic value cell, and local variables.
+SCHEME provides no facility for binding function cells; the model
+is that the function cells provide the outermost &quot;contour&quot; for
+the lexical environment.  There is only a single evaluation context
+for names.  In that context, one writes an atomic symbol to refer
+to a lexical variable, and (FLUID symbol) to refer to a dynamic
+variable.  There is no way as such to refer directly to a global
+function cell, because a function cell can always be lexically
+shadowed.  This is seldom a problem for user programs, but can
+pose problems for macros.
+For binding, SCHEME distinguishes fluid bindings from lexical ones.
+There is no way to bind a global function cell.  Thus function cells
+can be shadowed lexically but not dynamically.
+
+I believe what was decided, at last meeting, for NIL was
+that the notion of two distinct &quot;evaluation contexts&quot; for names
+be preserved, the model being that function names are usually thought
+of as constants in some sense.  However, there may be a way
+to shadow such definitions dynamically by binding the function
+cell.  On the third hand, such names cannot be shadowed lexically.
+Thus, in the &quot;functional context&quot;, only a small class of expressions
+are legitimate: atomic symbols (referring to the global, possibly
+dynamic, function cell), and a few special expressions such as
+LAMBDA-expressions.  (Are macro calls to be allowed to work in functional
+context?)  There is no way to refer to a dynamic variable or a local
+variable in function context -- one must use FUNCALL, as in MacLISP.
+(It would be possible to define constructs which would legitimately
+refer to such other variables in function context, but it is not
+clear whether this is better or worse as a user syntax than FUNCALL.)
+In other evaluation contexts, the three kinds of variable can be
+referred to by the constructs:
+	symbol			[local or dynamic variable]
+	(DYNAMIC symbol)	[dynamic variable]
+	(FUNCTION symbol)	[global function cell]
+Now as we discussed, there is a set of nasty cases where an ambiguity
+arises from the fact that an atomic symbol can be viewed as either
+a local or a dynamic variable, and so one must have a way to force
+the dynamic interpretation; hence the provision of the DYNAMIC construct.
+There is still some doubt in my mind as to whether we should simply
+tell the user always to use the DYNAMIC construct, which always but
+always works (in which case a macro character similar to ' for QUOTE
+should be provided), or tell him it mostly works not to use it
+and describe the kind of hairy situations where it will lose.
+
+Now it is interesting to note some similarities and differences between
+the NIL proposal and the SCHEME proposal (which does not fully exist
+either as an implementation).  Both implicitly acknowledge the existence
+of three distinct kinds of variable in terms of which the user may wish
+to think.  Both try to squeeze the three kinds into two sorts, because
+the user may wish to mix sorts in his mind occasionally.  In SCHEME,
+the global functional and local (lexical) types of variables are allowed
+to be confused: atomic symbols are conditionally treated first
+as local, and then as global functional if that fails.  This seems to
+be good for styles of programming in which it is likely that globally
+defined functions will be referred to as objects to be passed as
+arguments;  it was of course just such styles that SCHEME was in part
+designed to explore.  The dynamic variables are kept apart, because
+they behave differently from the other two.  (The relationship between
+global &quot;data&quot; variables and global &quot;function&quot; variables is not apparent
+in SCHEME because there is no facility for dynamic binding of global
+functional variables.  In writing &quot;The Art of the Interpreter&quot; I first
+realized how important this notion might be to SCHEME.)
+In the NIL proposal, the three kinds of variable are also squeezed into
+two, but using a different division: here it is the global functional
+which is the loner, and the other two are confused.  This suits a style
+of programming in which functions are seldom treated as data objects,
+and so it is mostly useful to separate names for functions from names
+for other kinds of data objects.  It may be useful to confuse local
+with dynamic variables for some purposes.  The lookup discipline is
+(as I understand it) to check for a local definition first, and if
+that fails, use the dynamic value cell.
+Both proposals have the serious disadvantage that whichever kind of
+variable is confused with local variables can be accidentally shadowed
+by a lexical variable (note the similarity between the conditional
+lookup disciplines in the two proposals as I have (I hope accurately)
+described them).  This poses little problem to the user, but can
+make things tricky for macros which cannot see their precise binding
+contexts.  In each case this necessitates the introduction of a special
+construct for eliminating the confusion.  In the case of NIL, it is
+the dynamic construct; I am considering likewise proposing the
+FUNCTION construct for SCHEME to eliminate the analogous ambiguity.
+
+As may perhaps be well known, I still happen to favor the SCHEME
+proposal slightly, because it simplifies the description of the language
+(requiring only one kind of name evaluation context) while maintaining
+that standard &quot;Cambridge Polish&quot; functional notation for the simple
+cases; i.e. (CONS A B) means applying the function names by &quot;CONS&quot;
+to two arguments named by &quot;A&quot; and &quot;B&quot;.  The FUNCALL notation is not needed.
+On the other hand, for those used to using one name as both the name
+of a function as as the name of a data object (and there are often
+good reasons for this -- e.g. LIST and EXP!), the separation inherited
+from MacLISP contained in the NIL proposal can be valuable.
+In conclusion, I repeat what I said earlier: the NIL proposal, the
+SCHEME proposal, and yet other possibilities are each appropriate to
+a certain style of programming.  Certainly the choice of model and
+discipline will have the effect of encouraging certain styles of
+programming and discouraging others.  This choice is therefore not
+to be made lightly.  I favor a rather liberal approach, namely to
+try to encompass as many styles comfortably as is possible without
+conflict, other things being equal.
+
+Now some issues that have not yet been touched upon here or in our
+meetings include that of local functions, encompassing both
+closures of various sorts and LABEL or LABELS or whatever.  I think
+it is true that the MacLISP handling of LABEL is not acceptable.
+What can be done to fix this?  Also, I recommend the LABELS syntax
+as being analogous to LET in allowing mutually recursive definitions;
+indeed, it is a subset of LETREC (cf. Landin).  A useful borderline
+case between the use of a LABELS-like construct and packages is the
+construction of OWN variables by some such piece of code as:
+	(PROG (OWN0 OWN1 OWN2 ...)
+	      (DEFUN FUNNYFN1 ...)
+	      (DEFUN FUNNYFN2 ...)
+	      ...)
+Gerry and I have been considering simply defining DEFINE to be a macro
+which expands into an ASET', i.e. not to hide so carefully the fact that
+it simply clobbers afunctional value into a certain variable (though the
+user can ignore this fact mostly if he likes):
+	(DEFINE FOO (X Y) BARF)  =&gt;  (ASET' FOO (LAMBDA (X Y) BARF))
+Do we similarly want to simply define DEFUN as a macro defined in
+terms of FSETQ or SETQ or whatever?
+
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03465.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03464.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03465.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03464.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03331"><strong>Date</strong></a></li>
+<li><a href="threads.html#03331"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

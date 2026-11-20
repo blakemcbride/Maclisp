@@ -1,0 +1,121 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Case study: Macro forms as operators in Maclisp -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Thu ,15 Jan 81 18:56:00 EDT -->
+<!--X-Message-Id: b19fb9efe9f0ecd7d6d375a7aaef72ff@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Case study: Macro forms as operators in Maclisp</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00315.html">Date Prev</a>][<a href="msg00317.html">Date Next</a>][<a href="msg00315.html">Thread Prev</a>][<a href="msg00320.html">Thread Next</a>][<a href="maillist.html#00316">Date Index</a>][<a href="threads.html#00316">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Case study: Macro forms as operators in Maclisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: Case study: Macro forms as operators in Maclisp</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu ,15 Jan 81 18:56:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>For better or worse, let me describe what it is that Maclisp currently does
+with the things in the car of a form, because it may bring to light some
+potential problems in the ideas being discussed:
+
+  If the object is a symbol, a functional property is looked for.
+  If the object is some other kind of atom, I think an error is generated.
+  Else if non-atomic, it is checked for one of a few special forms (LAMBDA
+   forms, FUNARGs, and such) ...
+   and finally if it's not one of those, it is normal Lisp EVAL'd to get 
+   something that can be re-run through this procedure.
+  After about 2 or 3 iterations it punts if it hasn't gotten something it
+  can use.
+
+The interesting thing is the case where the normal Lisp EVAL happens.
+So if you take the following two definitions:
+	(DEFMACRO FIRST () 'CAR)
+	(DEFUN DEMO () ((FIRST) '(A B)))
+and you run them in the interpreter and compiler you get two different
+effects. In the interpreter, Lisp EVAL means if it's a macro you get the
+double-evaluation syndrome. So 
+	((FIRST) '(A B))
+will err out in the interpreter because the interpreter Lisp EVAL's the car
+getting back CAR for the macro expansion and then re-eval'ing that to NIL and
+then trying to funcall the NIL on '(A B) and losing. Interestingly, there is
+a misfeature of MACROEXPAND in Maclisp such that
+	(EVAL '((FIRST) '(A B))) loses
+but	(EVAL (MACROEXPAND '((FIRST) '(A B)))) `wins' returning A.
+(What the right thing to do here is very subjective, so I use the term
+wins and loses *very* loosely.) Anyway, in the compiler, no EVALs are being
+done, so
+	((FIRST) '(A B))
+is only macroexpanded in one pass and you end up with (CAR '(A B)) which 
+it forgets needed the extra eval on the car of the form, resulting in an
+accidental `correct' compilation of DEMO so that it will return A instead of
+getting the NIL UNDEFINED FUNCTION OBJECT type error.
+
+I sincerely hope that a whole pile of code relying on these oddities will not
+be written as a result of this message, but I do hope it will point up that 
+in different contexts, it may be very complicated to keep track of the number
+of evaluations needed. 
+
+I suspect what this says is that Maclisp should not allow random forms in the
+car of an s-expression (requiring funcall if that's what the guy wants) and
+if it sees random forms, it should assume they are macro forms, macroexpand
+them WITHOUT evaluating the result, and then try to apply the expansion.
+This would probably be the easiest scheme to retain consistency.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00315.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00317.html">Re: More on macros in Maclisp</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00315.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00320.html">Re: Case study: Macro forms as operators in Maclisp</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00316"><strong>Date</strong></a></li>
+<li><a href="threads.html#00316"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

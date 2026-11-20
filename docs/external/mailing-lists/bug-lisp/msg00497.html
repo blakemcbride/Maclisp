@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Problems in TOPS&#45;10 MACLISP -->
+<!--X-From-R13: Epbgg.Tnuyzna ng Q[G&#45;10O (Q380ET50) -->
+<!--X-Date: Fri, 6 Apr 79 04:04:00 GMT -->
+<!--X-Message-Id: 05Apr79 230454 SF50@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Problems in TOPS-10 MACLISP</title>
+<link rev="made" href="mailto:Scott.Fahlman at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00453.html">Date Prev</a>][<a href="msg00376.html">Date Next</a>][<a href="msg00453.html">Thread Prev</a>][<a href="msg00376.html">Thread Next</a>][<a href="maillist.html#00497">Date Index</a>][<a href="threads.html#00497">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Problems in TOPS-10 MACLISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP @ MIT-MC</li>
+<li><em>Subject</em>: Problems in TOPS-10 MACLISP</li>
+<li><em>From</em>: Scott.Fahlman at CMU-10A (C380SF50)</li>
+<li><em>Date</em>: Fri, 6 Apr 79 04:04:00 GMT</li>
+<li><em>Original-date</em>: 5 Apr 1979 2304-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Hi,
+We're having lots of problems with relatively simple bugs that, instead
+of trapping back to MACLISP, cause the LISP to flame out to the TOPS-10
+monitor.  In particular, things like SETQ'ing NIL and FASLOADing too
+much into the fixed BPS allocation cause a fatal trap back to the system.
+Which makes it hard to debug the losing code.  I seem to recall that there
+is a way in TOPS to get hold of such errors in the user program, and I think
+I remember some code in the MACLISP source listing that claimed to be for
+this purpose, but either I was hallucinating (I can't find it now) or it
+is busted.  Anyway, if it's a relatively easy fix it is something that we
+really could use.
+
+We're also having a weird problem with RENAMEF clobbering things that it
+should have no way of getting at, like the CDR of a list that is being
+MAPCARed, with the car eventualy going to RENAMEF.  It looks like it's
+clobbering something on the stack or the contents of a register or something
+of the sort.  Sorry I can't be clearer about the problem -- we're trying
+to get a nice clean case to send you, but it seems to show up only within
+certain hairy functions we've written (Touretzky's SLURP package).  When
+we get a clean form of the bug we'll send it.  In the meantime, if anything
+occurs to you (as in &quot;Oh yeah, the old RENAMEF bug is back&quot;) we'd like to
+hear about it.
+
+Thanks,
+Scott Fahlman
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00453.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00376.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00453.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00376.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00497"><strong>Date</strong></a></li>
+<li><a href="threads.html#00497"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

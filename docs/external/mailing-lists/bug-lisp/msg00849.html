@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Rnivq Qunczna &#60;Liban ng [WF&#45;AL> -->
+<!--X-Date: Tue, 6 Jul 82 00:03:00 GMT -->
+<!--X-Message-Id: ede32a8443e8d828c76f35b40889763d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:Zvona at MIT-OZ">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00850.html">Date Prev</a>][<a href="msg00848.html">Date Next</a>][<a href="msg00850.html">Thread Prev</a>][<a href="msg00848.html">Thread Next</a>][<a href="maillist.html#00849">Date Index</a>][<a href="threads.html#00849">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-lisp at MIT-AI</li>
+<li><em>From</em>: David Chapman &lt;Zvona at MIT-OZ&gt;</li>
+<li><em>Date</em>: Tue, 6 Jul 82 00:03:00 GMT</li>
+<li><em>Original-date</em>: Monday, 5 July 1982, 20:03-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In lisp in Remote-File 10.1, LMFILE-Remote 17.1, MIT-Specific 9.0,
+System 86.53, ZMail 45.4, Local-File 37.1, DAEDALUS 45.2, Tester 26.1,
+microcode 136,  , on Lisp Machine Eight:
+
+I have a file of which there is only one version,
+&lt;zvona.coder&gt;macros.lisp.1.  I qc-filed this, producing
+&lt;zvona.coder&gt;macros.qfasl.1.  I then tried to qc-file the same file
+again.  It died with a FAE error.  
+
+Now, either the theory should be that qfasls get the same version mumber
+as their source, or else it should be that qfasls are given sequential
+version numbers like any other file.  In the first case, the qfasl
+should be opened for write in overwrite mode; and in the second, the &gt;
+version should be opened.  
+
+Now maybe the current theory is that you do some heuristic combination
+of these two on the theory that you might want old qfasls for something,
+so they should never be overwriten, and you want to know which qfasls
+came from which sources, so in the case cited you can't win.  I can't
+imagine any reason for keeping old qfasls generated from the same
+source, but in any case a better way of recovering would be to explain
+the problem and ask if  the old qfasl should be overwritten or if the &gt;
+version should be used instead.  No doubt ``this will be fixed in the
+new error system'' with all the rest of file error handling.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00850.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00848.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00850.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00848.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00849"><strong>Date</strong></a></li>
+<li><a href="threads.html#00849"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

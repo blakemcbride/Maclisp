@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SETF lacking bootstrap autoload property, and repeat of GENTEMP suggestion -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 4 Nov 81 16:43:00 GMT -->
+<!--X-Message-Id: 52cc00176d31d4cde2d1d2054d392097@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SETF lacking bootstrap autoload property, and repeat of GENTEMP suggestion</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01039.html">Date Prev</a>][<a href="msg02593.html">Date Next</a>][<a href="msg01039.html">Thread Prev</a>][<a href="msg02593.html">Thread Next</a>][<a href="maillist.html#01037">Date Index</a>][<a href="threads.html#01037">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SETF lacking bootstrap autoload property, and repeat of GENTEMP suggestion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: psz at MIT-ML</li>
+<li><em>Subject</em>: SETF lacking bootstrap autoload property, and repeat of GENTEMP suggestion</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 4 Nov 81 16:43:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 4 November 1981 11:43-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     PSZ@MIT-ML
+Date: Tue, 11 Mar 81 05:16:07 GMT
+Original-Date: 11/03/81 01:16:07 EDT
+Subject:
+    I just tried the following in a bare Lisp:
+    (defun foo macro (x) '(arraycall t foo 2 2))   . . . 
+    (setf (foo) t)
+    ;Loading SETF 292  . . . 
+    ;GENTEMP UNDEFINED FUNCTION IN UUO CALL
+Fixed in SETF version 293, which I just installed.
+
+Probably GENTEMP should have an initial AUTOLOAD property, but
+adding new capability to the initial system without taking more
+address space is a time-consuming process.  For some time, we've 
+been planning to get a wide-spread acceptance of the GENTEMP idea, 
+but it's been going slowly.  Anyone yet interested either of the
+two ideas:
+  1) Truly unique gensyms -- incorporating enough information to
+     distinguish site name and time quantum;
+  2) New data type -- a &quot;gensym&quot; symbol, which is guaranteed to
+     be un-interned, but still identifiable over calls to READ, e.g.
+      (SETQ L '(A #G00025 B #G00025))
+     would guarantee (EQ (CADR L) (CADDDR L)), but subsequent calls
+     to READ would get a different, un-interned symbol for #G00025.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01039.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02593.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01039.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02593.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01037"><strong>Date</strong></a></li>
+<li><a href="threads.html#01037"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

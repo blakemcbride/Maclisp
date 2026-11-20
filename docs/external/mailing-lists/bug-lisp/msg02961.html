@@ -1,0 +1,116 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 3 Jul 79 07:14:00 GMT -->
+<!--X-Message-Id: 8e9bace105a4e5e39eba03e7d902f6ee@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02962.html">Date Prev</a>][<a href="msg02960.html">Date Next</a>][<a href="msg02962.html">Thread Prev</a>][<a href="msg02960.html">Thread Next</a>][<a href="maillist.html#02961">Date Index</a>][<a href="threads.html#02961">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: rms at MIT-AI</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 3 Jul 79 07:14:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 3 JUL 1979 0314-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+From:     RMS@MIT-AI
+Date: Wed, 28 Jun 79 22:17:34 GMT
+Original-Date: 06/28/79 18:17:34 EDT
+Subject:
+    To: (BUG LISP) at MIT-AI
+    Maclisp DEFMACRO doesn't use *MACROARG* to hold the form
+    which makes it incompatible with Lispm DEFMACRO.
+    It is necessary to use *MACROARG* to tell for certain
+    whether an optional arg was supplied or not.
+
+There are 3 reasons why the maclisp DEFMACRO does not use *MACROARG*
+in imitation of the LISPM defmacro:
+1) It is not a documented feature of defmacro in the LISPM manual,
+   so any dependence upon it is a kludge that deserves to lose randomly.
+2) In order to determine how many args are actually being passed, when
+   there are &amp;optional (or &amp;rest) variables, it would be nice to have a 
+   method consistent between both DEFUN and DEFMACRO.  Using *MACROARG*
+   defeats this goal.  Admittedly, there is no &quot;ARG&quot; function for either
+   DEFUN or DEFMACRO, but having pored over much LISPM and MACLISP
+   code, I can say that using some distinctive marker as the default
+   value for the optional variable *is* is consistent and workable.
+   [This &quot;distinctive marker&quot; may have to be suitable constructed from
+   a description of the program - I doubt that a single marker would work
+   for all possible programs].
+3) There is an inherent flaw in scoping, when using just a single name
+   such as *MACROARG*, illustrated by the following:
+	(DEFMACRO BLETCH (A &amp;OPTIONAL B)
+	   `(RUN ,a (RLIST ,(cond ((cddr *MACROARG*) b)
+				  (default-value-for-b))
+			    ,a)))
+	(DEFMACRO RLIST (X Y) `(LIST ,y ',(eval x)))  
+   Admittedly, this sort of thing, explicit calling of EVAL, leads one
+   to all sorts of non-modularity bugs, but here the problem is even
+   more obscured, since there is nothing in the code to suggest that
+   the &quot;free(?)&quot; variable *MACROARG* will be captured by the scope 
+   of RLIST.  The maclisp DEFMACRO uses a name constructed by string-
+   appending the macro name to &quot;-MACROARG&quot;, so that *MACROARG* in the
+   definition of BLETCH above would become BLETCH-MACROARG;  however
+   I'm not fully satisfied with that, for I'm sure there are some
+   glitch cases even there.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02962.html">SETF on macro-expanded forms</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02960.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02962.html">SETF on macro-expanded forms</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02960.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02961"><strong>Date</strong></a></li>
+<li><a href="threads.html#02961"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

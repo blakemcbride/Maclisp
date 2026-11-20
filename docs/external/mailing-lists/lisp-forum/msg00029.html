@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Array modification feature -->
+<!--X-From-R13: Xbua U. Ofcvanyy &#60;XUO ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,2 Feb 81 09:39:00 EDT -->
+<!--X-Message-Id: 193d360159acec93101a48f455f35ec7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Array modification feature</title>
+<link rev="made" href="mailto:JGA at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00028.html">Date Prev</a>][<a href="msg00196.html">Date Next</a>][<a href="msg00028.html">Thread Prev</a>][<a href="msg00030.html">Thread Next</a>][<a href="maillist.html#00029">Date Index</a>][<a href="threads.html#00029">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Array modification feature</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DLA at MIT-AI</li>
+<li><em>Subject</em>: Re: Array modification feature</li>
+<li><em>From</em>: John G. Aspinall &lt;JGA at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,2 Feb 81 09:39:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    From: DLA at MIT-AI (David L. Andre)
+
+    A neat feature in arrays which would have been useful to me many times
+    recently would be the ability to tell if any element of an array has
+    been modified since some other time....
+
+    The advantage of this arises in the following type of situation:
+
+    (progn (unmodify-array foo)
+           (do-something-which-might-modify foo)
+           (if (modified-array foo)
+    	   (make-consistent foo)))
+
+I have a situation like this involving redisplay of graphic objects
+if they have been changed by (do-something-which-might-modify foo).
+
+However, I find nothing wrong with a stack onto which
+do-something-which-might-modify pushes the array subscripts which have
+been modified.  Unless the modification is so trivial that the stack push
+adds a significant amount of effort to the modification function, this
+seems like a way to do it without modify bits for every word.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00028.html">Re: Array modification feature</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00196.html">Re: Destructuring syntax</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00028.html">Re: Array modification feature</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00030.html">Re: Array modification feature</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00029"><strong>Date</strong></a></li>
+<li><a href="threads.html#00029"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

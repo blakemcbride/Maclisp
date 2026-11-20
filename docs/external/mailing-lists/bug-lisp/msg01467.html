@@ -1,0 +1,117 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Qney I. Vbsszna &#60;QIV ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 11 Mar 81 07:57:00 GMT -->
+<!--X-Message-Id: 23b035aefa6d4467e3a191f543984521@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:CWH at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01038.html">Date Prev</a>][<a href="msg01466.html">Date Next</a>][<a href="msg01038.html">Thread Prev</a>][<a href="msg01466.html">Thread Next</a>][<a href="maillist.html#01467">Date Index</a>][<a href="threads.html#01467">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJS at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>From</em>: Carl W. Hoffman &lt;CWH at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 11 Mar 81 07:57:00 GMT</li>
+<li><em>Original-date</em>: 11 March 1981 02:57-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 9 March 1981 23:51-EST
+    From: Gerald Jay Sussman &lt;GJS at MIT-AI&gt;
+
+    The macros IF-FOR-LISPM and IF-FOR-MACLISP and IF-FOR-MACLISP-ELSE-LISPM
+    ought to be defined by default in Maclisp just as on the Lisp machine.
+    I don't want to use the #M and #Q because they are not Lisp-like.
+
+The # macro is as Lisp-like as ' ` or ,.  Often, it describes some read-time
+action to the following form, e.g. wrapping a (FUNCTION ...) around it,
+reading it with certain global state modified, or making the form disappear
+entirely.
+
+Use of IF-FOR-LISPM and IF-FOR-MACLISP is discouraged:
+1) They assume that the only conditionalizations you would want to make are
+   for the Lisp Machine and MacLisp.  They are not extensible in any way.
+2) They can only appear in a place where the compiler will do macro
+   expansion.
+
+The encouraged replacement is #+Lispm and #+MacLisp, which are newer forms
+of #Q and #M.  #+&lt;condition&gt; &lt;form&gt; is read as &lt;form&gt; if (status feature
+&lt;condition&gt;) is true.  Otherwise, &lt;form&gt; disappears entirely.  Thus, one can
+do #+NIL, #+Franz, #+SchemeChip, etc. for conditionalizing code which must
+run many different places, without having to create new constructs and
+add them to every Lisp implementation around.
+
+*** Note Well ***  I am not encouraging free and indiscriminant use of this
+construct.  I don't consider it in any way elegant or an integral part of
+Lisp.  It is simply an unfortunate engineering necessity needed to make
+programs run in many different places.
+
+In general, one uses #+ at the very beginning of one's code to set up
+program-specific macros which are then used further on.  E.g.:
+
+(defmacro symbol-definition (symbol)
+	  #+MacLisp	`(cadr (getl ,symbol '(expr subr lsubr)))
+	  #+Lispm	`(fsymeval ,symbol)
+	  #+Franz	`(getd ,symbol))
+
+Then the rest of your code would be written in terms of the
+&quot;symbol-definition&quot; macro, and you must endure the # ugliness only once.
+MC:ALAN;NSTRUCT is a good example of a large program conditionalized in
+this fashion.  It implements the Lisp Machine defstruct macro, runs in
+three separate Lisp implementations, and is used heavily in all three.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01038.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01466.html">#+ ... vs (IF-FOR-LISPM ...), etc.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01038.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01466.html">#+ ... vs (IF-FOR-LISPM ...), etc.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01467"><strong>Date</strong></a></li>
+<li><a href="threads.html#01467"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

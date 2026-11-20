@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Snapped Elastic -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Thu ,13 Nov 80 13:38:00 EDT -->
+<!--X-Message-Id: 352e93164ba58b78cf9530c5f1df73aa@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Snapped Elastic</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00027.html">Date Prev</a>][<a href="msg00622.html">Date Next</a>][<a href="msg00027.html">Thread Prev</a>][<a href="msg00622.html">Thread Next</a>][<a href="maillist.html#00621">Date Index</a>][<a href="threads.html#00621">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Snapped Elastic</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Scott.Fahlman at CMU-10A</li>
+<li><em>Subject</em>: Re: Snapped Elastic</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Thu ,13 Nov 80 13:38:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Actually, I didn't even have in mind all the hair of actual versus
+allocated sizes, only a primitive that could shrink a vector, but never
+grow it.
+What would you think of a medium-level primitive that would attempt
+to resize a vector, returning it is it succeeded and returning false
+if it failed?  Then different implementations could have different
+criteria for whether it could resize a vector in place.  User-level
+code would do:
+      (DEFUN VECTOR-RESIZE (VEC NEWSIZE)	;may not return EQ pointer
+	     (OR (LOW-LEVEL-FAST--BUT-NOT-GUARANTEED-RESIZE VEC NEWSIZE)
+                 (DO ((V (MAKE-VECTOR NEWSIZE))
+                      (N (MIN (VECTOR-LENGTH VEC) NEWSIZE))
+                      (J 0 (+ J 1)))
+                     ((= J N) V)
+                   (VSET (VREF VEC J) V J))))
+Then whatever cases are handled well by the low-level guts would be speedy
+and result in an EQ pointer, and otherwise the user code would have to
+deal with the copying.  Some implementations would never allow resizing;
+some would always win, by using forwarding pointers; some would win when
+decreasing but not increasing; some would win for any variation below
+the initially allocated size; and so on.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00027.html">Re: LISP vs. APL</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00622.html">Re: Snapped Elastic</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00027.html">Re: LISP vs. APL</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00622.html">Re: Snapped Elastic</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00621"><strong>Date</strong></a></li>
+<li><a href="threads.html#00621"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

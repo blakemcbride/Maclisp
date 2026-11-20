@@ -1,0 +1,111 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MacLISP's LDB "moves" from out&#45;of&#45;core -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sat, 29 Nov 80 08:07:00 GMT -->
+<!--X-Message-Id: 235255f8d040e9c8a86656380d2743a2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MacLISP's LDB &quot;moves&quot; from out-of-core</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01755.html">Date Prev</a>][<a href="msg01753.html">Date Next</a>][<a href="msg01755.html">Thread Prev</a>][<a href="msg01753.html">Thread Next</a>][<a href="maillist.html#01754">Date Index</a>][<a href="threads.html#01754">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MacLISP's LDB &quot;moves&quot; from out-of-core</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC, DLW at MIT-MC</li>
+<li><em>Subject</em>: MacLISP's LDB &quot;moves&quot; from out-of-core</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sat, 29 Nov 80 08:07:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 29 NOV 1980 0307-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 28 November 1980 16:34-EST
+    From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+    I have been working on some new features for defstruct and I compiled
+    a version that should have run in MacLisp.  I asked DLW and Moon to
+    try it out (in MacLisp) confident that it would work in anybody's
+    SETF.  I was wrong of course: .  .  .
+I'm so very sorry Alan, but your artfully worded complaint was just totally 
+off base again -- DLW's symptom has nothing to do with SETF per se, nor of any 
+&quot;macrology&quot;, but to the lack of address space in the PDP10 MacLISP which has 
+caused us to try keep only a minimal amount of code and symbols in the initial
+lisp.
+   LDB etc used to be macros which autoloaded from some file (the out-dated 
+autoload properties in current L^K caused a minor lossage which I've corrected
+thru a &quot;patch&quot; in the file which does get autoloaded).  But in XLISP, these 
+functions are system SUBRs,(just a few words each) and the COMPLR uses the 
+former macro properties to do a half-job of open-coding.
+This was noted in LISP RECENT:
+    Tuesday  OCT 28,1980   FM+4D.17H.18M.10S.        LISP 2033   - Jonl -
+    1) Some new functions:
+	LOAD-BYTE, DEPOSIT-BYTE, LDB, and DPB  are now installed as SUBR's.
+    .  . .
+Neither in the old lisp, nor in the new, was the correct property set up for 
+SETF to find for inverting LDB, but I've corrected this and recompiled the
+offending files.  Essentially the same thing applies to the apparent use
+of *:XREF in old lisp.   *DPB is a part of the PDP10-only macroexpansions
+of LDB, and is not a bug.
+    We may only conclude that no PDP10 user has ever used SETF on a LDB, 
+reinforcing our common observation that the &quot;ppss&quot; part of the LISPMachine 
+defstruct is not a particlularly useful tool on the 10.  However, users
+seem to be sensitive to the slightest change in LDB etc, since there
+were quite a few who reported when XCOMPLR had (buggily!) forgotten the
+FIXNUM declarations for LDB, *LDB etc.
+    If you had remembered the conversation I had with you last month, when
+you first asked what the *LDB and *DPB were, you might have recognized the 
+problem, and might have been able to tell DLW something constructive. 
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01755.html">VECTOR-S-IFY</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01753.html">DEFMACRO and DEFUN&amp;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01755.html">VECTOR-S-IFY</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01753.html">DEFMACRO and DEFUN&amp;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01754"><strong>Date</strong></a></li>
+<li><a href="threads.html#01754"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

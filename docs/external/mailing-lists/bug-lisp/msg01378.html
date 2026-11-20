@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: YES&#45;OR&#45;NO&#45;P and Y&#45;OR&#45;N&#45;P -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Fri, 3 Apr 81 20:25:00 GMT -->
+<!--X-Message-Id: 78397fe666d78f78e06fcac9db302d2f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>YES-OR-NO-P and Y-OR-N-P</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01379.html">Date Prev</a>][<a href="msg01377.html">Date Next</a>][<a href="msg01379.html">Thread Prev</a>][<a href="msg02576.html">Thread Next</a>][<a href="maillist.html#01378">Date Index</a>][<a href="threads.html#01378">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>YES-OR-NO-P and Y-OR-N-P</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC</li>
+<li><em>Subject</em>: YES-OR-NO-P and Y-OR-N-P</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Fri, 3 Apr 81 20:25:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, (BUG LISPM) at MIT-MC</li>
+<li><em>Original-date</em>: 3 APR 1981 1525-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 5 March 1981 21:17-EST
+    From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+    Why does y-or-n-p REQUIRE that I supply an argument?  I would think that
+    it was completely clear what I want if I just call it with no arguments.
+    Why doesn't yes-or-no-p go to the trouble to strip leading and trailing
+    spaces from what the user types?
+In case this hasn't been answered before, YES-OR-NO-P now ignores spaces,
+and zero arguments is acceptable.  Did the LISPM version ever permit the
+interchange-ability of the first and second arg?  namely is it ok to
+say  (YES-OR-NO-P &quot;What foo?&quot; some-stream)  as well as
+     (YES-OR-NO-P some-stream &quot;What foo?&quot;)
+Clearly these two arguments can be distinguished by data-type, and position
+in the argument list is unimportant.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01379.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01377.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01379.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02576.html">YES-OR-NO-P and Y-OR-N-P</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01378"><strong>Date</strong></a></li>
+<li><a href="threads.html#01378"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

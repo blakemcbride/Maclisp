@@ -1,0 +1,84 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XOD ng [WF&#45;[Q (Xbanguna O. Drrf) -->
+<!--X-Date: Tue, 10 Mar 81 04:18:00 GMT -->
+<!--X-Message-Id: bb0a543c854406d6bfcffb5103bd399c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JAR at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01473.html">Date Prev</a>][<a href="msg01471.html">Date Next</a>][<a href="msg01473.html">Thread Prev</a>][<a href="msg01471.html">Thread Next</a>][<a href="maillist.html#01472">Date Index</a>][<a href="threads.html#01472">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: JAR at MIT-MC (Jonathan A. Rees)</li>
+<li><em>Date</em>: Tue, 10 Mar 81 04:18:00 GMT</li>
+<li><em>Original-date</em>: 9 MAR 1981 2318-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The file JSYS-TBL.LSP on the Twenex Maclisp release tape has the following
+cute mistake in it:
+(eval-when (eval load compile)
+	   (setq oibase ibase ibase 8.)
+	   (setq frob1 127)  ...  ;Octal 127 intended
+)
+The (setq ibase 8) ought to be in a separate top-level-read-able form,
+obviously, from the following setq's, or else the #o notation should
+be used.
+Did the #o(17 362 foo) bug ever get fixed?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01473.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01471.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01473.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01471.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01472"><strong>Date</strong></a></li>
+<li><a href="threads.html#01472"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

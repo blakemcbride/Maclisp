@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DESCRIBE method for STRUCT&#45;CLASS -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 16 Jun 81 06:10:00 GMT -->
+<!--X-Message-Id: 209e2a9249f723ed07c7d2ae509ad616@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DESCRIBE method for STRUCT-CLASS</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02448.html">Date Prev</a>][<a href="msg02446.html">Date Next</a>][<a href="msg02448.html">Thread Prev</a>][<a href="msg02446.html">Thread Next</a>][<a href="maillist.html#02447">Date Index</a>][<a href="threads.html#02447">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DESCRIBE method for STRUCT-CLASS</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: DESCRIBE method for STRUCT-CLASS</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 16 Jun 81 06:10:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 16 June 1981 02:10-EDT</li>
+<li><em>Sender</em>: JONL0 at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 11 June 1981 02:10-EDT
+    From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+    The describe method for STRUCT-CLASS is bogus.
+    (DESCRIBE (GET 'LOCAL 'FEATURE-SET))
+    says all the slot values are LOCAL.
+The problem is that you didn't have SHARPA loaded, so the DESCRIBE
+method was getting () for the selector property of the various
+macro-accessors.  Probably a good idea for the describe method to
+retrieve that index some other way.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02448.html">SI:GEN-LOCAL-VAR</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02446.html">Re: lisp 2117 on XX</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02448.html">SI:GEN-LOCAL-VAR</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02446.html">Re: lisp 2117 on XX</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02447"><strong>Date</strong></a></li>
+<li><a href="threads.html#02447"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

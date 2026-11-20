@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Query about proposed slight change to FIX and FIXR functions -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Thu, 12 Mar 81 03:20:00 GMT -->
+<!--X-Message-Id: 11Mar81 222051 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Query about proposed slight change to FIX and FIXR functions</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01459.html">Date Prev</a>][<a href="msg01457.html">Date Next</a>][<a href="msg01463.html">Thread Prev</a>][<a href="msg01457.html">Thread Next</a>][<a href="maillist.html#01458">Date Index</a>][<a href="threads.html#01458">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Query about proposed slight change to FIX and FIXR functions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: David A. Moon &lt;Moon at MIT-AI&gt; </li>
+<li><em>Subject</em>: Re: Query about proposed slight change to FIX and FIXR functions</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Thu, 12 Mar 81 03:20:00 GMT</li>
+<li><em>Cc</em>: info-lispm at MIT-AI, bug-lisp at MIT-AI, rwg at MIT-AI,    Scott.Fahlman at CMU-10A</li>
+<li><em>In-reply-to</em>: David A. Moon's message of 11 Mar 81 17:58-EST</li>
+<li><em>Original-date</em>: 11 March 1981 2220-EST (Wednesday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>[Why wasn't this just sent to LISP-FORUM??]
+
+FIX isn't ridiculous -- it's just incompatible with FORTRAN
+(but compatible with ALGOL and a few others).  WHat FIX should
+do is very closely related to what integer division, remainder,
+modulus, and arithmetic shift should do.  Think about it this way:
+FIX divides the argument n by 1, producing integer quotient q and
+a remainder r (which will be fractional); it then returns q.
+If the remainder has the same sign as the dividend (true remainder),
+then FIX rounds towards zero.  If it has the same sign as the divisor
+(in this case, always positive), i.e., the remainder is actually a MOD
+operation, then FIX rounds towards minus infinity.
+
+Rather than change FIX incompatibly and potentially breaking programs,
+I urge that the names FLOOR, CEILING, TRUNC, and ROUND be introduced,
+to perform rounding towards minus infinity, plus infinity, zero,
+and nearest integer, respectively.  I would be inclined simply not to guarantee
+the behavior of ROUND on half-integers, leaving it to the implementation
+to decide whether to round up or down; but I am not adamant on this point.
+
+The point of these names is that various languages use the term FIX in
+incompatible ways; but the four names proposed are never used for other
+than the meanings I have described, and so leave the programmer in no
+state of doubt as to what is going on.
+--Guy
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01459.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01457.html">Query about proposed slight change to FIX and FIXR functions</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01463.html">Query about proposed slight change to FIX and FIXR functions</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01457.html">Query about proposed slight change to FIX and FIXR functions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01458"><strong>Date</strong></a></li>
+<li><a href="threads.html#01458"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

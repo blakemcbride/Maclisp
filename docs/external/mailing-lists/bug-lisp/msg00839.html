@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: sxhash -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 17 Jul 82 22:23:00 GMT -->
+<!--X-Message-Id: 5a777d2d7dd72298049f3c9e253bc5cc@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>sxhash</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00840.html">Date Prev</a>][<a href="msg00838.html">Date Next</a>][<a href="msg01919.html">Thread Prev</a>][<a href="msg02336.html">Thread Next</a>][<a href="maillist.html#00839">Date Index</a>][<a href="threads.html#00839">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>sxhash</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GLR at MIT-MC</li>
+<li><em>Subject</em>: sxhash</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 17 Jul 82 22:23:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 17 July 1982 18:23-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 17 July 1982 17:36-EDT
+    From: Jerry Roylance &lt;GLR&gt;
+
+    I thought SXHASH was changed ages ago so
+     (not (= (sxhash '(a b)) (sxhash '(b a))))
+
+I believe what was decided was that it was unreasonable to suddenly change the
+behavior of SXHASH because of the danger of screwing people with SXHASHes
+recorded in files.  Thus a switch was installed to allow the user to choose
+between the old behavior and the new, and the default was made to be the old.
+Doing (sstatus sxhash nil) will turn on the new behavior which has the property
+you are looking for.
+
+Someday the new behavior may become the default, but I wouldn't hold my breath.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00840.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00838.html">MacLISP</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01919.html">Re: sxhash</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02336.html">Re: LAP</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00839"><strong>Date</strong></a></li>
+<li><a href="threads.html#00839"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

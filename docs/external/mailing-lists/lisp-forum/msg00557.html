@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: / and \ -->
+<!--X-From-R13: [bba ng [WF&#45;OW -->
+<!--X-Date: Wed ,22 Jan 81 14:36:10 EDT -->
+<!--X-Message-Id: 8ebcb3b3a8b71c9f86f9e7a2ea579a9e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: / and \</title>
+<link rev="made" href="mailto:Moon at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00161.html">Date Prev</a>][<a href="msg00556.html">Date Next</a>][<a href="msg00161.html">Thread Prev</a>][<a href="msg00562.html">Thread Next</a>][<a href="maillist.html#00557">Date Index</a>][<a href="threads.html#00557">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: / and \</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: / and \</li>
+<li><em>From</em>: Moon at MIT-AI</li>
+<li><em>Date</em>: Wed ,22 Jan 81 14:36:10 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>What should the \ function be renamed to?  Is \\ reasonable?  And should
+the present rem function (friend of remove, which is a friend of delete,
+which is a friend of member) be renamed to something else so that name
+can be used for some sort of remainder?
+
+I would like to make new functions, div and mod, which are like quotient
+and remainder but truncate toward negative infinity rather than zero
+(more precisely, mod has the sign of the divisor whereas remainder
+has the sign of the dividend, and div is the division function that goes with it).
+I guess it isn't necessary to worry about fixnum-only names for these, since
+computer manufacturers perversely don't provide the operation anyway.
+(If my documentation is up-to-date, the S-1 has an instruction for mod
+but doesn't have one for div!  However, it has so many kinds of numbers
+that no naming scheme can possibly accomodate them all and declarations
+necessarily are required.)
+
+As far as I know, everyone agrees that the present \\ (fixnum gcd) is
+useless and can simply be flushed.
+
+Of course, in the Lisp machine this vast plethora of arithmetic functions
+are all identical, so I don't care as much as some people.  But it would
+certainly be unacceptable to make this change in some parts of the Maclisp
+family and not others.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00161.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00556.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00161.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00562.html">Re: / and \</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00557"><strong>Date</strong></a></li>
+<li><a href="threads.html#00557"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

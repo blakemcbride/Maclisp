@@ -1,0 +1,147 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: What should we DO? -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Sun, 13 Apr 80 01:54:00 GMT -->
+<!--X-Message-Id: 3c15685dd27b511202c6da348fd895f7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>What should we DO?</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01957.html">Date Prev</a>][<a href="msg01955.html">Date Next</a>][<a href="msg01957.html">Thread Prev</a>][<a href="msg04220.html">Thread Next</a>][<a href="maillist.html#01956">Date Index</a>][<a href="threads.html#01956">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>What should we DO?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC, NIL at MIT-MC, (BUG LISPM) at MIT-MC</li>
+<li><em>Subject</em>: What should we DO?</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Sun, 13 Apr 80 01:54:00 GMT</li>
+<li><em>Cc</em>: H at MIT-MC, KMP at MIT-MC, HENRY at MIT-MC, RMS at MIT-MC</li>
+<li><em>Cc</em>: MOON at MIT-MC</li>
+<li><em>Original-date</em>: 12 APR 1980 2054-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>RMS - doing (PROG name () (DO ...)) seems rather inelegant --
+ an idiom for achieving something conceptually different than what
+ you were really asking for. Take for example:
+
+   (PROG name
+	 (DO
+	  ... code that extends off page ...))
+
+ you'd be forced to scan to the next page to see that name was referring
+ really to the DO. This sort of reasoning is why we most of us use let rather
+ than LAMBDA. So I certainly wouldn't advocate that DO-NAMED was redundant.
+
+Moon - Clearly we aren't advocating making everything named -- just the
+ constructs that do flow of control-hacking -- for such constructs need
+ information about where to GO/RETURN to. Probably we need a DOTIMES that
+ allows the capability and another flavor that doesn't -- ie, that becomes
+ an invisible prog.
+
+My personal feelings on this are that we should come up with consistent
+rules about these things. Documentation is much simpler if you could
+generalize in it. So I would prefer flushing old-DO in the longrun but
+it's probably unworkable at present. There's no reason to leave ourselves
+open to future problems of this sort by implementing something now without
+thinking first -- which is why I advocated not allowing (DOTIMES n ...).
+I was not advocating that (DOTIMES lab ...) be installed -- just allowing
+for that contingency.
+
+I now present my feelings on this issue of how DO/PROG could be done in order
+this haggling, part of which I think comes out of the fact that these return
+tags are tied up in PROG-ness and so on ... Suppose you had the following
+primitives in Lisp:
+
+(PROG-BODY ...) which evaluated all non-atomic stuff. Atoms were GO-tags.
+ Returns () if you fall off the end. RETURN does not work from this form.
+
+(PROG-RETURN-POINT form name) name is not evaluated. Form is evaluated and
+ if a RETURN-FROM specifying name (or just a RETURN) were executed, control
+ would pass to here. Returns the value of form if form returns normally or
+ the value returned from it if a RETURN or RETURN-FROM is executed. [Note:
+ this is not a [*]CATCH because it is lexical in nature and optimized out
+ by the compiler. Also, a distinction between NAMED-PROG-RETURN-POINT
+ and UNNAMED-PROG-RETURN-POINT might be desirable -- extrapolate for yourself
+ how this would change things -- I'll just present the basic idea here.]
+
+(ITERATE bindings test form1 form2 ...) like DO is now but doesn't allow
+ return or goto. All forms are evaluated. GO does not work to get to any form
+ in the iteration body.
+
+So then we could just say that the definitions for PROG and DO might be
+(ignore for now old-DO's -- they could, of course, be worked in if people
+really wanted them but they have nothing to do with this argument) ...
+
+ (PROG [ &lt;tag&gt; ] &lt;bvl&gt; . &lt;body&gt;)
+
+  =&gt; (PROG-RETURN-POINT (LET &lt;bvl&gt; (PROG-BODY . &lt;body&gt;)) [ &lt;tag&gt; ])
+
+ (DO [ &lt;tag&gt; ] &lt;bind-specs&gt; &lt;tests&gt; . &lt;body&gt;)
+
+  =&gt; (PROG-RETURN-POINT (ITERATE &lt;bind-specs&gt; &lt;tests&gt; (PROG-BODY . &lt;body&gt;))
+			[ &lt;tag&gt; ])
+
+Other interesting combinations could be formed by those interested in them.
+If these lower-level primitives were made available to the user, he needn't
+feel tied to one of PROG/DO -- he can assemble an operator with the 
+functionality he really wants. 
+
+-kmp
+
+ps - apologies for multiple copies ... i wish i knew how to make that
+	not happen ...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01957.html">&quot;*CATCH&quot;?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01955.html">*CATCH vs named PROG</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01957.html">&quot;*CATCH&quot;?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04220.html">What should we DO?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01956"><strong>Date</strong></a></li>
+<li><a href="threads.html#01956"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

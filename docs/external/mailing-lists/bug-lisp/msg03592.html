@@ -1,0 +1,115 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Macro&#45;Cache'ing a pure cell? -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 9 Jan 81 09:00:00 GMT -->
+<!--X-Message-Id: 4bc8f6f606be3b6240386e3cef65b63a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Macro-Cache'ing a pure cell?</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03593.html">Date Prev</a>][<a href="msg03591.html">Date Next</a>][<a href="msg03596.html">Thread Prev</a>][<a href="msg03587.html">Thread Next</a>][<a href="maillist.html#03592">Date Index</a>][<a href="threads.html#03592">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Macro-Cache'ing a pure cell?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: Macro-Cache'ing a pure cell?</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 9 Jan 81 09:00:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 9 January 1981 04:00-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 8 January 1981 13:18-EST
+    From: Jon L White &lt;JONL at MIT-MC&gt;
+    Subject: Macro-Cache'ing a pure cell?
+    To: RWK at MIT-MC
+    cc: BUG-LISP at MIT-MC
+
+        Date: 8 January 1981 13:09-EST
+        From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+        I think it SHOULD do caching (like I had it doing before) when it finds
+        it is not writable, with the hashing scheme. .  . 
+    Unfortunately, it didn't work.  Just because one has ONE cell in pure
+    space is no reason for the cacher to change the user's setting of
+    MACRO-EXPANSION-USE from MACROEXPAND to MACROMEMO;  you cannot use the
+    hasharray unless this is done.  Now maybe a warning msg is in order,
+    but that is another story.
+You didn't change this part of the code at all, except to rename PUREP to
+STATIC-AREAP.  You did change the code for the DISPLACE case (which I seem to
+have ignored) to PURCOPY before writing writeable pure code, and ignored the
+MACROEXPANDED case.  I changed the case you ignored to conform to the way you
+changed the case I ignored.
+
+Anyway, I decided that MACROFETCH looking at the state of MACRO-EXPANSION-USE
+is really the wrong thing.  If you have hash-memoized something, it should use
+that, just like if you have DISPLACED something.  If you change the switch from
+MACROMEMO to MACROEXPANDED, and you want to no longer use the hashed
+definitions (why??), you can always flush the cache.  But with the bookkeeping
+that goes on to handle redefinitions, there is no reason to insist on ignoring
+the cache just because the user requests that you no longer add to it.  So it
+now just checks for the existance of a cache.  There isn't any efficiency lost
+by doing this, since the check for the CDR of MACROMEMO being NIL is fast.
+
+It may still reasonable for MACROEXPANDED to restore the original form if it
+finds MACRO-EXPANSION-USE to be other than MACROEXPANDED, on the theory that
+the user changed it because he was grossed out.  But that isn't essential,
+since again, the user can get that effect by just doing
+(FLUSH-MACROMEMOS () ()).
+
+So I changed MACROFETCH, but not MACROEXPANDED.  I did not install this yet.
+Do you concur that this is reasonable?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03593.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03591.html">STRINGS</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03596.html">Macro-Cache'ing a pure cell?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03587.html">Macro-Cache'ing a pure cell?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03592"><strong>Date</strong></a></li>
+<li><a href="threads.html#03592"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

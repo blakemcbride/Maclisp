@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>PDLOV.RPG[UP,DOC] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename PDLOV.RPG[UP,DOC]  blob <a href="PDLOV.RPG[UP,DOC]_blob">sn#476183</a> filedate 1979-09-27 generic text, type C, neo UTF8</div>
+<pre id="u8lump">COMMENT ⊗   VALID 00002 PAGES
+C REC  PAGE   DESCRIPTION
+C00001 00001
+C00002 00002		Random Pdl Overflow
+C00007 ENDMK
+C⊗;
+	Random Pdl Overflow
+
+Many people have been plagued by Random Pdl Overflow in MacLisp this
+summer. The real problem is that the hardware on the system has some known
+marginalities in timing which affect the trap mechanism, the mechanism
+used by floating under/overflow and pdl overflow interrupts.  People who
+use the floating arithmetic in SAIL and do underflows, such as in matrix
+inversion, may have noticed this lossage as long ago as last summer.
+
+This summer the pdlov interrupts have been affected. There are simple
+assembly language programs that have been shown to fail due to hardware,
+so that this is not a programmer's daydream.
+
+MacLisp encounters problems with the interrupt system by generating a
+large number of pdlovs for legitimate reasons. The more interrupts like
+this the more likely the system is to fail. Of course, manifestation
+depends on the mix of jobs as well, so it appears truly random.
+
+The legitimate reason for pdlovs is that while doing THROWs, FRETURNS,
+UNWIND-PROTECTS, and any other primitive which trap LISP control and
+errors, the interpreter plays fast and loose with the various internal
+stacks for efficiency reasons. PDL pointers are saved on other stacks, and
+large sections ar popped with MOVEs and HRRs. Thus, there is often not
+much reason to keep track of the length of the stack since control will
+usually keep popping and restoring the stacks, and very few pushes are
+done on them until the last large restoration occurs. So, what MacLisp
+does is to set the length of the stack to 1, and then if a pdlov occurs,
+which means that the code is using the stacks, the pdlov handler will
+recalculate the length given a known base for each stack.
+
+The software `fix' to this is:  Every time the length of the stack would
+be set to 1, the actual length is re-calculated instead. This amounts to 5
+extra instructions in about 10 places.
+
+The KL should be getting Rev 10 some day, which should eliminate this
+problem, but the re-written code will be used until then.
+
+The system MacLisp now incorporates these changes: You betcha.
+</pre>
+</body>
+</html>

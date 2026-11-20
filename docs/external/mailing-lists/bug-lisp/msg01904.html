@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Another thought on #o -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Fri, 31 Oct 80 22:25:00 GMT -->
+<!--X-Message-Id: 1d8ba58882cc0c2af2d3e1644a38102c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Another thought on #o</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01905.html">Date Prev</a>][<a href="msg01903.html">Date Next</a>][<a href="msg01907.html">Thread Prev</a>][<a href="msg01892.html">Thread Next</a>][<a href="maillist.html#01904">Date Index</a>][<a href="threads.html#01904">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Another thought on #o</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Another thought on #o</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Fri, 31 Oct 80 22:25:00 GMT</li>
+<li><em>Original-date</em>: 31 OCT 1980 1725-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>#o and friends could also peek for a trailing &quot;,&quot; to help in system 
+system programming. for DDT compatibility, an extra &quot;,&quot; would be eaten
+as well. Hence, the following sorts of things would work:
+
+	#o-1,,0
+	#o1,,0
+or even #o1,,
+
+I would recommend that leading spaces be allowed after the &quot;o&quot; but not after
+the comma. So that
+
+	(SYSCALL 3. 'FOO #o -1,,0 #o 3,,)
+
+would be a valid form. The sign convention &quot;*&quot; might want to work for
+both halves so that you could say
+
+	#o -1,,*2222222222222222222222222222
+
+in order to mean 777... in the left half and the pattern 010 010 010 ... in 
+the right half ... 
+
+Note also that if we hair up #o it should be made clear that #8r is what
+people want to read normal numbers in base 8 and that #o is especially for
+dealing with single-machine-word bits. Currently there is no emphasized
+difference between #8r and #o. 
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01905.html">Re: #o and unsignedness</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01903.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01907.html">RLB's #o* suggestion</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01892.html">Another thought on #o</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01904"><strong>Date</strong></a></li>
+<li><a href="threads.html#01904"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

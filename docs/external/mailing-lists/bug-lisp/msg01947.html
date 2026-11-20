@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: new LISP rubout processing -->
+<!--X-From-R13: SYWZZWO@ ng PP@O -->
+<!--X-Date: Tue, 28 Oct 80 17:37:00 GMT -->
+<!--X-Message-Id: ea851785ee658c323c4078c44825b57b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>new LISP rubout processing</title>
+<link rev="made" href="mailto:EKILLIAN at BBNA">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01051.html">Date Prev</a>][<a href="msg01946.html">Date Next</a>][<a href="msg01055.html">Thread Prev</a>][<a href="msg01941.html">Thread Next</a>][<a href="maillist.html#01947">Date Index</a>][<a href="threads.html#01947">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>new LISP rubout processing</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Subject</em>: new LISP rubout processing</li>
+<li><em>From</em>: EKILLIAN at BBNA</li>
+<li><em>Date</em>: Tue, 28 Oct 80 17:37:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, BUG-TWENEX at MIT-XX, MT at MIT-XX,    MMCM at MIT-AI</li>
+<li><em>Original-date</em>: Tuesday, 28 October 1980  12:37-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: Tuesday, 28 October 1980  07:08-EST
+    From: JONL at MIT-MC (Jon L White)
+
+        Date: Monday, 27 October 1980  17:08-EST
+        From: EKILLIAN at BBNA
+
+        Doesn't seem to work when using SUPDUP to get to XX as opposed to
+        TELNET.  Perhaps 20X is not setting the bit saying you can move
+        the cursor backward on a SUPDUP terminal (because there is no %TD
+        code for doing it -- you only have %TDMV0 and %TDFS)?  
+
+    LISP only copies what VTS can do, and it seems likely that your analysis
+    is right (i.e., no TC%MOV capability) which would mean no CURSORPOS
+    capability of any note.  Also, no TC%SCL (or TC%CLR) would mean that
+    the terminal can't selectively erase, so LISP wouldn't try the  rubout
+    processing.  As for the echoing of ^L as a sail char, I'm not sure
+    I understand what is happing wrong.
+
+Rather than speculate further, I decided to find out what was
+going on.  LISP is looking at TC%CLR and using that to set %TOERS
+in one of its internal capability words.  It does not appear to
+be looking at TC%SCL for that.  Also, 20X is not setting TC%CLR
+on a SUPDUP TTY.  Why?  SUPDUP TTYs certainly use %TDCLR.
+Anyway, it seems like both LISP and 20X are in error.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01051.html">&amp;WHOLE</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01946.html">Re: Shifted-0, Modular arithmetic</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01055.html">new LISP rubout processing</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01941.html">new LISP rubout processing</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01947"><strong>Date</strong></a></li>
+<li><a href="threads.html#01947"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

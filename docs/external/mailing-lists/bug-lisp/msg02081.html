@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: PUT/GET -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 5 Mar 80 19:30:00 GMT -->
+<!--X-Message-Id: 412e171bcd6087ed189560caab2fb28e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>PUT/GET</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02082.html">Date Prev</a>][<a href="msg02080.html">Date Next</a>][<a href="msg02083.html">Thread Prev</a>][<a href="msg02089.html">Thread Next</a>][<a href="maillist.html#02081">Date Index</a>][<a href="threads.html#02081">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>PUT/GET</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: NIL at MIT-MC</li>
+<li><em>Subject</em>: PUT/GET</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 5 Mar 80 19:30:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 5 March 1980 14:30-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I also propose that GET be renamed *GET and GET be allowed an optional
+extra argument which would specify the return value. eg,
+
+                        *
+		(GET sym  prop [ default ])
+
+(*= Or appropriate surrogate such as CDR-able list...)
+
+would return the sym's prop property or default if no such property existed.
+The default default should still be () for compatibility AND because that's
+an awfully reasonable thing to return most of the time anyway...
+
+One might even want to allow a fourth argument (setp, default ()) which said 
+whether or not to actually add DEFAULT as a property if it was unseen (saves
+having to scan the plist later or having to do SETPLIST to get around it ...
+
+Maybe there should be a *PUT which does a PUT without looking to see if the
+property already exists -- just does the splice.
+
+Given the proliferation of PUT/GET functionality, I think it's worthwhile
+to at least examine some of the functionality we often try for and what we
+have to do to get it ... A few more options, discretely located as defaultable
+args, would not seem unreasonable. Comments?
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02082.html">CAR and CDR</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02080.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02083.html">PUT/GET</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02089.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02081"><strong>Date</strong></a></li>
+<li><a href="threads.html#02081"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

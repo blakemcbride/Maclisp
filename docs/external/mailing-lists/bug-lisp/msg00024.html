@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LIMIT&#45;CONS for arrays and hunks -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 26 Dec 78 15:14:00 GMT -->
+<!--X-Message-Id: 5668197fbbb8ed251b9b087c6459fc06@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LIMIT-CONS for arrays and hunks</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00025.html">Date Prev</a>][<a href="msg00023.html">Date Next</a>][<a href="msg00025.html">Thread Prev</a>][<a href="msg00023.html">Thread Next</a>][<a href="maillist.html#00024">Date Index</a>][<a href="threads.html#00024">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LIMIT-CONS for arrays and hunks</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: REM at MIT-MC</li>
+<li><em>Subject</em>: LIMIT-CONS for arrays and hunks</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 26 Dec 78 15:14:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, jmc at SU-AI, rww at SU-AI, wilber at SRI-KL</li>
+<li><em>Cc</em>: gsb at MIT-ML</li>
+<li><em>Original-date</em>: 26 DEC 1978 1014-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The informations provided by
+ 1) (ALLOC 'T)
+ 2) (GETSP (1+ (GETSP 0)))
+ 3) input to GC-DAEMON
+are sufficient to write the consers you want, namely &quot;take-new-cell if
+enough space already, otherwise return ()&quot;.  One problem is that the
+array space will dynamically increase and decrease (but if NORET is 
+non-null, it will not decrease).
+  The current action by maclisp, upon running out of any allocatable
+space, was deemed satisfactory for most usages; this action is described
+in the various places that the function ALLOC and the feature GC-DAEMON
+is discussed.  Henry Baker's package on  AI:LIBDOC;GCDEMN BAKER1 provides
+one interesting usage of these features in a way to override the system
+defaults. I really don't see how programming the storage management in
+machine language is less work than accepting the limitations of a LISP
+system and working around that (providing of course that the limitations
+are not prohibitory).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00025.html">Allocating arrays and hunks</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00023.html">TOPS-20 interrupts</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00025.html">Allocating arrays and hunks</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00023.html">TOPS-20 interrupts</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00024"><strong>Date</strong></a></li>
+<li><a href="threads.html#00024"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

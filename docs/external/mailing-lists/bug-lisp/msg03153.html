@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 6 Aug 81 17:18:00 GMT -->
+<!--X-Message-Id: 46ca471d37e063ea0ba3d27de52a8c9b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03154.html">Date Prev</a>][<a href="msg03151.html">Date Next</a>][<a href="msg03154.html">Thread Prev</a>][<a href="msg03151.html">Thread Next</a>][<a href="maillist.html#03153">Date Index</a>][<a href="threads.html#03153">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: REM at MIT-MC</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 6 Aug 81 17:18:00 GMT</li>
+<li><em>Cc</em>: &quot;(FILE [LISP;BUG MAIL])&quot; at MIT-MC</li>
+<li><em>Original-date</em>: 6 August 1981 13:18-EDT</li>
+<li><em>Sender</em>: ___021 at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(DEFUN EDIT-ONCE EXPR (BD NEXMOV OKCHANGES)
+  (PROG (CHR OLDCHR DELTA SIZE)
+    ... (COND ((EQUAL (ASCII 7) CHR) (ECHO) (ERROR 'YOU-RANG) (RETURN NIL)))
+    ... ))
+
+Does this code look familiar? You requested the behavior you got. 
+
+The (ERROR 'YOU-RANG) generates a ;YOU-RANG and a ;BKPT *RSET-TRAP (*RSET is
+the handler that gets errors which have no error channel associated with them).
+
+I don't really think the BUG-LISP people should have to debug your code. This
+is something you clearly could have solved yourself by searching for the 
+YOU-RANG string in your file as I did... Oh, and in future bug reports, please
+specify:
+
+	* the filename(s) involved
+	* a procedure for reproducing the bug
+	* a clear description of how the viewed behavior deviates from what
+	  you think the correct behavior is.
+
+Your bug note contained really none of these. Bug notes really should contain
+all of that information to be very useful.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03154.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03151.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03154.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03151.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03153"><strong>Date</strong></a></li>
+<li><a href="threads.html#03153"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: generic types vs. specific types -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;RZI ng [WF&#45;OW> -->
+<!--X-Date: Sat ,16 Aug 80 18:23:00 EDT -->
+<!--X-Message-Id: e502dbd46a5a47ed5ee2ab72b906e08e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: generic types vs. specific types</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00083.html">Date Prev</a>][<a href="msg00085.html">Date Next</a>][<a href="msg00081.html">Thread Prev</a>][<a href="msg00092.html">Thread Next</a>][<a href="maillist.html#00084">Date Index</a>][<a href="threads.html#00084">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: generic types vs. specific types</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: generic types vs. specific types</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;</li>
+<li><em>Date</em>: Sat ,16 Aug 80 18:23:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    It would be a bad idea to have a different data type
+    for characters if that means that all the fine old numeric
+    functions don't work on them.  The user should not have
+    to have a whole new set of CHAR-+, CHAR-&lt;, CHAR-&gt;, CHAR--,
+    CHAR-LOGAND, CHAR-BOOLE, etc, etc.
+
+Suppose that I, for some reason, WANT to write a portable Lisp editor
+that wil work on an EBCDIC system.  In general, suppose that I want to
+write code that will work in any character set.  In taht case, I have
+no business doing CHAR-BOOLE; it is obviously not a meaningful or
+defined thing to do to a character.  Of the functions you mention,
+indeed CHAR-&lt; and CHAR-&gt; would be needed (although if &gt; works on
+fixnums and flonums and bignums equally well there is no reason
+for it to go to the trouble of failing on character objects),
+because the concept of a collating sequence is usually useful
+and well-understood.
+
+Let me repeat that whatever happens, I would like to see defined Lisp
+functions to do all those things we usually do by doing arithmetic on
+characters, such as uppercasing, converting from numbers to digits (as
+in (+ #/0 x)) and so on.  Having these functions, and defining them
+consistently with NIL, plus the inclusion of some NIL-compatible
+identity macros, MIGHT be all we need to resolve this whole question.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00083.html">Re: character objects &amp; representation issues</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00085.html">Re: character objects &amp; representation issues</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00081.html">Re: generic types vs. specific types</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00092.html">Re: CHPROP problems</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00084"><strong>Date</strong></a></li>
+<li><a href="threads.html#00084"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

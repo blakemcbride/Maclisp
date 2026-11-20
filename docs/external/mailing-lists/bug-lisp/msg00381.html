@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: XLISP Bug? -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Sun, 3 Jun 79 10:30:00 GMT -->
+<!--X-Message-Id: 815bad5c8781abdc8230ca37c179e1bb@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>XLISP Bug?</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00382.html">Date Prev</a>][<a href="msg00380.html">Date Next</a>][<a href="msg00382.html">Thread Prev</a>][<a href="msg00380.html">Thread Next</a>][<a href="maillist.html#00381">Date Index</a>][<a href="threads.html#00381">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>XLISP Bug?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG JONL) at MIT-MC</li>
+<li><em>Subject</em>: XLISP Bug?</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Sun, 3 Jun 79 10:30:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, RWK at MIT-MC, HIC at MIT-MC, GLS at MIT-MC</li>
+<li><em>Original-date</em>: 3 JUN 1979 0630-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(HUNK 'A)
+returns
+(#777777 . A)
+when MAKHUNK is set to T ... Is this how 1-hunks will print? That's pretty
+ugly. What happened (in all lisps) to the ability to recognize a hunk  cuz
+it printed with a trailing dot, .. eg: (A . B . C .) ... if you had left
+that in you could have hunks print as
+(A .)
+(A . A .)
+(A . A . A .)
+and so on ... This would make them visually distinguishable from dotted
+pairs. You could even make the lisp reader smart enuf to recognize this 
+syntax and turn the object into a hunk as I think the syntax is unambigous.
+That might be a feature. I'm not that attached to hunks that i would cry
+if someone objected but ... 
+
+Comments anyone?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00382.html">TOPS-10 bug revisited.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00380.html">TOPS-10 RENAMEF bug found.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00382.html">TOPS-10 bug revisited.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00380.html">TOPS-10 RENAMEF bug found.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00381"><strong>Date</strong></a></li>
+<li><a href="threads.html#00381"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

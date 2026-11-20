@@ -1,0 +1,123 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: eval&#45;when -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Thu ,14 Aug 80 22:40:00 EDT -->
+<!--X-Message-Id: c0648c593592d88834442dd03c626fa6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: eval-when</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00004.html">Date Prev</a>][<a href="msg00070.html">Date Next</a>][<a href="msg00284.html">Thread Prev</a>][<a href="msg00286.html">Thread Next</a>][<a href="maillist.html#00285">Date Index</a>][<a href="threads.html#00285">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: eval-when</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DLW at MIT-AI</li>
+<li><em>Subject</em>: Re: eval-when</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu ,14 Aug 80 22:40:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, Greenberg.Multics at MIT-MULTICS</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 14 August 1980 19:06-EDT
+    From: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;
+
+        (eval-when (load)
+          (eval-when (eval load compile)
+            &lt;stuff&gt;))
+
+        Should it evaluate &lt;stuff&gt; at compile time?  
+
+    If this evaluates &lt;stuff&gt; at compile time, I would be very confused.
+
+Well, COMPLR currently DOES evaluate &lt;stuff&gt; at compile time, and my
+first reaction was that this is a bug.  It seemed, at first, that the
+right thing was for &lt;stuff&gt; to be &quot;evaluted&quot; at those times that were
+in the intersection of the times specified by all surrounding
+eval-whens.  But consider:
+
+(eval-when (compile)
+  (eval-when (eval)
+    &lt;stuff&gt;))
+
+When COMPLR sees the outer eval-when, it calls EVAL to process the
+rest of the stuff.  Then EVAL sees the inner eval-when and, sure
+enough, it's now EVAL-time so &lt;stuff&gt; gets evaluated!  This has
+nothing to do with the intersection of anything, and it seems to be
+the correct behavior, since the name of the thing is &quot;EVAL-when&quot;!  (It
+also does the correct thing with respect to macrology that might
+expand into an (eval-when ...).  The macrology wants to know if the
+stuff is going to be run interpreted or compiled, and the surrounding
+(eval-when (compile) ...) is there to cause the stuff to be run
+interpreted (in the compiler).)
+
+The problem with (eval-when (load) ...) is that it in effect says (to
+the compiler): &quot;continue to process the stuff in here, just as you
+would normally&quot;.  Where what you sometimes want to do is turn off
+inner (eval-when (compile) ...)s.  For example, suppose you had a
+macro that expanded into a bunch of putprops all wrapped up in a
+(eval-when (eval compile load) ...).  If, for some reason, you decided
+that in just this one case you wanted different properties at compile
+and load time, then you might call the macro in two different places,
+once surrounded by an (eval-when (compile) ...) and once surrounded by
+an (eval-when (load) ...).  But if you write them in that order, the
+wrong thing will happen, because the putprops in the
+(eval-when (load) ...) will happen at compile time anyway!
+
+Oh well, I guess that in the days when we did all this stuff with
+(declare (eval (read))) and such hacks, we could never have even been
+able to concieved of such subtleties!
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00004.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00070.html">Re: Confusion over character objects</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00284.html">Re: eval-when</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00286.html">Re: eval-when</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00285"><strong>Date</strong></a></li>
+<li><a href="threads.html#00285"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

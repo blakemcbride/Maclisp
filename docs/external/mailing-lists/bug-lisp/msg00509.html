@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: tnx&#45;lisp -->
+<!--X-From-R13: XAVO@N[WF&#45;OW -->
+<!--X-Date: Fri, 31 Mar 79 17:04:02 GMT -->
+<!--X-Message-Id: ed46eaf33b275a698d43d5bbd5a6fe57@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: tnx-lisp</title>
+<link rev="made" href="mailto:JOHAN@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00510.html">Date Prev</a>][<a href="msg00508.html">Date Next</a>][<a href="msg00510.html">Thread Prev</a>][<a href="msg00508.html">Thread Next</a>][<a href="maillist.html#00509">Date Index</a>][<a href="threads.html#00509">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: tnx-lisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-AI</li>
+<li><em>Subject</em>: Re: tnx-lisp</li>
+<li><em>From</em>: JOHAN@MIT-AI</li>
+<li><em>Date</em>: Fri, 31 Mar 79 17:04:02 GMT</li>
+<li><em>Original-date</em>: 03/31/79 13:04:02 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>[1]  Namestring should always succeed if the string given it is
+syntactically correct.  However, *sometimes* if you name string an
+existing file without specifying a version number, GETJFN will give
+you error : No such version.  namestring will always succeed
+on nonexistant file names.  This appears to be a TNX bug.  Hackers
+here claim that output file groups are not guaranteed to work.
+
+[2]  A side effect of many namestrings is to cause the version number of
+the existing file set to 99999.  eg.  If EMACS is haning onto file foo.lsp;89
+and you read that file into lisp, and then go back to the original EMACS
+and do ^x^s you will write ot foo.lsp;99999.  I see that the no acess by
+other forks bit is on, so maybe someone is aware of this problem.  But I
+dont think that bit does anything.  (Or I am confused about what is means).
+
+Solution:  Make RH of LFGBLK -3.  This is equivalent to '*' which is
+always the right thing.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00510.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00508.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00510.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00508.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00509"><strong>Date</strong></a></li>
+<li><a href="threads.html#00509"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Use of New Keyboards with ITS. -->
+<!--X-From-R13: Xbua Z. Yhyc &#60;XZY ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 4 Mar 80 02:41:00 GMT -->
+<!--X-Message-Id: aaa882b9a324ce9ef757a6b94686e312@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Use of New Keyboards with ITS.</title>
+<link rev="made" href="mailto:JLK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02089.html">Date Prev</a>][<a href="msg02087.html">Date Next</a>][<a href="msg02089.html">Thread Prev</a>][<a href="msg02087.html">Thread Next</a>][<a href="maillist.html#02088">Date Index</a>][<a href="threads.html#02088">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Use of New Keyboards with ITS.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>Subject</em>: Use of New Keyboards with ITS.</li>
+<li><em>From</em>: John L. Kulp &lt;JLK at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 4 Mar 80 02:41:00 GMT</li>
+<li><em>Cc</em>: CPR at MIT-MC, BUG-DDT at MIT-MC, BUG-LISP at MIT-MC,    BUG-ITS at MIT-MC, BUG-TECO at MIT-MC</li>
+<li><em>Original-date</em>: 3 March 1980 21:41-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>We are going to hook up a new kbd to the PTV system in the next few
+days, and the obvious question comes up about how to encode all
+the function keys.  I suppose they could be handled the way
+they are on the old keyboard, namely send chars with the TOP bit +
+100 + &lt;code&gt;.  In order to distinguish them from the old kbd,
+how about encoding them in 140-177?  Presumably the extra modifier
+bits (SUPER, HYPER, and GREEK) need to be allowed (that uses up
+all the bits available in the intelligent terminal protocol, unless
+we want to flush SHIFT and SHIFT-LOCK).  It doesn't much matter
+what the encoding is, as long as its documented.  I guess any
+part of the system which masks off the high modifier bits or
+otherwise depends on them being zero will have to get looked at.
+
+ITS presumably wants to know about the SYSTEM key (treat like BACK/NEXT).
+
+Its about time DDT knew about CLEAR (or CLEAR INPUT on the new kbds) which
+should behave like ^D.  Also, HELP, STOP OUTPUT (^S, actually this should
+probably be defined to do an output hold at the terminal, followed by an
+output reset from the remote process (as is currently done)), ABORT (^G), END
+(^C), RESUME ($P), etc.
+
+TELNET and SUPDUP should be informed about the NETWORK key.
+
+Various programs should know about END, ABORT, RESUME, BREAK, QUOTE, HELP,
+STATUS (I'm not saying every program in the world should be retrofitted
+to know about these, but the basic ones -- DDT, TECO, LISP -- probably
+should).
+
+I suspect that not much is going to happen on this until AI TV's start
+getting new keyboards, but I would at least like to see the encoding
+defined now, so that where only simple changes are required, they
+can be done quickly when desired.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02089.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02087.html">Use of New Keyboards with ITS.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02089.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02087.html">Use of New Keyboards with ITS.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02088"><strong>Date</strong></a></li>
+<li><a href="threads.html#02088"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

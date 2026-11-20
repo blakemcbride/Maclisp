@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Fri, 3 Aug 79 04:30:00 GMT -->
+<!--X-Message-Id: e50632beffef24976b0f620fb8ba77e2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02906.html">Date Prev</a>][<a href="msg02904.html">Date Next</a>][<a href="msg02906.html">Thread Prev</a>][<a href="msg02904.html">Thread Next</a>][<a href="maillist.html#02905">Date Index</a>][<a href="threads.html#02905">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC, RWK at MIT-MC</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Fri, 3 Aug 79 04:30:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 3 AUG 1979 0030-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>VALUE-CELL vs VALUE-CELL-LOCATION
+There are several internal kinds of data not yet visible
+to the lisp user - value cells are one of them.  The segment
+table entry for value cells makes them look like some kind of
+LIST cell, just so that PRINT and CAR and CDR can hack them
+(if you should, perish the thought, ever get a pointer to them).
+But there are other kinds of spaces, for which the the segment
+table gives up with a more-or-less RANDOM description, and you 
+can't do any lisp-like operations with them; e.g. the &quot;symbol-block&quot;
+space, &quot;pdl&quot; spaces, &quot;system&quot; spaces, &quot;uuolinks&quot; areas, etc.
+Really, rather than deal with any of the questions of how to
+extend these pointers into the LISP world, I'd prefer to give 
+only primitives which return locations (addresses) and let the
+user use MUNKAM in order make the transfre explicit.  There is
+of course, no penalty in time or space, in compiled code,
+in this approach - (MUNKAM (VALUE-CELL-LOCATION x)) is just
+as fast a (VALUE-CELL x).  Especially, the only known application
+now for value-cell hackery is LAP, and it wants the location,
+not a &quot;pointer&quot; of any kind, for assembly into code.
+   I'd like to prepare a LAP which takes this approach,
+supplying the needed gap from (GET x 'VALUE) if loaded into
+a LISP without the new feature; how about it guys, will
+VALUE-CELLL-LOCATION be acceptable?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02906.html">VALUE-CELL</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02904.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02906.html">VALUE-CELL</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02904.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02905"><strong>Date</strong></a></li>
+<li><a href="threads.html#02905"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

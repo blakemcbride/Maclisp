@@ -1,0 +1,83 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: ERRLIST: Does it really claim to do that? -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Thu, 8 Jan 81 20:02:00 GMT -->
+<!--X-Message-Id: 08Jan81 150239 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: ERRLIST: Does it really claim to do that?</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03595.html">Date Prev</a>][<a href="msg03593.html">Date Next</a>][<a href="msg03595.html">Thread Prev</a>][<a href="msg03593.html">Thread Next</a>][<a href="maillist.html#03594">Date Index</a>][<a href="threads.html#03594">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: ERRLIST: Does it really claim to do that?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: kmp at MIT-MC, gjs at MIT-AI</li>
+<li><em>Subject</em>: Re: ERRLIST: Does it really claim to do that?</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Thu, 8 Jan 81 20:02:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC</li>
+<li><em>In-reply-to</em>: Kent M. Pitman's message of 8 Jan 81 14:01-EST</li>
+<li><em>Original-date</em>: 8 January 1981 1502-EST (Thursday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I believe the precise story is that the ERRLIST is evaluated
+*after* unwinding the bindings, but the list of forms to be
+evaluated is the value of the variable ERRLIST *before* the
+unwinding.  That is, it &quot;works&quot; to lambda-bind ERRLIST.
+This is the purpose of the variable //, which is used as
+a buffer during this unwinding process.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03595.html">ERRLIST: Does it really claim to do that?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03593.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03595.html">ERRLIST: Does it really claim to do that?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03593.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03594"><strong>Date</strong></a></li>
+<li><a href="threads.html#03594"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

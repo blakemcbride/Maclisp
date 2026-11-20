@@ -1,0 +1,115 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LAST -->
+<!--X-From-R13: DIY ng [WF&#45;[Q (Dboreg I. Yreaf) -->
+<!--X-Date: Wed, 6 Sep 78 07:00:00 GMT -->
+<!--X-Message-Id: 4af3a93057e0abab122bf121a76f2bb9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LAST</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00315.html">Date Prev</a>][<a href="msg02302.html">Date Next</a>][<a href="msg00315.html">Thread Prev</a>][<a href="msg00679.html">Thread Next</a>][<a href="maillist.html#00314">Date Index</a>][<a href="threads.html#00314">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LAST</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: HIC at MIT-MC, RWK at MIT-MC</li>
+<li><em>Subject</em>: LAST</li>
+<li><em>From</em>: RWK at MIT-MC (Robert W. Kerns)</li>
+<li><em>Date</em>: Wed, 6 Sep 78 07:00:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, CWH at MIT-MC</li>
+<li><em>Original-date</em>: 6 SEP 1978 0300-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 5 SEP 1978 2340-EDT
+    From: HIC at MIT-MC (Howard I. Cannon)
+    Subject: LAST
+    To: RWK at MIT-MC
+    CC: (BUG LISP) at MIT-MC, CWH at MIT-MC
+
+        From: RWK at MIT-MC (Robert W. Kerns)
+        Subject: LAST
+        Your comment would be almost valid, except that LAST obviously isn't
+        just CDR'ing down the list checking for NIL.  It is doing a LIST-P
+        on the CDR instead.
+    ------
+    You are wrong.  It is doing a NIL check (look at the damn code before
+    flaming, please).
+    ------
+Twas faked out by it's coincidentally working since the CDR of an atom is
+its (usually null) plist.  Another example of randomness that this can cause!
+
+      After all, this isn't very expensive, a MOVEI, a LSH,
+        and a SKIPL will do it.  I would muchly appreciate it if APPEND would
+        be changed to do likewise.
+    ------
+    Compared to a JUMPN, a MOVEI, LSH, and SKIPL are quite expensive.
+    ------
+Aw c'mon.  Yes, it doubles the loop size.  It still probably all runs in the
+cache (on KL's).  I still wouldn't call it expensive for an interpreter
+      (There should also be a TYPEP before the loop,
+        so (LAST 3.3) wouldn't die).
+    ------
+    I had this idea also, and I might implement it.
+    ------
+      After all, the interpreter isn't supposed to
+        be fast, it's supposed to be suportive and not die on easy mistakes.
+    ------
+    This is true...on the other hand, one does not want to make it unbearably slow.
+    Perhaps a *RSET check is in order...more thought is necessary.
+I would go along with this....*RSET is for things like that.
+    --howard
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00315.html">LAST</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02302.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00315.html">LAST</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00679.html">LAST</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00314"><strong>Date</strong></a></li>
+<li><a href="threads.html#00314"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

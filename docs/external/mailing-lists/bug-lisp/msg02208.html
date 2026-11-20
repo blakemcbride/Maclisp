@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: DIY ng [WF&#45;[Q (Dboreg I. Yreaf) -->
+<!--X-Date: Sun, 6 Aug 78 02:05:00 GMT -->
+<!--X-Message-Id: 0001e971f4aee26dcdaa7690b9893028@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03452.html">Date Prev</a>][<a href="msg02207.html">Date Next</a>][<a href="msg03452.html">Thread Prev</a>][<a href="msg02207.html">Thread Next</a>][<a href="maillist.html#02208">Date Index</a>][<a href="threads.html#02208">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: RWK at MIT-MC (Robert W. Kerns)</li>
+<li><em>Date</em>: Sun, 6 Aug 78 02:05:00 GMT</li>
+<li><em>Cc</em>: NIL at MIT-MC</li>
+<li><em>Original-date</em>: 5 AUG 1978 2205-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>All right, what's going on here.  In MACLISP, the function IN only takes
+one argument, so there is no way to specify an EOF value.  Also, the
+IO-LOSSAGE interrupt appears to be broken.  While it is totally undocumented,
+(LISP ARCHIVE mutters about it not being new in NEWIO, but the old LISP manual
+is totally silent on the issue), one would expect that
+
+(SETQ IO-LOSSAGE '(LAMBDA (X) '(NIL)))
+
+would cause (IN FOO) to return NIL on EOF.  It does not.  It returns
+-1 times the last value returned.  It would seem that the only way to handle
+EOF on a fixnum file is
+
+(SETQ IO-LOSSAGE '(LAMBDA (X) (COND ((EQ CAR X) 'IN) (THROW (CADR X) 'IN-EOF)))
+
+or the sledgehammer of an ERRSET.
+
+I'm not sure what the best way to handle EOF is, but I hope NIL can do better
+than this!!  I also hope that MACLISP will be retrofitted with whatever
+fix is decided on for NIL.  How could this deficiency have lasted this long,
+is there something obvious I'm missing?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03452.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02207.html">SPRINTER on odd-length SETQ's</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03452.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02207.html">SPRINTER on odd-length SETQ's</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02208"><strong>Date</strong></a></li>
+<li><a href="threads.html#02208"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

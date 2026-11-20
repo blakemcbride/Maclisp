@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 31 Dec 80 10:40:00 GMT -->
+<!--X-Message-Id: 0e4137b3dfbeb2ae287bee5cfc9526e0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03611.html">Date Prev</a>][<a href="msg03609.html">Date Next</a>][<a href="msg03611.html">Thread Prev</a>][<a href="msg03608.html">Thread Next</a>][<a href="maillist.html#03610">Date Index</a>][<a href="threads.html#03610">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JPG at MIT-MC</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 31 Dec 80 10:40:00 GMT</li>
+<li><em>Cc</em>: BUG-COMPLR at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 31 December 1980 05:40-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 30 December 1980 06:14-EST
+    From: Jeffrey P. Golden &lt;JPG at MIT-MC&gt;
+    To: BUG-COMPLR at MIT-MC
+    cc: JPG at MIT-MC
+
+    Doing the following gives ;IMPROPER USE OF MACRO - EVAL    :
+    CL^K  ^G  (LOAD '|JPG;CHOMP|)  (CHOMP)
+
+    RWK looked at this a few days ago, and a likely theory is that the 
+    call to (INITIALIZE) is REMOBing something needed by the FORMAT package.
+    Anyway something within the FORMAT package ends up pointing into the 
+    freelist, leading to the above error condition.
+I'm not 100% clear as to what is happening here, but it IS clear that symbols
+are getting bashed that have no right to be bashed.  While looking at various
+SY2 blocks, I found one symbol with a PNAME that ended in IN0 instead of NIL!
+Other than that, I found a number of other symbols with PNAME's which pointed
+to things they shouldn't, all with the Compiled-Code-Needs-me bit set.  My
+theory is that the GC collects symbols with SY.CCN set, if they're not pointed
+to by any obarray.  I can't find anything to contradict this in the code.  But
+there's nothing to say the compiled code in question isn't still referenced
+just because it references a symbol not on any obarray.
+
+Just for the record, the function referencing the symbol is
+FORMAT-FROBNICATE-LISP-OBJECT, the symbol bashed is FMT-FROB/|, and the error
+message is purest nonsense.  If you APPLY the former FMT-FROB/| (it now looks
+something like |nv|), it complains about illegal use of
+a MACRO, while if you look at it's PLIST, it may be GUBBISH, but nowhere is
+there a MACRO property...)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03611.html">&amp;body</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03609.html">STRING BUG</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03611.html">&amp;body</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03608.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03610"><strong>Date</strong></a></li>
+<li><a href="threads.html#03610"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

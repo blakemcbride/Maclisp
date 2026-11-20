@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: #/char -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Thu ,14 Aug 80 17:34:00 EDT -->
+<!--X-Message-Id: d24c23390e72ed8be882e4c2c04e03a9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: #/char</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00003.html">Date Prev</a>][<a href="msg00068.html">Date Next</a>][<a href="msg00003.html">Thread Prev</a>][<a href="msg00068.html">Thread Next</a>][<a href="maillist.html#00067">Date Index</a>][<a href="threads.html#00067">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: #/char</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: #/char</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Thu ,14 Aug 80 17:34:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>1) People who have any code using #/... generally have code that
+   works arithmetic on these things.  You guys who want to make NIL
+   incompatible with the rest of the world, by not having #/...
+   return a fixnum, will either make it impossible for NIL to
+   absorb code written by J-random user of LISP/MACLISP, or else
+   you aspire to convincng *everyone* who's ever used #/... to go
+   back and check their code for fixnum-dependencies.
+2) Is this whole issue the hopless morass of not enough graphic
+   characters again?  Martin, Szolovits, and Sussman have designed
+   a &quot;logical&quot; character set scheme which allows 7- or 8- bit graphics
+   for information interchange (in files, over nets, etc), but permits
+   a user-tailored mapping  to-and-from a larger set (say 8- bit or
+   even 12 bit, a la APL).  Similar &quot;mapping&quot; schemes have been in
+   use for a long time in the IBM world, where EBCDIC is only one of
+   the several mappings into the 8-bit alphabet.  This sort of solution
+   is necessary in the long run, and is clearly superior to forcing
+   every possible new character usage into some # format.  By the bye,
+   I've already programmed up the Martin-Solovits-Sussman scheme in
+   the NIL reader.
+3) More  against the conservative-minded approach of making every new
+   application take a # approach:  The NIL vector syntax works
+   because there is simple extension of any paired bracket -- 
+   namely for { and }, do #{ and };  or in the vector case, we have
+   &quot;#(&quot; paired with &quot;)&quot;.  Yes, this is a very limited approach, but
+   it works for 1 or 2 new data types.  The idea of making #. be
+   the general approach appears attractive, e.g.
+      #.(MAKE-FOO-DATUM ...)
+   but it takes something more than a sophomoric mind to see the
+   worthlessnes of this &quot;hook&quot; as a general information interchange
+   standard.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00003.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00068.html">Re: character objects &amp; randomness</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00003.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00068.html">Re: character objects &amp; randomness</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00067"><strong>Date</strong></a></li>
+<li><a href="threads.html#00067"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

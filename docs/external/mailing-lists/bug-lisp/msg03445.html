@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: (STATUS SYSTEM FOO) -->
+<!--X-From-R13: VWQ ng [WF&#45;[Q (Vbjneq W. Qnaaba) -->
+<!--X-Date: Wed, 10 May 78 20:16:00 GMT -->
+<!--X-Message-Id: 2410e000c0080f5f78875c634dadabfc@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>(STATUS SYSTEM FOO)</title>
+<link rev="made" href="mailto:HIC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00239.html">Date Prev</a>][<a href="msg03444.html">Date Next</a>][<a href="msg00239.html">Thread Prev</a>][<a href="msg03444.html">Thread Next</a>][<a href="maillist.html#03445">Date Index</a>][<a href="threads.html#03445">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>(STATUS SYSTEM FOO)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RLB at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: (STATUS SYSTEM FOO)</li>
+<li><em>From</em>: HIC at MIT-MC (Howard I. Cannon)</li>
+<li><em>Date</em>: Wed, 10 May 78 20:16:00 GMT</li>
+<li><em>Original-date</em>: 10 MAY 1978 1616-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+    Date: 18 APR 1978 1125-EST
+    From: RLB at MIT-MC (Richard L. Bryan)
+    Subject: (STATUS SYSTEM FOO)
+    To: (BUG LISP) at MIT-MC
+
+    This should return an indication (e.g. T) for symbols needed internally in 
+    Lisp but which have no other reason to appear in STATUS SYSTEM.
+    For example, LAMBDA and FUNARG.
+    The philosophy being that (STATUS SYSTEM foo) should return non-NIL for
+    ALL symbols needed by the Lisp system.
+-------
+In the next LISP, (STATUS SYSTEM foo) will return, as a member of its list
+the atom ATOM if foo is a system atom.  This way, CONS will return (SUBR ATOM)
+and LAMBDA will return (ATOM).
+
+--Howard
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00239.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03444.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00239.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03444.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03445"><strong>Date</strong></a></li>
+<li><a href="threads.html#03445"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

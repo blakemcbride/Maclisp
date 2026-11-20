@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SAIL and segmentation -->
+<!--X-From-R13: UZE ng EG&#45;OW (Uhl Egrryr) -->
+<!--X-Date: Wed, 9 Aug 78 23:25:00 GMT -->
+<!--X-Message-Id: bdd54efa0026d13e77ba7819dc2b37a2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SAIL and segmentation</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02195.html">Date Prev</a>][<a href="msg02192.html">Date Next</a>][<a href="msg02195.html">Thread Prev</a>][<a href="msg02192.html">Thread Next</a>][<a href="maillist.html#02194">Date Index</a>][<a href="threads.html#02194">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SAIL and segmentation</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC</li>
+<li><em>Subject</em>: SAIL and segmentation</li>
+<li><em>From</em>: GLS at SU-AI (Guy Steele)</li>
+<li><em>Date</em>: Wed, 9 Aug 78 23:25:00 GMT</li>
+<li><em>Cc</em>: GLS, LES, RPG   </li>
+<li><em>Original-date</em>: 9 Aug 1978 1625-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Several people here at SAIl are having tremendous difficulty
+using MacLISP because of the small address space in the low
+segment.  They have small amounts of compiled code, and
+so sharing is of little consequence; also, SAIL now has lots
+of physical memory.  What matters is the limitation on list
+structure.  Horror upon horrors, how difficult would it be
+at thisstage of the game to re-install the ability to have
+a one-segment LISP for TOPS-10/SAIL?  The system segments
+would have to be back down below BPS and initial list structure,
+with the attendant changes to guys like SYSP who hack BEGFUN
+and ENDFUN, etc.; also the core allocator would have to be
+munged a little, and the high-segment FASLOAD stuff excised or
+at least disabled.  They are really hurting here -- what do
+you think?
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02195.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02192.html">-101_)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02195.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02192.html">-101_)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02194"><strong>Date</strong></a></li>
+<li><a href="threads.html#02194"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

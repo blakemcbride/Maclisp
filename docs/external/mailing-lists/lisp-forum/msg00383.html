@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: LOOP fan mail -->
+<!--X-From-R13: UEP ng [WF&#45;[Z (Uyraa E. Phexr) -->
+<!--X-Date: Thu ,11 Dec 80 19:56:00 EDT -->
+<!--X-Message-Id: 48ef9dc5e6109632c09f01d626d91606@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: LOOP fan mail</title>
+<link rev="made" href="mailto:GSB at MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00000.html">Date Prev</a>][<a href="msg00384.html">Date Next</a>][<a href="msg00001.html">Thread Prev</a>][<a href="msg00384.html">Thread Next</a>][<a href="maillist.html#00383">Date Index</a>][<a href="threads.html#00383">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: LOOP fan mail</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: gjc at MIT-MC</li>
+<li><em>Subject</em>: Re: LOOP fan mail</li>
+<li><em>From</em>: GSB at MIT-ML (Glenn S. Burke)</li>
+<li><em>Date</em>: Thu ,11 Dec 80 19:56:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-ML</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>You missed one significant point and one example.
+You failed to count the space taken by the breakoff function:
+  pname:  6 words (3 fixnum, 3 list), although this could be longer
+	or shorter depending on the genprefix.
+  symbol:  3 words (1 header, 2 sy block)
+  plist:  2 words
+  and one cons cell to intern it.
+That makes the space comparison 23. words, not 11.  2 of those words
+will not be shared (symbol header, and cons cell in the obarray).
+In any case, a more appropriate comparison with the open-coded map is:
+  (LOOP FOR X IN PRELUDE-FILES
+	NCONC (LIST X (GET X 'VERSION)))
+which happens to take 26. words.  That is because there is a special
+optimization for an NCONC of a call to LIST;  fooling it by using
+(LIST* X (GET X 'VERSION) NIL) takes 27. words, same as the open-compiled
+MAP, which i believe it emulates fairly closely.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00000.html">Re: More LOOP fan mail.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00384.html">Re: more loop fan mail</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00001.html">Re: More LOOP fan mail.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00384.html">Re: more loop fan mail</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00383"><strong>Date</strong></a></li>
+<li><a href="threads.html#00383"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

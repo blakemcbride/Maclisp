@@ -1,0 +1,173 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Request for comments (not about characters and fixnums!) -->
+<!--X-From-R13: SP ng [WF&#45;OW (Sqjneq Pnegba) -->
+<!--X-Date: Mon ,18 Aug 80 00:46:00 EDT -->
+<!--X-Message-Id: de5d45c21584dd614342c4baa09dfdb7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Request for comments (not about characters and fixnums!)</title>
+<link rev="made" href="mailto:EB at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00098.html">Date Prev</a>][<a href="msg00616.html">Date Next</a>][<a href="msg00101.html">Thread Prev</a>][<a href="msg00617.html">Thread Next</a>][<a href="maillist.html#00614">Date Index</a>][<a href="threads.html#00614">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Request for comments (not about characters and fixnums!)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: Request for comments (not about characters and fixnums!)</li>
+<li><em>From</em>: EB at MIT-AI (Edward Barton)</li>
+<li><em>Date</em>: Mon ,18 Aug 80 00:46:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(Some of you have seen this before; apologies.)
+
+UNWIND-PROTECT allows you to make sure certain actions (such as the
+closing of a file) happen when a scope is exited regardless of whether
+that scope is exited in the normal flow of control, by *THROW, or by
+^G quit.  However, it requires that the expressions specifying the
+actions be written directly in the UNWIND-PROTECT form; it does not
+directly support figuring out &quot;on the fly&quot; what cleanup actions will
+need to be performed.  For example, suppose you want the following
+particular organization of code:
+
+   (defun F (x y)
+	...
+	(open-a-bunch-of-files x (f y))
+	(munch-the-files-for-a-while)
+	(close-the-files)
+	... )
+
+Suppose further that the number of files opened and the location where the
+file objects are kept is dependent on various parameters and cannot be
+known when F is written.  IOTA and PHI cannot be used in that case, yet
+some form of UNWIND-PROTECT is desirable to keep the files from remaining
+open in the event of a QUIT.
+
+Consider also another example.  Suppose you want to explicitly
+indicate in the file itself that a certain file is always to be read
+using a particular reader syntax.  It is tempting to write at the
+beginning of the file some expression that will set up the reader
+syntax (perhaps by loading a file where it is defined) and write at
+the end of the file some expression that will undo the changes since
+they were intended to be local.  Again, though, some form of
+UNWIND-PROTECT is necessary if you are to insure that the changes
+are local even in the event of a QUIT during loading.
+
+As a final example, consider the following command loop:
+
+   (defun command-loop ()
+     (loop as cmd = (read-a-command)
+	   until cmd = 'STOP
+	   do (funcall (get cmd 'command-server))))
+
+Suppose you want it to be possible for the command servers to perform
+arbitrary actions, but with the assurance that (if the servers so
+request) various cleanup actions will be done whenever COMMAND-LOOP
+is exited by any means.
+
+I would like to propose a set of functions and forms, implemented with
+UNWIND-PROTECT, that allow you to handle cases like the above.  This
+message is a request for comments on the general idea and the particular
+conventions proposed.
+
+   (UNWINDING-SCOPE form1 ... formn)			MACRO
+	evaluates the forms and returns the last one, allowing calls
+	to QUEUE-UNWINDING-ACTION while dynamically within that
+	evaluation.  Expands to an UNWIND-PROTECT surrounded
+	by a lambda-binding of a specvar used as a queue.  The
+	restoration expression of the UNWIND-PROTECT takes actions from
+	the queue and performs them in the order they were queued.
+   (QUEUE-UNWINDING-ACTION when function ... args ...)  LSUBR
+	queues the given function to be APPLY'ed to the given arguments
+	if evaluation of the forms terminates either normally or
+	for some other reason (throw, quit, error).  WHEN may be
+	T (apply always), NORMAL (apply only if normal termination),
+	or ABNORMAL (apply only if not normal termination).
+   (ABNORMAL-UNWIND-PROTECT e u1 ... un)		MACRO
+	(isn't really related to the other two, but while we're on the
+	subject of UNWIND-PROTECT....) is just like UNWIND-PROTECT
+	but only evaluates U1 ... Un if the evaluation of E terminates
+	abnormally.
+
+For debugging convenience QUEUE-UNWINDING-ACTION should also be legal
+at top level, but print a warning if thus used.  (RESET-GLOBAL-UNWINDING-SCOPE)
+or some such thing would &quot;exit&quot; and re-enter the fictitious global scope.
+
+As an example, consider the following version of OPEN for use within an
+unwinding scope:
+
+   (defun UW-OPEN (file &amp;optional (options NIL) (when T))
+      (let ((file-object nil))
+        (abnormal-unwind-protect
+	   (progn (setq file-object (open file options))
+		  (or (eq file-object tyi)(eq file-object tyo)
+		      (queue-unwinding-action when 'close file-object)))
+	   (and (filep file-object)        ; in case quit out of UW-OPEN
+		(not (eq file-object tyo))
+		(not (eq file-object tyi))
+		(close file-object)))
+	file-object))
+
+One possible area for comment:  It might be useful to have named unwinding
+scopes so that you need not push your restoration actions on the innermost
+one.
+
+(Personally, I think that the system LOAD function should contain an unwinding
+scope to allow files to specify local changes without requiring the user to
+use some special LOAD function that the file is intended to be loaded with.
+For certain reasons, if this were done it would also be good to have a
+separate LOAD that did not establish a new scope.)
+
+Comments?  Counterproposals and arguments about uselessness welcome.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00098.html">Re: Character Objects (what else!)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00616.html">Re: UNWINDING-SCOPE</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00101.html">Re: In reply to TK: Character Objects (what else!)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00617.html">Re: In reply to EB: unwind-protect</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00614"><strong>Date</strong></a></li>
+<li><a href="threads.html#00614"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Open&#45;coding, and proliferation of function names -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Thu ,4 Dec 80 19:22:00 EDT -->
+<!--X-Message-Id: 5854a45efacd68e21eb6c72583fea89c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Open-coding, and proliferation of function names</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00459.html">Date Prev</a>][<a href="msg00354.html">Date Next</a>][<a href="msg00459.html">Thread Prev</a>][<a href="msg00461.html">Thread Next</a>][<a href="maillist.html#00460">Date Index</a>][<a href="threads.html#00460">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Open-coding, and proliferation of function names</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Guy.Steele at CMU-10A</li>
+<li><em>Subject</em>: Re: Open-coding, and proliferation of function names</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu ,4 Dec 80 19:22:00 EDT</li>
+<li><em>Cc</em>: JONL at MIT-MC, LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 4 December 1980 1424-EST (Thursday)
+    From: Guy.Steele at CMU-10A
+
+    xxx-IDENTITY -- or even FIX-I and FLO-I (flatfoot FIX-I with a FLO-I 
+    FLO-I) -- is too painful to type all over the place, and within their
+    limited domain MAX$ and + and &gt;$ are extremely convenient and useful, 
+    whether or not they are considered &quot;primitive&quot; or &quot;macro&quot;.
+
+Who said anything about typing them all over the place?
+
+You'd do (DECLARE (FIXNUM ...)) for variables, so you'd never need (FIX-I ...)
+around a variable except in rare (probably uninteresting) cases where it 
+happens to have a fixnum for an instant and you happen to know that.
+
+As for things like (GREATERP (+ I J) K) if K was declared FIXNUM, the rest
+would be inferred easily. So in mathy expressions, very few FIX-I's would be
+needed either.
+
+As for structure references, you might find (GREATERP (FIX-I (CAR X))
+(FIX-I (CAR Y))) pretty ugly, but probably you should have used a typed
+data accessor anyway. Eg, (DEFMACRO FOO (X) `(FIX-I (CAR ,X))) so that
+you could say (GREATERP (FOO X) (FOO Y)). In fact, if GREATERP and &gt; were
+synonymous, you could have said (&gt; (FOO X) (FOO Y)), thus reducing the net
+number of chars (if you're into that).
+
+It's probably true that greaterp tests occur often enough that several
+flavors for brevity might be nice to provide. I'm not convinced that
+this is true, though, of MAX -- a function I have probably only ever
+used four or five times in all my Lisp coding. Maybe other people use
+MAX more often. But unless someone can show me some real applications
+(plural) where MAX is really used more than once or twice a file, I'll
+remain unconvinced as to the need for a name split on that function. It
+would leave open the question of why there shouldn't be a different
+function for SIN of fixnums, for CHAR-UPCASE of chars known to be in the
+alphabetic range, for IO from a known SFA, etc. I would like such
+declarations to be available, but I don't think that building them into
+the names -- except for the most common idioms -- is a good idea.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00459.html">Re: Open-coding, and proliferation of function names</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00354.html">Re: food for hack.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00459.html">Re: Open-coding, and proliferation of function names</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00461.html">Re: Open-coding, and proliferation of function names</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00460"><strong>Date</strong></a></li>
+<li><a href="threads.html#00460"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

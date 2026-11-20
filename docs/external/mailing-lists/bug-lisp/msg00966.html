@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Rriba E. [pQhyybhtu &#60;RSHA@ ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 4 Jan 82 06:56:00 GMT -->
+<!--X-Message-Id: d093ca2ab05e7605a81f32ead35cfb67@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:DEVON at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00967.html">Date Prev</a>][<a href="msg00965.html">Date Next</a>][<a href="msg00967.html">Thread Prev</a>][<a href="msg00965.html">Thread Next</a>][<a href="maillist.html#00966">Date Index</a>][<a href="threads.html#00966">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>From</em>: Devon S. McCullough &lt;DEVON at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 4 Jan 82 06:56:00 GMT</li>
+<li><em>Original-date</em>: 4 January 1982 01:56-EST</li>
+<li><em>Sender</em>: DEVON7 at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I've got a bug that just can't be reproduced in the interpreter, it may be
+timing-related but I don't think it's a compiler bug, just something that
+only happens at the faster execution speed of compiled code.
+
+At some random time I get a MPV error at 44333 and if I &lt;Alt&gt;G then
+another MPV error at 11346 occurs.  In an effort to track this down, I
+aborted the program before it bombed, using the (^G) function, not ^G which
+was disabled while the program runs.
+Then I typed (subr 44333) and I got a MPV at 10033&gt;&gt;hlrz 4,(17).
+
+So I ran a new LISP and did (subr 44222) and it replied GC, and then
+did (subr 11346) and it came back with READ-EVAL-*-PRINT, no problem.
+
+Thus my bug seems to be freaking the GC somehow.  It turns out there are
+no RPLACAs or RPLACDs anywhere in my code, so they aren't responsible
+for trashing random memory locations, are there any alternative causes?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00967.html">You two recent bug reports</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00965.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00967.html">You two recent bug reports</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00965.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00966"><strong>Date</strong></a></li>
+<li><a href="threads.html#00966"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

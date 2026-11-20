@@ -1,0 +1,115 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: is it sensible to think of an extended address Lisp for the DEC&#45;20? -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Wed ,10 Dec 80 13:08:00 EDT -->
+<!--X-Message-Id: 546022230431851232f1bed5024df2c8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: is it sensible to think of an extended address Lisp for the DEC-20?</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00588.html">Date Prev</a>][<a href="msg00294.html">Date Next</a>][<a href="msg00291.html">Thread Prev</a>][<a href="msg00295.html">Thread Next</a>][<a href="maillist.html#00293">Date Index</a>][<a href="threads.html#00293">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: is it sensible to think of an extended address Lisp for the DEC-20?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: HEDRICK at RUTGERS</li>
+<li><em>Subject</em>: Re: is it sensible to think of an extended address Lisp for the DEC-20?</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Wed ,10 Dec 80 13:08:00 EDT</li>
+<li><em>Cc</em>: meyers at SRI-KL, action at SRI-KL, geoff at SRI-KL,      lisp-forum at MIT-MC, frank at utah-20, cpr at MIT-MC,      admin.mrc at SU-SCORE, Howard.Wactlar at CMU-10A,      rindfleisch at sumex-aim, josh at rutgers, amarel at rutgers,      levy at rutgers</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I remember all too well worrying about whether to extend MacLISP for
+DEC20 extended addressing, when it first was announced (rumored?).
+It's been some time, but I'll try to outline here why we (JONL, I, and
+whoevere else was around at the time) didn't do it:
+
+(1) There is an obvious problem regarding data formats.  Either you
+make pointers larger than 18 bits, or you don'.  If you don't, then
+you can only take advantage of the extra address space by filling it
+with compled code (which might have been acceptable for MACSYMA),
+and additionally you could keep special things like print name strings
+outside the &quot;primary&quot; 18-bit address space which pointers can reference.
+The reason one might not make pointers bigger is to preserve as much
+compatibility as possible with old code (e.g. HLRZ=CAR, HRRZ=CDR).
+On the other hand, this doesn't really work either, because as I recall
+indexing off a pointer whose LH is zero means &quot;current 18-bit address
+space&quot;, not &quot;address space zero&quot;.  One might use HLRO and HRRO for CAR and
+CDR, and make the last 18-bit address space be the one for data, but
+already it's getting kludgy.  Also, there's the problem of not being
+able to put list-structure constants as immediate data, e.g.
+(CAIN B (QUOTE FOO)) as an instruction.
+On the other hand, if you make pointers be greater than 18 bits, the
+data formats have to change radically; in particular, list cells noiw
+occupy two words.  Thus you have already lost a factor of two on space
+before beginning to get any back.  This could be expected to have a
+severe effect on virtual memory performance, particularly on programs
+that didn't need extended addressing anyway, which are many.
+
+(2) After number (1), you want another reason???
+
+The problem is that DEC20 extended addressing is really a kludge,
+and it's not a simple question of a smooth upgrading of an existing
+LISP system.  We estimated that over half the existing code would
+have to be rewritten; given the choice of doing that or holding off
+and waiting for the LISP Machine or VAX, the latter seemed more
+attractive and profitable.
+
+P.S. I just remembered that using HRRO and HLRO didn't work either,
+because DEC20 extended addressing called for ignoring the LH of
+an index if the sign bit was set (this was to make indexing off
+AOBJN pointers still work, in some sense).  I told you it was a kludge!
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00588.html">Re: EQ(UAL) in SUBST</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00294.html">Re: a note on extended addressing lisp for 20's</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00291.html">Re: is it sensible to think of an extended address Lisp for the DEC-20?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00295.html">Re: is it sensible to think of an extended address Lisp for the DEC-20?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00293"><strong>Date</strong></a></li>
+<li><a href="threads.html#00293"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

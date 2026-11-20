@@ -1,0 +1,112 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;RZI ng [WF&#45;OW> -->
+<!--X-Date: Mon ,27 Apr 81 13:45:00 EDT -->
+<!--X-Message-Id: 35aa6a5ae56859c6204853c6b961c92f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00815.html">Date Prev</a>][<a href="msg00813.html">Date Next</a>][<a href="msg00815.html">Thread Prev</a>][<a href="msg00813.html">Thread Next</a>][<a href="maillist.html#00814">Date Index</a>][<a href="threads.html#00814">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DLA at MIT-EECS</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;</li>
+<li><em>Date</em>: Mon ,27 Apr 81 13:45:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI, BUG-LISPM at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Oh, now I see.  Yes, you're right.  The only question is whether to
+bother introducing the name OPENF, since it does look like the new
+functinality could be added to OPEN and WITH-OPEN-FILE without changing
+the old functionality.
+
+If nobody says anything for a while, I will change OPEN and
+WITH-OPEN-FILE to accept the new syntax as well as the old, with the
+aim of leaving it that way forever so that we do not have to force the
+users to change their code, and so that we don't need new versions of
+both of these things.  If anyone disagrees, say so and I will cease and
+desist.
+
+I disagree about things &quot;optionally taking arguments&quot;.  There are two
+reasons to prefer the convention that all keywords should always take
+one argument.  One reason is that if you have a keyword whose presence
+or absence is serving as a flag, then it is hard to take a boolean
+value and pass that on to a function as a flag.  That is, suppose function
+FOO has a :BINARY-P keyword argument.  Then
+  (foo ':bar 4 ':binary-p x ':baz 5)
+is simpler than
+  (if x
+      (foo ':bar 4 ':binary-p ':baz 5)
+      (foo ':bar 4 ':baz 5))
+or
+  (apply #'foo (append (if x '(:binary-p) nil) '(:bar 4 ':baz 5)))
+or anything else I can think of.  The other reason is that keyword
+argument lists can be used as disembodied property lists:
+  (defun foo (x &amp;rest options)
+    (let ((plist (locf options)))
+      (if (get plist ':binary-p) ...)))
+So I advocate adopting the convention that all keywords always
+be followed by an argument.  This does have the problem that
+it becomes slightly more verbose to do some things.  For example,
+   (open &quot;foo;bar&quot; ':read)
+is easier to type than
+   (open &quot;foo;bar&quot; ':mode ':read)
+or whatever.  I am not sure what to do about this.  Opinions?
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00815.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00813.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00815.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00813.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00814"><strong>Date</strong></a></li>
+<li><a href="threads.html#00814"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Function cells. -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ N [WF&#45;[Q> -->
+<!--X-Date: Tue ,30 Aug 83 23:58:00 EDT -->
+<!--X-Message-Id: 3af3fb744194ef7c114c139d006e651d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Function cells.</title>
+<link rev="made" href="mailto:GJC@MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00638.html">Date Prev</a>][<a href="msg00636.html">Date Next</a>][<a href="msg00623.html">Thread Prev</a>][<a href="msg00625.html">Thread Next</a>][<a href="maillist.html#00637">Date Index</a>][<a href="threads.html#00637">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Function cells.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM @ MIT-MC</li>
+<li><em>Subject</em>: Function cells.</li>
+<li><em>From</em>: George J. Carrette &lt;GJC @ MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,30 Aug 83 23:58:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I would credit JONL with introducing what is effectively the
+function-cell functionality to Maclisp. Even though the internals
+of the function calling mechanism in maclisp uses various properties,
+EXPR, FEXPR, LSUBR, SUBR, FSUBR, and also various function cells with
+the UUOLINK mechanism, the user only need be aware of the existence of
+DEFUN. Here is some old lisp mail on the topic:
+
+3/1/69 JONL
+
+ THE CURRENT VERSION OF LISP, &quot;LISP 102&quot;, HAS
+THE FOLLOWING AS-YET UNDOCUMENTED FEATURES:
+
+	1)&quot;DEFUN&quot; IS AN FSUBR USED TO DEFINE
+FUNCTIONS. EXAMPLES ARE
+	(DEFUN ONECONS (X) (CONS 1 X))
+WHICH IS EQUIVALENT TO 
+	(DEFPROP ONECONS 
+		(LAMBDA (X) (CONS 1 X)
+	 EXPR)
+
+THE NOVEL FEATURE OF &quot;DEFUN&quot; IS THAT ONE NEED
+ NOT BE SO CONCERNED WITH BALANCING
+PARENTHESES AT THE VERY END OF THE FUNCTION
+DEFINITION.  ALSO, THE &quot;LAMBDA&quot; NEED NOT BE 
+DIRECTLY INSERTED.
+
+Of course, the time this note was written none of the hairier
+specialized calling mechanisms had been added to maclisp.
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00638.html">Re: function cells</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00636.html">Function cells</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00623.html">Re: Function cells</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00625.html">Zippy the mailer, or ... are we on the net yet?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00637"><strong>Date</strong></a></li>
+<li><a href="threads.html#00637"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

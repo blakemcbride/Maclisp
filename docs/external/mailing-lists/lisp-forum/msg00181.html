@@ -1,0 +1,84 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: DEFSTRUCT, reclaimable storage, and "resources" -->
+<!--X-From-R13: POY ng [WF&#45;OW (Ivyyvnz O. Ybeasryq) -->
+<!--X-Date: Sun ,30 Nov 80 23:33:00 EDT -->
+<!--X-Message-Id: 74e879f0bb99ed5a87036a162fab1555@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: DEFSTRUCT, reclaimable storage, and &quot;resources&quot;</title>
+<link rev="made" href="mailto:BAK at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00180.html">Date Prev</a>][<a href="msg00182.html">Date Next</a>][<a href="msg00182.html">Thread Prev</a>][<a href="msg00451.html">Thread Next</a>][<a href="maillist.html#00181">Date Index</a>][<a href="threads.html#00181">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: DEFSTRUCT, reclaimable storage, and &quot;resources&quot;</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DLW at MIT-AI, LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: Re: DEFSTRUCT, reclaimable storage, and &quot;resources&quot;</li>
+<li><em>From</em>: BAK at MIT-AI (William A. Kornfeld)</li>
+<li><em>Date</em>: Sun ,30 Nov 80 23:33:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>If I understand the Lispm resource feature, it requires allocation and
+deallocation to happen within some lexical contour.  Many of the
+applications I have do not behave in a way that could take advantage of
+this facility.  For example, I make use of a queue of linked structures
+(each one containing a pointer to the next).  After a structure has
+&quot;reached&quot; the front of the queue (after some indeterminate time, and not
+within the lexical contour in which it was created) the structure is
+reclaimable.  My suggestion still stands, although I guess it is
+possible that a new facility could be created that deals with more
+general objects than structures implemented as art-q arrays.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00180.html">Re: DEFSTRUCT and reclaimable storage</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00182.html">Re: DEFSTRUCT and reclaimable storage</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00182.html">Re: DEFSTRUCT and reclaimable storage</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00451.html">Re: null LAMBDA bodies?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00181"><strong>Date</strong></a></li>
+<li><a href="threads.html#00181"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

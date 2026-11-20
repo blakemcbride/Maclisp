@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: /\ -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,26 Jan 81 05:40:00 EDT -->
+<!--X-Message-Id: 9e440567175833a925a89106cf1b7024@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: /\</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00434.html">Date Prev</a>][<a href="msg00435.html">Date Next</a>][<a href="msg00571.html">Thread Prev</a>][<a href="msg00428.html">Thread Next</a>][<a href="maillist.html#00573">Date Index</a>][<a href="threads.html#00573">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: /\</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: Re: /\</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,26 Jan 81 05:40:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 25 January 1981 10:01-EST
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    Subject:  /\
+    To: LISP-FORUM at MIT-MC
+    
+    For maclisp users, an unwind-protected END-OF-FILE-EVAL-QUEUE
+    would be sufficient to set up local modes of all kinds, since
+    Emacs doesn't actually do a lisp read on the file.
+    #.(PROGN (PUSH '(RESET-SLASH-SYNTAX) END-OF-FILE-EVAL-QUEUE)
+	     (SET-SLASH-SYNTAX) NIL)
+    [There is a slight problem with sub-loading and the dynamic scope of
+     readtable et. al.]
+    
+    By the way, isn't read-time evaluation considered *problematic*?
+Actually, the next LISP (XLISP) has two new variables:
+FILE-EXIT-FUNCTIONS and FILE-EXIT-FUNCTIONS-DEFAULT.  Each LOAD
+binds FILE-EXIT-FUNCTIONS to FILE-EXIT-FUNCTIONS-DEFAULT.  These
+are lists of functions of one argument.  When the file is finished,
+each function is popped off the list and called on an argument of
+().  If the file is exited abnormally (^G or *THROW), it is called
+on the file array.  (Mostly because this is the only useful non-null
+object I could think of, but it does let you report the filepos
+that got an error).
+
+There are a number of other things to do with this besides local modes.
+One of the more important is to defer setting the VERSION property of
+a file (which says whether it has previously been loaded by MacLisp
+convention) until the file has been fully loaded, thus preventing
+^G'd loads from breaking things due to half-loaded files.  Another
+common case is to perform some setup action after all forms in the file
+have been performed, such as flavor compilation, etc.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00434.html">Re: George, take a float until your hat walks.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00435.html">Re: mode lines</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00571.html">Re: /\</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00428.html">Re: /\ Mess.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00573"><strong>Date</strong></a></li>
+<li><a href="threads.html#00573"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

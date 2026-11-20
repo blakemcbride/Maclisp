@@ -1,0 +1,118 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Malformed do loops -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 21 Apr 81 15:50:00 GMT -->
+<!--X-Message-Id: 56814756ec824d61459b8b8558e8fa57@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Malformed do loops</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02575.html">Date Prev</a>][<a href="msg02573.html">Date Next</a>][<a href="msg02575.html">Thread Prev</a>][<a href="msg02573.html">Thread Next</a>][<a href="maillist.html#02574">Date Index</a>][<a href="threads.html#02574">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Malformed do loops</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: Malformed do loops</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 21 Apr 81 15:50:00 GMT</li>
+<li><em>Cc</em>: MOON at MIT-MC, BUG-LMMAN at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 21 April 1981 10:50-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 21 April 1981 08:15-EST
+    From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+
+        Date: 17 April 1981 17:31-EST
+        From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+        Subject: Malformed do loops
+        To: MOON at MIT-MC
+        cc: BUG-lmman at MIT-AI, BUG-lispm at MIT-AI
+
+	    Date: 17 April 1981 16:04-EST
+	    From: David A. Moon &lt;MOON at MIT-MC&gt;
+
+From: 		ALAN@MIT-MC
+Date: Thu, 17 Apr 81 11:29:03 GMT
+Original-Date: 04/17/81 07:29:03 EDT
+Subject:
+		To: (BUG lmman) at MIT-AI
+		The do loops in both of the samefringe functions in the stack-group
+		documentation examples, are malformed.  (pages 154 and 155)
+
+	    No they aren't.  This is an incompatibility between Lisp machine
+	    and Maclisp.  That code was tested by running it directly out of
+	    the source file of the manual by the way.
+        
+        Well that's a shame.  Could we get it changed back?  Doesn't anyone
+        else ever mis-type the number of parens in a do loop out there?  I
+        sure am surprised I haven't noticed this before given the number of
+        times I make the error.
+
+    Huh?  Am I confused or are you two?  As near as I can figure, both DO loops
+    are perfectly legal in both LISPM and MacLisp.  Or are you refering to
+    something else besides the atomic index variable specification?
+
+Well, well.  MacLisp does seem to try and support this losing feature:
+
+(putprop 'v1 'foo 'bar)
+FOO 
+(do (v1 v2) (nil) (print (list v1 v2)))
+(NIL NIL) 		;first time around v1 and v2 bound to nil
+;FOO UNBOUND VARIABLE	;(caddr 'v1) is FOO!
+
+;BKPT UNBOUND-VARIABLE
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02575.html">Re: #\STOP-OUTPUT</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02573.html">Malformed MacLisp</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02575.html">Re: #\STOP-OUTPUT</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02573.html">Malformed MacLisp</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02574"><strong>Date</strong></a></li>
+<li><a href="threads.html#02574"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

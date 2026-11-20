@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SAIL&#45;NEWIO -->
+<!--X-From-R13: Rvpx Unoevry &#60;DBU ng EG&#45;OW> -->
+<!--X-Date: Thu, 4 Jan 79 21:54:00 GMT -->
+<!--X-Message-Id: 71463998fa241c63bd8bfe9854469da6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SAIL-NEWIO</title>
+<link rev="made" href="mailto:RPG at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00006.html">Date Prev</a>][<a href="msg00004.html">Date Next</a>][<a href="msg00006.html">Thread Prev</a>][<a href="msg00004.html">Thread Next</a>][<a href="maillist.html#00005">Date Index</a>][<a href="threads.html#00005">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SAIL-NEWIO</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC    </li>
+<li><em>Subject</em>: SAIL-NEWIO</li>
+<li><em>From</em>: Dick Gabriel &lt;RPG at SU-AI&gt;</li>
+<li><em>Date</em>: Thu, 4 Jan 79 21:54:00 GMT</li>
+<li><em>Original-date</em>: 4 Jan 1979 1354-PST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>	I've come across a strange diskio bug in SAIL-NEWIO.
+
+Namely, suppose that { is a read macro that basically does TYI's.
+However, assume that [ and &lt; cause a READ to occur and ] and &gt;
+are splicing macros al la (lambda () ()) and that you are scanning something
+like:
+
+	{[foo] &lt;bar&gt; [abcd] =&gt; ...}
+
+The program does a tyi and sees the [, flushes it, and the does (READ file),
+getting &quot;foo&quot; (and removing the ] from consideration). Now it does a TYI and
+gets &gt; (!!!), then a space, then the &lt; (!!!). Here it does the correct (READ file).
+It flushes the &gt; but then the next TYI gets a &gt; again!!!
+
+This sounds suspicious to me.
+			-rpg-
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00006.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00004.html">{[foo]&lt;bar&gt;[bletch] =&gt;)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00006.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00004.html">{[foo]&lt;bar&gt;[bletch] =&gt;)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00005"><strong>Date</strong></a></li>
+<li><a href="threads.html#00005"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

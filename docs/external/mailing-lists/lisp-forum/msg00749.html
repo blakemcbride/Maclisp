@@ -1,0 +1,117 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Suggested new lambda&#45;list syntax -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Fri ,25 Sep 81 20:06:00 EDT -->
+<!--X-Message-Id: 4ec45b74ab68f0f63935ae71235451b3@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Suggested new lambda-list syntax</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00750.html">Date Prev</a>][<a href="msg00748.html">Date Next</a>][<a href="msg00751.html">Thread Prev</a>][<a href="msg00738.html">Thread Next</a>][<a href="maillist.html#00749">Date Index</a>][<a href="threads.html#00749">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Suggested new lambda-list syntax</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: rms at MIT-AI</li>
+<li><em>Subject</em>: Suggested new lambda-list syntax</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri ,25 Sep 81 20:06:00 EDT</li>
+<li><em>Cc</em>: MOON at MIT-MC, LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+ From the very beginning, there have been several people around here 
+who never really accepted the &amp;-keyword format for lambda lists -- KMP 
+in particular has long been agitating for the list-like format which
+you have just suggested.   I more-or-less agree with MOON's comments 
+reproduced below about the importance of keeping the present &amp;OPTIONAL, 
+&amp;REST, and &amp;AUX; since these are the most common cases, I'd hate to see 
+their usage haired up even one iota.   And I tend to agree with Fahlman 
+that the proposed *format* is not succinct enough to be a &quot;real winner&quot; 
+(whereas &amp;OPTIONAL, &amp;REST and &amp;AUX are);  but at least in the rare cases 
+where such additional generality is desired by a programmer, his requirements 
+should be met in an upwards-compatible way.
+
+However, I will say in defense of your proposal that it appears to be 
+fully upwards compatible, so that we needn't flush the existing syntax, 
+at least for the &quot;common&quot; cases, in order to add the more general mechanisms.
+
+  Date: 23 September 1981 20:28-EDT
+  From: David A. Moon &lt;MOON at MIT-MC&gt;
+    I think &amp;OPTIONAL, &amp;REST, &amp;AUX, and &amp;KEY are quite different from the other
+    lambda-list keywords.  Those four keywords delimit boundaries between
+    various sublists, which could have been written as separate lists except
+    that that would be a mess.  Your proposal doesn't really apply sensibly to
+    those four keywords.  For other ones like &amp;QUOTE, &amp;SPECIAL, etc. it would
+    be an improvement.
+    A separate point: I don't think it makes sense to complicate the syntax in
+    order to get rid of the reserved words.  Reserved words in this context cause
+    no harmful effects, whereas a syntax with more parentheses and more noise
+    words would decrease readability, and in a very central, heavily-used part
+    of the language too.
+
+One other interesting benefit, should your proposal go thru, is that
+destructuring could be put into the lambda syntax without needing to
+decide whether one wants the data-directed destructuring, or the program
+directed one -- there is plenty of room in the keyword space to select
+either one.  Currently, MacLISP and NIL don't really have destructuring
+for LAMBDAs (only for LET), and the LISPM has no destructuring yet; so 
+there would be no incompatibility problem.  The MacLISP/NIL LET could
+then produce an apropriate flavor of destructuring lambda, and an
+alternative let, say PLET (for Program-directed-destructuring-LET) would
+produce the other flavor.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00750.html">Lists for REST, OPTIONAL and AUX look nice</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00748.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00751.html">Suggested new lambda-list syntax</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00738.html">Re: Suggested new lambda-list syntax</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00749"><strong>Date</strong></a></li>
+<li><a href="threads.html#00749"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

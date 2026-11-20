@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 26 Oct 81 19:38:00 GMT -->
+<!--X-Message-Id: 098813392540bd94ae5cedfd0989dc25@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01048.html">Date Prev</a>][<a href="msg01046.html">Date Next</a>][<a href="msg01048.html">Thread Prev</a>][<a href="msg01046.html">Thread Next</a>][<a href="maillist.html#01047">Date Index</a>][<a href="threads.html#01047">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 26 Oct 81 19:38:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 26 October 1981 14:38-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I ran my timing tests with *RSET both on an off. You get a factor of 3
+speed-up with *RSET off. Still not good enough. The compilation of
+(BIT1P X J) is particulaly poor. So I open-coded somethings by hand,
+and called +INTERNAL-RPLACHAR-N et. al. Still not good enough.
+
+But why a function call to get an element of a string? That is what 
+stinks. So, I changed the implementation, made my own strings that
+used a HUNK of FIXNUMS, and got open coding and decent speed.
+The same thing works like a charm for BIT1P ==&gt;
+
+(LOGAND (LSH 1 (\ J 36.)) (CXR (+ 2 (// J 36.)) X)).
+
+Oh well. Doesn't really matter I guess. I just wish there
+were more vax around so that we didn't have to use the PDP10
+to do the port from VMS-NIL to UNIX-NIL.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01048.html">&quot;modifications&quot;, or extensions?  a 2-bit misunderstanding</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01046.html">Your timing worries, and generality</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01048.html">&quot;modifications&quot;, or extensions?  a 2-bit misunderstanding</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01046.html">Your timing worries, and generality</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01047"><strong>Date</strong></a></li>
+<li><a href="threads.html#01047"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

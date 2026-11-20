@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Proposed incompatible change to MacLISP FORMAT function -->
+<!--X-From-R13: "Uhl Z. Egrryr, Xe." &#60;UZE ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 16 Jun 79 23:58:00 GMT -->
+<!--X-Message-Id: 025d4accfa5a826859d3f9741c0002a0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Proposed incompatible change to MacLISP FORMAT function</title>
+<link rev="made" href="mailto:GLS at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03000.html">Date Prev</a>][<a href="msg02998.html">Date Next</a>][<a href="msg03004.html">Thread Prev</a>][<a href="msg03003.html">Thread Next</a>][<a href="maillist.html#02999">Date Index</a>][<a href="threads.html#02999">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Proposed incompatible change to MacLISP FORMAT function</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: Proposed incompatible change to MacLISP FORMAT function</li>
+<li><em>From</em>: &quot;Guy L. Steele, Jr.&quot; &lt;GLS at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 16 Jun 79 23:58:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 16 June 1979 19:58-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 16 JUN 1979 0323-EDT
+    From: RWK at MIT-MC (Robert W. Kerns)
+
+From:         Date:
+Date: Thu, 15 Jun 79 23:44:18 GMT
+Original-Date: 06/15/79 19:44:18 EDT
+Subject:
+        From: GLS at MIT-AI
+        To:   *CMU, *DM, *MC, *ML, *AI
+        Re:   Proposed incompatible change to MacLISP FORMAT function
+
+        Currently NIL means &quot;output to the standard output files&quot; (under the
+        control of TYO, OUTFILES, ^W, and ^R variables), and T means &quot;output
+        to the file in the TYO variable&quot;.  ... to get what NIL now means, one
+        can use T. To get what T now means, one can use a list of T, i.e. (T).
+        Any objections?
+        -- GLS
+
+    What's wrong with using TYO to mean &quot;output to the file in the TYO variable&quot;?
+    (For that matter, why not call TYO something LISPM compatible like
+    CONSOLE-OUTPUT?  It's probably too late, but calling the variable TYO was a
+    mistake, I think.)  I have never used T to mean TYO, I always use TYO directly,
+    so this won't break any of my code on that score, although maybe the NIL might.
+
+    However, I think this change is important enough to change to make it worth
+    fixing the various code which will be broken.  (JONL:  No cracks about fixing
+    DRB's modes package, please!)
+I forgot to mention that T means &quot;use the value in TYO, UNDER
+THE CONTROL OF THE ^W SWITCH&quot;.  Hence (FORMAT '(T) ...) and
+(FORMAT TYO ...) would mean slightly different things.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03000.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02998.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03004.html">Proposed incompatible change to MacLISP FORMAT function</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03003.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02999"><strong>Date</strong></a></li>
+<li><a href="threads.html#02999"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

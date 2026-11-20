@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: funny&#45;looking eval thingie on stack -->
+<!--X-From-R13: ROHS.FAGDSFLYK ng Q[G&#45;10O  -->
+<!--X-Date: Thu, 24 May 79 02:16:00 GMT -->
+<!--X-Message-Id: e617867ce110a2c83ce5559cecad3536@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>funny-looking eval thingie on stack</title>
+<link rev="made" href="mailto:DAVE.TOURETZKY at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00409.html">Date Prev</a>][<a href="msg00408.html">Date Next</a>][<a href="msg00409.html">Thread Prev</a>][<a href="msg00408.html">Thread Next</a>][<a href="maillist.html#00411">Date Index</a>][<a href="threads.html#00411">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>funny-looking eval thingie on stack</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-AI</li>
+<li><em>Subject</em>: funny-looking eval thingie on stack</li>
+<li><em>From</em>: DAVE.TOURETZKY at CMU-10A </li>
+<li><em>Date</em>: Thu, 24 May 79 02:16:00 GMT</li>
+<li><em>Original-date</em>: 23 May 1979 2216-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+I am trying to make FIXIT, my MacLisp debugger, invisible to the
+user.  This means it has to know what parts of itself will appear on
+the stack so it can edit them out.  I found a rather strange thing
+on the stack today that apparently only gets built when a uuo call
+to EVAL, made inside of the function DEBUG, is snapped.  The stack item
+looks like  (APPLY -nnn (EVAL (#24016 -1)) -mmm).  Where do those weird
+arguments come from?
+
+The file AI:SEF;FIXIT LOG is a log of a brief terminal session demonstrating
+this bug.  The source code for FIXIT is on AI:SEF;FIXIT 1, and the FASL file
+was created by :QC at AI.  The utility function ERUN is used in the bug demo
+to print out the stack.  Its definition is in AI:SEF;FIXUTL 1.
+
+Please let me know if this oddity is due to a bug, or if I must take it
+into account in FIXIT's stack editing routine.  Thanks,  -- Dave Touretzky
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00409.html">funny-looking eval thingie on stack</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00408.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00409.html">funny-looking eval thingie on stack</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00408.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00411"><strong>Date</strong></a></li>
+<li><a href="threads.html#00411"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

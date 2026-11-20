@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: () as a lambda variable -->
+<!--X-From-R13: VWQ ng [WF&#45;[Q (Vbjneq W. Qnaaba) -->
+<!--X-Date: Wed, 19 Jul 78 10:33:00 GMT -->
+<!--X-Message-Id: 0a2dc2c8952cf747624c3a867ceb233f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>() as a lambda variable</title>
+<link rev="made" href="mailto:HIC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02254.html">Date Prev</a>][<a href="msg02252.html">Date Next</a>][<a href="msg02255.html">Thread Prev</a>][<a href="msg02254.html">Thread Next</a>][<a href="maillist.html#02253">Date Index</a>][<a href="threads.html#02253">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>() as a lambda variable</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: () as a lambda variable</li>
+<li><em>From</em>: HIC at MIT-MC (Howard I. Cannon)</li>
+<li><em>Date</em>: Wed, 19 Jul 78 10:33:00 GMT</li>
+<li><em>Original-date</em>: 19 JUL 1978 0633-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 18 JUL 1978 2346-EDT
+    From: JONL at MIT-MC (Jon L White)
+    Subject: () as a lambda variable
+    To: (BUG LISP) at MIT-MC
+
+    Would it be possible for the next version of the interpreter
+    to permit constructs such as  &quot;(LAMBDA (V1 V2 () V4) . . .)&quot;  to be 
+    applicable;  thus one could explicitly show where he expects a lambda-
+    variable to be unused, without the compiler complaining.  This is in the
+    current COMPLR, but of course is of little value until the interpreter
+    will overlook () in the bound var list.
+--------
+I guess I didn't send out a note, but this has already been implimented
+(try :XL).  It does not do the **INTERNAL** frob, it actually ignores the
+().
+
+--howard
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02254.html">() in bound var list</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02252.html">Proposed GETSYNTAX function</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02255.html">() as a lambda variable</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02254.html">() in bound var list</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02253"><strong>Date</strong></a></li>
+<li><a href="threads.html#02253"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LAMBDA proposals and counter&#45;proposals -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;xzc ng [WF&#45;OW> -->
+<!--X-Date: Fri ,2 Oct 81 01:38:00 EDT -->
+<!--X-Message-Id: 6bf8a10bfaed2418bf053898ba00fe89@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LAMBDA proposals and counter-proposals</title>
+<link rev="made" href="mailto:kmp at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00723.html">Date Prev</a>][<a href="msg00721.html">Date Next</a>][<a href="msg00724.html">Thread Prev</a>][<a href="msg00725.html">Thread Next</a>][<a href="maillist.html#00722">Date Index</a>][<a href="threads.html#00722">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LAMBDA proposals and counter-proposals</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: EAK at MIT-MC</li>
+<li><em>Subject</em>: LAMBDA proposals and counter-proposals</li>
+<li><em>From</em>: Kent M. Pitman &lt;kmp at MIT-AI&gt;</li>
+<li><em>Date</em>: Fri ,2 Oct 81 01:38:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Your last note addresses an interesting and important problem of how to
+scope the declaration correctly. I am familiar with the LET/LET* problem
+with propagating declarations around right.  It's a pain. But I think the
+problem is caused by the fact that you really have a request that a
+different kind of binding be done and you're trying to overload LAMBDA to
+make it be able to bind several different kinds of cells. So my answer is
+to create a different kind of binding primitive. ie, let the user write 
+
+  (DEFUN F (X &amp;SPECIAL Y Z) ...code...)
+
+if he feels strongly that that's how he wants to visualize it, but let it
+macroexpand into:
+
+  (SETF #'F #'(VANILLA-LAMBDA (X G0001 Z)
+			      ((SPECIAL-LAMBDA (Y) ...code...) G0001)))
+
+A smart compiler will make the right code for this without blinking. A
+not-so-smart one could easily enough be tought to look for this idiom and
+not compile the extra stack push. The loss of time in the interpreter would
+likely be negligible. With appropriate macro expansion and printer hooks,
+the user should rarely have to look at this visually. BUT the great thing
+is that code-walkers can really handle this kind of stuff VERY elegantly.
+Similarly, suppose you had  an &amp;SPECIAL keyword which was sticky and could
+go in LET*'s as given here:
+
+  (LET* ((W 1) &amp;SPECIAL (X 2) (Y 3) &amp;UNSPECIAL (Z 4)) ...code...)
+
+Then it might expand into the conceptually elegant underlying form:
+
+  ((VANILLA-LAMBDA (W) ((SPECIAL-LAMBDA (X Y)
+			   ((VANILLA-LAMBDA (Z) ...code...) 4))
+			2 3))
+   1)
+
+which is explicit, parse-free, and which does not have the LET/LET*
+declaration scoping problem you alluded out in your note.
+
+Such an approach does mean that you would have to have several kinds of
+binding primitives around -- eg,
+
+  VANILLA-LAMBDA -- does the really primitive kind of binding which the
+   compiler is allowed to assume is essentially lexical.
+
+  SPECIAL-LAMBDA -- binds the variable's special cell always.
+
+  FUNCTIONAL-LAMBDA -- binds the variable's function cell.
+
+These are the only ones I think you would need at the lowest level. Perhaps
+one or two more could be shown to be necessary. But the nice thing is that
+they all have very simple meanings and are very easy to be manipulated by
+code-manipulating programs.
+
+I think that a basing a language on the composition of small number of
+well-understood primitives -- even if it means that we have to create some
+that have not been needed until now -- is far better than trying to do
+everything all in one place. 
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00723.html">Mary had a moby lambda</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00721.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00724.html">LAMBDA proposals and counter-proposals</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00725.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00722"><strong>Date</strong></a></li>
+<li><a href="threads.html#00722"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

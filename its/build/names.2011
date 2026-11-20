@@ -1,0 +1,128 @@
+;;; -*- Fundamental -*-                          
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; This file belongs on %MCHN%.  DO NOT COPY TO OTHER MACHINES!!
+;;;
+;;; The format of this file is documented in .MAIL.;NAMES INFO.
+;;; You should read that before modifying it.  Also, there are
+;;; restrictions on tourists creating mailing lists; see
+;;; ACOUNT;TURIST POLICY.
+;;;
+;;; If you DO mung this file, after writing it out look for a file
+;;; called "NNAMED ERRnnn" or "NAMED ERRnnn" to appear, where nnn is
+;;; the same version number you wrote.  This file will tell you if you
+;;; won or not, hopefully with explanations if it didn't.  If this
+;;; report file DOESN'T appear, either the mailer isn't around, or is
+;;; busy, or is falling down in flames.  (Congratulations!)
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Try to use only domain-style host names.
+; (Except for specially known ITS hosts.)
+
+
+;;; Various special sacred lists - don't mung these!
+
+(SYS-OPERATING-TROUBLE (EQV-LIST %MCHN%-ADMIN))
+(MAGIC-DRAGON-KEEPER (EQV-LIST %MCHN%-ADMIN))
+
+; Gateways and bug host. To set a value, use (EQV-LIST @host), where
+;   host is a known host name, or an (octal) Chaosnet address, or
+;   an IP address such as 192.168.1.1. Remember the @, and
+;   NOTE that the address must belong to a host in SYSTEM;H3TEXT.
+; *COMSAT-TCP-GATEWAY sets TCPGAT, which is used for all non-Chaosnet mail.
+(*COMSAT-TCP-GATEWAY (EQV-LIST @%GW%))
+; *COMSAT-DOMAIN-GATEWAY sets DOMGAT, which is used as a relay
+;   for all unknown hostnames.
+(*COMSAT-DOMAIN-GATEWAY (EQV-LIST @%GW%))
+; *COMSAT-BUGHOST sets BUGHST: where to send BUG mail which isn't specified 
+;   below. Default is the local host.
+; *COMSAT-HEADER-GATEWAY sets HDRGAT, which is used in headers to create
+;   user%host@HDRGAT headers on outgoing mail through relays.
+; *COMSAT-GATEWAY-HOST sets GATHST which is used to set the default
+;   HDRGAT, TCPGAT, and DOMGAT for Chaos-only hosts. It has no effect on
+;   Internet-connected hosts. It's better to set the entries above explicitly.
+
+; Mail maintenance stuff.  Do not fuck with this.
+(BUG-MAIL (EQV-LIST BUG-QMAIL))
+(BUG-MAILER (EQV-LIST BUG-QMAIL))
+(BUG-QMAIL (EQV-LIST BUG-MAIL-AND-POSTMASTER [.MAIL.;MAIL BUGS]))
+(BUG-MAIL-AND-POSTMASTER (EQV-LIST %MCHN%-ADMIN))
+(POSTMASTER (EQV-LIST BUG-MAIL-AND-POSTMASTER))
+(MAIL-DIR-MAINT (EQV-LIST %MCHN%-ADMIN))
+(MAIL-MAINTAINERS (EQV-LIST ([.MAIL.;FAILED STUFF] (R-OPTION FAST-APPEND))
+		  %MCHN%-ADMIN))
+(H3MAKE-MAINTAINERS (EQV-LIST ([.MAIL.;FAILED STUFF] (R-OPTION FAST-APPEND))
+		    	      %MCHN%-ADMIN))
+(COMSAT (EQV-LIST MAIL-MAINTAINERS))
+(H3MAKE (EQV-LIST H3MAKE-MAINTAINERS))
+(DEAD-MAIL-RECEIPTS (EQV-LIST [NUL:])) ; out for dead msgs
+;; See message about this in mc:.mail.;names:
+(NET-ORIGIN (EQV-LIST ; ([.MAIL.;FAILED NETORG] (R-OPTION FAST-APPEND))
+			MAIL-MAINTAINERS))
+
+
+; Inquire database daemon.  These are needed in order to update
+; the database!
+(UPDATE-ITS-INQUIR (EQV-LIST UPDATE-INQUIR))
+(UPDATE-INQUIR (EQV-LIST ([INQUIR;INQUPD RECORD] (R-OPTION APPEND))
+			  [INQUIR;.UPD1. >]
+			  (PGM [INQUIR;INQUPD BIN]
+			       (R-PGM-MNTNR BUG-INQUIR)
+			       (R-PGM-DISOWN 6))))
+(UPDATE-INQUIR-LOSSAGE (EQV-LIST [NUL:INQUIR;INQUPD BARFS]))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Here is the stuff for *MSG message hackery.  Any name beginning with "*"
+;;; is by default of type *MSG, and will be given a *MSG-style header unless
+;;; otherwise forced.
+;;; All *MSG-type recipients will appear in the DISTRIB field, unless
+;;; they have the NOTDIST option.  Any attempt to actually send the message
+;;; to a *MSG-type rcpt will throw away the name itself and send instead
+;;; to the file [DSK:.MSGS.;1 2] where 1 and 2 default to *MSG and > unless
+;;; explicitly specified via MSG-FN1 and MSG-FN2.
+
+;; The entry for "*" is the only one which varies in the NAMES file for
+;; each site.
+(* (R-OPTION NOTDIST) (EQV-LIST *%MCHN%))
+;; *msg mailing lists -- see .MAIL.;BBOARD INFO for accepted policy on
+;; which list to use for what purpose.
+(*ITS (R-OPTION NOTDIST) (EQV-LIST *%MCHN%))
+;; BBOARD goes most everywhere but is not shown by :MSGS by default
+(BBOARD (EQV-LIST (*BBOARD)))
+(*BBOARD (EQV-LIST *MSGS-TO-ITSES))
+
+;; Hosts that can receive *msgs
+(*%MCHN% (EQV-LIST *MSGS-TO-ITSES))
+(*MSGS-TO-ITSES (R-OPTION NOTDIST)
+  (EQV-LIST (*MSG-SINK@%MCHN% (R-OPTION NOTDIST))))
+; This is final "sink". Mailer converts to filename specially.
+(*MSG-SINK (R-OPTION NOTDIST))
+
+; Messages addressed to a BUG-type recipient that doesn't exist are
+; vectored to (BUG RANDOM-PROGRAM) instead, at a host address patched
+; into COMSAT at location BUGHST.
+
+(BUG-RANDOM-PROGRAM (EQV-LIST %MCHN%-ADMIN))
+
+
+;; The remaining names are not necessary to the operation of ITS but
+;; are generally useful, I suppose.
+
+; Plausible generic contact names.
+(NETWORK-LIAISON (EQV-LIST %MCHN%-ADMIN))
+(LIASON (EQV-LIST NETWORK-LIAISON))
+(LIAISON (EQV-LIST NETWORK-LIAISON))
+(ACTION (EQV-LIST NETWORK-LIAISON))
+
+; Personal lists and stuff.
+
+(%MCHN%-ADMIN (EQV-LIST [.MAIL.;ADMIN MAIL]))
+
+(ACCOUNTS-NOTIFICATION (EQV-LIST %MCHN%-ADMIN))
+(USER-ACCOUNTS (EQV-LIST %MCHN%-ADMIN))
+(ACCOUNTS-HELD-REFUSED (EQV-LIST %MCHN%-ADMIN))
+(USER-ACCOUNTS-ARCHIVE (EQV-LIST %MCHN%-ADMIN))
+(PASSWORD-SYSTEM (EQV-LIST %MCHN%-ADMIN))
+(BUGGY-PWORD (EQV-LIST %MCHN%-ADMIN))
+(HIPY-PAPY-BTHUTHDTH-THUTHDA-BTHUTHDY (EQV-LIST %MCHN%-ADMIN))

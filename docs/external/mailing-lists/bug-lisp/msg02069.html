@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LISPT, CHNTB, LDDT, SYMBOLS, AND SCREWAGE -->
+<!--X-From-R13: V[D ng [WF&#45;[Q (Vneel [. Dngu) -->
+<!--X-Date: Thu, 13 Mar 80 04:51:00 GMT -->
+<!--X-Message-Id: 4c5d850ed62a218affffd2f02f9f8898@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LISPT, CHNTB, LDDT, SYMBOLS, AND SCREWAGE</title>
+<link rev="made" href="mailto:HMR at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02070.html">Date Prev</a>][<a href="msg02067.html">Date Next</a>][<a href="msg01851.html">Thread Prev</a>][<a href="msg02067.html">Thread Next</a>][<a href="maillist.html#02069">Date Index</a>][<a href="threads.html#02069">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LISPT, CHNTB, LDDT, SYMBOLS, AND SCREWAGE</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC, RLB at MIT-MC, JLK at MIT-MC</li>
+<li><em>Subject</em>: LISPT, CHNTB, LDDT, SYMBOLS, AND SCREWAGE</li>
+<li><em>From</em>: HMR at MIT-MC (Harry M. Rath)</li>
+<li><em>Date</em>: Thu, 13 Mar 80 04:51:00 GMT</li>
+<li><em>Original-date</em>: 12 MAR 1980 2351-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Ah, I've found what was causeing all my lossage, I think.
+Loading LDDT without symbols is a screw.  J*STADR and friends
+do not get defined, being GETDDTSYM'd values which are passed to
+(STORE (ARRAYCALL FIXNUM JOB J*STADR) ..) and such.  This is certainly
+what was causing the job interrupt handler to be clobbered with 4000
+(and later .ATOM CRLF), and quite likely it was also causing the array
+to get clobbered just enough to cause the channel to not get deallocated
+by the GC.  Probably this has been the source of all my bugs.
+
+I added the syms J.STADR and J.CRUFT to XTRSYMS, but in the meantime maybe
+LDDT should explicitly load symbols if needed?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02070.html">Inconsistent and UnInformative Error Messages</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02067.html">Re: RAWTYO, etc.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01851.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02067.html">Re: RAWTYO, etc.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02069"><strong>Date</strong></a></li>
+<li><a href="threads.html#02069"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

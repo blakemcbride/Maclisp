@@ -1,0 +1,140 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Compiler Error -->
+<!--X-From-R13: SPN[WF&#45;OW -->
+<!--X-Date: Thu, 14 Mar 80 08:32:24 GMT -->
+<!--X-Message-Id: 95d8ce30ec0e92ca24b2d2d911946c1a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Compiler Error</title>
+<link rev="made" href="mailto:EB@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02066.html">Date Prev</a>][<a href="msg02064.html">Date Next</a>][<a href="msg02066.html">Thread Prev</a>][<a href="msg02064.html">Thread Next</a>][<a href="maillist.html#02065">Date Index</a>][<a href="threads.html#02065">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Compiler Error</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG Lisp) at MIT-MC</li>
+<li><em>Subject</em>: Re: Compiler Error</li>
+<li><em>From</em>: EB@MIT-AI</li>
+<li><em>Date</em>: Thu, 14 Mar 80 08:32:24 GMT</li>
+<li><em>Original-date</em>: 03/14/80 04:32:24 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+AI ITS.1168. DDT.1388.
+TTY 43
+11. Lusers, Fair Share = 73%
+1. memory errors in 17.7 hours.
+EB$0U EB0$U--Mail--:Postponed
+*GAG 0
+*:QC
+
+LISP COMPILER 907 [by 906, in LISP 1914]
+_TEST
+
+(COMMENT **ERROR**  NIL No free acs - FREEREGAC in function FILE-INFO)
+;%%%%%%%% COMPILER ERROR - CALL JONL %%%%%%%% 
+;BKPT BARF
+47041)   XCT 11   :PRINT EB;DSK:TEST &gt;
+
+(eval-when (eval compile)
+   (load '((liblsp) for))
+   (setsyntax '/# 'splicing '+internal-/#-macro))
+
+(eval-when (eval compile)
+   (defvst file-block
+           filepos
+           dir-block
+           name
+           ext
+           version
+           d-namestring
+           d-its-credate
+           d-its-credate-atom
+           source-namestring
+           source-its-credate
+           source-credate-atom
+           source-num-words
+           full-dump-tape-num ; or NIL
+           private-tape-block
+           last-retrieval-request
+           last-retrieval-request-atom
+           pending-status ; NIL, (RETRIEVE-AS namestring), (DUMP-ON tape-bloc!
+k),
+                          ; (DUMP-ON FULL-DUMP)
+           valid
+             ))
+
+(defmacro concat (x y) `(implode (append (explode ,x)(explode ,y))))
+
+(eval-when (eval compile load)
+   (setq file-info-format '(filepos dir-block name ext version d-namestring d!
+-its-credate
+                                   d-its-credate-atom source-namestring
+                                   source-its-credate source-credate-atom
+                                   source-num-words full-dump-tape-num
+                                   private-tape-block last-retrieval-request
+                                   last-retrieval-request-atom
+                                   pending-status valid)))
+
+(defun file-info (fb)
+   #.`(list
+       ,@ (for field in file-info-format
+           collect (list (concat 'file-block- field) 'fb))))
+
+*$$0U
+AI ITS 1168  Console 43 Free. 04:29:34
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02066.html">Rawtyo and cursorpos</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02064.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02066.html">Rawtyo and cursorpos</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02064.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02065"><strong>Date</strong></a></li>
+<li><a href="threads.html#02065"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

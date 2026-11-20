@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Label -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 21 Dec 79 21:03:00 GMT -->
+<!--X-Message-Id: c9682a318cfb2193b2f5c0ff4e58adff@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Label</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03830.html">Date Prev</a>][<a href="msg03828.html">Date Next</a>][<a href="msg03830.html">Thread Prev</a>][<a href="msg02148.html">Thread Next</a>][<a href="maillist.html#03829">Date Index</a>][<a href="threads.html#03829">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Label</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MACRAK at MIT-MC</li>
+<li><em>Subject</em>: Label</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 21 Dec 79 21:03:00 GMT</li>
+<li><em>Cc</em>: BKPH at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 21 December 1979 16:03-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The Y-Operator need not be primitive since it is possible to construct
+one from smaller primitives. There is no breach in power, pure recursive
+or otherwise, by having removed LABEL. Its implementation was a crock and
+it is not clear that it could be fixed at all given the current calling
+procedures. 
+
+I personally would suggest you do a construct like the following when you
+think you need LABEL...
+
+((LAMBDA (ANONYMOUS)
+  ... body using (FUNCALL ANONYMOUS ...) where appropriate ...)
+ (FUNCTION (LAMBDA (X)
+		   (SPECIAL ANONYMOUS)
+		   (COND ((ZEROP X) 1)
+			 (T (* X (FUNCALL ANONYMOUS (1- X))))))))
+
+This will not confuse the compiler and is not utterly inelegant from
+a purist standpoint. The FUNCALL operator has a lot of aesthetic value
+in its own right.
+
+--kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03830.html">Label</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03828.html">Label is useful and should stay in Lisp.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03830.html">Label</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02148.html">LABEL</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03829"><strong>Date</strong></a></li>
+<li><a href="threads.html#03829"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

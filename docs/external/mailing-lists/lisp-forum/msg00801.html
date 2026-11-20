@@ -1,0 +1,109 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Found in the Boston Globe -->
+<!--X-From-R13: Prafba W. [nethyvrf ng [WF&#45;[hygvpf -->
+<!--X-Date: Tue ,2 Jun 81 14:01:00 EDT -->
+<!--X-Message-Id: 2208586cf390ecb77c55070946b47884@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Found in the Boston Globe</title>
+<link rev="made" href="mailto:Benson I.Margulies at MIT-Multics">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00057.html">Date Prev</a>][<a href="msg00800.html">Date Next</a>][<a href="msg00057.html">Thread Prev</a>][<a href="msg00800.html">Thread Next</a>][<a href="maillist.html#00801">Date Index</a>][<a href="threads.html#00801">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Found in the Boston Globe</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: sipb at MIT-MC, multics-lisp-people at MIT-MC,      lisp-forum at MIT-MC</li>
+<li><em>Subject</em>: Found in the Boston Globe</li>
+<li><em>From</em>: Benson I. Margulies at MIT-Multics</li>
+<li><em>Date</em>: Tue ,2 Jun 81 14:01:00 EDT</li>
+<li><em>Reply-to</em>: Margulies at MIT-Multics</li>
+<li><em>Sender</em>: Margulies.Multics at MIT-Multics</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(defun ad (want-job challenging boston-area)
+       (cond
+         ((not (equal want-job 'yes)) nil)
+         ((not (equal boston-area 'yes)) nil)
+         ((lessp challenging 7) nil)
+         (t (append ((defun nf (a c)
+		        (cond ((null c) nil)
+			    ((atom (car c))
+			     (append (list (eval (list 'getchar
+						 (list (car c)
+						       'a)
+						 (cadr c))))
+				   (nf a (cddr c))))
+			    (t (append (list(implode (nf a (car c))))
+				     (nf a (cdr c))))))
+		 (get 'ad 'expr)
+		 '((caaddr 1 caadr 2 car 1 car 1)
+		   (car 5
+		        cadadr
+		        9
+		        cadadr
+		        8
+		        cadadr
+		        9
+		        caadr
+		        4
+		        car
+		        2
+		        car
+		        1)
+		   (car 2 caadr 4)))
+		(list '851-5071x2661))
+	  )))
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00057.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00800.html">Intra-dialect Lisp translation</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00057.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00800.html">Intra-dialect Lisp translation</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00801"><strong>Date</strong></a></li>
+<li><a href="threads.html#00801"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

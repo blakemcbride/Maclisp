@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Y[B,DIY ng [WF&#45;[Q -->
+<!--X-Date: Mon, 31 Jul 78 02:21:00 GMT -->
+<!--X-Message-Id: 99a5275932008ae34b00a95eb8de4abe@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02214.html">Date Prev</a>][<a href="msg02212.html">Date Next</a>][<a href="msg02214.html">Thread Prev</a>][<a href="msg02212.html">Thread Next</a>][<a href="maillist.html#02213">Date Index</a>][<a href="threads.html#02213">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: NIL at MIT-MC, (BUG LISP) at MIT-MC, (BUG LISPM) at MIT-MC</li>
+<li><em>To</em>: BSG at MIT-MC</li>
+<li><em>From</em>: KMP,RWK at MIT-MC</li>
+<li><em>Date</em>: Mon, 31 Jul 78 02:21:00 GMT</li>
+<li><em>Original-date</em>: 30 JUL 1978 2221-EDT</li>
+<li><em>Sent-by</em>: KMP at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>UNCC:Greenberg@MIT-MULTICS
+
+Suppose the syntax for cond were as follows:
+
+(COND [&lt;optional-(atomic)-label&gt;]
+      (&lt;pred&gt; &lt;form1&gt; &lt;form2&gt; ...)
+      ...)
+
+And inside a named-cond, the label would be initially bound to NIL and
+each time a &lt;pred&gt; were EVAL'd, the label would get the value. (Naturally
+the compiler could optimize this out where possible).  This allows
+the flexibility provided by GLS's extension, with a cleaner, more
+Lisp-like syntax. 
+
+RWK is implementing a 'CCOND' macro in MacLISP that will describe the
+exact specifications of this.
+
+Comments?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02214.html">This list</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02212.html">Proposed KMP/RWK cond</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02214.html">This list</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02212.html">Proposed KMP/RWK cond</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02213"><strong>Date</strong></a></li>
+<li><a href="threads.html#02213"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

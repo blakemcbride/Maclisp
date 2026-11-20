@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: lisp vs. lsp -->
+<!--X-From-R13: Yraargu I. Quhepu &#60;ZTU.YIQ ng [WF&#45;EBSSQV> -->
+<!--X-Date: Sat, 6 Feb 82 18:59:00 GMT -->
+<!--X-Message-Id: f66ad6a79618aa5945a3b69f853a370c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>lisp vs. lsp</title>
+<link rev="made" href="mailto:LFG.KWC at MIT-SPEECH">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00949.html">Date Prev</a>][<a href="msg00947.html">Date Next</a>][<a href="msg00949.html">Thread Prev</a>][<a href="msg00947.html">Thread Next</a>][<a href="maillist.html#00948">Date Index</a>][<a href="threads.html#00948">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>lisp vs. lsp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-ML, bug-lispm at MIT-ML, kwc at MIT-ML</li>
+<li><em>Subject</em>: lisp vs. lsp</li>
+<li><em>From</em>: Kenneth W. Church &lt;LFG.KWC at MIT-SPEECH&gt;</li>
+<li><em>Date</em>: Sat, 6 Feb 82 18:59:00 GMT</li>
+<li><em>Original-date</em>: 6 Feb 1982 1359-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>this is a real problem that needs to be resolved once and for all.
+all lispm software assumes that lisp files are of type &quot;lisp&quot; and
+all maclisp code (except lsb) assume &quot;lsp&quot;.  I would like my code
+to run both places.  Major screws:
+
+tags will not run on &quot;lisp&quot; files
+fs:copy-file will give &quot;lisp&quot; as the type of a file that it thinks is lisp code
+complr and (qc-file ...) don't agree
+symbolics and mit 20's don:t agree
+
+can we come to some compromise and stick with it.
+
+- ken
+-------
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00949.html">who is EPSS</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00947.html">LSP vs LISP</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00949.html">who is EPSS</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00947.html">LSP vs LISP</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00948"><strong>Date</strong></a></li>
+<li><a href="threads.html#00948"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

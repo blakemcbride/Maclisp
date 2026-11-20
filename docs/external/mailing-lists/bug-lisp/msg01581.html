@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Buggy XLISP -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Thu, 12 Feb 81 17:19:00 GMT -->
+<!--X-Message-Id: bc9f3fab93647dd3a68a11b92a4733f9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Buggy XLISP</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01582.html">Date Prev</a>][<a href="msg01580.html">Date Next</a>][<a href="msg01582.html">Thread Prev</a>][<a href="msg01580.html">Thread Next</a>][<a href="maillist.html#01581">Date Index</a>][<a href="threads.html#01581">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Buggy XLISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: WGD at MIT-MC, RWK at MIT-MC</li>
+<li><em>Subject</em>: Buggy XLISP</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Thu, 12 Feb 81 17:19:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 12 FEB 1981 1219-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Incidentally, since last Saturday, the &quot;newer&quot; lisp had been placed as
+LISP^K, so XLISP^K is again experimental.
+    Date: 10 February 1981 19:55-EST
+    From: William G. Dubuque &lt;WGD at MIT-MC&gt;
+	    LISP;EXTEND fails to load into an XL, dying trying to call 0 
+    (actually its when EXTSFA is being loaded). Congratulations, that's 
+    every day now for the past two weeks that some piece of the system has 
+    screwed me.
+LISP^K and XLISP^K, although same version numbers, should have been different 
+dumps when you got this problem, and you shouldn't have seen it in LISP^K. 
+RWK's fix is correct, mentioned in
+    Date: 11 February 1981 02:46-EST
+    From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+    Subject: Problems with XLISP
+    The problem with EXTEND and EXTSFA and YESNOP not loading is due to
+    GENTEMP not working which is in turn due to EXPLODEN being broken, giving
+    FXPDL OUT OF PHASE for fixnums, and ILOPR at location 0 for flonums.
+    .  .  .
+    I have fixed and patched the problem.
+However this patch should be installed only as XLISP^K, due to the
+fact that I was still trying to get the bug out of PUTPROP referenced as
+    Date: 10 February 1981 17:53-EST
+    From: Jon L White &lt;JONL at MIT-MC&gt;
+    Subject: Lightening Strikes Twice!
+    .  .  .
+    Sigh, remember the PUTPROP twice bug that has plagued us lo these
+    6 years?  This is still another manifestation of it.  I've done some
+    more work on PUTPROP, but it still isn't completely bug-free .  .  .
+So I hope this &quot;experimental&quot; PUTPROP doesn't cause any problems -- 
+they would be manifest when pure-loading up a big system (like,
+COMPLR, NILAID or MACSYMA!)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01582.html">LEDIT interface</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01580.html">Strength</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01582.html">LEDIT interface</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01580.html">Strength</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01581"><strong>Date</strong></a></li>
+<li><a href="threads.html#01581"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

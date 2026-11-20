@@ -1,0 +1,9 @@
+/bin/
+/build/
+/run/
+/selftest.log
+/from-its/
+/its/out/
+/its/tools/*/.gitignore
+/its/tools/klh10/
+__pycache__/

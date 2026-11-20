@@ -1,0 +1,164 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Thoughts on Completing Readers -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Thu ,9 Oct 80 16:37:00 EDT -->
+<!--X-Message-Id: 83f8624b4f012b00e9da14c0cf7bacfc@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Thoughts on Completing Readers</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00259.html">Date Prev</a>][<a href="msg00523.html">Date Next</a>][<a href="msg00259.html">Thread Prev</a>][<a href="msg00523.html">Thread Next</a>][<a href="maillist.html#00112">Date Index</a>][<a href="threads.html#00112">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Thoughts on Completing Readers</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: Thoughts on Completing Readers</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu ,9 Oct 80 16:37:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I have some ideas about completing readers that I would like to get some input
+about. I would like to have a completing reader which interacted gracefully 
+with a LispM style rubout handler. The problem is that the tokenizer needs to
+do the completion, but the prescan needs to see the chars coming in. Moreover,
+if a rubout happens later, the completion char (eg, altmode) should not be
+rescanned but the characters auto-completed should be. Hence, I think it might
+be useful to build in some general support to the readers which would allow
+smooth communication. Let me describe a scenario (using some code I have been
+working on for the Macsyma reader...)
+
+    (DEFUN TOKENIZE-NORMAL-SYMBOL (STREAM)
+      (DO ((C (TYIPEEK () STREAM #\EOF) (TYIPEEK () STREAM #\EOF))
+	   (FLAG () T)
+	   (L () (CONS C L)))
+	  ((AND FLAG (NOT (OR (DIGITP C) (ALPHABETP C) (= C #/\))))
+	   (NREVERSE L))
+	(IF (= (TYI STREAM) #/\)
+	    (SETQ C (TYI STREAM))
+	    (SETQ C (CHAR-UPCASE C)))))
+
+Suppose that this reads a normal Macsyma symbol returning its characters
+backward. Now suppose we augment it as follows:
+
+    (DEFUN TOKENIZE-NORMAL-SYMBOL (STREAM)
+      (DO ((C (TYIPEEK () STREAM #\EOF) (TYIPEEK () STREAM #\EOF))
+	   (FLAG () T)
+	   (L () (CONS C L)))
+	  ((AND FLAG (NOT (OR (DIGITP C) (ALPHABETP C) (= C #/\))))
+	   (NREVERSE L))
+	(CASEQ (TYI STREAM)
+	  ((#/\) (SETQ C (TYI STREAM))
+		 (SETQ C (CHAR-UPCASE C)))
+	  ((#\ATTEMPT-COMPLETION)
+	         (MAPC #'(LAMBDA (C) (FUNCALL STREAM ':UNTYI-COMPLETION C))
+		       (COMPLETE-AS-FAR-AS-POSSIBLE (REVERSE L)
+						    THINGS-TO-COMPLETE-OVER)))
+	  ((#\QUERY-COMPLETIONS)
+	         (FUNCALL STREAM ':DISPLAY-POSSIBLE-COMPLETIONS
+			  (POSSIBLE-COMPLETIONS (REVERSE L)
+						THINGS-TO-COMPLETE-OVER))))))
+				      
+The problems are as follows:
+
+ * The tty prescan needs to recognize that the characters #\ATTEMPT-COMPLETION
+   and #\QUERY-COMPLETIONS are not to be `remembered' (so that if a rubout 
+   later causes rescanning, the completion isn't retried since the completed
+   characters will already be on the stream).
+
+ * Not all aspects of tokenizing should need to support completion. Eg, while
+   tokenizing a string, I might want to disable completion. So I should be able
+   to dynamically control whether completion is allowed. I feel that the
+   easiest way to do this is to have the RUBOUT-HANDLER bind some special 
+   variable like COMPLETION-ALLOWED to (). When I do a TYI that allows
+   completion, I will bind it to T. If it's (), the RUBOUT-HANDLER treats
+   #\ATTEMPT-COMPLETION and #\QUERY-COMPLETIONS it like any other char,
+   echoing it and passing it on. If it's T, then it passes the char to the 
+   scanner without remembering it (presumably the scanner will next receive
+   UNTYI-COMPLETION requests back from the scanner -- if it receives no 
+   such requests, then it may wish to beep at the user if he's a tty rather
+   than a file (a style issue we'll leave open); if it does get such requests,
+   it will display (again, iff it's an interactive stream like a tty)).
+   Upon rescan, those untyi'd chars should be indistinguishable in their buffer
+   from other, really-typed-in chars and the completion-character should not
+   be present.
+
+ * There's some question about what the space is that it should complete
+   over and how this should be communicated. Eg, for Macsyma, it will probably
+   initially complete over the Macsyma defined symbols and not over user 
+   variables. Presumably it should be user-settable. It can be context
+   sensitive, perhaps, in lists by having the list constructor actually bind
+   a variable that made things after ('s complete over functions and things
+   in the middle of lists complete over variables. Things like COND, etc.
+   would confuse it. Maybe they could be handled, too. It's hard to say until
+   we've tried it for a while what would be comfortable.
+
+I actually think that in the long run a distinguished character should be 
+made available to the user which is called &lt;COMPLETE&gt;. Whether &lt;HELP&gt; or
+some other character should work to show completions, I'm still not sure
+about -- but it would seem a reasonable application for that char.
+
+I can put this functionality into the rubout handler I have built for 
+my Maclisp applications, but I'd like to get some input her on whether others
+have suggestions on technique, philosophy, etc. I have built a poor model
+of this which didn't do at all the right thing but did give me the feel of
+typing in Macsyma expressions with completion and it was indeed a pleasure
+given some of the long names hanging around. I'm hoping this will catch on.
+
+Comments/Questions? Would anyone be interested in making this or some 
+equivalently useful functionality work in on the LispM?
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00259.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00523.html">Re: A (possibly interesting) macro</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00259.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00523.html">Re: A (possibly interesting) macro</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00112"><strong>Date</strong></a></li>
+<li><a href="threads.html#00112"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

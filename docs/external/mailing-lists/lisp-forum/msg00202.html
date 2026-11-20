@@ -1,0 +1,114 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Disappointment -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Tue ,3 Feb 81 13:51:00 EDT -->
+<!--X-Message-Id: 9a4c93b94ee3a2ef0e9138efe4476e03@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Disappointment</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00201.html">Date Prev</a>][<a href="msg00203.html">Date Next</a>][<a href="msg00201.html">Thread Prev</a>][<a href="msg00204.html">Thread Next</a>][<a href="maillist.html#00202">Date Index</a>][<a href="threads.html#00202">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Disappointment</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Subject</em>: Re: Disappointment</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Tue ,3 Feb 81 13:51:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Sorry to have let you down, KMP.  I wasn't terribly serious about
+adopting that BNF syntax; I merely put it forward as a logical
+extension in the spirit of exploring the design space.  (At the
+end of my note of 2 October, I said &quot;May not be worth it?&quot;.)
+
+Anyway, lest anyone misinterpret my opinions, let me say this:
+(1) In general, when I say something *could* be done, I do not
+    necessarily mean at all that it *should* be done.
+    (As an example, the note of 2 Oct was clearly labelled
+    a suggestion, not an exhortation.)
+(2) In this specific case, I continue to support most strongly,
+    as I have stated several times in the past, RMS' destructuring
+    syntax.  It is general, encompassing both destructuring and
+    binding of SETF'able things in one framework.  It is extensible,
+    readily accommodating new kinds of destructuring because of
+    the use of natural keywords (for example, using VALUES to
+    handle multiple values).  For the simple cases of lists, the
+    keywords can be made invisible by using backquote (which is
+    a visual aid to tell you something odd is going on, so you
+    don't have to count parentheses after the word LET):
+	(LET ((`(,A ,B ,@C) '(1 2 3 4))) (LIST A B C)) =&gt; (1 2 (3 4))
+    This also permits some syntactic variety:
+	(LET (((VECTOR A B C) ...) ...) body)
+    and (LET ((`#(,A ,B ,C) ...) ...) body)
+    mean the same thing.
+    Finally, there is no reason why macros cannot be allowed in the
+    position of a variable in a LET for this purpose!  As long as they
+    expand into a valid recognizable case, it can still work (just as
+    for SETF).  So if I define
+	(DEFMACRO FROBBOZ (A B C D) `(LIST ,A (VECTOR ,B ,C ,D)))
+    then
+	(LET (((FROBBOZ W X Y Z) ...)) body)
+    makes perfect sense.
+    (This last example leads to the possibility that a macro might
+    want to know which of *four* contexts it is expanding for:
+    EVAL, COND, PROGN, or SETF.  Oh, well.)
+
+Anyway, *that* is my current and consistent opinion.
+Revelation 22:18-19 (but I don't mean to be pompous).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00201.html">Re: Destructuring LET</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00203.html">Re: destructuring</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00201.html">Re: Destructuring LET</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00204.html">Re: &amp;keywords</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00202"><strong>Date</strong></a></li>
+<li><a href="threads.html#00202"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

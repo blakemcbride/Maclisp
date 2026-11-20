@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XI ng [WF&#45;[Q (Xbua Q. Iraa) -->
+<!--X-Date: Thu, 14 Aug 80 07:43:00 GMT -->
+<!--X-Message-Id: 3940955187679085500f9b208b4792c6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JW at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01293.html">Date Prev</a>][<a href="msg01291.html">Date Next</a>][<a href="msg01285.html">Thread Prev</a>][<a href="msg01291.html">Thread Next</a>][<a href="maillist.html#01292">Date Index</a>][<a href="threads.html#01292">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: JW at MIT-MC (John C. Wenn)</li>
+<li><em>Date</em>: Thu, 14 Aug 80 07:43:00 GMT</li>
+<li><em>Original-date</em>: 14 AUG 1980 0343-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>There seems to be a bug in the complr.
+I try to run the simple function:
+
+(defun bitrev (j nu) (declare (fixnum j nu))
+	(do ((j1 j nextbase)
+	     (n nu (// n 2))
+	     (next-base (// j 2) (// next-base 2))
+	     (k 0 (+ (* k 2) (- j1 (* 2 next-base)))))
+	    ((= 1 n) k)))
+
+This runs fine when interpreted.  When it is complied,
+on the second and subsequent iterations, j1 and next-base
+are set to the same value!!! J1 should equal (* 2 next-base).
+What is going wrong, and how can I fix it??  Now I am 
+using the function written as a prog (GROAN!!).
+
+	thanx--
+		JW
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01293.html">SETF</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01291.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01285.html">SETF clarification</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01291.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01292"><strong>Date</strong></a></li>
+<li><a href="threads.html#01292"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

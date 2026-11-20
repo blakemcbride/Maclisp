@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Getting characters into Lisp -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 29 Nov 80 20:11:00 GMT -->
+<!--X-Message-Id: 205ef8bc7bf3464ba6bb49f28b8e75b1@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Getting characters into Lisp</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01753.html">Date Prev</a>][<a href="msg01751.html">Date Next</a>][<a href="msg01759.html">Thread Prev</a>][<a href="msg01758.html">Thread Next</a>][<a href="maillist.html#01752">Date Index</a>][<a href="threads.html#01752">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Getting characters into Lisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Leonard.Zubkoff at CMU-10A</li>
+<li><em>Subject</em>: Getting characters into Lisp</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 29 Nov 80 20:11:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 29 November 1980 15:11-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 28 November 1980 1540-EST (Friday)
+    From: Leonard.Zubkoff at CMU-10A (C410LZ60)
+    Re:   Getting characters into Lisp
+
+    I am running MacLisp on the Dec-20 (CMU-20C) and appear to be unable to get
+    certain control characters through to lisp under any circumstances.  That
+    is, even slashifying them fails and a tyo when one is typed does not 
+    return to its caller.  Two such characters are specifically ^A and ^V.
+    					Leonard
+-----
+Some characters are trapped by the operating system. Others are not seen 
+because they have lisp interrupt properties. Try doing (SSTATUS TTYINT #^A NIL)
+to turn off ^A's interrupt property and see if that lets you TYI it then.
+I'm pretty sure that will work. Making ^S and ^Q be readable on a Tops-20 may
+be much harder since they are hacked by the operating system. -kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01753.html">DEFMACRO and DEFUN&amp;</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01751.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01759.html">Getting characters into Lisp</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01758.html">suckage</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01752"><strong>Date</strong></a></li>
+<li><a href="threads.html#01752"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

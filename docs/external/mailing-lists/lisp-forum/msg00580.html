@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Foot&#45;in&#45;mouth disease -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Sun ,15 Feb 81 20:55:00 EDT -->
+<!--X-Message-Id: b1e451fc352f3189f7977b21dd2c0d86@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Foot-in-mouth disease</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00579.html">Date Prev</a>][<a href="msg00581.html">Date Next</a>][<a href="msg00579.html">Thread Prev</a>][<a href="msg00581.html">Thread Next</a>][<a href="maillist.html#00580">Date Index</a>][<a href="threads.html#00580">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Foot-in-mouth disease</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Subject</em>: Re: Foot-in-mouth disease</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Sun ,15 Feb 81 20:55:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Well, I suppose that most of my remarks about NIL and strings need
+to be retracted in the light of JONL's recent note about the state of
+NIL.  I can say that my remarks were made in good faith on the basis
+of the most recent documentation available to me; and I cannot slight
+NIL for its lack of up-to-date documentation inasmuch as it hasn't been
+released yet.  (I do fervently hope, however, that documentation will
+accompany the release; and I predict that this will be very difficult
+to do if the documentation doesn't proceed in parallel.)
+
+In any case, I did get the results I was looking for:  NIL uses a count
+for compatibility with other languages and with architectures, and LISPM
+uses start/end because counts have been observed to be more awkward and
+because LISPM is not constrained by the architecture of the VAX or S-1
+(which also uses counts) or whatever.  If DLW is right that end positions
+are more available than counts anyway, then the subtraction JONL fears
+will turn up anyway:
+	(STRING-SUBSEQ FOO START (- END START))
+rather than
+	(SUBSTRING FOO START END)	;compilation requires a subtraction
+so the merit of the argument for eliminating a subtraction is unclear;
+however, the stylistic arguments are also unclear.
+
+Everything is unclear.  Sigh.  Thanks to all for bearing with me.
+--TGQ (The Gronked Quux)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00579.html">Re: STRING subsequencing functions, etc</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00581.html">Re: Fence posts?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00579.html">Re: STRING subsequencing functions, etc</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00581.html">Re: Fence posts?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00580"><strong>Date</strong></a></li>
+<li><a href="threads.html#00580"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

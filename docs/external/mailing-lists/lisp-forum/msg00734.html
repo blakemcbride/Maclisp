@@ -1,0 +1,147 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LAMBDA syntax counter&#45;proposal -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Tue ,29 Sep 81 17:24:00 EDT -->
+<!--X-Message-Id: 29Sep81 172446 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LAMBDA syntax counter-proposal</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00735.html">Date Prev</a>][<a href="msg00733.html">Date Next</a>][<a href="msg00740.html">Thread Prev</a>][<a href="msg00731.html">Thread Next</a>][<a href="maillist.html#00734">Date Index</a>][<a href="threads.html#00734">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LAMBDA syntax counter-proposal</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at MIT-MC</li>
+<li><em>Subject</em>: LAMBDA syntax counter-proposal</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Tue ,29 Sep 81 17:24:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Here is another idea for a more &quot;Lispy&quot; LAMBDA-list syntax that some
+people here at CMU came up with.  It is simpler to parse than &amp;-syntax,
+but has all the power of &amp;optional, &amp;rest, and &amp;aux.  Moreover, it is
+more concise.  It does not extend to other kinds of declaration.
+
+[0] A LAMBDA list is a (possibly dotted) list of specifiers,
+    one for each non-rest parameter.
+[1] An atomic specifier names a required parameter.
+[2] A non-atomic specifier is of the form (&lt;name&gt; &lt;init&gt; &lt;namep&gt;).  The second
+    and third items may be omitted.  This describes an optional parameter.
+[3] A non-() tail must be a symbol.  It names a rest parameter.
+[4] (Optional rule.)  All atomic specifiers must precede all non-atomic ones.
+[5] That's all.
+
+&amp;aux variables are handled by the incredibly subtle dodge of using an
+embedded PROG or LET.  Other declarations are handled another way, such
+as by local DECLARE forms.
+
+Here are some comparative examples of the use of this syntax.
+
+(DEFUN STRING-POSITION (CH STR (START 0) (END (STRING-LENGTH STR)))
+  (DO ((J START (+ J 1)))
+      ((= J END) ())
+    (WHEN (CHAR-EQUAL CH (CHAR STR J)) (RETURN J))))
+
+(DEFUN STRING-POSITION (CH STR &amp;OPTIONAL (START 0) (END (STRING-LENGTH STR)))
+  (DO ((J START (+ J 1)))
+      ((= J END) ())
+    (WHEN (CHAR-EQUAL CH (CHAR STR J)) (RETURN J))))
+
+(DEFUN ASET (NEWVAL ARRAY . SUBSCRIPTS)
+  (LET ((N (ARRAY-RANK ARRAY)))
+    (DO ((J 0 (+ J 1))
+         (S SUBSCRIPTS (CDR S))
+         (LIN 0 (+ (* LIN (ARRAY-DIMENSION ARRAY J)) (CAR S))))
+        ((= J N)
+         (IF (NULL S) (%LINEAR-ASET ARRAY LIN NEWVAL) (TOO-MANY-SUBSCRIPTS)))
+      (IF (NULL S) (TOO-FEW-SUBSCRIPTS)))))
+
+(DEFUN ASET (NEWVAL ARRAY &amp;REST SUBSCRIPTS &amp;AUX (N (ARRAY-RANK ARRAY)))
+  (DO ((J 0 (+ J 1))
+       (S SUBSCRIPTS (CDR S))
+       (LIN 0 (+ (* LIN (ARRAY-DIMENSION ARRAY J)) (CAR S))))
+      ((= J N)
+       (IF (NULL S) (%LINEAR-ASET ARRAY LIN NEWVAL) (TOO-MANY-SUBSCRIPTS)))
+    (IF (NULL S) (TOO-FEW-SUBSCRIPTS))))
+
+This representation is very easy to parse, because each LAMBDA-list
+element corresponds to exactly one parameter.  It is also always more
+concise, with two exceptions.  The word &amp;optional is simply omitted,
+and &amp;rest is replaced by a dot.  The word &amp;aux is replaced by &quot;(let (&quot;
+and two close parentheses, and so is longer by three printing characters
+plus a bit of whitespace (excption #1).  If there are many &amp;optional
+parameters all defaulting to (), then &quot;&amp;optional x y z ...&quot; must become
+&quot;(x) (y) (z) ...&quot;; this is less concise if there are more than five such
+parameters (exception #2).
+
+Omitting optional rule [4] permits optional parameters to precede
+required parameters.  This has some limited usefulness:
+
+(DEFUN LOG ((BASE 10) NUM)
+  (/ (LN NUM) (LN BASE)))
+
+(LOG 2) =&gt; 0.301...		;Log base 10 of 2
+(LOG 16 2) =&gt; 0.25		;Log base 16 of 2
+
+(DEFUN TURBOPROP (SYM (NEWVAL () NEWP) PROP)	;Can do either GET or PUTPROP
+  (IF NEWP (PUTPROP SYM NEWVAL PROP) (GET SYM PROP)))
+
+This idea has been mentioned before, of course.  It has the disadvantage
+of requiring two-pass processing when binding parameters to arguments.
+I'd be inclined to retain rule [4].
+--Guy
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00735.html">About &amp;parsers</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00733.html">P.S. to previous message (LAMBDA list counter-proposal)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00740.html">rational arithmetic</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00731.html">LAMBDA syntax counter-proposal</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00734"><strong>Date</strong></a></li>
+<li><a href="threads.html#00734"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

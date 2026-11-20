@@ -1,0 +1,132 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: c*r -->
+<!--X-From-R13: YW[.wxsNPrexryrl (Xbua Tbqreneb) -->
+<!--X-Date: Sat ,6 Dec 81 15:56:04 EDT -->
+<!--X-Message-Id: 3274089e3d95483554ababd959bd37ed@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>c*r</title>
+<link rev="made" href="mailto:KIM.jkf@Berkeley">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00687.html">Date Prev</a>][<a href="msg00685.html">Date Next</a>][<a href="msg00692.html">Thread Prev</a>][<a href="msg00684.html">Thread Next</a>][<a href="maillist.html#00686">Date Index</a>][<a href="threads.html#00686">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>c*r</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum@mit-mc</li>
+<li><em>Subject</em>: c*r</li>
+<li><em>From</em>: KIM.jkf@Berkeley (John Foderaro)</li>
+<li><em>Date</em>: Sat ,6 Dec 81 15:56:04 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>  Again let's put this into perspective.  Franz has implemented c{a,r}+r
+closure for many years and I have never heard a complaint or even a comment
+about it from anyone until gjc just mentioned it.  Aparently no one here
+thinks that it is unusual to define all c*r, they are lisp programmers
+not implementors and all they want it is a uniform language.  If they then
+moved their code to one of the lisps which only partially implement c*r,
+they would undoubtably call it a 'hacky' system.  Thus when you refer
+to the c{a,d}r HACK, it is not clear whether you are refering to systems
+which close over car and cdr or those that do not.
+  As for the implementation, no one here has ever questioned that and I
+am not even going to say how it is done, since that doesn't have any 
+bearing on this discussion.  To the typical lisp programmer, it looks like
+all c*r functions are defined in the initial lisp.  [The clever programmer
+could watch the storage use counts and figure what functions were manufactured
+on the fly].  In response to ACW, we don't view the manufacture of the
+c*r functions as a 'feature' of the system which then the user should
+have control of.  It is simply a action we must take to provide a uniform
+language.  If we could obtain infinite time and space we would define all
+c*r functons in the initial lisp and throw out the manufacturing.
+As for the multiple oblist questions, franz only has one oblist, but if
+it were possible to make new ones then whether they had c*r defined would
+depend on whether the user asked for a copy of an oblist with c*r defined
+or whether he asked for an empty oblist.  In the former case c*r would
+be defined, in the later case it would not.
+
+Now that we have this defined, why should we as lisp implementors remove it?
+ALAN, you removed it from the lisp machine.  Was it because:
+1) users came to you saying &quot;Please, please remove us from the temptation of
+   cdddddr and deliver us unto the the path of data abstraction&quot;.
+2) it was a poor implementation to begin with and/or it conflicted with
+   a later hack you wanted to make.
+3) you felt that people who wrote cdddddr should be punished and lacking
+   50Kv seats, you figured that a few 'undefined function' error messages
+   should teach them a thing or two.
+   
+What if you decide tomorrow that 'plus' should have no more than 4 arguments
+to prevent confusion?  Or that the evil 'go' statement will not longer exist.
+My point is that the implementor should not inflict his prejudices on 
+his community.  
+
+  Regarding what is clear and what is not.  It is true that 'caddadr' is
+pretty confusing but not because of its size, for example 'cadddar' accesses
+the fourth element of the first part of a list.  Thus it is the form of
+the c*r not the size which makes it understandable or not.
+
+ My pet peeve are programs which have the capability to do something useful
+for the user but fail to.  If I was sitting a lisp machine with a hairy
+list structure in front of me and I wanted to see the fourth element
+of the first subpart of a list, and I typed '(cadddar x)' and it said
+that cadddar was an undefined function, I would be pretty disgusted.
+I think that what I wanted to do is clear to everyone who has ever heard of
+the language lisp, but to have the machine fail to do what it should just
+because it is distasteful to the implementors is pretty sad and I would
+probably boot the machine down the stairs.
+
+
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00687.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00685.html">Query</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00692.html">Re:  C*R</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00684.html">c*r</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00686"><strong>Date</strong></a></li>
+<li><a href="threads.html#00686"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

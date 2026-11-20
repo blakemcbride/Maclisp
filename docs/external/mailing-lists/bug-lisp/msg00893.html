@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Changes to Maclisp -->
+<!--X-From-R13: Zrbaneq @ Lhoxbss &#60;Lhoxbss ng Qzh&#45;20p> -->
+<!--X-Date: Thu, 6 May 82 01:48:00 GMT -->
+<!--X-Message-Id: dbaa436f2c566768b9b71814c1b66540@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Changes to Maclisp</title>
+<link rev="made" href="mailto:Zubkoff at Cmu-20c">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00894.html">Date Prev</a>][<a href="msg00892.html">Date Next</a>][<a href="msg00894.html">Thread Prev</a>][<a href="msg00892.html">Thread Next</a>][<a href="maillist.html#00893">Date Index</a>][<a href="threads.html#00893">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Changes to Maclisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Steele at CMU-20C, Fahlman at CMU-20C, Jonl at Parc-Maxc,      Bug-Lisp at mc</li>
+<li><em>Subject</em>: Changes to Maclisp</li>
+<li><em>From</em>: Leonard N Zubkoff &lt;Zubkoff at Cmu-20c&gt;</li>
+<li><em>Date</em>: Thu, 6 May 82 01:48:00 GMT</li>
+<li><em>Original-date</em>: Wednesday, 5 May 1982  21:48-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>We've recently discovered a peculiar interaction between MacLisp and the
+migration system program (reaper).  It seems that some .fasl files that were
+being accessed by MacLisp frequently were not having their last-read dates
+updated properly, causing them to be migrated and thus making MacLisp unusable
+until they were restored.
+
+Our system programmer, Aaron Wohl, postulates that this is caused by MacLisp's
+first opening a file with the do-not-update-read-date bit set (Of%Pdt) and then
+actually opening the file for reading.  Apparently, the monitor is then failing
+to update the read date on the second file opening as well.  Searching through
+the Lisp sources, it appears that the only place such an Openf% is ever used is
+in the function FASLP; also, it seems highly likely that most uses of FASLP
+would be immediately followed by actually reading the file.
+
+In order to alleviate this problem, I've built and installed Lisp version 2130
+on CMUC using a modified QIO.mid with the following changes:
+
+(1) Of%Pdt is no longer set on the Openf% in FASLP.
+(2) All GtJfn% calls have had the Gj%Acc removed, so that the files are visible
+(this change in response to discussions with Jonl indicating that this would be
+a good idea).
+
+If whoever is responsible for maintaining the master Lisp sources would make
+these changes there as well, it would be appreciated.  Alternatively, just
+ftp the file Ps:&lt;MacLisp&gt;Qio.mid.751 from CMUC.
+
+
+		Leonard Zubkoff
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00894.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00892.html">Changes to Maclisp	I believe the Jonl has already updated maclisp wrt Gj%Acc.  						--Chiron</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00894.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00892.html">Changes to Maclisp	I believe the Jonl has already updated maclisp wrt Gj%Acc.  						--Chiron</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00893"><strong>Date</strong></a></li>
+<li><a href="threads.html#00893"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: more lossage in NEWLSP -->
+<!--X-From-R13: ROHS.FAGDSFLYK ng Q[G&#45;10O  -->
+<!--X-Date: Thu, 17 May 79 06:25:00 GMT -->
+<!--X-Message-Id: 59c0e45d2df236ce02c2a38cf4daa467@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>more lossage in NEWLSP</title>
+<link rev="made" href="mailto:DAVE.TOURETZKY at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00424.html">Date Prev</a>][<a href="msg00422.html">Date Next</a>][<a href="msg00424.html">Thread Prev</a>][<a href="msg00422.html">Thread Next</a>][<a href="maillist.html#00423">Date Index</a>][<a href="threads.html#00423">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>more lossage in NEWLSP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-AI</li>
+<li><em>Subject</em>: more lossage in NEWLSP</li>
+<li><em>From</em>: DAVE.TOURETZKY at CMU-10A </li>
+<li><em>Date</em>: Thu, 17 May 79 06:25:00 GMT</li>
+<li><em>Cc</em>: SCOTT.FAHLMAN</li>
+<li><em>Original-date</em>: 17 May 1979 0225-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I hate to keep doing this, but there seems to be another bug in
+NEWLSP.  Specifically, upon leaving a CASEQ inside a PROG, the
+PROG gets exited too.  Here's how to reproduce the problem.
+
+	.run newlsp
+	(slurp c410dt50 fixit mcl)
+	(foo 1)
+	&lt;space&gt;
+	T
+
+What this does is (a) invoke the debugger, and (b) attempt to print
+the value of the variable T.  In NEWLSP, the debugger will print T = T,
+and then print T ? because the function DEBUG1 returned NIL.  Doing
+the exact same thing in MACLSP gets you the T = T, but DEBUG1 returns
+a frame and no error message is printed.
+
+The code to print a variable value is the T clause of a CASEQ in DEBUG1.
+Tracing and stepping both indicate that the PROG is exited when the
+CASEQ returns, while in MACLSP execution proceeds to the next expression,
+which is (RETURN (OR FRAME ITEM)).
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00424.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00422.html">fretry and unwinding</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00424.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00422.html">fretry and unwinding</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00423"><strong>Date</strong></a></li>
+<li><a href="threads.html#00423"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

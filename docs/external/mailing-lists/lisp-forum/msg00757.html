@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Lexical variables -->
+<!--X-From-R13: Dvpuneq [. Egnyyzna &#60;D[E ng [WF&#45;OW> -->
+<!--X-Date: Mon ,7 Sep 81 03:11:00 EDT -->
+<!--X-Message-Id: 2f048b91841e8d6e08f4071ad500b15f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Lexical variables</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00758.html">Date Prev</a>][<a href="msg00755.html">Date Next</a>][<a href="msg00758.html">Thread Prev</a>][<a href="msg00755.html">Thread Next</a>][<a href="maillist.html#00757">Date Index</a>][<a href="threads.html#00757">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Lexical variables</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-AI, INFO-LISPM at MIT-AI</li>
+<li><em>Subject</em>: Lexical variables</li>
+<li><em>From</em>: Richard M. Stallman &lt;RMS at MIT-AI&gt;</li>
+<li><em>Date</em>: Mon ,7 Sep 81 03:11:00 EDT</li>
+<li><em>Sender</em>: RMS0 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I've just finished implementing a feature I call LEXICAL-CLOSURE
+which makes nonspecial variables into downward-only lexical variables:
+
+(defun foo (a)
+   (mem (lexical-closure '(lambda (pat elt)...)) ...))
+
+allows the inner lambda to access the variable a even though not special.
+
+So far it only works in compiled code, and it isn't installed.
+
+I have two questions I want input on:
+
+1) should it be necessary to write LEXICAL-CLOSURE explicitly to have
+this feature?  Perhaps writing an unquoted lambda-expression should
+do this?  Perhaps (FUNCTION (LAMBDA ...)) should do this?
+
+2) Should I change the interpreter so that variables behave always
+as they do in the compiler?  That is, if not declared special,
+they would be completely local, unless the lexical-closure mechanism
+(under whatever user interface is used) makes them visible to an internal lambda.
+
+Note that expressions such as ((lambda ...) args) are compiled open by all`
+lisp compilers I know of, so that explicit lexical-closure is not
+needed in that case, and won't be in the future either.
+This makes me feel that it would be inconsistent to reqire an
+explicit lexical-closure in any other case just to get the same behavior.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00758.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00755.html">Suggested new lambda-list syntax</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00758.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00755.html">Suggested new lambda-list syntax</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00757"><strong>Date</strong></a></li>
+<li><a href="threads.html#00757"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

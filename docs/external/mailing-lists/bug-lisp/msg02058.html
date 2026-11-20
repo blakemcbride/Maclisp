@@ -1,0 +1,111 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DEFVST -->
+<!--X-From-R13: Xbanguna O. Drrf &#60;DSSE ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 15 Mar 80 12:36:00 GMT -->
+<!--X-Message-Id: dd6dac5873765bb937e4fbd2fc18990e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DEFVST</title>
+<link rev="made" href="mailto:REES at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02059.html">Date Prev</a>][<a href="msg02057.html">Date Next</a>][<a href="msg02059.html">Thread Prev</a>][<a href="msg02056.html">Thread Next</a>][<a href="maillist.html#02058">Date Index</a>][<a href="threads.html#02058">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DEFVST</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: EB at MIT-AI</li>
+<li><em>Subject</em>: DEFVST</li>
+<li><em>From</em>: Jonathan A. Rees &lt;REES at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 15 Mar 80 12:36:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-AI</li>
+<li><em>Original-date</em>: 15 March 1980 07:36-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 14 March 1980 23:37-EST
+    From: Edward Barton &lt;EB at MIT-AI&gt;
+    To:   BUG-LISP at MIT-AI
+    Re:   DEFVST
+
+    What is the proper way to make DEFVST constructions intelligible
+    to the compiler but unavailable at runtime?
+       (eval-when (compile) (defvst barf a b c))
+       (defun foo () (cons-a-barf a 1 b 2 c 3))
+    seems reasonable, but this causes the result of (FOO) to produce
+    a hunk whose struct-typep is nil and which contains &quot;UNBOUND&quot;
+    for at least one component. 
+
+What you want to say is not (eval-when (compile) (defvst ...)), but
+simply (defvst ...), at top level in your file.  This will make sure
+that the information that struct-typep wants to look at is available
+at runtime, and should fix the problem of whatever it was being
+UNBOUND.  I notice that since you use struct-typep, you need to have
+DEFVST around at runtime; you might make sure it's loaded before your
+defvst is encountered by the loader.  Use an incantation such as
+  (eval-when (eval load compile)
+    (cond ((status nofeature DEFVST) (load '((lisp) defvst))))) 
+instead of letting struct-typep autoload, if that's what you're doing.
+
+I'm not sure what you mean by 'DEFVST constructions', but
+if you mean that you don't want the macros cons-a-barf, barf-a, etc.
+to get output to the FASL file, just do
+  (eval-when (compile)
+    (setq defmacro-for-compiling () defmacro-displace-call ()))
+before the top level occurrence of defvst (but if you have other DEFMACROs
+you do want compiled, be sure to reset these magic variables to T).  (Too
+bad the Maclisp compiler doesn't have COMPILER-LET, which would be the
+right way to bind those flags!)
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02059.html">DEFVST</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02057.html">GETSYNTAX</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02059.html">DEFVST</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02056.html">Re: DEFVST</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02058"><strong>Date</strong></a></li>
+<li><a href="threads.html#02058"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

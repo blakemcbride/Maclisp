@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DDT Symbols etc. -->
+<!--X-From-R13: DZP ng [WF&#45;[Q (Dvpuneq Z. Pelna) -->
+<!--X-Date: Wed, 26 Jul 78 19:50:00 GMT -->
+<!--X-Message-Id: 95443845cbea7f7e7c2e9d2cc2e57936@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DDT Symbols etc.</title>
+<link rev="made" href="mailto:RLB at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02235.html">Date Prev</a>][<a href="msg02233.html">Date Next</a>][<a href="msg02235.html">Thread Prev</a>][<a href="msg02233.html">Thread Next</a>][<a href="maillist.html#02234">Date Index</a>][<a href="threads.html#02234">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DDT Symbols etc.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: DDT Symbols etc.</li>
+<li><em>From</em>: RLB at MIT-MC (Richard L. Bryan)</li>
+<li><em>Date</em>: Wed, 26 Jul 78 19:50:00 GMT</li>
+<li><em>Original-date</em>: 26 JUL 1978 1550-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Given the presence in much code of something like
+(or (getddtsym 'T) (valret '|^W:sl sys:ts l/
+:vp |))
+I propose instead (yet) another status/sstatus option pair:
+(status ddtsyms) returns T if the superior claims to be a DDT and has 
+symbols loaded;
+(sstatus ddtsyms) returns falsity if the superior is not a DDT, else
+returns T if the DDT has symbols loaded, else requests the DDT to load symbols
+**from the correct SYS:PURQIO nnn** or wherever and returns T if that was 
+successful.  Alternatively, this could set some flag for GETDDTSYM which
+would cause it to load symbols if necessary.
+
+The advantage of all this is that symbols could be guaranteed to be loaded
+from the 'right place' even in the presence of hacking file load defaults,
+etc. Hopefully it could even work in the presence of multiple levels of
+pdumping, although this would require more careful thought than I am putting
+into it now.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02235.html">Re: evalhook, applyhook</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02233.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02235.html">Re: evalhook, applyhook</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02233.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02234"><strong>Date</strong></a></li>
+<li><a href="threads.html#02234"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

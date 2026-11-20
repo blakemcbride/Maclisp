@@ -1,0 +1,88 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: New backquote. -->
+<!--X-From-R13: [OQDOY ng [WF&#45;[Q (Egniebf [. [npenxvf) -->
+<!--X-Date: Sat, 19 May 79 15:34:00 GMT -->
+<!--X-Message-Id: c797d4d9e6cc3a50a60c42a1939a6a40@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>New backquote.</title>
+<link rev="made" href="mailto:MACRAK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00420.html">Date Prev</a>][<a href="msg00418.html">Date Next</a>][<a href="msg00420.html">Thread Prev</a>][<a href="msg00418.html">Thread Next</a>][<a href="maillist.html#00419">Date Index</a>][<a href="threads.html#00419">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>New backquote.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: New backquote.</li>
+<li><em>From</em>: MACRAK at MIT-MC (Stavros M. Macrakis)</li>
+<li><em>Date</em>: Sat, 19 May 79 15:34:00 GMT</li>
+<li><em>Original-date</em>: 19 MAY 1979 1134-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The idea is nice, but I woul prefer that the internal names be a little
+nicer if we're going to see so much of them.  Even un-grinef'd code
+should be marginally readable.  I suggest something like
+(|`-expander| (|`,| . B) (|`,@| . D)).  These names shouldn't be too
+much in demand.
+
+By the way, there is a bug with readmacro inverse which screws up
+on forms like (quote . a); this is not an unreasonable form to have
+around: consider '((cond . docond) (quote . doquote)) , for example.
+One curious anomaly is that '(quote . x) prints out as ''#232342
+but (quote . y) gives an error message saying that y isn't a list
+(arg to length); this presumably has something to do with the 
+predictor?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00420.html">Re: RUBOUT</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00418.html">Error handling</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00420.html">Re: RUBOUT</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00418.html">Error handling</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00419"><strong>Date</strong></a></li>
+<li><a href="threads.html#00419"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

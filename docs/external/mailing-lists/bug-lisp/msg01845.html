@@ -1,0 +1,112 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Naming -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Wed, 5 Nov 80 16:34:00 GMT -->
+<!--X-Message-Id: 05Nov80 113458 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Naming</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01846.html">Date Prev</a>][<a href="msg01844.html">Date Next</a>][<a href="msg01847.html">Thread Prev</a>][<a href="msg01843.html">Thread Next</a>][<a href="maillist.html#01845">Date Index</a>][<a href="threads.html#01845">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Naming</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: jonl at MIT-MC</li>
+<li><em>Subject</em>: Naming</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Wed, 5 Nov 80 16:34:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC</li>
+<li><em>Original-date</em>: 5 November 1980 1134-EST (Wednesday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    From: JONL at MIT-MC (Jon L White)
+    Subject: Your personal feelings about names
+	From: rwk,kmp at MIT-MC
+	.  .  .
+	(2) We disagree violently with releasing functions named +INTERNAL...,
+	    |constantp/|| etc. These functions want reasonable names.
+    So just go ahead and remove them from the documentation.  Who cares,
+    since nobody will use them anyhow.
+	In defense of documentation, though, I would say that the several
+    system packages are interrelated; e.g., several places call |constantp/||, 
+    which would have the same functionality regardless of what you rename it to.
+    Furthermore, because of the interrelations, you can't fix the name argument
+    just by renaming them in the source.
+	You (RWK) invented some of them, and must have had good reason for 
+    such functionality in the higher-level functions (like SETF).  So why not 
+    flush the documentation and let every loser re-invent the functionality?
+    
+I agree with the point which I think KMP and RWK were trying to make.
+As I perceive it, they were arguing not that functions which have been
+endowed with funny names should not be advertised, but rather that if
+a function is useful enough to the user to be worth advertising in LISP
+RECENT, then one ought to provide such a function with a reasonable
+name.  After all, names like +INTERNAL-FROBBOZ and |frobboz/|| are
+purposely used to keep certain functions out of the user's hair; they
+were chosen precisely because they are weird and hard to type.
+This is okay for system types, but users shouldn't have to put
+up with it.  (Actually, it hurts my eyes just to look at a name
+like |frobboz/|| -- which means it is *excellent* for its original
+purpose.  I certainly don't want to use such a name in *my* code!)
+
+I don't understand the remark, &quot;because of the interrelations, you
+can't fix the name argument just by renaming them in the source.&quot;
+Well, certainly you have to rename something everywhere it is used,
+but since such a function is by hypothesis a &quot;system function&quot; before
+it gets advertised, presumably you system wizards can get together
+and find all such places.  I think it would be worth it.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01846.html">Re: Another thought on #o</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01844.html">Using * in names</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01847.html">Re: Format's C (kicking a live horse)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01843.html">Naming</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01845"><strong>Date</strong></a></li>
+<li><a href="threads.html#01845"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

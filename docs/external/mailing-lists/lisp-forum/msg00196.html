@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Destructuring syntax -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,2 Feb 81 10:08:00 EDT -->
+<!--X-Message-Id: a3f1ac0fca13ed75fb05e35d1e0bfbe7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Destructuring syntax</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00029.html">Date Prev</a>][<a href="msg00030.html">Date Next</a>][<a href="msg00192.html">Thread Prev</a>][<a href="msg00199.html">Thread Next</a>][<a href="maillist.html#00196">Date Index</a>][<a href="threads.html#00196">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Destructuring syntax</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DLW at MIT-MC, dick at MIT-AI</li>
+<li><em>Subject</em>: Re: Destructuring syntax</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,2 Feb 81 10:08:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, LISP-DISCUSSION at MIT-MC, CLR at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Dan, I think you're being far far too conservative in your opion about
+extending lambda-binding:
+    Date: 2 February 1981 02:56-EST
+    From: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;
+    .  .  .  Destructuring is new functionality; there should be a
+    new special form that does it. .  .  . 
+    Modifying all lambda-binding special forms to have a
+    feature that has nothing to do with lambda-binding is what I object to.
+In the LISP RECENT note (now in the LISP NEWS file) dated &quot;Jan 27,1979&quot;
+there was presented a very succinct bnf syntax for &quot;lambda-lists&quot;, which 
+would take care of LET, DEFUN, DO, PROG etc. (see item 3b in that note). 
+In fact, only DEFUN now allows the &amp; keywords, and Quux later sent an 
+addeddum giving some ideas on how &amp;optional and &amp;rest could be added to 
+the others.
+
+This syntax is ** fully-upward compatible **, and entirely unabmiguous
+(as the bnf shows);  The fact that many ordinary users are rudely
+suprised when they find it is unavailable on the LISPM shows that it
+must be a &quot;natural&quot; extension too.  In fact, at other non-MIT sites
+this sort of &quot;destructuring&quot; in the lambda-list has been independently
+invented and used, but private conversations with these types usually
+meets extreme resistance to the &amp; keywords (even now, KMP still objects
+to it, and has other ways of doing these things).
+
+As far as I know, LISPM/MacLISP/NIL is the only dialect supporting the
+&amp; keywords, but lots of others support destructuring.  I'd be interested
+in hearing some non-MIT, non-hacker ideas on this.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00029.html">Re: Array modification feature</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00030.html">Re: Array modification feature</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00192.html">Re: Destructuring syntax</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00199.html">Re: Destructuring syntax</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00196"><strong>Date</strong></a></li>
+<li><a href="threads.html#00196"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

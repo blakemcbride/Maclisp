@@ -1,0 +1,148 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: LOOP -->
+<!--X-From-R13: Qney I. Vbsszna &#60;QIV ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,18 Nov 80 13:34:00 EDT -->
+<!--X-Message-Id: 7e556336596178fc3fa26c8247578437@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: LOOP</title>
+<link rev="made" href="mailto:CWH at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00380.html">Date Prev</a>][<a href="msg00382.html">Date Next</a>][<a href="msg00380.html">Thread Prev</a>][<a href="msg00382.html">Thread Next</a>][<a href="maillist.html#00381">Date Index</a>][<a href="threads.html#00381">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: LOOP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC, Guy.Steele at CMU-10A</li>
+<li><em>Subject</em>: Re: LOOP</li>
+<li><em>From</em>: Carl W. Hoffman &lt;CWH at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,18 Nov 80 13:34:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 17 November 1980 1938-EST (Monday)
+    From: Guy.Steele at CMU-10A
+
+    (a) There is a &quot;dangling AND&quot; problem, similar to the &quot;dangling ELSE&quot;
+        problem with IF-THEN-ELSE.  Suppose I write:
+    	(LOOP FOR I IN LIST-OF-INTEGERS
+                  WHEN (ODDP I)
+                    DO (FORMAT T &quot;~%~D is odd&quot; I)
+                    AND WHEN (ZEROP (REMAINDER I 3))
+    		      DO (FORMAT T &quot; and divisible by 3&quot;)
+                    AND (FORMAT T &quot;.&quot;))
+
+There are certain features I like about LOOP, but the ability to write code
+which looks like the above is not one of them.  That is, I don't care for
+this attempt to create an algebraic-syntax language within Lisp.  We can
+just as easily (and more clearly, in my Aunt Agathoid opinion) write
+
+    (LOOP FOR I IN LIST-OF-INTEGERS
+	  DO (WHEN (ODDP I)
+		   (FORMAT T &quot;~%~D is odd&quot; I)
+		   (WHEN (ZEROP (REMAINDER I 3))
+			 (FORMAT T &quot; and divisible by 3&quot;))
+		   (FORMAT T &quot;.&quot;)))
+
+where (WHEN X . Y) is an abbreviation for (COND (X . Y)).
+I classify LOOP's features into three catagories:
+
+(1) The ease with which one can construct &quot;data sources&quot;, as in
+
+    (LOOP FOR X IN LIST-1
+	  FOR Y IN LIST-2
+	  FOR I FROM 1 TO N
+	  DO ...)
+
+where we don't have to worry about cdr'ing, car'ing, incrementing, and
+end-testing by hand.
+
+(2) The ease with which one can construct &quot;data sinks&quot;, like COLLECT,
+APPEND, MAXIMIZE, SUM, COUNT, and THEREIS.
+
+(3) Various &quot;control&quot; features, like ALWAYS, NEVER, and FINALLY.
+
+It is not the LOOP keywords I object to.  They seem essential for anything
+of this complexity, and we seem to be moving in that direction anyway.  It
+is their infix nature.  I would prefer to see a syntax of the form
+
+    (LOOP (IN-LIST X LIST-1)
+	  (IN-LIST Y LIST-2)
+	  (INCREMENT I 1 N)
+	  (ALWAYS (&gt; Y 3))
+	  (DO ...)
+	  (FINALLY ...))
+
+Other keywords might be IN-VECTOR, ON-LIST, etc. [along the lines of what
+LOOP provides], and a keyword like AND for parallel assignment, e.g.
+
+    (LOOP (AND (REPEAT CHAR (TYI))
+	       (REPEAT OLD-CHAR NIL CHAR))
+	  (DO ...))
+
+Where the REPEAT keyword is meant to describe something like
+LOOP's FOR X = ... THEN ...
+
+The problem arises when we try to implement the class of features mentioned
+under (2).  Correct me if I'm wrong, but it appears that the only reason the
+LOOP keyword WHEN is needed [as opposed to writing DO (COND ...)]  is in
+conjunction with the &quot;data source&quot; facilities [COLLECT, COLLECT-INTO,
+MAXIMIZE, SUM, THEREIS].  We want forms like (COLLECT X) to appear
+arbitrarily deep in nested CONDS, which may contain vanilla Lisp forms as
+well.  Unfortunately, COLLECT is not an isolated special form, but a part of
+LOOP's syntax.  I don't see a simple solution to this, other than doing a
+hairy analysis/macro-expansion of code at macro-expand time, as is done by
+MC:ALAN;COMLET.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00380.html">Re: LOOP Macro a Winner</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00382.html">Re: LOOP loses</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00380.html">Re: LOOP Macro a Winner</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00382.html">Re: LOOP loses</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00381"><strong>Date</strong></a></li>
+<li><a href="threads.html#00381"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

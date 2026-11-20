@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Simplifications for UUO links etc. -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Thu, 6 Jul 78 00:41:00 GMT -->
+<!--X-Message-Id: 6c4685b327886ec04ea3629e76393937@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Simplifications for UUO links etc.</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02322.html">Date Prev</a>][<a href="msg03456.html">Date Next</a>][<a href="msg02322.html">Thread Prev</a>][<a href="msg03456.html">Thread Next</a>][<a href="maillist.html#02321">Date Index</a>][<a href="threads.html#02321">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Simplifications for UUO links etc.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Simplifications for UUO links etc.</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Thu, 6 Jul 78 00:41:00 GMT</li>
+<li><em>Original-date</em>: 5 JUL 1978 2041-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>1) Hau about flushing the alternative for lap and fasload which
+   permits the &quot;snapping&quot; of CALLs and JCALLs during loading etc.
+   The only alternatives then would be PURE = NIL and PURE = non-NIL.
+   With the new incrementally-extendible UUOLINKS area, and its smaller
+   size, there seems to be little reason not to use it in all cases
+   wherein some purification is desired.
+2) According to GSB, the UUO clobberer should bypass the clobbering
+   on any binary-program page which is considered pure.  There is come
+   code in the UUO handler which tries to decide whether or not to
+   clobber - perhaps we could merely extend it to inspect the GCST for
+   the page in question, and it it is alleged to be pure, then cancel.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02322.html">SAIL LISP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03456.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02322.html">SAIL LISP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03456.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02321"><strong>Date</strong></a></li>
+<li><a href="threads.html#02321"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

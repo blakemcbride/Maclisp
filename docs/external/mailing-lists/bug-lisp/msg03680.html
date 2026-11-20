@@ -1,0 +1,114 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: #% -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 10 Dec 80 12:17:00 GMT -->
+<!--X-Message-Id: 5b2e301479742efc4809133f8df550c2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>#%</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03681.html">Date Prev</a>][<a href="msg03679.html">Date Next</a>][<a href="msg03685.html">Thread Prev</a>][<a href="msg03684.html">Thread Next</a>][<a href="maillist.html#03680">Date Index</a>][<a href="threads.html#03680">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>#%</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: #%</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 10 Dec 80 12:17:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 10 December 1980 07:17-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 9 December 1980 14:18-EST
+    From: Jon L White &lt;JONL at MIT-MC&gt;
+    Subject: #%
+    To: RWK at MIT-MC
+    cc: BUG-LISP at MIT-MC
+
+        Date: 8 December 1980 15:31-EST
+        From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+	#%`(....) is hardly ever right!  `#%(SI:XSET ,x ,y ,z) used to work
+	perfectly well, until BACKQ make |`,/|| a macro.  If you REMPROP it's
+	MACRO property, or (SETQ BACKQUOTE-EXPAND-WHEN 'READ), it works
+	perfectly.  #%`(....) is identical with doing `(....) in an environment
+	with BACKQUOTE-EXPAND-WHEN set to READ.
+    this still isn't right -- the problem is that want a read-time &quot;change of
+    horses in mid-stream&quot;, so to speak.  Here is one correct way to do it:
+      #+FM (sublis `((A . ,totsize) (B . ,(symbolconc sname '-CLASS)))
+	       '#%(SI:MAKE-EXTEND A B))
+    instead of
+       `(SI:MAKE-EXTEND ,totsize ,(symbolconc sname '-CLASS))
+    Whatever we do, we don't want to remove the macro property of |`,/||.
+
+I don't understand 'read-time &quot;change of horses in mid-stream&quot;.  At any rate,
+since the read-macro for comma (at least used to) check at read-time if it is
+inside a backquote, you really have to work hard to get one of those markers to
+evaluate.  In fact, the *ONLY* way I have ever seen it happen is by #%
+macro-expanding them.  I think one of two things should be done:
+
+1)  Remove the macro property.
+2)  Make MACROEXPAND know about it.
+
+Also, please note that your 'correct' solution is not as correct as you think.
+At the time of the macro-expansion, the macro sees just symbols A and B.  It
+may very well do something illegal like reverse the order of evaluation, since
+those are SIMPLEP.  However, (|`,/|| . A) is NOT SIMPLEP.  In your simple case,
+you win, since what you're substituting for both happen to be reversable and
+multiply evaluable, but if totsize weren't a fixnum, but where a
+(progn (PRINT 'FOO) 5) and SI:MAKE-EXTEND were something more complicated that
+actually looked at it's arguments, you might well lose.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03681.html">Re: LISP.INI on TWENEX</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03679.html">SETF</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03685.html">#%</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03684.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03680"><strong>Date</strong></a></li>
+<li><a href="threads.html#03680"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

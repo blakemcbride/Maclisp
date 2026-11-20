@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 26 Apr 80 13:32:00 GMT -->
+<!--X-Message-Id: a195f1b1562290482c139f57b7ea323c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04180.html">Date Prev</a>][<a href="msg04178.html">Date Next</a>][<a href="msg04180.html">Thread Prev</a>][<a href="msg04177.html">Thread Next</a>][<a href="maillist.html#04179">Date Index</a>][<a href="threads.html#04179">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DCP at MIT-MC</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 26 Apr 80 13:32:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 26 April 1980 08:32-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 25 April 1980 03:31-EST
+    From: David C. Plummer &lt;DCP at MIT-MC&gt;
+    To:   BUG-LISP
+
+    Now that carriage returns are no longer NO-OPS but real WHITESPACE,
+    perhaps print should be told about this. I printed a bignum to
+    a file, and PRINT inserted newlines,...
+-----
+You were not using the default environment and/or you were doing this from
+a breakpoint. The autoterpri 'feature' is controlled by the variable TERPRI.
+Setting it to T makes it not autoterpri (don't ask me why not the other way
+around ...). There's a Lisp bug that makes TERPRI get rebound to NIL in
+breakpoints instead of T (which it defaultly is at toplevel). This is and has
+been for a while fixed in XLisp, so hang in there or start using XLisp in
+the interim ... -kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04180.html">TTYSCAN and the programming Gestapo</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04178.html">Autoload</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04180.html">TTYSCAN and the programming Gestapo</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04177.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04179"><strong>Date</strong></a></li>
+<li><a href="threads.html#04179"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

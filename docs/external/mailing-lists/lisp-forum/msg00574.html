@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Use of strings in PDP10 MACLISP -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,1 Oct 80 16:40:00 EDT -->
+<!--X-Message-Id: eb435fe986bcbc946a5f3e9489b7790f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Use of strings in PDP10 MACLISP</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00126.html">Date Prev</a>][<a href="msg00127.html">Date Next</a>][<a href="msg00126.html">Thread Prev</a>][<a href="msg00190.html">Thread Next</a>][<a href="maillist.html#00574">Date Index</a>][<a href="threads.html#00574">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Use of strings in PDP10 MACLISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BARMAR at MIT-MC, ALAN at MIT-MC, KMP at MIT-MC,      LISP-FORUM at MIT-MC, BUG-LISP at MIT-MC, Miller at MIT-AI,      Guy.Steele at CMU-10A</li>
+<li><em>Subject</em>: Re: Use of strings in PDP10 MACLISP</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,1 Oct 80 16:40:00 EDT</li>
+<li><em>Cc</em>: JHendler at BBNA, JShelton at BBNA, TBlocker at BBNA,      Pattermann at BBNA, Kehler at BBNA</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>There has been a lot of commentary on the two notes reproduced below
+and I've copied it to a file MC:LSPMAI;STRING BARMAR for reference.
+    Date: 28 September 1980 20:22-EDT
+    From: Barry Margolin &lt;BARMAR at MIT-MC&gt;
+    Subject: &quot;strings&quot;
+    To: BUG-LISP at MIT-MC
+    Why does (equal &quot;a&quot; &quot;a&quot;) return NIL?
+    Date: 29 SEP 1980 0910-EDT
+    From: KMP at MIT-MC (Kent M. Pitman)
+    The primary use of &quot;...&quot; is to get an object which prints a 
+    certain way... &quot;...&quot; is defined on non-Multics Maclisp to return 
+    an UNINTERNED SYMBOL which has been SETQ'd to itself (so that it 
+    self-evaluates).
+Sad to say, no one seems to have thought of telling BARMAR to use the
+macLISP STRING package.  The initial setting of the &quot; macro in PDP10
+MacLISP is indeed for a minimal kind of compatibility, but for a real
+STRING implementation, one should load in the out-of-core package
+	(LOAD '((LISP) STRING FASL))
+Some minimal documentation can be found in the source files 
+MC:NILCOM;STRING &gt;, MC:LSPSRC;EXTEND &gt;, and MC:LSPSRC;EXTMAC &gt;.
+Similar files exist on the MacLISP distribution to TOPS-10/20 sites.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00126.html">Re: #| ... |# = /* ... */</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00127.html">Re: #| ... |#</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00126.html">Re: #| ... |# = /* ... */</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00190.html">Re: destructuring within &quot;argument&quot; positions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00574"><strong>Date</strong></a></li>
+<li><a href="threads.html#00574"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

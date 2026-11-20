@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: setf bug -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 12 May 81 17:40:00 GMT -->
+<!--X-Message-Id: 70e772c50211523ff41edb8f670dfb4c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>setf bug</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02537.html">Date Prev</a>][<a href="msg02535.html">Date Next</a>][<a href="msg02538.html">Thread Prev</a>][<a href="msg02537.html">Thread Next</a>][<a href="maillist.html#02536">Date Index</a>][<a href="threads.html#02536">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>setf bug</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: setf bug</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 12 May 81 17:40:00 GMT</li>
+<li><em>Cc</em>: GZ at MIT-MC</li>
+<li><em>Original-date</em>: 12 May 1981 13:40-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 12 May 1981 05:44-EDT
+    From: Gail Zacharias &lt;GZ at MIT-MC&gt;
+
+    (SETF (FIXNUM-IDENTITY (CAR SOME-LIST)) 17.)
+
+    wants that SOME-LIST should be a fixnum...
+
+This is becase it expands into:
+
+(progn (fixnum-identity (rplaca some-list 17.)) 17.)
+
+While you people are fixing this, could you make it expand into:
+
+(fixnum-identity (progn (rplaca some-list (fixnum-identity 17.)) 17.))
+
+or some other variation that does a fixnum-identity BEFORE performing
+the side-effect?  This would be a useful error check to have in the
+interpreter.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02537.html">Alleged Rubout/Echo lossage</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02535.html">Rubout/Echo lossage</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02538.html">setf bug</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02537.html">Alleged Rubout/Echo lossage</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02536"><strong>Date</strong></a></li>
+<li><a href="threads.html#02536"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

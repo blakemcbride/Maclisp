@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Using macros in Mapping functions -->
+<!--X-From-R13: Quneyrf Dvpu &#60;Dvpu ng [WF&#45;OW> -->
+<!--X-Date: Mon, 10 Nov 80 22:04:00 GMT -->
+<!--X-Message-Id: 4bd45c87b3b2ffaca14bf88ee19becea@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Using macros in Mapping functions</title>
+<link rev="made" href="mailto:Rich at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01829.html">Date Prev</a>][<a href="msg01825.html">Date Next</a>][<a href="msg01829.html">Thread Prev</a>][<a href="msg01825.html">Thread Next</a>][<a href="maillist.html#01826">Date Index</a>][<a href="threads.html#01826">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Using macros in Mapping functions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISPM at MIT-AI, BUG-LISP at MIT-AI, LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: Using macros in Mapping functions</li>
+<li><em>From</em>: Charles Rich &lt;Rich at MIT-AI&gt;</li>
+<li><em>Date</em>: Mon, 10 Nov 80 22:04:00 GMT</li>
+<li><em>Cc</em>: KMP at MIT-AI, RICH at MIT-AI</li>
+<li><em>Original-date</em>: 10 November 1980 17:04-EST</li>
+<li><em>Sender</em>: GLR at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>  I just finished reading Ken Pitman's Lisp Conference article on
+macros and Fexpr's in which he points out that a difference between
+macros and Fexpr's is that you can apply Fexpr's, which you cannot do
+so with macros.  This is indeed a significant point.  I have been
+irritated for a long time by having to write forms like the following
+
+  (MAPCAR #'(LAMBDA (X) (SECOND X)) L)
+
+when I would much rather write
+
+  (MAPCAR #'SECOND L)
+
+I would like to ask now why the second form above cannot be taken as
+a shorthand for the first (using a gensym for the variables)?
+It seems unreasonable to force the user to write the first form
+or, even worse,
+
+  (MAPCAR #'CADR L)
+
+if the interpreter and compiler could systematically accept the
+shorter form as a valid abbreviation for the longer form.  If I am not
+missing some obvious (or subtle) reason why Lisp can't support macros
+used in this way, may I propose this as an innovation for future
+Lisp's.
+
+       yt, Chuck Rich.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01829.html">Meaningless error msg in CASEQ</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01825.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01829.html">Meaningless error msg in CASEQ</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01825.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01826"><strong>Date</strong></a></li>
+<li><a href="threads.html#01826"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Macros and destructuring... -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;RZI ng [WF&#45;OW> -->
+<!--X-Date: Wed, 1 Oct 80 08:02:00 GMT -->
+<!--X-Message-Id: c74c4402f49529b1bff7ac9f982cdf24@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Macros and destructuring...</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01136.html">Date Prev</a>][<a href="msg01134.html">Date Next</a>][<a href="msg01116.html">Thread Prev</a>][<a href="msg01134.html">Thread Next</a>][<a href="maillist.html#01135">Date Index</a>][<a href="threads.html#01135">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Macros and destructuring...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Dave Touretzky at CMU-10A</li>
+<li><em>Subject</em>: Re: Macros and destructuring...</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;</li>
+<li><em>Date</em>: Wed, 1 Oct 80 08:02:00 GMT</li>
+<li><em>Cc</em>: BUG-lisp at MIT-MC, BUG-lispm at MIT-MC, BUG-macsymai at MIT-MC</li>
+<li><em>Original-date</em>: 1 October 1980 04:02-EDT</li>
+<li><em>Sender</em>: DLW at CADR2 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>This discussion should be moved to LISP-FORUM.  Dave, if you are not on
+it, you probably should be.  I'll send further messages to LISP-FORUM
+instead of these BUG- lists.
+
+   What does a LEXPR take if not an argument vector?
+
+It does not take an argument vector.  The ARG function never returns any
+such vector.  ARG lets you get at your N arguments via an ugly mechanism
+(numbers instead of names) because Maclisp hasn't had &amp;mumbles.  What
+FEXPRs do is even more irrelevant; FEXPRs are basically a loss and do
+not fit into what I consider reasonable philosophy of Lisp.  I think
+it is absurd to base a discussion of what Lisp ought to be on the basis
+of what FEXPRs do now.
+
+As for your second paragraph, I have already explained this in previous
+messages.  A macro is a function to the meta-lenguage, but it is a macro
+to the language.  To say that &quot;A macro is still a function, just like a
+FEXPR is&quot; is quite wrong; FEXPRs aren't functions either.  Saying that
+destructuring in DEFUN &quot;is a natural thing to do, because at least one
+class of function really needs it&quot; is exactly what I have been
+disagreeing with; you should *not* add something just because one
+application needs it, you can get destructuring with a DESTRUCTURE
+special form quite easily without building it in, and macros are NOT
+functions.  Read my previous mail.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01136.html">(EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01134.html">#| ... |# = /* ... */</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01116.html">(EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01134.html">#| ... |# = /* ... */</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01135"><strong>Date</strong></a></li>
+<li><a href="threads.html#01135"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

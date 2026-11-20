@@ -1,0 +1,121 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: No, it's a bug. -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 7 Jan 81 08:12:00 GMT -->
+<!--X-Message-Id: 86c727b299fe670add7cb4b100bb3a16@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>No, it's a bug.</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02503.html">Date Prev</a>][<a href="msg03603.html">Date Next</a>][<a href="msg02503.html">Thread Prev</a>][<a href="msg03603.html">Thread Next</a>][<a href="maillist.html#03604">Date Index</a>][<a href="threads.html#03604">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>No, it's a bug.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: No, it's a bug.</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 7 Jan 81 08:12:00 GMT</li>
+<li><em>Cc</em>: DICK at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 7 January 1981 03:12-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 4 January 1981 20:05-EST
+    From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+
+From:         Date:
+Date: Tue, 1 Apr 81 18:27:15 GMT
+Original-Date: 01/04/81 14:27:15 EDT
+Subject:
+        From: DICK at MIT-ML
+        To:   (BUG LISP) at MIT-ML
+
+        There is a bug in macroexpand that is seen in the  following
+        scenario ... macroexpand uses a macro even if it is not the current 
+        functional property in force....
+    -----
+    This is a widely taken-advantage-of feature, actually. ...
+
+This is not the not-so-widely taken-advantage-of feature that I am
+familiar with, look again:
+
+(defun bar macro (body) (cons '1+ (cdr body)))
+BAR
+(defun bar (x) (+ x x))
+BAR
+(bar 4)
+8
+(macroexpand '(bar 4))
+(1+ 4)
+
+bar is defined as a macro first and THEN redefined to be an expr.
+Eval and apply will BOTH find the expr property, the function bar has
+been 100% redefined to be (lambda (x) (+ x x)).  You may recall that
+defun (and defprop) go to a great deal of hair to move properties to
+the front of property lists so that such redefinitions work.
+
+Now there is this kludge where apply, mapxxx, funcall, etc. ignore a
+macro property in favor of one that can be applied, but that is a
+kludge in the language to fix a defficiency (at small expense, since
+nothing that otherwise works is effected), and it doesn't imply a
+general philosophy that macro properties must ALWAYS represent correct
+translations.  You HAVE to be able to redefine a macro as an expr
+(with a possibly different definition) and have everybody agree on it.
+If you wish to make shadowed macro properties mean what you suggest,
+then defun had better start doing remprops of macro properties.
+
+This is a real bug in macroexpand, and it should be fixed.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02503.html">Re: TTYCONS for SFAs</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03603.html">MACRO and EXPR properties</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02503.html">Re: TTYCONS for SFAs</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03603.html">MACRO and EXPR properties</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03604"><strong>Date</strong></a></li>
+<li><a href="threads.html#03604"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re:  Base/ibase -->
+<!--X-From-R13: RVRN[WF&#45;OW -->
+<!--X-Date: Fri, 24 Nov 79 15:28:15 GMT -->
+<!--X-Message-Id: 0354fb05ee4482ba4f78d4b08869ca96@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re:  Base/ibase</title>
+<link rev="made" href="mailto:DHD@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03949.html">Date Prev</a>][<a href="msg03947.html">Date Next</a>][<a href="msg03949.html">Thread Prev</a>][<a href="msg03942.html">Thread Next</a>][<a href="maillist.html#03948">Date Index</a>][<a href="threads.html#03948">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re:  Base/ibase</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-AI	The obvious answer is compatibility with the LISP machine and other lisp	In any case, I don't see why it would be too hard to put the (SETQ BASE	So why not consider it?  This base 8 bit is at least as ridiculous as</li>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: Re:  Base/ibase</li>
+<li><em>From</em>: DHD@MIT-AI</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 24 Nov 79 15:28:15 GMT</li>
+<li><em>Date</em>: Sat, 24 Nov 79 16:03:00 GMT</li>
+<li><em>Cc</em>: GSB at MIT-MC</li>
+<li><em>Original-date</em>: 11/24/79 11:28:15 EDT</li>
+<li><em>Original-date</em>: 24 November 1979 11:03-EST</li>
+<li><em>Sender</em>: RWK0 at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The current Format is a loss, as we all know.  It doesn't even KNOW about
+~T, and ~&amp; doesn't work right, etc...
+
+GSB has a FORMAT that's as fully LISPM compatible as can be done, works well,
+comes complete with excellent documentation (due to LSB)  It takes only about
+300 words more BPS than the current MacLisp default, etc. unless ~R, ~&lt;, or ~C
+are used, which autoloads another 700 words or so.  I haven't done any speed
+comparisons yet, but I'd expect GSB's to be at least comparable, if not
+superior.
+
+Do we want to make GSB's format autoload instead of the current one?
+(Macsyma doesn't use FORMAT, so the space is less critical than it might be)
+
+The disadvantages include the fact that it's written with LSB, which hurts
+its exportability.  On the other hand, it's so far superior to the current
+one that I've always used it instead of the default one even in it's much
+earlier and more primitive versions.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03949.html">New atom constructor in STRUCT</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03947.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03949.html">New atom constructor in STRUCT</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03942.html">Base/ibase</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03948"><strong>Date</strong></a></li>
+<li><a href="threads.html#03948"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

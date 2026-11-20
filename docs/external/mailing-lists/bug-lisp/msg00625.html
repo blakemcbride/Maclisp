@@ -1,0 +1,121 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DEFPROP and PUTPROP -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Sat, 27 Jan 79 22:51:00 GMT -->
+<!--X-Message-Id: a7f00cc795928ecdebba6c92f4b56008@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DEFPROP and PUTPROP</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00626.html">Date Prev</a>][<a href="msg00624.html">Date Next</a>][<a href="msg00632.html">Thread Prev</a>][<a href="msg00624.html">Thread Next</a>][<a href="maillist.html#00625">Date Index</a>][<a href="threads.html#00625">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DEFPROP and PUTPROP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GLS at MIT-MC</li>
+<li><em>Subject</em>: DEFPROP and PUTPROP</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Sat, 27 Jan 79 22:51:00 GMT</li>
+<li><em>Cc</em>: NIL at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 27 JAN 1979 1751-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 25 Jan 1979 2119-PST
+    From: Guy Steele &lt;GLS at SU-AI&gt;
+
+    Gee hiz.  Anyone who depends on the value of DEFPROP
+    deserves to lose.  If we were really winning we would arrange
+    for DEFPROP to return NO value (as in &quot;MARVEL&quot;!).
+
+Sigh. I'm not sure if you are serious or not. Yes, it might be nice
+if things like DEFPROP, etc. didn't return values but they do. I might
+point out that the fact that they do is supposedly one of the big features
+of Lisp. That you can make use of return values as in:
+
+   (DEFUN PRINT-AND-RETURN-A-RANDOM-NUMBER ()
+          (PRINT (RANDOM)))
+
+rather than the fortran-ish style:
+
+   (DEFUN PRINT-AND-RETURN-A-RANDOM-NUMBER ()        ; Yech
+          ((LAMBDA (TEMP) (PRINT TEMP)) (RANDOM)))
+
+or
+
+   (DEFUN PRINT-AND-RETURN-A-RANDOM-NUMBER ()        ; Double-Yech
+          (PROG (TEMP)
+		(SETQ TEMP (RANDOM))
+		(PRINT TEMP)
+		(RETURN TEMP)))
+
+You are saying I am foolish to rely on what it returns, but if you think
+for a moment I hope you'll admit that I'm foolish only 'cuz I know better
+about how the language was derived and maintained. Why shouldn't that be
+perfectly well-defined? 
+
+Most of these other things that assign values to things (and I use the
+phrase 'assign values' loosely as in SETPLIST, RPLACA, SETQ, ... et al
+as I mentioned in the note that started this) return the value of the thing
+they set. Things that have a clearly defined, well-thought-out return-value
+will make for much better compilation and generally nice program elegance.
+
+Do you disagree? I think this is an important issue. I have received several
+messages from people in the last year or so with the form &quot;well, you're
+foolish for relying on what &lt;x&gt; returns&quot; and I would like to settle this.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00626.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00624.html">Re: DEFPROP and PUTPROP</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00632.html">DEFPROP and PUTPROP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00624.html">Re: DEFPROP and PUTPROP</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00625"><strong>Date</strong></a></li>
+<li><a href="threads.html#00625"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

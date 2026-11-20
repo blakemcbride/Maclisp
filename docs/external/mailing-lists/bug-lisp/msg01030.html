@@ -1,0 +1,105 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: losing with newly released STRING ? -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 9 Nov 81 21:09:00 GMT -->
+<!--X-Message-Id: 2c31f2f3194c500410cc7b7d176f9ead@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>losing with newly released STRING ?</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01031.html">Date Prev</a>][<a href="msg01029.html">Date Next</a>][<a href="msg01031.html">Thread Prev</a>][<a href="msg01029.html">Thread Next</a>][<a href="maillist.html#01030">Date Index</a>][<a href="threads.html#01030">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>losing with newly released STRING ?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: losing with newly released STRING ?</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 9 Nov 81 21:09:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 9 November 1981 16:09-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 9 November 1981 01:53-EST
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    After enough consing/garbage-collection the pnames of strings change.
+    ...
+    ;; note the value of the following variable
+    STATUS-SSTATUS-FUNCTION-ALIST
+    ;; then compile a file
+    (comfile &quot;jl;emacs&quot;)
+    . . . 
+This problem may not be related particularly to the new STRING, but
+possibly to the dynamics of GC/consing -- your dumped VASL is already 
+garbaged, before you ever start to do COMFILE.  The point at which you 
+noticed the bug occurred while trying to make a FORMAT string, and I 
+noticed that the GC-DAEMON in VASL is backwards (in a sense) -- by not 
+loading the Baker GCDEMN file &quot;early&quot; (i.e., before the STRING file) its 
+daemon function gets run before the string gc-daemon function, and if it 
+causes any consing, there could be some lossages.  I'll change the Baker 
+GCDEMN file to run its function 'last', rather than first.
+
+But where did this value for STATUS-SSTATUS-FUNCTION-ALIST
+get created?  None of the strings on it are &quot;real&quot;, which is why
+they go away after the first STRING-GC; but the string GC markarray
+has entries for lots of other STATUS/SSTATUS keyword names which
+aren't on that list.  Could you make up a new VASL with the to-be-fixed
+Baker GCDEMN, and with the current STRING, but having first done 
+(SETQ STR:GC-CHECK? 'T) ?  
+If there are any truly weird conditions occuring during the load-up 
+phase, this should catch them (but it also may catch a legitimate 
+situation where queue-ing up of interrupts had occurred).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01031.html">losing with newly released STRING</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01029.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01031.html">losing with newly released STRING</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01029.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01030"><strong>Date</strong></a></li>
+<li><a href="threads.html#01030"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

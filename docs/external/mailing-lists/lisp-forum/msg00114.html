@@ -1,0 +1,114 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: comment brackets -->
+<!--X-From-R13: QEHOJ.wxs ng Prexryrl -->
+<!--X-Date: Tue ,2 Sep 80 11:44:50 EDT -->
+<!--X-Message-Id: c43d60667a3d54bee41b6617e2feb1d5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: comment brackets</title>
+<link rev="made" href="mailto:CSVAX.jkf at Berkeley">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00113.html">Date Prev</a>][<a href="msg00115.html">Date Next</a>][<a href="msg00113.html">Thread Prev</a>][<a href="msg00115.html">Thread Next</a>][<a href="maillist.html#00114">Date Index</a>][<a href="threads.html#00114">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: comment brackets</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: alan at mit-mc</li>
+<li><em>Subject</em>: Re: comment brackets</li>
+<li><em>From</em>: CSVAX.jkf at Berkeley</li>
+<li><em>Date</em>: Tue ,2 Sep 80 11:44:50 EDT</li>
+<li><em>Cc</em>: lisp-forum at mit-mc</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>  As I see it we have gone full circle in our choice of a commenting
+method for high level languages.  Initially we had the C in column
+one of Fortran.  After you put that C in column one you could put anything
+you wanted in the rest of the card.  The next stage, when we went to
+freer formated languages, was the balanced comments.  And finally, in
+ADA we revert to a LISP style convention, with `--' taking the place of `;'.
+I think that it is great that some language designers have finally
+realized that LISP was right all along.  I program mainly in lisp a C, 
+which uses the PL/1 style /* ... */ and I much prefer the LISP style comment.
+It allows me to comment every line if I want to, you can't do this with
+/* ... */ , there is just too much baggage around the comment.  Also,
+if you want to comment out a line or two of LISP, you can just put a 
+`;' at the beginning of the lines to remove.  But in C, you cannot
+surround the lines to comment out with /* ... */ if any of those line
+contain comments! And finally, the prefered way of formatting a multi-line
+comment in C is
+
+ /*
+  *  this is the first line
+  *  and yet another line
+  */
+
+The reason for the added *'s is not that the language requires them, but
+to keep reminding you that this is a comment and not program text.  Of
+course in LISP, using `;' this is always done.
+
+
+  I can see one use for #| ... |# and that is to surround large blocks
+of text.  I can imagine including parts of documentation files in the
+source code and dont want to see ugly `;'s in front of each line.  Another
+case would be if you wrote a large section of documentation inline
+and now want to right and left justify it.  When you send that block off
+to the text justifier you don't want any extraneous semicolons around.
+
+ To summarize, I can see a very limited use for #| ... |# and if such
+a convention is adopted, I would ask that people only use it when
+absolutely necessary.
+
+ - john foderaro
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00113.html">Re: /* ... */</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00115.html">Re: Suggestion for commenting brackets like /*...*/</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00113.html">Re: /* ... */</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00115.html">Re: Suggestion for commenting brackets like /*...*/</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00114"><strong>Date</strong></a></li>
+<li><a href="threads.html#00114"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

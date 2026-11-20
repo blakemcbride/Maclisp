@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: c*r -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Sun ,6 Dec 81 17:45:00 EDT -->
+<!--X-Message-Id: b0acf7eaf31789b8f83ac1f68156827f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>c*r</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00685.html">Date Prev</a>][<a href="msg00683.html">Date Next</a>][<a href="msg00686.html">Thread Prev</a>][<a href="msg00691.html">Thread Next</a>][<a href="maillist.html#00684">Date Index</a>][<a href="threads.html#00684">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>c*r</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KIM.jkf at UCB-C70</li>
+<li><em>Subject</em>: c*r</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun ,6 Dec 81 17:45:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>You are making a rather strong statement when you say you would
+probably boot the lisp machine down the stairs because it didn't
+implement C*R. It depends on what you think is important to spend time
+on fully and consistently supporting. General &quot;language quality&quot;
+issues are much more important here than issues of &quot;what is clear to
+everyone who has ever heard of the language lisp.&quot;
+
+For example, some people might not like the fact that in Franz 1.0E+99
+reads in as 1.7014E+38 (i.e. no overflow checking in flonum
+internalization), or that too many &quot;)&quot; gives the error message
+&quot;Readlist error, code 3&quot; or that &quot;'.&quot; gives the error message
+&quot;Readlist error, code 4&quot; That may seem ok to somebody used to the
+error messages provided by the Unix &quot;C&quot; compiler, but your average
+hacker brought up in a Maclisp/ITS/Emacs=&gt;Lispm environment just isn't
+going to buy it.
+
+There is a totally different perspective here, as evident from some of
+your examples. If a user on a lispm, (or in Maclisp or Nil for that
+matter), wanted to get at a deep subpart of a list structure during
+interactive use they would not think of typing (cadddar x). Most
+likely they would call upon an interactive structure walker, usually
+called an &quot;INSPECTOR,&quot; to get what they want in the minimum number of
+key-strokes. Couple this with the fact that mininmum number of
+keystrokes is not at all an issue inside program source-files,
+and you can see why this C*R thing is not a bias of implementor against
+user.
+
+The most reasonable thing a lisp can do is probably to define only CAR and CDR,
+and to insure that the compiler can optimize CAR/CDR compositions into calls
+to the internal entry points to the usually defined set of C*R functions.
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00685.html">Query</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00683.html">Re: Query</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00686.html">c*r</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00691.html">More pointless hot air about cdaddaddaadddaadaaddddaaar</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00684"><strong>Date</strong></a></li>
+<li><a href="threads.html#00684"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

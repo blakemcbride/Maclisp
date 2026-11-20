@@ -1,0 +1,126 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Once again a plea for slash -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Tue ,23 Dec 80 21:10:00 EDT -->
+<!--X-Message-Id: d868430ee80c311d2f04562f77a4d045@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Once again a plea for slash</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00139.html">Date Prev</a>][<a href="msg00543.html">Date Next</a>][<a href="msg00542.html">Thread Prev</a>][<a href="msg00543.html">Thread Next</a>][<a href="maillist.html#00503">Date Index</a>][<a href="threads.html#00503">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Once again a plea for slash</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJS at MIT-AI, rwg at SU-AI, Guy.Steele at CMU-10A,      Scott.Fahlman at CMU-10A, Fateman at BERKELEY,      lisp-forum at MIT-MC</li>
+<li><em>Subject</em>: Re: Once again a plea for slash</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Tue ,23 Dec 80 21:10:00 EDT</li>
+<li><em>Sender</em>: dlw at CADR6 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I, too, assign a high benefit to changing the quoting character to not
+be slash.  The problem of blocking novice users bothers me a lot; having
+to double slashes in text bothers me a lot too; leaving room for
+rationals is a good thing, though, as we just pointed out to one of our
+users, we will probably never get to the point where implementing
+rational numbers is the most important thing to be done next; Unix
+pathnames could certainly be an issue for some sites in the future.
+
+However, there are some problems in your plan.
+
+(1) Leaving Maclisp alone and changing the LM and NIL would be a
+disaster for Macsyma.  I suppose Macsyma could doctor the Maclisp
+readtable before doing anything else, assuming there is some way to make
+this work in the compiler.
+
+(2) Making the / function do what you say is very unappealing.  I think
+you are throwing around the word &quot;correct&quot; rather loosely, especially
+for someone who has, in the past, been careful to distinguish between
+&quot;floating point numbers&quot; and &quot;real numbers&quot;.  What is the &quot;correct&quot;
+result of (/ 1 3)?  I would prefer to let // retain its old meaning
+and have / be the round-towards-negative-infinity kind of integer division
+that Bill Gosper has more than adequately demonstrated is superior to
+the current thing (&quot;FORTRAN divide&quot;).
+
+The implementation strategy for the Lisp Machine would be as follows:
+
+To keep thing working as much and as long as possible, several
+techniques can be used.  Leaving &quot;//&quot; as a function named &quot;//&quot; is a good
+example of this.  Probably all occurances of the function named &quot;/&quot;,
+currently called &quot;//&quot;, can be left as calls to the new function named
+&quot;//&quot;, and they will never have to be changed if we don't want to.  Other
+than this case, we rarely use slashes in symbol names.  More often, we
+use them in strings.  Where they are used to slashify slashes, it would
+not hurt terribly to leave things alone; we would just get funny messages
+with doubled slashes every so often, which could be fixed any time.  The
+problem is where we use them to slashify double-quotes in strings; these would
+have to be fixed.  There are also a few cases where backslashes are used
+explicitly in strings, like user-defined format items, though these are
+pretty rare.  I think the easiest thing would be to generate a transistion
+system version in which both slash and backslash worked as quoting characters,
+and then use this to convert everything, finally removing slash when everything
+is converted.
+
+No matter how we do it, old Maclisp programs that are not converted will
+not work after the change unless they are read in on a special
+readtable.  We should make such reading easy to do; I think this is a price
+worth paying to get rid of making slash quote.
+
+The real problem, of course, is that this conversion is a pain and a bunch of
+work.  Someone has to do it to all the software.  Of course, we have some
+pretty powerful versions of Tags Query Replace on the LM these days...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00139.html">Re: COPY-TOP-LEVEL</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00543.html">Re: Once again a plea for slash</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00542.html">Re: Once again a plea for slash</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00543.html">Re: Once again a plea for slash</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00503"><strong>Date</strong></a></li>
+<li><a href="threads.html#00503"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

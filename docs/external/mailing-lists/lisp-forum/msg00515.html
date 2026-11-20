@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: The utility of readmacros in converting infix expressions. -->
+<!--X-From-R13: EVDOUS ng IVODFA@&#45;10 ( Xrsserl Euentre) -->
+<!--X-Date: 27 Feb 1981 (Friday) 1833&#45;EDT -->
+<!--X-Message-Id: 99791de41f2d373212226ffb4e53ccbf@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: The utility of readmacros in converting infix expressions.</title>
+<link rev="made" href="mailto:SHRAGE at WHARTON-10">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00022.html">Date Prev</a>][<a href="msg00518.html">Date Next</a>][<a href="msg00516.html">Thread Prev</a>][<a href="msg00609.html">Thread Next</a>][<a href="maillist.html#00515">Date Index</a>][<a href="threads.html#00515">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: The utility of readmacros in converting infix expressions.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: The utility of readmacros in converting infix expressions.</li>
+<li><em>From</em>: SHRAGE at WHARTON-10 ( Jeffrey Shrager)</li>
+<li><em>Date</em>: 27 Feb 1981 (Friday) 1833-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I was hacking Franz yesterday and discovered several interesting things
+about LISP in general;
+
+   Firstly, the purpose that I hoped to acheive was to define some major 
+subset of the APL syntax in LISP.  The reason for such a game is neither
+here nor there.  I found an interesting application, albeit somewhat 
+special to the task at hand, for the upper/lower distinction that is 
+intrinsic in Franz (care of Unix).  The Concept (and most key-paired APL
+terminals) have the special APL functions in the shift position of the
+normal characters.  For example, cap-I yields IOTA, cap-R yields RHO, etc.
+I simply defined readmacros that transformed cap-I into (iota ...) and
+similar macros for most cap letters.  Thus it was very simple to create
+almost all the simple (non-overstrike) APL characters without interfering
+at all with normal variable names.  In fact, the result of this was that I
+was able to basically type APL expressions directly to Franz and have them
+Evaled as if it were APL by simply setting my terminal into APL mode.
+
+   A problem that I encountered is that there should really be better
+read control in NORMAL LISP (ie, not someone's hacked version).
+It is quite a problem to try and macro-hook infix operations because the
+leftpart of the dyadic function has been eaten by the reader by the time
+the readmacro is invoked.  Typically this is resolved by simply writing
+your own reader and parser.  This would not be necessary if the macro could
+get hold of the reader pointers and address the buffer (justread and to-be-
+read) like an array.
+
+-- Jeff
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00022.html">Re: control vs constraint</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00518.html">Re: LISP security query</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00516.html">Re: The utility of readmacros in converting infix expressions.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00609.html">Re: timings</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00515"><strong>Date</strong></a></li>
+<li><a href="threads.html#00515"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

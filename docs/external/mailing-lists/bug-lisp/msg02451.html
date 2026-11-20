@@ -1,0 +1,114 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Restriction condition in DEFVST -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 15 Jun 81 18:05:00 GMT -->
+<!--X-Message-Id: 30c9ea0feb417deaf97e006bbb47a701@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Restriction condition in DEFVST</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02452.html">Date Prev</a>][<a href="msg02450.html">Date Next</a>][<a href="msg02452.html">Thread Prev</a>][<a href="msg02450.html">Thread Next</a>][<a href="maillist.html#02451">Date Index</a>][<a href="threads.html#02451">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Restriction condition in DEFVST</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RLB at MIT-MC, touretzky at CMU-10A</li>
+<li><em>Subject</em>: Restriction condition in DEFVST</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 15 Jun 81 18:05:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 15 June 1981 14:05-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Touretzky's case is now fixed, as mentioned in:
+    Date: 12 June 1981 20:03-EDT
+    From: Richard L. Bryan &lt;RLB at MIT-MC&gt;
+	Date: 12 June 1981 1946-EDT
+	From: Dave Touretzky at CMU-10A
+	(defvst x (name /: symbol))
+	...load some stuff...
+	X
+	(cons-a-x)
+	;FOO UNBOUND VARIABLE
+    The restriction alist in the (SETQ INIFORM  ...) part of the DEFVST macro
+    has a pair (SYMBOL . FOO) which should be (SYMBOL . 'FOO).  I wrote out
+    a new source version MC:NILCOM;DEFVST 144 but didn't compile it since I
+    don't understand all the circular interfile compilation dependencies.
+The compilation dependencies are hierarchical rather than circular, and are 
+as follows: 
+	DEFVST 		3
+	  ||
+	  \/
+	DEFVSX 		2
+	  ||
+	  \/
+	DEFVSY		1
+	  ||
+	  \/
+	EXTSTR		0
+That is, in order to compile a level-n file, all the files below it have 
+to be usable in the COMPLR, but none at the same or higher level is required.
+Some other features are used too, like EXTEND, EXTMAC, EXTHUK, DEFSETF, and 
+UMLMAC, but they are independent of DEFVSxxx.
+
+I've also edited the DEFVSxxx files to use a 1-arg version of GLOBALIZE,
+and to use the SHARPC form of code conditionalization (should make
+cross-compilation a little more comprehensible).
+
+Dave:   You should just FTP over to CMUA new versions of DEFVST.FAS,
+        DEFVSX.FAS, and DEFVSY.FAS (the latter two not being strictly
+        necessary to update, but why not).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02452.html">*ARRAY doesn't check size for plausibility</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02450.html">DEFMACRO's generation of internal variables</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02452.html">*ARRAY doesn't check size for plausibility</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02450.html">DEFMACRO's generation of internal variables</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02451"><strong>Date</strong></a></li>
+<li><a href="threads.html#02451"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

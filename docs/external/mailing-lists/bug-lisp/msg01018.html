@@ -1,0 +1,108 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: &#38;optional arguments and complr -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 14 Nov 81 19:38:00 GMT -->
+<!--X-Message-Id: 915c6a0148a6260e2f264a7a84a846cc@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>&amp;optional arguments and complr</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01019.html">Date Prev</a>][<a href="msg01017.html">Date Next</a>][<a href="msg01020.html">Thread Prev</a>][<a href="msg01017.html">Thread Next</a>][<a href="maillist.html#01018">Date Index</a>][<a href="threads.html#01018">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>&amp;optional arguments and complr</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOHAMMED at SRI-KL</li>
+<li><em>Subject</em>: &amp;optional arguments and complr</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 14 Nov 81 19:38:00 GMT</li>
+<li><em>Cc</em>: BUG-MACLISP at MIT-MC</li>
+<li><em>Original-date</em>: 14 November 1981 14:38-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Functions defined with &amp;optional arguments are automatically turned into
+'lexpr's, so that a variable number of arguments may be handled.  The only 
+full solution to the &quot;number of arguments&quot; problem during compilation is to 
+declare such functions as *LEXPR, in the files which use them.  However, note
+that COMPLR's message is merely a warning -- the compiled code is still
+correct (albeit somewhat less than optimal since SUBR-type calls to a function 
+with LSUBR-calling-sequence cannot have their UUO links 'snapped').
+
+    Date: 12 Nov 1981 1408-PST
+    From: MOHAMMED at SRI-KL
+	    There is  a  bug in  the  way complr  handles  functions  with
+    optional arguments. I've  prepared a dribble  file to demonstrate  the
+    problem:
+    . . . 
+	    1. Despite the  fact that  the function TEST1  is loaded  when
+    TEST2 is compiled, complr decides that something is wrong because  the
+    function is being called with a different number of arguments.
+	    3. It makes no difference whether  the fasl or lsp version  of
+    TEST1 is loaded.
+Whatever information may be found about TEST1 must be consistent with
+that in the intended target environment -- declarations are the only safe
+way to give this information, since the compilation environment need not be
+(and indeed in many cases is not) consistent with the target.
+	    2. When TEST1 is re-compiled in the same complr as TEST2,  the
+    problem does not occur.
+After the COMPLR compiles a function, it makes the declarations that are
+deducible from its definition; in this case, it notes that TEST1 is LSUBR
+type in the target environment.
+	    4. Declaring TEST1  to be  a *LEXPR in  the TEST2  file is  an
+    effective temporary solution to the problem.
+Also a long-term solution.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01019.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01017.html">&amp;optional arguments and complr</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01020.html">&amp;optional arguments and complr</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01017.html">&amp;optional arguments and complr</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01018"><strong>Date</strong></a></li>
+<li><a href="threads.html#01018"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

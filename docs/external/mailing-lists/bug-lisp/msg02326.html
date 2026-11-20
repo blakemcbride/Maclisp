@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DEFSTRUCT and PASCAL&#45;type Record Variants -->
+<!--X-From-R13: UZE ng EG&#45;OW (Uhl Egrryr) -->
+<!--X-Date: Mon, 3 Jul 78 23:42:00 GMT -->
+<!--X-Message-Id: 6d150a1438e0b3121637f5be39889fe9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DEFSTRUCT and PASCAL-type Record Variants</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02327.html">Date Prev</a>][<a href="msg02325.html">Date Next</a>][<a href="msg02327.html">Thread Prev</a>][<a href="msg02325.html">Thread Next</a>][<a href="maillist.html#02326">Date Index</a>][<a href="threads.html#02326">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DEFSTRUCT and PASCAL-type Record Variants</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: L.DIS[1,GLS]:    </li>
+<li><em>Subject</em>: DEFSTRUCT and PASCAL-type Record Variants</li>
+<li><em>From</em>: GLS at SU-AI (Guy Steele)</li>
+<li><em>Date</em>: Mon, 3 Jul 78 23:42:00 GMT</li>
+<li><em>Original-date</em>: 3 Jul 1978 1642-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>It would be nice if the DEFSTRUCT hack had a provision
+for handling PASCAL-type &quot;record variants&quot; (I have an
+application for them).  In this, one field of the structure
+is a datum whose value determines the format of the rest
+of the structure.  Thus, in my application, one might
+want to write something like
+	(DEFSTRUCT CODENODE ()
+		   SEXPRCODE
+		   ENVIRONMENT
+		   (FUNNY-BITS 0)
+		   (VARIANT NODETYPE
+			    (VARIABLE VARTYPE VARNAME)
+			    (CONSTANT CONSTVAL)
+			    (SETQ VARTYPE VARNAME SETQBODY)
+			    (LAMBDA LAMBDAVARS (REGISTERS '()) LAMBDABODY)
+			    ...))
+That is, the VARIANT clause defines a field NODETYPE
+whose value can be one of VARIABLE, CONSTANT, SETQ, LAMBDA, ...
+Is is illegal to SETF this field, and its value must be specified
+to MAKE-CODENODE when a CODENODE is created.  Interpretively,
+at least, SETF could test when altering a field, and access macros
+could test when accessing, that the structure is of the right variant
+form for that field to exist.  PASCAL does not permit two variants
+to have the same field name (as VARTYPE and VARNAME in my example);
+it would be much hairier, but convenient, for DEFSTRUCT to check
+for this and ensure that fields with the same name occupied the
+same slot in all variants;  in this manner if one knew that a
+CODENODE was either a SETQ or a VARIABLE variant, then accessing
+VARTYPE would work properly no matter which variant it were.
+
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02327.html">SORT exchange operator</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02325.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02327.html">SORT exchange operator</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02325.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02326"><strong>Date</strong></a></li>
+<li><a href="threads.html#02326"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LAMBDA syntax counter&#45;proposal -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Wed ,30 Sep 81 02:31:00 EDT -->
+<!--X-Message-Id: 02b9399957b1da2256d2f11736e6111f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LAMBDA syntax counter-proposal</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00732.html">Date Prev</a>][<a href="msg00730.html">Date Next</a>][<a href="msg00734.html">Thread Prev</a>][<a href="msg00730.html">Thread Next</a>][<a href="maillist.html#00731">Date Index</a>][<a href="threads.html#00731">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LAMBDA syntax counter-proposal</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at MIT-MC</li>
+<li><em>Subject</em>: LAMBDA syntax counter-proposal</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Wed ,30 Sep 81 02:31:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I am much happier with GLS's new proposal than anything I have ever seen
+before.  This format is very easy for a program to parse.  It is also
+easy for people to read -- it is even less visually obnoxious than our
+present format, whereas the more complex keyword-oriented proposals are
+definitely more visually obnoxious.
+
+I disagree with the philosophy put forth in EAK's recent mail -- I do
+not think that it should be a goal that the format of the lambda list be
+extensible.  I do not think that lambda lists are a place in which
+creeping featurism should be allowed to fester.  We are talking here
+about the basic foundation stones of the language.  This is not a place
+to add random hair.  If you want hair, you can build it with macros, but
+the macros should expand to code that does what you want, NOT into hairy
+lambda lists with extra keywords and features.
+
+As an example, I think that &amp;aux variables are a bad thing.  We already
+have several good syntaxes for letting you bind variables; &amp;aux is now
+completely superfluous.  &amp;aux comes from CONNIVER, in the early days of
+Maclisp.  Since then, LET has been installed, and it is far better for
+this purpose.  &amp;aux has outlived its usefulness and is obsolete.
+
+I'm also inclined to retain rule 4; the need for the two-pass processing
+seems semantically bad (and also looks hard to implement without an
+efficiency loss in accessing the required arguments that are past the
+optionals (since their stack location is no longer constant)).
+
+I am strongly in favor of this proposal.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00732.html">LAMBDA syntax counter-counter-proposal</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00730.html">LAMBDA syntax counter-proposal</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00734.html">LAMBDA syntax counter-proposal</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00730.html">LAMBDA syntax counter-proposal</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00731"><strong>Date</strong></a></li>
+<li><a href="threads.html#00731"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

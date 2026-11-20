@@ -1,0 +1,115 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Data&#45;types for "descending" during copying -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat ,14 Mar 81 08:11:00 EDT -->
+<!--X-Message-Id: a826c619a3d8daaf434eaa899924b41c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Data-types for &quot;descending&quot; during copying</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00164.html">Date Prev</a>][<a href="msg00519.html">Date Next</a>][<a href="msg00308.html">Thread Prev</a>][<a href="msg00166.html">Thread Next</a>][<a href="maillist.html#00165">Date Index</a>][<a href="threads.html#00165">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Data-types for &quot;descending&quot; during copying</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DLW at MIT-MC</li>
+<li><em>Subject</em>: Re: Data-types for &quot;descending&quot; during copying</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat ,14 Mar 81 08:11:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, LISP-DISCUSSION at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>   Just got your note about the meaning of COPYTREE, and the 
+question about &quot;PAIR&quot;.  First let me explain that I wanted to
+CC this reply to the LISP-DISCUSSION people, since the extended 
+&quot;copy&quot; question reveals quite a bit about the semantics of new
+data types in LISP, and it might be a good thing to think of
+the inter-dialectic differences.  (since both LISP-FORUM and
+LISP-DISCUSSION are mailing lists here at MIT-MC, I hope no one 
+gets two copies of this note;  if you do, please send me notice 
+of this fact, and maybe someone here can do something about it)
+    Re the name PAIR, it is fully equivalent to a &quot;CONS&quot; -- the 
+name PAIR has been used by the StandardLISP people for a long time,
+and the NIL people seem to favor it too  (since NIL and MUDDLE
+distinguish between the nullist and other &quot;pairs&quot;, the &quot;LIST&quot; data 
+type must be a union of &quot;PAIR&quot; and &quot;NULL&quot;).  So if COPYTREE is to 
+be the name for the pair-only descending copier, then that is fine.
+   Still, we must address the next level of copying, namely something
+which descends the normal &quot;hunk&quot;-type data -- for StandardLISP and NIL
+this would include VECTOR's, Maclisp would include HUNK's, and for
+just about all lisps it would include S-expression (or ART-Q) ARRAYs.
+(Please, please, don't anyone else *ever* implement HUNKs, let MacLISP
+rest in peace, if you must do it, then give them the generality of
+VECTORs).  Although one could argue that SYMBOLs have &quot;components&quot;,
+and would thus be descendible, I believe there is some reasonable
+stopping point for this level of &quot;copyist&quot;,  e.g., SYMBOLs, numbers
+of all kinds, non-S-expression arrays, etc.
+   The other important extension for copyings is to &quot;instances&quot; of
+classes-of-objects (yes, there seems to be a lot of fast-changing
+terminology these days, what with flavours, classes, smalltalk, etc).
+I believe the generic notion for this data type is caught by the NIL
+&quot;EXTEND&quot;, which is more-or-less the admixture of ECL's TYPES with the
+capabilities for any of the emerging message-passing protocol's.
+EXTENDs have been &quot;piggy-backed&quot; onto MacLISP in order to get a modest
+class system, and a bunch of new data types; and here we chose to have
+SUBST send a &quot;SUBST&quot; message.  If a new function is admitted, with a
+slightly broader authorization for copying than COPYTREE, then no new
+messages need be introduced (i.e., we don't need a :COPY-SELF message), 
+since the implementation of such a new function could utilise the SUBST 
+message.  Isn't it true that SUBST is more primitive, in that &quot;copy-self&quot;
+can be reduced to the &quot;(subst () () x)&quot; hac, but SUBST cannot be reduced 
+to any mere straightforward usage of :COPY-SELF ?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00164.html">Re: COPYTREE</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00519.html">Re: LISP security query</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00308.html">Re: fix,fixr</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00166.html">Re: Data-types for &quot;descending&quot; during copying</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00165"><strong>Date</strong></a></li>
+<li><a href="threads.html#00165"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

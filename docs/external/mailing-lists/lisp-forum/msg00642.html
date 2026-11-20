@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LOOP CONTINUE STATEMENT -->
+<!--X-From-R13: [ngg PraRnavry &#60;E[OFFN[WF&#45;AL> -->
+<!--X-Date: Wed ,11 May 83 03:25:00 EDT -->
+<!--X-Message-Id: 05fcab838f637c741961f4f208bcc058@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LOOP CONTINUE STATEMENT</title>
+<link rev="made" href="mailto:SMATT@MIT-OZ">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00643.html">Date Prev</a>][<a href="msg00641.html">Date Next</a>][<a href="msg00643.html">Thread Prev</a>][<a href="msg00641.html">Thread Next</a>][<a href="maillist.html#00642">Date Index</a>][<a href="threads.html#00642">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LOOP CONTINUE STATEMENT</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON@SCRC-TENEX, SMATT@MIT-OZ</li>
+<li><em>Subject</em>: LOOP CONTINUE STATEMENT</li>
+<li><em>From</em>: Matt BenDaniel &lt;SMATT@MIT-OZ&gt;</li>
+<li><em>Date</em>: Wed ,11 May 83 03:25:00 EDT</li>
+<li><em>Cc</em>: bug-LISPM@MIT-OZ, dove@MIT-DSPG, LISP-FORUM@MIT-OZ</li>
+<li><em>In-reply-to</em>: The message of 11 May 83 02:43-EDT from MOON at SCRC-TENEX</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>A CONTINUE statement should mean skipping executing any code lexically
+after it on the current iteration.  This could, of course, be a problem
+in the following:
+
+. . . (loop for x = 0 then (1+ x)
+            IF (&gt; x 3)
+            CONTINUE
+            until (&gt; x 7))
+
+However, this is the problem of the coder.  If there are other reasons
+why implementing (or specifying) the function of a CONTINUE statement,
+how about constraining the location of an IF-CONTINUE sequence in a
+LOOP body in a manner similar to the IF-DO sequence, where iteration is
+not allowed to follow body code.  Also, what about a CONTINUE-NAMED
+feature for NAMED loops?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00643.html">LOOP CONTINUE STATEMENT</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00641.html">Call For Papers</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00643.html">LOOP CONTINUE STATEMENT</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00641.html">Call For Papers</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00642"><strong>Date</strong></a></li>
+<li><a href="threads.html#00642"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Z&#45;80 Lisp -->
+<!--X-From-R13: PDboregf ng PP@U (Pehpr Dboregf) -->
+<!--X-Date: Thu ,19 Feb 81 21:37:00 EDT -->
+<!--X-Message-Id: 34313ee0950c39c5dbafbb0ba43bc41f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Z-80 Lisp</title>
+<link rev="made" href="mailto:BRoberts at BBNG">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00356.html">Date Prev</a>][<a href="msg00358.html">Date Next</a>][<a href="msg00359.html">Thread Prev</a>][<a href="msg00608.html">Thread Next</a>][<a href="maillist.html#00357">Date Index</a>][<a href="threads.html#00357">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Z-80 Lisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: dws at LLL-MFE</li>
+<li><em>Subject</em>: Re: Z-80 Lisp</li>
+<li><em>From</em>: BRoberts at BBNG (Bruce Roberts)</li>
+<li><em>Date</em>: Thu ,19 Feb 81 21:37:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The book you were looking for is:
+
+John Allen &quot;Anatomy of LISP&quot; McGraw-Hill 1978.
+
+In additional to his other interests and teaching responsibilities at
+Stanford, John Allen (JRA@SU-AI) has a company called The LISP Company
+-- (T . (L . C)) and is very interested in promoting Lisp on small
+machines.  In fact, he has written TLC-Lisp, which runs on a Z-80
+under CP/M.  This is not a toy implementation.  He explicitly
+acknowledges Maclisp as the ancestor of TLC-Lisp and this is apparent
+in the choice of functions provided.  One finds the generalized DO
+statement, &amp;keyword arguments to DEFUN, macros, readmacros,
+catch/throw, LET, and many familiar function names.  I would say the
+most obvious omission to date is any kind vector/array/hunk data
+structure; but it does have string and character datatypes.  No
+compiler is advertised, but one exists that handles about 60% of the
+language and produces a factor of 4 speed up.
+
+TLC-Lisp has two schemes for overcoming the address space limitation
+of the Z-80: (1) an &quot;autoload&quot; that brings in lisp objects from a file
+(either permanently or each time referenced), (2) at least on Cromemco
+systems, using bank-switching to extend the usable address size in
+which to store lisp objects to 4*32K.  An object takes 4 bytes to
+store, so one can have 32,000 of them.
+
+We have recently acquired a Cromemco Z-2D system and have just begun
+to develop some software for it (in C and TLC); our initial
+impressions are very favorable.
+
+Support John Allen's efforts if possible; his company is lurching
+along at this point, and deserves to flourish.
+The address is: The Lisp Company
+                P.O. Box 487
+                Redwood Estates, CA  95044
+                (408) 353-3857
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00356.html">Re: [DWS: LISP info requested]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00358.html">Re: [DWS: LISP info requested]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00359.html">Re: [DWS: LISP info requested]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00608.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00357"><strong>Date</strong></a></li>
+<li><a href="threads.html#00357"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: destructuring and &#38;mumbles -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,30 Sep 80 03:36:00 EDT -->
+<!--X-Message-Id: 8c6e1037b4bb37a7a7fae878fa7f0593@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: destructuring and &amp;mumbles</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00282.html">Date Prev</a>][<a href="msg00185.html">Date Next</a>][<a href="msg00283.html">Thread Prev</a>][<a href="msg00185.html">Thread Next</a>][<a href="maillist.html#00184">Date Index</a>][<a href="threads.html#00184">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: destructuring and &amp;mumbles</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DLW at MIT-AI, Guy.Steele at CMU-10A</li>
+<li><em>Subject</em>: Re: destructuring and &amp;mumbles</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,30 Sep 80 03:36:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I don't see where &amp;mumbles have anything to do with destructuring.
+
+As the person who first combined destructuring and &amp;mumbles in
+defmacro, let me tell you what I thought I was doing:
+
+Sometimes you wanted defmacro to do destructuring, we had that and it
+was useful, but sometimes you wanted it to behave like defun and have
+optional arguments.  Realizing that you could allow both syntaxes I
+wrote the defmacro that the LispMachine is still using, but the
+interaction between the two features is not smooth.  For example,
+&amp;mumbles are not allowed in places other than the top-level argument
+list, why not
+  (defmacro yech (foo (bar &amp;optional baz) &amp;optional (qaz 'wsx)) ...)
+??  Also why doesn't
+  (defmacro fruity (&amp;optional ((a 'apple) (b 'banana))) `(cons ,a ,b))
+define a macro such that (fruity) expands into (cons 'apple 'banana)
+and (fruity (x y)) expands into (cons x y) ??  The reason &quot;why&quot; is
+because this is really a KLUDGE to allow defmacro to look like defun
+sometimes and destructure other times.  
+
+The fact that (a &amp;rest b) happens to mean the same thing as (a . b) is
+amusing, but misleading.  I would never write (a (b c) d &amp;rest e) since
+(a (b c) d . e) is more clearly destructuring.  Nor would I write
+(a &amp;optional b . c) instead of (a &amp;optional b &amp;rest c) since the latter
+is more clearly defunish.
+
+I don't think that &amp;mumbles and destructuring combine to make any kind
+of reasonable pattern matcher.  If the interaction had turned out to
+be amazingly elegant, then perhaps we would have moved the combined
+mess back into defun, but it ISN'T.  In defmacro you frequently want
+BOTH features, but in defun you rarely need destructuring so there is
+no reason to clutter it up.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00282.html">Re: #\EOF</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00185.html">Re: destructuring and &amp;mumbles</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00283.html">Re: &quot;What are you going to do about...&quot;</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00185.html">Re: destructuring and &amp;mumbles</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00184"><strong>Date</strong></a></li>
+<li><a href="threads.html#00184"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

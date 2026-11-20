@@ -1,0 +1,33 @@
+name: Build
+
+on: [push, pull_request]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    environment: Deploy
+    runs-on: ${{matrix.os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04]
+        emulator: [simh, klh10, pdp10-ka, pdp10-kl, pdp10-ks, simhv3]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        env:
+          EMULATOR: ${{matrix.emulator}}
+        if: ${{runner.os == 'Linux'}}
+        run: sh -ex build/dependencies.sh install_linux
+      - name: Build
+        run: make check-dirs all EMULATOR=${{matrix.emulator}}
+      - name: Deploy
+        if: github.ref == 'refs/heads/master'
+        env:
+          SECRET: ${{secrets.SECRET}}
+          FTP_SECRET: ${{secrets.FTP_SECRET}}
+          EMULATOR: ${{matrix.emulator}}
+        run: sh build/deploy-ftp.sh

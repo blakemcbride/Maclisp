@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MAKUNBOUND -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 18 Jul 78 03:09:00 GMT -->
+<!--X-Message-Id: 8d533ba833e3a67ee964024d64cb727f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MAKUNBOUND</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02261.html">Date Prev</a>][<a href="msg02259.html">Date Next</a>][<a href="msg02258.html">Thread Prev</a>][<a href="msg02259.html">Thread Next</a>][<a href="maillist.html#02260">Date Index</a>][<a href="threads.html#02260">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MAKUNBOUND</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: MAKUNBOUND</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 18 Jul 78 03:09:00 GMT</li>
+<li><em>Cc</em>: JPG at MIT-MC</li>
+<li><em>Original-date</em>: 17 JUL 1978 2309-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>At one time, GLS and I worked out the logic that has put us in the 
+current bind (no pun!): the information as to whether or not a 
+value-cell is needed by compiled code can only be kept in the symbol
+block of the symbol;  thus if a value-cell is disconnected from its
+symbol, then it must be reclaimed, for there is no provision to sweep
+the value-cell space.  Of course, if a symbol itself is being swept
+up due to nothing at all pointing to it, or due to it being a TWA
+(herein defined to be a symbol with no properties on its PLIST, one
+which is not BOUNDP, and is on at most the current obarray) then
+the value-cell pointed to that symbol may be explicitly reclaimed
+(again excluding SUNBOUND). The sad part about the latter reclamation
+scheme is that it prevents two symbols from sharing a value cell
+(for what if one is swept and the other is not?).  At any rate, there
+would seem to be little loss if we removed the explicit-reclamation
+code from MAKUNBOUND, since most value-cells to be reclaimed could
+be ggrabbed by the explicit symbol-sweeper.
+  The currently-rejected alternative is to have two bit-blocks for
+each value-cell segment, one which would be a standard mark-bit
+bit-block for the GC marker to use, and the other to be a sort of
+CCN-bit bit-block for FASLOAD and GCPROTECT to use.  Currently
+LAP makes a distinction when it calls GCPROTECT by giving a second
+arg VALUE in one case, and T in all others; but GCPROTECT merges all
+non-NIL (and non-?) second args into the T case.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02261.html">GCPRO</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02259.html">SAIL BPS</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02258.html">GCPRO</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02259.html">SAIL BPS</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02260"><strong>Date</strong></a></li>
+<li><a href="threads.html#02260"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

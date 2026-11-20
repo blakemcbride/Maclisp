@@ -1,0 +1,88 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: #\EOF -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sun ,21 Sep 80 13:51:00 EDT -->
+<!--X-Message-Id: 83a5158ad599961c55ba6c76a40af50f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: #\EOF</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00270.html">Date Prev</a>][<a href="msg00272.html">Date Next</a>][<a href="msg00270.html">Thread Prev</a>][<a href="msg00281.html">Thread Next</a>][<a href="maillist.html#00271">Date Index</a>][<a href="threads.html#00271">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: #\EOF</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DLW at MIT-AI</li>
+<li><em>Subject</em>: Re: #\EOF</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun ,21 Sep 80 13:51:00 EDT</li>
+<li><em>Cc</em>: GJC at MIT-MC, JAR at MIT-MC, LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The reason is that EOF must be a value which is not a possible character
+to be useful. Since the space of characters is system-dependent, then so
+is the complementary space of not-possible characters. If I have to do
+(EVAL-WHEN (EVAL COMPILE) (SETQ EOF -1.)) .... code involving #.EOF ...
+instead of doing #\EOF where that value is defined by the system, then I
+might as well just reference -1 and be done with it... and I might as well
+have written 65. as #/A ...  I once proposed that a # thing be made to get
+funny symbols in addition to fixnum reps of those symbols and people said why
+don't I use #.(ASCII #\...). I agree that that case was a convenience issue,
+but I don't agree that #\EOF is of the same class. Doesn't *anyone* else see 
+that unless the system is complete, it doesn't really buy you what it 
+pretends to? JAR or GLS -- I would be interested in your comments.
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00270.html">Re: #\EOF</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00272.html">Re: eof</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00270.html">Re: #\EOF</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00281.html">Re: #\EOF</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00271"><strong>Date</strong></a></li>
+<li><a href="threads.html#00271"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

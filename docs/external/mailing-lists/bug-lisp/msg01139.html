@@ -1,0 +1,113 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Macros and destructuring and functions, oh my! -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;RZI ng [WF&#45;OW> -->
+<!--X-Date: Mon, 29 Sep 80 16:20:00 GMT -->
+<!--X-Message-Id: 7d1e46c5fa7fd3a1f40891af4f659c85@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Macros and destructuring and functions, oh my!</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01145.html">Date Prev</a>][<a href="msg01147.html">Date Next</a>][<a href="msg01145.html">Thread Prev</a>][<a href="msg01137.html">Thread Next</a>][<a href="maillist.html#01139">Date Index</a>][<a href="threads.html#01139">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Macros and destructuring and functions, oh my!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Guy.Steele at CMU-10A</li>
+<li><em>Subject</em>: Macros and destructuring and functions, oh my!</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;</li>
+<li><em>Date</em>: Mon, 29 Sep 80 16:20:00 GMT</li>
+<li><em>Cc</em>: BUG-lisp at MIT-MC, BUG-lispm at MIT-MC, macsyma-i at MIT-MC</li>
+<li><em>Original-date</em>: 29 September 1980 12:20-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Sorry, Dan, I beg to differ with you on the philosophical nature of macros.
+    Macros certainly are functions, of one argument.
+
+No, I still don't agree.  A macro is implemented as a function of one
+argument in the meta-language.  From the point of view of the
+meta-language it is a function of one argument.  But functions in the
+meta-language have nothing to do with functions in the language; from
+the point of view of the language, a macro is a translator and not a
+function.
+
+							   Now, the fact
+    that macros and functions are invoked by means of the &quot;same syntax&quot;
+    is sort of a coincidence, and not at all essential.  
+
+Yes.  That's what I said, too.  I don't see why you are debating this.
+I went on to say that this coincidence should not fool you into
+thinking that lambda lists and defmacro patterns are &quot;the same thing&quot;.
+
+    Now, it is true that in practice up until now destructuring has been the most
+    useful for macros, which commonly parse apart their arguments into known
+    fixed pieces.  There is also the fact that ordinary functions in effect
+    already get one level of destructuring by the fact that they are
+    considered to get many named arguments rather than a single one (which
+    is usually a &quot;vector&quot; of some sort); but after all, what are &amp;OPTIONAL
+    and &amp;REST but destructuring mechanisms?  There is something to be said
+    for unifying that mechanism with the one used by DEFMACRO and the NIL LET,
+    provided it can be done without undue clutter.
+
+No, I do not buy this argument at all.  &amp;OPTIONAL and &amp;REST are not
+&quot;destructuring an argument vector&quot;.  Functions are not passed an
+argument vector; they are passed several arguments.  &amp;OPTIONAL has
+absolutely nothing to do with destructuring; you might think &amp;REST
+does, but I don't; the only reason that list is there is because it is
+the easiest way to let you deal with an unanticipatable number of
+arguments.  That list got CONSed; it did n't &quot;fail to get
+destructured&quot;.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01145.html">Macros and destructuring and functions, oh my!</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01147.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01145.html">Macros and destructuring and functions, oh my!</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01137.html">Re: Macros and destructuring and functions, oh my!</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01139"><strong>Date</strong></a></li>
+<li><a href="threads.html#01139"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

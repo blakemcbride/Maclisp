@@ -1,0 +1,116 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Standardization -->
+<!--X-From-R13: Rrhgfpu ng BODQ&#45;[OJQ -->
+<!--X-Date: Mon ,9 Feb 81 13:03:00 EDT -->
+<!--X-Message-Id: 16ec23d2a52c45ee3cd7d7b410c79124@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Standardization</title>
+<link rev="made" href="mailto:Deutsch at PARC-MAXC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00059.html">Date Prev</a>][<a href="msg00538.html">Date Next</a>][<a href="msg00534.html">Thread Prev</a>][<a href="msg00532.html">Thread Next</a>][<a href="maillist.html#00536">Date Index</a>][<a href="threads.html#00536">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Standardization</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: Standardization</li>
+<li><em>From</em>: Deutsch at PARC-MAXC</li>
+<li><em>Date</em>: Mon ,9 Feb 81 13:03:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Several assertions that have been made about Lisp standardization
+contradict my experience with standardization and/or Lisp.
+
+Re KMP: yes, it's true things don't always go the way a particular
+individual wants.  But balance some amount of unhappiness /
+inconvenience for some number of individuals against the incredible
+amount of work required to keep one's programs running in a &quot;moving
+target&quot; and/or do lots of niggling little edits (some of which may not
+be mechanically detectable, e.g. if the semantics of some existing
+function change in some subtle way).  I've seen this in Interlisp --
+hardly any program of mine survives more than a year or two without
+having to be edited.  I would expect things to be at least as bad in
+the more volatile MIT environment.
+
+The option of &quot;freezing a system&quot; is hardly ever realistic.  New
+packages get written and people want to use them.  The outer
+environment (operating system, etc.) changes; the language system has
+to track them, and nobody wants to fix old versions.  Bugs get
+discovered and fixed, but not retroactively.  I've seen this
+phenomenon in every language system people have tried to fork off a
+frozen version of.
+
+Computer standards can accomplish a lot if enforced.  APL is a good
+example. Algol is another.  Cobol is yet another.
+
+Re GJC: unfortunately, everyone doing things &quot;his own super-winning
+standardized way&quot; doesn't work either.  For several years I did my
+Interlisp programming in a system which I had done modest extensions
+and adaptations to.  I finally had to give it up, because none of the
+programs I wrote could be combined with programs written by anyone
+else (because they had all extended and/or adapted the system in their
+own ways, some of which were incompatible with mine).  Arbitrary
+compile-time evaluation and user-extensible compilers make this
+problem much, much worse.
+
+I personally favor an approach similar to that of the Utah group:
+standardize a modest kernel of Lisp which all systems agree to
+implement compatibly.  This allows people to write transportable
+programs if they want to, and to balance the cost of transportability
+(both between systems, and into future versions of their own system)
+against whatever gains they get from using non-standardized features.
+As we gain more experience, the size of the standardized kernel can
+grow.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00059.html">Re: spurious argumentation.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00538.html">Re: Lisp Compatibility, Lisp differences</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00534.html">Re: Standardization</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00532.html">Re: Standardization</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00536"><strong>Date</strong></a></li>
+<li><a href="threads.html#00536"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

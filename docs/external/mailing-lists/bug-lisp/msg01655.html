@@ -1,0 +1,105 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Fri, 30 Jan 81 14:42:00 GMT -->
+<!--X-Message-Id: 278cca1d22cfed654e703dc6667a8e4e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01656.html">Date Prev</a>][<a href="msg01654.html">Date Next</a>][<a href="msg01656.html">Thread Prev</a>][<a href="msg01654.html">Thread Next</a>][<a href="maillist.html#01655">Date Index</a>][<a href="threads.html#01655">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DCP at MIT-MC</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Fri, 30 Jan 81 14:42:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, rod at SU-AI</li>
+<li><em>Original-date</em>: 30 JAN 1981 0942-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Re the long-standing COMPLR failure:
+    Date: 29 January 1981 20:28-EST
+    From: David C. Plummer &lt;DCP at MIT-MC&gt;
+    Will somebody please fix this? PLEASE?? This ==&gt; BUG &lt;== hit me today, 
+	 Date: 16 Jan 1981 0319-PST
+	 From: Rod Brooks &lt;ROD at SU-AI&gt;
+	 Subject: COMPLR can't do DO 
+	 I have vague memories of complaining about something like this years 
+	 ago but maybe this is different. In any case I wish it didn't happen 
+	 this way.
+	 (defun baz (n)
+		(do ((old 1 new)
+		     (new 2 (1+ new))
+		     (l () (cons (list old new) l))
+		     (i 0 (1+ i)))
+		    ((= i n) l)))
+	 interpreted:
+	 (baz 4) ==&gt; ((4 5) (3 4) (2 3) (1 2)) 
+	 compiled (both 905 and 924):
+	 (baz 4) ==&gt; ((5 5) (4 4) (2 3) (1 2)) 
+    Perhaps COMPLR thinks it is too smart. 
+This is a long-standing bug which fortunately has hit only a very few
+persons (notably, GLR twice, GSB once I believe, and now ROD and DCP).
+The problem occurs precisely if there are local variables being SETQ'd in
+parallel, such as in a DO loop, which haven't been declared numeric, 
+*** but which in fact are being used a numeric variables ***.  Possibly 
+the reason so few instances of this lossage occur is that most persons 
+would have already done (DECLARE (FIXNUM OLD NEW)).  I don't think anyone 
+wants to work on correcting this bug now (for lack of time mainly),
+so maybe it should be 'documented'.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01656.html">MACLISP compiler</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01654.html">DEFMACRO-DISPLACE</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01656.html">MACLISP compiler</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01654.html">DEFMACRO-DISPLACE</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01655"><strong>Date</strong></a></li>
+<li><a href="threads.html#01655"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

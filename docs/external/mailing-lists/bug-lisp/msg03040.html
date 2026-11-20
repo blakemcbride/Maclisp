@@ -1,0 +1,120 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Joke of the century. -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 25 Oct 81 17:48:00 GMT -->
+<!--X-Message-Id: bf658baf4efa58ac8a2a265029996871@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Joke of the century.</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03041.html">Date Prev</a>][<a href="msg03039.html">Date Next</a>][<a href="msg03042.html">Thread Prev</a>][<a href="msg03039.html">Thread Next</a>][<a href="maillist.html#03040">Date Index</a>][<a href="threads.html#03040">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Joke of the century.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: Joke of the century.</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 25 Oct 81 17:48:00 GMT</li>
+<li><em>Original-date</em>: 25 October 1981 13:48-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The implementation of strings and bitvectors in Maclisp is a joke.
+I brought up the NIL READer in maclisp to use as a Macro32 parser,
+and the damn thing runs 138 times slower than it does in real VAX NIL.
+If it were only 2 times slower it would be usable, but 138 times, 
+that is absurd. For a 297 calls to +TYI there were 1297 calls to 
+SI:CHECK-TYPER, 936 calls to PTR-TYPEP, 936 calls to BITSP,
+828 calls to STR:CHARACTER-VALUEP, 828 calls to *:FIXNUM-TO-CHARACTER,
+714 calls to CHAR-CODE, 645 calls to +INTERNAL-CHAR-N, 469 calls to
+MEMQ on the arguments [BITS,(STRING VECTOR BITS LIST EXTEND)].
+468 calls to SI:CHECK-SUBSEQUENCER, 468 to BITS-LENGTH, 468 to BIT,
+360 to +INTERNAL-RPLACHAR-N, all for only 60 calls to READ-TOKEN.
+
+There are just three functions that need to be fast, which make
+up the inner loop of the finite state machine, I wonder if there
+is a good way to get at the primitives to hand code them?
+
+#+Maclisp
+(defun si:inch-by-mask-into-string (stream bits string offset)
+  ;; Maclisp conditionalized for using +TYI.
+  (do ((n (string-length string))
+       (c))
+      ((= offset n) offset)
+    (setq c (+tyi stream))
+    (rplachar string offset (code-char c))
+    (if (bit1p bits c)
+	(return offset)
+	(setq offset (1+ offset)))))
+
+#+MACLISP
+(defun si:inch-by-not-mask (stream bits)
+  (do ((c))
+      (())
+    (setq c (+tyi stream))
+    (cond ((= c -1) (*throw 'si:read-eof ()))
+	  ((not (bit1p bits c))
+	   (return (code-char c))))))
+
+(defun si:translate-string-subseq (translations string offset length)
+  (do ((j 0 (1+ j)))
+      ((= j length) string)
+    (rplachar string (+ j offset)
+	      (char translations (char-code (char string (+ j offset)))))))
+
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03041.html">DESCRIBE</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03039.html">Questionable &quot;modifications&quot; to LIBDOC;6BIT</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03042.html">Not MacLISP's fault</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03039.html">Questionable &quot;modifications&quot; to LIBDOC;6BIT</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03040"><strong>Date</strong></a></li>
+<li><a href="threads.html#03040"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: YZSN[WF&#45;OW -->
+<!--X-Date: Mon, 7 Nov 78 23:03:03 GMT -->
+<!--X-Message-Id: 20b4b460d474b29f162a0c5d056827f6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KLE@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00139.html">Date Prev</a>][<a href="msg00138.html">Date Next</a>][<a href="msg02293.html">Thread Prev</a>][<a href="msg00138.html">Thread Next</a>][<a href="maillist.html#02290">Date Index</a>][<a href="threads.html#02290">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-AI</li>
+<li><em>Subject</em>: </li>
+<li><em>From</em>: KLE@MIT-AI</li>
+<li><em>Date</em>: Mon, 7 Nov 78 23:03:03 GMT</li>
+<li><em>Original-date</em>: 07/11/78 19:03:03 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    (defun write macro (n)		;(write &lt;file&gt; &lt;s-exp&gt;)
+           `(progn ()
+    	       (setq outfiles (list (open ,(cadr n) 'out)) ^r t ^w t)
+    	       ,(caddr n)
+    	       (close (car outfiles))
+    	       (setq ^r nil ^w nil)
+    	       t))
+
+    Which expands into:
+
+    (DEFUN WRITE MACRO (N) 
+           (CONS 'PROGN
+    	     (CONS 'NIL
+    		   (CONS (CONS 'SETQ
+    			       (CONS 'OUTFILES
+    				     (CONS (CONS 'LIST
+    						 (CONS (CONS 'OPEN
+    							     (CONS (CADR N)
+    								   '('OUT)))
+    						       'NIL))
+    					   '(^R T ^W T))))
+    			 (CONS (CADDR N)
+    			       '((CLOSE (CAR OUTFILES)) (SETQ ^R NIL ^W NIL) T))))))
+
+
+    	it seems that after you use this macro grindef refuses to work. 
+
+Why?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00139.html">The &quot;* &lt;pgm&gt;&quot; convention</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00138.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02293.html">Re: (list (read) (tyi))X:   etc.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00138.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02290"><strong>Date</strong></a></li>
+<li><a href="threads.html#02290"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: eof -->
+<!--X-From-R13: D[E ng [WF&#45;OW (Dvpuneq [. Egnyyzna) -->
+<!--X-Date: Tue ,23 Sep 80 23:40:00 EDT -->
+<!--X-Message-Id: 631cc1c37168b077379bd9fceb8e1224@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: eof</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00271.html">Date Prev</a>][<a href="msg00273.html">Date Next</a>][<a href="msg00269.html">Thread Prev</a>][<a href="msg00273.html">Thread Next</a>][<a href="maillist.html#00272">Date Index</a>][<a href="threads.html#00272">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: eof</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: eof</li>
+<li><em>From</em>: RMS at MIT-AI (Richard M. Stallman)</li>
+<li><em>Date</em>: Tue ,23 Sep 80 23:40:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>It does improve program readability to use something symbolic instead
+of a -1.  However, there is no reason why this has to require any
+read-time syntax.  Just use a symbol whose value is -1.
+The compiler could even allow a declaration that the symbol value would
+never change, for systems where that would lead to increased
+efficiency.  We don't need to have EVERY constant value in the world
+have a read-time syntax when there are variables.
+
+This may apply to #\TAB as well.
+
+Instead of a new declaration, we could make DEFCONST values available
+at compile time like macros, and then suggest that users use #,.
+
+Alternatively, a reasonable idea is that #\ should be used for ALL
+values in a program which are to be considered constant by the
+compiler -- for #\ to be the way to ask for a value to be taken as
+constant -- and then provide a DEFsomething to define them.
+
+
+A uniorm convention is important.  We might want to replace the #\TAB
+names with something that fits a convention that the user can use as
+well, if the convetion isn't using #\.
+
+However, where EOF is concerned, the best code is not a comparison
+with -1, but a sign test.  In other words, not (= -1 (TYIPEEK)) but
+(MINUSP (TYIPEEK)).  This is true on the Lisp machine and in Maclisp.
+If you want to use code which says &quot;eof&quot; in it for clarity, it should
+expand into the latter.  So what we need is (EOFVALP (TYIPEEK)) and
+let it be the same as MINUSP.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00271.html">Re: #\EOF</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00273.html">Re: eof</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00269.html">Re: #\EOF  (look before you leap)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00273.html">Re: eof</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00272"><strong>Date</strong></a></li>
+<li><a href="threads.html#00272"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

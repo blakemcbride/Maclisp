@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DEFMACRO and DEFUN&#38; -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sat, 29 Nov 80 10:23:00 GMT -->
+<!--X-Message-Id: dc49bdb307bbcba00063a6dba67a989b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DEFMACRO and DEFUN&amp;</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01754.html">Date Prev</a>][<a href="msg01752.html">Date Next</a>][<a href="msg01754.html">Thread Prev</a>][<a href="msg01751.html">Thread Next</a>][<a href="maillist.html#01753">Date Index</a>][<a href="threads.html#01753">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DEFMACRO and DEFUN&amp;</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GSB at MIT-MC, RLB at MIT-MC</li>
+<li><em>Subject</em>: DEFMACRO and DEFUN&amp;</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sat, 29 Nov 80 10:23:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 29 NOV 1980 0523-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     GSB@MIT-ML
+Date: Fri, 29 Nov 80 00:32:05 GMT
+Original-Date: 11/28/80 20:32:05 EDT
+Subject: Re: defmacro
+    produces (PROGN 'COMPILE FLUSH-MACROMEMOS (|forget-macromemos/|| '...) ...)
+The bug (not corrected in DEFMACRO 137) was that it should have produced 
+(PROGN 'COMPILE (DEFPROP FLUSH-MACROMEMOS ((LISP) DEFMAX) AUTOLOAD) 
+	(|forget-macromemos/|| '...) 
+	...)
+So that lisps prior to 2056 won't get too confused as where this new fun lives.
+Also my prior note
+    Date: 29 November 1980 00:36-EST
+    From: Jon L White &lt;JONL at MIT-MC&gt;
+    Subject: VECTOR-S-IFY
+	Date: 28 November 1980 15:29-EST
+	From: Richard L. Bryan &lt;RLB at MIT-MC&gt;
+	(defun foo (&amp;restv x) x)
+	(foo 1)
+	;VECTOR-S-IFY UNDEFINED FUNCTION OBJECT
+    Since true stack-allocated vectors were never put into MacLISP, this
+    name is an anachronism, so in DEFMAC 137  it will just do TO-VECTOR.
+is buggy -- it will not call TO-VECTOR, but rather some weird internal fun.
+(This now works in version 137).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01754.html">MacLISP's LDB &quot;moves&quot; from out-of-core</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01752.html">Getting characters into Lisp</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01754.html">MacLISP's LDB &quot;moves&quot; from out-of-core</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01751.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01753"><strong>Date</strong></a></li>
+<li><a href="threads.html#01753"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MACLISP ON VAX -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 7 Nov 79 07:43:00 GMT -->
+<!--X-Message-Id: 7593476f53889d9de0e39af22b7a2443@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MACLISP ON VAX</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02650.html">Date Prev</a>][<a href="msg02647.html">Date Next</a>][<a href="msg02657.html">Thread Prev</a>][<a href="msg00527.html">Thread Next</a>][<a href="maillist.html#02648">Date Index</a>][<a href="threads.html#02648">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MACLISP ON VAX</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MILLER at MIT-AI</li>
+<li><em>Subject</em>: MACLISP ON VAX</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 7 Nov 79 07:43:00 GMT</li>
+<li><em>Cc</em>: JONL at MIT-MC, KMP at MIT-MC, BUG-LISP at MIT-MC, Steve at SRI-KL,    Fin at MIT-ML</li>
+<li><em>Original-date</em>: 7 November 1979 02:43-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 3 NOV 1979 1229-EST
+    From: MILLER at MIT-AI (Mark L. Miller)
+    To:   Steve at SRI-KL
+    cc:   Fin at MIT-ML, Jonl, KMP, (BUG Lisp)
+    Re:   MACLISP ON VAX
+
+    Dear Steve,
+    In Reply To:
+        Date:  2 Nov 1979 1125-PST
+        From: Steve at SRI-KL (Steve Rosenberg)
+          I am exploring ways to get MACLISP up on a VAX, under VMS. I wonder
+        whether you have anything to tell me about this. I know NIL
+        will eventually be up, and that FRANSLISP runs, under UNIX-7.
+            Due to constraints of various kinds, i must use the VMS operating
+        system, and I can't wait a year till NIL is up.
+            So far, the best scheme seems to be to hire someone to bring
+        up FRANSLISP under VMS, and iron out any differenences between it
+        and MACLISP.
+      Good luck!  The only current programming languages under VMS are
+    Fortran and Assembler; Pascal may appear thru DECUS soon.  It will take you
+    more than a year to do ANYTHING yourself -- and who can you POSSIBLY hire
+    that is any good?  (LISP implementors are a pretty scarce breed; I am happy
+    if I can find systems people who have HEARD of it!)
+This is untrue.  I don't know ALL the languages available, but they include
+BLISS, C, COBOL, APL, and others.  I've heard rumours about PL1.  Since
+Franz is written in C, for the price of a UNIX license (or maybe less) you
+can get a C that runs under VMS and start hacking.  I don't know how easy it
+would be...
+      We, too, are using VMS, as is MIT, even though the entire rest of the
+    world is going over to UNIX.  What I suggest is: (a) don't try to use a VAX
+    for at least another year (what EDITOR are you going to use?); (b) if you
+    have no choice, talk to Ken Keller and Bill Joy (UCB grad students) and get
+    the UNIX-UNDER-VMS emulator from a company in San Diego (we are probably
+    going to get this, it includes a UNIX license and is NOT CHEAP however, I
+    think probably &gt;$50K) and then just LIVE WITH FRANZ until NIL is done.  Bob
+    Balzer is threatening to put INTERLISP on the Vax, but again, it will be
+    more than a year.  There are also various FORTRAN-4 LISPS (probably awful)
+    which MIGHT work.  If you can live with 16-bit addresses (i.e., 2**16 byte
+    or less programs, compared to 2**18 WORDS (x4.5 bytes/wd) on a PDP10), you
+    might get MARYLAND PDP-11 ULISP which should run in EMULATOR MODE.
+      My advice is: if you can get on a PDP10 or DEC20, wait a year or two.
+    Hope the world is otherwise treating you ok!  Regards, Mark
+My advice is, work harder at getting a UNIX license, and DON'T wait.  Winning
+software won't happen unless people work on it.  But don't depend on getting
+anything useful done for another year.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02650.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02647.html">+TYO lossage</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02657.html">MACLISP ON VAX</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00527.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02648"><strong>Date</strong></a></li>
+<li><a href="threads.html#02648"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

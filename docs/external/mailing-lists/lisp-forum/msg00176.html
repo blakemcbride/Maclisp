@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Function invocation by key word -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Mon ,6 Oct 80 12:25:00 EDT -->
+<!--X-Message-Id: 513eb89cd434b35c58a6f9a9e188316a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Function invocation by key word</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00175.html">Date Prev</a>][<a href="msg00248.html">Date Next</a>][<a href="msg00175.html">Thread Prev</a>][<a href="msg00248.html">Thread Next</a>][<a href="maillist.html#00176">Date Index</a>][<a href="threads.html#00176">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Function invocation by key word</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BAK at MIT-AI, LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: Re: Function invocation by key word</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Mon ,6 Oct 80 12:25:00 EDT</li>
+<li><em>Sender</em>: dlw at CADR6 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Your defun-keyed looks like a good thing.  It's too bad you didn't write
+it several years ago, before we started putting keyword-argument
+function in the Lisp Machine.  If you look at the current Lisp Machine
+software system, there are a lot of functions that are called by
+keyword, using the simpler mechanism of simply having a &amp;rest argument
+and having the function sort out the arguments.  An example in the manual
+(from the Archaic Window System -- this function is highly obsolete)
+is tv-define-pc-ppr.  The example is:
+
+(setq foo (tv-define-pc-ppr &quot;foo&quot; (list fonts:tvfont)
+                            ':top 300
+			    ':bottom 400))
+
+So the keyword names are evaluated (thus the single-quote characters),
+and they are in the keyword package.  As I understand it, here is a
+point-by-point comparison:
+
+(1) With defun-keyed the user is saved the trouble of writing the single-quotes.
+    He doesn't get to put forms there, but nobody ever does that anyway.
+(2) With defun-keyed, the parsing is done at compile time instead of run time,
+    resulting in faster execution.
+(3) With defun-keyed, an actual argument position is created for every keyword
+    option, and so function calls must always pass all those arguments.  This
+    could result in slower execution speed.
+(4) In the Lisp Machine, the keyword symbols have to be on the keyword
+    package, but the names of the local variables have to be in the current
+    package.
+(5) The syntax is different from the one we use now for keyword arguments.
+
+Points (1) and (2) are positive.  I don't know how much of a problem (3) and (5)
+are.  (4) could be solved by having the defun-keyed macro expander re-intern
+the symbols to create the keywords to be looked for; I think this would be OK.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00175.html">Re: Function invocation by key word</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00248.html">Re: DIGIT-WEIGHT/DIGITP and funny input bases</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00175.html">Re: Function invocation by key word</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00248.html">Re: DIGIT-WEIGHT/DIGITP and funny input bases</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00176"><strong>Date</strong></a></li>
+<li><a href="threads.html#00176"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

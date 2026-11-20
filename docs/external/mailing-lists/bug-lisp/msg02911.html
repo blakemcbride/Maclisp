@@ -1,0 +1,85 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: VALUE  "property" special to GET -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;OW> -->
+<!--X-Date: Thu, 2 Aug 79 06:34:00 GMT -->
+<!--X-Message-Id: f8aa4c851410eca748b795df680e50a0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>VALUE  &quot;property&quot; special to GET</title>
+<link rev="made" href="mailto:ALAN at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02912.html">Date Prev</a>][<a href="msg02910.html">Date Next</a>][<a href="msg02913.html">Thread Prev</a>][<a href="msg02912.html">Thread Next</a>][<a href="maillist.html#02911">Date Index</a>][<a href="threads.html#02911">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>VALUE  &quot;property&quot; special to GET</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: VALUE  &quot;property&quot; special to GET</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-AI&gt;</li>
+<li><em>Date</em>: Thu, 2 Aug 79 06:34:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-AI</li>
+<li><em>Original-date</em>: 2 August 1979 02:34-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>	How I got shafted should be obvious. I wrote a piece of code
+that used the 'value property, and spent most of an evening trying
+to figure out why this trivial code wouldn't work. (&quot;well gee,
+when I do a (plist 'foo) it says (value 777), so when I do a get...&quot;)
+It's not trivial to catch on that get is doing this wierd special case.
+If lap is the only thing to depend on this crock, then it seems
+obvious that it should be flushed. (I mean you can just replace
+(get x 'value) with (cdr (car x)) and it will do the right thing.
+Right?).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02912.html">lisp init file hanging around</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02910.html">(GET foo 'VALUE)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02913.html">VALUE  &quot;property&quot; special to GET</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02912.html">lisp init file hanging around</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02911"><strong>Date</strong></a></li>
+<li><a href="threads.html#02911"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

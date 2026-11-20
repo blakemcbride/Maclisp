@@ -1,0 +1,112 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: A (possibly interesting) macro -->
+<!--X-From-R13: POY ng [WF&#45;OW (Ivyyvnz O. Ybeasryq) -->
+<!--X-Date: Sat ,11 Oct 80 16:26:00 EDT -->
+<!--X-Message-Id: 217b8a259526431a2a1b1acd8ad327bf@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: A (possibly interesting) macro</title>
+<link rev="made" href="mailto:BAK at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00112.html">Date Prev</a>][<a href="msg00524.html">Date Next</a>][<a href="msg00112.html">Thread Prev</a>][<a href="msg00524.html">Thread Next</a>][<a href="maillist.html#00523">Date Index</a>][<a href="threads.html#00523">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: A (possibly interesting) macro</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: A (possibly interesting) macro</li>
+<li><em>From</em>: BAK at MIT-AI (William A. Kornfeld)</li>
+<li><em>Date</em>: Sat ,11 Oct 80 16:26:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Occasionally I find myself trying to read nested functions in the
+&quot;wrong direction.&quot;  For example, a form such as:
+
+         (BAR (PLUS (FOO (REVERSE X)) 1))
+
+I might understand as &quot;first reverse x, apply FOO to that list,
+add 1 to the result and call BAR on that.&quot;  This is precisely
+backwards.  For cases where this kind of thinking seems more
+natural, the SEQ macro allows you to write:
+
+(SEQ (REVERSE X)
+     (FOO *)
+     (PLUS * 1)
+     (BAR *))
+
+which expands into the above code.  Its hard to characterize
+the places where this kind of SEQuential, non-functional thinking
+is appropriate, but there definitely seem to be some.
+
+Note that any middle ground between totally SEQuential and totally
+functional is possible.  We could have described the above as:
+
+(SEQ (FOO (REVERSE X))
+     (BAR (PLUS * 1)))
+
+or even as:
+
+(SEQ (BAR (PLUS (FOO (REVERSE X)) 1)))        [!]
+
+
+A definition of SEQ is:
+
+(defmacro seq (&amp;rest forms &amp;aux replacement)
+  (mapc
+    #'(lambda (form)
+	(setq replacement
+	  (cons (car form) (subst replacement '* (cdr form)))))
+    forms)
+  replacement)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00112.html">Re: Thoughts on Completing Readers</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00524.html">Re: A (possibly interesting) macro</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00112.html">Re: Thoughts on Completing Readers</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00524.html">Re: A (possibly interesting) macro</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00523"><strong>Date</strong></a></li>
+<li><a href="threads.html#00523"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

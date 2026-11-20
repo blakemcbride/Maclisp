@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: DEFSTRUCT and reclaimable storage -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Sun ,30 Nov 80 23:03:00 EDT -->
+<!--X-Message-Id: 85ffdd1f9b1a7bb8ea1f52a0e27f8e76@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: DEFSTRUCT and reclaimable storage</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00179.html">Date Prev</a>][<a href="msg00181.html">Date Next</a>][<a href="msg00179.html">Thread Prev</a>][<a href="msg00182.html">Thread Next</a>][<a href="maillist.html#00180">Date Index</a>][<a href="threads.html#00180">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: DEFSTRUCT and reclaimable storage</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BAK at MIT-AI, LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: Re: DEFSTRUCT and reclaimable storage</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Sun ,30 Nov 80 23:03:00 EDT</li>
+<li><em>Sender</em>: dlw at CADR7 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>You needn't worry about intense philosophical disagreement from the Lisp
+Machine system hacker community; while automatic freeing of storage is
+nice, we all recognize that sometimes you don't need it and can gain a
+lot of efficiency by using manual returning.  In fact, there is
+currently an installed Lisp Machine system feature called &quot;resources&quot;
+that do something like what you want.  You can define a new resource,
+which gives the resource a name and says how to make a new object; then
+you can say (with-resource (&lt;resource-name&gt; &lt;var&gt;) form1 form2 ...)
+which will lambda-bind &lt;var&gt; to an object from the &lt;resource-name&gt;
+resource.  When you exit the special form (with a normal or THROW-type
+exit), the item is returned to the resource pool.
+
+So the way you would do what you want to do is to define a new resource
+whose definition includes a defstruct constructor macro.  This should
+not be built into defstruct, since you might also want a resource of
+objects that are not structures (arrays, flavor instances, 1000-long
+lists, etc.).
+
+I am not sure whether anyone has documented the functions and special
+forms of the resource feature.  If I find out that they are not
+documented, I will document them.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00179.html">Re: DEFSTRUCT and reclaimable storage</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00181.html">Re: DEFSTRUCT, reclaimable storage, and &quot;resources&quot;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00179.html">Re: DEFSTRUCT and reclaimable storage</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00182.html">Re: DEFSTRUCT and reclaimable storage</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00180"><strong>Date</strong></a></li>
+<li><a href="threads.html#00180"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

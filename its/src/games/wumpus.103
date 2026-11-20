@@ -1,0 +1,530 @@
+;Hunt the Wumpus (2018 reconstruction)		-*-MIDAS-*-
+
+TITLE WUMPUS
+
+T=1
+T1=2
+ROOM=3
+ME=4
+CNT=5
+A=6
+P=17
+
+TTYI=1
+TTYO=2
+.KILL TTYI, TTYO
+
+WORLD:	BLOCK 21.		;Holds the world
+NTABLE:	BLOCK 21.		;Random table of numbers
+
+X0:	BLOCK 1			;Random # gen seed
+RCOUNT:	BLOCK 1			;Random # gen counter
+RANDP:	BLOCK 1			;Random # gen pointer
+ARROWS:	BLOCK 1			;Number of arrows allowed
+
+PDL:	BLOCK 40		;Push down list
+
+DEFINE SHOW MSG
+ JRST [PUSH P,A
+       MOVEI A,MSG
+       PUSHJ P,ATYPE
+       POP P,A
+       JRST .+1]
+TERMIN
+DEFINE SAY &MSG&
+ SHOW \[ASCIZ MSG]
+TERMIN
+
+DEFINE SENSE PROOM,HAZARD,ORWORD
+ LDB ROOM,PROOM
+ LDB T,HAZARD
+ IORM T,ORWORD
+TERMIN
+
+DEFINE SENSE3 HAZARD,ORWORD
+ PUSH P,ROOM
+ SENSE PROOM1,HAZARD,ORWORD
+ MOVE ROOM,(P)
+ SENSE PROOM2,HAZARD,ORWORD
+ MOVE ROOM,(P)
+ SENSE PROOM3,HAZARD,ORWORD
+ POP P, ROOM
+TERMIN
+;Do NOT change the order of these byte pointers:
+
+PROOM1:	360600,,WORLD(ROOM)	;Byte pointer to first tunnel
+PROOM2:	300600,,WORLD(ROOM)	;Second tunnel
+PROOM3:	220600,,WORLD(ROOM)	;Third tunnel
+PWUMP:	210100,,WORLD(ROOM)	;Byte pointer to wumpus bit
+PBAT:	200100,,WORLD(ROOM)	;Bat bit
+PPIT:	170100,,WORLD(ROOM)	;Pit bit
+
+SPACE:	ASCIZ/ /
+CRLF:	ASCIZ/
+/
+EXPL:	ASCIZ/
+YOU ARE A FAMOUS HUNTER DESCENDING DOWN INTO THE CAVES OF DARKNESS, LAIR
+OF THE FAMOUS MAN-EATING WUMPUS.  YOU ARE EQUIPED WITH FIVE BENT
+ARROWS, AND ALL YOUR SENSES.  THERE ARE TWENTY CAVES CONNECTED BY
+TUNNELS, AND THERE ARE TWO OTHER KINDS OF HAZARDS (THREE EACH):
+   A) SUPER-BATS WHICH IF YOU STUMBLE INTO THEIR ROOM WILL PICK
+      YOU UP AND DROP YOU IN SOME RANDOM ROOM IN THE NETWORK.
+   B) PITS, WHICH ARE BOTTOMLESS, AND FATAL TO FALL INTO.
+BOTH ARE IMMOVABLE.
+     IF YOU END UP IN THE SAME ROOM AS THE WUMPUS, YOU LOSE.  NORMALLY
+THE WUMPUS DOES NOT MOVE (HAVING GORGED HIMSELF UPON A PREVIOUS HUNTER).
+TWO THINGS WAKE HIM UP:
+   1) WALKING INTO HIS ROOM,
+   2) SHOOTING AN ARROW ANYWHERE IN THE NETWORK.
+IF HE WAKES THERE IS A 50-50 CHANCE HE WILL MOVE INTO AN ADJOINING CAVE.
+HE IS TOO BIG TO BE PICKED UP BY BATS, AND HAS SUCKER FEET,
+SO HE DOESN'T FALL INTO THE PITS.  YOU CAN SMELL THE WUMPUS FROM ONE OR
+TWO ROOMS AWAY.  YOU CAN HEAR BATS ONE ROOM AWAY, AND FEEL DRAFTS (FROM
+BOTTOMLESS PITS) FROM ONE ROOM AWAY (AND TASTE THE FEAR...).
+     TO SHOOT TYPE S (WITH NO CR) INSTEAD OF A MOVE, AND THEN SPECIFY
+A LEGAL PATH OF LENGTH FIVE FOR THE ARROW TO FOLLOW.  IF YOU GUESS AND
+LOSE THE ARROW TAKES A RANDOM PATH.  PATHS CAN BE TRUNCATED BY TYPING CR
+INSTEAD OF A ROOM NUMBER.
+
+       GOOD LUCK HUNTING!!
+î/
+BEG:					;The beginning
+GO:	.OPEN TTYI,[.UAI,,'TTY]
+	 .VALUE 0
+	.OPEN TTYO,[.UAO,,'TTY]
+	 .VALUE 0
+	MOVEI P, PDL
+	SAY /DIRECTIONS? (Y OR N) /	;Does he want the expl?
+GETLF:	.IOT TTYI,A
+	CAIE A,"y
+	 CAIN A,"Y
+	  SHOW EXPL
+	SHOW CRLF
+	PUSHJ P,NAMEF		;Fiddle with name
+	.RDTIME T,
+	MOVEM T,X0		;For random # gen
+	HRREI T,-5
+	MOVEM T,ARROWS		;Set up five bent arrows
+	SETZM RCOUNT
+	SETZM WORLD		;Restart the world
+	MOVE T,[XWD WORLD,WORLD+1]
+	BLT T,WORLD+20.
+	PUSHJ P,SETNTB		;Set up ntable
+	PUSHJ P,RANDOM
+	PUSHJ P,RANDOM
+	IMULI T,3
+	PUSH P,T
+	PUSHJ P,SHUFFL		;Shuffle ntable
+	SOSLE (P)
+	 JRST .-2
+	POP P,T
+	MOVE T,NTABLE+20.	;Make ntable a ring
+	MOVEM T,NTABLE
+	PUSHJ P,FIRST2		;First two tunnels per room
+	PUSHJ P,LAST1		;Last one
+	PUSHJ P,SHUFFL		;Shuffle ntable
+	PUSHJ P,SHUFFL
+	PUSHJ P,IHZRDS		;Add hazards and me
+	JRST CIRCLE
+UNAME:	BLOCK 2
+NAMEF:	.SUSET [.RUNAME,,UNAME]
+	SAY /HERE'S THE FAMOUS WUMPUS HUNTER MAJOR /
+	MOVE T,[440600,,UNAME]
+NAMEL:	ILDB T1,T
+	JUMPE T1,EON
+	ADDI T1,40
+	.IOT TTYO,T1
+	JRST NAMEL
+EON:	SHOW CRLF
+	SAY /DESCENDING INTO THE "CAVES OF DARKNESS", LAIR OF THE
+DEADLY MAN-EATING WUMPUS./
+	SHOW CRLF
+	MOVEI T,36
+	.SLEEP T,
+	SAY /DOWN.../
+	SHOW CRLF
+	MOVEI T,36
+	.SLEEP T,
+	SAY /DOWN.../
+	SHOW CRLF
+	MOVEI T,36
+	.SLEEP T,
+	SAY /DOWN.../
+	SHOW CRLF
+	MOVEI T,36
+	.SLEEP T,
+	POPJ P,
+SETNTB:	SETZM T			;Set up NTABLE with 1-20
+SETNT1:	AOS T
+	MOVEM T,NTABLE(T)
+	CAIGE T,20.
+	 JRST SETNT1
+	POPJ P,
+
+SHUFFL:	MOVEI ME,1		;Shuffle NTABLE once
+SHUFF1:	PUSHJ P,RANDOM		;Get random number
+	CAME T,ME		;If same, only two swaps
+	 EXCH P,NTABLE(T)	;Swap NTABLE (T) with NTABLE (ME)
+	EXCH P,NTABLE(ME)
+	EXCH P,NTABLE(T)
+	AOS ME
+	CAIG ME,20.
+	 JRST SHUFF1
+	POPJ P,
+
+FIRST2:	MOVEI T1,1		;Put first two tunnels in each room
+FIRSTA:	MOVE ROOM,NTABLE(T1)	;Get ring entry
+	MOVE T,NTABLE-1(T1)	;Get previous entry
+	DPB T,PROOM1		;Put in one direction
+	EXCH T,ROOM
+	DPB T,PROOM2		;Put in other
+	AOS T1
+	CAIG T1,20.
+	 JRST FIRSTA
+	POPJ P,
+LAST1:	HRREI T,-500.		;500 trys or else!!
+	PUSH P,T
+LASTA:	PUSHJ P,SHUFFL		;Shuffle NTABLE
+	MOVEI ROOM,1
+	SETZM T
+LASTA1:	DPB T,PROOM3		;Zero third tunnels
+	AOS ROOM
+	CAIG ROOM,20.
+	 JRST LASTA1
+	MOVEI T1,1		;Index to NTABLE
+LASTB:	MOVE ROOM,NTABLE(T1)
+	LDB T,PROOM3
+	JUMPN T,LASTC1		;If NTABLE(T1) has 3rd rm, get next t1
+	MOVEI ROOM,1		;Index to world
+LASTC:	LDB T,PROOM3
+	JUMPN T,LASTD		;If third room full, next!
+	CAMN ROOM,NTABLE(T1)	;Is room same as NTABLE entry?
+	 JRST LASTD		;Yep, next room
+	LDB T,PROOM1
+	CAMN T,NTABLE(T1)	;NTABLE(T1) = tunnel #1?
+	 JRST LASTD		;Yep, next room
+	LDB T,PROOM2
+	CAMN T,NTABLE(T1)	;NTABLE(T1) = tunnel #2?
+	 JRST LASTD		;Yep, next room
+	MOVE T,NTABLE(T1)	;Get room number
+	DPB T,PROOM3		;Put it in world
+	EXCH T,ROOM
+	DPB T,PROOM3		;Put in other direction
+LASTC1:	AOS T1
+	CAIG T1,20.		;End of NTABLE?
+	 JRST LASTB		;Nope, go back
+	POP P,T			;Get rid of counter
+	POPJ P,
+
+LASTD:	AOS ROOM		;Look at next room
+	CAIG ROOM,20.		;Looked at all?
+	 JRST LASTC		;Nope, go back
+	AOSGE (P)		;Yep, count shuffles
+	 JRST LASTA		;Shuffle and try again
+	SAY /(CANT FINISH TUNNELS. FOO!)/
+	JRST BEG
+IHZRDS:	PUSHJ P,SHUFFL		;Set up hazards and me
+	PUSHJ P,SHUFFL
+	SETOM T			;Bit for marking world
+	MOVE ROOM,NTABLE+1	;Wumpus goes in first room
+	DPB T,PWUMP
+	HRREI T1,-2		;Three bats and pits
+IHZRDL:	MOVE ROOM,NTABLE+4(T1)
+	DPB T,PPIT
+	MOVE ROOM,NTABLE+7(T1)
+	DPB T,PBAT
+	AOJLE T1,IHZRDL
+	PUSH P,A		;Check I'm not starting on a hazard
+	MOVEI T,NTABLE
+PUTME:	MOVE ROOM,(T)
+	MOVEI T1,2
+	MOVEM ROOM,(P)
+LOOKO:	LDB ROOM,PROOM1(T1)
+	LDB A,PWUMP
+	JUMPN A,[AOJA T,PUTME]
+	LDB A,PPIT
+	JUMPN A,[AOJA T,PUTME]
+	MOVE ROOM,(P)
+	SOJGE T1,LOOKO
+	LDB A,PBAT
+	JUMPN A,[AOJA T,PUTME]
+	LDB A,PWUMP
+	JUMPN A,[AOJA T,PUTME]
+	LDB A,PPIT
+	JUMPN A,[AOJA T,PUTME]
+	POP P,ME
+	POPJ P,
+MWUMP:	PUSH P,ROOM		;Move the Wumpus (50% chance)
+	PUSH P,T		;Transparent to AC'S
+	PUSH P,T1
+	MOVEI ROOM,1
+MWUMP1:	LDB T,PWUMP		;Find the Wumpus first
+	JUMPN T,MWUMP2		;Got him
+	AOS ROOM
+	CAIG ROOM,20.
+	 JRST MWUMP1
+	SAY /BAD NEWS IN MWUMP./
+	JRST BEG
+
+MWUMP2:	PUSHJ P,RANDOM
+	CAILE T,10.		;50% chance of moving!
+	 JRST MWUMPX		;Not this time
+	IDIVI T,3
+	SETZM T
+	DPB T,PWUMP		;Get rid of wumpus
+	LDB ROOM,PROOM1 (T1)	;Get random room
+	SETOM T
+	DPB T,PWUMP		;Put Wumpus there
+MWUMPX:	POP P,T1
+	POP P,T
+	POP P,ROOM
+	POPJ P,
+CIRCLE:	SAY /YOU ARE IN ROOM /	;Master loop
+	MOVE T,ME
+	PUSHJ P,DECPNT
+	SHOW CRLF
+	MOVE ROOM,ME
+	LDB T,PWUMP		;Get Wumpus bit
+	JUMPE T,CIRCL1		;No Wumpus, go on
+	PUSHJ P,MWUMP		;He's there, to move or not to move?
+CIRCLF:	MOVE ROOM,ME
+	LDB T,PWUMP
+	JUMPE T,CIRCL1		;He moved, you're safe...
+	SAY /YOU WERE EATEN BY THE WUMPUS./
+	JRST BEG
+
+CIRCL1:	LDB T,PBAT
+	JUMPE T,CIRCL2		;No bats, go on
+	SAY /BATS IN YOUR ROOM!/
+	SHOW CRLF
+	PUSHJ P,RANDOM
+	MOVE ME,T		;Put me somewhere random.
+	JRST CIRCLE
+
+CIRCL2:	LDB T,PPIT
+	JUMPE T,CIRCL3		;No pits, go on
+	SAY /(YOU FELL INTO A PIT. YOU LOSE!)/
+	JRST BEG
+
+CIRCL3:	SETZM T1		;Sense all around. T1 is OR-WORD
+	PUSHJ P,WSENSE
+	JRST CIRCL4
+WSENSE:	SENSE3 PWUMP,T1		;Sense the world!!
+	POPJ P,
+CIRCL4:	LDB ROOM,PROOM1
+	PUSHJ P,WSENSE
+	MOVE ROOM,ME
+	LDB ROOM,PROOM2
+	PUSHJ P,WSENSE
+	MOVE ROOM,ME
+	LDB ROOM,PROOM3
+	PUSHJ P,WSENSE
+	JUMPE T1,CIRCL5		;No smell of Wumpus, go on
+	SAY /I SMELL A WUMPUS./
+	SHOW CRLF
+CIRCL5:	SETZM T1		;Clear IOR bit
+	MOVE ROOM,ME
+	SENSE3 PBAT,T1		;Sense bats
+	JUMPE T1,CIRCL6		;No bats, go on
+	SAY /I HEAR SQUEEKING./
+	SHOW CRLF
+CIRCL6:	SETZM T1		;Clear IOR bit for pits
+	MOVE ROOM,ME
+	SENSE3 PPIT,T1
+	JUMPE T1,MOVEX		;No bats, let him move.
+	SAY /I FEEL A DRAFT./
+	SHOW CRLF
+	JRST MOVEX
+
+;Move Routine:  Does work related to user move.
+
+MOVEX:	SAY /TUNNELS TO /
+	MOVE ROOM,ME
+	LDB T,PROOM1
+	PUSHJ P,DECPNT
+	SHOW SPACE
+	LDB T,PROOM2
+	PUSHJ P,DECPNT
+	SHOW SPACE
+	LDB T,PROOM3
+	PUSHJ P,DECPNT
+	SHOW CRLF
+MOVE1:	SAY /MOVE? /	;Demand move
+	PUSHJ P,DECIN
+	 JRST MOVE2		;Non-number, go check.
+	SKIPE T
+	 CAILE T,20.		;Between 1-20?
+	 JRST WHAT		;Nope.
+	MOVE T1,ME
+	PUSHJ P,LEGAL		;Legal move? (from T1 to T)
+	JRST NOTPOS		;Nope, not possible
+	MOVE ME,T		;Yep, make it
+	JRST CIRCLE		;Go back
+MOVE2:	CAIE T,"s
+	 CAIN T,"S
+	  JRST SHOOT
+WHAT:	CAIN T,1000
+	 JRST MOVE1
+	SAY /WHAT??/		;Non-recognizable char
+	SKIPA
+NOTPOS:	 SAY /NOT POSSIBLE!/	;...
+	SHOW CRLF
+	JRST CIRCLE
+
+;Routine to determine if a tunnel exists tween T and T1
+;SKIP RETURN = YES.  Transparent to AC'S
+
+LEGAL:	PUSH P,ROOM
+	MOVE ROOM,T
+	LDB T,PROOM1
+	CAMN T,T1
+	 JRST SLEGAL
+	LDB T,PROOM2
+	CAMN T,T1
+	 JRST SLEGAL
+	LDB T,PROOM3
+	CAMN T,T1
+SLEGAL:	 AOS -1(P)		;Yep, 's legal
+	MOVE T,ROOM		;Restore AC'S
+	POP P,ROOM
+	POPJ P,
+;Shoot routine to handle shooting arrows.
+
+SHOOT:	SAY /HOOT!/
+	SHOW CRLF
+	AOSLE ARROWS		;Arrows left?
+	 JRST LOSE1		;Nope
+	SAY /FINISH WITH CR./
+	SHOW CRLF
+	MOVE ROOM,ME		;Arrow starts at me
+	SETZM NTABLE		;To check 180 deg bounces
+	HRREI CNT,-5		;Five rooms
+SHOOT1:	SAY /ROOM: /		;Get room number
+	PUSHJ P,DECIN
+	 JRST SHOOTX		;Unrecognizable input = EXIT
+	SKIPE T
+	 CAILE T,20.
+	  JRST SHOOTX		;Out of bounds = EXIT
+	MOVE T1,ROOM
+	PUSHJ P,LEGAL		;Tunnel tween T and T1?
+	 JRST BOUNCE		;Nope, he's fishing, get him
+	CAMN T,NTABLE		;Does he want to do a 180?
+	 JRST BOUNCE		;Yep, get him
+	MOVEM ROOM,NTABLE	;Arrow just leaving (ROOM)
+	PUSHJ P,MEWUMP		;Kill me or Wumpus??
+	AOJL CNT,SHOOT1		;No, more arrows = go back
+SHOOTX:	PUSHJ P,MWUMP		;Finished, move Wumpus
+	JRST CIRCLF		;Go back, see if Wumpus kills, dont let
+				;Him move again.
+BOUNCE:	SAY /(BOUNCE)/		;He tried to fool us, random arrow path.
+	SHOW CRLF
+	PUSHJ P,RANDOM
+	IDIVI T,3
+	LDB T,PROOM1(T1)	;Get random tunnel
+	PUSHJ P,MEWUMP		;Kill anyone?
+	AOJL CNT,BOUNCE		;Continue bouncing
+	JRST CIRCLE
+MEWUMP:	CAMN ME,T		;Kill me or Wumpus?
+	 JRST LOSE		;Yep, me
+	MOVE ROOM,T
+	LDB T,PWUMP		;Kill Wumpus?
+	JUMPN T,WIN		;Yep
+	POPJ P,
+
+CONSTA
+
+LOSE1:	SAY /NO MORE ARROWS. YOU LOSE BY DEFAULT./
+	JRST BEG
+
+LOSE:	SAY /YOU SHOT YOURSELF./
+	JRST BEG
+
+WIN:	SAY /YOU SLEW THE WUMPUS. CONGRATULATIONS!!!/
+	JRST BEG
+
+ATYPE:	PUSH P,T
+	HRLI A,440700
+	ILDB T,A
+	JUMPE T,[POP P,T
+	         POPJ P,]
+	.IOT TTYO,T
+	JRST .-3
+
+;DECIN inputs a decimal number.  It must be terminated
+;with a cr.  First char if non-number gets returned with POPJ.
+;Normal return is skip.  Answer in T.
+
+DECIN:	.IOT TTYI,T
+	CAIE T,15		;Is first char CR?
+	 JRST DECDEC
+	HRRZI T,1000
+	POPJ P,
+DECDEC:	CAILE T,"9		;Is first char a digit?
+	 POPJ P,
+	CAIGE T,"0
+	 POPJ P,
+	MOVE T1,T
+	SETZM T			;Clear result
+	SKIPA
+DECIN1:	.IOT TTYI,T1		;Read next char
+	CAILE T1,"9		;Is it a digit?
+	 JRST DECIN2
+	CAIGE T1,"0
+	 JRST DECIN2
+	SUBI T1,"0		;Convert to decimal and add to result
+	IMULI T,10.
+	ADD T,T1
+	JRST DECIN1
+DECIN2:	CAIE T1,15		;CR?
+	 JRST DWHAT
+	AOS (P)			;Success; skip return
+	POPJ P,
+
+DWHAT:	SAY /( WHAT??)/
+	SHOW CRLF
+	JRST DECIN
+
+;Decimal print routine.  Takes argument in T
+
+DECPNT:	IDIVI T,10.
+	ADDI T1,"0
+	PUSH P,T1
+	SKIPLE T
+	 PUSHJ P,DECPNT
+	POP P,T
+	.IOT TTYO,T
+	POPJ P,
+;Random number generator: uses formula:
+;   X[N+1]  = (  A*X[N] + C )TAKEN MOD(M)
+
+RANDOM:	SKIPE RCOUNT		;Random # GEN (RANGE = 1-20)
+	 JRST RAND1
+	AOS RCOUNT
+	MOVE T,X0
+	IMUL T,MA
+	ADD T,MC
+	IDIV T,MM
+	MOVEM T1,X0
+	MOVE T,[360600,,X0]
+	MOVEM T,RANDP
+RANDX:	LDB T,RANDP
+	IDIVI T,20.
+	MOVE T,T1
+	AOS T
+	POPJ P,
+
+RAND1:	AOS RCOUNT
+	MOVEI T,6
+	CAMN T,RCOUNT
+	 SETZM RCOUNT
+	IBP RANDP
+	JRST RANDX
+
+MA:	32768.-19.		;Random # gen constants
+MC:	262144.-11.
+MM:	4^11.-23.
+X0SAVD:	5
+
+CONSTA
+
+END BEG				;Game over!!!!!

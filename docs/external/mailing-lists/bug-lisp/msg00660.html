@@ -1,0 +1,133 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Sat, 13 Jan 79 22:14:00 GMT -->
+<!--X-Message-Id: a2760d59adbefd5be757c18010b2c3d6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00661.html">Date Prev</a>][<a href="msg00659.html">Date Next</a>][<a href="msg00661.html">Thread Prev</a>][<a href="msg00659.html">Thread Next</a>][<a href="maillist.html#00660">Date Index</a>][<a href="threads.html#00660">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Sat, 13 Jan 79 22:14:00 GMT</li>
+<li><em>Original-date</em>: 13 JAN 1979 1714-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Well, here we go again. I have a problem with NOINTERRUPT and UNWIND-PROTECT
+and so on. I don't think that UNWIND-PROTECT is powerful enough to handle
+the problem I have.
+
+Situation: Interrupts may be on or off (they are set at random by some
+   higher intelligence).
+
+Goal: To turn off interrupts for a moment, execute a piece of code and
+      guarantee that no matter what happens, interrupts will be left as
+      they had been initially.
+
+Examples of lossages:
+
+[1] UNWIND-PROTECT seems to be restoring the interrupts to what they were
+    at the end of the execution of its first arg. If there were a way it 
+    could detect that the user had munged with interrupts and would leave
+    things alone, then it would be okay. As is here is a case of where
+    I think is is doing the wrong thing. (Remember the value of 
+    (NOINTERRUPT arg) is the former value of NOINTERRUPT.
+
+    (NOINTERRUPT NIL)
+    NIL
+    (UNWIND-PROTECT (PROGN (NOINTERRUPT T) (PRINT 'FOO)) (NOINTERRUPT NIL))
+    FOO ; I hope interrupts are NIL here ...
+    T
+    (NOINTERRUPT NIL)
+    T   ; Interrupts seem to have been T!
+
+[2] Error recovery seems to override everything. I'd have thought there
+    was at least enough power here (maybe even overkill) to get interrupts
+    off at the end of this sequence, but doesn't do it!
+
+    (NOINTERRUPT T)
+    NIL
+    (UNWIND-PROTECT (+ 'A 'B) (NOINTERRUPT T))
+    ;B NON-NUMERIC VALUE
+    ;BKPT WRNG-TYPE-ARG
+    p
+    ;BKPT *RSET-TRAP
+    p
+    *
+    (NOINTERRUPT T) ;I hope interrupts are T already!
+    NIL ; But they aren't!
+
+
+What I would like is a way of saying to push interrupts and have them
+reset when I exit. Something like UNWIND-PROTECT for interrupts. This
+would probably be easy to write from Midas (though I bet impossible
+to write from Lisp (discounting LAP)) and would be much more elegant than
+some things I've tried.
+
+Something like:
+
+(PUSH-INTERRUPT &lt;Form-to-evaluate&gt;)
+
+where &lt;Form-to-evaluate&gt; could reset interrupts as he liked knowing that
+when the PUSH-INTERRUPT frame were popped, the world would be happy again.
+
+Comments? -kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00661.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00659.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00661.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00659.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00660"><strong>Date</strong></a></li>
+<li><a href="threads.html#00660"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

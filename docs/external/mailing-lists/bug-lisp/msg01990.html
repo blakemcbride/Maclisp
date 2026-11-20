@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: The Case for Lower Case -->
+<!--X-From-R13: XbEV &#60;XbEV ng DGFUSDE> -->
+<!--X-Date: Wed, 9 Apr 80 01:11:00 GMT -->
+<!--X-Message-Id: d3399df9f811bb48be2b2777d0440ce7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>The Case for Lower Case</title>
+<link rev="made" href="mailto:JoSH at RUTGERS">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01991.html">Date Prev</a>][<a href="msg01321.html">Date Next</a>][<a href="msg01991.html">Thread Prev</a>][<a href="msg01321.html">Thread Next</a>][<a href="maillist.html#01990">Date Index</a>][<a href="threads.html#01990">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>The Case for Lower Case</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC, dave.touretzky at CMU-10A</li>
+<li><em>Subject</em>: The Case for Lower Case</li>
+<li><em>From</em>: JoSH &lt;JoSH at RUTGERS&gt;</li>
+<li><em>Date</em>: Wed, 9 Apr 80 01:11:00 GMT</li>
+<li><em>Original-date</em>: 8 Apr 1980 2011-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Lower case IS easier to read, and Mixed case is even easier than
+that.  But especially in Lisp, lowercase makes lots of sense. 
+By comparison with:
+
+ (LABEL FOO (LAMBDA (BAR) (COND ((NULL BAR) NIL) (T (FOO (CAR BAR)))))),
+
+ (label foo (lambda (bar) (cond ((null bar) nil) (t (foo (car bar))))))
+
+is almost legible.  The difference is of course that the parens stand out.
+
+I've &quot;lowered&quot; Rutgers lisp by having READ convert everything to lowercase.
+This works on an uppercase-only terminal just as well as anywhere else.
+It works out to be a lot easier to take, ie reading the code.  I don't
+really care what Maclisp does, but several months of experience suggests
+that you would benefit from the change.
+
+(The only way i could see the change breaking extant code would be if some-
+one used varying case to distinguish atoms.  Surely this deserves to lose.)
+	--JoSH
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01991.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01321.html">Re: ferocious user code</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01991.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01321.html">Re: ferocious user code</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01990"><strong>Date</strong></a></li>
+<li><a href="threads.html#01990"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

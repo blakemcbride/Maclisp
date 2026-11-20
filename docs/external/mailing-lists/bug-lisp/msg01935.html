@@ -1,0 +1,118 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Poor SETF, revisited ["yea, me worry"] -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 29 Oct 80 19:20:00 GMT -->
+<!--X-Message-Id: 361164c04213d198d321eb88063a10de@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Poor SETF, revisited [&quot;yea, me worry&quot;]</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01936.html">Date Prev</a>][<a href="msg01934.html">Date Next</a>][<a href="msg01936.html">Thread Prev</a>][<a href="msg01932.html">Thread Next</a>][<a href="maillist.html#01935">Date Index</a>][<a href="threads.html#01935">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Poor SETF, revisited [&quot;yea, me worry&quot;]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: Poor SETF, revisited [&quot;yea, me worry&quot;]</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 29 Oct 80 19:20:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 29 October 1980 14:20-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 29 OCT 1980 1401-EST
+    From: JONL at MIT-MC (Jon L White)
+    To:   GJC
+    cc:   (BUG LISP)
+    Re:   Poor SETF, revisited [&quot;yea, me worry&quot;]
+
+    Uh, George, the problem just can't be laid at the feet of SETF, no
+    matter what system facilities it uses.
+
+I'm not laying them at the feet of SETF, I am laying them at the
+feet of JONL! The provided system facilities are not sufficient
+to handle SETF.
+
+    That the problem is still more general should have been evident from
+    the FIND-PROJECTION example, but to help visualize it again, just
+    imagine redefining the function LAST.  
+
+Redefine LAST? Are you feeling O.K. today?
+
+    Your proposal re SETF --  that of never memoizing -- would
+    be a narrow (and very costly!) solution.   
+
+Hey, I said you might as well just DISPLACE. Which costs even less than
+memoizing, and takes a lot less crufty code in your defmacro's.
+
+     But you didn't comment on my two suggestions, which would work for 
+    a rather wide variety of environment changes;  did you understand them?  
+
+I did comment, I said &quot;why should you have to do stuff like that
+by HAND?&quot; The comparison with UUOLINKS was a real win too. I never
+did understand why DEFUN didn't take care of UUOLINKS for you either!!!
+Why reset the UUOLINKS for the world when you only want to do it for
+a single function?
+
+gjc
+
+p.s. I think it goes without saying that the &quot;GENERAL PROBLEM&quot; 
+deals with what files/functions need to be recompiled when
+macros are changed etc. Already dealt with quite well on the
+lisp machine. My main comment is that this MACROMEMO stuff is
+an ill-working special case of that.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01936.html">Poor SETF, revisited [&quot;yea, me worry&quot;]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01934.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01936.html">Poor SETF, revisited [&quot;yea, me worry&quot;]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01932.html">Re: Poor SETF, revisited [&quot;yea, me worry&quot;]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01935"><strong>Date</strong></a></li>
+<li><a href="threads.html#01935"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

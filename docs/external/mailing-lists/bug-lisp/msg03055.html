@@ -1,0 +1,119 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: &#38;AUX list backwards in MacLISP -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 17 Oct 81 11:51:00 GMT -->
+<!--X-Message-Id: 5c4ebd1637c14f9bc9ffcc61ecf96fa1@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>&amp;AUX list backwards in MacLISP</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03056.html">Date Prev</a>][<a href="msg03054.html">Date Next</a>][<a href="msg03056.html">Thread Prev</a>][<a href="msg03054.html">Thread Next</a>][<a href="maillist.html#03055">Date Index</a>][<a href="threads.html#03055">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>&amp;AUX list backwards in MacLISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BIL at MIT-MC</li>
+<li><em>Subject</em>: &amp;AUX list backwards in MacLISP</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 17 Oct 81 11:51:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, KMP at MIT-MC, GJC at MIT-MC</li>
+<li><em>Original-date</em>: 17 October 1981 07:51-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 16 October 1981 00:09-EDT
+    From: William G. Dubuque &lt;WGD at MIT-MC&gt;
+    (defun car&amp;cdr (list &amp;aux (car (car list)) (list (cdr list))) 
+	   (values car list))
+    (car&amp;cdr '(a b)) ==&gt; (values 'b '(b))
+    It appears that defun&amp; is totally losing here, switching the order 
+    of the &amp;aux's and performing a boundp check on list. This works on 
+    the Lispm and in NIL.
+Both Lispm and a real NIL have &quot;native&quot; modes for binding the &amp;optional
+and &amp;aux variables, so only MacLISP has to try to &quot;patch it&quot; into a
+LET or LET* and kludge around.  But indeed, the MacLISP only version of
+DEFUN&amp; was returning a reversed list, and this is now fixed in DEFMAC 166.
+    Date: 16 October 1981 00:58-EDT
+    From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+    .  .  .  I thought it was agreed that &amp;AUX had
+    the semantics of a LET* -- why doesn't it just turn into one and be done
+    with it.  .  .  .  Am I confused or is someone just trying to save a 
+    few cons's at the expense of correct code?
+Some time back, there was a flurry of mail talking about the semantics of
+binding for these &amp; frobs -- originally the LISPM did a bind of all variables
+to their former values, and then a sequential assignment; subsequently it
+was changed to do incremental binding.  For a variety of reasons, the
+incremental binding is a loss for MacLISP (more details if you are *really*
+interested), so the MacLISP-only version of DEFUN&amp; tries to emulate the
+original Lispm behaviour.  This &quot;incompatibility&quot; is rather a moot point,
+since the differences in semantics can only be detected when there is
+SETQ'ing of free variables in the &amp;aux or &amp;optional computations;  the
+reversal of the &amp;aux list, was, however a real bug and has been fixed.
+    Date: 16 October 1981 15:06-EDT
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    If you load &quot;VAXMAX;DEFUN&amp;&quot; you will win. . .   However, we don't
+    claim to support the stuff for any strange maclisp-only purposes you may
+    have, but of course, if the price is right, maybe.
+The NILCOM file DEFMAC had two completely different versions of DEFUN&amp; --
+one for use under NIL, and one for use under MacLISP having the properties
+mentioned in the reply to KMP above.  That you chose to rewrite as much of 
+this software as you could, in your own way, is a mark of your personality,
+but it hardly helps the person like BIL who wants to write code that
+will run both in MacLISP and NIL.   As mentioned above, I've fixed the 
+MacLISP-only bug.   [yes, I know, you had to &quot;do it right&quot; -- don't you 
+always? -- but you've introduced yet a third set of alternatives with minor 
+semantic differences which *** are not moot points *** as the one difference 
+with Lispm noted above.]
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03056.html">&amp;AUX lossage.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03054.html">(STATUS HSNAME) on Twenex</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03056.html">&amp;AUX lossage.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03054.html">(STATUS HSNAME) on Twenex</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03055"><strong>Date</strong></a></li>
+<li><a href="threads.html#03055"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

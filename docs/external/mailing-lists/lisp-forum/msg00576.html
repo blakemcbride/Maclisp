@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Getting act together on strings -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Fri ,13 Feb 81 00:35:00 EDT -->
+<!--X-Message-Id: f3eb171b128b6010898a7bb3ad02e243@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Getting act together on strings</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00032.html">Date Prev</a>][<a href="msg00577.html">Date Next</a>][<a href="msg00032.html">Thread Prev</a>][<a href="msg00578.html">Thread Next</a>][<a href="maillist.html#00576">Date Index</a>][<a href="threads.html#00576">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Getting act together on strings</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lispm at MIT-AI, nil at MIT-MC</li>
+<li><em>Subject</em>: Re: Getting act together on strings</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Fri ,13 Feb 81 00:35:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I observe that as a general rule string functions specifying substrings
+use a start position and end position on the LISP Machine, but in NIL
+theytake a start position and a count.  Inasmuch as all the function
+names got chosen differently too that's not so bad, I guess...
+I think LM has STRING-EQUAL and NIL has STRING-EQUALP, LM has
+SUBSTRING and NIL has STRING-SUBSEQ, etc.
+WHat a confusing mess!
+If that's not enough, the function STRING does different things
+on the two machines (though I think they could be merged compatibly).
+
+Maybe it's too much to ask to make the LISPs completely compatible,
+but let's start on one small area at a time.  How about some dialogue
+on what to do about the current situation?  In particular, I'd like
+to hear some rationale for why each group did the string functions
+the way they did; for example, do they stem from architectural
+considerations?
+--Guy
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00032.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00577.html">Re: SLightly unwarranted flame</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00032.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00578.html">Re: Getting act together on strings</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00576"><strong>Date</strong></a></li>
+<li><a href="threads.html#00576"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

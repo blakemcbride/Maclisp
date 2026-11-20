@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: P.S. to previous message -->
+<!--X-From-R13: [AA@ ng [WF&#45;[Q (Rnivq O. [bba) -->
+<!--X-Date: Fri, 13 Mar 81 22:32:00 GMT -->
+<!--X-Message-Id: efb3c7fdb7e15346299542f4426bbf07@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>P.S. to previous message</title>
+<link rev="made" href="mailto:MOON at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01448.html">Date Prev</a>][<a href="msg01447.html">Date Next</a>][<a href="msg01446.html">Thread Prev</a>][<a href="msg01447.html">Thread Next</a>][<a href="maillist.html#01449">Date Index</a>][<a href="threads.html#01449">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>P.S. to previous message</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: info-lispm at MIT-AI</li>
+<li><em>Subject</em>: P.S. to previous message</li>
+<li><em>From</em>: MOON at MIT-MC (David A. Moon)</li>
+<li><em>Date</em>: Fri, 13 Mar 81 22:32:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 13 MAR 1981 1732-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Sorry, I left a couple things out of that message.
+
+FLOOR, CEIL, etc. will accept one or two arguments.  With one argument
+they will behave as described in the previous message.  With two arguments,
+they will first take the quotient of arg1 divided by arg2 then round the
+result accordingly.
+
+QUOTIENT of two arguments is identical to TRUNC of two arguments.
+REMAINDER is the corresponding remainder.
+
+I will add a ninth new function, MOD, which is the remainder that
+goes with the FLOOR form of division.
+
+Except for exact division, this seems consistent with the discussion of
+division of a couple months ago, factoring out the slash-backslash issue.
+Exact division really requires rational numbers as a datatype, although
+some people have proposed a half-measure which uses flonums to simulate
+rationals.  This isn't such a win since arithmetic on such a quotient will
+then never turn back into an integer.  I propose to defer exact division.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01448.html">Re: Query about proposed slight change to FIX and FIXR functions (again)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01447.html">Re: P.S. to previous message</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01446.html">Query about proposed slight change to FIX and FIXR functions (again)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01447.html">Re: P.S. to previous message</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01449"><strong>Date</strong></a></li>
+<li><a href="threads.html#01449"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

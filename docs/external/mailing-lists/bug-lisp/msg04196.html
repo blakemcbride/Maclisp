@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Autoload -->
+<!--X-From-R13: [nex Z. [vyyre &#60;[WZZSD ng [WF&#45;OW> -->
+<!--X-Date: Sun, 20 Apr 80 22:43:00 GMT -->
+<!--X-Message-Id: 40af147a75657a3df754dd45754c5620@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Autoload</title>
+<link rev="made" href="mailto:MILLER at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04195.html">Date Prev</a>][<a href="msg04194.html">Date Next</a>][<a href="msg00693.html">Thread Prev</a>][<a href="msg04194.html">Thread Next</a>][<a href="maillist.html#04196">Date Index</a>][<a href="threads.html#04196">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Autoload</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: Autoload</li>
+<li><em>From</em>: Mark L. Miller &lt;MILLER at MIT-AI&gt;</li>
+<li><em>Date</em>: Sun, 20 Apr 80 22:43:00 GMT</li>
+<li><em>Original-date</em>: 20 April 1980 17:43-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    It seems to me that there is very little conceptual difference between
+AUTOLOADable functions and macros.  Indeed it might be preferable to have
+the value of the AUTOLOAD property BE a macro definition which would
+receive the calling form as its one input, and return a revised form for
+further evaluation.  A built-in function AUTOLOAD would be the usual body,
+e.g.,:
+       (defun GRIND macro (form) (autoload form '((com) grindef fasl))).
+where autoload was defined as something like:
+       (defun AUTOLOAD (form file)
+              (load file) (comment possibly remprop the macro defn here)
+              form)
+ -- just to make the current behavior trivial to implement; but one could
+then also do cleverer things instead.
+  Would this sort of thing solve the problem?  Has this sort of idea been
+considered and rejected already?  Regards, Mark
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04195.html">Re: lap</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04194.html">Autoload</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00693.html">AUTOLOAD</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04194.html">Autoload</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04196"><strong>Date</strong></a></li>
+<li><a href="threads.html#04196"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

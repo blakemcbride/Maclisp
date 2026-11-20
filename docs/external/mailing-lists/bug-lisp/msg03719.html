@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Fri, 5 Dec 80 21:49:00 GMT -->
+<!--X-Message-Id: 0e28bacd2ca48a960203e22f9e801cf3@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03720.html">Date Prev</a>][<a href="msg03718.html">Date Next</a>][<a href="msg03720.html">Thread Prev</a>][<a href="msg03718.html">Thread Next</a>][<a href="maillist.html#03719">Date Index</a>][<a href="threads.html#03719">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Fri, 5 Dec 80 21:49:00 GMT</li>
+<li><em>Original-date</em>: 5 DEC 1980 1649-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In Maclisp, with STRING loaded, (SYMBOLCONC &quot;FOO&quot; &quot;BAR&quot;) gives a circular
+hunk description which if you trim with PRINLEVEL PRINLENGTH settings you
+find is wanting to say ;(...) 1G~S Bizarre arg -- SYMBOLCONC ?
+I don't think that's such a bizarre arg. I would have thought SYMBOLCONC
+was something akin to (IMPLODE (MAPCAN 'EXPLODEN arglist)) but I guess it
+does something wierder and less robust. Anyway, I think that CERROR should
+load FORMAT if it's going to use those silly messages. Alternatively, it
+should parse enough of the string to not output any of the ~ codes. Ie,
+&quot;FOO~1G~SBAR&quot; should be prescanned and print as FOOBAR. This would be really
+cheap to put in if you're worried about the size of FORMAT...The ~nG stuff
+really bugs me and as we've seen in JGA's message -- users don't find it too
+reassuring either.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03720.html">+INTERNAL-LOSSAGE</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03718.html">SYMBOLCONC, STRINGs, and other things being D.E.A.D.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03720.html">+INTERNAL-LOSSAGE</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03718.html">SYMBOLCONC, STRINGs, and other things being D.E.A.D.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03719"><strong>Date</strong></a></li>
+<li><a href="threads.html#03719"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

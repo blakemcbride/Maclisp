@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Checking in apply and bind for internal unbound frob -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 18 Jul 78 02:26:00 GMT -->
+<!--X-Message-Id: de189c9f972b064602839f70a27e0db8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Checking in apply and bind for internal unbound frob</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02263.html">Date Prev</a>][<a href="msg02261.html">Date Next</a>][<a href="msg02263.html">Thread Prev</a>][<a href="msg02261.html">Thread Next</a>][<a href="maillist.html#02262">Date Index</a>][<a href="threads.html#02262">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Checking in apply and bind for internal unbound frob</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>Subject</em>: Checking in apply and bind for internal unbound frob</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 18 Jul 78 02:26:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 17 JUL 1978 2226-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I guess that your motive in this is for some, albeit inadequate,
+compensation for the failure of the PDP10-compiled code to check
+for accessing unbound variables.  I'm sort of against it since
+it doesn't do much more than a little compensation, and would
+be doubly confusing to users who would notice that it would be 
+alright to listify such things, obtain them by car-cdring (and
+any other opencoded computation) but not use then in function
+calls.  But I'm not dead set against it.
+1) at .SET1, squeeze in the two lines below, just before the PUSH:
+	CAIN A,QUNBOUND
+	JRST &lt;additional-checking-etc&gt;
+  this will catch any binding caused by SET, or by interpreted versions
+  of SETQ PUSH POP .
+2) at a number of places in the uuo handler, such as at ARGPDL and
+   PDLARG, and at UUOS03+8 (or so) and UUOLB3+2, and at any place
+   in the uuo handler where PDLNMK or PDLNKJ is called;  This will
+   catch most leakage thru compiled-code to compiled-code linkage.
+3) at the interpreter's versions of the CARCDR function, ie at CR7+1,
+   at EVSYM (which is already done), and probably at interpreter's
+   accessing of hunks, arrays, etc.
+4) at SPEC2+1 (which is SPECBIND)
+So 1, 2, and 4 will stop almost all &quot;leaks&quot; of QUNBOUND out of
+compiled code (and interpreted code cant generate this loser!),
+the single exception is when it is open-coded into some list
+structure (or hunk, or array). That exceptional case should be 
+caught by 3.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02263.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02261.html">GCPRO</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02263.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02261.html">GCPRO</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02262"><strong>Date</strong></a></li>
+<li><a href="threads.html#02262"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

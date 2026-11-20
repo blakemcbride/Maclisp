@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Context of &#38;OPTIONAL and &#38;AUX calculations -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 1 Aug 81 16:26:00 GMT -->
+<!--X-Message-Id: ca3c9978d9ff7adaec6266649ea67e6d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Context of &amp;OPTIONAL and &amp;AUX calculations</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03170.html">Date Prev</a>][<a href="msg03168.html">Date Next</a>][<a href="msg03170.html">Thread Prev</a>][<a href="msg03167.html">Thread Next</a>][<a href="maillist.html#03169">Date Index</a>][<a href="threads.html#03169">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Context of &amp;OPTIONAL and &amp;AUX calculations</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: Context of &amp;OPTIONAL and &amp;AUX calculations</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 1 Aug 81 16:26:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 1 August 1981 12:26-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 1 August 1981 12:14-EDT
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    Subject: I hate to tell you but...
+    ...
+    (DEFUN G (Y) (SETQ X (+ X Y)))
+    (DEFUN H (&amp;OPTIONAL (X (G X))) X)
+    ...
+    I'll admit that the example is contrived, however, note well
+    that it used to work, when the code generated was a simple
+    use of LET* .  .  .
+At one time, the LISPM did the following for &amp;OPTIONAL and &amp;AUX calculations:
+  1) Create a bind frame with all the relevant variables in it, being bound
+     to their previous values, if any.
+  2) Sequentially set each &amp;OPTIONAL variable to either the input arg [which
+     might mean no code output], or set it to the default calculation.
+     Then sequentially set each &amp;AUX variable to its calculation.
+This order has the happy effect that &amp;OPTIONAL and &amp;AUX calculations don't
+disturb any special variable bindings in the outer contour, where there
+is an ** apparent LAMBDA binding ** of that special variable in the function.
+
+I still feel that that original scenario is the better one, since it
+is more in accord with the notion that the implicit LAMBDA binding of
+the argument variables will &quot;shield&quot; the outer contour.
+
+Could this situation possibly have any practical significance? or is
+it only going to occur in, as you say, &quot;contrived&quot; circumstances?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03170.html">I hate to tell you but...</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03168.html">ALPHALESSP &amp; Strings</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03170.html">I hate to tell you but...</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03167.html">Who says, &quot;gratuitous&quot;?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03169"><strong>Date</strong></a></li>
+<li><a href="threads.html#03169"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

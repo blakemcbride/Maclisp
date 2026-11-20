@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Slash: confusing the issue -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Wed ,24 Dec 80 16:25:00 EDT -->
+<!--X-Message-Id: 7ae2ddc4cad46513a9bc4fdfec54a213@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Slash: confusing the issue</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00506.html">Date Prev</a>][<a href="msg00544.html">Date Next</a>][<a href="msg00508.html">Thread Prev</a>][<a href="msg00544.html">Thread Next</a>][<a href="maillist.html#00507">Date Index</a>][<a href="threads.html#00507">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Slash: confusing the issue</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJS at MIT-AI, rwg at SU-AI, CSVAX.fateman at BERKELEY,      HIC at MIT-MC, LISP-FORUM at MIT-MC</li>
+<li><em>Subject</em>: Re: Slash: confusing the issue</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Wed ,24 Dec 80 16:25:00 EDT</li>
+<li><em>Cc</em>: fahlman at CMU-10A, guy.steele at CMU-10A</li>
+<li><em>Sender</em>: dlw at CADR6 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(1) All modern ASCII terminals have backslashes.  Multics has changed
+since you left; it now uses modern ASCII terminals.  The 2741s and such
+are all gone.  Multics uses backslashes regularly.
+
+(2) It doesn't matter whether we do or don't implement rational numbers,
+or how we do it.  This is a red herring.  We can decide it later.  The
+important thing is that we are gobbling a perfectly good character,
+slash, that better things can be done with.  Because of issues such as
+you have raised, the Lisp Machine has not yet implemented rationals, and
+we certainly aren't going to rush out and put them in just because a new
+character got freed up in the readtable.
+
+(3) Howard, it should not be necessary to have a switch to revert / to run old
+code, since all old code calls &quot;//&quot;, which will retain its old meaning.  (I
+guess you DO have to recompile things in the new readtable.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00506.html">Re: rationals as a Lisp data type</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00544.html">Re: Slash: confusing the issue</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00508.html">Re: rationals as a Lisp data type</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00544.html">Re: Slash: confusing the issue</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00507"><strong>Date</strong></a></li>
+<li><a href="threads.html#00507"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

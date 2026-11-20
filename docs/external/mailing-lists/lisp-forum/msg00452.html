@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: ((LAMBDA ())) => NIL ? -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,1 Dec 80 05:33:00 EDT -->
+<!--X-Message-Id: 494a670505025ffd8b03bb6bd98698ec@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: ((LAMBDA ())) =&gt; NIL ?</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00451.html">Date Prev</a>][<a href="msg00453.html">Date Next</a>][<a href="msg00455.html">Thread Prev</a>][<a href="msg00456.html">Thread Next</a>][<a href="maillist.html#00452">Date Index</a>][<a href="threads.html#00452">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: ((LAMBDA ())) =&gt; NIL ?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: ((LAMBDA ())) =&gt; NIL ?</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,1 Dec 80 05:33:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I think programs which construct programs need the flexibility of having
+((LAMBDA ())) and (PROGN) return NIL. Interlisp users should be happy with
+that since omitted cruft seems to always be the same as a list of NIL's. 
+Eg, consider a program which accepts a list of forms to evaluate on some
+condition
+
+	(DEFMACRO-FOO-CONDITION-HANDLER (&amp;REST FORMS)
+	   `(DEFUN FOO-HANDLER () ,@FORMS))
+
+Do you want to tell the user that if he's zero'ing out what FOO-HANDLER
+does, he must type (FOO-CONDITION-HANDLER NIL)? That's silly. It wants a 
+list of forms to be EVAL'd. You don't want to evaluate anything; evaluating
+NIL is not the same thing. Requiring the macro-writer to remember to write:
+
+	(DEFMACRO-FOO-HANDLER (&amp;REST FORMS)
+	   `(DEFUN FOO-HANDLER () NIL ; sigh, in case of no forms...
+		,@FORMS))
+
+is just as bad. (LAMBDA (...stuff1...) ...stuff2...) should be like
+(LAMBDA (...stuff1...) (PROGN ...stuff2...)) and I think there's really no
+question that (PROGN) needs to return NIL. Program-writing-programs can
+come up with the case of `(PROGN ,@STUFF) where stuff is NIL very easily
+and making it an error is just asking for lossage. It's clear when it arises
+that the guy didn't want to do anything. Why remove the obvious semantics
+to force an error on a guy in a case where what he wanted was indeed the
+original obvious semantics?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00451.html">Re: null LAMBDA bodies?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00453.html">Re: null LAMBDA bodies?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00455.html">Re: null LAMBDA bodies?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00456.html">Re: Special names for Open-Coded Functions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00452"><strong>Date</strong></a></li>
+<li><a href="threads.html#00452"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

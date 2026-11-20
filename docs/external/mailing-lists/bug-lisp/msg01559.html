@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 17 Feb 81 18:01:00 GMT -->
+<!--X-Message-Id: c6693bb69d80599c635dd1e9115766d8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01560.html">Date Prev</a>][<a href="msg01558.html">Date Next</a>][<a href="msg01560.html">Thread Prev</a>][<a href="msg01558.html">Thread Next</a>][<a href="maillist.html#01559">Date Index</a>][<a href="threads.html#01559">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 17 Feb 81 18:01:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, GSB at MIT-MC, JPG at MIT-MC, RLB at MIT-MC,    RWK at MIT-MC</li>
+<li><em>Original-date</em>: 17 February 1981 13:01-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 17 FEB 1981 1235-EST
+    From: JONL (Jon L White)
+    To:   GJC, RLB, RWK, GSB
+    cc:   (BUG LISP), JPG
+
+    two reminders:
+    1) We need a way to periodically &quot;clean out&quot; the LISP;LOCK MAIL file,
+       absorbing the relevant info into some data base that an automatic
+       reaper could hack.  DUMPGC doesn't address this problem, does it?
+It will take the LOCK MAIL file and produce a FASLoadable data base.
+Presumably the data base wants to be GC'd too. However, since backup tapes
+are never GC'd, there is an interesting problem. This is sounding more and
+more like COBOL applications programming. 
+    2) MACLISP, rathere than SHARABLE should be the base over which to build
+       systems (unless there is an extreme address space crunch e.g. LSBCM).
+       The file LISP;MACLISP LISP is an &quot;init&quot; loader file for MACLISP, and
+       shows what all files are included in it.
+Would be nice to be able to include MACSYMA in this scheme too. In that
+case it builds off of a bare lisp. Speaking of bare lisps, the present
+LISP IS NOT as BARE as it could be. How about having all those
+AUTOLOAD properties and symbols be part of the initial SHARAB, and not
+assembled with the bare lisp system. I know that Macsyma has no use
+for these symbols, and it would save about a &quot;K&quot;. I would think you
+owe it to macsyma to do this.
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01560.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01558.html">&quot;bare&quot; lisp and AUTOLOAD properties</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01560.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01558.html">&quot;bare&quot; lisp and AUTOLOAD properties</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01559"><strong>Date</strong></a></li>
+<li><a href="threads.html#01559"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

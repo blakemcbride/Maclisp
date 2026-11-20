@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: GRINDEF in lower case -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Sat, 27 Sep 80 01:18:00 GMT -->
+<!--X-Message-Id: 50d0eb2310fd146ad56f1fa5207d4060@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>GRINDEF in lower case</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01154.html">Date Prev</a>][<a href="msg01152.html">Date Next</a>][<a href="msg01154.html">Thread Prev</a>][<a href="msg01152.html">Thread Next</a>][<a href="maillist.html#01153">Date Index</a>][<a href="threads.html#01153">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>GRINDEF in lower case</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: SOLEY at MIT-MC</li>
+<li><em>Subject</em>: GRINDEF in lower case</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Sat, 27 Sep 80 01:18:00 GMT</li>
+<li><em>Cc</em>: (BUG GRINDEF) at MIT-MC</li>
+<li><em>Original-date</em>: 26 SEP 1980 2118-EDT</li>
+<li><em>Sent-by</em>: BIL at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Well, I don't agree that lower case code is more readable than uppercase
+code. Fortunately, my reason for not implementing that needn't be dependent
+on this dislike: We had some discussion a while back in which I and others
+pointed out that you cannot correctly decide what to downcase and what
+to leave upcased. There is no way to distinguish between code that was typed
+in by |...| from stuff that was not. Eg, 
+
+	(+ |X| X)
+
+would print out as 
+
+	(+ x x)
+
+under your scheme since after reading there is no way to detect the input
+syntax that was used. This would break code, so we can't do it. Besides that,
+it would be slow, but that's a lesser issue and not the criterial one.
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01154.html">Lowercase and bugs.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01152.html">GRINDEF in lower case</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01154.html">Lowercase and bugs.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01152.html">GRINDEF in lower case</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01153"><strong>Date</strong></a></li>
+<li><a href="threads.html#01153"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

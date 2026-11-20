@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: character objects -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Fri ,15 Aug 80 18:10:00 EDT -->
+<!--X-Message-Id: 39fc3cc94d127c2791ec9cf1e12e8245@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: character objects</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00079.html">Date Prev</a>][<a href="msg00082.html">Date Next</a>][<a href="msg00076.html">Thread Prev</a>][<a href="msg00075.html">Thread Next</a>][<a href="maillist.html#00080">Date Index</a>][<a href="threads.html#00080">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: character objects</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC (David A. Moon)</li>
+<li><em>Subject</em>: Re: character objects</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Fri ,15 Aug 80 18:10:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>CHARARRAYCALL is silly.  One can instead specify that arrays
+permit characters as well as fixnums as indices, and implicitly
+&quot;coerce&quot; them (in many implementations this will be the identity
+coercion).  On the other hand, CHARLOGXOR is clearly a loss,
+and I would suggest that writing (CODE-CHAR (LOGXOR nnn (CHAR-CODE c)))
+at least makes it clear that you're hacking around with the
+representation.  On the third hand, if you're doing LOGXOR is is probably
+for the explicit purpose of changing case or hacking a control bit,
+and the proposal CHPROP provides for operations to do these common things.
+I think I would rather write (UNMETA (CHAR-UPCASE x)) than
+(LOGXOR 1040 x).
+Certainly all this stuff only solves part of the transportability problem,
+but it is a start.  In particular, this problem is a great impediment to
+writing a transportable editor, which I would like to see happen.
+
+I I thyink JAR pointed out, having a character standard and having character
+objects are distinct notions.  The former is very important, the latter
+merely nice for some purposes.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00079.html">Re: character objects &amp; randomness</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00082.html">Re: Bawden's remarks on characters</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00076.html">Re: character objects</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00075.html">Re: character objects &amp; representation issues</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00080"><strong>Date</strong></a></li>
+<li><a href="threads.html#00080"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

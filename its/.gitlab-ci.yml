@@ -1,0 +1,39 @@
+image: ubuntu
+
+stages:
+  - build
+
+# Note, GitLab currently does not build well with KLH10.
+
+build_simh:
+  stage: build
+  variables:
+    EMULATOR: simh
+  script:
+    - sh -ex build/dependencies.sh install_linux
+    - make
+  artifacts:
+    paths:
+      - out/simh/
+
+build_ka10:
+  stage: build
+  variables:
+    EMULATOR: pdp10-ka
+  script:
+    - sh -ex build/dependencies.sh install_linux
+    - make
+  artifacts:
+    paths:
+      - out/pdp10-ka/
+
+build_kl10:
+  stage: build
+  variables:
+    EMULATOR: pdp10-kl
+  script:
+    - sh -ex build/dependencies.sh install_linux
+    - make
+  artifacts:
+    paths:
+      - out/pdp10-kl/

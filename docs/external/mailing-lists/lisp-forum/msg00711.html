@@ -1,0 +1,133 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Macros in Interlisp -->
+<!--X-From-R13: [OEW@FSD ng BODQ&#45;[OJQ -->
+<!--X-Date: Fri ,6 Nov 81 01:58:00 EDT -->
+<!--X-Message-Id: 71c47277fe14de21a5b0de6e5bff12cb@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Macros in Interlisp</title>
+<link rev="made" href="mailto:MASINTER at PARC-MAXC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00712.html">Date Prev</a>][<a href="msg00710.html">Date Next</a>][<a href="msg00712.html">Thread Prev</a>][<a href="msg00702.html">Thread Next</a>][<a href="maillist.html#00711">Date Index</a>][<a href="threads.html#00711">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Macros in Interlisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: Macros in Interlisp</li>
+<li><em>From</em>: MASINTER at PARC-MAXC</li>
+<li><em>Date</em>: Fri ,6 Nov 81 01:58:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Macros in Interlisp are a separate and powerful facility.
+
+There are actually three kinds of macros in Interlisp, as well
+as several other facilities which provide features which are
+often provided by macros in other Lisp dialects:
+
+
+Substitution macros (which I assume is what RMS was referring to)
+allow one to give a substitution template for a form, e.g.
+if BINDVAR's macro is ((VAR VAL . FORMS) ((LAMBDA (VAR) . FORMS) VAL))
+then (BINDVAR X Y (FOO)) -&gt; ((LAMBDA (X) (FOO)) Y)
+
+
+Computed macros correspond to the MacLisp style of macro, where
+a variable is bound to the macro body, a form is evaluated, and
+the result of the evaluation is used as the macro translation.
+
+While computed macros are more powerful than substitution macros,
+the substitution macros have the advantage that they are often
+more concice, and have the important property that the result
+of macro expansion depends only on the macro instance and the
+macro definition.
+
+LAMBDA macros correspond to &quot;inline&quot; definitions, e.g., if the
+macro for FOO is (LAMBDA (A B C) (MUMBLE)) then
+(FOO X Y Z) expands to ((LAMBDA (A B C) (MUMBLE)) X Y Z).
+
+MACROS are integrated into the system. Macros get expanded during
+interpretation (with the macro translation hashed off of the
+actual macro body so that while translation only happens once,
+the original source is left intact for pretty printing.) If
+the user maintains a masterscope database about his functions,
+Masterscope will print a warning about which functions need 
+recompilation when a macro is changed. [This is conservative
+only for substitution and LAMBDA macros, since expansion of
+computed macros could depend on arbitrary parts of the compile/runtime
+environment].
+
+In addition to Macros, Interlisp allows user-defined &quot;CLISP&quot; forms
+(e.g., the PUSH, POP, CHANGE etc. expressions were originally done
+this way) and extensions to the iterative expressions which allow
+user-defined iteration keywords.
+
+Finally, the RECORD package allows declarations of data structure
+types which are in actuality macro expansions, via the ACCESSFNS
+record type. While this can be thought of as a convenient way
+of packaging together a related set of macros, these ACCESSFNS
+records are integrated with the record package to provide
+for &quot;creation&quot; of new instances, record path tracing, etc.
+
+These facilities have been in place at least since 1978. 
+
+The misconception about macros in Interlisp seems to 
+be a common mind-bug. I found references to Interlisp's
+lack of macros in Winston&amp;Horn, and also in Charniak, Riesbeck
+and McDermott's book. Nonsense.
+
+Larry
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00712.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00710.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00712.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00702.html">macros in Interlisp</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00711"><strong>Date</strong></a></li>
+<li><a href="threads.html#00711"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

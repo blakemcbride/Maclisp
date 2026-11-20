@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Arguments to ALLOC function -->
+<!--X-From-R13: VWQ ng [WF&#45;[Q (Vbjneq W. Qnaaba) -->
+<!--X-Date: Mon, 8 May 78 00:33:00 GMT -->
+<!--X-Message-Id: 2b98d24a609ae581ca3faf6a7428209e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Arguments to ALLOC function</title>
+<link rev="made" href="mailto:HIC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03458.html">Date Prev</a>][<a href="msg03455.html">Date Next</a>][<a href="msg03534.html">Thread Prev</a>][<a href="msg03533.html">Thread Next</a>][<a href="maillist.html#03457">Date Index</a>][<a href="threads.html#03457">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Arguments to ALLOC function</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Arguments to ALLOC function</li>
+<li><em>From</em>: HIC at MIT-MC (Howard I. Cannon)</li>
+<li><em>Date</em>: Mon, 8 May 78 00:33:00 GMT</li>
+<li><em>Original-date</em>: 7 MAY 1978 2033-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 25 APR 1978 0916-EST
+    From: JONL at MIT-MC (Jon L White)
+    Subject: Arguments to ALLOC function
+    To: (BUG LISP) at MIT-MC
+
+    ****WORKS FOR (ALLOC ...) &amp; PROBABLY FOR INITIAL DIALOUGE, BUT THERE AIN'T
+        NO FREE SPACE IN WHICH TO CONS THE FLONUMS CREATED BY READ****
+
+    Let all the arguments to ALLOC be expressible as floating-point numbers.
+    Thus one could say (ALLOC '(LIST (56.0E3 64.0E3 .2)))  rather than type
+    some fixnums with lots of trailing (meaningless) zeros.  Since these
+    quantites are rounded up to the neares multiple of a segment size,
+    there would be no difficulyt in first fixing the flonum, and then carrying
+    on.
+-----------
+This works now for the alloc function, but unfourtunatly if you have a flonum
+in the init file alloc comment, LISP dies because it tries to do a GC due to
+flonum space...barf, how can I allocate some initial flonum space??
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03458.html">Forwarding of mail</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03455.html">Hiseg follies</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03534.html">Arguments to ALLOC function</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03533.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03457"><strong>Date</strong></a></li>
+<li><a href="threads.html#03457"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

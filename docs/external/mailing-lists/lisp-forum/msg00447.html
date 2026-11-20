@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Proposed mildly incompatible change to MULTIPLE&#45;VALUE(&#45;BIND) -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Fri ,17 Apr 81 22:10:00 EDT -->
+<!--X-Message-Id: 02cffff318739665904e61010f4ce10e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Proposed mildly incompatible change to MULTIPLE-VALUE(-BIND)</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00066.html">Date Prev</a>][<a href="msg00448.html">Date Next</a>][<a href="msg00065.html">Thread Prev</a>][<a href="msg00448.html">Thread Next</a>][<a href="maillist.html#00447">Date Index</a>][<a href="threads.html#00447">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Proposed mildly incompatible change to MULTIPLE-VALUE(-BIND)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at MIT-MC</li>
+<li><em>Subject</em>: Re: Proposed mildly incompatible change to MULTIPLE-VALUE(-BIND)</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Fri ,17 Apr 81 22:10:00 EDT</li>
+<li><em>Cc</em>: Scott.Fahlman at CMU-10A</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I would like to suggest that the procedure call and procedure return
+interfaces be made more similar by means of the following slightly
+incompatible change to MULTIPLE-VALUE and MULTIPLE-VALUE-BIND.
+
+Recall that currently each of these takes a list of variables
+and a form to evaluate; MULTIPLE-VALUE-BIND additionally has a PROGN-body.
+Each evaluates the form, producing possibly multiple values;
+the variables are then SETQ'd or bound, respectively, to the values.
+
+Now, currently, if not enough values are supplied, then the extra variables
+receive NIL, while if too many values are produced the excess ones are
+discarded.
+
+I propose that the list of variables be completely identical in syntax
+to a LAMBDA-list.  This includes the use of &amp;OPTIONAL and &amp;REST.  One
+can get precisely the current functionality by inserting &amp;OPTIONAL at
+the front of the variables list.  In addition, one would be able to get
+non-NIL default values; a list of some of the values, using &amp;REST;
+and better error checking, because one can *require* that certain values
+be delivered.
+
+This is an incomatible change, but will screw only programs which depend
+on the defaulting to NIL or the discarding of excess values.  Such
+programs are easily fixed by inserting &amp;OPTIONAL or &amp;REST IGNORE,
+respectively.  I suspect that most programs ask for exactly the number
+of variables they are going to get, however, and so would be
+unaffected but better error-checked.
+--Guy
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00066.html">Re: Splicing macro's &amp; CGOL.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00448.html">Re: Proposed mildly incompatible change to MULTIPLE-VALUE(-BIND)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00065.html">Re: Splicing macros &amp; CGOL</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00448.html">Re: Proposed mildly incompatible change to MULTIPLE-VALUE(-BIND)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00447"><strong>Date</strong></a></li>
+<li><a href="threads.html#00447"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

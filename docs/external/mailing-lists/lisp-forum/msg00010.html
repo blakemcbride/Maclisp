@@ -1,0 +1,127 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Improving the LISP working environment by taking a lesson from... -->
+<!--X-From-R13: EVDOUS ng IVODFA@ (Xrsserl Euentre) -->
+<!--X-Date: 10 Nov 1980 (Monday) 0512&#45;EDT -->
+<!--X-Message-Id: f1f8cb6801ffccf659c8251d8330fb66@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Improving the LISP working environment by taking a lesson from...</title>
+<link rev="made" href="mailto:SHRAGE at WHARTON">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00818.html">Date Prev</a>][<a href="msg00013.html">Date Next</a>][<a href="msg00021.html">Thread Prev</a>][<a href="msg00397.html">Thread Next</a>][<a href="maillist.html#00010">Date Index</a>][<a href="threads.html#00010">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Improving the LISP working environment by taking a lesson from...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at MIT-AI, nil at MIT-MC</li>
+<li><em>Subject</em>: Re: Improving the LISP working environment by taking a lesson from...</li>
+<li><em>From</em>: SHRAGE at WHARTON (Jeffrey Shrager)</li>
+<li><em>Date</em>: 10 Nov 1980 (Monday) 0512-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>APL!
+
+I think that there are several problems inherent in the design of LISP and
+its environment that have been neatly avoided in APL.  I think particularly
+of the following:
+
+  1- When a programmer writes a function for his system it is &quot;eaten&quot; by
+     LISP.  That is, it becomes a part of the workspace as if it had been
+     there all along.  This is &quot;neat&quot; but painful for large system design
+     because it means that you need to carry around a notebook of all your
+     functions in order to remember what you have there.  In APL, you can ask
+     the system to list the names of all your functions or variables.  This
+     is a simple, but powerful idea and should exist in LISP without having
+     to go trapsing thru the oblist.   Also, the ability to get these
+     names into a data structure (admittedly somewhat klugely implemented
+     in APL) permits the writing of workspace documentor programs and the
+     like.
+  2- The CONTINUE workspace feature of APL permits a user to logout and
+     come back an hour later, the next day, etc with his environment
+     intact as he left it (this also happens if, for some reason, the
+     system craps out).  This is simple enough; a common checkpoint name
+     that is automatically restored when LISP starts up if it exists.
+  3- LISP has this one real unfortunate feature; it is too flexible and
+     too simple simultaneously.  This is the reason that it is soo hard
+     to transport LISP systems from one machine to the next.  &quot;Basic LISP&quot;
+     is so trivial that noone can write anything in it.  Thus, every impl-
+     ementation has devised their own set of cover functions thus making
+     programs written there completely incompatible with the rest of the
+     universe.  The flexibility of LISP makes this a real easy task.  APL
+     is not quite as flexible (you cannot easily add &quot;primatives&quot; to the
+     main loaded system but the primative set is sufficiently rich that
+     you usually do not need to do so.  Thus APL is, probably, one of the
+     most transportable languages in the world [don't thumb your nose
+     at transporatbility -- it is quite important if you ever expect to
+     see any of your work outside of MIT].  The MAPCAR, etc functions
+     were a half-hearted attempt to correct the problem of the simplicity of 
+     LISP -- useful and more powerful than CAR CDR...  I don't know quite
+     what to do about this one -- since the NIL people are writing a &quot;new
+     LISP&quot; they might be able to make use of this commentary I think that
+     the MacLISP users are already fried (sorry).
+
+Some of the problems sighted above are due to the general verbosity of
+LISP compared to APL; in particular, there is much greater proliferation
+of functions in a large LISP system than one in APL because of the
+difficuly of writing COMPACT one liners [just thow it in another function].
+
+Also, note that I am not saying &quot;use APL&quot; rather, learn from the popularity
+and usability of the APL environment.  LISP is better than APL for what we
+do with it but I think that the environment needs work (and has for a long
+time) and that it is about time someone did something about some of the
+other problems in LISP as well.  NIL is the place to strike out at these.
+
+-- Jeff Shrager
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00818.html">Spring Dance</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00013.html">Re: Of diamonds and mud:</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00021.html">Re: Improving the LISP working environment by taking a lesson from...</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00397.html">Re: Using macros in Mapping functions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00010"><strong>Date</strong></a></li>
+<li><a href="threads.html#00010"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: EQ(UAL) in SUBST -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,9 Dec 80 16:12:00 EDT -->
+<!--X-Message-Id: 2df0ab56bfad8cf4410408f0799dd8de@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: EQ(UAL) in SUBST</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00136.html">Date Prev</a>][<a href="msg00586.html">Date Next</a>][<a href="msg00136.html">Thread Prev</a>][<a href="msg00588.html">Thread Next</a>][<a href="maillist.html#00585">Date Index</a>][<a href="threads.html#00585">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: EQ(UAL) in SUBST</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DLW at MIT-MC</li>
+<li><em>Subject</em>: Re: EQ(UAL) in SUBST</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,9 Dec 80 16:12:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The general problem with using EQ is that in Maclisp, flonums and many
+fixnums which are '=' are not necessarily EQ. While it is fine for the
+LispM as an independent language to use EQ, but since EQ is itself a very
+different operation on the LispM, I'm not sure if this is a good idea.
+The notion of EQUALness is much more general across implementations than
+is the notion of EQness. I suggest that perhaps we could win with a compromise
+such one that called EQUAL on atoms and EQ on lists. This would make SUBSTing
+for flonums, fixnums, strings, etc behave more uniformly across dialects. 
+I agree that checking lists for EQUALness is an un-necessary slowness.
+
+There is also the other problem of whether (SUBST 'FOO '(A B) '((A B) A B))
+should return (FOO A B) or (FOO . FOO). This, it seems to me, is a far more
+severe issue since it plays a role in the existing definitions of SUBSTs
+and other similar mechanisms and code could conceivably broken in Maclisp
+or LispM depending on who changed and why. 
+
+I would prefer if CAR's and CDR's were treated identically, but I can 
+understand why others might find it more comfortable to ignore subtails.
+Whatever it does, however, I think uniformity would be important. Macsyma 
+users use SUBST a lot, but we can shield them on that score since we can 
+always write one that maintains whatever semantics we feel they need.
+Macsyma internal code using SUBST is trivially findable and we could adapt
+to any well-defined set of changes as well, so don't worry too much about
+that. Macsyma does have to run on Multics, too, so we'd have to be doing
+the adaptation anyway now that the potential bug has been pointed out.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00136.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00586.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00136.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00588.html">Re: EQ(UAL) in SUBST</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00585"><strong>Date</strong></a></li>
+<li><a href="threads.html#00585"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

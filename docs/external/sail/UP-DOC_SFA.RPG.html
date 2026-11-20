@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>SFA.RPG[UP,DOC] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename SFA.RPG[UP,DOC]  blob <a href="SFA.RPG[UP,DOC]_blob">sn#388136</a> filedate 1978-10-12 generic text, type C, neo UTF8</div>
+<pre id="u8lump">COMMENT ⊗   VALID 00002 PAGES
+C REC  PAGE   DESCRIPTION
+C00001 00001
+C00002 00002	I) Introduction.
+C00016 ENDMK
+C⊗;
+I) Introduction.
+
+	There are many instances when a MacLISP programmer wishes to
+simulate an arbitrary I/O device.  That is, he wishes to use the primitives
+provided in LISP for doing I/O (such as READ and PRINT) yet wishes the
+target/source of the characters to be completely arbitrary.  I propose a
+mechanism called an "SFA" (Software File Array) to handle this situation.
+
+	An SFA consists of a function and some associated local storage
+bound up in an "SFA-object".  In order to satisfy the above goals, an
+SFA-object may be used in almost all places that a file-object can be used.
+Note that the existence of SFAs will not obviate the need for the current
+NEWIO implementation of files.  SFAs are strictly a user entity, and the
+files are still needed in order to communicate with the operating system.
+
+	The SFA-function is a user-defined EXPR/SUBR which accepts 3
+arguments.  Its first argument is the SFA-object on which it is to act, and
+the second argument is a symbol indicating the operation to be performed.
+The third argument is operation specific.  The SFA-object needs to be
+supplied to the function because one SFA-function may be associated with
+many different SFA-objects.  There are some operations used by the system
+(TYI, TYO, etc...).   The user is free to define new operations and to use
+them by calling the SFA directly.
+
+	As there are predefined uses for many of the system I/O functions
+that currently exist, when these functions are translated to SFA operations
+they must retain the semantics they have when applied to file-objects.
+Since this is the case, any SFA that expects to interface directly to the
+standard I/O routines must know about the difference between binary and
+character-oriented operations.  Generally, an SFA will only handle one type
+of I/O (i.e. most SFAs will not handle both the IN and TYI operation), yet
+the structure of SFAs will not preclude them handling both.
+
+
+II) System defined operations
+
+
+1) Operations applicable to both input and output SFAs
+
+A) WHICH-OPERATIONS
+
+   The SFA must return a list of operations which it can perform.
+WHICH-OPERATIONS is REQUIRED OF ALL SFAS.  The list should NOT contain
+the WHICH-OPERATIONS operation.
+
+
+B) OPEN
+
+   This operation is invoked if an OPEN is done with a SFA as its first
+argument.  The SFA should return either a file-object or a
+SFA-object.  The third argument to the SFA is the second argument to
+the OPEN, and it defaults to NIL.
+
+
+C) CLOSE
+
+   This operation is invoked when a CLOSE is done with a SFA as its
+argument.  There is never a third arg, and the SFA should  return either T
+if the close was successful and NIL if not (e.g. if the SFA was already
+"closed".)
+
+
+D) DELETEF
+
+   No arguments will be passed to the SFA.  There is no clear global
+semantic meaning of this.
+
+
+E) FILEPOS
+
+    If an argument is given to FILEPOS, it is NCONS'ed and handed to the
+SFA, else the SFA is given NIL.  For a NIL argument, a fixnum should be
+returned.  For one argument, the SFA should interpret the argument as a
+"position" to set the "file" to, and perform appropriate actions.
+
+
+F) (STATUS FILEMODE) [operation: FILEMODE]
+
+   The SFA should return a list of adjectives describing itself.  If the
+SFA cannot support the FILEMODE operation (as determined by a
+system-performed WHICH-OPERATIONS check), then a list of the form:
+
+	((SFA) {results of a WHICH-OPERATIONS call})
+
+is returned.
+
+
+2) Functions applicable to SFAs which can do input
+
+   If the SFA is to support normal LISP reading other than TYI, it must
+support TYI and UNTYI.
+
+
+A) TYI
+
+   The SFA should return a fixnum representing a character.  This operation
+may be called from a READ, READLINE, or a straight TYI (the SFA cannot
+depend upon being able to determine the context).  The argument is the
+value to return when EOF is reached (this is true for all input functions
+including IN).
+
+
+B) UNTYI
+
+   The SFA should put the argument into its input stream and on the next
+TYI should spew forth the saved character rather than the next one in the
+"stream".  Note that an arbitrary number of UNTYI's may be done in a row.
+
+
+C) TYIPEEK
+
+   The SFA should return a fixnum (as in TYI) but should not remove the
+character from the input flow.  Therefore, subsequent TYIPEEK's will read
+the same character.  If the SFA cannot handle TYIPEEK, it will be simulated
+by a TYI/UNTYI pair of operations.
+
+
+D) IN
+
+   The value returned should be a fixnum that is the next binary value in
+the input stream.  The argument is the EOF value.
+
+
+E) READLINE
+
+   The value returned should be a symbol that represents one "line" of the
+input stream.  If the SFA cannot handle this operation, it is simulated in
+terms of TYI.  The argument is the value to return upon EOF.
+
+
+F) READ
+
+   The value returned should be the next "object" in the input stream  If
+the SFA cannot handle this operation, it is simulated in terms of
+TYI/UNTYI.  The argument is the value to return upon EOF.
+
+
+3) Functions applicable to SFAs which can do output
+
+A) TYO
+
+   The argument is a fixnum representing a character.  The value returned
+should be T if the SFA succeeds, and NIL if the output was unsuccessful.
+
+
+B) OUT
+
+   The argument is a fixnum and is output as such.  The TYO/OUT pair of
+functions is the analog to the TYI/IN pair.
+
+
+C) FORCE-OUTPUT
+
+   The SFA should empty its output buffer to the logical "device" to which
+it is connected.  This is most likely a no-op for most SFAs.
+
+
+D) PRIN1
+
+   The SFA should print the arg in its slashified form.  If the SFA
+cannot perform this operation, it is simulated in terms of TYO.
+
+
+E) PRINT
+
+   The SFA should print the arg in its slashified form preceeded by a
+&lt;NEWLINE> and terminated by a &lt;SPACE>.  If the SFA cannot perform this
+operation, it is simulated in terms of TYO.
+
+
+F) PRINC
+
+   The SFA should print the arg in its unslashified form.  If the SFA
+cannot perform this operation, it is simulated in terms of TYO.
+
+
+III) System functions for manipulating SFAs
+
+A) (SFA-CREATE &lt;old-SFA or SFA-function>
+	       &lt;amount-of-local-user-storage>
+	       &lt;printed-representation>)
+
+   SFA-CREATE returns an SFA-object which represents a function and
+associated local storage.  If the first arg is a SYMBOL, then that symbol
+is taken as the SFA-function;  if the first arg is an SFA-object, then the
+function associated with it is used as the SFA-function, and the local
+storage is possibly reclaimed (the first arg being an SFA is not yet
+implemented).  The second arg to this function should be the number of user
+locations to allocate in the SFA-object.
+
+   When the SFA-CREATE is done, the SFA is immediatly invoked with a
+WHICH-OPERATIONS call.  A mask is then created corresponding to the
+internal functions that the SFA knows how to do.  This mask is used for
+fast error-checking when a predefined operation is handed an SFA (e.g.
+TYO).
+
+
+B) (SFA-CALL &lt;SFA-object> &lt;operation> [&lt;argument to SFA>])
+
+   SFA-CALL is used to perform an arbitrary operation on an arbitrary
+SFA-object.  For example, (TYO 1 &lt;SFA>) is equivalent to
+(SFA-CALL &lt;SFA> 'TYO 1).
+
+
+C) (SFAP &lt;lisp-object>)
+
+   Returns T iff &lt;lisp-object> is a SFA-object else returns NIL.
+
+
+D) (SFA-GET &lt;SFA-object> &lt;fixnum or system-location-name>)
+
+   SFA-GET reads the local storage of &lt;SFA-object>.   If the second
+arg is a fixnum, then location &lt;fixnum> of the user's local storage is
+accessed.  This number may range from 0 to the maximum as specified when
+the SFA-object is created {see SFA-CREATE}.  If the second arg is a
+symbol, then one of the "named" locations is accessed.  The names are as
+follows:
+
+	FUNCTION		The SFA-function
+	WHICH-OPERATIONS	A list of operations of interest to the
+				system that the SFA can perform.  This is a
+				subset of the SFAs WHICH-OPERATIONS list.
+	PNAME			The object to print as the "name" of an SFA
+
+
+E) (SFA-STORE &lt;SFA-object> &lt;fixnum or system-location-name> &lt;value>)
+
+   &lt;value> is stored in the location specified by the second arg to
+SFA-STORE.  Locations are as for SFA-GET.  It is strongly recommended that
+the SFA-function NEVER be changed.
+</pre>
+</body>
+</html>

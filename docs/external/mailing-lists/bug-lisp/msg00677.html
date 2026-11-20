@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Thu, 11 Jan 79 07:08:00 GMT -->
+<!--X-Message-Id: bd1cfc8d42ae000c3487b878e1d3c61c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00678.html">Date Prev</a>][<a href="msg00676.html">Date Next</a>][<a href="msg00674.html">Thread Prev</a>][<a href="msg00676.html">Thread Next</a>][<a href="maillist.html#00677">Date Index</a>][<a href="threads.html#00677">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: CWH at MIT-MC</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Thu, 11 Jan 79 07:08:00 GMT</li>
+<li><em>Cc</em>: RWK at MIT-MC, HIC at MIT-MC, JONL at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 11 JAN 1979 0208-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I'D LIKE TO MAKE LAST DO THE &quot;ATOM&quot; TEST RATHER THAN THE &quot;NULL&quot; TEST,
+UNLESS THRE IS A GREAT HUE AND CRY ABOUT THE **NECESSITY** FOR SPEED
+IN &quot;LAST&quot;.  PUTTING IN THE CHECKS CHANGES THE TIMING FROM  1.12 US/NODE
+TO ABOUT 2.92 US/NODE, ON THE MC MACHINE.  IF THIS IS, FOR SOME REAL
+REASON, UNACCEPTABLE, THEN PERHAPS WE COULD DEFINE A FAIL-SAFE FUNCTION
+&quot;LASTNODE&quot; THAT DOES THE &quot;ATOM&quot; CHECK.  EITHER WAY, ALL THE OTHER
+FUNCTIONS, SUCH AS APPEND, NCONC, ETC. COULD, IN *RSET MODE, MERELY
+CHECK (AND (OR (ATOM ARG) (CDR (LAST ARG))) (ERROR '|NON-LIST - | ...))
+BEFORE FALLING INTO THE FAST LOOP.  NOTE, HOWEVER, THAT THERE MUST
+BE SOME USER-AVAILABLE FUNCTION, WHICH IS NOT AFFECTED BY *RSET, FOR
+TESTING THE &quot;NORMALITY&quot; OF A LIST.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00678.html">LAST versus APPEND, REVERSE, GET, etc.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00676.html">(STATUS FLUSH)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00674.html">LAST versus APPEND, REVERSE, GET, etc.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00676.html">(STATUS FLUSH)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00677"><strong>Date</strong></a></li>
+<li><a href="threads.html#00677"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

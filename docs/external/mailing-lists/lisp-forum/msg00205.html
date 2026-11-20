@@ -1,0 +1,109 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: &#38;keywords -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,3 Feb 81 19:25:00 EDT -->
+<!--X-Message-Id: 14b1929b6782e1728b8bdc2b1bfb14cd@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: &amp;keywords</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00204.html">Date Prev</a>][<a href="msg00206.html">Date Next</a>][<a href="msg00204.html">Thread Prev</a>][<a href="msg00210.html">Thread Next</a>][<a href="maillist.html#00205">Date Index</a>][<a href="threads.html#00205">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: &amp;keywords</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RMS at MIT-AI</li>
+<li><em>Subject</em>: Re: &amp;keywords</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,3 Feb 81 19:25:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I thought your destructuring suggestion was a nice replacement
+for &amp;keywords. Much simpler, and more general. I'll illustrate:
+
+(DEFUN FOO ((SPECIAL X) Y Z (FLONUM Y) (VECTOR 3 K) (VECTOR REST M))
+       ...)
+
+Now, DEFUN FOO says &quot;have a function FOO which takes its arguments off
+the stack.&quot; The argument list tells how to &quot;take them off&quot;.
+
+(SPECIAL X) ; bind the fluid variable X with the first argument.
+Y  ; lexical variables. might as well stay on stack, but this
+Z  ; does let the compiler choose register homes at will.
+(FLONUM Y) ; give this guy a flonum home, making sure it is a flonum!
+           ; or else it wouldn't fit in the home.
+(VECTOR 3 K) ; take the next 3 arguments and have a lexical variable K
+             ; point to them as a vector.
+(VECTOR REST M) ; M gets a vector of the REST of the arguments.
+
+(OPTIONAL Q) ; is not quite as pretty to implement, think about this one.
+
+Now, I see what I have given as happening at a pretty low-level.
+Things like SPECIAL declarations are handled as part of the USER-MACROLOGY,
+which is not at this level.
+Also, the form (QUOTE X) is not admitted in DEFUN. That kind of thing
+is handled in a formalism developed for semantic description of the
+system and extensions to the non-user level of the compiler. e.g.
+(DEFEXT PUSH (X (QUOTE Y)) (SET Y (CONS X (EVAL Y))))
+
+So, the question is, does this all make practical sense?
+
+-gjc
+
+p.s. I've got a version of RMS's destructuring LET if anyone would
+like to see it.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00204.html">Re: &amp;keywords</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00206.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00204.html">Re: &amp;keywords</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00210.html">Re: &amp;keywords</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00205"><strong>Date</strong></a></li>
+<li><a href="threads.html#00205"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

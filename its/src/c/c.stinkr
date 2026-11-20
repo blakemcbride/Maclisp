@@ -1,0 +1,9 @@
+x c/clib
+l c31.stk
+l c32.stk
+l c33.stk
+l c34.stk
+l c35.stk
+l c91.stk
+l c95.stk
+o _c.bin

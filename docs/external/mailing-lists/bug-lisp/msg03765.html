@@ -1,0 +1,129 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: more info -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 21 Jan 80 12:14:00 GMT -->
+<!--X-Message-Id: e7abc68a9618e2e1f2c42eaacdf4f0ba@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>more info</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03766.html">Date Prev</a>][<a href="msg03764.html">Date Next</a>][<a href="msg03766.html">Thread Prev</a>][<a href="msg03764.html">Thread Next</a>][<a href="maillist.html#03765">Date Index</a>][<a href="threads.html#03765">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>more info</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RLB at MIT-MC</li>
+<li><em>Subject</em>: more info</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 21 Jan 80 12:14:00 GMT</li>
+<li><em>Cc</em>: BUG-DDT at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 21 January 1980 07:14-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 19 JAN 1980 0255-EST
+    From: RLB at MIT-MC (Richard L. Bryan)
+    To:   (BUG DDT)
+    Re:   more info
+
+    Start a Lisp without symbols in DDT.
+    (SETQ SYMBOLS T)
+    Load HUMBLE from LISP;.
+    See DDT BUG DO :BUG DDT ...
+
+    The Lisp is doing
+    	.BREAK 12,[..SSTB,,T] with T/ -302,,mumble
+    at LDPUTM+6.
+
+    Thereafter, at strange times, having to do with job manipulation, the bug
+    msg reappears.  I encountered occurrences of jobs doing .BREAK 12, at startup.
+    If such jobs are reselected, the BUG DDT ... happens again. 
+
+    :SELF
+    :PDUMP MC:CRASH;RLB .BREAK
+
+The :SELF is unecessary.  Undesirable even.
+
+I think LISP is passing up a malformed symbol table, fucking DDT over
+royally.  As near as I can tell from the totally inadaquate
+documentation on this feature, LISP should be passing a symbol table,
+as documented in DDT ORDER.  It's not easy for DDT to protect itself
+from this kind of lossage.
+
+As I understand it, this is what you should be doing.  It seems to work
+ok for me.
+
+1)  Turn on %SYGBL in the symbols.  Either that or %SYLCL *MUST* be
+set, as documented in DDT ORDER.
+2)  By the way, I assume it's LISP that's clearing out the %SYHKL bit
+in the symbols being passed up.  Please make it stop doing that, It
+makes the SYMBOLS T feature completely useless since it hides important
+symbols like A.
+3)  Put all the symbols in a symbol block.  I'd suggest, for maximum
+utility, putting them into a block named after the FN1 of the FASL
+file.
+
+I.e.
+SYMS:	.SQUOZE 0,TEST		   ;Test BLOCK
+	-10,,1			   ;10 long, including 2 for header, level 1
+	.SQUOZE %SYLCL,A
+	1
+	.SQUOZE %SYLCL,B
+	2
+	.SQUOZE %SYLCL,C
+	3
+
+GO:	.BREAK 12,[..SSTB,,[-10,,SYMS]]
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03766.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03764.html">Mersenne vs. LISP</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03766.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03764.html">Mersenne vs. LISP</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03765"><strong>Date</strong></a></li>
+<li><a href="threads.html#03765"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

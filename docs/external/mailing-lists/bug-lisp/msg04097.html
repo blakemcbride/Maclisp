@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Appending files from MacLisp -->
+<!--X-From-R13: Rnir Fbhergmxl ng Q[G&#45;10O -->
+<!--X-Date: Mon, 2 Jun 80 03:02:00 GMT -->
+<!--X-Message-Id: a640910cec651c603373a2f68be20694@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 31May80 121047 TC50@CMU&#45;10A -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Appending files from MacLisp</title>
+<link rev="made" href="mailto:Dave Touretzky at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04098.html">Date Prev</a>][<a href="msg04096.html">Date Next</a>][<a href="msg04098.html">Thread Prev</a>][<a href="msg04096.html">Thread Next</a>][<a href="maillist.html#04097">Date Index</a>][<a href="threads.html#04097">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Appending files from MacLisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Tom.Cooper at CMU-10A (A780TC50)</li>
+<li><em>Subject</em>: Re: Appending files from MacLisp</li>
+<li><em>From</em>: Dave Touretzky at CMU-10A</li>
+<li><em>Date</em>: Mon, 2 Jun 80 03:02:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC, Scott Fahlman at CMU-10A</li>
+<li><em>In-reply-to</em>: &lt;31May80 121047 TC50@CMU-10A&gt;</li>
+<li><em>Original-date</em>: 1 June 1980 2302-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Tom,
+	There is an APPEND mode in MacLisp that you can use with the
+OPEN function to append onto a file.  Unfortunately, it appears not to
+work in the current TOPS-10 version of MacLisp.  Doing (OPEN '|FOO.BAR|
+'APPEND) acts as if OUT had been used, and STATUS FILEMODE shows OUT
+instead of APPEND.
+
+  Sigh.  This should be fixable though.  I've CC'ed this message to the
+appropriate wizards.
+
+-- Dave
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04098.html">#\VT</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04096.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04098.html">#\VT</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04096.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04097"><strong>Date</strong></a></li>
+<li><a href="threads.html#04097"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

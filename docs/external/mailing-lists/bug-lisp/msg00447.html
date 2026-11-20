@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Retry function for debugger. -->
+<!--X-From-R13: Epbgg.Tnuyzna ng Q[G&#45;10O (Q380ET50) -->
+<!--X-Date: Mon, 7 May 79 05:12:00 GMT -->
+<!--X-Message-Id: 07May79 011249 SF50@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Retry function for debugger.</title>
+<link rev="made" href="mailto:Scott.Fahlman at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00448.html">Date Prev</a>][<a href="msg00446.html">Date Next</a>][<a href="msg00448.html">Thread Prev</a>][<a href="msg00446.html">Thread Next</a>][<a href="maillist.html#00447">Date Index</a>][<a href="threads.html#00447">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Retry function for debugger.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP @ MIT-AI</li>
+<li><em>Subject</em>: Retry function for debugger.</li>
+<li><em>From</em>: Scott.Fahlman at CMU-10A (C380SF50)</li>
+<li><em>Date</em>: Mon, 7 May 79 05:12:00 GMT</li>
+<li><em>Cc</em>: fahlman at CMU-10A, touretzky at CMU-10A</li>
+<li><em>Original-date</em>: 7 May 1979 0112-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+We (meaning mostly Dave Touretzky) are working on a new debugging package
+for MACLISP.  One common need is to crawl a few levels up the stack,
+change something that caused the bug (edit a function, etc.), then retry
+everything below this level.
+
+To do this right, we need a new function (FRETRY x).  This would be just
+like FRETURN, except that it retrys the function associated with the
+argument (a pdlptr) rather than returning a given value from it.  The
+stack would be peeled back to the pdlptr position before the form is retried.
+
+This is not a class AAA priority.  We can fake the effect, but only by a lot
+of very ugly hacking which leaves the old losing stack intact, jumps back
+over it, and makes it invisible during baktrace.  It seems to me that FRETRY
+(or whatever you want to call it) should be easy to do, given that FRETURN
+already exists.  And it cleans things up tremendously.  It seems to me to
+be a logical part of the LISP virtual machine.
+-- Scott Fahlman
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00448.html">Interrupts in 20X MacLisp</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00446.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00448.html">Interrupts in 20X MacLisp</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00446.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00447"><strong>Date</strong></a></li>
+<li><a href="threads.html#00447"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

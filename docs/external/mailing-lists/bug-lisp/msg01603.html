@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Am I just a naive IO user, or is this a bug? -->
+<!--X-From-R13: RQB ng [WF&#45;[Q (Rnivq Q. Byhzzre) -->
+<!--X-Date: Mon, 9 Feb 81 06:31:00 GMT -->
+<!--X-Message-Id: b330b53b23457d6fc3b9b680129b0b20@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Am I just a naive IO user, or is this a bug?</title>
+<link rev="made" href="mailto:DCP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01604.html">Date Prev</a>][<a href="msg01602.html">Date Next</a>][<a href="msg01604.html">Thread Prev</a>][<a href="msg01592.html">Thread Next</a>][<a href="maillist.html#01603">Date Index</a>][<a href="threads.html#01603">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Am I just a naive IO user, or is this a bug?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Am I just a naive IO user, or is this a bug?</li>
+<li><em>From</em>: DCP at MIT-MC (David C. Plummer)</li>
+<li><em>Date</em>: Mon, 9 Feb 81 06:31:00 GMT</li>
+<li><em>Original-date</em>: 9 FEB 1981 0131-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+File foo is freshly opened for input, but there is nothing in the
+file. Now I do either a 
+
+(tyi foo)   ==&gt; -1
+or
+(readline foo 'nil) ==&gt; nil
+
+This is right, but try to do another tyi or readline
+and you will find that the file has been graciously
+closed behind your back. You cannot attempt to read
+from it and request more end-of-file conditions.
+
+what gives??
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01604.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01602.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01604.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01592.html">Re: Am I just a naive IO user, or is this a bug?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01603"><strong>Date</strong></a></li>
+<li><a href="threads.html#01603"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

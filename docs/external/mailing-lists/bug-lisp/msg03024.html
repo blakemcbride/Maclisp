@@ -1,0 +1,124 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: CASEQ and SELECTQ -->
+<!--X-From-R13: Uhl Egrryr &#60;UZE ng EG&#45;OW> -->
+<!--X-Date: Mon, 11 Jun 79 05:43:00 GMT -->
+<!--X-Message-Id: 610531adfe86bfa50078623bb00c662a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CASEQ and SELECTQ</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03025.html">Date Prev</a>][<a href="msg03021.html">Date Next</a>][<a href="msg03025.html">Thread Prev</a>][<a href="msg03021.html">Thread Next</a>][<a href="maillist.html#03024">Date Index</a>][<a href="threads.html#03024">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>CASEQ and SELECTQ</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-AI, BUG-LISPM at MIT-AI</li>
+<li><em>Subject</em>: CASEQ and SELECTQ</li>
+<li><em>From</em>: Guy Steele &lt;GLS at SU-AI&gt;</li>
+<li><em>Date</em>: Mon, 11 Jun 79 05:43:00 GMT</li>
+<li><em>Cc</em>: GLS at SU-AI, RPG at SU-AI    </li>
+<li><em>Original-date</em>: 10 Jun 1979 2243-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I have long wished for a couple of extra features in CASEQ, and
+having them now would sure make coding a lot easier for me.
+I propose that CASEQ and SELECTQ mean slightly different things.
+SELECTQ would remain as it is now, and CASEQ would mostly remain
+the same, except for two added features:
+[1] If there is no default (i.e., T or OTHERWISE) clause in a SELECTQ,
+    the default value () is produced.  I suggest that a CASEQ instead
+    produce some sort of correctable error as the &quot;default default&quot;.
+    This correctable error for (CASEQ &lt;form&gt; ... &lt;no-T-clause-at-end&gt;)
+    ideally would be something like
+	(FERROR ':UNSEEN-CASE-KEY		;or maybe UNSEEN-GO-TAG?
+		&quot;The CASEQ key ~S produced by &lt;form&gt; does not occur in the CASEQ&quot;
+		&lt;value-of-form&gt;)
+    If the error is corrected, the CASEQ should be retried with the
+    returned value.
+    This is a construct I am constantly reconstructing by hand.  It wouldn't
+    be too hard to write a macro for CASEQ in terms of SELECTQ to do this.
+[2] I wish there were a construct (CASEGO &lt;form&gt;), which would take an
+    evaluated argument and effectively jump to the top of the containing
+    CASEQ and perform the selection with the specified item.  (I suppose
+    there would have to be a CASEQ-NAMED as well to handle a CASEGO to
+    an outer CASEQ.  In that case (sorry), CASEGO should take an optional
+    unevaluated second argument, as for GO.)
+    In the situation where the first argument to CASEGO is a constant,
+    then the code can be optimized to go directly to the relevant clause.
+    I find that I am using CASEQ a lot, and either the processing for one
+    key involves doing a diddle and then doing code identical to that for
+    another key; or I want to do my own error handling and write
+	(CASEQ &lt;form&gt;
+	       ((FOO) ...)
+	       ((BAR) ...)
+	       ((BAZ) ...)
+               ...
+	       (T (WARN &quot;you blew it, bunky; I'll assume BAR for now&quot;)
+		  (CASEGO 'BAR)))
+    instead I have to resort to the awkward
+	(CASEQ &lt;form&gt;
+	       ((FOO) ...)
+	       ((BAZ) ...)
+	       ...
+	       (T (OR (EQ &lt;form&gt; 'BAR)
+		      (WARN &quot;you blew it, bunky; I'll assume BAR for now&quot;))
+                  ...))	
+    which is asymmetrical in the keys, requires me to put the code for BAR
+    last, and requires me to write &lt;form&gt; twice.
+
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03025.html">previous message</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03021.html">RENAMEF bugs</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03025.html">previous message</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03021.html">RENAMEF bugs</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03024"><strong>Date</strong></a></li>
+<li><a href="threads.html#03024"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

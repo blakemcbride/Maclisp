@@ -1,0 +1,105 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Quotient -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Fri, 31 Jul 81 16:23:00 GMT -->
+<!--X-Message-Id: 31Jul81 122330 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Quotient</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03176.html">Date Prev</a>][<a href="msg03174.html">Date Next</a>][<a href="msg03177.html">Thread Prev</a>][<a href="msg03172.html">Thread Next</a>][<a href="maillist.html#03175">Date Index</a>][<a href="threads.html#03175">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Quotient</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt; </li>
+<li><em>Subject</em>: Quotient</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Fri, 31 Jul 81 16:23:00 GMT</li>
+<li><em>Cc</em>: moon at MIT-MC, gjc at MIT-MC, lph at MIT-MC, bug-lisp at MIT-MC,    bug-lispm at MIT-MC</li>
+<li><em>In-reply-to</em>: Kent M. Pitman's message of 31 Jul 81 02:40-EST</li>
+<li><em>Original-date</em>: 31 July 1981 1223-EDT (Friday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Well, it is bullshit that // and - of one argument were motivated
+by hardwre considerations.  How do you omit one argument to the FDVR
+instruction?
+Extension of nonassociative operators to other than two arguments
+is always a tricky business.  There was confusion in FORTRAN for
+quite a while over whether X/Y/Z should mean X/(Y/Z) or (X/Y)/Z = X/(Y*Z).
+(FORTRAN 77 resolves this in favor of the latter.)
+Now note that the definition of (QUOTIENT a b c ... z) = a/b/c/.../z
+= (...((a/b)/c).../z) = a/(b*c*...*z) is not the only &quot;natural&quot; extension.
+One could equally well define it to be a/b/c/.../z = a/(b/(c/...z)).
+This is actually easier for the PDP-10 hardware given the LSUBR convention!
+It is also what APL does when division-reduction is requested.
+I strongly suspect that the real reason // and - are the way they are
+is because of the appealing analogy to the standard infix and prefix
+(i.e., binary and unary) interpretations of these operators.
+Thus	(- x y) = x-y
+ and	(- x)   = -x
+which is certainly nice.  The three-or-more-argument cases arise seldom
+anyway, so I suppose consistency for that extension was not a prime
+concern.
+Actually, the main argument for keeping three-argument - and //
+in Common LISP is mostly compatibility, while there are good
+arguments against (clarity).  One can just as well write (- x (+ y z))
+as (- x y z).  (By the way, I think old PDP-1 LISP defined - and //
+to work as APL reduction does.)  LISP 1.5 and InterLISP have only
+two-argument quotient and difference.  Opinioc
+xx opinions?
+--Guy
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03176.html">Re: Inconsistency of 1-argument QUOTIENT with //,//$</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03174.html">Query about splicing macros</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03177.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03172.html">Quotient</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03175"><strong>Date</strong></a></li>
+<li><a href="threads.html#03175"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Compiler Bug -->
+<!--X-From-R13: SPN[WF&#45;OW -->
+<!--X-Date: Mon, 25 Mar 80 08:24:42 GMT -->
+<!--X-Message-Id: ffeaf4644085e2e5d544a12784519ce7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Compiler Bug</title>
+<link rev="made" href="mailto:EB@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02033.html">Date Prev</a>][<a href="msg02031.html">Date Next</a>][<a href="msg02033.html">Thread Prev</a>][<a href="msg02031.html">Thread Next</a>][<a href="maillist.html#02032">Date Index</a>][<a href="threads.html#02032">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Compiler Bug</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG Lisp) at MIT-MC</li>
+<li><em>Subject</em>: Re: Compiler Bug</li>
+<li><em>From</em>: EB@MIT-AI</li>
+<li><em>Date</em>: Mon, 25 Mar 80 08:24:42 GMT</li>
+<li><em>Original-date</em>: 03/25/80 04:24:42 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(defun foo (x)
+   (let (((a b c) x))
+      (cond ((probef a)
+	     (list a b c))
+	    (t nil))))
+
+If FOO is called on a three-element list whose first element is the name
+of an existing file, FOO should return a copy of that list.  But if
+FOO is compiled with XC (907, in Lisp 1984) the resulting compiled function
+returns the wrong value, e.g. (foo '(|lisp;defvst fasl| 1 2)) should
+return (|lisp;defvst fasl| 1 2) but in fact returns
+(|lisp;defvst fasl| |lisp;defvst fasl| 2).
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02033.html">HUNK printer hooks</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02031.html">3 MacLisp/Nilaid bugs</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02033.html">HUNK printer hooks</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02031.html">3 MacLisp/Nilaid bugs</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02032"><strong>Date</strong></a></li>
+<li><a href="threads.html#02032"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,1112 @@
+;;; Copyright (c) 1999 Massachusetts Institute of Technology
+;;; See the COPYING file at the top-level directory of this project.
+
+;AC's used by disk routines
+
+da=11			;used mostly for argument passing
+db=12
+dc=13
+dd=14			;dd>=0 if file open else reason why file is closed
+
+nudsl==500.		;# user directory slots in M.F.D.
+
+;file system parameters and RH10/RP04 parameters
+
+ifn dsksw-3, .err Only RH10 disk is supported
+
+IFN RP06P,[
+ .insrt system;rp06
+]
+IFN RP04P,[
+ .insrt system;rp04
+]
+.insrt system;rh10
+.insrt system;fsdefs
+
+icwa==20		;initial channel control word
+lowfix==icwa+2		;lowest fixed loacation
+blksiz==2000		;# words in disk block
+maxtry==10		;# times to try disk transfer before hard failure assumed
+maxlnk==20		;maximum # of links
+;ntutbl==		;# pages necessary to store a TUT
+swpags==ntutbl+4	;# pages swapped to disk (mfd, ufd, io bfr, core bfr and tut)
+swpblk==tblks-swpags	;first disk block used for core swapping
+bootbl==swpblk-4	;four disk blocks to save ddt for fast booting
+mfd=lowcod-blksiz	;mfd origin
+ufd=mfd-blksiz		;ufd origin
+corbfr=ufd-blksiz	;core buffer origin
+iobfr=corbfr-blksiz	;io buffer origin
+tut=iobfr-<blksiz*ntutbl>
+			;tut goes last
+lowswp==lowcod-<blksiz*swpags>
+			;lowest location swapped
+ifn tut-lowswp, .err lowswp loses
+maxdmp==200		;largest dump block allowed
+lowclr==40		;lowest location zeroed when ddt loads
+
+;template for datao's that cause disk transfers
+
+rdatao==%hrctl\%hrlod,,%hmred\<icwa_<35.-29.>>
+wdatao==%hrctl\%hrlod,,%hmwrt\<icwa_<35.-29.>>
+
+kl, swpua=701540,,0
+
+;bug halt for bugs
+;error halt for error conditions beyond capabilities of program
+
+define errhlt
+	jrst 4,.
+termin
+
+define	bughlt
+	jrst 4,.
+termin
+
+dskcod==.
+
+
+;lowest level io
+
+;calculates Physical Disk Address and sets up Channel Command List
+
+pdaccl:	pushj p,rp4map		;caluculate physical disk address
+	skiple w1,ioadr	;first word to be transferred
+	caige w1,17		;don't try transfer from or to shadow AC's
+	bughlt
+	subi w1,1		;iowd format
+ka,	hrli w1,-blksiz		;# words in block
+.else	hrli w1,-blksiz_4
+pdacc2:	movem w1,icwa		;transfer data (iowd)
+	setzm icwa+1		;DF10 writes here for termination
+	popj p,
+
+;calculates RP04 cylinder, surface, and sector given block #
+
+rp4map:	skipl w1,da		;the block #
+	cail w1,tblks		;check for reasonable block #
+	bughlt
+	idivi w1,nblksc		;blocks/cylinder
+	movem w1,cylndr
+	imuli w2,secblk		;sectors/block
+	move w1,w2		;sector # on this cylinder
+	idivi w1,nsecs		;sectors/surface
+	movem w1,surfce
+	movem w2,sector
+	popj p,
+
+;transfers disk block
+
+redblk:	skipa db,[rdatao]	;the beginnings of a datao (go bit is on)
+wrtblk:	move db,[wdatao]
+rwblk:	pushj p,pdaccl		;calculate physical disk address, set up CCL
+rwblk0:	move w1,drive		;fill in the desired drive
+	skipn qact(w1)		;make sure is good drive
+	 jrst rwblkl
+	dpb w1,[$hcdrv db]
+	setzm xfrcnt		;count times through loop
+rwblk1:	pushj p,xfer		;transfer the data
+	 aosa w1,xfrcnt
+	  popj p,		;transfer succeeded, don't try again
+	caig w1,maxtry
+	 jrst rwblk1
+rwblkl:	move w1,drive
+	hrroi dd,'UN0(w1)
+	jrst fserr
+
+xfer:	consz dsk,%hibsy	;wait for controller to finish
+	jrst .-1
+	datao dsk,[%hrrae\%hrlod,,377];flush any rae's that may be there
+	cono dsk,%hoclr\%horae	;flush any left overs and plunge on
+kl,[	consz pag,600000
+	 swpua			;sweep the cache
+	consz 200000		;apr,
+	 jrst .-1
+]
+	movsi w1,%hrsts		;get the drive status
+	jsp t,rhget		;will popj on error
+	trnn w1,%hserr		;any drive errors
+	jrst xfer2		;drive is okay plunge on
+
+;detected drive error before data xfer, try to reset drive if possible
+
+	trc  w1,%hsvv\%hsmol\%hsrdy	;check for all ready bits on
+	trce w1,%hsvv\%hsmol\%hsrdy
+	popj p,			;not ready, transfer fails
+xfer2:	movsi w1,%hrcyl		;set cylinder
+	hrr w1,cylndr
+	jsp t,rhset
+	move w1,surfce		;set sector and track
+	lsh w1,10
+	ior w1,sector
+	hrli w1,%hradr
+	jsp t,rhset
+	datao dsk,db		;zap
+	conso dsk,%hidone	;wait for transfer to finish
+	jrst .-1
+	conso dsk,%hierr	;errors?
+	aos (p)			;    no
+	popj p,			;    yes
+	
+;rhset and rhget are used to read and write device registers on Massbus
+;They are called with jsp t, but popj if they fail.  Beware!!!
+
+rhset:	tloa w1,%hrlod		;load register
+rhget:	tlz  w1,%hrlod		;just read register
+	tso w1,drive		;put in drive #
+	datao dsk,w1
+	movei w1,6		;delat for massbus
+	sojg w1,.
+	datai dsk,w1
+	tlne w1,%hderr		;covers the multitude of sins
+	 popj p,		;failed
+	jrst (t)		;success
+ 
+;routines to read and write special disk blocks
+
+swpin:	skipl blkin		;skip if no core buffer
+	 pushj p,swpbfo		;swap the buffer out first
+	pushj p,swpi1		;do all disk transfers necessary
+	move c,[twenty,,20]	;restore old stuff at icwa
+	blt c,lowfix-1
+	setob c,blkin		;also used as no blocks in flag
+	popj p,
+
+swpout:	movs c,[twenty,,20]	;try and save a literal
+	blt c,ac0+lowfix-1	;save stuff used by icwa
+	skipa c,[wrtblk]
+swpi1:	movei c,redblk
+	movei b,lowcod		;starting at this core address
+	move a,mu
+	movem a,drive		;always use master unit for swapping
+	movei a,swpags-1	;block counter
+swpio:	movei b,-blksiz(b)
+	movem b,ioadr
+	movei da,swpblk(a)
+	pushj p,(c)		;call either redblk or wrtblk
+	sojge a,swpio
+	movei c,<corbfr-lowswp>/blksiz
+swpbfp:	movem c,blkin		;block that is swapped in
+	skipge da,c
+	bughlt			;no blocks are swapped out
+	imuli da,blksiz
+	addi da,lowswp		;virtual address of first word in corbfr
+	movem da,swporg
+	addi da,blksiz-1	;virtual address of last word in corbfr
+	movem da,swpor1
+	popj p,
+
+;here to swap core block in and set up pointers
+
+swpbfi:	pushj p,swpbfp		;set buffer pointers
+	skipa b,[redblk]
+
+;swaps out the block in corbfr
+
+swpbfo:	movei b,wrtblk
+	skipge c,blkin		;index of block we want
+	 bughlt
+	movei da,corbfr		;core address for transfer
+	movem da,ioadr
+	move da,mu		;swapped from and onto master unit
+	movem da,drive
+	movei da,swpblk(c)	;block # to read
+	jrst (b)		;transfer the block
+
+nxttut:	aos c,cu		;try next tut
+	cail c,ndsk
+	 setzb c,cu
+	skipn qact(c)
+	 jrst nxttut
+redtut:	skipa c,[redblk]
+wrttut:	movei c,wrtblk
+	movei b,tut+<ntutbl*blksiz>
+	move a,cu		;tut goes on current unit
+	movem a,drive
+	movei a,ntutbl-1
+tutio:	movei b,-blksiz(b)
+	movem b,ioadr
+	movei da,tutblk(a)
+	pushj p,(c)
+	sojge a,tutio
+	popj p,
+
+redmfd:	movei da,mfdblk
+	movei b,mfd
+mfdufd:	movem b,ioadr	
+	move b,mu		;read from master unit
+	movem b,drive
+	jrst redblk
+
+redufd:	move da,ufdblk		;where ufd is
+	movei b,ufd
+	jrst mfdufd
+
+wrtufd:	move da,ufdblk		;ufd is written on all units
+	movei b,ufd
+	movem b,ioadr
+	move a,cu		;start with current unit
+	movem a,drive
+wrtuf1:	skipe qact(a)
+	 pushj p,wrtblk
+	aos a,drive
+	cail a,ndsk
+	setzb a,drive
+	came a,cu
+	jrst wrtuf1
+	popj p,
+
+; Reset the disks
+
+reset:
+kl,[	coni pag,b		;turn off paging
+	trz b,060000
+	cono pag,(b)
+]
+	movei b,ndsk-1
+reset0:	movem b,drive
+	skipe qact(b)		;skip unit if turned off
+	 pushj p,reset1
+	sojge b,reset0
+	move b,mu		;is master unit active?
+	skipe qact(b)
+	 popj p,
+	movei b,ndsk-1		;no, pick an active unit for mu
+	skipn qact(b)
+	 sojge b,.-1
+	jumpl b,resetl		;"UN/" mumble
+	movem b,mu
+	popj p,
+
+reset1:	pushj p,reset3		;poptj if win
+resetl:	hrroi dd,'UN0(b)		;popj if lose
+	jrst fserr
+
+reset3:	cono dsk,%hoclr\%horae
+	datao dsk,[%hrrae\%hrlod,,377]
+	movei w1,%hmclr
+	jsp t,rhset
+	movei w1,%hmrdp
+	jsp t,rhset
+	movsi w1,%hrofs
+	jsp t,rhset
+	movei w1,%hmack
+	jsp t,rhset
+	movsi w1,%hrsts
+	jsp t,rhget
+	trne w1,%hserr
+	 popj p,
+	trc w1,%hsvv+%hsmol+%hsrdy
+	trcn w1,%hsvv+%hsmol+%hsrdy
+	 jrst poptj		;win
+	popj p,
+
+;file system routines
+
+;lookup -- call with file names and sname in fn1, fn2, and sname
+;fails if dd<0 otherwise returns user directory index in dd
+;dirpt is set up as byte pointer into descriptor area
+;if lookup found a link then lnkcnt will be non-zero and lnkufd and lnkptr
+;will contain block # of ufd and name area index respectively of
+;first link in chain  fn1, fn2, and sname are clobbered file at end of chain
+
+lookup:	setzm lnkcnt		;link counter
+	pushj p,redmfd		;read the mfd
+	move t,mfd+mdchk
+	came t,[sixbit /M.F.D./]
+	errhlt			;how can this be the mfd?
+	move t,mfd+mdnuds
+	caie t,nudsl		;make sure there are enough directory slots
+	errhlt			;this still doesn't look like an mfd
+linklk:	skipn t,sname		;entry point for link solver
+	 jrst look1b
+	move db,mfd+mdnamp	;pointer to mfd name area
+look1a:	camn t,mfd+mnunam(db)
+	 jrst look2		;found directory in mfd
+	addi db,lmnblk		;next slot in mfd
+	caige db,blksiz
+	 jrst look1a
+look1b:	hrroi dd,'NXD		;directory slot not found
+	popj p,
+
+;found the ufd slot, pointer in db
+
+look2:	lsh db,-1
+	movei da,<nudsl-1000>(db);magic
+	movem da,ufdblk		;save address of ufd
+	move t,sname
+	camn t,ufd+udname
+	jrst look3		;don't read ufd unless we have to
+	pushj p,redufd		;read ufd from master disk
+	move t,sname		;check for right one
+	came t,ufd+udname
+	errhlt			;this is not it
+look3:	move dd,ufd+udnamp	;pointer to name area
+	skipn da,fn1		;search user directory
+	 popj p,		;just getting dir, return now
+	move db,fn2
+	movsi dc,unigfl		;deleted or open for writing
+ulook:	camn da,ufd+unfn1(dd)	;file name match?
+	came db,ufd+unfn2(dd)
+	jrst ulook1
+	tdnn dc,ufd+unrndm(dd)	;file names match
+	jrst ulook2		;found file
+ulook1:	addi dd,lunblk		;advance to next file
+	caige dd,blksiz
+	jrst ulook
+	hrroi dd,'FNF		;file not found
+	popj p,
+
+;found file, set up pointer into descriptor area, and get tut in core
+
+ulook2:	pushj p,ufdbp		;make ufd descriptor byte pointer
+	movem da,dirpt
+	movsi da,unlink
+	tdne da,ufd+unrndm(dd)	;is this a link?
+	jrst ulink		;    yes, call link solver
+	ldb dc,[unpkn ufd+unrndm(dd)]
+	setzm cu
+ulook3:	pushj p,nxttut
+	camn dc,tut+qpknum
+	 jrst ulook4
+	skipe cu
+	 jrst ulook3
+	hrroi dd,'NSP		;no such pack
+	popj p,
+
+ulook4:	setzm lblock		;last block accessed
+	setzm blkcnt		;forces next descriptor byte
+	setzm wrdcnt		;forces buffer reload
+	popj p,
+
+;returns byte pointer into descriptor area in da, clobbers db
+
+ufdbp:	ldb da,[undscp ufd+unrndm(dd)]
+	idivi da,ufdbyt		;convert ufd character address into byte pointer
+	imuli db,-10000*ufdbyt
+	hrli da,440000+<ufdbyt_6>(db)
+	addi da,ufd+uddesc	;origin of ufd descriptor area
+	popj p,
+
+;link solver
+
+ulink:	skipe lnkcnt		;first link
+	jrst ulink1		;    no
+	movem dd,lnkptr		;save pointer to first one
+	move t,ufdblk
+	movem t,lnkufd
+ulink1:	aos t,lnkcnt
+	caile t,maxlnk		;too many links
+	jrst [	hrroi dd,'TML
+		popj p,]
+	pushj p,redlnk		;read the link name
+	jrst linklk
+
+redlnk:	setzm sname
+	setzm fn1
+	setzm fn2
+	move dc,[440600,,sname]	;read file name from descriptor area
+linkl:	ildb t,dirpt
+	cain t,';		;directory name?
+	jrst links
+	cain t,':
+	jrst [	ildb t,dirpt	;: quotes next character
+		idpb t,dc
+		jrst link1]	;allows blanks in file names
+	idpb t,dc
+	jumpe t,cpopj		;jump if finished reading link
+link1:	came dc,[000600,,fn2]	;finished?
+	jrst linkl
+	popj p,			;end of link
+
+;found ";" in file name
+
+links:	tlnn dc,770000		;align byte pointer on word boundary
+	jrst link1
+	ibp dc
+	jrst links
+
+fsdele:	pushj p,lookup		;find the file
+	jumpl dd,cpopj		;jump if we're losing
+	pushj p,zapdsc		;zap descriptor area
+	setzm ufd+unfn1(dd)
+	setzm ufd+unfn2(dd)
+	setzm ufd+unrndm(dd)
+	skipn lnkcnt		;don't write if link
+	pushj p,wrttut		;write the tut
+	jrst wrtufd		;write the ufd out on all units
+
+;zap file descriptor
+
+zapdsc:	setzm blkcnt		;make plenty damn sure
+	skipn lnkcnt		;if there were no links
+	jrst zaprf		;    then zap real file
+
+;zap link descriptor
+
+	move da,lnkufd		;fetch the original ufd
+	pushj p,redufd
+	move dd,lnkptr		;pointer to file
+	movsi da,unlink		;test for link
+	tdnn da,ufd+unrndm(dd)
+	bughlt			;hmmm, it said it was a link
+	pushj p,ufdbp		;get byte pointer to descriptor area
+	push p,da		;save beginning byte pointer
+	movem da,dirpt		;grist for redlnk
+	pushj p,redlnk
+	skipa
+zaplop:	pop p,dd		;entry point from zaprf
+	pop p,da		;beginning of descriptor area
+	setzb db,blkcnt		;clear blkcnt set by advblk
+zapl1:	idpb db,da		;zero out descriptor
+	came da,dirpt		;caught the end yet?
+	jrst zapl1
+	popj p,
+
+;zap real file descriptor
+
+zaprf:	jumpl dd,cpopj		;if file not found then give error return
+	movsi da,unlink		;test for link
+	tdne da,ufd+unrndm(dd)
+	bughlt			;it should not be a link
+
+;update tut before zapping descriptor area
+
+	push p,dirpt		;save pointer to beginning
+	push p,dd		;save pointer to name area in ufd
+zaprf1:	pushj p,advblk		;gets next block in da	
+	jumpl dd,zaplop		;now zap descriptor area
+	pushj p,tutpnt		;returns tut byte pointer in da
+	ldb db,da		;tut entry
+	caige db,tutlk-1	;block locked for some reason
+	sojl db,[bughlt]
+	dpb db,da		;clobber tut
+	jrst zaprf1
+
+;opens file for output
+
+outopn:	pushj p,lookup		;does version of file already exist?
+	skipn lnkcnt
+	jumpl dd,outo1		;not necessary to zap descriptor area
+	skipn lnkcnt		;if its a link, we must make sure ufd and tut are in
+	jrst outo01		;    not a link all the good stuff is together
+	jrst pikpak		;not necessary to find a free directory slot
+
+;find free slot in ufd name area
+
+outo1:	came dd,[-1,,'FNF]	;proceed only if file not in ufd
+	popj p,
+	move dd,ufd+udnamp	;start looking at beginning
+outo11:	skipn ufd+unfn1(dd)	;slot free?
+	jrst pikpak		;    yes, pick-a-pack
+	addi dd,lunblk
+	caige dd,blksiz		;past end of ufd?
+	jrst outo11		;    no,try again
+
+;no free slots, try to extend name area down
+
+	movni dd,lunblk
+	addb dd,ufd+udnamp
+	move da,ufd+udescp
+	idivi da,ufdbyt
+	addi da,uddesc+3
+	caml da,ufd+udnamp	;did we run into descriptor area?
+	jrst [	hrroi dd,'FUL	;directory full
+		popj p,]
+	setzm ufd+unfn1(dd)	;clear out that file name
+
+;directory slot all set up, now decide which unit to write on (pick-a-pack)
+
+pikpak:	move t,mu
+	movem t,cu
+	pushj p,redtut		;start searching on current unit
+	push p,cu		;unit we started on
+	push p,[0]		;# free blocks on best unit
+	push p,(p)		;# free blocks on this unit
+	push p,cu		;best unit so far
+piknxt:	setzm -1(p)		;# free blocks on this unit
+	move dc,tut+qfrstb
+	;following lines commented out so that files will be written in swap area
+	;thus avoiding Y files when dumping crashes.  When sys comes up will get copied.
+	;camge dc,tut+qswapa	;first track beyond swapping area
+	 ;move dc,tut+qswapa
+	move da,dc
+	sub da,tut+qlastb
+	hrl dc,da		;aobjn pointer
+piknx1:	movei da,(dc)		;block #
+	pushj p,tutpnt		;byte pointer to tut entry
+	ldb da,da
+	skipn da
+	aos -1(p)		;found a free block
+	aobjn dc,piknx1		;counted all free blocks on pack yet?
+	move da,-1(p)		;# free blocks on this pack
+	camg da,-2(p)		;more blocks on this one
+	jrst piknx2		;    no, advance to next tut
+	movem da,-2(p)
+	move db,cu
+	movem db,(p)		;this is best so far
+piknx2:	pushj p,nxttut		;try next tut
+	move db,cu
+	came db,-3(p)		;have we gone around the packs
+	jrst piknxt		;    no, go to next unit
+	pop p,cu		;this unit won
+	sub p,[3,,3]		;clean up stack
+	pushj p,redtut		;read in tut from current unit
+	skipn lnkcnt		;if a link, then get ufd in
+	jrst outo0		;was not a link, ufd is already there
+	move da,lnkufd
+	movem da,ufdblk
+	pushj p,redufd
+outo0:	skipe ufd+unfn1(dd)	;fresh file?
+	jrst outo01		;no, zap descriptor area
+	move da,fn1		;put in the file name
+	movem da,ufd+unfn1(dd)
+	move da,fn2
+	movem da,ufd+unfn2(dd)
+	skipa
+outo01:	pushj p,zapdsc		;zap descriptor area
+	setzm blkcnt		;no contig blks taken yet
+	setzm lblock		;and start searching from beginning
+	setzm ufd+unrndm(dd)	;flush all random bits
+	move da,tut+qpknum	;pack #
+	dpb da,[unpkn ufd+unrndm(dd)]
+	setom ufd+undate(dd)	;clear date file created
+	move da,ufd+udescp	;first free byte in descriptor area
+	dpb da,[undscp ufd+unrndm(dd)]
+	pushj p,ufdbp		;turn him into a byte pointer
+	movem da,dirpt		;descriptor area byte pointer
+outbuf:	setzm iobfr		;clear io buffer
+	move da,[iobfr,,iobfr+1]
+	blt da,iobfr+blksiz-1
+	jrst fsbfr		;set up buffer pointers and return
+
+tutpnt:	skipge tut+qpknum
+	 jrst [	hrroi dd,'OLD	;TUT must be old-format
+		jrst fserr ]
+	push p,db		;convert block no in da into ildb ptr to tut entry
+	camge da,tut+qlastb
+	camge da,tut+qfrstb
+	 jrst 4,.		;block number out of bounds
+	sub da,tut+qfrstb
+	idivi da,tutepw
+	imul db,[-10000*tutbyt]
+	hrli da,440000-tutbyt_14+tutbyt_6(db)
+	addi da,tut+ltiblk
+	pop p,db
+	popj p,
+
+;opens file for input
+
+inpopn:	pushj p,lookup		;look that file up
+	jumpl dd,fserr		;file not found, tell him why
+fsin:	pushj p,advblk		;set up pointers for next block
+	jumpl dd,cpopj		;jump if eof
+
+;actually reads the next sequential block in file
+
+rfsblk:	movei da,iobfr		;read into the io buffer
+	movem da,ioadr
+	move da,cu		;read from the current unit
+	movem da,drive
+	move da,lblock		;this is the block to read
+	pushj p,redblk		;read it
+fsbfr:	movei da,blksiz		;set up buffer pointers
+	movem da,wrdcnt		;count
+	move da,[444400,,iobfr]
+	movem da,wrdptr		;byte pointer
+	jumpge dd,cpopj		;jump if block came in okay
+
+;here for file system error, print error message and give up
+
+fserr:	skipl dd
+	 bughlt			;make sure we don't have total garbage
+	skipl blkin		;are there blocks swapped out?
+	 pushj p,swpin		;yes, get them back into core
+	hrlz w1,dd		;get sixbit error message
+	pushj p,sixo1		;sixbit type out
+	jrst err
+
+;advances pointers for next block in file, returns next block in da
+
+advblk:	sosl blkcnt		;take next sequential block?
+	jrst [	aos da,lblock	;    yes, increment block number
+		popj p,]
+	ildb da,dirpt		;next descriptor byte
+	jumpe da,[	hrroi dd,'EOF	;end of file
+			popj p,]
+	movem da,blkcnt		;save block count just in case
+	caig da,udtkmx
+	jrst advblk		;take next blkcnt
+	caige da,udwph		;jump?
+	jrst advb0		;    no, skip some blocks and take one
+	cain da,udwph		;place holder?
+	bughlt			;    yes, should not happen on read
+	subi da,udwph+1
+	movei db,nxlbyt		;# bytes for jump address
+	movem db,lblock
+fsjmp:	ildb db,dirpt		;next descriptor byte
+	lsh da,ufdbyt		;accumulate
+	ior da,db
+	sosle lblock		;read enough bytes?
+	jrst fsjmp
+	movem da,lblock		;jump to that block
+	jrst advb01		;and take next one
+
+advb0:	subi da,udtkmx-1
+	addb da,lblock		;skip da blocks
+advb01:	setzm blkcnt		;and take next one
+	popj p,
+
+;write block into file
+
+fsout:	move dc,lblock		;save last block taken
+fsout1:	aos da,lblock		;and find next free block
+	;following lines commented out so that files will be written in swap area
+	;thus avoiding Y files when dumping crashes.  When sys comes up will get copied.
+	;camge da,tut+qswapa	;that lies within file area
+	 ;move da,tut+qswapa
+	caml da,tut+qlastb
+	 jrst [	hrroi dd,'DVF	;got whole way through
+		popj p, ]
+	movem da,lblock
+	pushj p,tutpnt
+	ldb db,da		;get corresponding tut byte
+	jumpn db,fsout1		;not free, try next block
+	movei db,1
+	dpb db,da		;claim it in tut
+	move da,lblock		;da := block # being written
+	subm da,dc		;dc := # blocks skipped + 1
+	sojn dc,fsout2		;fix dc and jump if not contiguous
+	aos dc,blkcnt		;add to contiguous group
+	caig dc,udtkmx
+	 jrst fsout4
+	movei db,udtkmx		;doesn't fit start new group
+	pushj p,ufdput
+	jumpl dd,cpopj
+	movei db,1
+	movem db,blkcnt
+	jrst fsout4
+
+fsout2:	caile dc,udskmx		;maybe skip to it?
+	 jrst fsout3
+	skipe db,blkcnt
+	 pushj p,ufdput
+	jumpl dd,cpopj
+	setzm blkcnt
+	movei db,udtkmx(dc)
+	pushj p,ufdput	
+	jumpl dd,cpopj
+	jrst fsout4
+
+fsout3:	skipe db,blkcnt
+	 pushj p,ufdput
+	jumpl dd,cpopj
+	setzm blkcnt
+	move db,lblock		;generate jump command
+	lshc db,-ufdbyt*nxlbyt
+	addi db,udwph+1
+	pushj p,ufdput
+	jumpl dd,cpopj
+repeat nxlbyt,[
+	lshc db,ufdbyt
+	pushj p,ufdput
+	jumpl dd,cpopj
+]
+
+fsout4:	movei da,iobfr		;block is in ufd & tut.  now write it
+	movem da,ioadr
+	move da,cu
+	movem da,drive
+	move da,lblock
+	pushj p,wrtblk
+	jrst outbuf
+
+;close the output file (writes ufds and tut)
+
+outeof:	movni da,blksiz		;close file
+	addm da,wrdcnt
+	jsp t,acsav
+	skipge wrdcnt		;is buffer empty
+	 pushj p,fsout		;    no, write it
+	jumpl dd,outef1		;don't update tut and ufd if problems
+	skipe db,blkcnt		;write any residual take-N code
+	 pushj p,ufdput
+	jumpl dd,outef1
+	aos ufd+udescp		;count one extra for zero block at end
+	pushj p,wrttut		;write the tut for this drive
+	pushj p,wrtufd		;write ufd on all drives
+outef1:	jsp t,acrest		;do some ac restoring here
+	jumpl dd,fserr
+	hrroi dd,'EOF		;this file is now closed
+	popj p,
+
+;put byte into ufd descriptor area, checks for directory full
+
+ufdput:	idpb db,dirpt		;put byte into ufd
+	aos ufd+udescp
+	push p,da
+	movei db,0		;throw in eof at end
+	move da,dirpt
+	idpb db,da
+	movei da,-ufd(da)	;word offset
+	caml da,ufd+udnamp	;did we flow into name area
+	 hrroi dd,'FUL		;   yes, give error indication
+	pop p,da
+	popj p,
+
+;gets one word into io buffer, reads next block if necessary
+
+wrdi0:	jsp t,acsav		;save ddt ac's on stack
+	pushj p,fsin
+	jsp t,acrest		;restore ac's
+	jumpl dd,fserr		;tried to read past eof
+wrdi:	sosge wrdcnt
+	 jrst wrdi0		;buffer is empty read a new one
+	ildb d,wrdptr
+	popj p,
+
+;puts one word into io buffer, writes block if no more room
+
+wrdo0:	movem d,dsktmp		;d=t
+	jsp t,acsav
+	pushj p,fsout
+	jsp t,acrest
+	skipa d,dsktmp		;restore d
+dmpo:	move d,(c)
+wrdo:	jumpl dd,fserr		;check for errors
+	sosge wrdcnt
+	jrst wrdo0
+	idpb d,wrdptr
+	popj p,
+
+;ddt ac saving and restoring
+
+acsav:	push p,a
+	push p,b
+	push p,c
+	push p,w1
+	push p,w2
+	jrst (t)
+
+acrest:	pop p,w2
+	pop p,w1
+	pop p,c
+	pop p,b
+	pop p,a
+	jrst (t)
+
+;file name saving and restoring
+
+pushfn:	push p,fn1
+	push p,fn2
+	push p,sname
+	jrst (t)
+
+popfn:	pop p,sname
+	pop p,fn2
+	pop p,fn1		;restore file name
+	jrst (t)
+
+;load and dump routines
+
+dump:	pushj p,reset
+	tlne f,ccf
+	 jrst wboot
+	pushj p,getfil		;read a file name
+	jsp t,pushfn		;save old file names
+	pushj p,swpout		;make room for ufd, mfd, etc.
+	pushj p,outopn		;open file for output
+	jsp t,popfn		;and restore
+	jumpl dd,fserr		;jump if could not open file
+
+;ac usage
+;	b	aobjn pointer for current block being dumped, rh is virtual address
+;	c	real address of word to be dumped
+
+	move d,[jrst 1]		;end of sblk loader
+	pushj p,wrdo
+	movei b,0		;ac's are loaded and dumped!
+dump1:	pushj p,fd		;convert virtual address to real address
+	 jrst dumpj		;went past end, write symbols and close
+	skipn (c)		;look for non-zero
+	 aoja b,dump1
+	hrrz a,@jobsym		;addr of lowest symbol
+	caml b,a
+	 jrst dumpj		;all core done
+	move a,b		;save address of first non-zero
+	hrli b,-maxdmp		;keep size of dump block within reason
+dump2:	pushj p,fd		;calculate real address
+	 jrst dump3		;past end
+	skipe (c)		;look for zeros
+	 jrst dump2a
+	aos b
+	pushj p,fd		;look ahead - block is ended by
+	 soja b,dump3		; two consecutive zeros
+	sos b
+	skipe (c)
+dump2a:	 aobjn b,dump2
+dump3:	hrrzm b,dmpnxt		;save next address to check
+	subm a,b		;negative block length
+	hrl a,b			;aobjn pointer to block
+	jumpge a,dumpj		;zero length block, must be all core done
+	move b,a
+	pushj p,dumpb
+	move b,dmpnxt		;start the next dump
+	jrst dump1
+
+dumpb:	pushj p,wrdoa		;a checksum, b aobjn ptr.  write header
+dumpb1:	pushj p,fd		;calculate real address
+	 bughlt			;can't fetch what we fetched before
+	pushj p,dmpo		;write word
+	rot a,1			;checksum
+	add a,d
+	aobjn b,dumpb1
+wrdoa:	move d,a
+	jrst wrdo		;write checksum
+
+;write starting address, symbols and close
+
+dumpj:	move d,starta
+	hrli d,(jumpa)
+	pushj p,wrdo		;there goes starting address
+	move b,@jobsym
+	add b,[nsyms,,]		;don't punch builtin symbols
+	jumpge b,dumpj1		;don't punch zero-length block
+	hllz a,b		;symbol block header has address=0
+	pushj p,dumpb		;dump 'em all out
+dumpj1:	move d,starta		;starting address again
+	hrli d,(jumpa)
+	pushj p,wrdo
+	pushj p,outeof		;close the output file (writes ufds and tut)
+dskex:	pushj p,swpin		;swap real core back in
+	jrst dd1		;crlf, close loc, ddt
+
+;load code
+
+load:	pushj p,reset
+	tlne f,ccf
+	 jrst load1		;L merge core images
+	move a,kilc		;L flush the old symbols
+	movem a,@jobsym
+	movem a,prgm
+	setzm lowclr		; and clear core
+	move b,[lowclr,,lowclr+1]
+	blt b,-1(a)
+	setzm starta
+load1:	pushj p,getfil
+	jsp t,pushfn		;push file name
+	pushj p,swpout		;make space for dirs etc.
+	pushj p,lookup		;look him up
+	jsp t,popfn		;restore the file name
+	jumpl dd,fserr		;jump if file not found
+	pushj p,wrdi		;read first word
+	hrroi dd,'PDM
+	jumpe d,fserr		;can't read pdumped files
+	tdza dd,dd
+load2:	 pushj p,wrdi		;skip sblk loader
+	came d,[jrst 1]
+	 jrst load2
+load3:	tlnn f,cf
+	 jrst dskex		;after loading block of symbols
+	pushj p,wrdi
+	jumpge d,loads		;jump for starting address
+	move a,d		;set up ac's to load block
+	move b,d
+load4:	pushj p,wrdi		;read word
+	rot a,1			;checksum
+	add a,d
+	pushj p,fd		;real address calculation
+	skipa			;ignore words that we can't wriet
+	movem d,(c)		;store word
+	aobjn b,load4
+	pushj p,wrdi		;read checksum
+	camn a,d
+	jrst load3
+ckserr:	hrroi dd,'CKS		;checksum error
+	jrst fserr
+
+;found starting address, hopefully there are some symbols there too
+
+loads:	skipn starta		;only believe first start address seen
+	 movem d,starta		;starting address
+	tlon f,ccf		;if L don't load symols
+loadii:	 pushj p,wrdi		;else get symbol table pointer
+	jumpge d,dskex		;no symbol table in file or not to be loaded
+	trne d,-1		;block type 0?
+	 jrst loadi		;no, skip other brain-damaged info
+	movs b,d
+	hrli b,-1(b)		;compensate for carry
+	addb b,@jobsym		;subtract new symbol table size from both halves
+	movem b,prgm
+	hll b,d			;make aobjn ptr to new block of symbols
+	move a,d		;init checksum
+	tlz f,cf		;make sure only to load one block
+	jrst load4		;go load 'em up (ccf now on so no read past eof)
+
+loadi:	hlro b,d		;minus number of words to skip (also checksum)
+	pushj p,wrdi
+	aojle b,.-1
+	jrst loadii		;try for next block of crud
+
+;takes virtual address in right half of b, returns real address in c 
+;swaps in block in necessary
+
+fd:	aos (p)			;skip return is default
+	movei c,(b)		;get virtual address
+	cail c,lowswp		;lowest location swapped
+	jrst fdhi		;word might be swapped out
+	caige c,lowfix		;perhaps an ac or in channel command list
+	addi c,ac0
+	popj p,			;word alread in place			
+
+;here if address might be swapped out
+
+fdhi:	cail c,lowcod		;address in ddt?
+	jrst [	sos (p)		;take non-skip return
+		popj p,]
+	camle c,swporg		;virtual origin of swapped block
+	camle c,swpor1		;highest virtual address swapped in
+	jrst fdswp		;block not swapped in
+fdhi1:	sub c,swporg
+	addi c,corbfr		;address of word in core
+	popj p,
+
+;must swap out corbfr and swap the appropriate block
+
+fdswp:	push p,d		;d=t
+	jsp t,acsav		;save the ac's before we do this
+	push p,c		;the address inside block we want
+	pushj p,swpbfo		;swap the old buffer out
+	pop p,c
+	subi c,lowswp		;lowest location swapped	
+	idivi c,blksiz		;get block to swap in
+	pushj p,swpbfi		;swap that block in
+	jsp t,acrest		;get ac's back
+	pop p,d
+	jrst fdhi1		;set up real address in c
+
+; List Directory
+
+listf:	pushj p,reset
+	tlzn f,qf
+	 jrst listf1
+	move t,[440600,,sname]
+	movem t,dsktmp
+	move t,[jrst listf2]
+	movem t,spts(i)
+	move t,sym
+	pushj p,spt1-1
+listf1:	push p,swpout
+	setzm fn1
+	pushj p,lookup		;get ufd
+	jumpl dd,fserr
+	move b,ufd+udnamp
+	move w1,sname
+listf3:	pushj p,sixo1
+	pushj p,crf
+	pushj p,listen
+	 cail b,2000
+	  jrst dskex		;end of dir or char typed
+	ldb t,[unpkn ufd+unrndm(b)]
+	pushj p,toc
+	pushj p,tspc
+	move w1,ufd+unfn1(b)
+	pushj p,sixo1
+	pushj p,tspc
+	move w1,ufd+unfn2(b)	
+	addi b,lunblk
+	jrst listf3
+
+listf2:	subi t,40
+	idpb t,dsktmp
+	popj p,
+
+;nY write DDT on boot area unit n
+
+wboot:	move t,syl		;get n
+	movem t,drive
+	movei da,bootbl
+	pushj p,rp4map		;set up disk addr
+	move t,kilc		;flush all but builtin symbols
+	movem t,prgm
+	movem t,@jobsym
+ka,	move t,[-10000,,ddt-4001]	;write out last 4 pages of low moby
+kl,	move t,[-10000_4,,ddt-4001]	;..
+	movem t,icwa
+	setzm icwa+1
+	move db,[wdatao]
+	pushj p,rwblk0
+	jrst dd1
+
+;PUSHJ P,GETFIL reads a file name, sets SNAME, FN1, FN2
+;clobbers a,b,db,t
+
+getfil:	pushj p,tspc
+	skipa b,[sixbit/@/]	;default fn1
+getfl3:	 movem a,sname
+getfl1:	movei a,0
+	move db,[440600,,a]
+getfl2:	pushj p,iin
+	subi t,40
+	jumple t,getfl4		;break
+	cain t,';
+	 jrst getfl3		;sname
+	tlne db,770000
+	 idpb t,db
+	jrst getfl2
+
+getfl4:	jumpe a,getfl5		;leading space
+	exch a,b
+	jumpe t,getfl1		;space, get another name
+	movem a,fn1		;cr, done
+	movem b,fn2
+	jrst crf		;echo crlf and return
+
+getfl5:	jumpe t,getfl1
+	jrst err		;blank name
+
+;disk address for next transfer
+
+drive:	0
+cylndr:	0
+sector:	0
+surfce:	0
+ioadr:	0	;core address for next disk transfer
+dsktmp:	0	;used for temporary storage here and there
+xfrcnt:	0	;# times we have tried this disk transfer
+cu:	0	;current unit
+mu:	0	;master unit
+ufdblk:	0	;disk block of ufd
+qact:	repeat 8, -1+ifge .rpcnt-ndsk,1	;-1 if should use, 0 if unit not active
+
+;file manipulation variables (leave sname, fn1, and fn2 contigous and in this order
+;otherwise code at ulink will cease to function)
+
+sname:	sixbit/./	;directory name
+fn1:	0	;first file name
+fn2:	0	;second file name
+
+;dev:	0	;for holding random device
+wrdcnt:	0	;disk io buffer word count
+wrdptr:	0	;disk buffer byte pointer
+lblock:	0	;last block read or written
+blkcnt:	0	;number of blocks read or written consectively
+dirpt:	0	;descriptor area byte pointer
+tutpt:	0	;tut byte pointer
+lnkcnt:	0	;link counter used by link solver non-zero means at least one link
+lnkptr:	0	;user directory index of first link in chain
+lnkufd:	0	;block # of ufd of of first link in chain
+pknum:	repeat ndsk,-1
+qded:	repeat ndsk,0
+
+dmpnxt:	0	;virtual address of next block to dump
+
+;swapping variables
+
+blkin:	-1	;index of block in, negative implies no core swapped out
+swporg:	0	;virtual address of first location in corbfr
+swpor1:	0	;virtual address of last  location in corbfr
+
+litter:	constants
+vars::	variables
+
+inform dsksiz,\<.-dskcod>

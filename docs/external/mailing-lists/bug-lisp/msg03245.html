@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SXHASH and/or ABS peculiarities -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 3 Jul 81 18:45:00 GMT -->
+<!--X-Message-Id: 9678884c0ea1b415de94b4cf034bf1e7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SXHASH and/or ABS peculiarities</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03246.html">Date Prev</a>][<a href="msg02621.html">Date Next</a>][<a href="msg03246.html">Thread Prev</a>][<a href="msg02621.html">Thread Next</a>][<a href="maillist.html#03245">Date Index</a>][<a href="threads.html#03245">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SXHASH and/or ABS peculiarities</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: rivest at MIT-ML</li>
+<li><em>Subject</em>: SXHASH and/or ABS peculiarities</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 3 Jul 81 18:45:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, Guy.Steele at CMU-10A</li>
+<li><em>Original-date</em>: 3 July 1981 14:45-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In your note of
+From:     RIVEST@MIT-ML
+Date: Mon, 23 Jun 81 04:15:05 GMT
+Original-Date: 06/23/81 00:15:05 EDT
+Subject:
+you have the function
+    (defun count-hash-index (expr)
+	   (remainder (abs (sxhash expr)) 5000.))
+If the ABS is open-compiled here, you will lose;  however,
+such a function would not normally cause ABS to be open-compiled.
+The generic-arithemtic works ok on this example.
+
+However, note the following emmendation of 'count-hash-index', which
+will be optimally fast (no closed-codings) by checking explicitly for
+the overflow case:
+    (defun count-hash-index (expr)
+       (let ((n (sxhash expr)))
+	 (declare (fixnum n))
+	 (if (= n -1_35.)
+	     #.(remainder (abs -1_35.) 5000.)
+	     (\ (abs n) 5000.))))
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03246.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02621.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03246.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02621.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03245"><strong>Date</strong></a></li>
+<li><a href="threads.html#03245"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

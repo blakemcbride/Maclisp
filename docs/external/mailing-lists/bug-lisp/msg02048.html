@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Wed, 19 Mar 80 09:11:00 GMT -->
+<!--X-Message-Id: 5ae7d125726d75e31ba2182904c9cb13@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02049.html">Date Prev</a>][<a href="msg02047.html">Date Next</a>][<a href="msg02049.html">Thread Prev</a>][<a href="msg02047.html">Thread Next</a>][<a href="maillist.html#02048">Date Index</a>][<a href="threads.html#02048">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ben at MIT-ML</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Wed, 19 Mar 80 09:11:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 19 MAR 1980 0411-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     BEN@MIT-ML
+Date: Thu, 14 Mar 80 21:14:29 GMT
+Original-Date: 03/14/80 17:14:29 EDT
+Subject:
+    To: (BUG LISP) at MIT-ML
+    On the TOPS-10 at Tufts.
+    1.  (getchar 'foo 0) appears to loop, rather than return NIL
+    as advertised.  Similarly for negative args.  Too-large args
+    work correctly, return NIL.
+I've just corrected this in the source, although the &quot;wheels&quot;
+have already been set into motion to send out maclisp tapes
+(Ty Sealy is doing it) and you probably won't have this update,
+unless (horrors!) the mailing is held up so long that the new
+system is installed around before then.
+    2.  Is there any way to get decent rubout processing?  TOPS-10
+    will let me handle my terminal i/o reasonably enough to do rubouts
+    correctly in the monitor and several programs, but not in LISP.
+    (I have a Teleray 1061.)
+Well, I don't think there is much maclisp can do by itsels - some
+people have been writing packages with special knowledge about
+terminals, and using a file object created by
+(OPEN '((TTY) FOO BAR) '(OUT IMAGE SINGLE))
+which is supposed to allow you to do output in &quot;raw&quot; mode
+(for TOPS-10, this uses IONEOU).  You might want to correspond
+with FAHLMAN@CMUA on this point to see what's new there.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02049.html">DISPLACEing macros and purified code.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02047.html">correction to TTY processing note</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02049.html">DISPLACEing macros and purified code.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02047.html">correction to TTY processing note</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02048"><strong>Date</strong></a></li>
+<li><a href="threads.html#02048"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

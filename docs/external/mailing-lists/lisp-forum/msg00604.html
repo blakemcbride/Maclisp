@@ -1,0 +1,187 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Response to Goto's lisp timings -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,22 Oct 80 11:08:00 EDT -->
+<!--X-Message-Id: cb68ed4d8bfce2aefd48fa08573311fa@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Response to Goto's lisp timings</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00603.html">Date Prev</a>][<a href="msg00338.html">Date Next</a>][<a href="msg00603.html">Thread Prev</a>][<a href="msg00338.html">Thread Next</a>][<a href="maillist.html#00604">Date Index</a>][<a href="threads.html#00604">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Response to Goto's lisp timings</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BOYER at SRI-KL, CSD.DEA at SU-SCORE, MASINTER at PARC-MAXC2,      TYSON at UTEXAS-11</li>
+<li><em>Subject</em>: Re: Response to Goto's lisp timings</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,22 Oct 80 11:08:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, LISP-DISCUSSION at MIT-MC, BBOARD at SRI-KL,      BBOARD at SU-AI, BBOARD at SU-SCORE</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    As Larry Masinter mentioned in his comment on the Goto
+timings, comparisons between LISPs are likely to generate 
+more heat than light;  but the replies did throw a little
+more light on some things, especially the runtime variabilities
+of an Interlisp program, and I thought I'd summarize them 
+and pass them along to the original recipients of the note.
+However, I'd like to say that the general concern with speed 
+which I've  encounterd in the past has been between MacLISP and 
+FORTRAN, rather than with some other lisp;  and several Japanese 
+research labs have done AI research still in FORTRAN.  
+    Just in case you're put off by looking at even more meaningless
+statistics, I'd also like to aprise you that following the little 
+summary is a brief technical discussion of three relevant points 
+disclosed by the TAK function (out of the many possible points at 
+which to look).  These technical points may be new to some of you, 
+and even beyond the LISP question you may find them useful; the key 
+words are (1) UUOLINKS, (2) Uniform FIXNUM representation, and 
+(3) Automatic induction of helpful numeric declarations by a compiler.
+
+    Almost everyone familiar with Interlisp recognized that
+the ECL people had not requested &quot;block&quot; compilation in the TARAI-4
+example, and several persons supplied results from various
+20/60's around:
+				 default compilation 	rewritten code, with
+       correspondent 		       timings 		block-compiled timing
+   Date: 19 OCT 1980 2127-PDT		  9.8ms		    1.8ms
+  From: MASINTER at PARC-MAXC2
+   Date: 20 Oct 1980 1039-PDT		  16.ms		    2.ms
+  From: CSD.DEA at SU-SCORE (Doug Appelt)
+   Date: 20 Oct 1980 at 2257-CDT	   0.83ms    (for UCILISP only)
+  From: tyson at UTEXAS-11 
+  &lt;Goto's original timings on ICILISP&gt;     2.9ms
+  &lt;Goto's original timings on Interlisp&gt;  15.0ms
+  &lt;myself, for MacLISP on 20/50)	   0.556ms
+
+There seems to be some unexplained discrepancy between Tyson's timing 
+and that of Goto, as well as between Masinter's and Appelt's default-
+compilation timings; but the &quot;best-possible&quot; Interlisp timings for
+a re-written function (replacing GREATERP by IGREATERP) and using
+the &quot;right&quot; block declarations seem consistent at around 2ms.  Indeed,
+as Shostack suggest in his note of &quot;20 Oct 1980 1036-PDT&quot; there is
+quite a bit of variablity in timing Interlisp functions depending on
+just the right set of declarations etc (even for such a simple function).
+    A point which, however, seems to be missed is that the notion of
+&quot;block&quot; compilation requires a decision at compile-time as to what 
+kind of function-linkage would be desirable (I presume that spaghetti-
+stack maintainence is the worst offender in runtime slowdown here);
+by comparison, the decision between fast and slow function linkage
+in MacLISP is made dynamically at runtime, so that only one kind of
+compilation be needed.  Indeed, by not burdening the novice with the
+understanding of yet one more inscrutable compilation question
+(&quot;block&quot; versus what?), the novice needn't be unduly penalized for
+not becoming a &quot;hacker&quot;; the above timings show a penalty of a factor 
+between 5 and 10 for ignoring, or under-utilizing, the &quot;block&quot; question.  
+
+
+(1) UUOLINKS:
+    The following strategy, which we call the UUOLINKS hack, may have 
+first been introduced into the old LISP 1.6:  
+    Arguments are set up for passing to a function and an instruction 
+	in a specially-managed hash table is XCT'd.
+    In case a fast link is acceptable, the first usage of this linking
+	will convert the hash entry to a PUSHJ P,...  --  if not
+	acceptable, it will remain a slow interpretive route.
+    Two copies of the hash-table are kept -- one is  never altered by
+	the linker, so that at any given point in time, all the &quot;fast&quot;
+	links may be restored to the unconverted slow interpretive route
+	(which may yet again be &quot;snapped&quot; to fast).
+    Typically, a hash table size of 512. is satisfactory, but some
+	applications require 1024. or more (in particular, MACSYMA).
+Indeed as Boyer (@SRI-KL) mentioned in his note of &quot;21 Oct 1980 2055-PDT&quot;, 
+the fast route -- whether by Interlisp's block compiler, or by MacLISP's
+runtime &quot;snapper&quot; -- does not leave much debugging help lying around
+on the stack; at least with this UUOLINKS approach, one can make the
+decision while in the middle of a debugging session, without penalty.
+The time cost of using the slow linkage seems to be a factor of between
+2 and 5.
+
+(2) Uniform FIXNUM representation
+    Many years ago we changed MacLISP's representation of FIXNUM so
+that it would be uniform;  unlike the other PDP10 lisps with which I
+am familiar, we do not code some fixnums (small ones) as &quot;immediate&quot; 
+pointers and others (larger ones) as addresses.  Also, there is a
+read-only page or two which &quot;caches&quot; fixnum values of about -300. to
++600., so that number consing of small numbers won't actually be 
+allocating new cells; e.g. interpreting a form like 
+	(DO I 0 (ADD1 I) (GREATERP I 100.) ...)
+Although I took a lot of flak for flushing the INUM scheme in favor
+of the uniform scheme, consider the advantage for compilation strategy,
+as seen in these representative code sequences for (IGREATERP X Y):
+  INUM scheme:		MOVE A,-3(P)
+			JSP T,UNBOX
+			SAVE TT,somewhere
+			MOVE A,-4(P)
+			JSP T,UNBOX
+			CAME TT,somewhere
+			...
+  Uniform scheme:	MOVE TT,@-3(P)
+			CAME TT,@-4(P)
+			...
+
+(3) Automatic induction of helpful numeric declarations by a compiler.
+    As Masinter and Boyer pointed out, most Interlisp programmers 
+would probably be using &quot;IGREATERP&quot; rather than &quot;GREATERP&quot; (the MacLISP 
+correspondent is &quot;&lt;&quot; ).  But a compiler can accumulate static information
+and do this change automatically;  at the very least, it could give
+out warning checks such as &quot;Floating-point argument used with FIXNUM-only
+operation&quot;.  Providing the capability for compile-time typing of variables
+is probably the only way to meet the FORTRAN challenge -- which must be
+met since much useful AI research needs both symbolic and numeric
+capabilities.  Larry's MASTERSCOPE is a very similar sort of automated
+induction scheme.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00603.html">Re: Time and time again</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00338.html">Re: DEFINEM</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00603.html">Re: Time and time again</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00338.html">Re: DEFINEM</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00604"><strong>Date</strong></a></li>
+<li><a href="threads.html#00604"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

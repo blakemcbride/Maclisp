@@ -1,0 +1,124 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: character objects &#38; representation issues -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;RZI ng [WF&#45;OW> -->
+<!--X-Date: Sat ,16 Aug 80 18:12:00 EDT -->
+<!--X-Message-Id: 4f5055fc000c00c672c3d6dd90c02178@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: character objects &amp; representation issues</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00092.html">Date Prev</a>][<a href="msg00084.html">Date Next</a>][<a href="msg00075.html">Thread Prev</a>][<a href="msg00085.html">Thread Next</a>][<a href="maillist.html#00083">Date Index</a>][<a href="threads.html#00083">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: character objects &amp; representation issues</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: character objects &amp; representation issues</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;</li>
+<li><em>Date</em>: Sat ,16 Aug 80 18:12:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I have heard a lot of discussion here, and I think some of it arises
+ from people's not understanding what is being proposed here.  For
+example, of course converting a character into a fixnum, adding a
+constant, and converting it back is not a character-set-independent
+way to uppercase something.  Nobody ever said it was; the proposal was
+to have a CHAR-UPCASE function.  On the other hand, you can certainly
+have such a function even if there is no distinction made between
+fixnums and characters.
+
+When this discussion first started, I thought RWK was advocating the
+virtues of having character objects be a distinct data type so taht it
+might be possible to check at runtime whether a given Lisp object was a
+character object as opposed to a fixnum, and so that functions like
+CHAR-UPCASE might be able to detect fixnum arguments as errors, thus
+helping out a user who is mistakenly trying to uppercasify the number
+of or something.
+
+However, in recent messages, GLS seems to be saying that his idea of
+character objects does not require that it be possible to distinguish
+characters from fixnums at runtime.  I am not sure what this is all
+about.  Perhsps the idea is that one can write code that will work in
+two different Lisps, one in which charcter objects are really a
+diffrent data type, and one in which they are not; but that any
+functions that distinguished betwen the data types at runtime could NOT
+be used in such code, as they would work only in the first dialect but
+not in the second.  Then users of the first dialect would gain the
+advantages and disadvantages of having separate character types, and
+users of the second would not, but it would still be possible to write
+portable code.  Existing Lisp Machine code would have to be modified only
+if someone wanted to make it portable, and the modifications would be to
+add some coercion functions around arithmetic uses of characters,
+or to change those arithmetic uses to functions like UNMETA and
+CHAR-UPCASE and such.  (The latter is not a bad idea anyway.)
+
+Maybe I misunderstood one of them, or maybe they are not expounding the
+same proposal. The proposal that I am construing from GLS's remarks
+sounds pretty reasonable to me.  Lisp Machine people should note that
+my construal requires no change in any code UNLESS you are interested
+in being portable.
+
+More than one person has said &quot;this won't really solve portability
+anyway&quot;.  While it is certainly not a panacea, it does solve some
+problems.  (1) When you debug your portable code in NIL, you get NIL's
+extra error checking -- but the code works on the LispM too.  (2) You
+can uppercasify characters and it will still work in EBCDIC.  (As I
+said, this could also be done without character objects, by providing
+CHAR-UPCASE for fixnums; but the important thing is to CLEARLY DEFINE a
+portable set of allowable operations, so that it is possible to write
+code and be reasonably sure it will stand a good chance of running in
+other character sets.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00092.html">Re: CHPROP problems</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00084.html">Re: generic types vs. specific types</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00075.html">Re: character objects &amp; representation issues</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00085.html">Re: character objects &amp; representation issues</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00083"><strong>Date</strong></a></li>
+<li><a href="threads.html#00083"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

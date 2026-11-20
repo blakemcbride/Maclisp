@@ -1,0 +1,149 @@
+#!/bin/sh
+
+#Defaults.
+TVCON=${TVCON:--2BS}
+VT52=${VT52:--B -b 9600}
+DATAPOINT=${DATAPOINT:--a -B -b 4800}
+TEK=${TEK:--b9600}
+
+EXIT=:
+trap "" QUIT INT TERM
+
+started() {
+    EXIT="$EXIT;stop \"$1\" $2"
+    trap "$EXIT" EXIT
+    echo "$1 started, pid $2"
+}
+
+stop() {
+    echo -n "Stopping $1... "
+    kill "$2" 2> /dev/null
+    sleep 2
+    kill -9 "$2" 2> /dev/null
+    echo "OK"
+}
+
+gt40() {
+    (sleep 3; tools/simh/BIN/pdp11 build/pdp10-ka/gt40 >gt40.log 2>&1) &
+    started GT40 "$!"
+}
+
+imlac() {
+    (sleep 3; cd tools/simlac/imlac; mono bin/Debug/sImlac.exe ../../../build/pdp10-ka/imlac >../../../imlac.log 2>&1) &
+    started Imlac "$!"
+}
+
+tv11() {
+    (sleep 3; tools/tv11/tv11 -s 4 -p 10011 localhost >tv11.log 2>&1) &
+    started TV-11 "$!"
+}
+
+tvcon() {
+    (sleep 4; tools/tv11/tvcon/tvcon $TVCON localhost >tvcon.log 2>&1) &
+    started "TV-console" "$!"
+}
+
+xgp11() {
+    (sleep 3; tools/tv11/xgp11 -s1 -p 10021 localhost >xgp11.log 2>&1) &
+    started XGP-11 "$!"
+}
+
+type340() {
+    sed -i.old 's/set dpy disabled/set dpy enabled/' \
+        out/pdp10-ka/run
+}
+
+cscope() {
+    sed -i.old 's/set wcnsls enabled joystick/set wcnsls enabled joystick cscope/' \
+        out/pdp10-ka/run
+}
+
+datapoint() {
+    (sleep 2; tools/vt05/dp3300 $DATAPOINT telnet localhost 10020 >datapoint.log 2>&1) &
+    started "Datapoint" "$!"
+}
+
+vt52() {
+    (sleep 2; tools/vt05/vt52 $VT52 telnet localhost 10018 >vt52.log 2>&1) &
+    started "VT52" "$!"
+}
+
+tek() {
+    (sleep 2; tools/tek4010/tek4010 $TEK telnet localhost 10017 >tek.log 2>&1) &
+    started "Tektronix" "$!"
+}
+
+simh_imlac() {
+    (sleep 2; tools/simh/BIN/imlac build/pdp10-ka/imlac.simh >imlac.log 2>&1) &
+    started "Imlac" "$!"
+}
+
+chaosnet() {
+    (sleep 2; tools/cbridge/cbridge -c build/cbridge.conf >cbridge.log 2>&1) &
+    started "Chaosnet bridge" "$!"
+}
+
+arpanet() {
+    sed -i.old \
+        -e 's/^#set imp ncp/set imp ncp/' \
+        -e 's/^#at -u imp 33/at -u imp 33/' \
+        -e 's/^set imp mac/#set imp mac/' \
+        -e 's/^set imp ip/#set imp ip/' \
+        -e 's/^set imp gw/#set imp gw/' \
+        -e 's/^set imp host/#set imp host/' \
+        -e 's/^at imp tap/#at imp tap/' \
+        out/pdp10-ka/run
+
+    (sleep 2; cd build/arpanet; ../../tools/simh/BIN/h316 imp62.simh >imp62.log 2>&1) &
+    started "Arpanet IMP" "$!"
+
+    export NCP="$PWD/ncp076"
+    rm -f "$NCP"
+    (sleep 5; ./tools/ncp/src/ncpd localhost 33003 33004 2>ncp076.log) &
+    started "Local NCP daemon" "$!"
+}
+
+help() {
+    cat <<EOF
+This start script takes several command line arguments:
+
+help - Display this help text.
+type340 - Enable the Type 340 display.
+gt40 - Start a GT40 emulator.
+imlac - Start an Imlac PDS-1 emulator.
+simh_imlac - Start the SIMH Imlac PDS-1 emulator.
+tv11 - Start a TV-11 emulator.
+xgp11 - Start an XGP-11 emulator.
+tvcon - Start a TV display.
+datapoint - Start a Datapoint 3300 emulator.
+vt52 - Start a VT52 emulator.
+tek - Start a Tektronix 4010 emulator.
+cscope - Enable the color scope.
+chaosnet - Start a local Chaosnet.
+arpanet - Start ARPANET.
+
+EOF
+
+    touch out/pdp10-ka/nohelp
+}
+
+sed -i.old -e 's/set dpy enabled/set dpy disabled/' \
+    -e 's/set wcnsls enabled joystick cscope/set wcnsls enabled joystick/' \
+    -e 's/^set imp ncp/#set imp ncp/' \
+    -e 's/^at -u imp 33/#at -u imp 33/' \
+    -e 's/^#set imp mac/set imp mac/' \
+    -e 's/^#set imp ip/set imp ip/' \
+    -e 's/^#set imp gw/set imp gw/' \
+    -e 's/^#set imp host/set imp host/' \
+    -e 's/^#at imp tap/at imp tap/' \
+    out/pdp10-ka/run
+
+test -f out/pdp10-ka/nohelp || help
+
+while test -n "$1"; do
+    "$1"
+    shift
+done
+
+tools/sims/BIN/pdp10-ka out/pdp10-ka/run
+exit 0

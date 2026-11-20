@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: wanted: opinions on a benchmark. -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 6 Mar 81 19:52:00 GMT -->
+<!--X-Message-Id: 635aca4c5b548df70f63d2991b07bb06@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>wanted: opinions on a benchmark.</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01481.html">Date Prev</a>][<a href="msg01479.html">Date Next</a>][<a href="msg01481.html">Thread Prev</a>][<a href="msg01482.html">Thread Next</a>][<a href="maillist.html#01480">Date Index</a>][<a href="threads.html#01480">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>wanted: opinions on a benchmark.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>Subject</em>: wanted: opinions on a benchmark.</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 6 Mar 81 19:52:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, BUG-LISPM at MIT-MC, NIL-I at MIT-MC</li>
+<li><em>Original-date</em>: 6 March 1981 14:52-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Thanks for the explaination. 
+
+About the divide-by-zero and overflow errors. What I really want
+is some kind of arithmetic modulo M. However, the description of
+24-bit-arithmetic in the Lispm-Manual scared me off a bit.
+
+What would be very nice is to be able to use the same generic
+arithmetic functions, &quot;+&quot;,&quot;*&quot;,&quot;//&quot;,&quot;\&quot;, with a &quot;small fixnum&quot;
+which had certain properties, amoung them &quot;staying small.&quot;
+It is not that I don't like SMALL-FLONUM's, it is just that
+the algebraic properties of them are not ideal for hidden-line
+clipping arithemetic.  What happens is that because the
+lisp machine does a lot more CHECKING, this forces the program
+using them to do checking too, and to compensate for the strange
+algebraic properties. Its pretty obvious that if one can get
+the required program behaviour from the properties of the objects
+being manipulated, rather than from hairy control structure inside
+the program itself, then it is a win.
+
+The Array-accessing problem: Of course, the Maclisp object I used
+to descibe a CLIPPING-PLANE was a fixed-size hunk, a very simple
+structure fixed locations of which can be referenced with a single
+PDP-10 instruction.
+Lispm-machine arrays have much more complex properties, which simplify
+the control structure of many of the programs which use them no doubt!
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01481.html">Re: wanted: opinions on a benchmark.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01479.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01481.html">Re: wanted: opinions on a benchmark.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01482.html">y-or-n-p, yes-or-no-p</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01480"><strong>Date</strong></a></li>
+<li><a href="threads.html#01480"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

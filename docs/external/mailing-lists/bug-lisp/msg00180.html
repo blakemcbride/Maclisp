@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: lisp bug at Illinois -->
+<!--X-From-R13: RSIAZT ng IBOTP&#45;OTOZ -->
+<!--X-Date: Tue, 17 Oct 78 02:58:00 GMT -->
+<!--X-Message-Id: e0677b59b623379830cee4ad97ac2dc3@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>lisp bug at Illinois</title>
+<link rev="made" href="mailto:DEWOLF at WPAFB-AFAL">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00179.html">Date Prev</a>][<a href="msg00178.html">Date Next</a>][<a href="msg00179.html">Thread Prev</a>][<a href="msg00178.html">Thread Next</a>][<a href="maillist.html#00180">Date Index</a>][<a href="threads.html#00180">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>lisp bug at Illinois</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-AI</li>
+<li><em>Subject</em>: lisp bug at Illinois</li>
+<li><em>From</em>: DEWOLF at WPAFB-AFAL</li>
+<li><em>Date</em>: Tue, 17 Oct 78 02:58:00 GMT</li>
+<li><em>Original-date</em>: 16 Oct 1978 (Monday) 2158-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Someone here found a GC bug in our current LISP (1137!).  I'm
+forwarding you his message.
+
+From Tze-Wah Wong[702,207] on October 14, 1978 at 4:16 PM
+I found a bug under the following circumstance:
+	(1) A compiled function passes a number to either (a) an interpreted
+		function, or (b) a function with a SPECIAL argument.
+	(2) The argument passing mechanism makes sure that the argument is
+		a true number by number-consing
+	(3) If this number-cons causes GC, the GC destroyes certain save
+		locations and causes an error.
+
+in ONR:LISP.EXE
+742114/	push 14,7	;save funct,,lambda-form on p
+742116/ movem 6,462	;c(462)=-ve number of arguments
+735105/ skipn 1,174	;get a flonum, succeed ?
+735106/ jsp 1,752362	;no more flonum, go to gc
+735107/			;return from gc, c(462) destroyed !!!!!!!!!!!!
+742125/ move 6,462	;restore 6=-ve ac
+751136/ move 3,6	;reg 3=-ve number of arg
+751137/ addi 3,0(14)	;reg 3 points to funct,,lambda-form
+751140/ hrrz 1,0(3)	;reg 1=lambda-form
+			;At this point we get garbage as lambda-form
+
+[Forwarded from Tim Finin]
+
+
+Tim Finin (FININ@MIT-AI)
+
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00179.html">lisp bug at Illinois</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00178.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00179.html">lisp bug at Illinois</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00178.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00180"><strong>Date</strong></a></li>
+<li><a href="threads.html#00180"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

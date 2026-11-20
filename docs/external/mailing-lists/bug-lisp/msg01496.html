@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 26 Feb 81 02:42:00 GMT -->
+<!--X-Message-Id: 48db898945b4679b458920808ee4ab57@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01497.html">Date Prev</a>][<a href="msg01495.html">Date Next</a>][<a href="msg01497.html">Thread Prev</a>][<a href="msg01495.html">Thread Next</a>][<a href="maillist.html#01496">Date Index</a>][<a href="threads.html#01496">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 26 Feb 81 02:42:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 25 February 1981 21:42-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>This is indeed what I did. In fact, I defined a macro
+(DEF-SUBR-ENTER-POINTS FOOBAR 0 3) which said define subr enter points
+for arguments 0 through 3 and automatically set up SOURCE-TRANS.
+
+However, I really WANT to go through the UUO handler. 
+(1) Save adding extra symbols to the environment, this is an issue,
+    multiplying the number of symbols by 6. I have MERROR, and MFORMAT,
+    and MTELL, and TR-FORMAT, and perhaps others in the future.
+    These are all hairy error or I/O functions, and the overhead of
+    the UUO handler is trivial.
+(2) Better debugging. If you go through the handler then the DEBUG
+    function can easily do an FRETURN for cases which are
+    sort-of-recoverable errors. (hackers only).
+
+If I could only keep the compiler from putting an assumption
+about the function into the environment (if there were some
+user hook to filter those assumptions), then I could win.
+Now, I've searched via COMLAP;COMPLR TAGS, and I find only
+two places where PUTPROP is done for '*EXPR or '*LEXPR,
+one place is in the function COMPILE in COMLAP;COMPLR
+and the other is in the function P1 in COMLAP;PHAS1.
+If I could put a hook, e.g. call a function PUT-FUN-INFO
+instead of PUTPROP, then I could win. How about it?
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01497.html">Default-setting of DEFUN&amp;-CHECK-ARGS</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01495.html">&gt;=</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01497.html">Default-setting of DEFUN&amp;-CHECK-ARGS</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01495.html">&gt;=</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01496"><strong>Date</strong></a></li>
+<li><a href="threads.html#01496"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

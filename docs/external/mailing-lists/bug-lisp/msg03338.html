@@ -1,0 +1,83 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LET macro &#38; fsubr -->
+<!--X-From-R13: DZP ng [WF&#45;[Q (Dvpuneq Z. Pelna) -->
+<!--X-Date: Fri, 2 Jun 78 19:34:00 GMT -->
+<!--X-Message-Id: a44f8929d1204219f124aeb375d28417@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LET macro &amp; fsubr</title>
+<link rev="made" href="mailto:RLB at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03339.html">Date Prev</a>][<a href="msg03337.html">Date Next</a>][<a href="msg03339.html">Thread Prev</a>][<a href="msg03337.html">Thread Next</a>][<a href="maillist.html#03338">Date Index</a>][<a href="threads.html#03338">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LET macro &amp; fsubr</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: LET macro &amp; fsubr</li>
+<li><em>From</em>: RLB at MIT-MC (Richard L. Bryan)</li>
+<li><em>Date</em>: Fri, 2 Jun 78 19:34:00 GMT</li>
+<li><em>Original-date</em>: 2 JUN 1978 1534-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Before it's too late, why not generalize it to allow atomic symbols in the
+bind list. If these occur, bind to NIL in the interpreter, and in compiled
+code, to the appropriate zero.
+Thus, at macro level,
+ (let ((a 'a) b c) . body) becomes
+ ((lambda (a b c) . body) 'a nil nil)
+This is only a little harder than mapcar'ing 'CAR or 'CADR over the lists,
+and the DO equivalent required might accomplish additional error checking.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03339.html">Rubout processing</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03337.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03339.html">Rubout processing</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03337.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03338"><strong>Date</strong></a></li>
+<li><a href="threads.html#03338"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

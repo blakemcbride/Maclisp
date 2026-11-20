@@ -1,0 +1,118 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: For the record. -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 25 Sep 80 16:07:00 GMT -->
+<!--X-Message-Id: c8e122699436eb695237bd2cc6605781@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>For the record.</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01166.html">Date Prev</a>][<a href="msg01164.html">Date Next</a>][<a href="msg01163.html">Thread Prev</a>][<a href="msg01162.html">Thread Next</a>][<a href="maillist.html#01165">Date Index</a>][<a href="threads.html#01165">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>For the record.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: For the record.</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 25 Sep 80 16:07:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, GSB at MIT-MC, JONL at MIT-MC, ALAN at MIT-MC</li>
+<li><em>Original-date</em>: 25 September 1980 12:07-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+If anyone wants to use something which has the functionality of
+*FUNCTION, yet compiles into good code, there is LIBMAX;CLOSE &gt;
+I'll give a short example,
+
+(defclosure stack (com arg)
+	    ((sp 0) (array (*array nil t 50)) (dim 50)
+		    (undeflow (make-undeflow)) (overflow (make-overflow)))
+	    (caseq com
+		   (null (= sp 0))
+		   (pop
+		    (setq sp (1- sp))
+		    (if (= sp 0) (call underflow self))
+		    (arraycall t array sp))
+		   (push
+		    (setq sp (1+ sp))
+		    (if (= sp dim) (call overflow self))
+		    (setf (arraycall t array sp) arg)
+		    SELF)))
+
+(defclosure overflow (master) ((more-inc 10) (more-limit 5))
+	    (if (= more-limit 0) (barf))
+	    (setq more-limit (1- more-limit))
+	    (IN-ENV-OF-STACK MASTER
+			     ; lexical scoping of variables of course!
+			     ; so if we want the variables of somebody we have
+			     ; to be explicit.
+			     (setq dim (+ dim more-inc))
+			     (*rearray array dim)))
+
+(setq s (make-stack))
+
+I use a macro CALL, so that calling these guys can be open compiled, (subrcall).
+That way I can use them for clipping-streams, 3d-transformation-streams,
+and other graphics applications. If you want to go through FUNCALL
+you can, just by setting up the USERHUNK things. However, I found
+FUNCALL to be too slow, changing the whole Programming Style.
+(Actually this was using the general CLASS stuff to do the
+dispatching, I don't know how much faster you can make it by writing
+your own hunk-dispatcher in midas).
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01166.html">For the record?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01164.html">For the record?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01163.html">For the record?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01162.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01165"><strong>Date</strong></a></li>
+<li><a href="threads.html#01165"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

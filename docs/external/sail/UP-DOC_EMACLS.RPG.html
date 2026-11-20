@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>EMACLS.RPG[UP,DOC] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename EMACLS.RPG[UP,DOC]  blob <a href="EMACLS.RPG[UP,DOC]_blob">sn#649986</a> filedate 1982-03-29 generic text, type C, neo UTF8</div>
+<pre id="u8lump">COMMENT ⊗   VALID 00012 PAGES
+C REC  PAGE   DESCRIPTION
+C00001 00001
+C00002 00002				  Remarks and Philosophy
+C00004 00003				    Starting Things Up
+C00009 00004				 Sending Simple Messages
+C00012 00005			     Sending Answers to Other Places
+C00016 00006				Stopping Runaway MacLisps
+C00017 00007				 How to Win after Losing
+C00020 00008				  Running E from MacLisp
+C00023 00009				  Getting a Line from E
+C00024 00010				   Buffer Empty Demons
+C00030 00011					  Modes
+C00032 00012				 Details of the Interface
+C00035 ENDMK
+C⊗;
+			  Remarks and Philosophy
+
+The E/MacLisp interface realizes a slightly different philosophy
+of interaction between the user and his/her partner, the Lisp system.
+The basic premises are that the user is spending 99% of his/her own
+time doing an editing task. This means editing text files, typing
+sequences of commands or functions to MacLisp, tracing, debugging,
+or otherwise typing complex strings or structures of strings to
+the computer. The second facet of the philosophy is that the user
+is best off using the same editing tool for all of these editing tasks.
+
+Thus was born the E/MacLisp interface which allows the user to type through
+and with his/her own files to MacLisp, and which allows MacLisp to
+type through and with its/his/her own files to the user.
+
+MacLisp and the user are two separate, equal jobs from the point of
+view of E, which serves as a moderator, intermediary, slave, and master
+for its two companions.
+
+But remember there is a MacLisp lurking in the background and you
+as a user of the interface have responsibility for seeing that it
+does not become homeless when you head out the door.
+
+			    Starting Things Up
+
+To start up a MacLisp from E one simply does, from E,
+αXSL&lt;cr>. What this does is starts up the MacLisp using
+ELISP.INI[MAC,LSP]. To start PLISP say αXSUL PLISP&lt;cr>.
+
+Behind the scenes much more is going on. The following is a
+brief explanation. In general you need to add some lines to
+your INI file to start things up properly, and/or you need to
+do some things after a SUSPEND to restart nicely.
+
+In order to run the E/MacLisp interface it is necessary to
+load the file EMACLSP.FAS[MAC,LSP]. Additionally there is
+some initialization that needs to be done; these initializations
+are different depending on whether you are starting a fresh MacLisp
+with an INI file or restarting a saved system.
+
+In the first case you need only do (in your INI file):
+
+	(help)
+	(and si:ecalledp
+	     (fasload emaclsp fas dsk (mac lsp)))
+
+which tests whether E has started MacLisp and then loads the file.
+SI:ECALLEDP is a global variable set up by MacLisp upon startup.
+In this case, when your INI file has finished, E will be able to
+talk to it without any further intervention.
+
+Here is exactly the ELISP.INI[MAC,LSP]:
+
+(comment bps 30000.)
+(progn (close infile)(inpush -1)
+ (help)
+ (fasload demon fas dsk (mac lsp))
+ (fasload file fas dsk (aid lsp))
+ (and si:ecalledp
+      (progn (fasload emaclsp fas dsk (mac lsp))
+	     (fasload eaid fas dsk (mac lsp))))
+ T) 
+
+If you want to load up a system, suspend it, and then be able
+to start it from E or from a DD, you can do something like:
+
+	(setq em:no-init t)
+	(fasload emaclsp fas dsk (mac lsp))
+
+	...
+	(SUSPEND '|Save sys loser| '(LOSER SHR SYS (1 3)))
+	(cond (si:ecalledp
+	       (em:mail-interface-initialize)))
+
+The em:no-init flag tells EMACLSP not to start itself up; the 
+em:mail-interface-initialize call is what is normally done upon
+loading of EMACLSP.
+
+E will not send any requests until MacLisp sends an acknowledgement
+message to E, which  EM:MAIL-INTERFACE-INITIALIZE sends as the 
+last thing it does.
+
+If you have a MacLisp around that can talk to E already (for instance,
+if you flush the one you started from E by starting up another subjob or
+another MacLisp, you can re-establish the connection with αNαXSLISP,
+where N is the job number of that MacLisp.
+
+If you do αE and you have a MacLisp in communication, E will remind you
+that you do. This MacLisp can be re-connected with the above command
+later if you run something else and then E once more.
+
+If you do not specify an INI file to E when you start up a bare MacLisp,
+ELISP.INI on your aliased directory is assumed. If none exists, 
+ELISP.INI[MAC,LSP] is used.
+			 Sending Simple Messages
+
+Once talking to MacLisp from E you probably want to give
+yourself some more room at the bottom of the page so
+you can see what MacLisp is saying to you. On DD's I use
+αβ1αβ0αXBOTSET which gives me 10 lines. On my DM I use 8.
+
+When MacLisp sends its results they normally appear at the
+bottom of the screen. The carriage return-linefeed situation
+then interacts with E's, so that you may not always get the exact
+spacing your program or MacLisp intends. When you are LATTACH or
+LFILE modes, though, E echoes exactly what MacLisp sends (or at
+least does a better job of it).
+
+To send the arrow line, you just type α=. If there is more than
+one EVALable thing on that line you will see as many results
+printed. To send the current and next n-1 lines, just do
+αnα=. The numeric results follow the E conventions for ATTACH, for
+example.
+
+To send the Attach buffer, just type α=.
+
+If you type α0α= the command line will be sent to MacLisp.
+So you can say:
+
+	α0α=(+ 2 3)
+
+and get 5 returned.
+
+The next simple way to talk to MacLisp is in EVAL mode,
+which is invoked by
+
+	αXEVAL&lt;cr>
+
+which sends everything you type (in linemode) to E. You terminate
+this mode with αβ&lt;linefeed> as with macro definition mode.
+In this mode (as in all others for that matter) you are talking to
+MacLisp in 9-bit ascii, which means that you can send control and
+meta characters. In particular, you can send αG, αB etc. 
+
+The last primitve is αXREEVAL, which sends the current line as control
+and meta characters, but reading them in E macro format. Numeric arguments
+are interpreted as usual, and α0αXREEVAL sends the command line, in
+the manner of α0αXSEND. If you type a linefeed at the end of the α0αXREEVAL
+commands line, you may continue ala α0αXSEND.
+
+		     Sending Answers to Other Places
+
+You can have the results from MacLisp sent to the file
+you are in by being in LFILE mode, which you get into
+with αXLFILE. In this mode everything from MacLisp is
+sent to the page you are editting. This mode
+is particularly useful in EVAL mode where you type to MacLisp
+directly and receive answers in the file.
+
+Results can be sent to the Attach buffer by being in LATTACH mode,
+which is started by αXLATTACH. Normally you are in LTYPE mode,
+which is αXLTYPE.
+
+You will notice that when you send several things from E, the results
+are printed as they are computed, which can cause a fair delay, especially
+when you remember that a message is passed to E for each result, and E
+must deal with each message separately. There are some E commands
+and MacLisp functions that make this nicer.
+
+First, MacLisp has a function called EM:EVAL-MESSAGE. This function
+allows MacLisp to treat the total message sent from E as a file. This
+primitive will read every S-expression sent by E, EVAL those
+S-expressions, package them up internally in some data structure,
+then print the results to E in an MacLisp mode that sends as many answers
+as it can in each message.
+
+So, for example, suppose you want to compute several factorials.
+You have in your file the function:
+
+→
+(defun fact (x)
+ (cond ((zerop x) 1)
+       (t (times x (fact (sub1 x))))))
+
+You send this function definition by positioning yourself
+at the arrow and typing α!α=, which sends the s-expression. MacLisp
+echoes `FACT' which means you have defined the factorial function.
+
+Now, you have someplace in your file the following:
+
+
+(em:eval-message)
+(fact 5)(fact 10)(fact 15)
+(fact 7)(fact 13)(fact 19)
+
+You can point to the first line and type α=, which tells MacLisp
+that it is about to get some things in a pseudo-file to evaluate.
+Now, you want to put the answers on some other page of the file.
+
+First you tell E that you don't want to see any results until you're
+ready by saying α-αXLRECEIVE. Then you move to the first line of
+FACT calls and say α2α= to send those two lines. MacLisp goes off
+to evaluate them, gets a big message ready, then sends it, but E has
+been stifled.
+
+You move to wherever in the file you want and you say αXLFILE, then
+αXLRECEIVE. The answers come swooping into your file full tilt boogie!
+
+			Stopping Runaway MacLisps
+
+Sometimes Lisp jobs run away and we want to stop them where they
+are. With a vanilla MacLisp we simply type ``&lt;esc>i B'' to do this.
+With the E/MacLisp interface, however, we cannot type &lt;esc>i at Lisp.
+
+To accomplish the same thing, type αXINTERRUPT B at E. This sends
+a MAIL interrupt to MacLisp, which looks at the mail, sees that it
+is an interrupt interrupt, and then dispatches on the supplied character
+exactly as &lt;esc>i does. Sometimes you may want to do α-αXLRECEIVE
+first to stop any output (this also pauses MacLisp when its output
+buffer fills up).
+
+			 How to Win after Losing
+
+If you get MacLisp into a losing situation there are ways of
+getting out. Here are some of these situations.
+
+First, sometimes a JOBRD is not possible if you have, for example,
+gotten to E from CKMAIL. The message ``Communication Failed!'' will
+appear on your screen.
+
+Second, you can try the αXinterrupt things mentioned earlier. αXinterrupt B
+and αXinterrupt G are useful. These now work in any context.
+
+Third, you might want to stop using the interface. Say αXinterrupt N which
+should flush the interface and do a ↑B Then you can attach the job, do a
+&lt;call> and then CONTINUE, which will put into the ↑B break with no comment
+from MacLisp.
+
+Fourth, you can just attach the detached MacLisp, do a &lt;call>, then a REENTER,
+and then a αN. This will put you in a ↑B break, but it will not be announced.
+Your wholine should report you in LINE mode at that time.
+
+To suspend from the interface you will have to use one of the attaching
+methods above since SUSPEND depends on loading the line editor to work.
+Some day I will fix this, but for now I suggest doing the entire process
+from the terminal anyway (that's how I do it).
+
+αR (either as a character or as αXinterrupt R) will re-initialize the
+interface, so that if you think the Lisp end has lost, you can do
+this as a last resort. This also does a αG.
+
+(em:init) initializes the interface (resets all flags, flushes all
+queues).  (em:initialize) flushes the entire interface and starts a new
+incantation of it.  (em:reset) flushes the interface and sets default
+IO to teminal IO.
+
+			  Running E from MacLisp
+
+The user and MacLisp share essentially the same relationship
+with E: they can both run E and examine its contents. There is
+a primitive in the interface called EM:ECOMMANDS which takes a
+sequence of characters which is sent to E and is interpreted
+as E commands. These characters are considered by E to be in
+E macro notation. For example, to go to the next page you would
+say:
+
+	(EM:ECOMMANDS '(α P))
+
+which is αP.
+
+You can string together any number in a message to E, but you should
+remember that E makes up a macro from this command string and then
+runs it. The macro name is ..LISP, but you cannot type this name to E
+yourself. Thus it is conceivable that you will see messages from E
+such as ``MACRO ABORTED'' when you never thought you were running
+E macros.
+
+In addition, you may examine E readonly variables, such as LINE, the
+line number you are on, and LINES the number of lines on the current page.
+
+The primitive is called EM:READONLY-VARS, which takes a list
+of variables and returns an alist of variable value pairs. Here is
+an example:
+
+	(EM:READONLY-VARS '(LINE LINES PAGE PAGES CHARS))
+
+which returned the line below when I executed this while typing
+this document.
+
+((LINE . 29.) (LINES . 35.) (PAGE . 7.) (PAGES . 10.) (CHARS . 50.)) 
+
+			  Getting a Line from E
+
+You can get the current line or some number of lines of ascii codes
+from E by using EM:TYI-MESSAGE much as getting S-expressions
+using EM:EVAL-MESSAGE. You can say:
+
+	(EM:TYI-MESSAGE)
+
+which, when applied to itself via α=, results in:
+
+	(11 50 105 115 72 124 131 111 55 106 111 114 105 51 15 12) 
+
+a list of the ascii codes that appear in that file.
+
+			   Buffer Empty Demons
+
+One of the most powerful and mysterious of the abilities of the
+E/MacLisp interface is to run an arbitrary MacLisp function
+at that point. This feature is used for some of the hairier
+things that the interface can do. Let's consider an example.
+Suppose you want to read an s-expression from an E file; you may
+have defined many read macros and changed the syntax bits on
+many characters, so you do not want to rely on the bare E to
+figure out the extent of the s-expression. However, the only
+MacLisp function that can do that easily is READ. But, from
+E you can only send previously known amounts to MacLisp.
+
+So, let's write the function that does the job of READing
+and EVALing an s-expression that starts at the current arrow
+line. First, it looks like this:
+
+(defun eval-this-sexpr ()
+       (print (eval (read))))
+
+and if you have file that looks like this:
+
+	(eval-this-sexpr)
+	(print 'baz)
+
+you can point to the first line, say α2α= and have the right thing
+happen. If, however, you want to call this function after some other
+function has found the correct spot, though, you need to be able to
+make E send the next line. This is pretty simple because we can
+make MacLisp say:
+
+	(em:ecommands '(α =))
+
+which sends the current line.
+
+(defun eval-this-sexpr ()
+       (em:ecommands '(α =))
+       (print (eval (read))))
+
+will do this job. But the problem is if our s-expression looks like
+
+(defun baz ()
+       (print 'foo)
+       (compute-like-crazy)
+       (print 'baz))
+
+Then we must be able to send more lines as needed.
+
+The value of the variable -em:mail-input-buffer-dry-handler-
+is the function that is called each time the buffer from E runs dry,
+and with this we can solve the problem. Each time the buffer runs dry,
+we send the current line and then go to the next line! If READ finishes
+we never read that line, if not, we simply get it sent.
+
+Another problem, though minor, arises if we must cross page boundaries
+to read the s-expression. Here is a version of this function that anticipates
+this problem by setting some global variables to relevant values:
+
+;;; SEXP on this line
+(defun eval-this-sexpr ()
+  (let ((alist (em:readonly-vars '(line lines page pages))))
+       (setq em:line (cdr (assq 'line alist))
+	     em:lines (cdr (assq 'lines alist))
+	     em:page (cdr (assq 'page alist))
+	     em:pages (cdr (assq 'pages alist))))
+  (let ((-em:mail-input-buffer-dry-handler- 'send-this-line))
+       (print (eval (read)))))
+
+Here is what send-this-line looks like:
+
+(defun send-this-line ()
+ (let ((-em:mail-input-buffer-dry-handler- ()))		;don't recurse
+	(cond ((&lt; em:lines em:line)			;bottom of page
+	       (cond ((= em:page em:pages)		;more pages?
+		      (break |No right paren found| t))	;foo
+		     (t (em:ecommands 
+			 '(α p))			;go to next page
+           		(setq em:line 1			;increment some stuff
+			      em:page (1+ em:page)
+			      em:lines 
+			      (cdr (assq 'lines		;find out number of lines
+					 (em:readonly-vars '(lines)))))
+			(em:ecommands '(α =)))))	;send the first line
+	      (t (em:ecommands '(α = ⊗ ↔))		;send this line and
+		 (setq em:line (1+ em:line))))))	;go to next line
+
+Believe it or not, this really works!
+
+				  Modes
+I didn't want to put various modes into MacLisp, but I had to
+in order to get certain things to work right. Think about this 
+for a minute: MacLisp does not know, in general, whether MacLisp
+is typing to the E page printer or into the file (or attach buffer).
+If it is going to the page printer, then it is typing where the user
+is, and the user's crlf is added to MacLisps. In the default, MacLisp
+tries to do the best it can on spacing, but it is only approximate.
+
+Therefore, MacLisp can be in various modes, namely -EM:MODE- can
+be LTYPE, LFILE, or LATTACH, and SI:ECALLEDP is a flag stating whether
+MacLisp is running under E. In my E macro files, I define αZN to go
+into LTYPE mode, αZF to go into LFILE mode, and αZA to go into
+LATTACH mode. These macros also send (em:mode 'LTYPE), (em:mode 'LFILE),
+and (em:mode 'LATTACH), resp.
+
+			 Details of the Interface
+αxSLISP dsk:maclsp.dmp[1,3](elisp.ini)
+αxSULISP dsk:maclsp.dmp[alias](elisp.ini)
+αnαxSLISP talks to job n(10.)
+α0αxSLISP types the wholine of inferior
+α-αxSLISP murder (i.e. negotiated suicide)
+α=	send arrow line or attach buffer
+α+nα=	send next n lines
+α-nα=	send previous n lines
+
+α0α= &lt;sexp>
+     send command line
+
+α0αxREEVAL &lt;text>
+	command line control-meta chars sent
+	&lt;linefeed> lets you keep going
+
+αxREEVAL current line sent as control-meta chars
+
+αxINTERRUPT B
+
+αxEVAL&lt;cr>
+      &lt;sexp1>&lt;cr>
+      &lt;sexp2>&lt;cr> ... αβ&lt;LF>
+
+αxLTYPE sends answers to Page Printer
+αxLFILE sends answers to the E Page
+αxLATTACH sends answers to the Attach buffer
+αxLPEND sends answers to the last page in core
+
+Protocols: (* means not actually anticipated to be used; current
+implementation knows about it but does not send and/or interpret them
+specially)
+
+From E to MacLisp
+	Mail
+	wd0:	(sixbit EPR),,Job# sending message
+	wd1:	type of message
+
+2,,0:   Continuation needed
+1,,0:	Short (fits in the next =30 words, ends with null byte
+        or falls off)
+
+0		no-op
+1		initiating a conversation
+2		ok (did the jobread)
+3		SEXPs (9-bit from E to MacLisp and 7-bits otherwise)
+4		explicit eof
+5		E commands (from MacLisp to E) 7-bits (E Macro format)
+6		interrupt. do &lt;esc>i &lt;char>
+7		close connection (suicide)
+8		from MacLisp: sends n words of readonly variable names
+		from E: return n words of name,value pairs
+
+	wd2:	-number of bytes,,address of buffer
+		
+
+Protocol is:
+	E	MacLisp
+        ---------------
+	initiate
+		ok
+
+To send a short message just a MAIL
+To send a long message MAIL then wait for JOBREAD acknowledge
+To send interrupts, just send them
+Acknowledgment is the short OK message
+
+Commands needed:
+	send control chars
+
+
+SI:EJOBNUM is a global variable containing E's job number.
+</pre>
+</body>
+</html>

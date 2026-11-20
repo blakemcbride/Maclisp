@@ -1,0 +1,100 @@
+================================
+  CHAOS is restored!
+   or
+  CH11 support for ITS in KLH10
+================================
+
+The ch11 device in KLH10 for ITS, which was originally just a dummy
+inteface to keep ITS running, is now a functional Unibus Chaosnet
+device, which supports Chaosnet-on-Ethernet and Chaosnet-over-UDP.  
+It does not support SPY (promiscuous) mode, or LUP (loopback), but ITS
+doesn't seem to use/need these. 
+
+Latest update: 2021-02-23
+
+Like other KLH10 network devices, ch11 works together with a Device
+Process which communicates with the device and reads/writes network
+data. It can do it in two ways:
+
+Firstly, by implementing Chaosnet over Ethernet (protocol nr 0x0804) and handling
+ARP for that protocol (cf RFC 826). This uses one of the packet filtering
+implementations (currently only pcap) provided by osdnet. (Only Ethernet II
+headers are supported, not 802.3.)
+No routing is handled, that's done by ITS - this code uses the
+Chaosnet trailer provided by ITS to decide where to send pkts. 
+(On Ethernet, no Chaosnet trailer is included.)
+
+Secondly, it can do it by using a Chaos-over-UDP tunnel. A 4-byte
+protocol header is added, with only one defined function code yet
+(sending a Chaos packet). The "original" Chaos trailer (destination,
+source, and checksum) is also added.
+
+The protocol, CHUDP, by default uses UDP port 42042, but this can be
+configured in case, e.g., that port doesn't pass through your
+firewall.
+
+Configuration parameters:
+
+The basic configuration parameters:
+    devdef chaos ub3  ch11 addr=764140 br=6 vec=270
+
+ITS seems to think the "br" param should be 6, not 5 as used in the
+old dummy device definition (see CHXCHN in ITS).
+
+More parameters:
+
+    myaddr=oooo
+	defines the octal Chaosnet address of the interface. 
+	This needs to match the address configured in ITS (see MYCHAD
+	in SYSTEM;CONFIG >)
+    ifmeth=meth
+	where meth is "chudp" or "pcap", selects the link
+	implementation to use (Chaos-over-UDP or Chaos-on-Ethernet).
+For "chudp":
+    chudpport=dddddd
+	sets the local UDP port to use for Chaos-over-UDP. The default is 42042.
+    chip=oooo/hhhhhhhh
+	defines a remote Chaos-over-UDP host with the octal Chaos address oooo,
+	and the IPv4 address or hostname hhhhhhhh. If a hostname is
+	used, the first IPv4 address returned is used. (Rather than
+	listing all your friends' ITS hosts directly, I suggest joining the
+	Global Chaosnet and just list its central router. See
+	https://chaosnet.net.)
+
+If chudpport or chip parameters are given, the ifmeth defaults to chudp,
+otherwise to pcap.
+
+If a CHUDP packet is received from an unknown host, a Chaos/IP mapping
+is dynamically added to the table, so return traffic can find its way. 
+This is useful e.g. if you accept connections from other ITSes without
+static IP addresses. (You can avoid this feature, and potentially
+filling your table, by using a firewall.)
+
+To make use of the interface, you need to recompile ITS after defining
+CHAOSP, MYCHAD, NINDX, and CH11P in SYSTEM;CONFIG (and following the
+instructions in distrib.its, of course).  See also BEWARE note below.
+Don't forget to compile SYSENG;@CHAOS and install as DEVICE;ATSIGN
+CHAOS.  Don't forget to keep names of your friends' ITSes in
+SYSEN2;MLDEV, SYSENG;@DEV, etc.  
+
+*BEWARE*:
+If you have both CHAOSP and IMPP, you run into a bug which results in
+all non-local IP packets being routed via Chaosnet... (unfortunately
+noone is listenting at Chaos address 3040).  
+The bug is caused by the IPMASK macro defined and used in
+SYSTEM;CONFIG, which results in the netmask NM%CHA being zero, which
+matches anything.  The easy fix is to change the line
+IFN CHAOSP,DEFOPT NM%CHA==<IPMASK IMPUS4>	; Set default netmask for it
+to
+IFN CHAOSP,DEFOPT NM%CHA==<IPADDR 255,255,0,0>	; Set default netmask for it
+but the real fix would be to the IPMASK macro.
+
+----------------
+
+See https://chaosnet.net for much much more information, and
+https://github.com/bictorv/chaosnet-bridge for a bridging/routing
+program for Chaosnet.
+
+Cheers,
+
+Bjorn Victor (bjorn@victor.se)

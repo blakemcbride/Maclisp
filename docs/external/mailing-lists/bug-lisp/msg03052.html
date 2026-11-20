@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: additional &#38;AUX capability -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 17 Oct 81 16:04:00 GMT -->
+<!--X-Message-Id: a94253d6eb3d8cdc05e94575d54b5535@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>additional &amp;AUX capability</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03053.html">Date Prev</a>][<a href="msg03051.html">Date Next</a>][<a href="msg03053.html">Thread Prev</a>][<a href="msg03051.html">Thread Next</a>][<a href="maillist.html#03052">Date Index</a>][<a href="threads.html#03052">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>additional &amp;AUX capability</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: WGD at MIT-MC</li>
+<li><em>Subject</em>: additional &amp;AUX capability</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 17 Oct 81 16:04:00 GMT</li>
+<li><em>Cc</em>: BUG-MACLISP at MIT-MC</li>
+<li><em>Original-date</em>: 17 October 1981 12:04-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 3 October 1981 18:03-EDT
+    From: William G. Dubuque &lt;WGD at MIT-MC&gt;
+    (defun f (a &amp;aux b &amp;aux c) ...) complains about the arglist; this works 
+    on the Lispm.  Allowing this format makes it much easier for programs 
+    to append additional &amp;aux vars.
+
+I forgot to mention that this now works in DEFMAC 166 (currently installed
+version which you get if DEFUN&amp; is autoloaded).  Also, the same thing
+should be true for DEFMACRO, right?  Currently, the COMPLR isn't yet
+reloading DEFMAC, but there should be a new COMPLR soon anyway.
+
+Incidentally, some time ago, someone complained about the COMMENT which
+DEFUN&amp;/DEFMACRO outputs that it shouldn't tell you about the &amp;AUX vars;
+I believe removing that information is a mistake, and have re-installed
+it now, so that the comment contains pretty much the whole lambda-list.
+I see that some persons avoid &amp;AUX for esthetic reasons, so presumably
+these ones wouldn't complain about the COMMENT.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03053.html">Updating MacLISP on SPEECH machine</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03051.html">EXPLODE, EXPLODEC, EXPLODEN reveal bug in PRINT</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03053.html">Updating MacLISP on SPEECH machine</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03051.html">EXPLODE, EXPLODEC, EXPLODEN reveal bug in PRINT</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03052"><strong>Date</strong></a></li>
+<li><a href="threads.html#03052"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: TTYSCAN troubles&#45;&#45;doing something wrong -->
+<!--X-From-R13: Brgre Embybivgf &#60;BEL ng [WF&#45;[Z> -->
+<!--X-Date: Sat, 26 Apr 80 14:07:00 GMT -->
+<!--X-Message-Id: f46644a468ba3af7708ffe6130be8934@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>TTYSCAN troubles--doing something wrong</title>
+<link rev="made" href="mailto:PSZ at MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04177.html">Date Prev</a>][<a href="msg04175.html">Date Next</a>][<a href="msg04177.html">Thread Prev</a>][<a href="msg04175.html">Thread Next</a>][<a href="maillist.html#04176">Date Index</a>][<a href="threads.html#04176">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>TTYSCAN troubles--doing something wrong</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: CWH at MIT-MC, ALAN at MIT-MC</li>
+<li><em>Subject</em>: TTYSCAN troubles--doing something wrong</li>
+<li><em>From</em>: Peter Szolovits &lt;PSZ at MIT-ML&gt;</li>
+<li><em>Date</em>: Sat, 26 Apr 80 14:07:00 GMT</li>
+<li><em>Cc</em>: PSZ at MIT-ML, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 26 April 1980 09:07-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The comment was made that if you are having side-effects at read-time
+you must be doing something wrong.  Clearly, the reader already does so,
+but we tend not to think of extra interned atoms as a terrible problem.
+In my application, I am providing other, non-atomic, unique-ized
+expressions, which are also indexed to others of their kind.  The only
+mechanism I know which supports this reasonably IN NOTATION is to use a
+reader macro which then SQUIDifies its result, so that expressions like
+                       (setq foo '(a b [c d] e))
+where the [c d] will never get eval'd, work out right.  Then, however,
+if I type [a [b c] d], the inner [b c] will be created and indexed
+before the expression is complete, and then I may rub it out.  I agree
+that this case could be hacked by making the [b c] realize that it is
+inside another expression and not construct its meaning but merely
+indicate to the outer expression how to construct it when the outer one
+is done, but that is a rather filthy way to program.  I like GSB's
+suggestion, of a global flag that says &quot;don't care about the value&quot;
+better, because it allows each function to decide locally what to do
+without having to understand another notation for what its subsidiaries
+want.  (E.g., what about [a {b &lt;c&gt; d} [e]]--God forbid.)
+	I still think that if you are going to retain the current
+TTYSCAN mechanism, you ought at least to add to it the flexibility to
+handle everything but the &quot;arbitrary macro character&quot; case correctly.
+I'd bet that nearly all of what arbitrary read macros do can, for the
+purposes of prescanning, be described in terms of four or five standard
+schema (the small infinity theory of Waltz).  My (partial) list: 1.
+initial string delimiter (e.g.,|;&quot;), 2. initial of nested bracket pair
+(e.g., ([{&lt;--possibly, though only ( in lisp now), 3. quote-like thing
+(e.g., '`#), 4. slash-like thing (e.g., /).  Can anyone think of others?
+Each of these categories has uniform prescanning implications.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04177.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04175.html">LISPT</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04177.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04175.html">LISPT</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04176"><strong>Date</strong></a></li>
+<li><a href="threads.html#04176"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,9 @@
+x c/clib
+l g0.stk
+l g1.stk
+l g2.stk
+l g3.stk
+l g4.stk
+l g5.stk
+l c25.stk
+o c/ts.gt

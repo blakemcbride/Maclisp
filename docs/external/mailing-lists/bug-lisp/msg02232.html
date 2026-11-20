@@ -1,0 +1,105 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: lsubr CONS and backquote -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Thu, 27 Jul 78 16:26:00 GMT -->
+<!--X-Message-Id: 531be8b44359abe7e423f7ddf6dd7543@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>lsubr CONS and backquote</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02233.html">Date Prev</a>][<a href="msg02231.html">Date Next</a>][<a href="msg02233.html">Thread Prev</a>][<a href="msg02229.html">Thread Next</a>][<a href="maillist.html#02232">Date Index</a>][<a href="threads.html#02232">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>lsubr CONS and backquote</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISPM) at MIT-MC, (BUG LISP) at MIT-MC, NIL at MIT-MC</li>
+<li><em>Subject</em>: lsubr CONS and backquote</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Thu, 27 Jul 78 16:26:00 GMT</li>
+<li><em>Original-date</em>: 27 JUL 1978 1226-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    I have many places in the COMPLR where I would like to use an
+LSUBR version of CONS, namely to do something like
+  (CONS (CAR X) (CONS (CADR X) (CONS 'MUMBLE (CONS Z (CDDDR L)))))
+[hence I would like to see LISP 1703 be made the system LISP asap]
+Now this is not exactly a problem for backquote since I would
+like to write the code directly and the code using 2-arg cons is 
+bletcherous (which is what the read-macro-expansion of backquote
+produces anyway!).  Note the similarity of the
+pre-expanded input using backquote and that using lsubr cons
+     `(,(CAR X) ,(CADR X)  MUMBLE ,Z . ,(CDDDR L))
+  (CONS (CAR X)  (CADR X) 'MUMBLE  Z    (CDDDR L))
+In short, backquote seems best used when most of the stuff is quoted,
+whereas lsubr cons seems best used when most of the stuff is evaluated.
+Yes I *am* aware of the extended generality of the ,@ feature of 
+backquote, but that is no reason to demand usage of a sledgehammer when
+a toothpick will do, for it takes a lot more to control the heavy-tool
+when it is not the instrument especially suited for the job.  For example,
+the above example requires typing 5 unquoter characters (&quot;,&quot;s) for
+backquote, but only one quoter character (&quot;'&quot;) for forwardquote.
+   It is a little annoying that backquote produces such bletcherous consy
+code - it could use lsubr cons also when all things are installed -
+and somewhat annoying that there is no &quot;forwardquote&quot;, i.e. something
+that evals everything except where there is a quote.  
+  I know the LISPM has *LIST - any hopes of generalizing CONS to many
+args both in LISPM and NIL and standardizing on that definition?
+For now (may change mind) I tend to agree with DLW that backquote is
+essentially only used in MACRO defunitions, and we could ignore any
+systemic use;  thus it needn't go in the system of MACLISP or NIL to
+be usable, but merely in the prefaces (or helper-files) for MACRO
+subpackages etc.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02233.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02231.html">LSUBR CONS and back-quote</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02233.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02229.html">lsubr CONS and backquote</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02232"><strong>Date</strong></a></li>
+<li><a href="threads.html#02232"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

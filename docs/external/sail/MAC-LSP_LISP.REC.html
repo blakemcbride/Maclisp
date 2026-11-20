@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>LISP.REC[MAC,LSP] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename LISP.REC[MAC,LSP]  blob <a href="LISP.REC[MAC,LSP]_blob">sn#559367</a> filedate 1981-01-27 generic text, type T, neo UTF8</div>
+<pre id="u8lump">1) New AUTOLOADable macros and capabilities from MLMAC:
+     MULTIPLE-VALUE,  VALUES,  MULTIPLE-VALUE-LIST,  VALUES-LIST
+     RETURN-LIST, MULTIPLE-VALUE-BIND, 
+     LISTP 	
+   Also, SOURCE-TRANS properties are set up for 
+     &lt;=, >=, LOGAND, LOGIOR, LOGXOR, LOGNOT, FIXNUMP, FLONUMP, EVENP
+     (see item 5 below for "SOURCE-TRANS").
+   Reminder: MULTIPLE-VALUE is essentially the same as MSETQ-CALL of
+     previous notes.  The names MSETQ-CALL and MSETQ-RETURN will be
+     supersede by the LISPM names; however macros to convert them will
+     be provided in the UMLMAC file (Utility MacLisp MACros).
+
+   MSETQ-CALL and MSETQ-RETURN are being superseded by the LISPM names,
+   which are now essentially equivalent; minor differences are documented
+   here below.
+   1a) MULTIPLE-VALUE, by default in NIL/MacLISP, will signal an error 
+	if too few values are returned by the called function.  The LISPM 
+	version supplies ()'s;  to change the action of NIL/MacLISP to
+	supply nulls, just do (SETQ SI:CHECK-MULTIPLICITIES () )  --  
+	see the discussion under item 4 below.
+   1b) VALUES is a new LISPM special form, and in NIL/MacLISP it is 
+	essentially the same thing as MSETQ-RETURN was; its basic action is
+	to set up a "return-values vector";  typical usage would be to
+	call VALUES as the last form in a lambda-expression.
+   1c) MULTIPLE-VALUE-LIST is a macro which expands to call a helper function;
+	the result is a list of all the (possibly multiple) values returned 
+	by the evaluated sub-form.  Format of usage is like
+	    (MULTIPLE-VALUE-LIST (&lt;fun> ...))
+	where &lt;fun> should return some (possibly multiple) values.
+   1d) RETURN in MacLISP still admits only one argument -- in order to do
+	a RETURN with multiple arguments, do (RETURN (VALUES first second ...))
+   1e) MULTIPLE-VALUE-RETURN is primitive on the LISPM, but is macro expanded
+	in MacLISP to use merely RETURN.  Currently, RETURN (but not
+	MULTIPLE-VALUE-RETURN) is primitive in MacLISP, and this causes one
+	incompatibility -- (RETURN (VALUES ...)) on the LISPM might return
+	only one value, but in MacLISP it will return as many values as are 
+	provided by the VALUES.
+   1f) VALUES-LIST is a SUBR of one argument, a list, which it "spreads out"
+	into the "return-values vector";  Thus  (VALUES-LIST '(1 B 3))
+	is the same as (VALUES 1 'B 3).
+   1g) RETURN-LIST macroexpands into something like (RETURN (VALUES-LIST ...))
+	As mentioned above for MULTIPLE-VALUE-RETURN, there is the implicit 
+	LISPM/MacLISP incompatibility about RETURN.
+  Remember also that MULTIPLE-VALUE depends upon a "return-values vector" being
+  set up by the function called, and thus constructs like 
+    (MULTIPLE-VALUE (v1 v2) (PROG1 (MANY-VALUED-FUN a1 a3) (SOMETHING-ELSE)))
+  will not work in general;  a correct way to do this particular example is 
+	(LET (unique-var-1 unique-var-2)
+	  (MSETQ-CALL (unique-var-1 unique-var-2) (MANY-VALUED-FUN a1 a3))
+	  (SOMETHING-ELSE)
+	  (SETQ v1 unique-var-1 v2 unique-var-2)
+	  v1)
+  This "fault" of side-effecting also applies to MULTIPLE-VALUE-LIST.
+
+
+2) The two LSUBRs "&lt;=" and ">=" are now autoloading from the MLSUB file.
+   Also some other functions are defined as SUBRs in the file:
+
+   Each of &lt;= and >= take two or three arguments (someday, may be
+     extended to more than three, but for now ...)
+   In conjunction with the functions which get SOURCE-TRANS properties
+     from the MLMAC file, there are SUBR definitions of them in this
+     file (MLSUB, which is acronymic for "MacLisp SUBrs").  Generally 
+     they are not autoloading;  they are  LOGAND, LOGIOR, LOGXOR, LOGNOT,
+     FIXNUMP, FLONUMP, and EVENP.
+   Also, three internal subrs which are helpers for the multiple-value 
+    macroexpanders are autoloadable from this file, namely 
+    RETURN-LIST-aux/|,  MULTIPLE-VALUE-LIST-aux/|,  and
+    SI:CHECK-MULTIPLICITIES.  The latter is called whenever MULTIPLE-VALUE
+    or MULTIPLE-BIND have more variables than there are returned values;
+    the value of SI:CHECK-MULTIPLICITIES, as a variable, then determines
+    what to do (default setting is CERROR):
+ 	()     -- means pad out unsupplied multiple-return-values with nulls;
+	CERROR -- means run an error if not enough values supplied;
+	any thing else should be a function to funcall with an argument which
+		is the number of variables minus one (*:ARn contains the
+		actual number of returned values).
+
+3) Non-autoload versions of FMAKUNBOUND, FSYMEVAL, and FSET are in FUNCEL file.
+    By loading in the EXTEND feature, a pseudo SUBR object can be created 
+    and manipulated;  thus reasonable versions of the LISPM/NIL functions 
+    FMAKUNBOUND, FSYMEVAL, and FSET are implemented.   
+    This facility is pre-loaded into NILAID.
+
+4) FILE-EXIT-FUNCTIONS is a new global variable which is lambda-bound to
+     the value of FILE-EXIT-FUNCTIONS-DEFAULT by LOAD and FASLOAD.
+     It holds a list of functions of 1 arg to be run  at end of loading
+     (the argument supplied is null if loading completed successfully; if not,
+     it is the file-array of the file being aborted).  This uses the
+     UNWIND-PROTECT mechanism, so these functions will be called even
+     if the file is aborted by ↑G or *THROW.
+
+
+5) SOURCE-TRANS properties for COMPLR act almost like LISPM "optimizers".
+
+   It is now possible to carry out "code-transformations" in COMPLR
+     by means of the SOURCE-TRANS mechanism. When compiling a form whose
+     CAR is a symbol, the compiler will check for a SOURCE-TRANS property
+     on the symbol. The value of this propery should be a list of
+     transformation routines, each of which must be a function of one
+     argument. Furthermore, each transformation routine must return two
+     values (e.g., via VALUES), the first being the transformed form and
+     the second being a flag which, when non-null, indicates that the
+     transformation routine has "done something". The compiler applies
+     each transformation routine in turn, passing the form to be
+     transformed as the sole argument. If the transformation routine
+     returns a second value of () then it is considered to have
+     "done nothing" and the next transformation routine is tried; otherwise
+     the routine is considered to have "done something" and the entire
+     process begins anew with the first transformation routine.
+     The transformation of the original form is complete only after all
+     transformation routines have been tried and "done nothing". This
+     transformation procedure is carried out fully before any macro
+     expansion is attempted.
+   Note well, that this differs from the LISPM facility in that the
+     translating functions *must* return at least two values.
+ </pre>
+</body>
+</html>

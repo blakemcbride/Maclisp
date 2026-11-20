@@ -1,0 +1,84 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: ASSUME&#45;FIXNUM -->
+<!--X-From-R13: Rnir Fbhergmxl &#60;Rnir.Fbhergmxl ng Q[G&#45;10O> -->
+<!--X-Date: Wed, 15 Aug 79 09:57:00 GMT -->
+<!--X-Message-Id: 31f7dc85fa1b28aa5221679d02f69803@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: ASSUME-FIXNUM</title>
+<link rev="made" href="mailto:Dave.Touretzky at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02870.html">Date Prev</a>][<a href="msg02868.html">Date Next</a>][<a href="msg02870.html">Thread Prev</a>][<a href="msg02868.html">Thread Next</a>][<a href="maillist.html#02869">Date Index</a>][<a href="threads.html#02869">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: ASSUME-FIXNUM</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp @ mit-mc</li>
+<li><em>Subject</em>: Re: ASSUME-FIXNUM</li>
+<li><em>From</em>: Dave Touretzky &lt;Dave.Touretzky at CMU-10A&gt;</li>
+<li><em>Date</em>: Wed, 15 Aug 79 09:57:00 GMT</li>
+<li><em>In-reply-to</em>: Robert W. Kerns's message of 15 Aug 79 04:50-EST</li>
+<li><em>Original-date</em>: 15 August 1979 0557-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>If this FIXNUM-IDENTITY is supposed to be a declaration, then ASSUME-FIXNUM
+is fine.  But if it is asserting a fact about an argument that you wish
+MacLisp to verify, I think ASSERT-FIXNUM is more appropriate.  It coincides
+with the notion of &quot;assertions&quot; in proving or testing programs.  Some
+experimental languages allow you to make fairly complex assertions about
+the state of the computation at various places, and the runtime system
+then checks each assertion as it comes to it.  ASSERT-FIXNUM appears to
+be a simple example of the above.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02870.html">ASSUME-FIXNUM</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02868.html">ASSERT-FIXNUM</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02870.html">ASSUME-FIXNUM</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02868.html">ASSERT-FIXNUM</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02869"><strong>Date</strong></a></li>
+<li><a href="threads.html#02869"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

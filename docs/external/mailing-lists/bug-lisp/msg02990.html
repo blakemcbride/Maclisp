@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Screw with DEFVST (which otherwise works fine) -->
+<!--X-From-R13: Uhl Egrryr &#60;UZE ng EG&#45;OW> -->
+<!--X-Date: Tue, 19 Jun 79 08:12:00 GMT -->
+<!--X-Message-Id: 15cb3dda1b29883087f626117beeb063@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Screw with DEFVST (which otherwise works fine)</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02991.html">Date Prev</a>][<a href="msg02989.html">Date Next</a>][<a href="msg02991.html">Thread Prev</a>][<a href="msg02989.html">Thread Next</a>][<a href="maillist.html#02990">Date Index</a>][<a href="threads.html#02990">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Screw with DEFVST (which otherwise works fine)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC</li>
+<li><em>Subject</em>: Screw with DEFVST (which otherwise works fine)</li>
+<li><em>From</em>: Guy Steele &lt;GLS at SU-AI&gt;</li>
+<li><em>Date</em>: Tue, 19 Jun 79 08:12:00 GMT</li>
+<li><em>Cc</em>: GLS at SU-AI    </li>
+<li><em>Original-date</em>: 19 Jun 1979 0112-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+(DEFVST GRUNT FOO BAR BAZ)
+
+(DEFMACRO CLOBBER (FROB)
+	  (COND ((EQ (CAR FROB) 'CAR)
+		 `(RPLACA ,(CADR FROB) (CLOBBERIFIER ,FROB)))
+		((EQ (CAR FROB) 'CDR)
+		 `(RPLACD ,(CADR FROB) (CLOBBERIFIER ,FROB)))
+		(T `(SETF ,FROB (CLOBBERIFIER ,FROB)))))
+
+(CLOBBER (GRUNT-BAR MY-FAVORITE-GRUNT))
+
+This fails to work because the two occurrences of FROB (i.e. of
+(GRUNT-BAR MY-FAVORITE-GRUNT)) in the generated SETF
+form will be EQ.  The second occurrence is evaluated first,
+and macro-expanded in the process.  As a result, the SETF
+(i.e. SETVST) sees a form as its first argument whose car
+is MACROEXPANDED rather than GRUNT-BAR, so it gets very unhappy.
+I am fixing this by writing instead
+		...
+		(T `(SETF ,(APPEND FROB '()) (CLOBBERIFIER ,FROB)))))
+but this seems to be a crock.  Is there any hope of a reasonable
+general solution to this problem?
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02991.html">[RAND.FAUGHT: maclisp complr]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02989.html">Sprinter lossage</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02991.html">[RAND.FAUGHT: maclisp complr]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02989.html">Sprinter lossage</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02990"><strong>Date</strong></a></li>
+<li><a href="threads.html#02990"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

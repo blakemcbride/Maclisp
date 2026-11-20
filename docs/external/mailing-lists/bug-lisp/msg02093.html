@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: READER, (TYIPEEK T) -->
+<!--X-From-R13: DIY,Y[B ng [WF&#45;[Q -->
+<!--X-Date: Sat, 1 Mar 80 01:19:00 GMT -->
+<!--X-Message-Id: b4dc41e560cd6c49cd469cea7cc9b587@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>READER, (TYIPEEK T)</title>
+<link rev="made" href="mailto:RWK">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02094.html">Date Prev</a>][<a href="msg02092.html">Date Next</a>][<a href="msg02094.html">Thread Prev</a>][<a href="msg02092.html">Thread Next</a>][<a href="maillist.html#02093">Date Index</a>][<a href="threads.html#02093">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>READER, (TYIPEEK T)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: READER, (TYIPEEK T)</li>
+<li><em>From</em>: RWK,KMP at MIT-MC</li>
+<li><em>Date</em>: Sat, 1 Mar 80 01:19:00 GMT</li>
+<li><em>Original-date</em>: 29 FEB 1980 2019-EST</li>
+<li><em>Sent-by</em>: KMP at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The bugous behaviour of (TYIPEEK T) and splicing macros has been improved!
+It no longer lets user code clobber AR2A (it's read table), by refetching
+the readtable after the call (if somebody SETQ's READTABLE in a splicing
+macro he'll now win (or lose, depending on your point of view)).  However,
+(TYIPEEK T) will still lose, returning most likely a space.  Since it's
+not possible to make this do the truely right thing, (since as I recall it's
+described as returning the first meaningful character, and that turned out
+to be that non-flushing splicing macro), I propose to not fix this.  I
+only looked at it to fix ending up in the &quot;nothing terminates&quot; mode that
+resulted when a random S-expression ended up in AR2A instead of the
+readtable...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02094.html">FDEFINE</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02092.html">IOTA-ifying LOAD</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02094.html">FDEFINE</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02092.html">IOTA-ifying LOAD</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02093"><strong>Date</strong></a></li>
+<li><a href="threads.html#02093"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

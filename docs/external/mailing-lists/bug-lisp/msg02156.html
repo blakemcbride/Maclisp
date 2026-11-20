@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 13 Feb 80 02:33:00 GMT -->
+<!--X-Message-Id: 774f673c11fb1e0dfc4749834df5f079@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02157.html">Date Prev</a>][<a href="msg02155.html">Date Next</a>][<a href="msg02157.html">Thread Prev</a>][<a href="msg02155.html">Thread Next</a>][<a href="maillist.html#02156">Date Index</a>][<a href="threads.html#02156">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 13 Feb 80 02:33:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 12 February 1980 21:33-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 12 FEB 1980 1243-EST
+    From: JONL at MIT-MC (Jon L White)
+
+    (SUBST () () (HUNK 1 2 3 4))  MAKES A ** LIST **
+
+also (append (hunk 1 2 3 nil) '(b c)) makes (1 b c).
+Now perhaps you could argue that append is a list-hacking
+function and that this is therefore reasonable.  But other behaviors
+could also be justified:
+
+1) subst hacks non-atomic structure and should make hunks, while append
+   hacks lists and thus should barf since it is about to treat a hunk as
+   a list.
+
+2) subst and append are both cons-hacking functions and they should both do
+   the same thing (both barf or both do what they do now).
+
+3) subst and append are both non-atom hacking functions and should
+   make conses or hunks as appropriate.
+
+I have always thought it was a pain that hunks are not atoms.  It
+seems that whenever one writes code that deals with lists that include
+structures made of hunks (like those produced by a defstruct), one really
+wants ATOM to return nil for hunks.  Oh well, too late to change it now!
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02157.html">non-null termination of list</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02155.html">ATOM applied to a hunk?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02157.html">non-null termination of list</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02155.html">ATOM applied to a hunk?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02156"><strong>Date</strong></a></li>
+<li><a href="threads.html#02156"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

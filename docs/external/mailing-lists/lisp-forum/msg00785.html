@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: nested function definitions interfering with extensibility. -->
+<!--X-From-R13: Dvpuneq [. Egnyyzna &#60;D[E ng [WF&#45;OW> -->
+<!--X-Date: Fri ,19 Jun 81 00:44:00 EDT -->
+<!--X-Message-Id: ead06274ece9096873fa13507dcfca01@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>nested function definitions interfering with extensibility.</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00786.html">Date Prev</a>][<a href="msg00784.html">Date Next</a>][<a href="msg00786.html">Thread Prev</a>][<a href="msg00784.html">Thread Next</a>][<a href="maillist.html#00785">Date Index</a>][<a href="threads.html#00785">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>nested function definitions interfering with extensibility.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: nested function definitions interfering with extensibility.</li>
+<li><em>From</em>: Richard M. Stallman &lt;RMS at MIT-AI&gt;</li>
+<li><em>Date</em>: Fri ,19 Jun 81 00:44:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 18 June 1981 10:37-EDT
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+
+    This certainly true in the case of program editing in a
+    non-structured text-oriented way, but in a system with
+    more cooperation between program editor and compiler this
+    need not be the case. I'm all for editing programs as text,
+    but I don't like representing them, storing them, as
+    a sequence of characters, i.e. in a purely syntactic manner.
+    Why? Because it severely limits program management to
+    purely syntactical levels. 
+
+The problem is not in editing at all.  It is easy in any sort of
+editor to edit the internal function definition and make no change to
+the external one, and vice versa.
+
+The problem comes when you try to store a file which, when loaded,
+changes one but not the other.  No editing is involved, just loading
+of source or compiled files.
+
+IRT Moon's suggestion:
+
+Function specs like (:INTERNAL FOO BAR) for BAR within FOO make it
+possible to redefine the internal function without changing the
+external one.  This is a good solution for that half of the problem.
+
+But how do you redefine the external one without changing the internal
+one?
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00786.html">LABELS</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00784.html">NCONC and LAST of locatives</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00786.html">LABELS</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00784.html">NCONC and LAST of locatives</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00785"><strong>Date</strong></a></li>
+<li><a href="threads.html#00785"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

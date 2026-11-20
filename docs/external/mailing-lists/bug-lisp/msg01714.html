@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: this doesn't have much to do with any new monitor, I suspect -->
+<!--X-From-R13: Quevf Dlynaq &#60;QBD ng [WF&#45;SSQE> -->
+<!--X-Date: Tue, 13 Jan 81 18:22:00 GMT -->
+<!--X-Message-Id: 03f7c5597baab2e736311ab1a24affef@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>this doesn't have much to do with any new monitor, I suspect</title>
+<link rev="made" href="mailto:CPR at MIT-EECS">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01715.html">Date Prev</a>][<a href="msg01713.html">Date Next</a>][<a href="msg01715.html">Thread Prev</a>][<a href="msg01711.html">Thread Next</a>][<a href="maillist.html#01714">Date Index</a>][<a href="threads.html#01714">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>this doesn't have much to do with any new monitor, I suspect</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at mc</li>
+<li><em>Subject</em>: this doesn't have much to do with any new monitor, I suspect</li>
+<li><em>From</em>: Chris Ryland &lt;CPR at MIT-EECS&gt;</li>
+<li><em>Date</em>: Tue, 13 Jan 81 18:22:00 GMT</li>
+<li><em>Cc</em>: Keshav at MIT-XX</li>
+<li><em>Original-date</em>: Tuesday, 13 January 1981  13:22-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Date: Mon, 12 Jan 81 22:03:00 GMT
+Original-Date: Monday, 12 January 1981  17:03-EST
+From: KESHAV at MIT-XX
+To:   cpr at MIT-XX
+Re:   A Bug
+
+The function writeablep in Maclisp is defined in the fasl file &lt;maclisp&gt;purep.
+fasl. My guess is that it checks for write protection violations. Until
+yesterday, calling this function with an output file (in Maclisp) gave t(rue).
+It still does so in Maclisp on ML. However, your new monitor gives a
+write protection error.
+      One LISP program that shows this is -
+       (load '((dsk maclisp) purep fasl))
+       (setq outfilep (open '(my output) 'out))
+       (writeablep outfilep)
+   This should return t.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01715.html">Re: incompatible format change</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01713.html">Re: 24 carat multifaceted lossage</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01715.html">Re: incompatible format change</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01711.html">this doesn't have much to do with any new monitor, I suspect</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01714"><strong>Date</strong></a></li>
+<li><a href="threads.html#01714"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

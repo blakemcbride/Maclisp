@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Inadvertent loading of MLMAC file -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sun, 23 Nov 80 06:41:00 GMT -->
+<!--X-Message-Id: 3b861d5719d9670767b58f5281d3d732@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Inadvertent loading of MLMAC file</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01783.html">Date Prev</a>][<a href="msg01781.html">Date Next</a>][<a href="msg01783.html">Thread Prev</a>][<a href="msg01781.html">Thread Next</a>][<a href="maillist.html#01782">Date Index</a>][<a href="threads.html#01782">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Inadvertent loading of MLMAC file</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: WJL at MIT-MC</li>
+<li><em>Subject</em>: Inadvertent loading of MLMAC file</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sun, 23 Nov 80 06:41:00 GMT</li>
+<li><em>Cc</em>: GJC at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 23 NOV 1980 0141-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     WJL@MIT-ML
+Date: Mon, 18 Nov 80 17:12:37 GMT
+Original-Date: 11/18/80 13:12:37 EDT
+Subject:
+    To: (BUG LISP) at MIT-ML
+    I am getting very frustrated with the function name conflicts resulting 
+    from all of the new stuff that gets autoloaded into Lisp.  I spent five 
+    hours figuring out what was going on when a probef of a backquoted list 
+    caused backquote to be loaded which called pairp, got mine, returned t, 
+    messed up the interrupts, tried to load the tty, and went deaf.  .  .  .  
+On the 12'th of this month, GJC and I discovered that BACKQ had been
+compiled with a compiler which failed to open-code PAIRP (this is fixed now
+through the loading of a &quot;fix&quot; file when the XCOMPLR is loaded).  But there 
+should be no function call to PAIRP in compiled code, for that would, in 
+older LISPs, cause the autoloading of MLMAC.  I'm not sure when the recompiled
+BACKQ made it over to ML, but since GJC did the compilation on MC, he may have
+forgotten to :INSTALL it to AI and ML (GSB probably did it later?).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01783.html">(ARRAYDIMS (array () () 8)) ==&gt; (T 8)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01781.html">LEDIT on MIT-EE</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01783.html">(ARRAYDIMS (array () () 8)) ==&gt; (T 8)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01781.html">LEDIT on MIT-EE</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01782"><strong>Date</strong></a></li>
+<li><a href="threads.html#01782"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

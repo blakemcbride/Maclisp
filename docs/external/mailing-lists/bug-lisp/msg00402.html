@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Replies to ` query -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sun, 27 May 79 13:22:00 GMT -->
+<!--X-Message-Id: 490b74a2d236d31ed0242c2888e12565@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Replies to ` query</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00403.html">Date Prev</a>][<a href="msg00401.html">Date Next</a>][<a href="msg00403.html">Thread Prev</a>][<a href="msg00398.html">Thread Next</a>][<a href="maillist.html#00402">Date Index</a>][<a href="threads.html#00402">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Replies to ` query</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RBR at MIT-MC, KMP at MIT-MC, RWK at MIT-MC, KEN at MIT-MC</li>
+<li><em>To</em>: PRATT at MIT-MC, MACRAK at MIT-MC</li>
+<li><em>Subject</em>: Replies to ` query</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sun, 27 May 79 13:22:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, JONL at MIT-MC</li>
+<li><em>Original-date</em>: 27 MAY 1979 0922-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Soon there will be a new BACKQ package for maclisp, which willl
+have the option of generating &quot;macroified&quot; code, with the name
+|`-expander/|| as a primary eval-time macro.  This option will
+be exercised if BACKQUOTE-EXPAND-WHEN is &quot;EVAL&quot; (or in general
+anything except &quot;READ), and otherwise the expansion will occur
+at read-in time just as at present.  Three other internal markers:
+|-,-/||  |-,@-/||  and |-,.-/||    The latter one is for NCONC
+instead of APPEND, and thus we can have `(A ,@B)  generate
+(APPEND A B ()), thus copying B, but `(A ,.B)  generate
+(APPEND A B).  Note that `(,.A B) would generate (NCONC A B).
+[this idea, for &quot;,.&quot; comes from RBR, I think].
+GRINDEF would print out a form just like it was read-in, using
+the READMACROINVERSE feature;  however, there is a flaw in this
+feature in that readmacros won't appear in the CDR part of
+a list;  thus you never see '(A . 'B)  grindef'd out that way.
+For the same reason, it would be somewhat of a pain to get
+`(A . ,B) to grindef out that way, but `(A ,@B) and `(A ,.B)
+both win.  Note the weird commutation:  `(A . ,B) works the
+same as `(A ,. B)  ??
+All the aforesaid &quot;markers&quot; and macros would be on the obarray,
+so that any PRINTing or GRINDEFing (regardless of the success of
+the READMACROINVERSE attempts)  would be readable back in with
+no loss of functionality.
+Any further comments?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00403.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00401.html"># as an initial READ character macro</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00403.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00398.html">Replies to ` query</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00402"><strong>Date</strong></a></li>
+<li><a href="threads.html#00402"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

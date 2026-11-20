@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: [Re: [Re: (EQUAL "a" "a") &#45;> ()]] -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Wed, 1 Oct 80 16:52:00 GMT -->
+<!--X-Message-Id: 01Oct80 125246 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: [Re: [Re: (EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()]]</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01129.html">Date Prev</a>][<a href="msg01128.html">Date Next</a>][<a href="msg01130.html">Thread Prev</a>][<a href="msg01126.html">Thread Next</a>][<a href="maillist.html#01127">Date Index</a>][<a href="threads.html#01127">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: [Re: [Re: (EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()]]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Subject</em>: Re: [Re: [Re: (EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()]]</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Wed, 1 Oct 80 16:52:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC, miller at MIT-AI</li>
+<li><em>In-reply-to</em>: KMP@MIT-MC's message of 1 Oct 80 10:39-EST</li>
+<li><em>Original-date</em>: 1 October 1980 1252-EDT (Wednesday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I think I didn't make myself clear: I meant for the obarray to be
+an unadvertised internal implementation technique.  People are only
+supposed to depend on advertised properties of data types and functions,
+and strings being EQ is most certainly not advertised!
+Using an obarray internally will solve the EQUAL problem, and I don't
+think it breaks any correct programs.  It will just cause incorrect
+programsd to be incorrect in a different way.  Small fixnums are
+&quot;interned&quot; too, by FXCONS, for different implementational reasons,
+and this has occasionally misled people into using EQ on fixnums
+because they empirically determined that EQ &quot;worked&quot;; but when this
+screwed them we just said to use =, rather than flushing the
+&quot;interning&quot; feature.
+So if the obarray hack is put in, don't annouce that an obarray is
+used.  Announbce only that EQUAL now works on strings.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01129.html">Macros and destructuring and functions, oh my!</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01128.html">(EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01130.html">[Re: [Re: (EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()]]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01126.html">[Re: [Re: [Re: (EQUAL &quot;a&quot; &quot;a&quot;) -&gt; ()]]]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01127"><strong>Date</strong></a></li>
+<li><a href="threads.html#01127"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

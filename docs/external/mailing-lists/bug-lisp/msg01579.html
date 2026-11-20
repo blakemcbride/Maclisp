@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Lightening quenched! -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Thu, 12 Feb 81 19:18:00 GMT -->
+<!--X-Message-Id: 270e952de755008617b70e9120e6edb5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Lightening quenched!</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01580.html">Date Prev</a>][<a href="msg00993.html">Date Next</a>][<a href="msg01580.html">Thread Prev</a>][<a href="msg00993.html">Thread Next</a>][<a href="maillist.html#01579">Date Index</a>][<a href="threads.html#01579">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Lightening quenched!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Lightening quenched!</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Thu, 12 Feb 81 19:18:00 GMT</li>
+<li><em>Cc</em>: WGD at MIT-MC</li>
+<li><em>Original-date</em>: 12 FEB 1981 1418-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Finally, I think I have tested all cases of my &quot;patch&quot; to the
+&quot;lightening strikes twice&quot; bug:
+    Date: 10 February 1981 17:53-EST
+    From: Jon L White &lt;JONL at MIT-MC&gt;
+    Subject: Lightening Strikes Twice!
+    .  .  .
+    Sigh, remember the PUTPROP twice bug that has plagued us lo these
+    6 years?  This is still another manifestation of it.  I've done some
+    more work on PUTPROP, but it still isn't completely bug-free (will work
+    more on it later tonite)
+The only anomalous case is that when you are trying to do a pure-putprop,
+and the page on which the property-list cell resides **has already been
+made read-only**, then the initial part of the plist will be copied into
+impure space;  this behaviour isn't buggy, but simply leaves 2 words
+in impure space that could go into pure.   Look on the bright side!  it
+doesn't cause the frivolous creation of yet another page of pure space 
+when you &quot;accidentally&quot; pure-putprop twice.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01580.html">Strength</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00993.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01580.html">Strength</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00993.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01579"><strong>Date</strong></a></li>
+<li><a href="threads.html#01579"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

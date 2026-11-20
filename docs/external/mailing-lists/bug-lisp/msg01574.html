@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MACROEXPAND&#45;1*M -->
+<!--X-From-R13: DIY ng [WF&#45;[Q (Dboreg I. Yreaf) -->
+<!--X-Date: Fri, 13 Feb 81 07:36:00 GMT -->
+<!--X-Message-Id: b1a423df84fe48afb086143f87806df5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MACROEXPAND-1*M</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01575.html">Date Prev</a>][<a href="msg01573.html">Date Next</a>][<a href="msg01575.html">Thread Prev</a>][<a href="msg01573.html">Thread Next</a>][<a href="maillist.html#01574">Date Index</a>][<a href="threads.html#01574">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MACROEXPAND-1*M</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: MACROEXPAND-1*M</li>
+<li><em>From</em>: RWK at MIT-MC (Robert W. Kerns)</li>
+<li><em>Date</em>: Fri, 13 Feb 81 07:36:00 GMT</li>
+<li><em>Original-date</em>: 13 FEB 1981 0236-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>This now calls the value of FIND-MACRO-DEFINITION
+(defaultly FIND-MACRO-DEFINITION) to find the macro definition.
+If you want macros which you have stashed somewhere else to be
+included, set FIND-MACRO-DEFINITION to your own function
+(which can call FIND-MACRO-DEFINITION if it wishes).
+
+FIND-MACRO-DEFINITION now will find macros that the
+compiler pushed onto MACROLIST, so mere user programs
+will get these macros expanded too.
+
+This feature is useful for those writing cross-compilers.
+It could also be used as a way to get the effect of
+macros without actually making something a macro.  I.e.
+a better way to do things than defining something to
+be both a MACRO and a SUBR might be to do
+
+(DEFUN MY-FIND-MACRO-DEFINITION (sym)
+  (or (cdr (assq sym my-fake-macros))
+      (find-macro-definition sym)))
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01575.html">previous bug report</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01573.html">GET of a HUNK</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01575.html">previous bug report</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01573.html">GET of a HUNK</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01574"><strong>Date</strong></a></li>
+<li><a href="threads.html#01574"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

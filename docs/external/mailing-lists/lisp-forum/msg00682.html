@@ -1,0 +1,158 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: C*R and language design -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Sun ,6 Dec 81 20:08:00 EDT -->
+<!--X-Message-Id: 06Dec81 190836 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>C*R and language design</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00683.html">Date Prev</a>][<a href="msg00681.html">Date Next</a>][<a href="msg00683.html">Thread Prev</a>][<a href="msg00681.html">Thread Next</a>][<a href="maillist.html#00682">Date Index</a>][<a href="threads.html#00682">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>C*R and language design</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at MIT-MC</li>
+<li><em>Subject</em>: C*R and language design</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Sun ,6 Dec 81 20:08:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>JKF doesn't want to impose prejudices on me by not providing C*R in Franz
+LISP.  It seems to me that many other prejudices are inflicted in
+many other forms: the absence of FORMAT and DEFSTRUCT, the incompatibility
+of the reader, and others.  These all cramp my style in one way or another,
+the first-mentioned being the most annoying.
+
+It seems to me that an implementor will always necessarily impose
+constraints on a language, willy-nilly, if only because he doesn't have
+time or other resources to implement them all at once.  (Thus it is not
+entirely reasonable to blame Franz LISP for the 1.0E99 problem.  One
+could argue that if the C libraries are badly designed or contain
+errors, then they should have not been used, but instead reimplemented
+or (better yet) fixed.  This is not always economically feasible,
+however, and presumably that was the case here.)  The language will only
+have, at any given point in time, that which the implementor has had
+the resources (and taste) to install so far.
+
+On the other hand, as JKF points out, once a feature is installed, it
+can shaft a user badly to retract it, much more badly than never having
+installed it in the first place.
+
+It follows that implementors should choose their features carefully and
+wisely, not only with respect to the order in which things are put in,
+but also with respect to whether they should be put in at all.
+
+Of course, hindsight is easier than foresight.  Franz may be stuck with
+the C*R thing, because of the retraction problem; but the painful
+experience of many others seems to support the conclusion that it
+should not be introduced.  This experience occurs not immediately, but
+after many years; it is a Trojan horse or time bomb.  As KMP indicates,
+there is no problem using it to write code; and indeed, it is
+reasonable for the codewriter to expect consistency in the language.
+However, the indiscriminate use of C*R eventually leads to chaotic and
+unmaintainable code, with a severity on a par with the unrestrained and
+indiscriminate use of GO.  GO, like C*R, can be used wisely; but the
+wise occasions are rarer than those where DO and friends (in the case
+of GO) or DEFSTRUCT and friends (in the case of C*R) are far more
+appropriate.
+
+I think the very fact that JKF finds it necessary to describe CADDDAR
+as &quot;the fourth element of the first thing&quot; -- a composite description --
+rather than as some simple atomic notion indicates it is already too
+large to appear in &quot;polite&quot; code.  If that is how he thinks of it,
+then that is how he should write it: (CADDDR (CAR X)).  After all,
+depending on the context there might be another, more meaningful parsing.
+If I wanted the second element of the body of a lambda expression
+ from a form X = ((LAMBDA ...) ...), then (CADR (CDDR (CAR X))) would
+be more suitable.  Again I argue, the four-A/D instances approach the
+upper limit of what can be recognized as a single chunk by the eye.
+
+The more general question is whether consistency should be paramount
+in language design, or occasionally subordinated to such other goals
+as reliability, maintainability, detection of probable typographical errors,
+and so on.  Here is an example from the recent Common LISP deliberations.
+The MacLISP mapping functions take a function and N lists, for N &gt; 0,
+where the function must accept N arguments.  In my zeal for that kind of
+consistency called &quot;extending to boundary cases&quot;, I suggested that N
+be allowed to be zero.  This is perfectly well-defined.  A mapping
+function terminates when any of the lists runs out.  With no lists, it
+can never terminate.  Therefore (MAPC #'(LAMBDA () ...)) would be an
+idiom for (DO-FOREVER ...).
+
+This is all perfectly elegant and consistent, and it was roundly voted down.
+Why?  Because (a) the case of MAP of zero lists is much more likely
+to occur by typographical accident than by intention; (b) it is not
+really consistent because with zero lists MAP does something which is
+conceptually very *different* from a pragmatic standpoint, despite the
+mathematical elegance; (c) because of (b), it is undesirable for
+reasons of maintainability even to suggest to the programmer that MAP
+could be abused in this way, and therefore in consideration of (a)
+the entire feature is best omitted from the language.
+
+A mild analogy arises here with the function CR.  Why was the C...R hack
+not extended to zero as well as to infinity?  Perhaps it was merely
+oversight, but I venture that CADADADADADDAR is somehow &quot;like&quot; or &quot;in the
+same spirit as&quot; CAR, whereas CR somehow is less so, since it doesn't
+select (although it is indeed the limiting case of selection, selecting
+the whole).
+
+I do not consider consistency to be paramount.  Others no doubt
+will disagree.  The mathematician in me sighed at the rejection
+of MAP of zero lists.  The programmer in me was relieved that such
+an odd beast would likely not appear in future Common LISP code.
+--Guy
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00683.html">Re: Query</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00681.html">CR</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00683.html">Re: Query</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00681.html">CR</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00682"><strong>Date</strong></a></li>
+<li><a href="threads.html#00682"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

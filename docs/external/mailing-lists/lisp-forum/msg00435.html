@@ -1,0 +1,116 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: mode lines -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,26 Jan 81 10:55:00 EDT -->
+<!--X-Message-Id: 4d5a12d3363381657d119b1234eb8a9e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: mode lines</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00573.html">Date Prev</a>][<a href="msg00436.html">Date Next</a>][<a href="msg00434.html">Thread Prev</a>][<a href="msg00438.html">Thread Next</a>][<a href="maillist.html#00435">Date Index</a>][<a href="threads.html#00435">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: mode lines</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: Re: mode lines</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,26 Jan 81 10:55:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I'm not against mode lines per say, I just think the present
+implementation is un-necessarily crufty, really a relic from
+ITS Emacs, and one which would take extra amounts of code to implement
+in maclisp, finally arriving and an inferior and weak feature.
+
+I have nothing against putting
+(-*- Mode Lisp Package Macsyma Syntax Old Base 8 -*-) in a file.
+And I fail to see the objection a Tex user would have for
+%% (-*- Mode Tex -*-)
+or the macsyma user for /* (-*- Mode Macsyma -*-) */
+My argument is simply that the above is easier to parse,
+for human or computer, than
+;;; -*- Mode: Lisp; Package Macsyma; Base 8 -*-
+which looks more like the syntax of Algol.
+
+What could be the objection to supporting a sharp-sign
+feature which controlled read syntax? e.g.
+#S(Mode Lisp Package Macsyma Syntax Old Base 8)
+
+%% #S(Mode Tex)
+/* #S(Mode Macsyma) */
+
+The argument is &quot;why cruft up your lisp world, the one in which
+most of your work is done, with notions and features which are
+not native to it, which are difficult to support in the mother
+tongue (i.e. Maclisp)?&quot;
+
+The claim is that in this climate of many suggested changes,
+for example &quot;/&quot; &lt;=&gt; &quot;\&quot;, there should be some interest
+in increasing the power of features which can be use insulate
+innocent users from changes. Recall Moons note where he
+announced a new &quot;modeline&quot; feature for the Lispm, he
+dismissed the poor maclisp users with the statement,
+I guess there will be more of a problem doing this in maclisp.
+I think that is a callous and unimaginative attitude.
+[Alan, who has expressed favour for the status-quo on the
+ &quot;/&quot; issue certainly doesn't address the transportable modeline
+  problem with arguments which start off by talking about
+  the taking of long walks and floating.]
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00573.html">Re: /\</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00436.html">Re: /\ Mess, upward compatibility</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00434.html">Re: George, take a float until your hat walks.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00438.html">Re: mode lines</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00435"><strong>Date</strong></a></li>
+<li><a href="threads.html#00435"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: COMPLR bug -->
+<!--X-From-R13: Xrsserl B. Ubyqra &#60;XBU ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 3 Sep 81 10:44:00 GMT -->
+<!--X-Message-Id: 6327648e976c72a8dcc54701cc56d561@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>COMPLR bug</title>
+<link rev="made" href="mailto:JPG at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03093.html">Date Prev</a>][<a href="msg03091.html">Date Next</a>][<a href="msg02926.html">Thread Prev</a>][<a href="msg03091.html">Thread Next</a>][<a href="maillist.html#03092">Date Index</a>][<a href="threads.html#03092">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>COMPLR bug</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: COMPLR bug</li>
+<li><em>From</em>: Jeffrey P. Golden &lt;JPG at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 3 Sep 81 10:44:00 GMT</li>
+<li><em>Cc</em>: GJC at MIT-MC, BUG-LISP at MIT-MC, GCOOK at MIT-MC,    MACSYMA-I at MIT-MC</li>
+<li><em>Original-date</em>: 3 September 1981 06:44-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:    JONL@MIT-MC
+Date: Wed, 27 Aug 81 04:59:19 GMT
+Original-Date: 08/27/81 00:59:19 EDT
+Subject:
+   To: GJC at MIT-MC
+   CC: (BUG LISP) at MIT-MC, GCOOK at MIT-MC, JPG at MIT-MC,
+   CC: MACSYMA-I at MIT-MC
+   I'm aware of the limitation in COMPLR, whereby you can't
+   nest a local variables with differing declarations.  
+   
+Apart from the fact that it would be nice if the above bug were fixed,
+GJC's first example did not exhibit &quot;differing declarations&quot;:
+
+From:    GJC@MIT-MC
+Date: Wed, 27 Aug 81 03:08:46 GMT
+Original-Date: 08/26/81 23:08:46 EDT
+Subject: 
+   Let us look at a simple case:
+   (defun f (x)
+     ((lambda (x)
+        (declare (flonum x))
+        (times x ((lambda (x)
+   		 (declare (flonum x))
+   		 (times x x))
+   	       x)))
+      (sin x)))
+   
+The declarations here are the same.  But the compiler still gives an error:
+   
+   (COMMENT **ERROR**  (FLONUM G0001) 
+   		Local declaration occurs too late in function in function F)
+   ; DATA ERROR - TO PROCEED TYPE $P 
+
+I think it would be REALLY nice if THIS bug were fixed.  It seems to me 
+that one would expect a code generator to generate cases involving 
+consistent declarations, and it is a shame that even that does not 
+work.  This really adds to the burden of the code generator.  
+Furthermore, the error message given by the compiler involves a G0001.
+I don't think that is a good example of human engineering.  
+(Again, I am not saying there is anything wrong (except in terms of 
+clarity of code) with &quot;inconsistent nested local declarations&quot; and that 
+the whole bug shouldn't be fixed.  I am just more concerned that the 
+bug also happens when the declarations are consistent.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03093.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03091.html">COMPLR bug</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02926.html">Complr bug</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03091.html">COMPLR bug</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03092"><strong>Date</strong></a></li>
+<li><a href="threads.html#03092"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

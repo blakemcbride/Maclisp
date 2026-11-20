@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: STRING error messages -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 4 Dec 80 23:37:00 GMT -->
+<!--X-Message-Id: c797f5cedbdf9edc22bbeb92124a6eb8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>STRING error messages</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03726.html">Date Prev</a>][<a href="msg03724.html">Date Next</a>][<a href="msg03727.html">Thread Prev</a>][<a href="msg01733.html">Thread Next</a>][<a href="maillist.html#03725">Date Index</a>][<a href="threads.html#03725">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>STRING error messages</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RLB at MIT-MC</li>
+<li><em>Subject</em>: STRING error messages</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 4 Dec 80 23:37:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 4 December 1980 18:37-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 4 December 1980 10:39-EST
+    From: Richard L. Bryan &lt;RLB at MIT-MC&gt;
+    Subject: STRING error messages
+    To: BUG-LISP at MIT-MC
+
+        Date: 4 December 1980 01:07-EST
+        From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+
+            From: John G. Aspinall &lt;JGA at MIT-MC&gt;
+
+	    ;ARDS ~1G~S does not pass the ~0G~S test, for function ~2G~S ?
+	. . .
+
+	If you load FORMAT you'll get totally winning messages.  However, since
+	some systems can't tolerate the address space consumed by FORMAT, it
+	isn't loaded by default.  So as a poor alternate, it just gives you the
+	format string.
+    Well, perhaps the rest of the args to the nonexistent FORMAT could appear
+    on the screen as well, like what test (~0G) and what function (~2G).  I
+    often find myself ^Ging, loading FORMAT, and recreating the error in order
+    to find this out.
+Unfortunately, LISP's error system doesn't provide a way to do this.  In a
+WRONG-TYPE-ARG error, the second argument to ERROR should be the offending
+object.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03726.html">Re: READLINE</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03724.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03727.html">STRING error messages</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01733.html">STRING and `</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03725"><strong>Date</strong></a></li>
+<li><a href="threads.html#03725"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

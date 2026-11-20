@@ -1,0 +1,240 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: LOOP loses -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,18 Nov 80 18:54:00 EDT -->
+<!--X-Message-Id: 8d7bc1fe49f471f3e0b3a9b3de2f47c7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: LOOP loses</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00381.html">Date Prev</a>][<a href="msg00303.html">Date Next</a>][<a href="msg00381.html">Thread Prev</a>][<a href="msg00303.html">Thread Next</a>][<a href="maillist.html#00382">Date Index</a>][<a href="threads.html#00382">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: LOOP loses</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: LOOP loses</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,18 Nov 80 18:54:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I side with those that feel LOOP is a big mistake to put into Lisp in
+its current form.
+
+CWH's arguments about the parenthesizing are a valid criticism of LOOP in
+their own right. I agree with him completely and have little to add on that
+area. I will try here confine myself to gripes of a different nature
+-- to do with semantics, rather than syntax ...
+
+The day may come in which we can program in English and be understood,
+but it's not here yet. I believe LOOP unfairly deludes a person into
+thinking that if it reads well in English, it's going to run.  LOOP is a
+game between the programmer and the LOOP macro code. Sometimes it gets
+things right. If you're lucky, you even have a good enough model of
+what's going on to figure out when it'll guess right and when it won't.
+You're lucky you have that good a model ... What about those poor people
+who don't have such a good model and don't know what LOOP will win the
+game on and what cases it will bomb on. I somehow feel you're doing them
+a dis- service by introducing such a DWIM-ish hack into Maclisp and I
+wish you'd leave loop as a cute package on LIBLSP; that people can load
+iff they are willing to take the responsibility for what it does to
+them.
+
+Facilities with the power of LOOP certainly need to be devised, but they
+oughtn't be `endorsed' (which is my opinion of what AUTOLOAD'ing is) until
+people are happier with their syntax and semantics. I am satisfied with
+neither.
+
+Here are some samples of the sort of things that bother me about it. Some
+(maybe most) are clearly bugs in the particular implementation, but I include
+them anyway because I think that the fact that certain classes of bugs arise
+at all gives useful insight into the nature of the beast we are playing
+with ... Indeed, some only serve to characterize a larger problem which 
+I couldn't begin to exhaustively list all of the obscure manifestations of...
+
+  [a] It requires a hairy parser, and its error messages are correspondingly
+      heuristic and confusing.
+
+	(LOOP FOR X TO 3 FROM 4 DO (PRINT X))
+	;TO unknown keyword in FOR/AS clause
+	;BKPT *RSET-TRAP
+
+	(LOOP FOR X FROM 3 TO 4 DO PRINT X)
+	;X unknown keyword in LOOP
+	;BKPT *RSET-TRAP
+       
+      Here (LOOP FOR X FROM 3 TO 4 DO (PRINT X)) was desired. The error
+      diagnostic is way offbase. [And by the way, implementors, that shouldn't
+      be a *RSET break. Use a real error channel, please? Thanks.]
+
+	(LOOP FROM 3 TO 5 DO 3)
+	;FROM unknown keyword in LOOP
+
+      This error message is totally confusing. FROM *is* a LOOP keyword,
+      it's just not allowed in LOOP-toplevel context. I guess my feeling is
+      that what the user saves in being able to write his code in this
+      concise way, he'll lose back partly in trying to decipher the error 
+      messages, since they are considerably more obscure than the average
+      Lispy error message.
+
+  [b] Things which read right in English don't work.
+
+	(LOOP FOR X FROM 3 TO 5 DO COLLECT X)
+	;X unknown keyword in LOOP
+
+	(LOOP FOR X FROM 3 TO 5 DO (COLLECT X))
+	;COLLECT UNDEFINED FUNCTION OBJECT
+
+      Oops. Here I forgot that the English is only a magic illusion that
+      works in certain places. Having to remember NOT to use parentheses
+      may teach people bad habits about the rest of Lisp and will encourage
+      a poor programming style if they ever code their own macros.
+
+  [c] Two phrases which have equivalent English meanings and which are both
+      parsed by LOOP, do different things:
+
+	(LOOP FOR X FROM 3 TO 5 COLLECTING X)
+	(3 4 5) 
+
+	(LOOP COLLECTING X FOR X FROM 3 TO 5)
+	(3 4 5 6) 
+
+      Most proponents of LOOP I have spoken with cite its abilities to insulate
+      you from common fencepost erros as a feature. I'd rather not be deluded
+      into thinking I am safe if I'm really not.
+
+  [d] It doesn't constrain the way you order things sufficiently to avoid
+      all sorts of totally obscure interpretations:
+
+	(LOOP FOR X FROM 3 TO 5
+	      COLLECT X
+	      FOR X FROM 3 TO 5)
+	(3 5) 
+
+      This sort of bug could easily arise from having mistyped a variable name.
+      Loop neither warns you that the interaction between the two X steppers 
+      will be terrible, nor does it attempt to make sense of the interaction.
+
+  [e] Left-to-right order of evaluation is played with by LOOP in unpredictable
+      and dangerous ways:
+
+	(LOOP FOR X FROM (PROGN (PRINT 'FOO) 3) TO 5
+	      DO (PRINT X)
+	      FOR Y FROM (PROGN (PRINT 'BAR) X) TO 3
+	      DO (PRINT Y))
+	FOO 
+	BAR 
+	3 
+	3 
+	4 
+	NIL 
+
+      Left-to-right evaluation of this form would demand something different.
+      The 3 should print before the BAR. I think LOOP is too unconstrained
+      and leaves itself open to unpredictability.  I don't like guessing at 
+      what it's going to do or trying to carry a model of its model of me. If
+      it can't understand what I mean in the way I say it, it should just 
+      complain.
+
+	(LOOP FOR X FROM 3 TO 5 COLLECT X FOR X = (1- X))
+	;NIL NON-NUMERIC VALUE
+	;BKPT WRNG-TYPE-ARG
+
+	; X is bound to NIL. It died on the GREATERP check as seen here:
+
+	(LET ((X 3))
+	    (DECLARE (FIXNUM X))
+	    (LET (X)
+	      (PROG (G0010 G0009)
+		    (LOOP-COLLECT-INIT G0009 G0010)
+	  NEXT-LOOP (AND (GREATERP X 5) (GO END-LOOP))
+		    (RPLACD G0010 (SETQ G0010 (NCONS X)))
+		    (SETQ X (1- X))
+		    (SETQ X (1+ X))
+		    (GO NEXT-LOOP)
+	  END-LOOP  (RETURN G0009))))
+
+      This occurs do to bad interaction in the two X steppers. Probably
+      such things should be invalid. Here's another case where order of
+      evaluation and dual steppers for the same variable are allowed but
+      do something some might find unintuitive at best:
+
+	(LOOP FOR X FROM 4 TO 100
+	      UNTIL (NOT (ODDP X))
+	      FOR X FROM 3 TO 100
+	      DO (PRINT X))
+	3 
+	5 
+	7
+	...etc...
+	75
+	77
+	NIL
+
+      I'll leave it to you to hypothesize (or check) what this one expands
+      into.
+
+  [f] This one doesn't really count as a bug -- not much anyway; it can occur 
+      in all kinds of code. It just looks especially bad in the LOOP formalism 
+      because the usual Lisp parentheses divisions are missing ...
+
+	(SETQ TO 3 DO 5)
+	5 
+	(LOOP FOR FROM FROM TO TO DO DO (PRINT FROM))
+	3 
+	4
+	5 
+	NIL
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00381.html">Re: LOOP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00303.html">Re: (more) problems with (STATUS FEATURES)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00381.html">Re: LOOP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00303.html">Re: (more) problems with (STATUS FEATURES)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00382"><strong>Date</strong></a></li>
+<li><a href="threads.html#00382"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

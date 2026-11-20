@@ -1,0 +1,110 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: timings -->
+<!--X-From-R13: Quneyrf Tenaxfgba &#60;QPT ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,2 Mar 81 01:55:00 EDT -->
+<!--X-Message-Id: 80a8516c5d7f5cf457188142dbe5dd29@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: timings</title>
+<link rev="made" href="mailto:CBF at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00516.html">Date Prev</a>][<a href="msg00517.html">Date Next</a>][<a href="msg00515.html">Thread Prev</a>][<a href="msg00517.html">Thread Next</a>][<a href="maillist.html#00609">Date Index</a>][<a href="threads.html#00609">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: timings</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: CSVAX.fateman at BERKELEY</li>
+<li><em>Subject</em>: Re: timings</li>
+<li><em>From</em>: Charles Frankston &lt;CBF at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,2 Mar 81 01:55:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, masinter at PARC-MAXC, RWS at MIT-XX,      guttag at MIT-XX</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>It is rather obvious that the timings you distributed are wall times for
+the Lisp Machine, whereas the Vax and MC times count only time spent
+directly executing code that is considered part of Macsyma.  Ie. the
+Vax and MC times exclude not only garbage collection, but operating system
+overhard, disk i/o and/or paging, time to output characters to terminals, etc.
+
+I submit comparing wall times with (what the Multics people call) &quot;virtual
+CPU&quot; time, is not a very informative excercise.  I'm not sure if the Lisp
+Machine has the facilities to make analagous measurements, but everyone
+can measure wall time, and in some ways thats the most useful comparison.
+Is anyone willing to try the same benchmarks on the Vax and MC with just
+one user on and measureing wall times?
+
+Also, are there yet any Lisp machines with greater than 256K words?  No
+one would dream of running Macsyma on a 256K word PDP10 and I presume that
+goes the same for a 1 Megabyte Vax.  The Lisp Machine may not have a time
+sharing system resident in core, but in terms of amount of memory needed
+for operating system overhard, the fanciness of its user interface
+probably more than makes up for that.  I'll bet another 128K words of
+memory would not be beyond the point of diminishing returns, insofar
+as running Macsyma.
+
+Lastly, the choice of examples.  Due to internal Macsyma optimizations,
+these examples have a property I don't like in a benchmark.  The timings
+for subsequent runs in the same environment differ widely from previous
+runs.  It is often useful to be able to factor out setup times from a
+benchmark.  These benchmarks would seem to run the danger of being dominated
+by setup costs.  (Eg. suppose disk I/O is much more expensive on one system;
+that is probably not generally interesting to a Macsyma user, but it could
+dominate benchmarks such as these.)
+
+I would be as interested as anyone else in seeing the various lisp systems
+benchmarked.  I hope there is a reasonable understanding in the various
+Lisp communities of how to do fair and accurate, else the results will be
+worse than useless, they will be damaging.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00516.html">Re: The utility of readmacros in converting infix expressions.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00517.html">Re: shrage's APL parsing problems</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00515.html">Re: The utility of readmacros in converting infix expressions.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00517.html">Re: shrage's APL parsing problems</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00609"><strong>Date</strong></a></li>
+<li><a href="threads.html#00609"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Bridging the colon gap -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Wed, 6 Feb 80 13:38:00 GMT -->
+<!--X-Message-Id: 685419ba9ba4fe59c319c9a2dbe2a2ae@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Bridging the colon gap</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02173.html">Date Prev</a>][<a href="msg02171.html">Date Next</a>][<a href="msg02173.html">Thread Prev</a>][<a href="msg02171.html">Thread Next</a>][<a href="maillist.html#02172">Date Index</a>][<a href="threads.html#02172">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Bridging the colon gap</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: HIC at MIT-MC</li>
+<li><em>Subject</em>: Bridging the colon gap</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Wed, 6 Feb 80 13:38:00 GMT</li>
+<li><em>Cc</em>: ALAN at MIT-MC, (BUG LISP) at MIT-MC, (BUG LISPM) at MIT-MC</li>
+<li><em>Original-date</em>: 6 FEB 1980 0838-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>This &quot;keyword package&quot; question has given rise to a number of
+kludgy partial solutions, but none seems to have fully taken hold
+yet - until one does, we'll likely encounter complaints, such as
+yours (below) against &quot;#:&quot; , and I'd like to take this opportunity
+to apprise the bug-lisp/bug-lispm communities of the basic problem.
+    Date: 6 February 1980 01:53-EST
+    From: Howard I. Cannon &lt;HIC at MIT-MC&gt;
+    I suggest not having this.  It seems like a total kludge to me, and
+    I see no reason to snarf this either A) ambiguous, or B) potentially
+    useful # macro character.  I find it hard to believe that the MacLisp
+    reader can't be hacked to throw away everything before a : in a symbol,
+    if some flag was turned on, or somesuch.  This seems like a more
+    appropriate place for a the kludge.
+For MACLISP, we wouldn't want just to throw away the prefix of a colon - 
+for example, it is quite desirable for SI:MUMBLE and CL:MUMBLE to be
+distinct symbols.  The problem, as you remember, is that many people are 
+confused as to how to type keywords - most believe that the colon is 
+necessary.  Until it actually becomes necessary (e.g., having a separate 
+keyword package), there exists the necessity in MACLISP of having something
+which a user can write which will work both now and in the future.
+&quot;FOO&quot; is the current state, and if the keyword package happens,  then &quot;:FOO&quot;
+or &quot;KEY:FOO&quot;, is the future state;  for the LISPM, there is no trouble in 
+bridging this gap, but maclisp can't bridge it simply by tossing out the 
+colon prefix arbitrarily.  That's why the selectivity of the kludgy &quot;#:&quot; 
+is needed.  
+   A partial solution is for ALAN to re-install DEFSHARP so that any file
+which thinks it needs this security could do its own local definition
+for &quot;#:&quot;, and we could propogate a general prohibition for using &quot;#:&quot;
+for anything else until the question has been fully settled.  (By the bye, 
+I'd really like to see DEFSHARP be defaulty loaded - it is now with the
+maclisp SHARPM file).
+   Another possible solution is RMS's, namely just get people to stop 
+putting colons in front of keywords, and let system-programmers take
+their lumps about distinguishing the keyword when in the SI package.
+This has the desirable feature that all keywords appear *without* colons,
+but it may be hard to turn the hands of the clock back to state where
+this can be standardized.
+   Finally, it might be noted that this is not exclusively a maclisp
+compatibility problem (although prominently so now), but in any situation 
+where one wants to say, *selectively*, &quot;use the package feature, if enabled&quot;,
+some such &quot;feature&quot; would be desirable.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02173.html">default settings for DEFMACRO</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02171.html">Out-of-core maclisp system stuff</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02173.html">default settings for DEFMACRO</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02171.html">Out-of-core maclisp system stuff</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02172"><strong>Date</strong></a></li>
+<li><a href="threads.html#02172"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

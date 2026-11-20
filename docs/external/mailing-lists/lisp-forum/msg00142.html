@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: COPYALL, COPYLIST, et alia -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Tue ,20 Jan 81 02:19:00 EDT -->
+<!--X-Message-Id: 120552c3b5ef150879f5b82c0fd13603@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: COPYALL, COPYLIST, et alia</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00552.html">Date Prev</a>][<a href="msg00553.html">Date Next</a>][<a href="msg00552.html">Thread Prev</a>][<a href="msg00145.html">Thread Next</a>][<a href="maillist.html#00142">Date Index</a>][<a href="threads.html#00142">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: COPYALL, COPYLIST, et alia</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: Re: COPYALL, COPYLIST, et alia</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Tue ,20 Jan 81 02:19:00 EDT</li>
+<li><em>Cc</em>: ALAN at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>We seem to be in disagreement about which name to use for the (subst nil
+nil ...) function.  The votes so far show that RMS votes for COPYTREE,
+KMP seems to agree with this, Alan likes COPYALL, Moon likes COPYLISTS,
+and CWH likes COPY-ALL-LEVELS.
+
+For everyone's information, COPYLIST* is like COPYLIST except for the
+CDR-coding.  COPLIST* creates a list whose last cons is a full-node, so
+that you can RPLACD it without creating invisible pointers.
+
+The Lisp Machine also has a function called COPYALIST, which copies the
+top two levels of strucure, for association lists.
+
+It would seem to be more consistent with the naming system that we are
+currently using NOT to use a hyphenated name.  None of our little list
+utilities have hyphens; whether or not this would have been a good
+design decision from the start is academic.  At this point I consider
+it more obvious and aesthetic to be consistent.  So I don't want to
+use COPY-ALL-LEVELS.
+
+Also, copying all the conses has nothing to do with lists.  Lists are
+a higher-level abstraction built on conses; this function does not
+use that concept at all.  So I don't want to use COPYLISTS.
+
+This leaves COPYALL and COPYTREE, with one and two votes respectively.
+Neither seems particularly better than the other.  Anyone have further
+useful contributions to the discussion, or should we just pick one
+randomly?  Let's not waste too much effort on this.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00552.html">Re: \\\\</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00553.html">Re: Proposed schedule for change from &quot;/&quot; to &quot;\&quot;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00552.html">Re: \\\\</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00145.html">Re: COPYALL, COPYLIST, et alia</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00142"><strong>Date</strong></a></li>
+<li><a href="threads.html#00142"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

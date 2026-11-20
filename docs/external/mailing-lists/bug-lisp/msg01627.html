@@ -1,0 +1,108 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: severe consternation -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 4 Feb 81 09:28:00 GMT -->
+<!--X-Message-Id: 9bb5f84119802d5e7ef2198cb0b4b9b0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>severe consternation</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01628.html">Date Prev</a>][<a href="msg01626.html">Date Next</a>][<a href="msg01697.html">Thread Prev</a>][<a href="msg01696.html">Thread Next</a>][<a href="maillist.html#01627">Date Index</a>][<a href="threads.html#01627">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>severe consternation</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GSB at MIT-ML</li>
+<li><em>Subject</em>: severe consternation</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 4 Feb 81 09:28:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-ML, MOON at MIT-ML</li>
+<li><em>Original-date</em>: 4 February 1981 04:28-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     GSB@MIT-ML
+Date: Mon, 20 Jan 81 22:27:37 GMT
+Original-Date: 01/20/81 18:27:37 EDT
+Subject: Re: severe consternation
+    To: (BUG LISP) at MIT-ML
+    CC: MOON at MIT-ML
+    Here i was, demonstrating the wonders of SETF preserving implicit
+    order-of-evaluation.  I showed the macro-expansion of 
+    (SETF (ARRAYCALL T (FOO) (BAR)) (BAZ)), and imagine my surprise when
+    it came out to be:
+    ((LAMBDA (G0002) ((LAMBDA (G0004 G0005 G0006)
+			   (STORE (ARRAYCALL T G0004 G0005) G0006))
+			(FOO) (BAR) G0002)
+		     G0002)
+       (BAZ))
+    So, i said, &quot;Well, i've got a SETF which isn't being used, but at least
+    I can trust it.  Let's try it.&quot;  There was no fasl, so i loaded the source.
+    What did it say?  It said &quot;;TEM UNBOUND VARIABLE&quot;.  Closer examination
+    showed that
+    (DEFUN FOO (A B &amp;AUX (C (F A)) (D (G C)))
+	(LIST A B C D))
+    produced the following definition:
+    (DEFUN FOO (A B)
+	(COMMENT ARGLIST = (A B))
+	(LET ((D (G C)) (C (F A))) (LIST A B C D)))
+    Gremlins, perhaps?
+    The big question is this:  why is my compiled code working?
+    Or is it?
+
+BTW, I believe we forgot to report these as fixed.
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01628.html">Writing structures to a file</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01626.html">allocation question</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01697.html">Re: severe consternation</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01696.html">Re: Writing structures to a file</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01627"><strong>Date</strong></a></li>
+<li><a href="threads.html#01627"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

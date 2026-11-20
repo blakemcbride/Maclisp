@@ -1,0 +1,117 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: CAR and CDR -->
+<!--X-From-R13: Rnir Fbhergmxl &#60;Rnir.Fbhergmxl ng Q[G&#45;10O> -->
+<!--X-Date: Thu, 29 Nov 79 00:40:00 GMT -->
+<!--X-Message-Id: 151878b0dd368429163b5074ae75efde@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: CAR and CDR</title>
+<link rev="made" href="mailto:Dave.Touretzky at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03919.html">Date Prev</a>][<a href="msg03917.html">Date Next</a>][<a href="msg03919.html">Thread Prev</a>][<a href="msg03910.html">Thread Next</a>][<a href="maillist.html#03918">Date Index</a>][<a href="threads.html#03918">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: CAR and CDR</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: kmp @ mc</li>
+<li><em>Subject</em>: Re: CAR and CDR</li>
+<li><em>From</em>: Dave Touretzky &lt;Dave.Touretzky at CMU-10A&gt;</li>
+<li><em>Date</em>: Thu, 29 Nov 79 00:40:00 GMT</li>
+<li><em>Cc</em>: bug-lisp @ mc</li>
+<li><em>In-reply-to</em>: Kent M. Pitman's message of 27 Nov 79 13:46-EST</li>
+<li><em>Original-date</em>: 28 November 1979 1940-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I was not kidding about CAR and CDR.  While I agree wholeheartedly that
+FIRST and REST, HEAD and TAIL, etc., are awkard, and that short names
+for the most basic primitives are essential for &quot;natural&quot; languages, I
+also believe that these names should have some mnemonic properties.
+
+I am planning to teach LISP to some novice programmers next fall.  These
+are people who have probably never seen a computer before.  I think it
+is going to be fairly embarassing to explain to them why they have to
+say &quot;CAR&quot; and &quot;CDR&quot; instead of something more intuitive.  &quot;Contents of
+Address portion of Register&quot; is not very mnemonic for someone who does
+not know what an address or a register is.  These relics of the 7090 are
+amusing bits of trivia for us hackers, but they aren't so amusing to
+frustrated non-Lispers trying to develop an intuitive understanding of
+a very foreign language.
+
+With regard to composition of these nasty selectors into more obscure
+forms, I have the following observation.  We either use composition to
+select some top-level element further down the list, e.g.  CADR, CADDR,
+CADDDR, or we use it to select some internal element, e.g.  CDDAADDAR.
+Quick, tell me what CDDAADDAR means!  (I'm sure you can pronounce it,
+but what does it mean???)
+
+I suggest that top-level selection can be replaced with more intuitively
+named primitives like 1ST, 2ND, 3RD, 4TH, 5TH, etc.  Note that these all
+contain 3 letters, while the current scheme would use CADDDR (six letters)
+for 4TH, and CAR of CDDDDR (7 letters plus an extra function nesting) for
+5TH.
+
+In the case of internal elements, we already know that it is better to
+define macros for selecting named elements than to use obscure
+composite selectors like CDDAADDAR.  The existence of a structure
+package for MacLisp using named elements makes it reasonable to suggest
+that the convention be used universally.  This leaves perhaps one or two
+special cases, like CDAR or CAADR, that occur often enough to have
+built-in names.  I'm sure people can think up something suitable.
+
+We Lispers keep talking about the wonderfulness of an interpretive
+program-development environment, and the non-Lispers are beginning to
+listen.  Now I think it's time that we listen to some of what they've
+been saying about fighting obscurity in languages and programs.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03919.html">File property lists</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03917.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03919.html">File property lists</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03910.html">CAR and CDR</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03918"><strong>Date</strong></a></li>
+<li><a href="threads.html#03918"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

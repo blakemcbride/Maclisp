@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: control vs constraint -->
+<!--X-From-R13: EVDOUS ng IVODFA@ (Xrsserl Euentre) -->
+<!--X-Date: 11 Nov 1980 (Tuesday) 0406&#45;EDT -->
+<!--X-Message-Id: 68eb93c5dc76c8a17b7c527e09518010@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: control vs constraint</title>
+<link rev="made" href="mailto:SHRAGE at WHARTON">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00019.html">Date Prev</a>][<a href="msg00515.html">Date Next</a>][<a href="msg00017.html">Thread Prev</a>][<a href="msg00537.html">Thread Next</a>][<a href="maillist.html#00022">Date Index</a>][<a href="threads.html#00022">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: control vs constraint</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: alan at MIT-MC</li>
+<li><em>Subject</em>: Re: control vs constraint</li>
+<li><em>From</em>: SHRAGE at WHARTON (Jeffrey Shrager)</li>
+<li><em>Date</em>: 11 Nov 1980 (Tuesday) 0406-EDT</li>
+<li><em>Cc</em>: LISP-forum at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Control and constraint are not the same thing.  A control might be an
+audit trail.  This is the type of control that I am talking about.  I
+do not (necessarily) mean to disallow any extension to the language, simply
+monitored extension.  For example, if I were to go into your MacLISP
+base load and shange the MAKE-LIST function all of a sudden in order to
+have the arguments appear in the order that I wanted to see them you
+would all have cows!  All of your functions would stop functioning! 
+Extensions (changes) to the base language that are not carefully thought
+out lead to real trouble in the future.  Now, consider having written a
+large system with 100 functions or so.  Suddenly you decide to change the
+internals of some function or another without regard for who or what calls
+it other than the caller that you care about!  Insto-MESS!  There are
+a couple of ways around this, 1- always make a copy of a function with a
+different name [as *THROW, *CATCH in recent discussion] -- this leads real
+fast to a proliferation of functions.  The second way is to keep careful
+tabs on what functions call this one and the way that they have to be
+changed to match changes in this function.  It is exactly this latter type
+of control (auditing function) that I mean should be included in NIL (or
+whatever).  I am not against extending the language any more than I am
+against GOTOs (which is not very much).  However, the system should provide
+a means by which a programmer can FOLLOW, CONTROL, AUDIT, &lt;insert your
+favorite sysnonym here&gt; extensions that he or the support personell make!
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00019.html">Re: APL and LISP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00515.html">Re: The utility of readmacros in converting infix expressions.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00017.html">Re: LISP machine diamonds</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00537.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00022"><strong>Date</strong></a></li>
+<li><a href="threads.html#00022"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

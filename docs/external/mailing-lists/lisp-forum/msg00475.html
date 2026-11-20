@@ -1,0 +1,112 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Use of MULTIPLE&#45;VALUE and VALUES -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Fri ,30 Jan 81 19:38:00 EDT -->
+<!--X-Message-Id: e6e7828f1e88833b2d3f9f9fc5f49d16@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Use of MULTIPLE-VALUE and VALUES</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00474.html">Date Prev</a>][<a href="msg00476.html">Date Next</a>][<a href="msg00473.html">Thread Prev</a>][<a href="msg00476.html">Thread Next</a>][<a href="maillist.html#00475">Date Index</a>][<a href="threads.html#00475">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Use of MULTIPLE-VALUE and VALUES</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GSB at MIT-MC</li>
+<li><em>Subject</em>: Re: Use of MULTIPLE-VALUE and VALUES</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri ,30 Jan 81 19:38:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Re your conjecture:
+    Date: 30 January 1981 16:32-EST
+    From: Glenn S. Burke &lt;GSB at MIT-ML&gt;
+    Subject: optimizers
+    .  .  .
+    For one, it is a complete loss that to utilize such a feature
+    one must use multiple values, ESPECIALLY in Maclisp.  I might feel
+    differently if the support were small and efficient, but .  .  .
+I don't know if there is a polite way to say this, but you seem to 
+have lost all perspective on this facility:
+    (VALUES x y)
+Compiles into code that is exactly 2 (simple) instructions executions
+longer than merely setq'ing X and Y 
+    (MULTIPLE-VALUE (X Y) (&lt;m-v-function&gt; ...))
+Compiles into code that is exactly 3 (simple) instructions executions
+longer than merely calling the function and setq'ing X and Y, except 
+when there are too few return values, in which case an ** autoloadable ** 
+function would be called.  (Even the out-of-core file needn't be loaded if 
+one supplies his own &quot;patch-over&quot; function here).  (Checking for failure 
+to return &quot;multiple-values&quot; could be done, at a cost of about another 
+2 instructions, but this check is debatable.)
+
+If the top cell of an arg to &quot;Filter/optimizer&quot; is to be copied, 
+then surely that copying itself will take more time than those few
+instructions.  If one has 50 (!) &quot;Filter/optimizer&quot; functions in his
+system, *** and if it could be proven that the two-value return is indeed 
+two words longer than any other alternative **,  then he will lose all of 
+100 words out of his address space.  Really big deal.
+
+Using VALUES and MULTIPLE-VALUE doesn't require one to use VALUES-LIST
+or MULTIPLE-VALUE-LIST;  but even if one did use them, I don't think
+a MacLISP implementation of them could be made significantly smaller
+and more efficient.  Also, the macro support lives in the MLMAC file,
+which isn't generally loaded in a user's system;  with all that space
+reclaimed in the compiler recently, how could one carp about a couple
+hundred words of new macros?  especially for such a winning idea
+as multiple values.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00474.html">Re: Optimizers</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00476.html">Re: Use of MULTIPLE-VALUE and VALUES</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00473.html">Re: FILTERs: Source-to-source code transformers</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00476.html">Re: Use of MULTIPLE-VALUE and VALUES</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00475"><strong>Date</strong></a></li>
+<li><a href="threads.html#00475"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

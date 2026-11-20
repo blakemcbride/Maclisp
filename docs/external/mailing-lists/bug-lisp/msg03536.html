@@ -1,0 +1,88 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: siot/cla/cli/its/usr..... -->
+<!--X-From-R13: [AA@ ng [WF&#45;[Q (Rnivq O. [bba) -->
+<!--X-Date: Tue, 25 Apr 78 13:26:00 GMT -->
+<!--X-Message-Id: c449777e821eddc0653fd939b7c68437@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>siot/cla/cli/its/usr.....</title>
+<link rev="made" href="mailto:MOON at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03537.html">Date Prev</a>][<a href="msg03535.html">Date Next</a>][<a href="msg03537.html">Thread Prev</a>][<a href="msg03545.html">Thread Next</a>][<a href="maillist.html#03536">Date Index</a>][<a href="threads.html#03536">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>siot/cla/cli/its/usr.....</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GLS at MIT-MC, (BUG LISP) at MIT-MC, GSB at MIT-ML</li>
+<li><em>Subject</em>: siot/cla/cli/its/usr.....</li>
+<li><em>From</em>: MOON at MIT-MC (David A. Moon)</li>
+<li><em>Date</em>: Tue, 25 Apr 78 13:26:00 GMT</li>
+<li><em>Cc</em>: MOON at MIT-MC, rms at MIT-AI</li>
+<li><em>Original-date</em>: 25 APR 1978 0826-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>For a real crock:  perhaps we should change the core-link device to use the standard
+I/O routines, in which case as it happens Lisp's SIOT would use a BLT and would preserve
+the low bit of the sixbit names.  This change would also make the system a little smaller
+and simpler.  The only reason currently it cannot use the standard routines is because
+of the &quot;multiple eofs&quot; feature of core-link.  I doubt that anything depends on this.
+Flushing this would mean that if guy A opens CLI:FOO BAR, then closes, then guy B
+opens CLI:FOO BAR, guy B would have to wait until FOO BAR had read out the first message,
+whereas with multiple eofs he wouldn't have to wait if the messages were short enough.
+However, with the code as it is now you get a file-locked error in these circumstances
+anyway!  So I'm proposing that core link be changed to use a character-count instead
+of EOF bits, and to use the standard (BLKT etc.) I/O routines.  I am not seriously
+proposing this as a solution to the loss that Lisp will not let you do block-mode IOTs.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03537.html">siot/cla/cli/its/usr.....</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03535.html">Clarification</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03537.html">siot/cla/cli/its/usr.....</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03545.html">Re: siot on cla</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03536"><strong>Date</strong></a></li>
+<li><a href="threads.html#03536"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

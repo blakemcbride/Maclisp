@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: GC/EVAL bug -->
+<!--X-From-R13: DIY ng [WF&#45;[Q (Dboreg I. Yreaf) -->
+<!--X-Date: Mon, 15 Dec 80 10:22:00 GMT -->
+<!--X-Message-Id: 547bafdcab38aa4c94de6fac527d4f5e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>GC/EVAL bug</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03659.html">Date Prev</a>][<a href="msg03657.html">Date Next</a>][<a href="msg03629.html">Thread Prev</a>][<a href="msg03657.html">Thread Next</a>][<a href="maillist.html#03658">Date Index</a>][<a href="threads.html#03658">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>GC/EVAL bug</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: GC/EVAL bug</li>
+<li><em>From</em>: RWK at MIT-MC (Robert W. Kerns)</li>
+<li><em>Date</em>: Mon, 15 Dec 80 10:22:00 GMT</li>
+<li><em>Original-date</em>: 15 DEC 1980 0522-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(defun (foo macro) (())
+  (let ((sym (gensym)))
+    `((lambda (,sym) (print ,sym) (gc))
+      6)))
+
+(*rset () )		;So no EVALFRAMEs
+(GC)			;To make the only garbage what we're about to cons
+(FOO)
+6
+NIL
+^Z
+FFVC/ &amp; (NIL . UNBOUND)
+
+What is going on is this:  The GC does not mark symbols who's value cells
+are on the SPECPDL.  Neither does applying a LAMBDA with *RSET set to ()
+save the lambda or binding-list on the REGPDL.  And PROGN evaluation doesn't
+save old clauses, either, so when you get to the GC, there isn't anybody
+pointing to the gensym anymore.  It gets collected.  Later, we unbind
+the SPECPDL, and viola!, the freelist is bashed.  The next SETQ of a symbol
+without a value cell will result in the symbol UNBOUND being bashed.  Lossage
+will propogate.
+
+I don't feel up to figuring out the LAMBDA application code right now
+to fix this.  The right fix, of course, is for the GC to protect symbols
+pointed to by the SPECPDL, but I guess this isn't feasible.  Second choice
+is to make lambda-binding keep a copy of the LAMBDA list on the stack until
+after the UNBIND.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03659.html">|`,/|| and GRINDEF</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03657.html">TAGS file for 'extended LISP'</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03629.html">|`,/|| and GRINDEF</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03657.html">TAGS file for 'extended LISP'</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03658"><strong>Date</strong></a></li>
+<li><a href="threads.html#03658"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: SUY ng [WF&#45;AL (Sqwvx) -->
+<!--X-Date: Wed, 30 Jun 82 08:46:00 GMT -->
+<!--X-Message-Id: adf2d44858df60092055a981ce2c7fbf@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:EGK at MIT-OZ">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00851.html">Date Prev</a>][<a href="msg00849.html">Date Next</a>][<a href="msg00851.html">Thread Prev</a>][<a href="msg00849.html">Thread Next</a>][<a href="maillist.html#00850">Date Index</a>][<a href="threads.html#00850">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>From</em>: EGK at MIT-OZ (Edjik)</li>
+<li><em>Date</em>: Wed, 30 Jun 82 08:46:00 GMT</li>
+<li><em>Cc</em>: MERMAN at MIT-MC, BUG-LISP at MIT-MC, EGK at MIT-OZ</li>
+<li><em>In-reply-to</em>: Your message of 30-Jun-82 0007-EDT</li>
+<li><em>Original-date</em>: 30 Jun 1982 0446-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The reason valret works the way it does is because when the EXEC runs a
+program it takes the *LINE* of text that was used to invoke that
+program, prepends the name of the program and sticks that back into the
+rescan buffer for the program to read.  this is why you can pass
+arguments to a program on the command line, ie, &quot;finger foo&lt;crlf&gt;&quot; when
+typed to the EXEC will cause the exec to stick the string &quot;FINGER foo&quot;
+into the jobs rescan buffer.  Since there is only one rescan buffer,
+anything else that might have been in the buffer is lost.
+When finger starts up, it checks the rescan buffer for any commands.
+
+
+TOPS-20 could use a set of pipes so input intended for a process could
+be done right.  Various people have indicated a desire to put pipes into
+tops-20 but so far no one has done so.
+
+-- Edjik
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00851.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00849.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00851.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00849.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00850"><strong>Date</strong></a></li>
+<li><a href="threads.html#00850"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

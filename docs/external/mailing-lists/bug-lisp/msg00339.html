@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: EXAPDUN[WF&#45;OW -->
+<!--X-Date: Thu, 25 Aug 78 13:08:55 GMT -->
+<!--X-Message-Id: 87eaa482b6c17bb1d0974871672c0174@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:SJOBRG@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00340.html">Date Prev</a>][<a href="msg00338.html">Date Next</a>][<a href="msg00340.html">Thread Prev</a>][<a href="msg00338.html">Thread Next</a>][<a href="maillist.html#00339">Date Index</a>][<a href="threads.html#00339">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-AI, SJOBRG at MIT-AI</li>
+<li><em>Subject</em>: </li>
+<li><em>From</em>: SJOBRG@MIT-AI</li>
+<li><em>Date</em>: Thu, 25 Aug 78 13:08:55 GMT</li>
+<li><em>Original-date</em>: 08/25/78 09:08:55 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>        (defun tyitest nil
+	       (print (tyipeek))
+	       (print (read))
+	       (tyi))
+
+Now, (tyipeek) followed by the character sequence &quot;777 &quot; for example,
+prints
+	67
+	777
+	40
+as it should.  Also, (tyipeek) followed by &quot; 777 &quot; prints
+	40
+	777
+	40
+as it should.  However, (tyipeek) followd by &quot;7 &quot; prints only
+	40
+and waits for more input.  If one types &quot;7 &quot; at this point, then
+the remainder 
+	7
+	40
+is printed.
+
+Question:  Am I wrong in assuming that tyipeek does not gobble the
+next character when reading?  Why doesn't it work with a single
+character input?
+
+What I want is to write a function which, after a prompt, waits either
+for a space (to indicate use default), or an arbitrary fixnum followed
+by a space (to use that fixnum).  Things work fine for all but single
+digit fixnums, in which case I get the above problem.  It happens the
+same in compiled and interpreted code.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00340.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00338.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00340.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00338.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00339"><strong>Date</strong></a></li>
+<li><a href="threads.html#00339"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

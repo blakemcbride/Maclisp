@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: # macros. -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 6 Nov 81 23:35:00 GMT -->
+<!--X-Message-Id: 93991ffc88bbefff974d70a6624b4e13@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title># macros.</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01036.html">Date Prev</a>][<a href="msg01034.html">Date Next</a>][<a href="msg01036.html">Thread Prev</a>][<a href="msg01034.html">Thread Next</a>][<a href="maillist.html#01035">Date Index</a>][<a href="threads.html#01035">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1># macros.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: kwh at MIT-AI</li>
+<li><em>Subject</em>: # macros.</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 6 Nov 81 23:35:00 GMT</li>
+<li><em>Cc</em>: BUG-MACLISP at MIT-MC, BUG-LISPM at MIT-MC</li>
+<li><em>Original-date</em>: 6 November 1981 18:35-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 6 November 1981 17:13-EST
+    From: &quot;Kenneth W. Haase, Jr.&quot; &lt;KWH at MIT-AI&gt;
+    I have a file with Maclisp and LISPM code intermixed, and use #Q and #M
+    to differentiate code for each one.  However inside of one of the LISPM
+    defs (protected by #Q) I use #\Control-E, and for some reason MACLISP
+    sees this and returns an error.  (That it didn't recognize #\Control-E)
+    Is there anyway to make Maclisp just not read that definition?
+In SHARPM version 79, I've just fixed it so that it doesn't complain about
+certain &quot;errors&quot; which are detected as errors only by virtue of the fact 
+that the code is being processed by MacLISP reader -- the range of symbolic 
+character names is one of these.  
+  Thus, '(A #Q #\Control-E)  will win, but '(A #\Control-E) will lose
+in MacLISP.  This also applies to NIL constructs too --  so that '(A #N #T)
+will win, but '(A #T) will lose in native MacLISP.  For this context,
+#Q and #+LISPM are interchangeable.
+  The COMPLR has been dumped out with SHARPM version 78 current, so until
+another dump is made (hopefully, tomorrow), you may have to re-load by hand.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01036.html"># macros.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01034.html">null file name</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01036.html"># macros.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01034.html">null file name</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01035"><strong>Date</strong></a></li>
+<li><a href="threads.html#01035"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

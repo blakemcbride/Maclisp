@@ -1,0 +1,116 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: optimizers -->
+<!--X-From-R13: D[E ng [WF&#45;OW (Dvpuneq [. Egnyyzna) -->
+<!--X-Date: Fri ,30 Jan 81 17:00:00 EDT -->
+<!--X-Message-Id: 5022f16e3565322cc396b5201c96539d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: optimizers</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00470.html">Date Prev</a>][<a href="msg00472.html">Date Next</a>][<a href="msg00470.html">Thread Prev</a>][<a href="msg00472.html">Thread Next</a>][<a href="maillist.html#00471">Date Index</a>][<a href="threads.html#00471">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: optimizers</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: optimizers</li>
+<li><em>From</em>: RMS at MIT-AI (Richard M. Stallman)</li>
+<li><em>Date</em>: Fri ,30 Jan 81 17:00:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I can't understand all of the things that JONL says are wrong
+with optimizers on the Lispm.
+As far as I do understand them, 
+1) There is no problem with EQ tests.  Displacing macros have
+nothing to do with this -- the Lisp machine also has them,
+and that proves experimentally that they are no problem.
+The reason they are no problem is that optimizers aren't macros
+and we don't have (or need) displacing optimizers (since they
+only affect compilation).
+I think it is much cleaner just to return the transformed form
+(not to mention much better for compatibility!) so I'm against changing them.
+2) I would not object to a def.. function to define optimizers.
+I don't see why it should warn about putting optimizers on something
+which is not FBOUNDP. I don't think that the order of defining the
+optimizers vs the function should matter.  Also I don't understand
+the suggestion about creating a definition which prints a warning
+in interpreted code.  The lack of a definition ought to do that anyway.
+3) I don't believe it is right for DEFMACRO to check in any way for
+the existence of optimizers, because it is wrong for redefining the
+function (either macro or not) to flush the optimizers.  If I re-eval
+a corrected definition of a function, I don't want that to flush the
+optimizers.
+4) &quot;optimizers&quot; is precisely appropriate for source transformations
+which happen only in the compiler.  These are used for nothing except
+optimization of things which could instead compile into function calls
+that would be much slower (and might require some variables to be
+special).  For example, this is how DO and MAP get open-coded.
+And a lot of other things that would be &quot;cretinous code&quot; but not
+complete disasters if they were not optimized.
+
+If we decide also to have source to source transformations that also
+apply in the interpreter, then they could be essential parts of the
+definition of something, and they shouldn't be called &quot;optimizers&quot;.
+In any case they could not be called &quot;optimizers&quot; because the
+existing optimizers are definitely intended to be used only by
+the compiler.
+
+Anything which is used only by the compiler has to be a form
+of optimization since it can't be an essential part of the definition
+of the function it applies to.
+
+PS. The reason why just returning the transformed form is better
+for compatibility is that it doesn't require multiple values.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00470.html">Re: Source-to-source transformations</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00472.html">Re: optimizers</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00470.html">Re: Source-to-source transformations</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00472.html">Re: optimizers</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00471"><strong>Date</strong></a></li>
+<li><a href="threads.html#00471"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

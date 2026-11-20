@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Mon, 11 Feb 80 18:25:00 GMT -->
+<!--X-Message-Id: 8478b4dde4464a0744395f5cfca5a017@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02162.html">Date Prev</a>][<a href="msg02159.html">Date Next</a>][<a href="msg02162.html">Thread Prev</a>][<a href="msg02159.html">Thread Next</a>][<a href="maillist.html#02161">Date Index</a>][<a href="threads.html#02161">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: eb at MIT-AI</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Mon, 11 Feb 80 18:25:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, (BUG @) at MIT-MC, sjobrg at MIT-AI</li>
+<li><em>Original-date</em>: 11 FEB 1980 1325-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 10 February 1980 14:55-EST
+    From: Edward Barton &lt;EB at MIT-AI&gt;
+    Subject: Per-file options
+    A recent reply to someone asking about commas in (comment ...) 
+    constructions recommended doing (SSTATUS MACRO ...) to turn off
+    the commas, then possibly later re-enabling commas with another
+    (SSTATUS MACRO ..) call.  In order to turn off mcommas for a particular
+    file only, presumably there would be a SSTATUS at the beginning and
+    another at the end of the file.
+    . . . 
+KMP has a utility, IOTA, to handle &quot;clean-ups&quot; after file loading.   But
+the particular problem here really is something different;  it was Bob 
+Sjoberg who sent the comment last week about commas in the text part of 
+a lisp &quot;(COMMENT ...)&quot;.   I spoke with him verbally Saturday about the 
+root of the problem, and it is essentially this - there is yet no 
+system-wide standardization for commentary text.  By this, I mean
+that while the @ program looks for &quot;(COMMENT ...)&quot; in lisp source files,
+and indexes these lines, it does not look for any of the kinds of commentary
+which are independent of the lisp reader syntax;  if @ were to look for
+comments which began, say, 
+;;;@ &lt;some comments I'd like tabulated in my @ listing&gt;
+then we'd at least escape the conflict with the lisp reader.  On the other
+hand, Interlisp permits comments to be included right in with the souce
+text (by storing them, I believe, in a special &quot;comments&quot; area), so something
+like the maclisp &quot;(COMMENT ...)&quot; still has a place.  An interim solution
+is to use |'s around the text of your comments, e.g.
+(COMMENT |I hadn't thought about doing this; at least, not before now.|)
+or, if one has strings enabled in maclisp, he could use &quot; instead of |.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02162.html">Per-file options</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02159.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02162.html">Per-file options</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02159.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02161"><strong>Date</strong></a></li>
+<li><a href="threads.html#02161"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

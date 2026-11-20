@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: And you thought you could trace ALPHALESSP while sorting... -->
+<!--X-From-R13: Rnivq Q. Byhzzre &#60;RQB ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 20 Sep 81 19:34:00 GMT -->
+<!--X-Message-Id: 87c1ff82927fbf092abd2d11bf5ab9d0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>And you thought you could trace ALPHALESSP while sorting...</title>
+<link rev="made" href="mailto:DCP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03082.html">Date Prev</a>][<a href="msg03080.html">Date Next</a>][<a href="msg03082.html">Thread Prev</a>][<a href="msg03072.html">Thread Next</a>][<a href="maillist.html#03081">Date Index</a>][<a href="threads.html#03081">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>And you thought you could trace ALPHALESSP while sorting...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: And you thought you could trace ALPHALESSP while sorting...</li>
+<li><em>From</em>: David C. Plummer &lt;DCP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 20 Sep 81 19:34:00 GMT</li>
+<li><em>Original-date</em>: 20 September 1981 15:34-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>:l&lt;space&gt;
+n
+
+(trace alphalessp)
+;Loading TRACE 67
+(ALPHALESSP)
+(sort '(this is a test) 'alphalessp)
+(1 ENTER (ALPHALESSP (IS THIS))
+(1 EXIT ALPHALESSP T)
+PURPG; 126744&gt;&gt;HRRM 5,(11)   5/   740607   27076/  PUSH 16,6
+
+(:L for me acutally gets an XLISP)
+&lt;alt&gt;Ging and poking aroung I find:
+
+;;alphalessp by itself still works and traces correctly.
+(trace &gt;)
+(sort '(1 2 3 4) '&gt;)
+;; works correctly
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03082.html">Don't (SORT &lt;list of strings&gt; 'ALPHALESSP), or else...</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03080.html">Why can't things ever be tested? Or, Doesn't anybody else use strings (if they are, why is this breaking for me)?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03082.html">Don't (SORT &lt;list of strings&gt; 'ALPHALESSP), or else...</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03072.html">And you thought you could trace ALPHALESSP while sorting...</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03081"><strong>Date</strong></a></li>
+<li><a href="threads.html#03081"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

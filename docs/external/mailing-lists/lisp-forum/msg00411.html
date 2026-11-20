@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: DEFSUBST -->
+<!--X-From-R13: D[E ng [WF&#45;OW (Dvpuneq [. Egnyyzna) -->
+<!--X-Date: Fri ,14 Nov 80 05:34:00 EDT -->
+<!--X-Message-Id: 7f8478ae3d4178a3580ab87fa5a4e894@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: DEFSUBST</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00410.html">Date Prev</a>][<a href="msg00412.html">Date Next</a>][<a href="msg00622.html">Thread Prev</a>][<a href="msg00412.html">Thread Next</a>][<a href="maillist.html#00411">Date Index</a>][<a href="threads.html#00411">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: DEFSUBST</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: DEFSUBST</li>
+<li><em>From</em>: RMS at MIT-AI (Richard M. Stallman)</li>
+<li><em>Date</em>: Fri ,14 Nov 80 05:34:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I think it would be fine to change Lisp machine DEFSUBST
+to avoid evaluating agrs twice or in the wrong order,
+as long as the simple cases which are used now remain efficient.
+I don't expect that this would require a terrible
+slowdown since usually the args are such that it is easy to tell
+that it is ok to do the direct substitution.
+
+Fortunately, this doesn't require a compiler which has
+any hair about LAMBDA.  That probably would be a big loss
+and is almost certainly out of the question.
+
+I don't know why KMP talks about DEFSUBST as if the definition
+of DEFSUBST included a guarantee that it will evaluate arguments
+twice or in the wrong order.  I never intended that to be part
+of its contract.  DEFSUBST is that which defines an open-codable
+function. The rest is a matter of how it is implemented.
+
+There must be a distinct defining form for open codable functions.
+It would be intolerable for the compiler to open code
+any function unless the user gives permission.  It is welcome
+to refrain from open coding a function for some reason, but it has
+no right to take the initiative to do it.  It would screw users
+several ways:
+ It woull be consufing in debugging
+ It would prevent tracing
+ It would prevent redefinition of the function from working
+The problems would be reduced if there were a data base which
+records which compiled functions depend on each open coded function
+(this would be useful in any case, so it's a good idea).
+But even wit this feature, it is a bad idea to open-code
+anything tha the user doesn't expect.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00410.html">Re: I suppose I have to put in my two cents about DEFSUBST</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00412.html">Re: DEFSUBST clarification</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00622.html">Re: Snapped Elastic</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00412.html">Re: DEFSUBST clarification</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00411"><strong>Date</strong></a></li>
+<li><a href="threads.html#00411"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

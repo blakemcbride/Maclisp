@@ -1,0 +1,88 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: DSSE ng [WF&#45;[Q (Xbanguna O. Drrf) -->
+<!--X-Date: Fri, 14 Mar 80 10:41:00 GMT -->
+<!--X-Message-Id: f7a3045d7dfebfb46da90522d290c92a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:REES at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02065.html">Date Prev</a>][<a href="msg02063.html">Date Next</a>][<a href="msg02065.html">Thread Prev</a>][<a href="msg02063.html">Thread Next</a>][<a href="maillist.html#02064">Date Index</a>][<a href="threads.html#02064">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: REES at MIT-MC (Jonathan A. Rees)</li>
+<li><em>Date</em>: Fri, 14 Mar 80 10:41:00 GMT</li>
+<li><em>Cc</em>: EB at MIT-AI</li>
+<li><em>Original-date</em>: 14 MAR 1980 0541-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+A minimal function which produces EB's bug is as follows:
+
+(DEFUN LOSS (X)
+  (LIST (CXR 2 X)
+	(CXR 3 X)
+	(CXR 4 X)
+	(CXR 5 X)
+	(CXR 6 X)
+	(CXR 7 X)))
+
+Evidently the compiler's particular strategy for compiling CXRs commits
+it to eating up registers.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02065.html">Re: Compiler Error</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02063.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02065.html">Re: Compiler Error</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02063.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02064"><strong>Date</strong></a></li>
+<li><a href="threads.html#02064"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

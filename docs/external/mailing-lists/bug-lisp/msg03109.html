@@ -1,0 +1,113 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Multiple values -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 26 Aug 81 20:24:00 GMT -->
+<!--X-Message-Id: 999a5485ad5f49fc8df1688da22dd5ec@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Multiple values</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03110.html">Date Prev</a>][<a href="msg03108.html">Date Next</a>][<a href="msg03114.html">Thread Prev</a>][<a href="msg03115.html">Thread Next</a>][<a href="maillist.html#03109">Date Index</a>][<a href="threads.html#03109">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Multiple values</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GSB at MIT-MC, LAMP at MIT-MC, CWH at MIT-MC</li>
+<li><em>Subject</em>: Re: Multiple values</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 26 Aug 81 20:24:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 26 August 1981 16:24-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>This can't be the problem:
+From:     GSB@MIT-ML
+Date: Sun, 24 Aug 81 05:47:42 GMT
+Original-Date: 08/24/81 01:47:42 EDT
+Subject: Re: Multiple values
+	Date: 22 August 1981 02:28-EDT
+	From: Carl W. Hoffman &lt;CWH at MIT-MC&gt;
+From: 	    LAMP@MIT-MC
+Date: Wed, 20 Aug 81 22:01:15 GMT
+Original-Date: 08/20/81 18:01:15 EDT
+Subject:
+	    I've got a question about multiple values.
+	    Do you know why  (multiple-value (a1 a2 a3)
+			       (let ((s1 3) (s2 2) (s3 4))
+			     (values (+ s1 s2) (+ s2 s3) (+ s1 s3))))
+	    gives an error message?  I tried it in the lisp under
+	    a macsyma.                 Evan	
+	----
+	Can somebody answer this?  It seems fine to me.
+    ----
+    Seems fine to me too.  But the error message should be self-explanatory.
+    It thinks it's doing you (the user) a favor by barfing that LET 
+    MIGHT not return multiple values.  Cute, eh?  (LET is SYSP, after all,
+    and we all know system functions don't return multiple values.)
+The multiple-value checking *does* indeed &quot;pass thru&quot; LET  -- note the
+winnitude of LAMP's example with a slightly different structure
+  (defun LAMP () 
+    (multiple-value (a1 a2 a3)
+	(let ((s1 3) (s2 2) (s3 4))
+	  (auxillary s1 s2 s3))))
+  (defun auxillary (s1 s2 s3)
+    (values (+ s1 s2) (+ s2 s3) (+ s1 s3)))
+I believe that all that was losing was the one part of the tester
+macroexpanded *before* checking for VALUES explicitly (as the other
+part of the tester did).  I've fixed that now in the installed MLMAC
+(version 91), and will make up a new MACLISP/COMPLR pronto  (a move
+somewhat overdue anyway since XLISP has been around for several weeks.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03110.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03108.html">LOCK REPORT, and (2) Bare</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03114.html">Re: Multiple values</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03115.html">Why is the value NIL special?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03109"><strong>Date</strong></a></li>
+<li><a href="threads.html#03109"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

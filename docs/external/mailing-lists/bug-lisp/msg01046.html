@@ -1,0 +1,120 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Your timing worries, and generality -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 26 Oct 81 20:22:00 GMT -->
+<!--X-Message-Id: 8c0994d922dbe55bf70a461ac20e25ba@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Your timing worries, and generality</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01047.html">Date Prev</a>][<a href="msg01045.html">Date Next</a>][<a href="msg01047.html">Thread Prev</a>][<a href="msg01045.html">Thread Next</a>][<a href="maillist.html#01046">Date Index</a>][<a href="threads.html#01046">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Your timing worries, and generality</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: Your timing worries, and generality</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 26 Oct 81 20:22:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 26 October 1981 15:22-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 26 October 1981 14:38-EST
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    ...
+    But why a function call to get an element of a string? That is what 
+    stinks. So, I changed the implementation, made my own strings that
+    used a HUNK of FIXNUMS, and got open coding and decent speed.
+Originally, my STRING emulation package used hunks, but there are
+severe limitations to that approach -- you certainly can't get
+enough generality (or space efficiency) from this approach to do
+most of the NIL system code already written (assembler, compiler,
+text processor etc). 
+    ...
+    The same thing works like a charm for BIT1P ==&gt;
+    (LOGAND (LSH 1 (\ J 36.)) (CXR (+ 2 (// J 36.)) X)).
+    ... 
+This is sort of what happens with BIT1P now, except that a function
+call has to be done in order to retrieve the bit from a FIXNUM
+array.
+
+Speaking of function calls, the call to +INTERNAL-CHAR-N takes about
+20 microseconds to retrieve a character from a string -- the
+corresponding VAX retrieval has got to be at least 1 microsecond,
+and possibly more (depending on whether the arguments have to
+be moved to registers, etc).  Thus even allowing your 'factor of 3' 
+for failure to set *RSET to (), *** and timing only this correspondingly
+slow operation ***, its hard to imagine how you came up with a figure of 
+138. times slower on the PDP10.  Could it be that there's something
+else you're not telling?
+
+Of course, BITS emulations may be slower since they aren't as
+generally useful as STRINGs are -- the important thing was that
+they be large enough to handle cross-compiled SUBRs, and using
+hunks rather than FIXNUM arrays won't make it for the big cases.
+Worse yet, the memory utilization factor is even more important
+on the PDP10, and it is poor when you have to take a new page of 
+HUNKn space just because you wanted a single BITS of some random size. 
+
+Of reasonable importance is how often such programs will be run
+on the PDP10 -- if it's a small number of times (as you suggest)
+then virtually all your time spent developing alternative, less general
+systems will be wasted.  But if BITS are really important, and
+if everyone agrees to limit their size by the hunk kludgery,
+then a simple upward-compatible change can be done in the BITS
+package.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01047.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01045.html">Timing worries.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01047.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01045.html">Timing worries.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01046"><strong>Date</strong></a></li>
+<li><a href="threads.html#01046"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

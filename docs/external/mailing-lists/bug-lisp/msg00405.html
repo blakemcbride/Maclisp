@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DELETEF loses when LIB: used -->
+<!--X-From-R13: ROHS.FAGDSFLYK ng Q[G&#45;10O  -->
+<!--X-Date: Sun, 27 May 79 01:08:00 GMT -->
+<!--X-Message-Id: c8c835218015f0f84e2159888789b089@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DELETEF loses when LIB: used</title>
+<link rev="made" href="mailto:DAVE.TOURETZKY at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00406.html">Date Prev</a>][<a href="msg00404.html">Date Next</a>][<a href="msg00406.html">Thread Prev</a>][<a href="msg00404.html">Thread Next</a>][<a href="maillist.html#00405">Date Index</a>][<a href="threads.html#00405">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DELETEF loses when LIB: used</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-AI</li>
+<li><em>Subject</em>: DELETEF loses when LIB: used</li>
+<li><em>From</em>: DAVE.TOURETZKY at CMU-10A </li>
+<li><em>Date</em>: Sun, 27 May 79 01:08:00 GMT</li>
+<li><em>Cc</em>: SCOTT.FAHLMAN</li>
+<li><em>Original-date</em>: 26 May 1979 2108-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>TOPS-10 allows users to set a pseudo-device called LIB: to point to
+an arbitrary account.  File lookups that fail for the user's directory
+are tried on LIB: before giving up.  This is a useful feature; I often
+set my LIB: to C380ML5P (the MacLisp account) to run NEWLSP quicker.
+
+However, DELETEF appears to also be using the LIB: lookup option, and
+thus bombing with a protection failure whenever I delete a non-existent
+file that does happen to exist on the LIB: account.  This happens more
+frequently than you might think, as COMPLR tries to delete .FAS files
+while compiling.  If I have no .FAS file, but one does exist on
+C380ML5P, it flames out.
+
+It is possible to not use the LIB: lookup when seeking a file; PIP does
+so (and thus so does the TOPS-10 DELETE command.)  MacLisp should do
+likewise.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00406.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00404.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00406.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00404.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00405"><strong>Date</strong></a></li>
+<li><a href="threads.html#00405"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

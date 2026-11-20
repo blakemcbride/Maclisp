@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Sqjneq Pnegba &#60;SP ng [WF&#45;OW> -->
+<!--X-Date: Fri, 20 Jun 80 08:16:00 GMT -->
+<!--X-Message-Id: 7904c0fda97de3a48ac5fb3a16f695b1@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:EB at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04057.html">Date Prev</a>][<a href="msg04055.html">Date Next</a>][<a href="msg04057.html">Thread Prev</a>][<a href="msg04055.html">Thread Next</a>][<a href="maillist.html#04056">Date Index</a>][<a href="threads.html#04056">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>From</em>: Edward Barton &lt;EB at MIT-AI&gt;</li>
+<li><em>Date</em>: Fri, 20 Jun 80 08:16:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-AI</li>
+<li><em>Original-date</em>: 20 June 1980 04:16-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 20 JUN 1980 0413-EDT
+    From: KMP at MIT-MC (Kent M. Pitman)
+        Date: 20 June 1980 02:52-EDT
+        From: Edward Barton &lt;EB at MIT-AI&gt;
+        Subject: INHIBIT restoration bug
+        To: BUG-LISP at MIT-AI
+        Also happens when UNWIND-PROTECT is used instead of *CATCH.
+    Well, UNWIND-PROTECT, in the case of normal return, UNWIND-PROTECT
+    is supposed to ... ie, it works something like
+        (DEFUN UNWIND-PROTECT FEXPR (BODY)
+    	   (PROG1 (EVAL (CAR BODY))
+    		  (LET ((+INTERNAL-WITHOUT-INTERRUPTS T)) ;Bind INHIBIT, etc
+    		       (MAPC 'EVAL (CDR BODY)))))
+    when no non-local returns happen ... does this account for your bug?
+    If not, please give us an example of what you mean...
+No, this doesn't account for the bug.  Example:
+
+(setq tty-return '(lambda (x) (unwind-protect nil nil)(undefined-function)))
+^Z $P
+
+does a .VALUE after it is OUTSIDE the unwind-protect.
+
+I hope someone can fix this; I took out all the CATCHes in my code and
+it still happens sporadically.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04057.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04055.html">INHIBIT and user interrupt frames</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04057.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04055.html">INHIBIT and user interrupt frames</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04056"><strong>Date</strong></a></li>
+<li><a href="threads.html#04056"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

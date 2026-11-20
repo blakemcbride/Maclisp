@@ -1,0 +1,154 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: About &#38;parsers -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sat ,26 Sep 81 15:17:00 EDT -->
+<!--X-Message-Id: bbe1589e428790439079691c494289a1@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>About &amp;parsers</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00746.html">Date Prev</a>][<a href="msg00744.html">Date Next</a>][<a href="msg00746.html">Thread Prev</a>][<a href="msg00742.html">Thread Next</a>][<a href="maillist.html#00745">Date Index</a>][<a href="threads.html#00745">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>About &amp;parsers</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC</li>
+<li><em>Subject</em>: About &amp;parsers</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat ,26 Sep 81 15:17:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I agree with your sentiments about lambda lists becoming too complex.
+I have no objection to
+  (defun f (x y z) (let (a b c) ..)) 
+    instead of (defun f (x y z &amp;aux a b c) ...)
+nor to
+  (defun f (stuff) (dlet ((a b c) stuff) ...))
+    instead of (defun f ((a b c)) ...)
+As everyone is probably aware, I think &amp;keywords lose. I think that
+(defun f (x (optional a b c) (rest d)) ...)
+and related variants lose on similar grounds in spite of their
+seeming lispiness. Anything short of 
+(defun f (x (optional a) (optional b) (optional c) (rest d)) ...)
+will not be a notable improvement for programs that have to do
+code walking.
+
+HOWEVER, I'll not suggest anything along those lines. I know there is
+a camp of people with a valid gripe that such is overly verbose. I just 
+wanted to make it clear this is not an attempt at taking a radical 
+personal stand -- it is an attempt at compromise.
+
+The proposal: I think all systems need to provide at the bare minimum, a
+parser of the nature ALAN alluded to. Perhaps something like...
+
+  (PARSE-&amp;KEYWORDED-BVL '(X &amp;QUOTE &amp;OPTIONAL (A 3) &amp;EVAL (B) &amp;REST Z))
+
+     =&gt; ((X (REQUIRED)   )
+         (A (OPTIONAL 3) QUOTE)
+         (B (OPTIONAL)   )
+	 (Z (REST)       ))
+
+or ANY suitably chosen canonical form. This example is only illustrative
+of an idea, not of an implementation.  Such a program would want to be
+maintained by the system programmers since when the surface syntax changed,
+it would need to be updated. If a DEF-&amp;KEYWORD were provided, it would have
+to interface to the parser.
+
+Perhaps even a WALK-&amp;KEYWORDED-BVL which walked over useful kinds of nodes
+(eg, the init specs) of a node, calling a function at each such node with 
+info about what variables were bound so far, etc. Accumulating the return
+values in interesting ways, and finally returning information about those
+return values and a simple list of the variables which became bound... I
+can be much more explicit about such a function, but it's not terribly
+important right here, so I'll assume this gets the general idea across.
+
+My point is, though, that the naive user should not have to be able to
+understand how to write a parser just to be able to write code that 
+manipulates lambdas. I think a system-provided parser and or code-walker 
+facility of some sort is essential to avoid needless duplication of
+effort and possibility of bug introduction due to incomplete understanding
+of the funny &amp;syntax.
+
+Less essential, but a useful notion to consider, would be to retain
+DEFUN as are, but to make them macroexpand into something
+more explicit which the user does not see. This is probably not
+practical in the current lispm situation since LAMBDA itself can
+have these keywords, not just DEFUN. Nevertheless, I point it out
+because traditionally, the nice thing about Lisp was that funny
+surface forms had elegant and trivially decipherable underlying
+representations. Eg, 'A looks like something you'd feed to a parser,
+but underneath the (QUOTE A) is consistent with other stuff. Even,
+`(A ,B ,C) which is icky to many people has a well-formed underlying
+representation of (LIST 'A B C). That regularity is what made it so
+easy to get people to accept the ` syntactic sugar -- because the
+sugar was invisible to many programs that wanted to be treating a
+simpler model of the world. If (SI:|`| ...) really resisted macro-
+expansion attempts and code-walkers had to be constantly on guard
+for such, I suspect resistance would have been higher. Ditto even for
+things like LOOP which for all its bad points at least expands into
+something tractable by pre-existing code-walkers. Hence, the
+idea of having &amp;keywords exist primarily at the visual level and
+then macroexpand out to a more robust underlying representation is
+-- to me -- at least conceptually the right mechanism. Perhaps
+it is too late to think about that approach tho'... I don't know.
+
+Is there any discussion on the idea of formalizing a parser for
+general use? ... or even several flavors of parsers (pardon my
+loose use of ice cream terminology) for such lists? What sorts
+of properties would be desirable, etc?
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00746.html">&amp;NO</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00744.html">implementation of rational numbers</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00746.html">&amp;NO</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00742.html">About &amp;parsers</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00745"><strong>Date</strong></a></li>
+<li><a href="threads.html#00745"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

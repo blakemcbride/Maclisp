@@ -1,0 +1,83 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: GENSYM/GENTEMP -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,2 Sep 81 18:34:00 EDT -->
+<!--X-Message-Id: 7ad9913a0900d2b6eae8731c14199057@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>GENSYM/GENTEMP</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00763.html">Date Prev</a>][<a href="msg00761.html">Date Next</a>][<a href="msg00763.html">Thread Prev</a>][<a href="msg00760.html">Thread Next</a>][<a href="maillist.html#00762">Date Index</a>][<a href="threads.html#00762">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>GENSYM/GENTEMP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: GENSYM/GENTEMP</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,2 Sep 81 18:34:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Please do not think of changing GENSYM, at least in Maclisp. There are
+systems (eg, semantic network systems) where people use GENSYM just to make
+things with property lists that do not print circularly. They never intend
+these objects to be printed so don't care about the extra hair of GENTEMP
+which would cost them precious address space to no advantage. I think
+the concept of a GENSYM that can survive PRINT-READ is a good one to think 
+about, but let's not mix up the two ideas. Even in this day and age, memory
+conservation makes a difference.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00763.html">Why &quot;uninterned&quot; doesn't mean forever, or GENSYMs away!</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00761.html">GENSYM in MacLisp</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00763.html">Why &quot;uninterned&quot; doesn't mean forever, or GENSYMs away!</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00760.html">GENSYM/GENTEMP</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00762"><strong>Date</strong></a></li>
+<li><a href="threads.html#00762"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,11 Nov 80 19:13:00 EDT -->
+<!--X-Message-Id: 412b1e5331aa3695709954103e973032@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00403.html">Date Prev</a>][<a href="msg00329.html">Date Next</a>][<a href="msg00403.html">Thread Prev</a>][<a href="msg00329.html">Thread Next</a>][<a href="maillist.html#00404">Date Index</a>][<a href="threads.html#00404">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,11 Nov 80 19:13:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>We should like the implementation of our subprocedures to be reasonably
+transparent. In large systems (eg, Macsyma) there may be a large number
+of function-like programs which are in fact implemented as macros.
+Having to remember which are subrlike macros and which are true subrs
+(and therefore MAPable) detracts from the elegance of the system. The
+coding style resulting from such an environment is one which encourages
+having two functions around which do the same thing but each of which
+has [seemingly] arbitrary conditions on when it can be used.
+
+The `obvious' reason why we can't APPLY or MAP a macro is that its functional
+component expects to operate on a pointer to the whole macro form. eg,
+SECOND's definition acts on (SECOND x) as a unit. (MAPCAR #'SECOND x) doesn't
+work because there is no whole macro form anywhere. If SECOND is a displacing
+macro, it may want to displace that toplevel cons with (CADR x). The trouble
+in the MAPCAR case is that there is no toplevel cons to displace. The problem
+is that this obvious reason is an artifact of the evaluation method chosen
+and has nothing to do with high-level issues like getting problems solved.
+It is, as RICH points out, frustrating to have to worry about such trivial 
+details when you are trying to solve some real problem.
+
+DEFSUBST is the wrong answer because its semantics are ugly and weak. 
+Program-writing programs cannot reliably generate DEFSUBST forms because of
+the problems of variable naming conflicts (nested lambdas with similar names,
+quoted symbols, etc). A real effort needs to be made toward having a general
+purpose code-walker/meta-evaluator which can correctly analyze the code
+to be SUBSTed for. If we could make
+
+	(DEFOPEN FOO (X)
+	  (LIST 'X X ((LAMBDA (X) (LIST 'X X)) X)))
+
+mean
+
+	(FOO A) =&gt; (LIST 'X A ((LAMBDA (X) (LIST 'X X)) A))
+
+we'd be in much better shape than we are now. That would allow us to define
+real open-coding techniques. We just don't have such support yet.
+
+As an interim solution, we might want to look into what it takes to make
+something like a (DECLARE (SUBRLIKEMACRO (name number-of-`args') ...)) work
+so that #' could have help in deciding what to do. The compiler could in
+theory turn 
+		(DEFMACRO FOO (X) `(CDADR ,X))
+		(DECLARE (SUBRLIKEMACRO (FOO 1)))
+		(DEFUN BAR (X) (MAPCAR #'FOO X))
+		(DEFUN BAZ (L) (APPLY #'FOO L))
+into
+		(DEFMACRO FOO (X) `(CDADR ,X))
+		(DEFUN G0001 (X) (CDADR X))	
+		(DEFUN BAR (X) (MAPCAR #'G0001 X))
+		(DEFUN BAZ (L) (APPLY #'G0001 L))
+
+I'm not sure if this is a good idea. I think really that the meta-evaluator
+is the right thing to have. GJC has suggested for Macsyma that perhaps a single
+meta-evaluator should exist which can drive both the compiler and the 
+interpreter so that the semantics of code in the two are uniform...
+
+In any case, I'd be interested in hearing others opinions on these ideas.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00403.html">Re: Forgot to CC this</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00329.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00403.html">Re: Forgot to CC this</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00329.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00404"><strong>Date</strong></a></li>
+<li><a href="threads.html#00404"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

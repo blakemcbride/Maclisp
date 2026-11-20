@@ -1,0 +1,114 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Casifying at output time wins for what I want it to do. -->
+<!--X-From-R13: D[E ng [WF&#45;OW -->
+<!--X-Date: Sat ,1 Feb 81 18:00:07 EDT -->
+<!--X-Message-Id: 879156f042587ddad593167cdf43657d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Casifying at output time wins for what I want it to do.</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00045.html">Date Prev</a>][<a href="msg00042.html">Date Next</a>][<a href="msg00366.html">Thread Prev</a>][<a href="msg00041.html">Thread Next</a>][<a href="maillist.html#00051">Date Index</a>][<a href="threads.html#00051">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Casifying at output time wins for what I want it to do.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC, LISP-FORUM at MIT-MC</li>
+<li><em>Subject</em>: Re: Casifying at output time wins for what I want it to do.</li>
+<li><em>From</em>: RMS at MIT-AI</li>
+<li><em>Date</em>: Sat ,1 Feb 81 18:00:07 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>   Date: 1 February 1981 22:28-EST
+   From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+   Subject:  Casifying at output time doesn't win...
+   To: RMS at MIT-MC
+   cc: EAK at MIT-MC, LISP-FORUM at MIT-MC
+
+   The following case comes up every time we have had to discuss this
+   in GRINDEF bug mail. I don't think the I/O scenario you described
+   will handle it...
+   Consider:
+
+     (PRINT (READ))(X x |X| |x|)
+
+   then,
+
+     X must be EQ to |X|
+     x must be EQ to |x|
+
+At this point my actual idea and your idea of my idea part company.
+You seem to think I am trying to arrange for each use of the symbol X
+to print out the way it was typed in.  I'm not.  I certainly want both
+x and X to turn into |X|, always, and both of them would print out the
+same.  The question is, do they both print out as X or both print out
+as x?  This is what I would like the user to be able to specify.
+
+The intended feature is: if a user uses the symbol Together and always
+casifies it that way, then it will print back out as Together.  (And
+if once in a while he types in just together, it will still print as
+Together).  If another user always writes ToGetHer, then for HIM, it
+will always print as ToGetHer.  (And if once in a while he types just
+together, it will still print as ToGetHer).  For both of these users,
+the symbol actually appearing in memory is |TOGETHER|.
+
+If I write a program to call the second user's ToGetHer function, I
+can write it any way I like.  It will still print out ToGetHer.  This
+is because his program will contain something to specify how to print
+that symbol, and my program will (most likely) not contain anything to
+say how to print it out.
+
+Anyway, I'm really quite satisfied with the way Maclisp works now.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00045.html">Re: upper and lower case</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00042.html">Re: More case</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00366.html">Re: DEFMACRO incompatible</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00041.html">Re: more on mixed case</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00051"><strong>Date</strong></a></li>
+<li><a href="threads.html#00051"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

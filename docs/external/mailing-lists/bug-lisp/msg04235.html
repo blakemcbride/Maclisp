@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: ARRAYCALL vs FUNCALL -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Mon, 14 Apr 80 15:20:00 GMT -->
+<!--X-Message-Id: f8fd0a07b54aa518ff24ef70ed91c7de@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ARRAYCALL vs FUNCALL</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04236.html">Date Prev</a>][<a href="msg04234.html">Date Next</a>][<a href="msg04236.html">Thread Prev</a>][<a href="msg04234.html">Thread Next</a>][<a href="maillist.html#04235">Date Index</a>][<a href="threads.html#04235">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ARRAYCALL vs FUNCALL</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: CWH at MIT-MC</li>
+<li><em>Subject</em>: ARRAYCALL vs FUNCALL</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Mon, 14 Apr 80 15:20:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 14 APR 1980 1020-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>An opencoded ARRAYCALL should take about 5-10 JonlJiffies of time,
+whereas a CALLF (the compilation of FUNCALL) would probably take at
+least 100 JJ's.  I believe the reason PAULW used FUNCALL rather than
+ARRAYCALL is that he wasn't sure that all of his &quot;arrays&quot; were indeed
+arrays, or whetehr some of them were perhaps symbols with array
+properties.  Maybe you could run a few tests, with all the 
+   (FUNCALL &lt;a&gt; ...)
+turned into something like
+   (IF (EQ (TYPEP &lt;a&gt;) 'ARRAY) (ARRAYCALL T &lt;a&gt; ...) 
+       (BREAK PAULW-LOSES-ON-FUNCALL))
+Indeed, the maclisp interpreter permits you to FUNCALL any kind
+of array, whether it be type T or FIXNUM or whatever;  if this
+is the problem (instead of the potential for getting SYMBOLs as
+arrays), and if speed is of the essence, then modulo multiple
+evaluations of arguments (for which, see NILCOM;EVONCE &gt;) you could
+write something like
+   (DEFMACRO FULLARRAYCALL (&amp;REST L &amp;AUX (A (CAR L)))
+      `(CASEQ (ARRAY-TYPE ,a)
+	      (FIXNUM (ARRAYCALL FIXNUM ,.l))
+	      (FLONUM (ARRAYCALL FLONUM ,.l))
+	      (T      (ARRAYCALL T ,.l))))
+Currently, &quot;ARRAY-TYPE&quot; is not a primitive maclisp funciton,
+although more than once we wish it were.  It could be defined as
+   (DEFMACRO ARRAY-TYPE (A)
+      `(EQ (CAR (ARRAYDIMS ,a)) 'ARRAY))
+but for speed and non-CONSibility, we should write this one as
+a hand-coded LAP subr.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04236.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04234.html">ARRAYCALL vs FUNCALL</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04236.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04234.html">ARRAYCALL vs FUNCALL</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04235"><strong>Date</strong></a></li>
+<li><a href="threads.html#04235"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

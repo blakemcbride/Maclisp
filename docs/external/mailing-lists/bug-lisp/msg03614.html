@@ -1,0 +1,105 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DISPLACE -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 30 Dec 80 03:22:00 GMT -->
+<!--X-Message-Id: 4bf6e4e578eed67aae7fff243512cb05@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DISPLACE</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03615.html">Date Prev</a>][<a href="msg03613.html">Date Next</a>][<a href="msg03616.html">Thread Prev</a>][<a href="msg03598.html">Thread Next</a>][<a href="maillist.html#03614">Date Index</a>][<a href="threads.html#03614">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DISPLACE</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: DISPLACE</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 30 Dec 80 03:22:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, ALAN at MIT-MC, RWK at MIT-MC</li>
+<li><em>Original-date</em>: 29 December 1980 22:22-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Ho, hum. Just the other day WGD wanted a list-displace
+(defun displace (x y) (if (or (atom x)(atom y)) (error) %%%repla*%%%%))
+I think it is simpleminded, and quite outdated to be &quot;snarfing&quot;
+or &quot;using&quot; what should be the names of possibly generic systemic 
+data-struture primitives for semantic evaluation purposes.
+Use of SUBST for &quot;substitution&quot; macros truly is the classic example.
+(1) semanticaly incorrect in many cases.
+(2) multiple-evaluation brain-damage.
+
+Shouldn't displace work on vectors, hunks, arrays, structures?
+Does the PROGN hack really make sense for those other cases?
+
+How many calls to the evaluation-semantic displace does
+one have in a given lisp system anyway? One or two?
+I say the definition of this displace should be in
+the EVALUATOR Package. EVALUATOR:DISPLACE.
+
+I'm suprised at the people who have said that &quot;THE&quot; use
+of displace has been in macros (i.e. extending the evaluator
+or handing the EVAL message). Big irrelevent deal!
+What about the people working on algebra systems, or
+data-basis, or natural language parsers?
+They don't call EVAL, why should &quot;EVAL&quot; call their displace.
+
+Remember the 9'th commandment of systems programing,
+(we should ask JM to post these, har har):
+*XI* Thou Shalt Not Covet Thy Users Namespace.
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03615.html">Sub-jobs, and bi-directional i/o.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03613.html">EVAL-THE-ARGS-BEFORE-THE-FUNCTION STRIKES AGAIN</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03616.html">DISPLACE</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03598.html">DISPLACE</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03614"><strong>Date</strong></a></li>
+<li><a href="threads.html#03614"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

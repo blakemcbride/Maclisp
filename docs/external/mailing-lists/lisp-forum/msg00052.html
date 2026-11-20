@@ -1,0 +1,113 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: but you're losing flexibility... -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,2 Feb 81 16:29:00 EDT -->
+<!--X-Message-Id: f34654171aaabdc90941183ccc58f392@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: but you're losing flexibility...</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00496.html">Date Prev</a>][<a href="msg00466.html">Date Next</a>][<a href="msg00197.html">Thread Prev</a>][<a href="msg00466.html">Thread Next</a>][<a href="maillist.html#00052">Date Index</a>][<a href="threads.html#00052">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: but you're losing flexibility...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RMS at MIT-AI</li>
+<li><em>Subject</em>: Re: but you're losing flexibility...</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,2 Feb 81 16:29:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 02/02/81 07:00:07
+    From: RMS at MIT-AI
+    To:   KMP, LISP-FORUM
+    Re:   Casifying at output time wins for what I want it to do.
+
+       Date: 1 February 1981 22:28-EST
+       From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+       Subject:  Casifying at output time doesn't win...
+       To: RMS at MIT-MC
+
+       Consider: (PRINT (READ))(X x |X| |x|)
+
+       then, X must be EQ to |X|
+             x must be EQ to |x|
+
+    At this point my actual idea and your idea of my idea part company.
+    You seem to think I am trying to arrange for each use of the symbol X
+    to print out the way it was typed in.  I'm not.  I certainly want both
+    x and X to turn into |X|, always, and both of them would print out the
+    same.  The question is, do they both print out as X or both print out
+    as x?  This is what I would like the user to be able to specify.
+
+The point here is that suppose that in one critical piece of code, the guy
+had *really* and *truly* wanted to force uppercase &quot;TOGETHER&quot; to be the way
+the symbol was cased on input and output. He couldn't do it. He would write
+(defun f (|TOGETHER|) ...)
+and his output would come out &quot;(defun f (Together) ...)&quot; or 
+&quot;(defun f (ToGetHer) ...)&quot; but his output stream handler would have no way
+of allowing him variation of case. One would rarely want such, but if he did,
+your algorithm doesn't seem to provide for it ... I take it that what you
+are saying though, is that if he wants this sort of thing, he should be 
+willing to pay this price.
+
+    Anyway, I'm really quite satisfied with the way Maclisp works now.
+
+I'm glad of this. So am I. The above discussion is not really so much for
+your benefit as for the benefit of those who haven't thought as much about
+this.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00496.html">Re: Compilation in Standard LISP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00466.html">Re: Old IO symbols in MACSYMA</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00197.html">Re: [Re: Destructuring syntax]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00466.html">Re: Old IO symbols in MACSYMA</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00052"><strong>Date</strong></a></li>
+<li><a href="threads.html#00052"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

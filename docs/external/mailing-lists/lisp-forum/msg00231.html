@@ -1,0 +1,140 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: DIGITP -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q, XOD ng [WF&#45;[Q -->
+<!--X-Date: Thu ,2 Oct 80 00:17:00 EDT -->
+<!--X-Message-Id: 77b0622b92acb9c5d40ca8dfed3b0acb@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: DIGITP</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00230.html">Date Prev</a>][<a href="msg00575.html">Date Next</a>][<a href="msg00191.html">Thread Prev</a>][<a href="msg00234.html">Thread Next</a>][<a href="maillist.html#00231">Date Index</a>][<a href="threads.html#00231">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: DIGITP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: DIGITP</li>
+<li><em>From</em>: KMP at MIT-MC, JAR at MIT-MC</li>
+<li><em>Date</em>: Thu ,2 Oct 80 00:17:00 EDT</li>
+<li><em>Sender</em>: KMP at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Jonathan and I have put together our thoughts on the issue. We begin by
+summarizing the issues (perhaps oversimplifying somewhat, for the sake
+of conciseness) of the DIGITP controversy:
+
+* JAR suggested in CHPROP that DIGITP might want an optional 2nd arg 
+  defaulting to decimal 10.
+* RWK complained that (DIGITP #/q) returns non-().
+* JONL noted that DIGITP returns info about the weight of a digit and
+  that this needs to be compared to IBASE to achieve a useful end.
+  eg, (LET ((VAL (DIGITP x))) (AND VAL (&lt; VAL radix) VAL))
+  JONL's comments were repeated a number of other times, throughout,
+  pointing repeatedly to CHPROP and its descriptions of digit weights.
+* Moon suggested that perhaps DIGITP should look at IBASE to start with.
+* GLS brought up the idea of a 2nd arg to DIGITP again citing the following
+  points:
+	  1. (DIGITP #/q)	=&gt; ()  would be useful to novices
+	  2. (DIGITP #/q IBASE) =&gt; 26. would accomplish JONL and Moon's 
+					reader needs more concisely than
+					the code JONL suggested.
+	  3. (DIGITP #/q x)	=&gt; ... could be used for arbitrary radices
+					independent of what the lisp reader,
+					etc. would want to do with its 
+					digitness.
+* KMP agreed with 2nd arg idea, noting he had rarely wanted non-{0,1,...,9}
+  DIGITPness anyway.
+* GSB agreed with 2nd arg idea, noting he had never wanted non-{0,1,...,9}
+  DIGITPness anyway.
+* RMS said he didn't care what DIGITP did with a 2nd arg, but that with one
+  arg it must return non-() only for 0-9.
+* DLW agreed with GSB.
+
+------
+Now it seems to us that the problem stems from the fact that there is this
+winning name called &quot;DIGITP&quot; and everyone wants to see to it that it has
+maximally useful semantics without screwing things up. Domains of use include
+`machine language' readers (Lisp-like readers, parsers, etc.), human language
+readers, and user queries like &quot;Input a number:&quot; -- to name just a few. 
+Naive users, especially those experienced with languages that have no other
+base available than 10 are likely to be confused by the notion of non-{0-9}
+digits. Experienced users will want something that can handle different
+ranges of digits and [perhaps] return useful information about the digit as
+well.
+
+It would seem to us that the following solution presents itself:
+
+(DIGITP char &amp;optional radix)
+  If no radix is supplied, DIGITP returns true (T or #T, as appropriate)
+     for the characters 0 through 9, and () for other characters. (This would
+     reduce confusion for novices who expected it to be a simple predicate.
+     If a sophisticated user thinks this should do something else, maybe he
+     wants to look at what (DIGITP char 10.) will do in this formalism.)
+  If radix is supplied, DIGITP returns () if the character is not a digit
+     in the input base specified by radix. If the character is a digit
+     in that radix, then its weight as a digit is returned.
+
+(DIGIT-WEIGHT char)
+  Returns the weight of its argument as a digit, independent of base.
+  eg, (DIGITP #/A) should return 10. regardless of any radix considerations.
+  (DIGITP #/a) should also return 10., since &quot;a&quot; would be the same as &quot;A&quot;
+  in number reading.
+
+(DIGIT-NAME value)
+  Returns the character which represents the digit whose value is given
+  by its argument. eg, (DIGITP 10.) =&gt; #/A or ~A or whatever.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00230.html">Re: DIGITP not yet resolved?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00575.html">Re: MacLisp strings</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00191.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00234.html">Re: DIGITP</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00231"><strong>Date</strong></a></li>
+<li><a href="threads.html#00231"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

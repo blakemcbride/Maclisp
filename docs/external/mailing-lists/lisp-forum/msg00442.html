@@ -1,0 +1,123 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: &#45;*&#45; line -->
+<!--X-From-R13: RZI ng [WF&#45;OW (Rnavry Z. Irvaero) -->
+<!--X-Date: Mon ,26 Jan 81 18:54:00 EDT -->
+<!--X-Message-Id: 2bee75a1eabcf26d151e9526bb5eae3e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: -*- line</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00441.html">Date Prev</a>][<a href="msg00443.html">Date Next</a>][<a href="msg00441.html">Thread Prev</a>][<a href="msg00443.html">Thread Next</a>][<a href="maillist.html#00442">Date Index</a>][<a href="threads.html#00442">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: -*- line</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: -*- line</li>
+<li><em>From</em>: DLW at MIT-AI (Daniel L. Weinreb)</li>
+<li><em>Date</em>: Mon ,26 Jan 81 18:54:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Many messages about this subject have been very confused.  It
+would take more time than I can afford to answer everyone
+personally and point-by-point.  Other messages on this topic
+have been cogent and correct, and so I will be repeating
+some things people have said.
+
+No, the -*- line is not a relic from ITS EMACS.  ITS EMACS
+introduced the simple use of -*- to express the major mode.
+I invented the generalization into property lists, in
+response to ITS's lack of a property list feature in the file
+system.  I introduced it SPECIFICALLY for Lisp.  I INTENTIONALLY
+did not use a Lisp-like syntax.  The application in question
+was for the Package property.
+
+It is impossible to modify ITS to put in file property lists.
+100% out of the question; don't even think about it.
+
+File property lists have nothing whatsoever to do with Lisp.
+There is abolutely no reason for them to be in Lisp-like syntax.
+If we had ALGOL or SNOBOL-4 on ITS, they would use file property
+lists too.
+
+The syntax of file property lists is extremely simple to the
+point of being near-trivial.  If you have trouble parsing
+them, then you cannot program your way out of a paper bag.
+Furthermore, once a parser has been written for a given language system,
+it is written, once and for all, and anyone can use it.  Such
+code exists in the Lisp Machine and in Emacs; nobody ever has
+two write the parser again.  Writing one for Maclisp would
+be an easy task for any reasonably competent Maclisp programmer.
+
+The current implementation of file property lists has the
+extremely winning property that you can edit them without
+having to learn a whole new bunch of file system commands,
+all of which would probably have to get implemted in DDT, EMACS,
+ZWEI, et. al.  They get saved with backup tapes.  They get coied
+when the file gets copied, and this fact is OBVIOUS (nobody needs
+to wonder whether or not they get copied along with the file,
+to wonder whether, like the creation date, they are might not
+be considered part of the contents of the file).
+
+The Package property is used for several things, not all of which I can
+reconstruct right now.  Indeed, you can get this information from the
+package declaration.  However, it is useful for error-checking to have
+the information in the file as well, and it is also useful so taht you
+can read in a file without necessarily pre-loading the package
+declaration, in simple cases.
+
+I think the file property list works the right way.
+I see no reason for changing anything about it.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00441.html">Re: ITS getting file properties</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00443.html">Re: Explanation about file property lists.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00441.html">Re: ITS getting file properties</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00443.html">Re: Explanation about file property lists.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00442"><strong>Date</strong></a></li>
+<li><a href="threads.html#00442"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

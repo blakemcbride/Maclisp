@@ -1,0 +1,143 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,8 Dec 80 15:23:00 EDT -->
+<!--X-Message-Id: 198741826bc5304d7722e1da981a9a63@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00133.html">Date Prev</a>][<a href="msg00584.html">Date Next</a>][<a href="msg00133.html">Thread Prev</a>][<a href="msg00584.html">Thread Next</a>][<a href="maillist.html#00583">Date Index</a>][<a href="threads.html#00583">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,8 Dec 80 15:23:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Here's more data on an oddity originally introduced by ROD@SAIL in mail 
+to BUG-LISP. He pointed out that in Maclisp,
+
+    (setq x '(a b) y '(a b))	=&gt; (a b)
+    (eq x y)			=&gt; NIL
+    (subst 'foo x (list y y y))	=&gt; (FOO FOO FOO) 
+
+As he points out, the definition of SUBST in the Maclisp manual is:
+
+    (subst x y z) substitutes x for all occurrences of y in z, and returns
+	the modified copy of z.  The original z is  unchanged, as subst
+	recursively copies all of z replacing elements eq to y as it goes.
+	If x and y are nil, z is just copied, which is a convenient way to
+	copy arbitrary list structure. ... subst could have been defined by:
+
+        (defun subst (x y z)
+            (cond ((eq z y) x)    ;if item eq to y, replace.
+                  ((atom z) z)    ;if no substructure, return arg.
+                  ((cons (subst x y (car z))  ;otherwise recurse.
+                         (subst x y (cdr z))))))
+
+The problem is in fact much more far-reaching than he described, and there
+seems to be little agreement, so I thought I would present the rest of the
+story for comment... Here's what a sampling of the other dialects turns up...
+
+	Test case:	(setq new '(new list))
+			(setq old '(a b))
+			(setq test '((a b) a b))
+			(subst new old test)			
+
+In ITS Maclisp, back at least to Maclisp 1293, 
+
+		(subst new old test)	=&gt; ((NEW LIST) NEW LIST)
+		(eq (car *) new)	=&gt; T
+
+	This contradicts documentation in the manual. 
+
+In Multics Maclisp, 
+
+		(subst new old test)	=&gt; ((a b) a b) ; all copied structure
+
+In LispMachine Lisp,
+
+		(subst new old test)	=&gt; ((NEW LIST) A B)
+		(eq (car *) new)	=&gt; T
+
+	This contradicts documentation in the manual. Their documentation
+	is essentially equivalent to that of Maclisp.
+
+Franz Lisp has no SUBST function listed in their manual.
+
+In Interlisp, according to their documentation (I have no way to test this),
+
+		(subst new old test)	=&gt; ((NEW LIST) A B)
+		(eq (car *) new)	=&gt; NIL	; excuse the Maclisp notation
+
+For the curious, Interlisp documents its subst as follows...
+
+    subst[new;old;expr] Value is the result of substituing the S-expression 
+      new for all occurrences of the S-expression old in the S-expression 
+      expr. Substitution occurs whenever old is EQUAL to CAR of some sub-
+      expression, or when old is both atomic and not NIL and EQ to CDR of 
+      some subexpression of expr. For example:
+    
+	subst[A;B;(C B (X . B))] = (C A (X . A))
+    
+	subst[A;(B C);((B C) D B C)] = (A D B C),
+	  not (A D . A).
+    
+      The value of SUBST is a copy of expr with the appropriate changes. 
+      Furthermore, if new is a list, it is copied at each substitution.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00133.html">Re: (progn 'compile ...)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00584.html">Re: SUBST</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00133.html">Re: (progn 'compile ...)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00584.html">Re: SUBST</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00583"><strong>Date</strong></a></li>
+<li><a href="threads.html#00583"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

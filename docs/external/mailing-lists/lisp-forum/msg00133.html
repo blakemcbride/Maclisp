@@ -1,0 +1,88 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: (progn 'compile ...) -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,8 Dec 80 03:07:00 EDT -->
+<!--X-Message-Id: 29e214d22613c5e270f10363a06ca46a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: (progn 'compile ...)</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00132.html">Date Prev</a>][<a href="msg00583.html">Date Next</a>][<a href="msg00132.html">Thread Prev</a>][<a href="msg00583.html">Thread Next</a>][<a href="maillist.html#00133">Date Index</a>][<a href="threads.html#00133">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: (progn 'compile ...)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: EAK at MIT-MC</li>
+<li><em>Subject</em>: Re: (progn 'compile ...)</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,8 Dec 80 03:07:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 7 December 1980 16:11-EST
+    From: Earl A. Killian &lt;EAK at MIT-MC&gt;
+    Subject:  (progn 'compile ...)
+    To: LISP-FORUM at MIT-MC
+
+    I've also always wondered about this lossage.  It seems to me
+    that top-level forms ought to be considered as forms in a setup
+    function that gets compiled and that is called automatically at
+    load time.  Is there something wrong with this?  Does it have
+    undesirable semantics, or is it just implementation reasons?
+Well, the problem with this in MacLisp is that compiled functions cannot be
+garbage collected.  Thus these 'setup functions' would remain forever.  On the
+PDP-10 this would be rather fattening.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00132.html">Re: (progn 'compile ...)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00583.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00132.html">Re: (progn 'compile ...)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00583.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00133"><strong>Date</strong></a></li>
+<li><a href="threads.html#00133"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

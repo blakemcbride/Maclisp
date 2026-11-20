@@ -1,0 +1,4 @@
+x c/clib
+l maklib.stk
+l c10job.stk
+o ts maklib

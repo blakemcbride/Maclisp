@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: CHPROP problems -->
+<!--X-From-R13: RZI ng [WF&#45;OW -->
+<!--X-Date: Sat ,17 Aug 80 14:05:21 EDT -->
+<!--X-Message-Id: 8fd609cd1b8659e2e1cc2d956ae521c9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: CHPROP problems</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00615.html">Date Prev</a>][<a href="msg00101.html">Date Next</a>][<a href="msg00092.html">Thread Prev</a>][<a href="msg00094.html">Thread Next</a>][<a href="maillist.html#00099">Date Index</a>][<a href="threads.html#00099">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: CHPROP problems</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: CHPROP problems</li>
+<li><em>From</em>: DLW at MIT-AI</li>
+<li><em>Date</em>: Sat ,17 Aug 80 14:05:21 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    0) There is no function for turning a character into a fixnum...
+
+As I understand it, a character is a &quot;record&quot; containing three
+components; it is supposed to be invisible to portable programs how
+these fields get combined into a character.  So the portable set of
+functions ought not include such a function as you want; if you did
+this operation, your program would become non-portable.  I may
+be confused though.
+
+    1) There is no need for functions CHAR&lt;, CHAR=, CHAR&gt;.
+    The functions &lt;, = and &gt; should be used for this,
+
+I'd like this too; are the NIL people willing to make this work in the
+VAX and S-1 implementations, or would it slow things down badly?
+
+    4) The convention of a package called &quot;*&quot; seems like
+    a bad idea.  I don't think the Lisp machine will adopt it.
+
+I don't like this either, but I would be willing to put a hack into
+the package system if it is absolutely necessary for NIL compatibility.
+But I think the choice of &quot;*:&quot; was not very good, especially since we
+already had the package system at the time it was chosen.
+
+    5) Right now on the Lisp machine there is one sort of
+    character which can have bits and another which can
+    have a font.  There is no sort which can have both.
+    It might be an improvement if there were, but it might
+    also be a lot of work.  This might prevent the Lisp machine
+    from adopting CHPROP.
+
+This is quite explicitly mentioned in CHPROP; did you read all of it?
+Any code that works by using the %%KBD codes rather than magic
+constants will not have any trouble; we just redefine those codes.
+I volunteer to try to find the places that don't use that...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00615.html">Re: unwinding-scope</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00101.html">Re: In reply to TK: Character Objects (what else!)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00092.html">Re: CHPROP problems</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00094.html">Re: CHPROP problems</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00099"><strong>Date</strong></a></li>
+<li><a href="threads.html#00099"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

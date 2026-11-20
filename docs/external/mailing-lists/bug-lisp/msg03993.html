@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: PROG* and related forms -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;OW> -->
+<!--X-Date: Sat, 10 Nov 79 06:09:00 GMT -->
+<!--X-Message-Id: faf509c1b762fac46dfe6f12517be48c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>PROG* and related forms</title>
+<link rev="made" href="mailto:ALAN at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03994.html">Date Prev</a>][<a href="msg03992.html">Date Next</a>][<a href="msg03994.html">Thread Prev</a>][<a href="msg03992.html">Thread Next</a>][<a href="maillist.html#03993">Date Index</a>][<a href="threads.html#03993">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>PROG* and related forms</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: PROG* and related forms</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-AI&gt;</li>
+<li><em>Date</em>: Sat, 10 Nov 79 06:09:00 GMT</li>
+<li><em>Cc</em>: BUG-LISPM at MIT-AI, BUG-LISP at MIT-AI, NIL at MIT-MC</li>
+<li><em>Original-date</em>: 10 November 1979 01:09-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 10 NOV 1979 0048-EST
+    From: KMP at MIT-MC (Kent M. Pitman)
+
+    Could we introduce a LAMBDA* operator which did bindings sequentially? 
+    Consider the following form, which returns the value 4.
+
+    ((LAMBDA* (A A A) (1+ A)) 1 (1+ A) (1+ A))
+
+Are you serious?  You must be kidding.  You can't really mean this.
+Consider:  what does (LAMBDA* (A A A) (1+ A)) mean under your scheme?
+It would have to be the equivalent to: 
+
+	(LAMBDA (&amp;QUOTE X Y Z)
+		(SETQ A (EVAL X))
+		(SETQ A (EVAL Y))	
+		(SETQ A (EVAL Z))
+		(1+ A))
+
+Surely this ugly thing cannot be considered usefull.  Clearly what you
+have in mind is that LAMBDA* only be used in places like the one you
+gave as an example: &quot;((LAMBDA*&quot;, in which case What you want is LET*.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03994.html">PROG* and related forms</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03992.html">LAMBDA*</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03994.html">PROG* and related forms</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03992.html">LAMBDA*</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03993"><strong>Date</strong></a></li>
+<li><a href="threads.html#03993"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

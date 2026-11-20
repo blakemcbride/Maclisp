@@ -1,0 +1,114 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: BELN[WF&#45;[Z -->
+<!--X-Date: Tue, 23 Jul 80 19:34:55 GMT -->
+<!--X-Message-Id: fde0f6d43e8f496d78c112ecf9a0039e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:PSZ@MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01348.html">Date Prev</a>][<a href="msg01346.html">Date Next</a>][<a href="msg01348.html">Thread Prev</a>][<a href="msg01346.html">Thread Next</a>][<a href="maillist.html#01347">Date Index</a>][<a href="threads.html#01347">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-ML</li>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: </li>
+<li><em>From</em>: PSZ@MIT-ML</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 23 Jul 80 19:34:55 GMT</li>
+<li><em>Date</em>: Tue, 22 Jul 80 10:22:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 07/23/80 15:34:55 EDT</li>
+<li><em>Original-date</em>: 22 JUL 1980 0622-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 20 July 1980 03:39-EDT
+    From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+    Subject: Typo in SHARPM
+    . . . I note that /#-CNTRL-META-IFY has a bug in it. The line that claims 
+    to extract the C-M- bits actually only extracts M-bits. You probably want 
+    CADDR instead of CADR. -kmp
+Fixed.  tnx muchly.
+    Date: 20 July 1980 03:47-EDT
+    From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+    From &quot;NILCOM;SHARPM &gt;&quot; ...
+	(comment NIL-type defsharps for maclisp)
+	#-NIL  (progn 'COMPILE 
+    -----
+    Shouldn't that be #+NIL ...? NIL-/#-MACRO-DATALIST seems to get set up even
+    in non-NIL environments currently -- that seems like a waste ...
+Definetly not.  The idea is that general maclisp code has to be able to support
+a minimal abount of NIL-type defsharps so that things like
+   '(a #-NIL frob #N #B&quot;101011&quot; c)
+can even be read in.  ALAN's suggestion was used here - namely the code
+for these defshaprs will live, but is activated (thru the use of the varialbe
+NIL-/#-MACRO-DATALIST) only when under a #N conditinal;  in a pseudo-NIL
+environment (like the NIL simulator, or NILAID), more serious defsharping
+takes place.  The extra burden for maclisp to be able to pass over #N code
+is only about a 10% increast to the SHARPM package.
+    Date: 20 July 1980 03:44-EDT
+    From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+    (STATUS SYSTEM '/#-MACRO-DATALIST) =&gt; (VALUE SYMBOL)
+    but /#-MACRO-DATALIST is initially unbound. I am uncomfortable with this.
+    Is there some reason it can't be () by default? In fact, why does it have
+    privileged status as a system symbol when |#-C-M-bits| and some of the 
+    other variables used by SHARPM do not? -kmp
+It could be initially set to () with no harm -- was probably left this way
+during some experimentation as to how much should be assembled in and how
+much should be autoloaded.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01348.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01346.html">LEDIT</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01348.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01346.html">LEDIT</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01347"><strong>Date</strong></a></li>
+<li><a href="threads.html#01347"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

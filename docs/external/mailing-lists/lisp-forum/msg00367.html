@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: In search of the compatible DEFMACRO -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,4 Feb 81 09:35:00 EDT -->
+<!--X-Message-Id: 4cdef3c8323717b8835ca4908611e362@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: In search of the compatible DEFMACRO</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00213.html">Date Prev</a>][<a href="msg00214.html">Date Next</a>][<a href="msg00213.html">Thread Prev</a>][<a href="msg00214.html">Thread Next</a>][<a href="maillist.html#00367">Date Index</a>][<a href="threads.html#00367">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: In search of the compatible DEFMACRO</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC, MOON at MIT-MC, RMS at MIT-MC</li>
+<li><em>Subject</em>: Re: In search of the compatible DEFMACRO</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,4 Feb 81 09:35:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>How serious is this &quot;compatibility&quot; argument?
+  Date: 4 February 1981 02:43-EST
+  From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+  Subject: DEFMACRO incompatible
+    Date:  3 FEB 1981 2349-EST
+    From: Moon at MIT-AI (David A. Moon)
+    Subject: DEFMACRO incompatible
+    It would be unreasonable to change the Lisp machine one, since that would
+    make DEFMACRO incompatible with DEFUN and all other function-defining 
+    special forms.  Why can't DEFMACRO put its declarations in the body where 
+    all other function-defining things put them?
+  I really don't understand any of this.  The options you can supply to
+  DEFMACRO are like the options you can supply to DEFSTRUCT.  Declarations,
+  at least as I think of them, are information for the compiler.
+In addition to Bob's comment about parallels with DEFSTRUCT, I might ask
+what DEFUN ever accepts argument syntax like 
+	(DEFmumble FOO (X . Y)  (something-to-do))
+??  Well DEFMACRO does.   The &quot;name&quot; argument, in this example FOO, can
+be replaced by a list of name and options;  at least it can with
+DEFSTRUCT, DEFVST, and the NIL/MacLISP DEFMACRO (but not the LISPM 
+DEFMACRO).  Is there any reason for this gratuitous incompatibility?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00213.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00214.html">Re: Definition Syntax</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00213.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00214.html">Re: Definition Syntax</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00367"><strong>Date</strong></a></li>
+<li><a href="threads.html#00367"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

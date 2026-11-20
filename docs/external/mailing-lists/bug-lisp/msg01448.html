@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Query about proposed slight change to FIX and FIXR functions (again) -->
+<!--X-From-R13: [AA@N[WF&#45;[Q -->
+<!--X-Date: Thu, 13 Mar 81 20:51:16 GMT -->
+<!--X-Message-Id: 0c9d8f1ae38fd7e8aca18289b9d9ca13@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Query about proposed slight change to FIX and FIXR functions (again)</title>
+<link rev="made" href="mailto:MOON@MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01450.html">Date Prev</a>][<a href="msg01449.html">Date Next</a>][<a href="msg01450.html">Thread Prev</a>][<a href="msg01446.html">Thread Next</a>][<a href="maillist.html#01448">Date Index</a>][<a href="threads.html#01448">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Query about proposed slight change to FIX and FIXR functions (again)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: info-lispm at MIT-AI</li>
+<li><em>Subject</em>: Re: Query about proposed slight change to FIX and FIXR functions (again)</li>
+<li><em>From</em>: MOON@MIT-MC</li>
+<li><em>Date</em>: Thu, 13 Mar 81 20:51:16 GMT</li>
+<li><em>Cc</em>: RWG at MIT-MC, (BUG LISP) at MIT-AI</li>
+<li><em>Original-date</em>: 03/13/81 16:51:16 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>We leave FIX the same, change FIXR to round to nearest rather than adding
+0.5 and calling FIX, and add eight new functions(!):
+	FLOOR = convert flonum to integer, rounding toward -inf
+	CEIL = convert flonum to integer, rounding toward +inf
+	TRUNC = convert flonum to integer, rounding toward zero
+	ROUND = convert flonum to integer, rounding to nearest integer,
+		and to an even integer in the event of a tie.
+	FFLOOR, FCEIL, FTRUNC, and FROUND are the same except that their
+	result is a flonum rather than an integer.
+
+The first four functions are subject to overflow; however they probably
+are not guaranteed always to return a fixnum, rather it is implementation
+dependent what is the largest integer they will return, and given a number
+larger than that they may overflow.  The second four functions can never
+signal an error.
+
+FIX is identical to FLOOR.  FIXR will be changed to be identical to ROUND
+(unless there is sentiment for leaving FIXR the way it is).
+
+This proposal is compatible with IEEE standard floating point, which
+requires that at least TRUNC, ROUND, FTRUNC, and FROUND exist, and recommends
+the others, but does not suggest names for any of the operations.
+
+Since this proposal does not involve any changes to FIX, it will be
+upward compatible with Maclisp.  Is there any interest in adding these
+other functions to Maclisp?  The DPL people (at least) would use 
+(some of) them.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01450.html">Movement away from L</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01449.html">P.S. to previous message</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01450.html">Movement away from L</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01446.html">Query about proposed slight change to FIX and FIXR functions (again)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01448"><strong>Date</strong></a></li>
+<li><a href="threads.html#01448"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

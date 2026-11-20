@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: CERROR, and the ubiquitous FORMAT -->
+<!--X-From-R13: XUO ng [WF&#45;[Q (Xbua U. Ofcvanyy) -->
+<!--X-Date: Sun, 7 Dec 80 20:59:00 GMT -->
+<!--X-Message-Id: 6d9aa8a1016a529375683585f8215488@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CERROR, and the ubiquitous FORMAT</title>
+<link rev="made" href="mailto:JGA at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03708.html">Date Prev</a>][<a href="msg03705.html">Date Next</a>][<a href="msg03717.html">Thread Prev</a>][<a href="msg03698.html">Thread Next</a>][<a href="maillist.html#03706">Date Index</a>][<a href="threads.html#03706">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>CERROR, and the ubiquitous FORMAT</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: CERROR, and the ubiquitous FORMAT</li>
+<li><em>From</em>: JGA at MIT-MC (John G. Aspinall)</li>
+<li><em>Date</em>: Sun, 7 Dec 80 20:59:00 GMT</li>
+<li><em>Cc</em>: JGA at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 7 DEC 1980 1559-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date:  6 DEC 1980 0626-EST
+    From: JONL at MIT-MC (Jon L White)
+
+    True, some error msgs look funny with ~1G~S  and so on in  them,
+    but I still maintain that forcibly loading in FORMAT is not the
+    sloution (for MacLISP, that is).  Perhaps we should merely advise
+    novice users to put a loading of FORMAT into their LISP init files.
+    What we are doing is protecting MACSYMA and friends from the
+    suffocation of address space.   Any other opinions on this matter?
+
+ But the point is that an experienced user can recognize ~1G~S as a
+part of a format string, and can extract the equivalent information
+by a number of indirect means.  Once the novice can recognize a format
+string they probably don't need to load FORMAT to figure out what's
+going on. 
+
+ The person you hurt with this policy, is the fledgling lisp
+programmer who needs to have nastiness like error messages as sugar
+coated as possible; - not to be told &quot;... not only do you have an
+error, but you can't read the error message because of something
+else you don't know about&quot;.
+
+ I recognize the address space problem - I've strangled more than
+one Macsyma, but as someone who considers himself only a few microns
+above the novice level of lisp programming, I don't like the effect
+on the present default environment that this has.  Maybe experienced
+users (who all have inits, don't they?) should be given an
+&quot;anti-autoload&quot; property?
+
+John.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03708.html">DEFVSX, |defvst-contructor/||</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03705.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03717.html">CERROR, and the ubiquitous FORMAT</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03698.html">Re: CERROR, and the ubiquitous FORMAT</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03706"><strong>Date</strong></a></li>
+<li><a href="threads.html#03706"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

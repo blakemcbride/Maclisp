@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: QEHOJ.sngrzna ng Prexryrl -->
+<!--X-Date: Thu ,26 Feb 81 18:42:52 EDT -->
+<!--X-Message-Id: e8903ac785580f8f02190e4169c640da@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:CSVAX.fateman at Berkeley">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00359.html">Date Prev</a>][<a href="msg00516.html">Date Next</a>][<a href="msg00357.html">Thread Prev</a>][<a href="msg00516.html">Thread Next</a>][<a href="maillist.html#00608">Date Index</a>][<a href="threads.html#00608">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: CSVAX.jkf at Berkeley, jlk at mit-mc, lisp-forum at mit-mc,      rz at mit-mc</li>
+<li><em>From</em>: CSVAX.fateman at Berkeley</li>
+<li><em>Date</em>: Thu ,26 Feb 81 18:42:52 EDT</li>
+<li><em>Cc</em>: CSVAX.fateman at Berkeley</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre> _________________________________________________________
+ |             | UCILISP | INTERLISP | MACLISP |Franz/VAX| 
+ |-------------+---------+-----------+---------+---------|
+ | Interpreter |   57.0  |    26.0   |  22.8   |  65.0   |
+ |-------------+---------+-----------+---------+---------|
+ | Compiler    |    2.90 |    15.0   |   0.69  | 1.1 **  |
+ |-------------+---------+-----------+---------+---------|
+
+ Times are for (TAK 4 2 0), where TAK is an interesting function
+ defined by Mr. Ikuo Takeuchi.
+ (DEFUN TAK (X Y Z)
+	(COND ((GREATERP X Y)
+	       (TAK (TAK (SUB1 X) Y Z) 
+		    (TAK (SUB1 Y) Z X)
+		    (TAK (SUB1 Z) X Y) ))
+	      (T Y) ))
+(**) 5.3 with (1- x) etc [no other declarations, so greaterp is closed comp.]
+     4.1 with local function declaration (fast subroutine call)
+     1.1 with &gt; open compiled 
+     times on a VAX 11/780 at Berkeley, Feb. 26, 1981
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00359.html">Re: [DWS: LISP info requested]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00516.html">Re: The utility of readmacros in converting infix expressions.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00357.html">Re: Z-80 Lisp</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00516.html">Re: The utility of readmacros in converting infix expressions.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00608"><strong>Date</strong></a></li>
+<li><a href="threads.html#00608"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SXHASH -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Mon, 17 Dec 79 05:46:00 GMT -->
+<!--X-Message-Id: 56cee79bfb61aa42d7bf98e020beef5b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SXHASH</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03846.html">Date Prev</a>][<a href="msg03844.html">Date Next</a>][<a href="msg02337.html">Thread Prev</a>][<a href="msg03843.html">Thread Next</a>][<a href="maillist.html#03845">Date Index</a>][<a href="threads.html#03845">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SXHASH</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: PRATT at MIT-MC</li>
+<li><em>Subject</em>: SXHASH</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Mon, 17 Dec 79 05:46:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 17 DEC 1979 0046-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 15 December 1979 18:51-EST
+    From: Vaughan Pratt &lt;PRATT at MIT-MC&gt;
+    Any chance of getting sxhash a little more random?  At present it maps all
+    permutations of a list to the same number, . . . 
+Probably not - SXHASH is used by faslap/fasload in a &quot;heuristic&quot; way, but
+the gain to them by changeing sxhash is too small to be worth the risk of
+new bugs;  likely in NIL, we'll define sxhash to permute in the CAR direction
+instead of the CDR direction, and thus satisfy most users.  If you use the
+built-in SXHASH for atoms, it would be almost trivial to write your own version
+of it for non-atoms.
+    It would also be nice if atoms were hashed a little more thoroughly - at
+    present (A Z), (B Y), (C X) etc. all hash to the same thing.  All these
+    coincidences wreak havoc with any program using sxhash to implement its
+    own obarray.
+Yea, this coincidence is unfortunate.  I think if you had a version of sxhash
+which permuted down the car direction instead of teh cdr, you wouldn't
+be bothered by its peculiarities.  (The reason why you &quot;want&quot; it to permute
+down one of the directions is so that the recursive definition of sxhash
+will be some understandable piece of code in which the sxhash of a particular
+node is definable in terms of the sxhash's of the car and cdr of that node.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03846.html">(DISPLACE FOO ())</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03844.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02337.html">Re: sxhash</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03843.html">SXHASH</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03845"><strong>Date</strong></a></li>
+<li><a href="threads.html#03845"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

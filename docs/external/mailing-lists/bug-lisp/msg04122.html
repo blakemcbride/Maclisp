@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 16 May 80 03:38:00 GMT -->
+<!--X-Message-Id: bfd0c20bc5e82222b3b0c750d6f41cab@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04123.html">Date Prev</a>][<a href="msg04121.html">Date Next</a>][<a href="msg04123.html">Thread Prev</a>][<a href="msg04121.html">Thread Next</a>][<a href="maillist.html#04122">Date Index</a>][<a href="threads.html#04122">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 16 May 80 03:38:00 GMT</li>
+<li><em>Cc</em>: GJC at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 15 May 1980 23:38-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 15 May 1980 22:28-EDT
+    From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+    To:   KMP
+    cc:   GJC, BUG-LISP
+    Re:   #.(TYIPEEK #\FORM)
+
+    Why do it right when a kludge will suffice!  Come to think of it a lot
+    of things could be implemented by doing #.(&lt;random function&gt;) like
+    #.(or (status feature Multics) (read)) could replace #+Multics
+
+    There is this problem that both these guys return a value that is left
+    for read to return.  (my thing should read &quot;(progn (read) nil)&quot; so as
+    to do the right thing.)  This is really all completely losing.
+-----
+Oops. I stand corrected. You want #.(PROGN (TYIPEEK #\FORM) (READ)) if you
+are going to be (READ)'ing from the line before ... I am simply questioning
+the usefulness of your construct. I claim that comments of the form you 
+describe are hard to recognize in the editor if the #; falls off the screen 
+to the top and you are left only with the ostensibly commented-out part in
+view. Hence, I'd rather not give up a # char for that purpose.
+
+-kmp
+
+ps btw, for #+Multics you want  #.(COND ((STATUS FEATURE MULTICS) (READ))
+					(T (READ) (READ)))
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04123.html">#.(TYIPEEK #\FORM)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04121.html">New macro definers</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04123.html">#.(TYIPEEK #\FORM)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04121.html">New macro definers</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04122"><strong>Date</strong></a></li>
+<li><a href="threads.html#04122"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

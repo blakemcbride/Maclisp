@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: using the defstruct :print option. -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 10 Oct 82 20:32:00 GMT -->
+<!--X-Message-Id: ccfda02d7bc87b901e4863415e5f8f0c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>using the defstruct :print option.</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00768.html">Date Prev</a>][<a href="msg00766.html">Date Next</a>][<a href="msg00768.html">Thread Prev</a>][<a href="msg00766.html">Thread Next</a>][<a href="maillist.html#00767">Date Index</a>][<a href="threads.html#00767">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>using the defstruct :print option.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DAM at MIT-OZ</li>
+<li><em>Subject</em>: using the defstruct :print option.</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 10 Oct 82 20:32:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MC</li>
+<li><em>Original-date</em>: Sunday, 10 October 1982  16:32-EDT</li>
+<li><em>Sender</em>: ALAN at MIT-OZ</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The error messages you were getting were about ?FORMAT being called with
+the wrong number of arguments, right?  This is the usual COMPLR braindamage
+where you forget to tell it that a function is a lexpr and the first time
+it discovers you calling that function with a different number of arguments
+it drops dead.  (Despite the fact that just warning you and then continuing
+would be OK since it hasn't actually produced any incorrect code or
+anything.)  The temporary fix is for you to put a &quot;(DECLARE (*LEXPR ?FORMAT))&quot; 
+somewhere (probably the same place you load defstruct), and to also be sure
+that you get the format package loaded into your runtime correctly (since
+?FORMAT doesn't have an AUTOLOAD property either).
+
+BUG-* people:  I never noticed this before because the complr on ITS
+already has FORMAT loaded into it apparently.  Could someone do the right
+thing to give ?FORMAT an args declaration in the compiler so that I don't
+have to continue to warn people about this?  Thanks.
+
+I also thought that we had agreed to make ?FORMAT have an AUTOLOAD property
+since it really is a necessity in using format in MacLisp.
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00768.html">ALLFIL package under 20x</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00766.html">[Ian G. Macky &lt;Phaedrus&gt;: overwriting existing files.]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00768.html">ALLFIL package under 20x</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00766.html">[Ian G. Macky &lt;Phaedrus&gt;: overwriting existing files.]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00767"><strong>Date</strong></a></li>
+<li><a href="threads.html#00767"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

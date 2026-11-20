@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DO&#45;NAMED -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;RZI ng [WF&#45;OW> -->
+<!--X-Date: Sun, 13 Apr 80 01:43:00 GMT -->
+<!--X-Message-Id: 3709701af5e8f9f6517f1504771833a7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DO-NAMED</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01961.html">Date Prev</a>][<a href="msg01958.html">Date Next</a>][<a href="msg01961.html">Thread Prev</a>][<a href="msg01958.html">Thread Next</a>][<a href="maillist.html#01959">Date Index</a>][<a href="threads.html#01959">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DO-NAMED</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-AI, BUG-LISPM at MIT-AI</li>
+<li><em>Subject</em>: DO-NAMED</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;</li>
+<li><em>Date</em>: Sun, 13 Apr 80 01:43:00 GMT</li>
+<li><em>Original-date</em>: 12 April 1980 20:43-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I have a new proposal.  In the schemes being discussed, PROG, DO,
+DOTIMES and DOLIST must each exist in two forms, either with different
+function names (DO versus DO-NAMED) or different syntaxes (DOTIMES
+followed by a symbol versys followed by a list).  JONL correctly points
+out that there may be more such special forms in the future, each of
+which would have to have two versions for the same reason.
+
+Rather than duplicating this functionality in all these forms, why
+not &quot;subroutinize out&quot; the functionality into a new special form,
+which could be called &quot;*CATCH&quot;; you could have merely one version
+of each special form, and then put a *CATCH around it if you need
+a named escape expression.  This will keep the definition of the
+language simpler (by keeping down the number of special forms
+or different syntaxes of special forms), and will automatically
+work for any new special forms that are invented in the future without
+putting constraints on their syntax.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01961.html">DO-NAMED</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01958.html">*CATCH vs named PROG</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01961.html">DO-NAMED</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01958.html">*CATCH vs named PROG</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01959"><strong>Date</strong></a></li>
+<li><a href="threads.html#01959"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

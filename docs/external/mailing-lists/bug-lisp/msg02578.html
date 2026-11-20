@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Having our cake and eating it too -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 19 Apr 81 18:20:00 GMT -->
+<!--X-Message-Id: b55d0d9bd937cdb79076190c97573778@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Having our cake and eating it too</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02579.html">Date Prev</a>][<a href="msg02577.html">Date Next</a>][<a href="msg02579.html">Thread Prev</a>][<a href="msg02577.html">Thread Next</a>][<a href="maillist.html#02578">Date Index</a>][<a href="threads.html#02578">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Having our cake and eating it too</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: dick at MIT-AI</li>
+<li><em>Subject</em>: Having our cake and eating it too</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 19 Apr 81 18:20:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 19 April 1981 13:20-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 18 April 1981 15:02-EST
+    From: Richard C. Waters &lt;DICK at MIT-AI&gt;
+    more of a question than a bug,  when calls to status and sstatus 
+    are compiled, do they still have to parse the command name even 
+    when this is known at compile time.
+Yes, I'm afraid this is so -- QUUX started a system of multiple entries
+to STATUS functions some years ago, so that the complr could just PUSHJ P,
+to the right place, but we never finished this.  The question was one of
+achieving a very small efficiency factor, versus a modestly large investment
+of development time;  we preferred to develop other things, and at this point
+in time, its hard to justify much more development-for-the-sake-of-speed on the
+PDP10 MacLISP.
+    A similar but more interesting question, re EXTENDS. . .  When this
+    is the case everything could compile very effeciently, because you
+    could find out at compile time what all of the methods were and
+    everything, and save a great deal of searching around.  .  .  .
+This point is certainly worth considering -- indeed SMALLTALK does this.
+There is very little needed in the COMPLR in the form of &quot;understanding&quot;
+declarations to make it happen.  THis problem will occur in NIL too, 
+although the feeling of many persons is that the FLAVOR system has
+such a small, albeit constant, time overhead that most persons won't care
+to bother with declarations.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02579.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02577.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02579.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02577.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02578"><strong>Date</strong></a></li>
+<li><a href="threads.html#02578"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

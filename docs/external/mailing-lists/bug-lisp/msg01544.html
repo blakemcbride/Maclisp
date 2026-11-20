@@ -1,0 +1,125 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: This completely cretinous argument about GET and hunks -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Tue, 17 Feb 81 22:19:00 GMT -->
+<!--X-Message-Id: 17Feb81 171939 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>This completely cretinous argument about GET and hunks</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01548.html">Date Prev</a>][<a href="msg01545.html">Date Next</a>][<a href="msg01548.html">Thread Prev</a>][<a href="msg01545.html">Thread Next</a>][<a href="maillist.html#01544">Date Index</a>][<a href="threads.html#01544">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>This completely cretinous argument about GET and hunks</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC</li>
+<li><em>Subject</em>: This completely cretinous argument about GET and hunks</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Tue, 17 Feb 81 22:19:00 GMT</li>
+<li><em>Original-date</em>: 17 February 1981 1719-EST (Tuesday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>To JONL and KMP, and whoever else cares:
+
+   While I realize that in the area of law, the law of the land is the
+legislation that was passed and not what the legislators intended to
+pass, I think that in this situation the &quot;reasonable man&quot; and
+&quot;reasonable intent&quot; principles apply.  I observe that nearly all of the
+quoted &quot;documentation&quot; (and I use horror quotes, for LISP RECENT is
+certainly a horrible excuse for documentation) came from my hand.  You
+may well question whether I can be considered &quot;reasonable&quot; after
+implementing hunks.  Nevertheless, if anyone had thought to ask me
+earlier, I would have been happy to clarify the original intent and
+design philosophy behind hunks.  (This is not to say that the future of
+MacLISP must needs be confined by previous poor decisions.  On the other
+hand, the past may be the best source of light for the future.)
+
+   Hunks were originally invented to satisfy *two* applications:
+(1) to provide record structures more memory-efficient than lists;
+(2) to provide for list cells that could have properties attached.
+I thought at the time that LISP RECENT made this fairly clear,
+if not explicitly, then by example.
+
+   The functions which were explicitly enumerated were not meant to be
+the only functions which could treat hunks as lists.  It would have been
+infeasible to list all such functions.  The fact that CAR and CDR were
+listed as treating hunks as list cells, and the fact that ATOM of a
+hunk produced NIL, together were considered sufficient informal notice
+that all functions (such as GET and ASSQ) which are conceptually not
+primitive, but use CAR, CDR, and ATOM, would also treat hunks as list
+cells.
+
+   Indeed, the intention was that hunks should always be treated *by
+default* as list cells, *unless otherwise specified*.  This was the
+reason for the HUNKP switch, and for the explicit mention of functions
+such as PRINT and EQUAL:  the HUNKP switch conceptually does *not*
+explicitly cause EQUAL and PRINT to treat hunks as list cells; instead,
+permits the altering of that *default* behavior to make these
+explicitly mentioned functions consider all components of a hunk
+instead of just the car and cdr.
+
+   Conclude from these remarks what you will.  Let me chastise both of
+you, however, for your increasingly rude behavior in this interchange
+and in previous messages to BUG-LISP and LISP-FORUM.  I am quite weary
+of examining my mail every day or two only to find that much of it
+contains snide remarks and allusions to someone's purported ignorance
+or pigheadedness.  Such remarks are unnecessary to the transaction of
+business in this public forum, and serve only to ruffle feelings and
+impede progress.  (I have similar complaints about unnecessary and
+uncalled-for use of profanity by yet other parties.)
+
+--Guy
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01548.html">GET on HUNKS.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01545.html">HASHPUT and HASHGET</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01548.html">GET on HUNKS.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01545.html">HASHPUT and HASHGET</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01544"><strong>Date</strong></a></li>
+<li><a href="threads.html#01544"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

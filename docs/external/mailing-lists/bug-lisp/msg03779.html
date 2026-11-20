@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LISP.INI's fixed, finally! -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Wed, 16 Jan 80 12:52:00 GMT -->
+<!--X-Message-Id: 07f71af2c36c27ba83b674b7ae097d64@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LISP.INI's fixed, finally!</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03780.html">Date Prev</a>][<a href="msg03778.html">Date Next</a>][<a href="msg03780.html">Thread Prev</a>][<a href="msg03778.html">Thread Next</a>][<a href="maillist.html#03779">Date Index</a>][<a href="threads.html#03779">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LISP.INI's fixed, finally!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: TOURETZKY at CMU-10A</li>
+<li><em>Subject</em>: LISP.INI's fixed, finally!</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Wed, 16 Jan 80 12:52:00 GMT</li>
+<li><em>Cc</em>: (FILE [LISP;BUG MAIL]) at MIT-MC, RPG at SU-AI, FAHLMAN at CMU-10A</li>
+<li><em>Original-date</em>: 16 JAN 1980 0752-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Apparently there are two bugs in either the TOPS-10 monitor, or its
+documentation, but finally I've gotten the sequence of kludges which 
+makes all kinds of LISP.INIs and all kinds of relocating I/O buffers 
+to work;  the two tricks seem to be
+  1) always do the buffer-ring &quot;cycling&quot; yourself, by supplying
+     an address to the IN uuo
+  2) Note that the CMU monitor (and possibly others) does not return
+     the SN%SHR bit in the correct place, (or maybe documentation is
+     wront), so the the fasload into the hiseg was losing.  I simply 
+     added check to see if bit 4 is returned by GETTAB of the 
+     segment-number-table (.GTSGN).  The documentation says that this
+     bit is &quot;reserved&quot;, but it is what CMU seems to return.
+I've tested this out at CMU, by running the standard LISP.INI, and
+also doing a &quot;/NQACLSP&quot;  which is the QACLSP.MIC file altered to 
+get LISP off [C380ML5P], so it looks like we're in good shape again.
+Also, I made up a complr and put it on TEMP, so when you are ready,
+there is a LISP.SHR and COMPLR.SHR (and .LOW's too) to be moved to SYS:.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03780.html">Loading REL-type files into LISP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03778.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03780.html">Loading REL-type files into LISP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03778.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03779"><strong>Date</strong></a></li>
+<li><a href="threads.html#03779"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

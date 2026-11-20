@@ -1,0 +1,132 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: your note on Function Cells. -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ N [WF&#45;[Q> -->
+<!--X-Date: Tue ,27 Sep 83 20:10:00 EDT -->
+<!--X-Message-Id: 2827f6e14cb63a1264755ae606c0e905@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>your note on Function Cells.</title>
+<link rev="made" href="mailto:GJC@MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00858.html">Date Prev</a>][<a href="msg00856.html">Date Next</a>][<a href="msg00858.html">Thread Prev</a>][<a href="msg00856.html">Thread Next</a>][<a href="maillist.html#00857">Date Index</a>][<a href="threads.html#00857">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>your note on Function Cells.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JonL.pa @ PARC-MAXC</li>
+<li><em>Subject</em>: your note on Function Cells.</li>
+<li><em>From</em>: George J. Carrette &lt;GJC @ MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,27 Sep 83 20:10:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM @ MIT-MC, Padget @ UTAH-20</li>
+<li><em>In-reply-to</em>: Msg of Tue 27 Sep 83 16:16 PDT from JonL.pa at PARC-MAXC.ARPA</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>A loaded VAX-NIL MACSYMA has about 14 thousand of what you
+call slink cells allocated, mostly for function cells. So if
+you had implemented them as a slot in the symbol it would have
+indeed been a loser. Actually, another thing the indirection
+buys us is to make it possible to relocate symbols without putting
+a lot of work into looking at compiled code or its support structures.
+
+Another kind of function cell we see a lot of now is a
+flavor-method-table entry. These also get a regular function
+cell too now, for the purpose of &quot;book-keeping&quot; in the assembler/loader,
+so the figure of 14 thousand is more than slightly bloated by this
+and by procedures on property lists. The garbage collector can
+clean up this garbage though if the loader did a MAKFUNBOUND.
+
+As you pointed out, the multiple-namespace concept is a very useful
+one, and one that programmers have to be able deal with.
+People should know that real Scheme programmers can make use of the 
+multiple-namespace idea too. In Yale T or MIT &quot;6.001 &quot; scheme one
+might do a few different things:
+
+(putprop 'foo (lambda (...) ...) 'bar)
+
+and then write
+
+((get'foo'bar) ...)
+
+or define something that looks cleaner and runs faster such as:
+
+(define-namespace foo)
+
+(define-in-namespace (foo bar) (lambda (...) ...))
+
+and then write
+
+((foo bar) ...)
+
+The *hack* is that languages that are implemented efficiently enough
+in *general* allow the user to add his own namespace concepts which will
+run as fast as if the implementor had wired them into the system and
+wrote about them in the manual himself.
+
+I have observed that T, MIT SCHEME, VAX-NIL, and Lispmachine(s)
+live up to this *hack*, requiring slightly different amounts of
+kludgery on the part of the user in some cases, but with nothing at
+the level of LAP or MICROCODE being required. 
+
+This puts the arguments on a totally different level, at least for
+people with practical access to these kinds of languages/machines.
+
+You can do an excelent implementation of maclisp namespacing in T,
+and vice-versa (for the maclisp descendants such as lispm and nil).
+On the other hand, architectural optimizations in hardware and/or
+software can make it a real bitch (to use the techical term) to implement
+tail-calling in some implementations.
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00858.html">Function Cells -- the history</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00856.html">Addition to list</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00858.html">Function Cells -- the history</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00856.html">Addition to list</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00857"><strong>Date</strong></a></li>
+<li><a href="threads.html#00857"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

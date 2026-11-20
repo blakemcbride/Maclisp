@@ -1,0 +1,112 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: RSHA@N[WF&#45;[Z -->
+<!--X-Date: Thu, 12 Jun 81 22:06:42 GMT -->
+<!--X-Message-Id: ea3d235bb0c83ceff767668e804a1d60@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:DEVON@MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02469.html">Date Prev</a>][<a href="msg02467.html">Date Next</a>][<a href="msg02469.html">Thread Prev</a>][<a href="msg02465.html">Thread Next</a>][<a href="maillist.html#00990">Date Index</a>][<a href="threads.html#00990">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG EMACS) at MIT-ML</li>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>Subject</em>: </li>
+<li><em>From</em>: DEVON@MIT-ML</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 12 Jun 81 22:06:42 GMT</li>
+<li><em>Date</em>: Fri, 4 Dec 81 18:38:00 GMT</li>
+<li><em>Cc</em>: (BUG MACLISP) at MIT-ML</li>
+<li><em>Cc</em>: KMP at MIT-MC, BUG-LISPM at MIT-MC, BUG-MACLISP at MIT-MC</li>
+<li><em>Original-date</em>: 12/06/81 18:06:42 EDT</li>
+<li><em>Original-date</em>: 4 December 1981 13:38-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>This idea, &amp;WHOLE, was discussed through the mails early in 1979, and
+someone (I believe RMS?) suggested another keyword for the same idea
+to be used in the LISPM defmacro.  It's appearance in MacLISP/NIL was
+noted in the following from LISP;LISP NEWS
+
+Sunday December 9,1979  FM+5D.18H.52M.12S. LISP 1914/COMPLR 904  - JONL, RWK - 
+...
+12) Some things that failed to be documented previously about DEFUN/DEFUN&amp;
+    &amp;WHOLE  -  DEFMACRO now permits a keyword &amp;WHOLE, to get at whole call form
+	by specifying a variable to be bound to the whole call form.
+	    (DEFMACRO FOOM (&amp;WHOLE X) &lt;mumble&gt;)  would bind X just like
+	    (MACRO FOOM (X) &lt;mumble&gt;)
+
+
+Typically, one would use &amp;WHOLE when several symbols are set to the same
+macro code body, or when one wants a pointer ot the cell invoking the call;
+e.g., the following two macros FOO and FOOQ are essentially the same except
+for the action in the lines indicated by ;**** :
+
+(defmacro FOO (x y &amp;optional (z 1) &amp;whole form)
+    (do () 
+	((fixp z)) 
+      (setq form (error &quot;Count arg unreasonable for OPERATEing&quot; 
+ 			form
+			'FAIL-ACT)))
+    (let ((arglist `(,x ,y)))
+      (if (eq (car form) 'FOOQ)					;****
+	  (setq arglist (mapcar #'(lambda (a) `(QUOTE ,a)))))   ;****
+      `(OPERATE ,@arglist ,z)))
+
+(fsetq FOOQ (fsymeval 'FOO))
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02469.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02467.html">DEFVST lossage</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02469.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02465.html">Files on Twenex</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00990"><strong>Date</strong></a></li>
+<li><a href="threads.html#00990"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,70 @@
+version: 2.0
+jobs:
+  build_ka10:
+    docker:
+      - image: cimg/base:2020.01
+    environment:
+      EMULATOR: "pdp10-ka"
+    steps:
+      - checkout
+      - run: sudo -E sh -ex build/dependencies.sh install_linux
+      - run:
+          name: build
+          command: "make check-dirs all EMULATOR=$EMULATOR"
+          no_output_timeout: 30m
+          timeout: 120m
+      - store_artifacts:
+          path: out
+  build_kl10:
+    docker:
+      - image: cimg/base:2020.01
+    environment:
+      EMULATOR: "pdp10-kl"
+    steps:
+      - checkout
+      - run: sudo -E sh -ex build/dependencies.sh install_linux
+      - run:
+          name: build
+          command: "make check-dirs all EMULATOR=$EMULATOR"
+          no_output_timeout: 30m
+          timeout: 120m
+      - store_artifacts:
+          path: out
+  build_klh10:
+    docker:
+      - image: cimg/base:2020.01
+    environment:
+      EMULATOR: "klh10"
+    steps:
+      - checkout
+      - run: sudo -E sh -ex build/dependencies.sh install_linux
+      - run:
+          name: build
+          command: "make check-dirs all EMULATOR=$EMULATOR"
+          no_output_timeout: 30m
+          timeout: 120m
+      - store_artifacts:
+          path: out
+  build_simh:
+    docker:
+      - image: cimg/base:2020.01
+    environment:
+      EMULATOR: "simh"
+    steps:
+      - checkout
+      - run: sudo -E sh -ex build/dependencies.sh install_linux
+      - run:
+          name: build
+          command: "make check-dirs all EMULATOR=$EMULATOR"
+          no_output_timeout: 30m
+          timeout: 120m
+      - store_artifacts:
+          path: out
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build_ka10
+      - build_kl10
+      # build_klh10 # Fails almost all the time.
+      - build_simh

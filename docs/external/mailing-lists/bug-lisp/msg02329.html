@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Extension to merge sort -->
+<!--X-From-R13: UZE ng EG&#45;OW (Uhl Egrryr) -->
+<!--X-Date: Mon, 3 Jul 78 21:40:00 GMT -->
+<!--X-Message-Id: 9db3c04297628495b0a8cab792d6508e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Extension to merge sort</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02330.html">Date Prev</a>][<a href="msg02328.html">Date Next</a>][<a href="msg02330.html">Thread Prev</a>][<a href="msg02328.html">Thread Next</a>][<a href="maillist.html#02329">Date Index</a>][<a href="threads.html#02329">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Extension to merge sort</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC</li>
+<li><em>Subject</em>: Extension to merge sort</li>
+<li><em>From</em>: GLS at SU-AI (Guy Steele)</li>
+<li><em>Date</em>: Mon, 3 Jul 78 21:40:00 GMT</li>
+<li><em>Cc</em>: NIL at MIT-MC, GLS, bug-lispm at MIT-AI  </li>
+<li><em>Original-date</em>: 3 Jul 1978 1440-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>A useful extension to the merge sort (on lists) would be to
+extend to &quot;predicate&quot; to have four possible return values.
+Recall that at each step two items a and b are yanked off
+of two lists, and on the basis of the predicate one is stuffed
+into an output list and the other is left on its original
+input list for iteration.  The change would be:
+(pred a b) =	()	a  b: output b, leave a behind
+		FIRST	output a, and throw away b
+		SECOND	output b, and throw away a
+		other non-():	output a, leave b behind
+The idea is that if the predicate determines that two items
+are in some sense equal, it may want to just discard one and
+leave the other in the sort.  This is good for eliminating
+duplicates.  If it is not desired to change the semantics
+of the SORT function, perhaps this new one could be called
+SIFT or something.
+Also, it would be convenient if MERGE were available as
+a separate function.
+
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02330.html">CASEQ extensions</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02328.html">Motes, singles, and other issues of array theory for LISP</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02330.html">CASEQ extensions</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02328.html">Motes, singles, and other issues of array theory for LISP</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02329"><strong>Date</strong></a></li>
+<li><a href="threads.html#02329"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

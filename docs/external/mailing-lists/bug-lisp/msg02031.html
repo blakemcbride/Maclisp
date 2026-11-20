@@ -1,0 +1,138 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: 3 MacLisp/Nilaid bugs -->
+<!--X-From-R13: Epbgg ng EDW&#45;YZ (Epbgg X. Yenzre) -->
+<!--X-Date: Tue, 25 Mar 80 15:13:00 GMT -->
+<!--X-Message-Id: 8900dc1d3bd757e2f6c5a73948acfe51@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>3 MacLisp/Nilaid bugs</title>
+<link rev="made" href="mailto:Scott at SRI-KL">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02032.html">Date Prev</a>][<a href="msg02030.html">Date Next</a>][<a href="msg02032.html">Thread Prev</a>][<a href="msg02030.html">Thread Next</a>][<a href="maillist.html#02031">Date Index</a>][<a href="threads.html#02031">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>3 MacLisp/Nilaid bugs</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC</li>
+<li><em>Subject</em>: 3 MacLisp/Nilaid bugs</li>
+<li><em>From</em>: Scott at SRI-KL (Scott J. Kramer)</li>
+<li><em>Date</em>: Tue, 25 Mar 80 15:13:00 GMT</li>
+<li><em>Original-date</em>: 25 Mar 1980 0713-PST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>[1] TO-STRING losses after converting several long SYMBOLs to STRINGs.  I
+     tested this on smaller SYMBOLs and it apparently worked.  It doesn't
+     work in either MacLisp or Nilaid on ITS or 20x, but work okay in NIL
+     simulation on ITS.
+
+!na:
+
+NILAID 90
+
+NIL 
+(load '((scott) loss))
+T 
+(loss)
+1. This is a line to determine how long it takes TO-STRING to barfThis is a line
+ to determine how ..... a line to determine how long it takes TO-STRING to barf
+2. This is a line ... to barf
+   {time and boredom pass}
+10. This is .... TO-STRING to barf
+11. 
+;(NIL . 1. . 39143. . (NIL . 190. . 39141. . (NIL . 379. . 39138. . (NIL . 39139
+. . 39135. . (NIL . 39136. . 39132. . (NIL . 39133. . 39129. . (NIL . 39130. . 3
+9126. .
+
+  {it goes on for awhile, then...}
+
+ .) .) .) .) .) .) .) .) .) .) STRING bug detected by STR:GC-DAEMON
+
+;BKPT FAIL-ACT
+
+			*	*	*
+
+Here's the LOSS function I used to demo this:
+
+(do ((i 1 (1+ i)))	 ;Where are we
+    (())		 ;Do forever
+    (print i)		 ;Show index
+    (princ (to-string s)))	 ;&quot;s&quot; is a very long SYMBOL (947. chars)
+
+----------------------------------------------------------------------
+[2] DEFAULTF in Nilaid on 20x is wrong.
+
+defaultf 
+((PS MACLISP) * FASL *) 
+
+----------------------------------------------------------------------
+[3] OPEN doesn't work in either MacLisp or Nilaid for file without
+     extensions on 20x.
+!v test.*.* 
+
+   PS:&lt;SCOTT&gt;
+ TEST..1;P775252            1 550(7)       25-Mar-80 06:26:54 SCOTT     
+
+(open '|&lt;scott&gt;test..1|)
+;(OPEN |&lt;scott&gt;test..1|) FILE NOT FOUND
+
+;BKPT IO-LOSSAGE
+----------------------------------------------------------------------
+
+I heard a rumor that STRINGs aren't supposed to work in MacLisp but I
+thought I'd pass this along anyways.
+
+-sjk
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02032.html">Re: Compiler Bug</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02030.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02032.html">Re: Compiler Bug</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02030.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02031"><strong>Date</strong></a></li>
+<li><a href="threads.html#02031"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

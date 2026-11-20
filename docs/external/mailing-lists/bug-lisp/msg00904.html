@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Uyraa E. Phexr &#60;UEP ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 12 Apr 82 19:54:00 GMT -->
+<!--X-Message-Id: d2608fc8282ad721e9317786ada22626@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:GSB at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00905.html">Date Prev</a>][<a href="msg00903.html">Date Next</a>][<a href="msg00905.html">Thread Prev</a>][<a href="msg00903.html">Thread Next</a>][<a href="maillist.html#00904">Date Index</a>][<a href="threads.html#00904">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>From</em>: Glenn S. Burke &lt;GSB at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 12 Apr 82 19:54:00 GMT</li>
+<li><em>Cc</em>: HIC at MIT-MC, JLK at MIT-MC</li>
+<li><em>Original-date</em>: 12 April 1982 14:54-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>IOCERR special-cases a .BCHN of 0 and fails to read the error coode into
+D.  I can't see hw this can be really worth anything, especially since
+it will still jump to IOOCER8 and maybe call the IOCINS.  (Otherwise
+it shoould jump to IOOCOER9 which wouoldn't call IOCOINS.)
+(Excuse the typicing spasticity, especially &quot;O&quot; key, this is a Brand
+New Keyuboard installed by Techincal Services.)
+
+I will change this somehow unless somoeone can tell my why not to.
+This blooows away the (admittedly uncoommon) case where the channel
+number is incorrect.  But also, it can make it difficult to use channel
+0 tempoorarily.  n.b.  i can't break any lisp-internal iooc-traps because
+there aren't any.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00905.html">Re: assq compatibility with Maclisp</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00903.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00905.html">Re: assq compatibility with Maclisp</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00903.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00904"><strong>Date</strong></a></li>
+<li><a href="threads.html#00904"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

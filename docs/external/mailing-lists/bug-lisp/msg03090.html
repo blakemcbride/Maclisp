@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 3 Sep 81 19:55:00 GMT -->
+<!--X-Message-Id: 6c42d53eaba1a18e4f9c965db486a4b9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03091.html">Date Prev</a>][<a href="msg01474.html">Date Next</a>][<a href="msg03093.html">Thread Prev</a>][<a href="msg01474.html">Thread Next</a>][<a href="maillist.html#03090">Date Index</a>][<a href="threads.html#03090">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JPG at MIT-MC, WGD at MIT-MC</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 3 Sep 81 19:55:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, MACSYMA-I at MIT-MC, GCOOK at MIT-MC</li>
+<li><em>Original-date</em>: 3 September 1981 15:55-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 3 September 1981 07:08-EDT
+    From: Jeffrey P. Golden &lt;JPG at MIT-MC&gt;
+    Oops!  As it may be argued that the example in my last mail does 
+    exhibit &quot;differing declarations&quot;, as the first occurrence of X is 
+    not declared FLONUM, please replace the example by
+	    (defun f (x)
+	      (declare (flonum x))
+	      ((lambda (x)
+		 (declare (flonum x))
+		 (times x ((lambda (x)
+			     (declare (flonum x))
+			     (times x x))
+			   x)))
+		  (sin x)))
+    This one fails in the same way anyway.
+Yup, your're right.  I suspect that fixing COMPLR to ignore the
+*consistent* re-declarations wouldn't be any trouble at all.
+Maybe with a little more thought, fixing it for overriding
+declarations could be worked in too.  Overrides of NOTYPE are
+harder to do since NOTYPE generally means the absence of
+other declarations -- getting this part would involve a little
+more work, but I'll look into it after returning from England.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03091.html">COMPLR bug</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01474.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03093.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01474.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03090"><strong>Date</strong></a></li>
+<li><a href="threads.html#03090"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

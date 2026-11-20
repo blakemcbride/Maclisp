@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: While you're hacking SUSPEND&#45;time I/O... -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 26 Oct 80 02:48:00 GMT -->
+<!--X-Message-Id: bd8b128d365982b522ebbf8324311c54@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>While you're hacking SUSPEND-time I/O...</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01063.html">Date Prev</a>][<a href="msg01061.html">Date Next</a>][<a href="msg01063.html">Thread Prev</a>][<a href="msg01061.html">Thread Next</a>][<a href="maillist.html#01062">Date Index</a>][<a href="threads.html#01062">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>While you're hacking SUSPEND-time I/O...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;(FILE [JONL;JONL MAIL])&quot; at MIT-MC</li>
+<li><em>Subject</em>: While you're hacking SUSPEND-time I/O...</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 26 Oct 80 02:48:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 25 October 1980 22:48-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>This was reported once before but continues to cause problems. If there is
+a tty channel other than TYI/TYO open at SUSPEND time, SUSPEND fails on an
+open-channels error. Could you please make it close these channels and re-
+open them in the same mode automatically? It's a real screw for this not to
+happen because I don't always have control over the actual suspension process
+(someone else's code may be doing the dumping and may not realize I've opened
+an extra tty channel ... and I don't necessarily have a hook which allows
+me to get this channel re-opened after dump time ...) If the problem is not
+clear, I can elaborate, but I don't see any reason not to do it. Eg, try
+suspending a Macsyma sometime and you'll see the problem ... 
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01063.html">(RENAMEF &lt;SFA&gt; ...)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01061.html">STRING bug</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01063.html">(RENAMEF &lt;SFA&gt; ...)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01061.html">STRING bug</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01062"><strong>Date</strong></a></li>
+<li><a href="threads.html#01062"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

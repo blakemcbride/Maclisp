@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: I DON'T BELIEVE IT!!!!!!!!! -->
+<!--X-From-R13: OZO@N[WF&#45;OW -->
+<!--X-Date: Sun, 8 Jan 79 08:43:39 GMT -->
+<!--X-Message-Id: 8785fffa2d814f84a79a90f1ea30110e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: I DON'T BELIEVE IT!!!!!!!!!</title>
+<link rev="made" href="mailto:ALAN@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02964.html">Date Prev</a>][<a href="msg00697.html">Date Next</a>][<a href="msg02964.html">Thread Prev</a>][<a href="msg00697.html">Thread Next</a>][<a href="maillist.html#02917">Date Index</a>][<a href="threads.html#02917">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: I DON'T BELIEVE IT!!!!!!!!!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-AI	I have just been shafted by the most obscure &quot;feature&quot; in MacLisp.	Now I can't believe there is anybody who depends on this feature, and</li>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Re: I DON'T BELIEVE IT!!!!!!!!!</li>
+<li><em>From</em>: ALAN@MIT-AI</li>
+<li><em>From</em>: RWK at MIT-MC (Robert W. Kerns)</li>
+<li><em>Date</em>: Sun, 8 Jan 79 08:43:39 GMT</li>
+<li><em>Date</em>: Wed, 1 Aug 79 08:14:00 GMT</li>
+<li><em>Cc</em>: ALAN at MIT-MC, KMP at MIT-MC, CWH at MIT-MC</li>
+<li><em>Original-date</em>: 08/01/79 04:43:39 EDT</li>
+<li><em>Original-date</em>: 1 AUG 1979 0414-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I just talked with ALAN.  He implied the right way to do it in his
+last note, but let me summarize:
+
+1)  NIL is always ignored.  No change.
+2)  (FOO) returned from a splicing macro is the same as just having typed
+    FOO, at top level or inside a list.  The only change is in top-level READ
+    it has to know to return FOO instead of reading it.  Also in the position
+    after a . [his (A B . ~(C)) example].
+3)  (FOO BAR) is just like FOO and BAR typed in without the ~ or parens.
+    At top level and after a ., this should be an error.
+
+This really is a small pertebation in the current behaviour, and will fix
+both ALAN's and my complaints (being the same).  It completely subsumes any
+need for macros to determine at run time whether or not they want to be
+splicing.  It is simply a matter of making their behaviour consistant
+at top-level.  Oddly enough, it probably means special-casing at the
+top-level (and after a &quot;.&quot;) but in an innocuous way.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02964.html">Re: ignore prior message</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00697.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02964.html">Re: ignore prior message</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00697.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02917"><strong>Date</strong></a></li>
+<li><a href="threads.html#02917"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Timings for the BITS emulations in MacLISP -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 26 Oct 81 16:44:00 GMT -->
+<!--X-Message-Id: f6b4d46bcd8da9bd7805e18a29be42f2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Timings for the BITS emulations in MacLISP</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03038.html">Date Prev</a>][<a href="msg01049.html">Date Next</a>][<a href="msg03038.html">Thread Prev</a>][<a href="msg01049.html">Thread Next</a>][<a href="maillist.html#01050">Date Index</a>][<a href="threads.html#01050">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Timings for the BITS emulations in MacLISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: Timings for the BITS emulations in MacLISP</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 26 Oct 81 16:44:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 26 October 1981 11:44-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 25 October 1981 13:48-EDT
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    Subject: Joke of the century.
+    The implementation of strings and bitvectors in Maclisp is a joke.
+    I brought up the NIL READer in maclisp to use as a Macro32 parser,
+    and the damn thing runs 138 times slower than it does in real VAX NIL.
+    If it were only 2 times slower it would be usable, but 138 times, 
+    that is absurd. For a 297 calls to +TYI there were 1297 calls to 
+    SI:CHECK-TYPER, 936 calls to PTR-TYPEP, 936 calls to BITSP, . . . 
+
+Your failed to mention whether or not you ran your timing tests with 
+*RSET on or off.  This makes a big difference for the emulation code  -- 
+remember, PDP10 doesn't have load-byte-indexed instructions, nor general 
+variable-length bit-field hacking, and these data types and primitive
+operations were designed with an architecture in mind more like the
+VAX or 370 than the PDP10.
+
+The emulation packages were designed to check all types of arguments,
+and try to be &quot;secure&quot;, so setting *RSET to () should give an
+inordinate speed-up.  More to the point, if you know what you're
+doing, you can use the low-level functions +INTERNAL-CHAR-N and 
++INTERNAL-RPLACHAR-N instead of CHAR and RPLACHAR for another large
+speedup.   Still, none of these are likely to be &quot;open-compiled&quot;
+for the PDP10, since the basic targeted instructions just aren't
+in the PDP10 repetoire.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03038.html">back to normal ...</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01049.html">New EXTEND is winning.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03038.html">back to normal ...</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01049.html">New EXTEND is winning.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01050"><strong>Date</strong></a></li>
+<li><a href="threads.html#01050"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

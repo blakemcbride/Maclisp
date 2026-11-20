@@ -1,0 +1,181 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Destructuring, GLS's and RMS's suggestions, and &#38;EVAL. -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,8 Oct 80 14:41:00 EDT -->
+<!--X-Message-Id: d149b3a4a6bacb20cadeb469805d8290@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Destructuring, GLS's and RMS's suggestions, and &amp;EVAL.</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00258.html">Date Prev</a>][<a href="msg00177.html">Date Next</a>][<a href="msg00258.html">Thread Prev</a>][<a href="msg00177.html">Thread Next</a>][<a href="maillist.html#00193">Date Index</a>][<a href="threads.html#00193">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Destructuring, GLS's and RMS's suggestions, and &amp;EVAL.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: CWH at MIT-MC</li>
+<li><em>Subject</em>: Re: Destructuring, GLS's and RMS's suggestions, and &amp;EVAL.</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,8 Oct 80 14:41:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, Touretzky at CMU-10A</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>A little secret:
+    Date: 2 October 1980 22:20-EDT
+    From: Carl W. Hoffman &lt;CWH at MIT-MC&gt;
+    Subject: Dave Touretzky's message on macros, destructuring, and functions
+    I like your DESTRUCTURE function idea a lot.  Could such a thing be
+    implemented for MacLisp?
+The destructuring DEFUN has been in MacLISP for a long time -- since the
+LISP RECENT note of
+&quot; Sunday December 9,1979 FM+5D.18H.52M.12S. LISP 1914/COMPLR 904 -JONL,RWK- &quot;
+(with ocasional lapses of proper interfaceing between DEFUN and DEFUN/&amp;,
+ cough, cough!)
+For example, note this little example in the current MacLISP:
+  (SETQ DEFUN&amp;-CHECK-ARGS () )
+  (DEFUN FOO ( ((B . C) (D E))  A  &amp;OPTIONAL ((G . H) E /3RD?)  &amp;REST W) 
+	(mumble))
+  (GRINDEF FOO)
+==&gt;
+  (DEFUN FOO G0005 
+    (COMMENT ARGLIST = (((B . C) (D E)) A &amp;OPTIONAL ((G . H) E /3RD?) &amp;REST W))
+    (LET ((W (AND (&gt; G0005 3) (LISTIFY (- 3 G0005))))
+	  (A (ARG 2))
+	  (((B . C) (D E)) (ARG 1))
+	  G H /3RD?)
+	 (DESETQ (G . H) (COND ((&gt; G0005 2) (ARG 3)) (E)))
+	 (AND (&gt; G0005 2) (SETQ /3RD? 'T))
+	 (mumble)))
+
+I have one or two comments on the extension Proposed by GLS
+    Date:  2 October 1980 1340-EDT (Thursday)
+    From: Guy.Steele at CMU-10A
+    .  .  .  We can ignore &amp;AUX by fiat, and &amp;REST is the same
+    (in some sense) as &quot;.&quot;, so that leaves &amp;OPTIONAL.  I might suggest
+    extending JONL's BNF slightly to allow non-top-level &amp;OPTIONALs:
+    .  .  .
+    Adding &amp;OPTIONAL into RMS's syntax is more difficult.  I'm working
+    on that.  May not be worth it?
+If I understand the BNF right, the extension would allow for forms like
+  (LET ( ((A B &amp;OPTIONAL (C '35)) &lt;x&gt;) )
+	&lt;do-something&gt;)
+which would differ from
+  (LET ( ((A B C) &lt;x&gt;) )
+	&lt;do-something&gt;)
+only in that if &lt;x&gt; is a list of length less than 3, then C is bound to '35
+instead of ().  This would restrict binding a variable with the name
+&amp;OPTIONAL, which is a minor loss since such a variable can't now be bound
+in a DEFUN's variable list, leaving only an explicit LAMBDA as a way to
+bind this variable (yea, verry minor loss!).  Presumably the former would
+be preferable to doing it by hand
+    (LET ( ((A B . Z) &lt;x&gt;) 
+	   (C (IF Z (CAR Z) '35)) )
+	&lt;do-something&gt;)
+
+A more serious problem to be faced is working RMS's destructuring syntax 
+into the alread-extensively used MacLISP destructuring scheme:
+    Date:  1 OCT 1980 2132-EDT
+    From: RMS at MIT-AI (Richard M. Stallman)
+    I think that destructuring in DEFUN would be a reasonable idea.
+    .  .  . 
+    However, I don't think that the Maclisp style of destructuring should
+    be adopted at all.  It closes out the entire syntactc space -- if you
+    adopt it, you can't ever allow anything else, because there is no room
+    for an escape.  .  .  .
+    If destructuring is done as follows:
+    (defun foo (x (list z (list w y))) ...)
+    or, equivalently
+    (defun foo (x `(,z (,w ,y))) ...)
+    .  .  .
+With all respect, I'd like to offer an &quot;escape&quot; for the data-formatted
+destructuring which would allow intermixing of the program-formatted
+destructuring:  &amp;EVAL.   If something like GLS's &amp;OPTIONAL were
+to be adopted into the data-formatted scheme, then the precedent is
+already set for &quot;escapes&quot; in general.  Thus two ways to write the &quot;foo&quot;
+above would be
+    (defun foo (x (&amp;eval (list z (list w y)))) ...)
+or, if &quot;#@&quot; could be another &quot;quoter&quot; producing (&amp;eval ...), then
+    (defun foo (x #@`(,z (,w ,y))) ...)
+In the program-formatted destructuring syntax (which I've been attributing
+to RMS), the &quot;escape&quot; to data-directed format could be, say, &amp;QUOTE.
+Consider a &quot;mixed-mode&quot; in both schemes:
+  data-formatted style:
+   (DEFUN FOO (X (Z (&amp;eval (list W Y)) ) &lt;do-something&gt;)
+  program-formatted style:
+   (DEFUN FOO (X (list Z (&amp;quote (w y)) ) &lt;do-something&gt;)
+The duality of &quot;escapes&quot; cannot be escaped here, and was probably the
+subject of some thesis or paper 15 (or so) years ago.  
+
+However, there is very little at all to be gained by using the program-
+formatted destructuring only to destructure over data -- the data-formatted
+would always be more concise.  But as RMS points out, one would not like
+to close the door to syntactic extensions which would allow binding
+something other than a variable, and the program-formatted is the more
+general choice here.
+
+One more possibility for extension is to include a little &quot;matching&quot;
+along with the destructuring -- for example, suppose one wants to
+destructure a list which is supposed to be a LAMBDA list into two
+parts, the Bound-Variable-List and the Body.  He could say
+   (DESETQ ( ()  BVL . BODY) &lt;list&gt;)
+or alternatively,
+   (DESETQ (&amp;eval `(LAMBDA ,BVL ,. BODY)) &lt;list&gt;)
+only in the latter form, the explicit quote on LAMBDA would mean not
+only that nothing is to be bound at this point (just as the () means
+in the former), but also that a check should be performed to see
+that the car of &lt;list&gt; is equal to LAMBDA.  But I digress -- I don't
+want to resurrect arguments over how much of a pattern-matching
+language should be built into LISP.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00258.html">Re: DIGIT-WEIGHT etc.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00177.html">Re: side effects and a complr bug.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00258.html">Re: DIGIT-WEIGHT etc.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00177.html">Re: side effects and a complr bug.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00193"><strong>Date</strong></a></li>
+<li><a href="threads.html#00193"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

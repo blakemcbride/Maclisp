@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: guess what. -->
+<!--X-From-R13: Pneel [netbyva &#60;[netbyva ng [WF&#45;[hygvpf> -->
+<!--X-Date: Wed ,4 Feb 81 01:09:00 EDT -->
+<!--X-Message-Id: d6d3416d2b74d6fa54145d6407151973@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: guess what.</title>
+<link rev="made" href="mailto:Margolin at MIT-Multics">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00365.html">Date Prev</a>][<a href="msg00212.html">Date Next</a>][<a href="msg00208.html">Thread Prev</a>][<a href="msg00209.html">Thread Next</a>][<a href="maillist.html#00211">Date Index</a>][<a href="threads.html#00211">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: guess what.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: Re: guess what.</li>
+<li><em>From</em>: Barry Margolin &lt;Margolin at MIT-Multics&gt;</li>
+<li><em>Date</em>: Wed ,4 Feb 81 01:09:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Setting up &quot;&amp;&quot; to have a readmacro function
+    can give ( &amp;REST BAR) =&gt; (REST BAR)
+    (&amp;OPTIONAL A B C D E &amp;REST K) =&gt; ((OPTIONAL A B C D E) (REST K))
+    or whatever else you want.
+
+This is not so good, because &amp;keywords are only defined to have these
+meanings in bvl's, but using them as readmacros causes them to be
+expanded all the time.  True, how often do we use &amp;, so it could be
+slashed, but I'm still against having a readmacro that is only useful in
+a special place.
+                                        barmar
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00365.html">Re: DEFMACRO incompatible</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00212.html">Re: Your mail of 3 February 1981 18:37-EST</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00208.html">Re: guess what.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00209.html">Re: &amp; as reader syntax</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00211"><strong>Date</strong></a></li>
+<li><a href="threads.html#00211"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

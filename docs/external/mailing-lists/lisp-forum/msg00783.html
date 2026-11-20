@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Antecedent, what's thy name? -->
+<!--X-From-R13: UAEBSD ng BODQ&#45;[OJQ -->
+<!--X-Date: Wed ,24 Jun 81 03:38:00 EDT -->
+<!--X-Message-Id: 516fdfc831b64d316f58a7f6607c207d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Antecedent, what's thy name?</title>
+<link rev="made" href="mailto:GOSPER at PARC-MAXC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00784.html">Date Prev</a>][<a href="msg00782.html">Date Next</a>][<a href="msg00770.html">Thread Prev</a>][<a href="msg00781.html">Thread Next</a>][<a href="maillist.html#00783">Date Index</a>][<a href="threads.html#00783">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Antecedent, what's thy name?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at AI</li>
+<li><em>Subject</em>: Antecedent, what's thy name?</li>
+<li><em>From</em>: GOSPER at PARC-MAXC</li>
+<li><em>Date</em>: Wed ,24 Jun 81 03:38:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>One of the characteristic drawbacks of &quot;low level languages&quot;
+is the incessant need to invent names or places to
+temporarily put quantities that you had no intention of naming.
+Here's an case where LISP is guiltier than machine language.
+
+Suppose (F a) is any function, (G a b) is a recursive function,
+and x stands for a large (or costly) expression.  Now suppose
+you want (G x (F x))) (or just (G x x)).  In machine language,
+(and presumably in the compiler's model), the second x is
+readily available in a register or arg vector or stack as
+part of the setup to call G, but in LISP there seems to be no
+way to exploit this, necessitating the invention of a
+temporary.
+
+A clean pronoun mechanism permitting later arguments to reference
+their predecessors on the left would enhance clarity and efficiency,
+and resolve many parallel-serial assignment dilemmas in favor of
+parallel, by providing and alternate serial mechanism.
+
+Reservation:  a numeric designator (&quot;N args ago&quot;) is unflavorful
+on grounds of readability and editability, hatching gross bugs
+on failure to increment or decrement the Ns upon insertion or
+deletion of intervening args.
+
+Any suggestions?
+-------
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00784.html">NCONC and LAST of locatives</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00782.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00770.html">Re: NCONC and LAST of locatives</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00781.html">Re: Antecedent, what's thy name?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00783"><strong>Date</strong></a></li>
+<li><a href="threads.html#00783"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

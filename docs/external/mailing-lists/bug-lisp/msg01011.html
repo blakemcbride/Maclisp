@@ -1,0 +1,120 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: New mis&#45;feature of TOPS&#45;20, Release 5, and/or search rules for Logical names -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 18 Nov 81 18:38:00 GMT -->
+<!--X-Message-Id: fc127838486cbc8c923de19105fe0b00@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>New mis-feature of TOPS-20, Release 5, and/or search rules for Logical names</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01012.html">Date Prev</a>][<a href="msg01010.html">Date Next</a>][<a href="msg01012.html">Thread Prev</a>][<a href="msg01010.html">Thread Next</a>][<a href="maillist.html#01011">Date Index</a>][<a href="threads.html#01011">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>New mis-feature of TOPS-20, Release 5, and/or search rules for Logical names</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Admin.MRC at SU-SCORE</li>
+<li><em>Subject</em>: New mis-feature of TOPS-20, Release 5, and/or search rules for Logical names</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 18 Nov 81 18:38:00 GMT</li>
+<li><em>Cc</em>: JONL at MIT-MC, &quot;(FILE LISP;BUG MAIL)&quot; at MIT-MC, RYLAND at SRI-KL,    ADMIN.JQJ at SU-SCORE, CSD.CLAYTON at SU-SCORE,    CSD.GENESERETH at SU-SCORE, ZUBKOFF at CMU-20C,    BUG-TWENEX at MIT-XX</li>
+<li><em>Original-date</em>: 18 November 1981 13:38-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Problems with logical names under Twenex have come up in the past,
+and the new state, having PS: be a 'logical name', will break MacLISP.
+Since it is now installed on SCORE that way, then SCORE's MacLISP
+will essentially be unusable until there is some resolution -- I don't
+yet know of other sites with Release 5 yet, so maybe we can 'fix' this
+before too many others are affected.  
+
+One fix I suggested is having MacLISP 'special-case' the PS: device, but
+that amounts to defeating this new misfeatureful generality and I'm not
+sure that that's wise in the long run.   The only other alternative is
+for the searching rules to act in accord with my suggestion below, which 
+is part of my reply to your reply:
+
+    Date: 17 Nov 1981 1519-PST
+    From: Mark Crispin &lt;Admin.MRC at SU-SCORE&gt;
+    In-Reply-To: Your message of 17-Nov-81 1130-PST
+    . . . 
+    Yes, the systemwide logical name of PS: is a new feature of TOPS-20. . . 
+    The bug is MACLISP's.  It should supply both the device and the directory
+    specification to GTJFN in all circumstances.  
+This doesn't work -- when the GTJFN supplies a directory specification,
+it overrides any such in the logical name.  E.g., suppose you have
+@DEF FOO: PS:&lt;JONL&gt;,PS:&lt;MACLISP&gt;
+and suppose &lt;MACLISP&gt; has a BS.LSP, but &lt;JONL&gt; doesn't.  Then using
+&quot;FOO:BS.LSP&quot; will succeed, but &quot;FOO:&lt;JONL&gt;BS.LSP&quot; will not.  I suspect
+that in the latter case, the &quot;FOO:&quot; part is limited to supplying a real
+device name (i.e., PS:) for the searching procedure, whereas it should
+go through its search sequence independently of the &lt;JONL&gt;.  The MacLISP
+user will find himself 'supplying' directory specifications without 
+conscious effort, since that is the reason for the DEFAULTF variable;  
+possibly initializing it to ((* *) * ...)  would get around some problems, 
+but may introduce other undesirable perturbations.
+
+						  If it needs the true location
+    of the file, it should GTJFN it with GJ%OLD (to force a chase down the
+    logical name tree to find an existing file) then use JFNS to get the string
+    back.
+
+That's indeed how the PROBEF and TRUENAME functions work.
+
+    Release 5 is going to be this way as a standard.
+
+HELP!  Any of you Twenex wizards out there got an idea?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01012.html">Announce-&amp;-load-init-file</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01010.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01012.html">Announce-&amp;-load-init-file</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01010.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01011"><strong>Date</strong></a></li>
+<li><a href="threads.html#01011"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

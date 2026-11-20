@@ -1,0 +1,110 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MacLisp with multiple structures -->
+<!--X-From-R13: Zrbaneq.Lhoxbss ng Q[G&#45;10O (Q410ZL60) -->
+<!--X-Date: Tue, 27 Oct 81 12:11:00 GMT -->
+<!--X-Message-Id: 27Oct81 081113 LZ60@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MacLisp with multiple structures</title>
+<link rev="made" href="mailto:Leonard.Zubkoff at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01045.html">Date Prev</a>][<a href="msg01044.html">Date Next</a>][<a href="msg01045.html">Thread Prev</a>][<a href="msg01044.html">Thread Next</a>][<a href="maillist.html#01043">Date Index</a>][<a href="threads.html#01043">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MacLisp with multiple structures</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Bug-Lisp at MIT-MC</li>
+<li><em>Subject</em>: MacLisp with multiple structures</li>
+<li><em>From</em>: Leonard.Zubkoff at CMU-10A (C410LZ60)</li>
+<li><em>Date</em>: Tue, 27 Oct 81 12:11:00 GMT</li>
+<li><em>Original-date</em>: 27 October 1981 0811-EDT (Tuesday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I received the following Bug report; it seems to me that this is due to the
+fact that (ststus udir) knows nothing about the connected structure, only
+the connected directory.  Is there a fix for this in the works?
+
+		Leonard
+
+- - - - Begin forwarded message - - - -
+Date: Tue, 27 Oct 81 04:02:00 GMT
+Original-Date: 27 October 1981 0002-EDT (Tuesday)
+From: Roger.Dannenberg at CMU-10A (C410RD60)
+To: Leonard.Zubkoff at CMU-10A
+Subject:  maclisp and structures
+Message-Id: &lt;27Oct81 000217 RD60@CMU-10A&gt;
+Origin:  C410RD60 at CMU-10A; 27 Oct 1981 0002-EDT
+
+I've been trying to use maclisp on cmuc for about 2 hours, and still
+can't get ledit etc. to work.  My ignorance of tops-20 is probably the
+major cause of my problems, but there are a few other bugs:
+
+1) when maclisp comes up it looks for lisp.ini and then trys to load
+	ps:lisp.ini (note the difference).  If I connect to pqcc: then
+	I must have lisp.ini on both pqcc: and ps: (!)
+2) when connected to pqcc:, there seems to be no way to slurp files
+	(I guess that's touretzky's problem)
+3) when connected to pqcc:, (LLOAD file ext) will look for ps:file.ext
+	instead of pqcc:file.ext
+4) maclisp won't read the *ledit* buffer when I'm connected to pqcc:
+	(I can make it work by connecting to ps:)
+
+(I think the above are real bugs, but maybe there's something I should
+be doing to avoid them.)
+
+	thanks,
+	roger
+- - - - End forwarded message - - - -
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01045.html">Timing worries.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01044.html">Validity of your off-the-wall timing conjectures</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01045.html">Timing worries.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01044.html">Validity of your off-the-wall timing conjectures</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01043"><strong>Date</strong></a></li>
+<li><a href="threads.html#01043"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

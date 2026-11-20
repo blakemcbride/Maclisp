@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Half Bug / Half Already&#45;fixed Bug -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Thu, 3 May 79 12:13:00 GMT -->
+<!--X-Message-Id: f3babc8ccda3be8debcbb6021af56693@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Half Bug / Half Already-fixed Bug</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00587.html">Date Prev</a>][<a href="msg00459.html">Date Next</a>][<a href="msg00587.html">Thread Prev</a>][<a href="msg00459.html">Thread Next</a>][<a href="maillist.html#00460">Date Index</a>][<a href="threads.html#00460">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Half Bug / Half Already-fixed Bug</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Half Bug / Half Already-fixed Bug</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Thu, 3 May 79 12:13:00 GMT</li>
+<li><em>Original-date</em>: 3 MAY 1979 0813-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I have been getting 
+
+Loading GRINDEF 420
+;(OPEN ((DSK KMP) * GRIND) (NODEFAULT)) FILE NOT FOUND
+
+for a long time now at various random times...I have just figured
+out why ... Rather than a PROBEF, GFN seems to do
+
+(ERRSET (FUNCALL (COND ((STATUS FEATURE SAIL) 'EOPEN) (T 'OPEN)) ...) ())
+
+There seem to be two bugs here ... 
+
+1. The file never gets closed (I haven't fixed this ... I don't know what
+    EOPEN does so am hesitant to fiddle with the code following it)
+
+2. If the open fails, presumably the ERRSET is supposed to harmlessly trap
+   the error - but if ERRSET (var) is bound, it doesn't - the error still
+   BKPT's ... so I have fixed it up to be
+
+     ((LAMBDA (ERRSET) (ERRSET ...)) NIL)
+
+   in version 421 of GRIND. 
+
+If someone could look at bug (1) mentioned above tho' it would be nice.
+Presumably the file array will get closed next time the garbage collector
+runs but that's pretty hackish...
+
+Also, if someone could give me info on what EOPEN does that's different
+from OPEN, maybe it is something compatible with my IOTA package and
+we could use IOTA in this case...
+
+Thanx. -kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00587.html">Re: Default setting of (STATUS FLUSH)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00459.html">GRINDEF and &quot;grind init&quot; files</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00587.html">Re: Default setting of (STATUS FLUSH)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00459.html">GRINDEF and &quot;grind init&quot; files</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00460"><strong>Date</strong></a></li>
+<li><a href="threads.html#00460"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

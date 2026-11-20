@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re:  Grief with T and NIL as Filespecs -->
+<!--X-From-R13: [WZZSDN[WF&#45;OW -->
+<!--X-Date: Sun, 19 Nov 79 14:47:31 GMT -->
+<!--X-Message-Id: 918395ea4ee17f7558c63b6887b26ec6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re:  Grief with T and NIL as Filespecs</title>
+<link rev="made" href="mailto:MILLER@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03974.html">Date Prev</a>][<a href="msg03972.html">Date Next</a>][<a href="msg03961.html">Thread Prev</a>][<a href="msg03972.html">Thread Next</a>][<a href="maillist.html#03973">Date Index</a>][<a href="threads.html#03973">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re:  Grief with T and NIL as Filespecs</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG Lisp) at MIT-MC, KMP at MIT-MC  I agree with KMP wholeheartedly -- down with T and NIL as filespecs!  (Defun RawTyo Nargs         (cond ((&gt; Nargs 1) (Unwind-Protect                             (prog2 (Binary-Mode T (arg 2))                                    (tyo (arg 1) (arg 2)))                             (Binary-Mode Nil (arg 2))))               (T (Unwind-Protect (prog2 (Binary-Mode T) (Tyo (arg 1)))                                  (Binary-Mode Nil)))))  Regards, Mark</li>
+<li><em>To</em>: GSB at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Re:  Grief with T and NIL as Filespecs</li>
+<li><em>From</em>: MILLER@MIT-AI</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Sun, 19 Nov 79 14:47:31 GMT</li>
+<li><em>Date</em>: Mon, 19 Nov 79 14:18:00 GMT</li>
+<li><em>Cc</em>: RWK at MIT-MC, REES at MIT-MC</li>
+<li><em>Original-date</em>: 11/19/79 10:47:31 EDT</li>
+<li><em>Original-date</em>: 19 NOV 1979 0918-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     GSB@MIT-ML
+Date: Sun, 19 Nov 79 04:03:58 GMT
+Original-Date: 11/19/79 00:03:58 EDT
+Subject:
+        Date: 18 NOV 1979 0736-EST
+        From: KMP at MIT-MC (Kent M. Pitman)
+
+        (SETQ ^R T ^W T OUTFILES '(NIL)) according to the lisp manual will
+         make the output go to the terminal. It doesn't -- it does 
+         a .VAL 0; EROR5A+22&gt;&gt;PUSHJ P,UINT 
+         instead. The lisp manual quite 'clearly' states that if ^W is on,
+         that the default output destinations do not include the tty unless
+         ^R is on and NIL is a member of the OUTFILES list... 
+        -kmp
+    Obviously the lisp manual should be fixed, since this 'clearly'
+    contradicts newio conventions.  (Sigh.  My personal opinion is that
+    T and NIL should be flushed as filespecs. Too much greif.)
+-----
+Well, step one could be to change the losing default error handlers
+so they don't try to print to '(T) ... This caused REES and me no end of
+hassles this weekend. The number of cases of file objects and lists 
+thereof that a printer must handle to be compatible as a value of PRIN1 is
+ridiculous. -kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03974.html">ASSOQ and ASSQ and atoms</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03972.html">ASSOC and ASSQ on lists with atomic entries</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03961.html">ASSOQ and ASSQ and atoms</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03972.html">ASSOC and ASSQ on lists with atomic entries</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03973"><strong>Date</strong></a></li>
+<li><a href="threads.html#03973"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

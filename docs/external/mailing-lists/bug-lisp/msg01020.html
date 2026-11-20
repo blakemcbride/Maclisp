@@ -1,0 +1,201 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: &#38;optional arguments and complr -->
+<!--X-From-R13: [AVO[[SR ng EDW&#45;YZ -->
+<!--X-Date: Thu, 12 Nov 81 22:08:00 GMT -->
+<!--X-Message-Id: de265332051e2b8a81e8a64818de5258@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>&amp;optional arguments and complr</title>
+<link rev="made" href="mailto:MOHAMMED at SRI-KL">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01021.html">Date Prev</a>][<a href="msg01019.html">Date Next</a>][<a href="msg01021.html">Thread Prev</a>][<a href="msg01018.html">Thread Next</a>][<a href="maillist.html#01020">Date Index</a>][<a href="threads.html#01020">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>&amp;optional arguments and complr</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-maclisp at MIT-MC</li>
+<li><em>Subject</em>: &amp;optional arguments and complr</li>
+<li><em>From</em>: MOHAMMED at SRI-KL</li>
+<li><em>Date</em>: Thu, 12 Nov 81 22:08:00 GMT</li>
+<li><em>Original-date</em>: 12 Nov 1981 1408-PST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>To whom it may concern:
+
+	There is  a  bug in  the  way complr  handles  functions  with
+optional arguments. I've  prepared a dribble  file to demonstrate  the
+problem:
+
+
+[PHOTO:  Recording initiated  Tue 10-Nov-81 6:13PM]
+
+[Synonym LO defined]
+ End of &lt;MOHAMMED&gt;COMAND.CMD.5
+@ty test1.lsp
+(herald test1 /0)
+
+(defun test1 (a b &amp;optional (c 1)) (* a b c))
+@ty test2.lsp
+(eval-when (load eval compile)
+  (or (get 'test1 'version)
+      (load '(test1 fasl ps |mohammed.maclisp|))))
+
+(herald test2 /0)
+
+(defun test2 (a b)
+  (test1 a b)
+  (test1 a b 3))
+@complr.EXE.2 
+
+LISP COMPILER 1118 [in LISP 2122]
+
+_test1
+
+_
+@ty test1.uNFASL.3 
+
+'(THIS IS THE UNFASL FOR ((PS |MOHAMMED.MACLISP|) TEST1 LSP /3)) 
+'(ASSEMBLED BY FASLAP /392) 
+'(COMPILED BY LISP COMPILER /935 COMAUX /25 PHAS1 /81 MAKLAP /80 INITIA /115) 
+
+;COMPILED ON NOVEMBER 10, 1981, AT 6:13 PM
+
+        (COMMENT **FASL** 0. (LAP TEST1 LSUBR)) 
+        (COMMENT **FASL** TOTAL =  20. WORDS) 
+@complr.EXE.2 
+
+LISP COMPILER 1118 [in LISP 2122]
+
+_test2
+
+(COMMENT **ERROR**  (TEST1 A B 3.) Wrong number of args in function TEST2)
+; DATA ERROR - TO PROCEED TYPE $P 
+;BKPT DATA
+$P
+
+
+
+_
+@ty test2.uNFASL.1 
+
+'(THIS IS THE UNFASL FOR ((PS |MOHAMMED.MACLISP|) TEST2 LSP /1)) 
+'(ASSEMBLED BY FASLAP /392) 
+'(COMPILED BY LISP COMPILER /935 COMAUX /25 PHAS1 /81 MAKLAP /80 INITIA /115) 
+
+;COMPILED ON NOVEMBER 10, 1981, AT 6:14 PM
+
+;Loading TEST1 3
+(COMMENT ****  TEST1 
+                Has been previously used with wrong number of arguments in funct
+ion TEST2)
+(COMMENT **ERROR**  (TEST1 A B 3.) Wrong number of args in function TEST2)
+; DATA ERROR - TO PROCEED TYPE $P 
+
+(COMMENT ****  (TEST2) - Failed to compile)
+(COMMENT ****  (TEST1) have been used but remain undefined in this file)
+        (COMMENT **FASL** TOTAL =  0. WORDS) 
+@complr.EXE.2 
+
+LISP COMPILER 1118 [in LISP 2122]
+
+_test1
+
+_test2
+
+_
+@dir test*
+
+   PS:&lt;MOHAMMED.MACLISP&gt;
+ TEST1.FASL.3
+   .LSP.3
+   .UNFASL.3
+ TEST2.FASL.1
+   .LSP.1
+   .UNFASL.1
+
+ Total of 6 pages in 6 files
+@ty test2.uNFASL.1 
+
+'(THIS IS THE UNFASL FOR ((PS |MOHAMMED.MACLISP|) TEST2 LSP /1)) 
+'(ASSEMBLED BY FASLAP /392) 
+'(COMPILED BY LISP COMPILER /935 COMAUX /25 PHAS1 /81 MAKLAP /80 INITIA /115) 
+
+;COMPILED ON NOVEMBER 10, 1981, AT 6:14 PM
+
+;Loading TEST1 3
+        (COMMENT **FASL** 0. (LAP TEST2 SUBR)) 
+        (COMMENT **FASL** TOTAL =  18. WORDS) 
+@pop
+
+[PHOTO:  Recording terminated Tue 10-Nov-81 6:15PM]
+
+	Notes:
+
+	1. Despite the  fact that  the function TEST1  is loaded  when
+TEST2 is compiled, complr decides that something is wrong because  the
+function is being called with a different number of arguments.
+
+	2. When TEST1 is re-compiled in the same complr as TEST2,  the
+problem does not occur.
+
+	3. It makes no difference whether  the fasl or lsp version  of
+TEST1 is loaded.
+
+	4. Declaring TEST1  to be  a *LEXPR in  the TEST2  file is  an
+effective temporary solution to the problem.
+
+John L. Mohammed
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01021.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01019.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01021.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01018.html">&amp;optional arguments and complr</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01020"><strong>Date</strong></a></li>
+<li><a href="threads.html#01020"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

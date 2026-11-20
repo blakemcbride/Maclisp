@@ -1,0 +1,115 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Optimizers and macros -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Fri ,30 Jan 81 22:48:00 EDT -->
+<!--X-Message-Id: 892c3cae9724231f0ceb9c85128002d7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Optimizers and macros</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00479.html">Date Prev</a>][<a href="msg00482.html">Date Next</a>][<a href="msg00479.html">Thread Prev</a>][<a href="msg00483.html">Thread Next</a>][<a href="maillist.html#00481">Date Index</a>][<a href="threads.html#00481">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Optimizers and macros</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: Optimizers and macros</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Fri ,30 Jan 81 22:48:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Users are always wanting to override system functions.  If you decide to
+change the meaning of some function, macro, or symbol that names a
+special form, then ideally you should be able to do that, and if there
+is an optimizer sitting around that &quot;knows&quot; the meaning of the symbol,
+and you change the meaning, then that optimizer had better be flushed.
+
+The system can't tell the difference between a DEFUN (or DEFMACRO, et.
+al.) that is changing the meaning of something, and one that is merely a
+new version with a bug-fix, and so it can't tell whether to wipe out the
+optimizers.  Schemes based on remembering what file things were defined
+on are very prone to confusing effects (what if you type in a new definition
+at Lisp top level?  What if you have a patch file that is only making bug
+fixes?)  RMS's suggestion seems to me like the best way to solve
+this problem: have the definition of the function (or macro) include,
+textually, the names of optimizers to use, and have those be
+free-standing functions.  This has all the right properties.
+
+There is no problem with EQ checking to figure out whether an optimizer
+did something, since as RMS pointed out there is no point in making a
+displacing optimizer; they only happen at compile-time anyway.  In fact,
+the Lisp Machine compiler actually uses EQ checking to figure out
+when to stop macro expanding, and so does not actually allow old-style
+displacing macros, as it happens.
+
+GLS's and GSB's suggestions about DEFTRANSFORM are good, but if we
+do things as RMS suggested (using local declarations) then there
+is no need for it.
+
+I actually think the name OPTIMIZER is good.  It stresses the fact that,
+as RMS said, it is critically important that the optimizer does not
+change the functionality of the form is is transforming AT ALL.  These
+things are NOT like macros; they must not do anything semantically
+interesting, but merely produce a different (and presumably more
+efficient) way to do exactly the same thing.  This is because they only
+happen in the compiler; it must not make any difference to the semantics
+of the program if they do not get run.  Only the efficiency may be
+affected.  Talk about making these things work in the interpreter is
+misguided: we already have source-to-source transformations that also
+work in the interpreter, and they are called macros.  Macros are the
+right thing for doing actual intersting transformations; optimizers are
+for when you know something will run faster compiled if it is
+re-expressed in a certain way.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00479.html">Re: COMPLR address space</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00482.html">Re: P.S., regarding optimizers</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00479.html">Re: COMPLR address space</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00483.html">Re: Optimizers and macros</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00481"><strong>Date</strong></a></li>
+<li><a href="threads.html#00481"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

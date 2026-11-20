@@ -1,0 +1,516 @@
+title 340d - Datapoint emulator for 340 display.
+
+;Written in 2018 from a vague description.  We do know that in 1974,
+;there was a link from SYS1; TS 340D to STAN.K; MOD11 BIN.  We also
+;know some 340D parameters from TCTYP.  According to Stan Kugell, the
+;input could be from the Stanford keyboard or from the console TTY.
+;
+;Updated in 2019 to use the program STAN.K; 3406 40 running on the PDP-6.
+
+;Possible improvements:
+; - Super image mode for TTY input.
+; - Handle STY input from interrupt.
+
+;These numbers come from TCTYP.
+width=117
+height=50
+
+ifndef new,new==0	;Use new ASCII characters instead of old.
+ifndef stkp,stkp==0	;Use Stanford keyboard.
+ifndef pdp6p,pdp6p==1	;Use PDP-6.
+
+a=1
+b=2
+c=3
+d=4
+e=5
+x=10
+y=11
+p=17
+
+styi==1
+styo==2
+ttyi==3
+pdp6==4
+
+dstop==003000
+point==020000
+chara==060000
+incre==140000
+vecto==100000
+verti==200000
+
+;Character width and height
+charw==6
+charh==11.
+
+;Characters per line, as stored in memory.
+lshift==7
+lchars==<1_lshift>
+
+;STK device ITS mode: meta = 200, and the control bucky bit is
+;converted to ASCII control characters.
+%its==40
+
+;Open a USR job even if it exists.
+%jexst==20
+
+;The 3406 program talks to 340D through one page at 4000.
+six=4000
+flags=six+1             ;Array to flag updated lines.
+7bit=six+52             ;Buffer for ASCII text.
+cmung=six+1253          ;Cursor position.
+7wpl=20                 ;Words per line.
+
+loc 42
+	tsint
+
+loc 100
+
+start:	move p,[-pdllen,,pdl-1]
+
+	setzb x,y			;Initial cursor position.
+
+	.open styo,[.uio,,'STY]
+	 .lose
+	.open styi,[.uii,,'STY]
+	 .lose
+ifn stkp,.open ttyi,[%its+.uii,,'STK]	;ITS mode.
+.else,	.open ttyi,[.uii,,'TTY]
+	 .lose
+
+	pushj p,opn340			;Open 340 display.
+
+	.call [ setz
+		sixbit /cnsget/
+		movei styi
+		movem a ? movem a ? movem a
+		setzm b ]
+	 .lose
+	.call [ setz
+		sixbit /cnsset/
+		movei styi
+		[height] ? [width] ? [%tndp] ? b
+		;These bits for 340D are copied from TCTYP.
+		setz [%TOMVU+%TOMVB+%TOERS+%TOLWR,,%TPORS] ]
+	 .lose
+
+	;Enable interrupts for I/O error and input channels.
+	.suset [.smask,,[%piioc]]
+	.suset [.smsk2,,[<0_styi>+<1_ttyi>]]	;STY input disabled for now.
+	.suset [.rioc+styi,,a]
+	ldb a,[$tiidx,,a]
+	movem a,tty
+
+	.iot styo,[^Z]			;Get a HACTRN.
+
+loop:	.iot styi,a			;Couldn't make input from STY work in interrupt.
+	pushj p,styout			;Loop here instead.
+	jrst loop
+
+die:	.logout 1,			;Orderly exit.
+
+;Interrupt handler.
+tsint:	0
+	0
+	push p,a			;Better save accumulators as long
+	push p,b			;as there is a main loop.
+	push p,c
+	push p,d
+	move b,tsint
+	jumpn b,ioint			;Bit 0 means I/O channel interrupt.
+	trne b,%piioc
+	 jrst iocerr
+	jrst dismis
+
+iocerr:	.value				;Not prepared to handle I/O errors.
+
+ioint:	trne b,1_ttyi			;TTY input.
+	 pushj p,[.iot ttyi,b ? .iot styo,b ? popj p,]
+	trne b,1_styi			;STY input.  Will not happen for now.
+	 pushj p,styin			;Handled from main loop.
+dismis:	.suset [.sadf2,,[<1_styi>+<1_ttyi>]]
+	pop p,d
+	pop p,c
+	pop p,b
+	pop p,a
+	.dismis tsint+1
+
+;Handle input from STY.  Read character and put in screen.
+styin:	.iot styi,a
+	pushj p,styout
+	.status styi,a
+	trnn a,2000			;Loop if the buffer isn't empty.
+	 jrst styin
+	popj p,
+
+;Output character in A to STY.  Interpret Datapoint codes.
+styout:	move b,y
+	lsh b,lshift
+	add b,x				;B gets character offset in screen.
+	xct tab(a)
+	skipge x			;Ensure cursor position inside bounds.
+	 setz x,
+	cail x,width
+	 movei x,width-1
+	skipge y
+	 setz y,
+	cail y,height			;Scroll if cursor below last line.
+	 pushj p,scroll
+
+	pushj p,render
+	popj p,
+
+;Table for interpreting Datapoint codes.
+tab:	repeat 40,jfcl			;Most control codes ignored.
+	repeat 200-40,pushj p,insert	;Printable characters go into screen.
+ifn .-tab-200,.err The tab table is wrong.
+ZZZ=.
+loc tab+^G	? jfcl
+loc tab+^H	? subi x,1
+loc tab+^I	? pushj p,[addi x,8 ? andcmi x,7 ? popj p,]
+loc tab+^J	? addi y,1
+loc tab+^K	? .value		;Not implemented: go down without scrolling.
+loc tab+^M	? setz x,
+loc tab+30	? addi x,1
+loc tab+31	? subi x,1
+loc tab+32	? subi y,1
+loc tab+34	? pushj p,[setz x, ? movei y,height-1 ? popj p,]
+loc tab+35	? setzb x,y
+loc tab+36	? pushj p,eralin
+loc tab+37	? pushj p,erascr
+loc tab+177	? jfcl
+loc ZZZ
+
+ifn pdp6p,[
+opn340:	.open pdp6,[%jexst,,'usr ? 0 ? sixbit /pdp6/]
+	 .lose
+	.call [ setz			;Map in 3406 page at SIX.
+		sixbit /corblk/
+		movei %cbndw
+		movei %jself
+		movei six/2000
+		movei pdp6
+		setzi six/2000 ]
+	 .lose	
+	popj p,
+
+render:	move a,x			;Update cursor position.
+	imuli a,2*charw
+	dpb a,[221200,,cmung]
+	movei a,1750
+	move b,y
+	imuli b,2*charh
+	sub a,b
+	dpb a,[001200,,cmung]
+	popj p,
+
+;Get a byte pointer from the cursor position.  Return in C.
+bp:	hrrz c,flags(y)
+	move d,x
+	idivi d,5
+	add c,d
+	add c,chr(e)
+	popj p,
+chr:	350700,,
+	260700,,
+	170700,,
+	100700,,
+	010700,,
+
+;Insert character in A in screen memory.
+insert:	pushj p,bp
+	dpb a,c
+	addi x,1
+	hrros flags(y)
+	popj p,
+
+;Scroll entire screen.
+scroll:	move a,[7bit+7wpl,,7bit]	;Copy screen contents one line up.
+	blt a,7bit+<height-1>*7wpl-1
+	move d,[ascii /     /]		;Clear last line.
+	move c,[-7wpl,,7bit+7wpl*<height-1>]
+	movem d,(c)
+	aobjn c,.-1
+	movsi a,-height			;Flag all lines.
+	hrros flags(a)
+	aobjn a,.-1
+	subi y,1			;Move cursor back up.
+	popj p,
+
+;Erase to end of line.
+eralin:	pushj p,bp
+	movei a," 
+	hrrz b,flags+1(y)
+	dpb a,c
+	ibp c
+	caie b,(c)
+	 jrst .-3
+	hrros flags(y)
+	popj p,
+
+;Erase to end of screen.
+erascr:	pushj p,eralin
+	move a,y
+erasc0:	addi a,1
+	cain a,height
+	 popj p,
+	move d,[ascii /     /]
+	move c,flags(a)
+	hrli c,-7wpl
+	movem d,(c)
+	aobjn c,.-1
+	hrros flags(a)
+	jrst erasc0
+];ifn pdp6p
+
+ife pdp6p,[
+opn340:	hrlzi a,dstop			;Get the 340 started.
+	movem a,dlist
+	.dstart [-dlen,,dlist-1]
+	 .lose
+	popj p,
+
+render:	movei a,screen			;Render a display list from screen contents.
+	move c,[442200,,dlist]
+	movei d,point+17+<5_4>		;Set intentity and scale, go to point mode.
+	idpb d,c
+	movei d,chara+verti+1000.	;Set Y, go to character mode.
+	idpb d,c
+
+	tlnn c,770000			;Convert from 18-bit byte pointer to 6-bit.
+	 tlca c,002400
+	  hrli c,220600
+
+	setzm mode			;Start out with upper case character set.
+
+prscr:	pushj p,prlin			;Render one line.
+	movei b,34			;Insert CR LF in display list.
+	idpb b,c
+	movei b,33
+	idpb b,c
+	addi a,lchars			;Go to next line.
+	caie a,screen+lchars*height	;Unless done.
+	 jrst prscr
+
+	pushj p,eschr			;Escape from character mode.
+	pushj p,cursor			;Draw cursor.
+
+	movei b,dstop			;End with a 340 stop instruction.
+	idpb b,c
+	popj p,
+
+;Print line.
+prlin:	move b,a
+	move d,a
+	subi d,screen
+	lsh d,-lshift
+	movn d,length(d)		;Get negative of line length.
+	cain d,0
+	 popj p,			;Empty line.
+	hrl b,d				;Make AOBJN pointer for line.
+prlin0:	move d,(b)
+	xct shift(d)			;Insert shift character if necessary.
+	move d,char(d)			;Convert ASCII to 340 character code.
+	idpb d,c
+prlin1:	aobjn b,prlin0
+	popj p,
+
+;Insert character in A in screen memory.
+insert:	movem a,screen(b)
+	addi x,1			;Advance cursor.
+	camle x,length(y)
+	 movem x,length(y)		;Update number of characters in line.
+	popj p,
+
+;Shift in.
+shin:	skipn mode
+	 popj p,
+	setzm mode
+	movei e,35
+	idpb e,c
+	popj p,
+
+;Shift out.
+shout:	skipe mode
+	 popj p,
+	setom mode
+	movei e,36
+	idpb e,c
+	popj p,
+
+;Escape from character mode.
+eschr:	movei d,37                      ;Escape character.
+	idpb d,c
+	tlnn c,200000			;Convert from 6-bit byte pointer to 18-bit.
+	 jrst [hrli c,002200 ? jrst .+2]
+	  hrli c,222200
+	popj p,
+
+;Go from character mode to incremental.
+goinc:	pushj p,eschr
+	movei d,incre+17+<5_4>          ;Go to incremental mode.
+	idpb d,c
+	popj p,
+
+;Codes for incremental mode.
+inten==200000
+escap==400000
+up==2
+dn==3
+rt==10
+lt==14
+
+;Draw atsign character.
+atsign:	pushj p,goinc			;Go to incremental mode.
+	movei d,inten+<up_12.>+<up_8.>+<up_4>+up
+	idpb d,c
+	movei d,inten+<up_12.>+<<up+rt>_8.>+<rt_4>+rt
+	idpb d,c
+	movei d,inten+<<rt+dn>_12.>+<dn_8.>+<dn_4>+dn
+	idpb d,c
+	movei d,inten+<lt_12.>+<<lt+up>_8.>+<<rt+up>_4>
+	idpb d,c
+	movei d,<<lt+dn>_12.>+<<lt+dn>_8.>+<dn_4>+dn
+	idpb d,c
+	movei d,inten+<0_12.>+<rt_8.>+<rt_4>+rt
+	idpb d,c
+	movei d,escap+<rt_12.>+<rt_8.>+<rt_4>
+	idpb d,c
+next:	movei d,chara+17+<5_4>		;Go to character mode.
+	idpb d,c
+	tlnn c,770000			;Convert from 18-bit byte pointer to 6-bit.
+	 tlca c,002400
+	  hrli c,220600
+	jrst prlin1
+
+;Draw caret.
+caret:
+ifn new,[
+	movei d,40
+	idpb d,c
+	pushj p,shout
+	movei d,67
+	idpb d,c
+	jrst prlin1
+]
+.else [
+	pushj p,shout
+	movei d,46
+	idpb d,c
+	jrst prlin1
+]
+
+;Draw grave accent.
+grave:	movei d,40
+	idpb d,c
+	pushj p,shout
+	movei d,66
+	idpb d,c
+	jrst prlin1
+
+;Scroll entire screen.
+scroll:	move a,[screen+lchars,,screen]	;Copy screen contents one line up.
+	blt a,screen+lchars*height-lchars-1
+	move a,[length+1,,length]	;Copy line lengths one line up.
+	blt a,length+height-2
+	setzm length+height-1		;Clear last line.
+	subi y,1			;Move cursor back up.
+	popj p,
+
+;Erase to end of line.
+eralin:	movem x,length(y)
+	popj p,
+
+;Erase to end of screen.
+erascr:	pushj p,eralin
+	move a,y
+erasc0:	addi a,1
+	cain a,height
+	 popj p,
+	setzm length(a)
+	jrst erasc0
+
+;Draw cursor.
+cursor:	movei b,point+10		;Low intensity, go to point mode.
+	idpb b,c
+	move b,y
+	imuli b,charh*2
+	movns b
+	addi b,1000.-5
+	addi b,verti+point		;Set Y position.
+	idpb b,c
+
+	jumpe x,curso0			;Cursor in column 0 is different.
+
+	move b,x
+	imuli b,charw*2
+	addi b,vecto			;Set X position, go to vector mode.
+	idpb b,c
+	movei b,<charw>+<1_16.>		;Draw box for cursor.
+	idpb b,c
+	movei b,<charh_8.>+<1_16.>
+	idpb b,c
+	movei b,<200+charw>+<1_16.>
+	idpb b,c
+	movei b,<<200+charh>_8.>+<3_16.> ;Escape to parameter mode.
+	idpb b,c
+	popj p,
+
+curso0:	movei b,vecto			;Go to vector mode.
+	idpb b,c
+	movei b,<charw-1>+<1_16.>
+	idpb b,c
+	movei b,<charh_8.>+<1_16.>
+	idpb b,c
+	movei b,<200+charw-1>+<3_16.>
+	idpb b,c
+	popj p,
+
+;Table for converting from ASCII to 340 character codes.
+char:	repeat 40,0		;Control characters
+	repeat 40,.rpcnt+40	;Space to ?
+	00			;@
+	repeat 32,.rpcnt+1	;A to Z
+	53			;[
+	52			;\
+	54			;]
+	67			;^
+ifn new,60			;_
+.else	51			;left arrow
+	66			;`
+	repeat 32,.rpcnt+1	;a to z
+	55			;{
+	62			;|
+	56			;}
+	43			;~
+	00			;Rubout
+ifn .-char-200,.err The char table is wrong.
+
+;Table for shifting character set.
+shift:	repeat 32.,jfcl
+	repeat 32.,pushj p,shin
+	jrst atsign
+	repeat 26.,pushj p,shin
+	repeat 3,pushj p,shout
+	jrst caret
+	pushj p,shout
+	jrst grave
+	repeat 30.,pushj p,shout
+	jfcl
+ifn .-shift-200,.err The shift table is wrong.
+
+mode:	0			;0 means upper case, -1 means lower case.
+screen:	block lchars*height	;Characters on screen.
+length:	block height		;Number of characters on each line.
+.vector dlist(dlen==4000)	;Display list.
+];ife pdp6p
+
+tty:	0
+.vector pdl(pdllen==100)
+variables
+constants
+
+ifn pdp6p,ifg .-six,.err Program too large.
+
+end start

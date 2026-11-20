@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: RVRN[WF&#45;[Z -->
+<!--X-Date: Mon, 17 Jul 79 07:32:23 GMT -->
+<!--X-Message-Id: 3014156c6de65b154e1bc954825f277d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:DHD@MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02937.html">Date Prev</a>][<a href="msg02935.html">Date Next</a>][<a href="msg02937.html">Thread Prev</a>][<a href="msg02935.html">Thread Next</a>][<a href="maillist.html#02936">Date Index</a>][<a href="threads.html#02936">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-ML</li>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: </li>
+<li><em>From</em>: DHD@MIT-ML</li>
+<li><em>From</em>: REM at MIT-MC (Robert Elton Maas)</li>
+<li><em>Date</em>: Mon, 17 Jul 79 07:32:23 GMT</li>
+<li><em>Date</em>: Tue, 17 Jul 79 02:00:00 GMT</li>
+<li><em>Cc</em>: (BUG QCOMPL) at MIT-MC, RWG at MIT-MC</li>
+<li><em>Original-date</em>: 07/17/79 03:32:23 EDT</li>
+<li><em>Original-date</em>: 16 JUL 1979 2200-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Final message (probably) on bug in GC in LISP, pointers from compiled code
+to FIXNUMs not traced during GC causing FIXNUM objects to be reaped while
+code still points to them.
+MC:REM;CY12 &gt;   CY12 FASL
+Contains (SETQ #SAFE (LIST 111111111111 7007007007 777000777 777777 -7777
+			-1 -2 -3 -6 -9. -18.))
+which protects all these constants }from reaping and fixes the bug.
+The following JCL wins:
+:LISP
+N
+(FASLOAD CY12)
+T 
+^G
+(REC-BD-VAL #BD T 4 1)
+runs for 10 or 20 seconds and returns the correct value of 0
+but if you do (SETQ #SAFE NIL) just before calling REC-BD-VAL, i.e.
+unproect those constants from GC, within a couple seconds after
+starting REC-BD-VAL it detects that the result of COUNT-BITS isn't
+in range 0 to 36. thus showing at least one of the masks or shift-amounts
+has been reaped and replaced by some new random FIXNUM object.
+(Or at least that's what all the evidence points to.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02937.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02935.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02937.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02935.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02936"><strong>Date</strong></a></li>
+<li><a href="threads.html#02936"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

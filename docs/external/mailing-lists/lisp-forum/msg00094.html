@@ -1,0 +1,117 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: CHPROP problems -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Sun ,17 Aug 80 23:10:00 EDT -->
+<!--X-Message-Id: cb611d5d2f5419ed575e6ed6fa03e52c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: CHPROP problems</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00101.html">Date Prev</a>][<a href="msg00096.html">Date Next</a>][<a href="msg00099.html">Thread Prev</a>][<a href="msg00100.html">Thread Next</a>][<a href="maillist.html#00094">Date Index</a>][<a href="threads.html#00094">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: CHPROP problems</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RMS at MIT-AI</li>
+<li><em>Subject</em>: Re: CHPROP problems</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun ,17 Aug 80 23:10:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 08/17/80 06:12:35
+    From: RMS at MIT-AI
+    Re:   CHPROP problems
+
+    Here are some problems with CHPROP.
+
+    1) There is no need for functions CHAR&lt;, CHAR=, CHAR&gt;.
+    The functions &lt;, = and &gt; should be used for this,
+    and they should be willing to compare a character
+    object with a number if those data types are different.
+    Having separate functions for comparison of characters
+    does not accomplish anything, because on systems which
+    implement characters with fixnums, they would be the same
+    as the fixnum comparison functions anyway, and on systems with
+    character objects there is no difficulty with making
+    the functions &quot;&lt;&quot;, etc., generic.
+Because when I look at code and see &quot;&lt;&quot;, I think &quot;Aha, fixnums are being
+compared&quot;, and when I see &quot;CHAR-&lt;&quot; I think &quot;Aha, characters are being compared.
+Besides, I'm not too sure what &quot;CHAR-&lt;&quot; should do in an EBCDIC environment.
+Maybe it should do the right thin and simulate ASCII?
+
+    2) #/x is supposed to return a character object
+    if they exist.  It sounds like people agree now
+    that this should not happen, so why not fix CHPROP?
+GLS?
+    3) #=nnn is superfluous when there is #/nnn.
+What is #/nnn besides the fixnum-represented character &quot;&quot; followed by nnn?
+Is this a typo for #/nnn?  I do think #= is superfluous.
+    4) The convention of a package called &quot;*&quot; seems like
+    a bad idea.  I don't think the Lisp machine will adopt it.
+I've argued this for years.  I think the name &quot;*&quot; is bad, but not the idea of a
+separate package for machine dependencies.  But I'd rather see SOME standard
+adopted.  If you don't like &quot;*:&quot;, please make an counter-proposal.
+    5) Right now on the Lisp machine there is one sort of
+    character which can have bits and another which can
+    have a font.  There is no sort which can have both.
+    It might be an improvement if there were, but it might
+    also be a lot of work.  This might prevent the Lisp machine
+    from adopting CHPROP.
+Can you determine a subset of CHPROP which you could adopt?  Modifications to
+CHPROP which would aid the LISPM in adopting it?  Perhaps the notion of bits
+and fonts could be collapsed into one somehow?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00101.html">Re: In reply to TK: Character Objects (what else!)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00096.html">Re: &quot;And even if you don't like your code to be readable (sorry)&quot;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00099.html">Re: CHPROP problems</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00100.html">Re: CHPROP problems</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00094"><strong>Date</strong></a></li>
+<li><a href="threads.html#00094"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

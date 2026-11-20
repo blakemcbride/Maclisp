@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: DEFUN&#38;&#45;CHECK&#45;ARGS -->
+<!--X-From-R13: Uyraa E. Phexr &#60;UEP ng [WF&#45;[Z> -->
+<!--X-Date: Fri, 30 Jan 81 21:05:00 GMT -->
+<!--X-Message-Id: 71ff49411ecb3056c2fc1524955d7a98@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>DEFUN&amp;-CHECK-ARGS</title>
+<link rev="made" href="mailto:GSB at MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01652.html">Date Prev</a>][<a href="msg01648.html">Date Next</a>][<a href="msg01652.html">Thread Prev</a>][<a href="msg01648.html">Thread Next</a>][<a href="maillist.html#01651">Date Index</a>][<a href="threads.html#01651">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>DEFUN&amp;-CHECK-ARGS</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: DEFUN&amp;-CHECK-ARGS</li>
+<li><em>From</em>: Glenn S. Burke &lt;GSB at MIT-ML&gt;</li>
+<li><em>Date</em>: Fri, 30 Jan 81 21:05:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 30 January 1981 16:05-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 30 JAN 1981 1557-EST
+    From: JONL at MIT-MC (Jon L White)
+
+    I remember you had a question earlier this month about when
+    DEFUN&amp; would output (ARGS 'FOO ...).  Well, the variable
+    DEFUN&amp;-CHECK-ARGS only controls the insertion of number-of-arg-
+    checking code into the body of the function -- thus if such code
+    did get inserted, it is presumed that the ARGS needn't be
+    changed (and there are reasons why you might not want to 
+    change it frivously -- like, not having to unpurcopy the
+    symbol).
+Tell me about it.  I recently fixed a bug which was screwing me to the
+wall because i set DEFUN&amp;-CHECK-ARGS to NIL:  it was outputting 
+(ARGS 'FN ...), INCORRECTLY.  And ONLY when i set DEFUN&amp;-CHECK-ARGS to
+NIL.  I take it you consider such ARGS information not useful.  My
+complaint had nothing to do with changing ARGS info, only having it there
+in the first place.  The only one who loses because of having to unpurcopy
+the symbol is YOU, since MY functions aren't all defined with autoload
+properties in Maclisp already;  when ARGS gets called on them, the
+SY block is impure, even though it may be marked for purification.
+I still think that such number-of-arg checking should be left to
+the interpreter/uuo-linker, and i also think it is gross that the
+interface from an APPLY or EVAL generated error is different from
+one generated in-line.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01652.html">DEFUN&amp;-CHECK-ARGS</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01648.html">DEFUN&amp;-CHECK-ARGS</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01652.html">DEFUN&amp;-CHECK-ARGS</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01648.html">DEFUN&amp;-CHECK-ARGS</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01651"><strong>Date</strong></a></li>
+<li><a href="threads.html#01651"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

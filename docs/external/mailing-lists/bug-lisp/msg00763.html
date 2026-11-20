@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: getting screwed by FLONUM call sequences. -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 27 Oct 82 20:19:00 GMT -->
+<!--X-Message-Id: bf17dcca19ce8672e8491beab3d44289@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>getting screwed by FLONUM call sequences.</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00764.html">Date Prev</a>][<a href="msg00762.html">Date Next</a>][<a href="msg00764.html">Thread Prev</a>][<a href="msg00762.html">Thread Next</a>][<a href="maillist.html#00763">Date Index</a>][<a href="threads.html#00763">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>getting screwed by FLONUM call sequences.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JLL at MIT-MC</li>
+<li><em>Subject</em>: getting screwed by FLONUM call sequences.</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 27 Oct 82 20:19:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 27 October 1982 16:19-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>If you do want to use these for efficiency reasons but you still
+want generality, then you can use the same macrology and trampolines
+that numerical code in Macsyma uses, (specifically intended for code which
+is Macsyma-&gt;Lisp translated).
+
+The macros are in LIBMAX;NUMERM, the runtime support in MAXSRC;NUMER,
+and example usage in MAXSRC;ROMBRG and MAXSRC;NDIFFQ. One way to see
+how it all hangs together would be to try (in Macsyma):
+
+F(Y):=ROMBERG(X^2,X,0,Y); COMPILE('F);
+
+and see what the generated code is. When you get into stuff like this
+it actually gets pretty hairy...
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00764.html">forwarded for JLL: compiling lisp code</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00762.html">Strange interaction between LEDIT and COMPLR on Tops-20</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00764.html">forwarded for JLL: compiling lisp code</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00762.html">Strange interaction between LEDIT and COMPLR on Tops-20</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00763"><strong>Date</strong></a></li>
+<li><a href="threads.html#00763"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

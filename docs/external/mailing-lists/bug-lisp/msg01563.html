@@ -1,0 +1,109 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Gratuitous incompatibilities -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 17 Feb 81 12:56:00 GMT -->
+<!--X-Message-Id: ef9fb9af4a2d2dea7c7e4395ce33d897@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Gratuitous incompatibilities</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01564.html">Date Prev</a>][<a href="msg01562.html">Date Next</a>][<a href="msg01564.html">Thread Prev</a>][<a href="msg01530.html">Thread Next</a>][<a href="maillist.html#01563">Date Index</a>][<a href="threads.html#01563">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Gratuitous incompatibilities</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: kmp at MIT-AI</li>
+<li><em>Subject</em>: Gratuitous incompatibilities</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 17 Feb 81 12:56:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-AI, BUG-LISPM at MIT-AI</li>
+<li><em>Original-date</em>: 17 February 1981 07:56-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 17 February 1981 01:22-EST
+    From: Kent M. Pitman &lt;kmp at MIT-AI&gt;
+    To: BUG-LISP at MIT-AI, BUG-LISPM at MIT-AI
+         I note that Y-OR-N-P in Maclisp takes a format arg. In LispM,
+         it takes some args I didn't understand when I saw the error
+	message.
+
+	Can one or the other of us agree on a cure for this?
+
+When I wrote MacLisp's original Y-OR-N-P (it has since been re-written
+by JONL, but apparently retains the same functionality), LISPM's
+Y-OR-N-P took two arguments, a stream and a string, in either order.  I
+decided that the obvious improvment was that it should take its
+arguments like FORMAT, while retaining the compatability check that the
+LISPM people also had.  This doesn't seem to have been obvious to the
+LISPM people, who shortly after I introduced Y-OR-N-P to MacLisp,
+*DELETED* the STREAM STRING order, leaving only the STRING STREAM
+ordering of the arguments.  I guess it's my fault for not barfing at
+them at that time.  I don't see any reason they couldn't retract this
+&quot;improvement&quot;, however.
+
+You can be compatible with the LISPM crowd by giving Y-OR-N-P one or two
+arguments, with the string being first.  It is unfortunate that the
+LISPM people didn't see fit to extend Y-OR-N-P in this obvious manner,
+but they have since come up with a fairly winning general query facility
+called FQUERY, which takes no stream argument at all (rather it always
+uses QUERY-IO, which can be bound if needed), but does provide for a
+number of options such as clearing input, selecting a window, providing
+for more than just Y or N (or Yes and No), etc.  At some point I'll
+probably steal this from them for MacLisp, at which time they will
+probably change it incompatibly once again.  Such is life.
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01564.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01562.html">error checking in &gt;=</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01564.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01530.html">Gratuitous incompatibilities</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01563"><strong>Date</strong></a></li>
+<li><a href="threads.html#01563"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

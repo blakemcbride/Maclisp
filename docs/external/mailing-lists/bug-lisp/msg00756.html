@@ -1,0 +1,141 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: FA@KV ng [WF&#45;OW -->
+<!--X-Date: Sun, 31 Oct 82 17:05:00 GMT -->
+<!--X-Message-Id: a45ea0ab3479555a8d3d8c2439a48aa6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:TONYH at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00757.html">Date Prev</a>][<a href="msg00755.html">Date Next</a>][<a href="msg00757.html">Thread Prev</a>][<a href="msg00755.html">Thread Next</a>][<a href="maillist.html#00756">Date Index</a>][<a href="threads.html#00756">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-AI</li>
+<li><em>From</em>: TONYH at MIT-AI</li>
+<li><em>Date</em>: Sun, 31 Oct 82 17:05:00 GMT</li>
+<li><em>Original-date</em>: 31 October 1982 13:05-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Dear JONL -
+   
+   Thank you very much for your help.  Unfotunatley, in trying to make
+use of it ZI seem to have made things worse, to such an extent that the system
+itself pleaded with me to call you again.  I'd better show you what I'm 
+doing - you'll probably see at a glance what horrors I'm perpetrating on your
+long-suffering MacLisp:
+
+   (declare (SETQ DEFMACRO-FOR-COMPILING 'T DEFMACRO-DISPLACE-CALL 'T)
+            (special helplist))
+
+   ;;; During loading, the tilde (~) readmacro allows the special comments
+   ;;; in this file to be stored for later access by the APROPOS function.
+   ;;; On the property-list of 'HELP, under the property 'COMMENTS, will
+   ;;; be found a list of the comments, each element being a dotted pair
+   ;;; of the unquoted part of the comment and the quoted part.
+
+   (eval-when (compile load)
+     (and (status feature COMPLR)
+          (own-symbol DEFREADMACRO /~-readmacro)))   ;superstition...
+
+(eval-when (eval load compile)
+     (setq helplist nil)
+     (defmacro defreadmacro (char &amp;rest body)
+       (let ((macro-name (symbolconc char '-readmacro)))
+         (setsyntax char 'macro macro-name)
+         `(defun ,macro-name () ,.body)))
+     
+     (defreadmacro /~
+       (let* ((/^q t) (comment `(,(read) ,[atsign](read))))
+         (push comment helplist)
+         t)))
+
+[atsign] intended to represent the symbol on this machine!
+
+Then follows the comment itself:
+
+~MSG &quot;Simple formatter...&quot;
+
+...and the function it is supposed to describe - also a macro. Then,
+a line I added in the belief that it was the kind of thing you were advising:
+
+   (putprop 'help '#.helplist 'comments)
+
+That's the end of the file.  I then tried to compile it:
+
+;BKPT DATA   So I did:
+$p
+(COMMENT **ERROR** #75526 Unrecognizable datum __ Collecatoms in function FOO)
+; %%%%%%%%%%%%%%%%%%%%COMPILER ERRO(R - CALL JONL%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+;BKPT BARF
+
+Ugh, what have I done?  Sorry to bother you with this again so soon.  I would
+have flogged on with it on my own except for what the machine said just there.
+
+As to your other valuable help - yes, I had just about reached the same
+conclusion regarding how to  re-use &quot;compiled&quot; macros.  I just hoped,
+(we are riddled with superstition here) that there might be a clever way
+around the problem.    We seem to have the May '82 version of STRING, but
+I'll check that the dates are right. And Lord alone knows what happened
+to any notes you included with the source tapes - such things go
+through many administrative hands before reaching poor hackers like us!
+
+Thank you again, anyway.
+
+Tony.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00757.html">[TONYH: forwarded]  (Have fun!)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00755.html">lossage after lossage</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00757.html">[TONYH: forwarded]  (Have fun!)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00755.html">lossage after lossage</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00756"><strong>Date</strong></a></li>
+<li><a href="threads.html#00756"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

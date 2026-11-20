@@ -1,0 +1,389 @@
+
+TOPS-20/TENEX MacLISP 1982 Functions and Other Features
+This file was created by JONL on Tuesday, March 4, 1980 at 10:37 AM
+
+
+User SUBRs:
+
+    *-READ-EVAL-PRINT      COS                    NOINTERRUPT
+    *BREAK                 CXR                    NORET
+    *DIF                   DEFAULTF               NOT
+    *NOPOINT               DELETEF                NOUUO
+    *QUO                   DEPOSIT                NRECONC
+    *READ                  DISPLACE               NREVERSE
+    *READCH                EQ                     NTH
+    *RSET                  EQUAL                  NTHCDR
+    *THROW                 ERRFRAME               NULL
+    *TYI                   EVALFRAME              NUMBERP
+    +TYO                   EXAMINE                ODDP
+    1+                     EXP                    OUT
+    1+$                    EXPLODE                PLIST
+    1-                     EXPLODEC               PLUSP
+    1-$                    EXPLODEN               PNGET
+    <                      EXPT                   PNPUT
+    =                      FASLP                  PROBEF
+    >                      FILEP                  PUTPROP
+    ABS                    FILLARRAY              QMARK
+    ADD1                   FIX                    READ-*-EVAL-PRINT
+    ALLOC                  FIXNUM-IDENTITY        READ-EVAL-*-PRINT
+    ALPHALESSP             FIXP                   READ-EVAL-PRINT-*
+    ARG                    FLATC                  READLIST
+    ARRAYDIMS              FLATSIZE               RECLAIM
+    ASCII                  FLOAT                  REMAINDER
+    ASSOC                  FLOATP                 REMOB
+    ASSQ                   FLONUM-IDENTITY        REMPROP
+    ATAN                   FORCE-OUTPUT           RENAMEF
+    ATOM                   FRETRY                 RETURN
+    BIGP                   FRETURN                REVERSE
+    BOUNDP                 FSC                    ROT
+    CAAAAR                 GC                     RPLACA
+    CAAADR                 GCD                    RPLACD
+    CAAAR                  GET                    RPLACX
+    CAADAR                 GETCHAR                RUNTIME
+    CAADDR                 GETCHARN               SAMEPNAMEP
+    CAADR                  GETL                   SASSOC
+    CAAR                   HAIPART                SASSQ
+    CADAAR                 HAULONG                SET
+    CADADR                 HUNKP                  SETARG
+    CADAR                  HUNKSIZE               SETPLIST
+    CADDAR                 IFIX                   SETSYNTAX
+    CADDDR                 IMPLODE                SHORTNAMESTRING
+    CADDR                  IN                     SIN
+    CADR                   INCLUDEF               SLEEP
+    CAR                    INPUSH                 SQRT
+    CDAAAR                 INTERN                 SUB1
+    CDAADR                 LAST                   SUBLIS
+    CDAAR                  LENGTH                 SUBR
+    CDADAR                 LENGTHF                SUBST
+    CDADDR                 LISTIFY                SXHASH
+    CDADR                  LOAD                   SYMBOLP
+    CDAR                   LOG                    SYMEVAL
+    CDDAAR                 LSH                    SYSP
+    CDDADR                 MAKHUNK                TIME
+    CDDAR                  MAKNAM                 TRUENAME
+    CDDDAR                 MAKNUM                 TYPEP
+    CDDDDR                 MAKUNBOUND             VALUE-CELL-LOCATION
+    CDDDR                  MEMBER                 XCONS
+    CDDR                   MEMQ                   ZEROP
+    CDR                    MERGEF                 \
+    CLEAR-INPUT            MINUS                  \\
+    CLEAR-OUTPUT           MINUSP                 ^
+    CLOSE                  MUNKAM                 ^$
+    CNAMEF                 NAMELIST               ^G
+    CONS                   NAMESTRING
+    COPYSYMBOL             NCONS
+
+
+User FSUBRs:
+
+    *CATCH            CRUNIT            INCLUDE           STATUS
+    *FUNCTION         DECLARE           LSUBRCALL         STORE
+    AND               DEFPROP           OR                SUBRCALL
+    ARRAY             DEFUN             POP               THROW
+    ARRAYCALL         DO                PROG              UAPPEND
+    BREAK             ERR               PROGV             UCLOSE
+    CASEQ             ERRSET            PUSH              UFILE
+    CATCH             EVAL-WHEN         QUOTE             UKILL
+    CATCH-BARRIER     FASLOAD           SETF              UNWIND-PROTECT
+    CATCHALL          FUNCTION          SETQ              UPROBE
+    COMMENT           GCTWA             SIGNP             UREAD
+    COND              GO                SSTATUS           UWRITE
+
+
+User LSUBRs:
+
+    *                  DELQ               LIST*              PRINT
+    *$                 DIFFERENCE         LISTARRAY          PRINT-OBJECT
+    *ARRAY             ENDPAGEFN          LISTEN             PROG1
+    *REARRAY           EOFFN              MAP                PROG2
+    +                  ERROR              MAPATOMS           PROGN
+    +$                 ERRPRINT           MAPC               QUIT
+    -                  EVAL               MAPCAN             QUOTIENT
+    -$                 EVALHOOK           MAPCAR             RANDOM
+    /                  FILEPOS            MAPCON             READ
+    /$                 FLATSIZE-OBJECT    MAPLIST            READCH
+    APPEND             FUNCALL            MAX                READLINE
+    APPLY              GENSYM             MIN                RUBOUT
+    ARGS               GETSP              NCONC              SUSPEND
+    BAKLIST            GREATERP           OPEN               TERPRI
+    BAKTRACE           HUNK               PAGEL              TIMES
+    BOOLE              LESSP              PAGENUM            TYI
+    CHARPOS            LINEL              PLUS               TYIPEEK
+    CURSORPOS          LINENUM            PRIN1              TYO
+    DELETE             LIST               PRINC              VALRET
+
+
+STATUS options (* = can use with SSTATUS too):
+
+    * +                  FLPDL              OPSYS ?            SYSTEM
+    * ABBREVIATE       * FLUSH              PDL                TABSIZE
+      ARRAY              FXPDL            * PDLMAX           * TERPRI
+      BPSH             * GCMAX              PDLNAMES         * TOPLEVEL
+      BPSL             * GCMIN              PDLROOOM         * TTY
+    * BREAK            * GCSIZE             PDLSIZE          * TTYCONS
+    * CALLI ?          * GCTIME           * PUNT             * TTYINT
+    * CHTRAN             HOMEDIR            PURSIZE          * TTYREAD
+    * CRFIL              HSNAM              PURSPACENAMES    * TTYSCAN
+    * CRUNIT             JCL              * RANDOM             TTYTYPE
+      DATE               JNAME              SEGLOG             UDIR
+      DAYTIME            JNUMBER          * SENDI ?            UNAME
+    * DIVOV            * LINMODE            SITE             * UREAD
+      DOW                LISPVERSION        SPCNAMES           USERI
+    * EVALHOOK         * LOSEF              SPCSIZE          * USRHU ?
+      FASLN ?          * MACRO              SPDL             * UUOLINKS
+      FASLOAD            MEMFREE            SSTATUS          * UWRITE
+    * FEATURE            NEWLINE            STATUS             XUNAM
+      FILEMODE         * NOFEATURE          SUBSYS           * _
+      FILES ?          * NOINT ?          * SYNTAX
+
+
+Initial arrays:
+
+    OBARRAY      READTABLE
+
+
+Initial User AUTOLOAD properties:
+
+    NAME OF ATOM                   INITIAL VALUE
+
+    *DEPOSIT-BYTE                  ((LISP) LODBYT FASL)
+    *DPB                           ((LISP) LODBYT FASL)
+    *LDB                           ((LISP) LODBYT FASL)
+    *LOAD-BYTE                     ((LISP) LODBYT FASL)
+    CGOL                           ((LISP) CGOL FASL)
+    CGOLREAD                       ((LISP) CGOL FASL)
+    DEFBOTHMACRO                   ((LISP) MACAID FASL)
+    DEFCOMPLRMAC                   ((LISP) MACAID FASL)
+    DEFMACRO                       ((LISP) DEFMACRO FASL)
+    DEFMACRO-DISPLACE              ((LISP) DEFMACRO FASL)
+    DEFSHARP                       ((LISP) SHARPM FASL)
+    DEFSIMPLEMAC                   ((LISP) MACAID FASL)
+    DEFUN&                         ((LISP) DEFMACRO FASL)
+    DEFUN&-ERROR                   ((LISP) DEFMACRO FASL)
+    DEFUNFROMMAC                   ((LISP) MACAID FASL)
+    DEFVAR                         ((LISP) MLMAC FASL)
+    DEFVST                         ((LISP) DEFVST FASL)
+    DEPOSIT-BYTE                   ((LISP) LODBYT FASL)
+    DESETQ                         ((LISP) LET FASL)
+    DESETQ-EXPANDER-1              ((LISP) LET FASL)
+    DPB                            ((LISP) LODBYT FASL)
+    DUMPARRAYS                     ((LISP) DUMPARRAYS FASL)
+    EDIT                           ((LISP) EDIT FASL)
+    FBOUNDP                        ((LISP) MLMAC FASL)
+    FLATTEN-SYMS                   ((LISP) MACAID FASL)
+    FORMAT                         ((LISP) FORMAT FASL)
+    GETMIDASOP                     ((LISP) GETMIDASOP FASL)
+    GRIND                          ((LISP) GRIND FASL)
+    GRIND0                         ((LISP) GRIND FASL)
+    GRINDEF                        ((LISP) GRINDEF FASL)
+    HERALD                         ((LISP) MLMAC FASL)
+    LAP                            ((LISP) LAP FASL)
+    LAP-A-LIST                     ((LISP) LAP FASL)
+    LDB                            ((LISP) LODBYT FASL)
+    LEDIT                          ((LISP) LEDIT FASL)
+    LET                            ((LISP) LET FASL)
+    LET*                           ((LISP) LET FASL)
+    LET*-EXPANDER-1                ((LISP) LET FASL)
+    LET-EXPANDER-1                 ((LISP) LET FASL)
+    LOAD-BYTE                      ((LISP) LODBYT FASL)
+    LOADARRAYS                     ((LISP) DUMPARRAYS FASL)
+    MACRO                          ((LISP) DEFMACRO FASL)
+    MACROEXPAND                    ((LISP) DEFMAX FASL)
+    MACROEXPAND-1                  ((LISP) DEFMAX FASL)
+    MACROEXPAND-1*                 ((LISP) DEFMAX FASL)
+    MACROEXPANDED                  ((LISP) DEFMAX FASL)
+    MACROFETCH                     ((LISP) DEFMAX FASL)
+    MACROMEMO                      ((LISP) DEFMAX FASL)
+    READMACROINVERSE               ((LISP) GRINDEF FASL)
+    SELECTQ                        ((LISP) MLMAC FASL)
+    SETF-STRUCT                    ((LISP) SETF FASL)
+    SETQ-IF-UNBOUND                ((LISP) MLMAC FASL)
+    SETSYNTAX-SHARP-MACRO          ((LISP) SHARPM FASL)
+    SETVST                         ((LISP) DEFVST FASL)
+    SORT                           ((LISP) SORT FASL)
+    SORTCAR                        ((LISP) SORT FASL)
+    SPRIN1                         ((LISP) GRINDEF FASL)
+    SPRINTER                       ((LISP) GRINDEF FASL)
+    STRUCT-TYPEP                   ((LISP) DEFVST FASL)
+    TRACE                          ((LISP) TRACE FASL)
+    WITH-INTERRUPTS                ((LISP) MLMAC FASL)
+    WITHOUT-INTERRUPTS             ((LISP) MLMAC FASL)
+    WITHOUT-TTY-INTERRUPTS         ((LISP) MLMAC FASL)
+
+
+LAP and FASLOAD functions:
+
+    *APPEND         *NCONC          *TYO            PURCOPY
+    *APPLY          *PLUS           FASLAPSETUP|    PURIFY
+    *DELETE         *PRIN1          GCPROTECT       PUTDDTSYM
+    *DELQ           *PRINC          GETDDTSYM       SQOZ|
+    *EVAL           *PRINT          LAPSETUP|       TTSR|
+    *GREAT          *TERPRI         LH|
+    *LESS           *TIMES          PAGEBPORG
+
+
+Internal system functions:
+
+    +INTERNAL-"-MACRO          +INTERNAL-TTY-ENDPAGEFN
+    +INTERNAL-'-MACRO          +INTERNAL-TTYSCAN-SUBR
+    +INTERNAL-*RSET-BREAK      +INTERNAL-UBV-BREAK
+    +INTERNAL-;-MACRO          +INTERNAL-UDF-BREAK
+    +INTERNAL-AUTOLOAD         +INTERNAL-UGT-BREAK
+    +INTERNAL-CARCDRP          +INTERNAL-UREAD-EOFFN
+    +INTERNAL-FAC-BREAK        +INTERNAL-WNA-BREAK
+    +INTERNAL-GCL-BREAK        +INTERNAL-WTA-BREAK
+    +INTERNAL-GCO-BREAK        +INTERNAL-^B-BREAK
+    +INTERNAL-INCLUDE-EOFFN    +INTERNAL-^Q-MACRO
+    +INTERNAL-IOL-BREAK        +INTERNAL-^S-MACRO
+    +INTERNAL-PDL-BREAK        +INTERNAL-|-MACRO
+
+
+Internal system AUTOLOAD properties:
+
+    NAME OF ATOM                   INITIAL VALUE
+
+    |&r-l/||                       ((LISP) DEFMACRO FASL)
+    +INTERNAL-/#-MACRO             ((LISP) SHARPM FASL)
+    |+INTERNAL-,-macro/||          ((LISP) BACKQ FASL)
+    +INTERNAL-DUP-P                ((LISP) MACAID FASL)
+    +INTERNAL-POP-X                ((LISP) SETF FASL)
+    +INTERNAL-PUSH-X               ((LISP) SETF FASL)
+    +INTERNAL-SETF-X               ((LISP) SETF FASL)
+    +INTERNAL-SETF-X-1             ((LISP) SETF FASL)
+    |+INTERNAL-`-grindmacros/||    ((LISP) GRINDEF FASL)
+    |+INTERNAL-`-macro/||          ((LISP) BACKQ FASL)
+    |Certify-no-var-dependency/||   ((LISP) DEFMACRO FASL)
+    |DEFMACRO MACRO|               ((LISP) DEFMACRO FASL)
+    |DEFMACRO-DISPLACE MACRO|      ((LISP) DEFMACRO FASL)
+    |DEFUN& MACRO|                 ((LISP) DEFMACRO FASL)
+    |MACRO MACRO|                  ((LISP) DEFMACRO FASL)
+    |MACROEXPANDED MACRO|          ((LISP) DEFMAX FASL)
+    |MACROEXPANDED-grindmacro/||   ((LISP) GRINDEF FASL)
+    |`,./||                        ((LISP) BACKQ FASL)
+    |`,@/||                        ((LISP) BACKQ FASL)
+    |`,/||                         ((LISP) BACKQ FASL)
+    |`-expander/||                 ((LISP) BACKQ FASL)
+    |carcdrp/||                    ((LISP) MACAID FASL)
+    |constant-p/||                 ((LISP) MACAID FASL)
+    |defmacro-1/||                 ((LISP) DEFMACRO FASL)
+    |defvst-construction/||        ((LISP) DEFVST FASL)
+    |defvst-typchk/||              ((LISP) DEFVST FASL)
+    |forget-macromemos/||          ((LISP) DEFMAX FASL)
+    |no-funp/||                    ((LISP) MACAID FASL)
+    |side-effectsp/||              ((LISP) MACAID FASL)
+
+
+System variables:
+
+    NAME OF ATOM                   INITIAL VALUE
+
+    P                             P
+    /#-MACRO-DATALIST              UNBOUND
+    /#-SYMBOLIC-CHARACTERS-TABLE   UNBOUND
+    |&r-l/||                       NIL
+    *                              *
+    *-READ-EVAL-PRINT              NIL
+    *NOPOINT                       NIL
+    *RSET                          T
+    *RSET-TRAP                     +INTERNAL-*RSET-BREAK
+    +                              +
+    -                              -
+    //                             NIL
+    ARGS                           NIL
+    AUTOLOAD                       +INTERNAL-AUTOLOAD
+    BACKQUOTE-EXPAND-WHEN          EVAL
+    BASE                           10
+    CAR                            NIL
+    CDR                            NIL
+    CLI-MESSAGE                    NIL
+    COMPILER-STATE                 NIL
+    DEFAULTF                       ((DSK LOSER) @ @)
+    DEFMACRO-CHECK-ARGS            T
+    DEFMACRO-DISPLACE-CALL         T
+    DEFMACRO-FOR-COMPILING         T
+    DEFUN                          NIL
+    DEFUN&                         NIL
+    DEFUN&-CHECK-ARGS              T
+    DEFUN&-ERROR                   NIL
+    ECHOFILES                      NIL
+    EDIT                           NIL
+    ERRLIST                        NIL
+    ERROR-BREAK-ENVIRONMENT        (#OBARRAY-1200-65004 . #READTABLE-0-65006)
+    ERRSET                         NIL
+    EVAL                           NIL
+    EVALHOOK                       NIL
+    FAIL-ACT                       +INTERNAL-FAC-BREAK
+    FASLOAD                        (SUBR FSUBR LSUBR)
+    GC-DAEMON                      NIL
+    GC-LOSSAGE                     +INTERNAL-GCL-BREAK
+    GC-OVERFLOW                    +INTERNAL-GCO-BREAK
+    GCTWA                          NIL
+    GRIND-MACROEXPANDED            NIL
+    GRINDEF                        NIL
+    HUNKP                          T
+    IBASE                          10
+    INFILE                         T
+    INSTACK                        NIL
+    IO-LOSSAGE                     +INTERNAL-IOL-BREAK
+    MACHINE-ERROR                  NIL
+    MACRO-EXPANSION-USE            MACROEXPANDED
+    MACROEXPANDED                  NIL
+    MACROMEMO                      NIL
+    MAKHUNK                        T
+    MAR-BREAK                      NIL
+    MSGFILES                       (T)
+    NIL                            NIL
+    NORET                          NIL
+    NOUUO                          NIL
+    OBARRAY                        #OBARRAY-1200-65004
+    OUTFILES                       NIL
+    PDL-OVERFLOW                   +INTERNAL-PDL-BREAK
+    PRIN1                          NIL
+    PRINLENGTH                     NIL
+    PRINLEVEL                      NIL
+    READ                           NIL
+    READ-*-EVAL-PRINT              NIL
+    READ-EVAL-*-PRINT              NIL
+    READ-EVAL-PRINT-*              NIL
+    READTABLE                      #READTABLE-0-65006
+    RINTERN-PACKAGE-HOOK           NIL
+    SYMBOLS                        NIL
+    SYS-DEATH                      NIL
+    T                              T
+    TERPRI                         T
+    TTY                            17
+    TTY-RETURN                     NIL
+    TTYSCAN-STRINGERS/|            ((73 . 15) (174 . 174) (42 . 42))
+    TYI                            #FILE-IN-|PRIMARY:*.|-65012
+    TYO                            #FILE-OUT-|PRIMARY:*.|-65014
+    UNBND-VRBL                     +INTERNAL-UBV-BREAK
+    UNDF-FNCTN                     +INTERNAL-UDF-BREAK
+    UNSEEN-GO-TAG                  +INTERNAL-UGT-BREAK
+    UREAD                          NIL
+    UWRITE                         NIL
+    WRNG-NO-ARGS                   +INTERNAL-WNA-BREAK
+    WRNG-TYPE-ARG                  +INTERNAL-WTA-BREAK
+    ZFUZZ                          NIL
+    ZUNDERFLOW                     NIL
+    ^A                             NIL
+    ^D                             NIL
+    ^Q                             NIL
+    ^R                             NIL
+    ^W                             NIL
+    |`-,-level/||                  0
+    |carcdrp/||                    T
+
+
+LAP and FASLOAD variables:
+
+    NAME OF ATOM                   INITIAL VALUE
+
+    *PURE                          NIL
+    BPEND                          120547
+    BPORG                          120155
+    GCPROTECT                      NIL
+    LAPSETUP/|                     NIL
+    PURCLOBRL                      NIL
+    PURE                           1
+    PUTPROP                        (SUBR FSUBR LSUBR)
+    TTSR/|                         12705

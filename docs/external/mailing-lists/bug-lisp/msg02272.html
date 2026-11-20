@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Sat, 15 Jul 78 02:08:00 GMT -->
+<!--X-Message-Id: 4beedcade7386447ba15eba68d0db638@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02273.html">Date Prev</a>][<a href="msg02271.html">Date Next</a>][<a href="msg02273.html">Thread Prev</a>][<a href="msg02271.html">Thread Next</a>][<a href="maillist.html#02272">Date Index</a>][<a href="threads.html#02272">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Sat, 15 Jul 78 02:08:00 GMT</li>
+<li><em>Original-date</em>: 14 JUL 1978 2208-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>STATUS SYNTAX and STATUS MACRO have some of the shoddiest syntax
+I have ever seen. Any function that would be hurt by the change
+of 
+
+(DEFUN SYN (X) (STATUS SYNTAX (GETCHARN X 1.)))
+
+to 
+
+(DEFUN SYN (X) ((LAMBDA (Y) (STATUS SYNTAX Y))
+		(GETCHARN X 1.)))
+
+is really losing. The 1/2-FEXPR nature of the thing makes it incredibly
+tricky to write into a program, tho' it may be useful in debugging to not
+have to quote an arg, I would venture a guess that no one would mind its
+being EXPR in the char of its second arg. If there is not a very good 
+reason why this function feels a need to evaluate only non-atomic args,
+I would be interested. Otherwise, I would just as soon see it remodelled
+to evaluate second arg always.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02273.html">Clarification on OWN-SYMBOL</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02271.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02273.html">Clarification on OWN-SYMBOL</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02271.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02272"><strong>Date</strong></a></li>
+<li><a href="threads.html#02272"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

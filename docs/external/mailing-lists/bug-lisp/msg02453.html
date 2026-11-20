@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 14 Jun 81 23:12:00 GMT -->
+<!--X-Message-Id: 180618c0b113e35b6d331c641acdb749@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: KRONJ at MIT&#45;MC -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02454.html">Date Prev</a>][<a href="msg02452.html">Date Next</a>][<a href="msg02454.html">Thread Prev</a>][<a href="msg02452.html">Thread Next</a>][<a href="maillist.html#02453">Date Index</a>][<a href="threads.html#02453">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KRONJ at MIT-MC</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 14 Jun 81 23:12:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, WGD at MIT-MC, RLB at MIT-MC</li>
+<li><em>In-reply-to</em>: The message of 12 Jun 81 21:33-EDT from David Eppstein &lt;KRONJ at MIT-MC&gt;</li>
+<li><em>Original-date</em>: Sunday, 14 June 1981, 19:12-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 12 June 1981 21:33-EDT
+    From: David Eppstein &lt;KRONJ at MIT-MC&gt;
+    To: BUG-LISP at MIT-MC
+    
+    What is EVAL-ORDERED* and why does it have an autoload property of
+    ((LISP) AUTOLOAD FASL), which upon not being found gives me an IO-LOSSAGE
+    error when I try to load my file ((AR1 GUEST2) GENE &gt;).
+    
+    As far as I can tell, it is in the middle of a DEFVST when it has that problem.
+
+EVAL-ORDERED* is an internal function which tries to keep the evaluated
+parts of a SETF spec evaluated in left-to-right order despite the fact
+that some things which SETF expands into take their arguments in funny
+orders.  It had an absurd autoload property because JONL's mind wandered
+while he was changing the file to use his new DEF-OR-AUTOLOAD macro.
+
+I have fixed this.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02454.html">[GJS at MIT-AI: Forwarded]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02452.html">*ARRAY doesn't check size for plausibility</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02454.html">[GJS at MIT-AI: Forwarded]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02452.html">*ARRAY doesn't check size for plausibility</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02453"><strong>Date</strong></a></li>
+<li><a href="threads.html#02453"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

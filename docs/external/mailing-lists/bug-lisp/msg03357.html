@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 30 May 78 22:47:00 GMT -->
+<!--X-Message-Id: 1823dea20c351e99a7b10a90ed4d2080@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03358.html">Date Prev</a>][<a href="msg03356.html">Date Next</a>][<a href="msg03358.html">Thread Prev</a>][<a href="msg03356.html">Thread Next</a>][<a href="maillist.html#03357">Date Index</a>][<a href="threads.html#03357">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC, KMP at MIT-MC</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 30 May 78 22:47:00 GMT</li>
+<li><em>Original-date</em>: 30 MAY 1978 1847-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I'm afraid HIC's reply to question about (FLATC '&lt;control-H&gt;)
+was somewhat in error - he is right in that the definition of
+FLATC corresponds with the number of characters output by PRINC,
+but it actually operates by noting the count of number of stored
+characters in the string for the PNAME.  But FLATSIZE actually
+calls a subroutine of PRIN1, which generates characters for printout,
+and then merely counts how many characters were counted.  Neither
+of these routines try to outguess whether or not ITS will add
+escape characters of its own (PRIN1 of course adds the escape character
+slash in front of any control character it is about to print).
+My personal opinion is that ITS would have to supply a FLATSIZE
+functions for character strings in order to correctly accomplish
+what you (KMP) want.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03358.html">FLATC</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03356.html">MAPC returning some constant</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03358.html">FLATC</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03356.html">MAPC returning some constant</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03357"><strong>Date</strong></a></li>
+<li><a href="threads.html#03357"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

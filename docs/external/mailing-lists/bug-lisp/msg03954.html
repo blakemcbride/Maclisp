@@ -1,0 +1,115 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SETF, PUSH, POP -->
+<!--X-From-R13: DIY,Y[B ng [WF&#45;[Q -->
+<!--X-Date: Fri, 23 Nov 79 09:11:00 GMT -->
+<!--X-Message-Id: fcf204114ade36a48ee421e301b0558a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SETF, PUSH, POP</title>
+<link rev="made" href="mailto:RWK">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03955.html">Date Prev</a>][<a href="msg03953.html">Date Next</a>][<a href="msg03956.html">Thread Prev</a>][<a href="msg03955.html">Thread Next</a>][<a href="maillist.html#03954">Date Index</a>][<a href="threads.html#03954">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SETF, PUSH, POP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: EB at MIT-ML</li>
+<li><em>Subject</em>: SETF, PUSH, POP</li>
+<li><em>From</em>: RWK,KMP at MIT-MC</li>
+<li><em>Date</em>: Fri, 23 Nov 79 09:11:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 23 November 1979 04:11-EST</li>
+<li><em>Sender</em>: RWK at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     Date:
+Date: Wed, 22 Nov 79 22:54:32 GMT
+Original-Date: 11/22/79 18:54:32 EDT
+Subject:
+    From: EB at MIT-ML
+    To:   (BUG LISP) at MIT-ML
+    Re:   SETF, PUSH, POP
+
+    Why not have a general, uniform mechanism for operations thatt first
+    access, compute with, and then reset (SETF) some component?  This is
+    done in Interlisp with the so-called &quot;changeword&quot; mechanism, of which
+    Interlisp &quot;push&quot;, &quot;pop&quot;, &quot;pushnew&quot;, &quot;add&quot;, and &quot;pushlist&quot; are instances.
+    It seems better to have a general CHANGEF primitive than to special-case
+    everything.  For example, in Interlisp a form
+
+    	(change &lt;access&gt; &lt;form&gt;)
+
+    has such an effect.  (&quot;DATUM&quot; within &lt;form&gt; stands for the old
+    value.)  &lt;access&gt; is only evaluated once.
+
+This is a crockashit ... you can't nest CHANGEs inside CHANGEs, since there's
+no way to distinguish the DATUM referering to outside or inside CHANGE.  But
+the idea is useful.  How about instead of being a form, it being a Lambda-
+expression?  Thus INCREMENT becomes nothing more than a convenient way to
+write (CHANGE (mumble) (lambda (x) (1+ x))) or maybe (CHANGE x (1+ x) (mumble))
+
+  How about a DEFCHANGE macro which defines a macro to define things like
+INCREMENT ...
+
+(DEFCHANGE (INCREMENT x) (1+ x)).
+
+(DEFCHANGE (ADDTO X N) (+ X N))	   ;Structure always comes first
+
+[KMP doesn't like the names CHANGE and DEFCHANGE ... thinks they're ugly]
+
+Anyway, the way the SETF stuff works it's easy for you to do any of this,
+avoiding multiple-evaluations of the structure-access, and other such goblins.
+I don't know how many of these are useful enough to go into the system!
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03955.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03953.html">&quot; on TTYSCAN-STRINGERS/|</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03956.html">Re: SETF, PUSH, POP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03955.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03954"><strong>Date</strong></a></li>
+<li><a href="threads.html#03954"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

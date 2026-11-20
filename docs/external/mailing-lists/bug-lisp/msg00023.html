@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: TOPS&#45;20 interrupts -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 26 Dec 78 22:10:00 GMT -->
+<!--X-Message-Id: 0dac7df993e69b1d962569a5b1cd1458@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>TOPS-20 interrupts</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00024.html">Date Prev</a>][<a href="msg00022.html">Date Next</a>][<a href="msg00024.html">Thread Prev</a>][<a href="msg00022.html">Thread Next</a>][<a href="maillist.html#00023">Date Index</a>][<a href="threads.html#00023">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>TOPS-20 interrupts</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: TOPS-20 interrupts</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 26 Dec 78 22:10:00 GMT</li>
+<li><em>Cc</em>: dang at MIT-XX</li>
+<li><em>Original-date</em>: 26 DEC 1978 1710-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>MACLISP is advertised to have interrupt meaning for the following
+control characters:
+  ^A, ^B, ^C, ^D, ^G, ^R, ^T, ^V, ^W, ^X, and ^Z
+I believe that ^Q, ^S, are macro characters, and ^K and ^L are specially
+recognized by the read-scanner.  Apparently there are two bugs here?
+1) on ITS systems, ^S fails to set ^Q to (), and
+2) on TOPS-20, ^Q seems to be set up as an interrupt character.
+3) on neither system does ^A set the value of ^A as it should.
+Having interrupt capacity for at least
+  ^B, ^G, ^V, ^W, ^X and ^Z
+would be fairly important for TOPS-20 maclisps.
+
+Now there seems also to be a bug in (SSTATUS LINMO T) on the TOPS-20
+systems - it affects TLPRIN, but seems not to effect the ruubout scanner.
+It woudl be possible to use the standard TOPS-20 JSYS for input, thereby
+taking adavantage of all the twenex terminal niceities, if the LINEMODE
+worked ok; but when not in linemode, lisp must inspect each character in
+order to decide if enough has been buffered up.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00024.html">LIMIT-CONS for arrays and hunks</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00022.html">TOPS-20 Interrupts</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00024.html">LIMIT-CONS for arrays and hunks</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00022.html">TOPS-20 Interrupts</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00023"><strong>Date</strong></a></li>
+<li><a href="threads.html#00023"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

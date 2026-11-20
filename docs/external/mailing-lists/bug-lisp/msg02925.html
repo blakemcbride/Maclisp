@@ -1,0 +1,123 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Bug in MacLisp -->
+<!--X-From-R13: Rnivq [pRbanyq &#60;Rnivq.[pRbanyq ng Q[G&#45;10O> -->
+<!--X-Date: Fri, 27 Jul 79 00:44:00 GMT -->
+<!--X-Message-Id: 26Jul79 204422 DM20@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Bug in MacLisp</title>
+<link rev="made" href="mailto:David.McDonald at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02926.html">Date Prev</a>][<a href="msg02924.html">Date Next</a>][<a href="msg03091.html">Thread Prev</a>][<a href="msg02924.html">Thread Next</a>][<a href="maillist.html#02925">Date Index</a>][<a href="threads.html#02925">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Bug in MacLisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp @ ai</li>
+<li><em>Subject</em>: Bug in MacLisp</li>
+<li><em>From</em>: David McDonald &lt;David.McDonald at CMU-10A&gt;</li>
+<li><em>Date</em>: Fri, 27 Jul 79 00:44:00 GMT</li>
+<li><em>Original-date</em>: Thursday, 26 July 1979 2044-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>	The code to get the width of a terminal in the CMU version
+of MacLisp is incorrect.  The current code is:
+		seto	11,0		; current job for getlin uuo
+		calli	11,34		; get sixbit terminal name.
+		tlz	11,-1		; zero left half of result.
+		movei	10,1012		; parameter to trmop uuo
+					; to return tty width.
+		move	12,[xwd -2,10]	; 10 contains 1012 (get widthof
+					; terminal).  11 contains the
+					; users terminal index.
+		calli	12,116
+		movei	10,111		; default width of 73(decimal).
+		subi	10,1		; make it one less so that wrap
+					; around doesn't occur.
+		movem	10,?		; store it in a random location
+	The calli 11,34 returns the sixbit name of the terminal
+attached to the current job.  The trmop uuo (calli ,116) requires
+the universail I/O index for the terminal.  The sixbit name is not
+wanted, thus the calli 11,34 should be replaced with calli 11,115.
+This will return the universal I/O index for the terminal.  Note
+that the calli 11,115 may give an error return by not skipping the
+next instruction.
+	The -2 in the [xwd -2,10] operand should be a 2 as the calli
+12,116 UUO needs the absolute length of its parameter block.  Since
+the calli 116 should return the width of the terminal in register 12,
+the three following instructions should use 12 not 10.  In the
+current system the calli 116 takes the error return and uses the
+default of 72 characters.
+	The code that should be used to get the width of the terminal
+should be something along the following lines:
+		seto	11,0		; current job for trmno uuo
+		calli	11,115		; get universal I/O index for
+					; terminal
+		jrst	Default		; use default length on error.
+		movei	10,1012		; parameter to trmop uuo
+					; to return tty width.
+		move	12,[xwd 2,10]	; 10 contains 1012 (get widthof
+					; terminal).  11 contains the
+					; users terminal index.
+		calli	12,116		; get current width of terminal
+Default:	movei	12,111		; default width of 73(decimal).
+		subi	12,1		; make it one less so that wrap
+					; around doesn't occur.
+		movem	12,?		; store it in a random location
+	This is not a high priority bug, since the current MacLisp
+uses the default value of 72 because the calli 12,116 gets an error.
+		- David McDonald.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02926.html">Complr bug</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02924.html">CURSORPOS 'S, 'R</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03091.html">COMPLR bug</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02924.html">CURSORPOS 'S, 'R</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02925"><strong>Date</strong></a></li>
+<li><a href="threads.html#02925"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Knee&#45;jerk response -->
+<!--X-From-R13: Uyraa E. Phexr &#60;UEP ng [WF&#45;[Z> -->
+<!--X-Date: Wed, 29 Oct 80 23:23:00 GMT -->
+<!--X-Message-Id: 2207dbbc2474d57893fad24c338b2b70@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Knee-jerk response</title>
+<link rev="made" href="mailto:GSB at MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01932.html">Date Prev</a>][<a href="msg01930.html">Date Next</a>][<a href="msg01933.html">Thread Prev</a>][<a href="msg01929.html">Thread Next</a>][<a href="maillist.html#01931">Date Index</a>][<a href="threads.html#01931">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Knee-jerk response</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Guy.Steele at CMU-10A, JONL at MIT-MC</li>
+<li><em>Subject</em>: Knee-jerk response</li>
+<li><em>From</em>: Glenn S. Burke &lt;GSB at MIT-ML&gt;</li>
+<li><em>Date</em>: Wed, 29 Oct 80 23:23:00 GMT</li>
+<li><em>Cc</em>: BUG-lisp at MIT-MC</li>
+<li><em>Original-date</em>: 29 October 1980 18:23-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>is approximately the best thing proposed so far.  It is extremely
+inconvenient that even when one understands why you are getting
+screwed it is difficult to do anything about it.
+|forget-macromemos/|| should be renamed more conveniently (or another
+entry should be made) and there should be something you can call to do
+the mapatoms if you are super-paranoid and/or lazy.  (Note that you
+don't want to mapatoms just |forget-macromemos/||, and remproping the
+macroexpanded property is wrong;  you want to increment it.)  The
+other thing to do is to memoize the expansion on all the dependencies,
+so a particular SETF expansion would &quot;know&quot; that it depended on both
+SETF and FROBNICATE being redefined...  But in general it probably is not
+possible to back up as far as is necessary, given the case of macros
+evaluated for a value which makes up some part of a memoized macro
+expansion.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01932.html">Re: Poor SETF, revisited [&quot;yea, me worry&quot;]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01930.html">MACROEXPANDED not working with SETF (??)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01933.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01929.html">Infamous TYIPEEK bug</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01931"><strong>Date</strong></a></li>
+<li><a href="threads.html#01931"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

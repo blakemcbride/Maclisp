@@ -1,0 +1,110 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: That's not a bug, that's a feature! -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 5 Jan 81 01:05:00 GMT -->
+<!--X-Message-Id: 5d5e2808969dcf414a4d8d5c76d5a45a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>That's not a bug, that's a feature!</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03608.html">Date Prev</a>][<a href="msg02549.html">Date Next</a>][<a href="msg03608.html">Thread Prev</a>][<a href="msg02549.html">Thread Next</a>][<a href="maillist.html#03606">Date Index</a>][<a href="threads.html#03606">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>That's not a bug, that's a feature!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DICK at MIT-MC</li>
+<li><em>Subject</em>: That's not a bug, that's a feature!</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 5 Jan 81 01:05:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 4 January 1981 20:05-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     Date:
+Date: Tue, 1 Apr 81 18:27:15 GMT
+Original-Date: 01/04/81 14:27:15 EDT
+Subject:
+    From: DICK at MIT-ML
+    To:   (BUG LISP) at MIT-ML
+
+    There is a bug in macroexpand that is seen in the  following
+    scenario ... macroexpand uses a macro even if it is not the current 
+    functional property in force....
+-----
+This is a widely taken-advantage-of feature, actually. Consider the case of
+an FSUBR definition of LET (for efficiency, stepping convenience, etc) 
+shadowed by a MACRO definition (for the sake of program-understanding 
+programs which would like to decompose a macro form into something more
+primitive and intelligible). In such a case, the FSUBR definition would want
+to shadow the MACRO definition, but both would want to be accessible.
+
+It is also the case that certain files like to do the equivalent of the 
+following:
+
+(DEFUN FIRST (X) (CAR X)) ; In case FIRST gets MAP'd or APPLY'd
+
+(DEFUN FIRST MACRO (X)	; For compiler use
+       (DISPLACE X `(CAR ,@(CDR X))))
+
+where both a macro and an expr version are available at the same time and get
+used in different situations. Here the MACRO shadows the EXPR, but both are
+accessible at times.
+
+Moral: If you're going to have more than one definition on your functions,
+       make them compatible.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03608.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02549.html">Re: upcoming format, fyi</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03608.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02549.html">Re: upcoming format, fyi</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03606"><strong>Date</strong></a></li>
+<li><a href="threads.html#03606"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

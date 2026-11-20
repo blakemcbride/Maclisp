@@ -1,0 +1,110 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: YS@N[WF&#45;OW -->
+<!--X-Date: Wed, 18 May 78 03:09:08 GMT -->
+<!--X-Message-Id: eb58c84e573bda63e7b5e5a0b6f1b6bb@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KEN@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03392.html">Date Prev</a>][<a href="msg03390.html">Date Next</a>][<a href="msg03392.html">Thread Prev</a>][<a href="msg03390.html">Thread Next</a>][<a href="maillist.html#03391">Date Index</a>][<a href="threads.html#03391">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-AI</li>
+<li><em>To</em>: HENRY at MIT-AI</li>
+<li><em>Subject</em>: </li>
+<li><em>From</em>: KEN@MIT-AI</li>
+<li><em>From</em>: HIC at MIT-MC (Howard I. Cannon)</li>
+<li><em>Date</em>: Wed, 18 May 78 03:09:08 GMT</li>
+<li><em>Date</em>: Thu, 18 May 78 01:36:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 05/17/78 23:09:08 EDT</li>
+<li><em>Original-date</em>: 17 MAY 1978 2136-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+From:     HENRY@MIT-AI
+Date: Tue, 17 May 78 19:59:31 GMT
+Original-Date: 05/17/78 15:59:31 EDT
+Subject: Re:  lock for dumped Lisp systems
+    To: HIC at MIT-AI
+    There might be a problem with people 
+    remembering to edit the lock file in the
+    manner you propose. Here's an alternative.
+
+    Keep a file with the names of files dumped
+    with the flush feature. It could also contain
+    the UNAMES of their maintainers. A simple
+    program run each time a new Lisp was dumped
+    could do the following. It could mail reminders
+    to maintainers to redump systems in the new Lisp.
+    After a while, a GC program could run around checking
+    (STATUS LISPVERSION) in each of the files, and
+    if all existing systems were updated, the copy
+    would be deleted.
+------------
+Your ideas regarding the handling of the LISP system are reasonable; but I want
+to keep the mechanism down to a low level of complexity for all parties
+involved.  I don't want to have to have hairy hacks, and I want
+to be able to find the cases of lossage fast.  Therefore, I think the
+single user-maintained file is the best scheme.  BTW, even if a lISP does
+go away it is a simple matter to restore it from backup tape, so there really
+isn't that much lossage if the system maintainer forgets.....
+
+--Howard
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03392.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03390.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03392.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03390.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03391"><strong>Date</strong></a></li>
+<li><a href="threads.html#03391"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

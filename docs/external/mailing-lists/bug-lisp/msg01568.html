@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: GET -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Mon, 16 Feb 81 00:27:00 GMT -->
+<!--X-Message-Id: 5068fb48d7863042056fbecd3471e71b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>GET</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01569.html">Date Prev</a>][<a href="msg01567.html">Date Next</a>][<a href="msg01577.html">Thread Prev</a>][<a href="msg01576.html">Thread Next</a>][<a href="maillist.html#01568">Date Index</a>][<a href="threads.html#01568">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>GET</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: GET</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Mon, 16 Feb 81 00:27:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 15 FEB 1981 1927-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>GET has never been advertised to do anything except return () when
+applied to something other than a LIST or a SYMBOL.  Thus your
+charge of &quot;language changes&quot; is completely mis-applied.
+    Date: 15 February 1981 11:39-EST
+    From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+    Subject:  GET of a HUNK
+     ...[GET applied to HUNKs]
+    It REALLY bugs me that these things aren't discussed in advance. I don't
+    like this change and I would like it retracted. It is bad for two reasons:
+     (1) It can break code. I haven't had time to analyze my packages to see
+	.  .  .
+     (2) It is not uniform with the treatment of non-user-hunks and the value 
+	 of HUNKP elsewhere in Lisp. Please do not make changes to the language
+	 which are not coherent with what little overall design philosophy 
+	 there is still persisting in Maclisp after all the other changes that
+	 have been forced upon it to get NIL going.
+    .  .  .
+Speaking of the value of HUNKP, the switch MAKHUNK also affects the
+(now-obsolete) interpretation of hunks as pseudo-lists;  the default setting
+of both of them is **not** to make this interpretation, and I don't really 
+know of any current applications which change that.   If there were such
+applications, then GET, GETL, and a host of other functions would have 
+to be &quot;refined&quot;.
+   Incidentally, it was the development of NIL which discovered the
+inconsistent behaviour of GET on hunks -- not, as you mistakenly suggest,
+that MacLISP was changed to accommodate NIL.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01569.html">GET of a HUNK</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01567.html">MacLISP recidivus!</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01577.html">GET</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01576.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01568"><strong>Date</strong></a></li>
+<li><a href="threads.html#01568"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

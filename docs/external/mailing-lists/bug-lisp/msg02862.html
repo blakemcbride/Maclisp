@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Bug in LISP 860 at CMU -->
+<!--X-From-R13: Epbgg.Tnuyzna ng Q[G&#45;10O -->
+<!--X-Date: Fri, 17 Aug 79 00:24:00 GMT -->
+<!--X-Message-Id: 16Aug79 202444 SF50@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Bug in LISP 860 at CMU</title>
+<link rev="made" href="mailto:Scott.Fahlman at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02863.html">Date Prev</a>][<a href="msg02861.html">Date Next</a>][<a href="msg02863.html">Thread Prev</a>][<a href="msg02861.html">Thread Next</a>][<a href="maillist.html#02862">Date Index</a>][<a href="threads.html#02862">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Bug in LISP 860 at CMU</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp @ mit-ai</li>
+<li><em>Subject</em>: Bug in LISP 860 at CMU</li>
+<li><em>From</em>: Scott.Fahlman at CMU-10A</li>
+<li><em>Date</em>: Fri, 17 Aug 79 00:24:00 GMT</li>
+<li><em>Cc</em>: Dave.Touretzky at CMU-10A</li>
+<li><em>Original-date</em>: Thursday, 16 August 1979 2024-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Jonl,
+Our new lisp now loads OK and runs the INI files.  But it is impossible to
+run it on TOPS-10 with DDT.  It seems to be blowing away some locations
+starting at 4525, which are part of DDT when we have DDT loaded.  It is
+interesting to note that 4525 is the octal high part of the PPN corresponding
+to C380.  This, of course, makes it look like the MACLISP directory is being
+used as an address at which to store something, perhaps more literally than is
+intended.  I suspect some other random bug is caused when DDT is not loaded.
+
+I will try to poke around and pinpoint the problem more precisely over the
+weekend, though it will be hard with DDT being clobbered.  Just thought I'd
+mention it to you in case it rings a bell.  It presumably has to be due to
+the recent batch of changes -- DDT was working fine earlier.
+-- Scott
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02863.html">FIXNUM-IDENTITY et al</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02861.html">,@  ,.  .,</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02863.html">FIXNUM-IDENTITY et al</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02861.html">,@  ,.  .,</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02862"><strong>Date</strong></a></li>
+<li><a href="threads.html#02862"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

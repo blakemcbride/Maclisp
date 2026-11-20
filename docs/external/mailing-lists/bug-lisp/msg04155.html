@@ -1,0 +1,120 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Autoload properties and stuff -->
+<!--X-From-R13: Xbua Z. Yhyc &#60;XZY ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 1 May 80 20:48:00 GMT -->
+<!--X-Message-Id: 4b4dbe64943f0c3526d983b238950cea@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Autoload properties and stuff</title>
+<link rev="made" href="mailto:JLK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04156.html">Date Prev</a>][<a href="msg02174.html">Date Next</a>][<a href="msg04156.html">Thread Prev</a>][<a href="msg02174.html">Thread Next</a>][<a href="maillist.html#04155">Date Index</a>][<a href="threads.html#04155">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Autoload properties and stuff</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: Autoload properties and stuff</li>
+<li><em>From</em>: John L. Kulp &lt;JLK at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 1 May 80 20:48:00 GMT</li>
+<li><em>Cc</em>: RWK at MIT-MC, GSB at MIT-MC, REES at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 1 May 1980 16:48-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Your comments are rather full of inconsistencies.  Making a macro
+autoloadable does not make it part of the language.  If a user provides his
+own definition of a macro, it does not affect other compiled code.  It is
+certainly not the case that anywhere near everything that is autoloadable is
+documented in the manual (new or old), and there are many other things
+autoloadable which are not part of the language in any sense.
+
+I hope your argument about in-fix notation is not misinterpreted as an
+argument against keywords.  Also, the trouble with control forms is that
+they do not naturally fit into the applicative notion of pure LISP.  While
+I don't want to get in a position of defending in-fix notation, it seems
+that it is occassionally a lesser evil when compared to completely convoluted
+constructs one sometimes falls into with nested-list notation.  To me it
+is more important for a program to be understandable, and I believe you
+can judiciously use both in-fix, keyword, prefix, and nested-list notations
+to achieve that.  It is just as fallacious to claim that using in-fix notation
+results in less clarity as it is to claim that pure applicative style guarantees
+clarity.  Both have to be used where it is appropriate, not where it results
+in confusion.
+
+You seem to have a rather arbitrary view of what should be in &quot;primitive
+LISP&quot;.  PROG, COND, and GO are adequate, so why have DO at all?  The answer
+is obvious, as is the need for something like LOOP.  I do not claim the
+LOOP is the ultimate win, but I have been screwed often enough by the
+restrictions of the so-called &quot;generalized&quot; DO, that I think we need something
+better.  I also doubt that a clean syntax can be found using nested-lists
+that is as readable as one that uses keywords.  I find that ambiguous
+notions like &quot;LISP style&quot; are abused almost as often as terms like &quot;lexical
+scope&quot;.  Pure LISP style, if it means anything, means a pure applicative
+style which allows for no special forms.  If you allow special forms, then
+you need a theory of what makes one &quot;pure&quot; or not.  It is not at all clear
+that &quot;pure&quot; is equivalent to &quot;useful&quot;.  Prefix notation and nested structure
+are useful where they help connote semantic meaning, and they are a burden
+where they inhibit it.  Similarly, universality and simplicity are nice
+goals, especially for pedagogic situations, but they can also result in a
+sort of unstructured homogeneity.
+
+Your argument about English words is absurd.  Anyone who writes code with
+short English words as names for functions deserves what he gets.  I suggest
+just that opposite.  All English single words should be reserved for the
+language, and the user should only use names with dashes or package prefices
+(or otherwise non-words in the human language sense).  [This too is only
+half-serious...]
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04156.html">Autoload properties and stuff</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02174.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04156.html">Autoload properties and stuff</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02174.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04155"><strong>Date</strong></a></li>
+<li><a href="threads.html#04155"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

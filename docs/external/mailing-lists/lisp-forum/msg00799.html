@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Destructuring considered harmful -->
+<!--X-From-R13: RWZZ ng Q[G&#45;20Q -->
+<!--X-Date: Wed ,10 Jun 81 16:06:00 EDT -->
+<!--X-Message-Id: a9afb76402d27c8e08c0b29992776295@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Destructuring considered harmful</title>
+<link rev="made" href="mailto:DILL at CMU-20C">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00800.html">Date Prev</a>][<a href="msg00798.html">Date Next</a>][<a href="msg00809.html">Thread Prev</a>][<a href="msg00798.html">Thread Next</a>][<a href="maillist.html#00799">Date Index</a>][<a href="threads.html#00799">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Destructuring considered harmful</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at MIT-MC</li>
+<li><em>Subject</em>: Destructuring considered harmful</li>
+<li><em>From</em>: DILL at CMU-20C</li>
+<li><em>Date</em>: Wed ,10 Jun 81 16:06:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I think the use of destructuring as it currently exists represents
+a step backwards in making Lisp a serious language for programming
+non-toy systems, because it is actively hostile to abstracting
+away from representational decisions. In 90% of all cases, complicated
+list structures are REALLY being used to implement some sort of abstract
+type, or just to package up a bunch of related information that you
+want to pass around. The use of LET-style destructuring emphasizes
+the position of the data in particular structures, and de-emphasizes
+the meaning of the data.
+
+This is precisely the opposite of what really should happen. It binds
+programmers to using a particular representation (&quot;I wish a could
+change the order of these two things, or put them in a vector, but I
+can't because every routine in the system KNOWS exactly what the guts
+of the structure look like&quot;), and it makes it difficult to understand
+what is happening in terms of the abstraction being implemented (e.g.,
+sub-trees of a binary tree are extracted by saying ((a . b)
+random-tree) instead of having the extractors &quot;left-son&quot; and
+&quot;right-son&quot; right there).
+
+Furthermore, because of its brevity and &quot;convenience&quot;, this language
+feature will actively encourage programmers to do it the wrong way.
+I think that RMS-style destructuring will at least allow structures
+to be shredded according to their abstract structure.
+
+	-David Dill
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00800.html">Intra-dialect Lisp translation</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00798.html">Reply to DESTRUCTURING considered harmfull.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00809.html">intra-dialect Lisp translation</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00798.html">Reply to DESTRUCTURING considered harmfull.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00799"><strong>Date</strong></a></li>
+<li><a href="threads.html#00799"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

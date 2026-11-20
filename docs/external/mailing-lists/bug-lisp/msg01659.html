@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: PLEASE??? -->
+<!--X-From-R13: RQB ng [WF&#45;[Q (Rnivq Q. Byhzzre) -->
+<!--X-Date: Fri, 30 Jan 81 01:28:00 GMT -->
+<!--X-Message-Id: 8d2c4586aa2d0fcf8711a7d103169b61@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>PLEASE???</title>
+<link rev="made" href="mailto:DCP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01660.html">Date Prev</a>][<a href="msg01658.html">Date Next</a>][<a href="msg01660.html">Thread Prev</a>][<a href="msg01658.html">Thread Next</a>][<a href="maillist.html#01659">Date Index</a>][<a href="threads.html#01659">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>PLEASE???</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: PLEASE???</li>
+<li><em>From</em>: DCP at MIT-MC (David C. Plummer)</li>
+<li><em>Date</em>: Fri, 30 Jan 81 01:28:00 GMT</li>
+<li><em>Original-date</em>: 29 JAN 1981 2028-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Will somebody please fix this? PLEASE?? This ==&gt; BUG &lt;== hit me
+today, and most people compile their code for speed.
+
+
+     Date: 16 Jan 1981 0319-PST
+     From: Rod Brooks &lt;ROD at SU-AI&gt;
+     Subject: COMPLR can't do DO 
+     To:   bug-lisp at MIT-MC    
+
+     I have vague memories of complaining about something like this years ago
+     but maybe this is different. In any case I wish it didn't happen this way.
+
+     (defun baz (n)
+	    (do ((old 1 new)
+		 (new 2 (1+ new))
+		 (l () (cons (list old new) l))
+		 (i 0 (1+ i)))
+		((= i n) l)))
+
+     interpreted:
+     (baz 4) ==&gt; ((4 5) (3 4) (2 3) (1 2)) 
+
+     compiled (both 905 and 924):
+     (baz 4) ==&gt; ((5 5) (4 4) (2 3) (1 2)) 
+
+Perhaps COMPLR thinks it is too smart. 
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01660.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01658.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01660.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01658.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01659"><strong>Date</strong></a></li>
+<li><a href="threads.html#01659"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

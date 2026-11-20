@@ -1,0 +1,110 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: [nex Z. [vyyre &#60;[WZZSD ng [WF&#45;OW> -->
+<!--X-Date: Thu, 13 Mar 80 12:22:00 GMT -->
+<!--X-Message-Id: 7976f20763fe32e957ff623a56c6b351@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:MILLER at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02067.html">Date Prev</a>][<a href="msg02066.html">Date Next</a>][<a href="msg02067.html">Thread Prev</a>][<a href="msg02066.html">Thread Next</a>][<a href="maillist.html#02068">Date Index</a>][<a href="threads.html#02068">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MILLER at MIT-AI, JONL at MIT-MC</li>
+<li><em>From</em>: Mark L. Miller &lt;MILLER at MIT-AI&gt;</li>
+<li><em>Date</em>: Thu, 13 Mar 80 12:22:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-AI</li>
+<li><em>Original-date</em>: 13 March 1980 07:22-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Dear Jonl,
+I have been trying to understand your reply to my msg ...
+
+    Date: 9 JAN 1980 2128-EST
+    From: JONL at MIT-MC (Jon L White)
+
+From:         MILLER@MIT-AI
+Date: Sun, 1 Sep 80 11:36:28 GMT
+Original-Date: 01/09/80 07:36:28 EDT
+Subject: Re:  SUPER-IMAGE Output
+    	There ought to be a way to OPEN a TTY file in &quot;SUPER-IMAGE&quot; mode, or a
+        builtin &quot;RAWTYO&quot; function.  These would, on ITS, prefix any special
+        characters with a control-P...
+
+    I believe that the idea of the CURSORPOS function was to abstract out the
+    various &quot;terminal hacking stuff&quot;, and refer to them as symbolic arguments
+    (or numeric positions) to CURSORPOS.  Indeed, the maclisp implementation 
+    of CURSORPOS does the appropriate &quot;lock-out&quot; so that control-p codes are
+    not separated from the preceeding control-P.  Shouldn't you do that too?
+    namely, just add to the code for CURSORPOS in the midas listing?
+
+I am not sure if I am misunderstanding your point, but it seems like you are
+oversimplifying the problem here.  The user of LISP ought to be able -- when
+necessary -- to do anything he could do from MIDAS, directly from LISP.  For
+example, send strange escape codes if he knows what he is doing.  It is just
+not possible for the clever author of CURSORPOS to anticipate all possible
+cases and make them totally device independent.  Consider the case of what I
+was actually doing: driving a printer from the auxiliary port of a CRT where
+both the printer and the CRT were variable entities and where different
+instantiations required different protocols.  You might add a (cursorpos 'aux)
+feature, say, but then what about a terminal like a C100 which can have
+many devices strung off of it on DIFFERENT aux ports?  Striving for generality
+and terminal independence is nice, but sometimes you have to be allowed to
+get a bit crufty to get the job done...           Regards, Mark
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02067.html">Re: RAWTYO, etc.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02066.html">Rawtyo and cursorpos</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02067.html">Re: RAWTYO, etc.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02066.html">Rawtyo and cursorpos</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02068"><strong>Date</strong></a></li>
+<li><a href="threads.html#02068"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

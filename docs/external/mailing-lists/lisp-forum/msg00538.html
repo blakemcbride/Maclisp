@@ -1,0 +1,172 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Lisp Compatibility, Lisp differences -->
+<!--X-From-R13: [nfvagre ng BODQ&#45;[OJQ -->
+<!--X-Date: Mon ,9 Feb 81 19:24:00 EDT -->
+<!--X-Message-Id: 7bd579fb72acc856573a1deade5ee6f0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Lisp Compatibility, Lisp differences</title>
+<link rev="made" href="mailto:Masinter at PARC-MAXC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00536.html">Date Prev</a>][<a href="msg00031.html">Date Next</a>][<a href="msg00535.html">Thread Prev</a>][<a href="msg00031.html">Thread Next</a>][<a href="maillist.html#00538">Date Index</a>][<a href="threads.html#00538">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Lisp Compatibility, Lisp differences</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Lisp-Forum at MIT-MC, &quot;@LispDiscussion&quot; at PARC-MAXC</li>
+<li><em>Subject</em>: Re: Lisp Compatibility, Lisp differences</li>
+<li><em>From</em>: Masinter at PARC-MAXC</li>
+<li><em>Date</em>: Mon ,9 Feb 81 19:24:00 EDT</li>
+<li><em>Cc</em>: Lisp-Discussion at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>INVITATION TO JOIN LISP-DISCUSSION:
+
+In June, a group of us (namely those currently on
+Lisp-Discussion@MIT-MC) got together and generated an outline of what
+we believed to be the major areas of divergence among the popular lisp
+dialects of the ARPA community.
+
+I am interested in turning this outline into a publication, because I
+think that currently there are more differences than most folks
+suspect. This of course would be useful to anyone seriously
+considering Lisp &quot;standardization&quot;, because every area of divergence
+would necessarily have to be addressed in any proposed standard. I
+don't know enough about all of the dialects of Lisp to finish the
+document myself. Since there seems to be some recent interest on
+Lisp-Forum@MIT-MC on standardization, I invite those interested to join
+Lisp-Discussion@MIT-MC. My plan is to send out questions and edit together
+the responses. I'll send future messages only to
+Lisp-Discussion@MIT-MC.
+
+--------
+SOME GROUND-RULES:
+
+There are several ways to discuss differences between dialects,
+easiest to characterize by the kinds of questions you wish to address.
+For example, one might wish to
+
+(1) take an implementation of dialect A and turn it into an
+implementation of dialect B on the same machine.
+
+(2) write a &quot;compatibility package&quot; which will sit on top of any
+implementation of dialect A and turn it into dialect B (this is
+different from (1) because in this situation, the implementation of A
+is hidden)
+
+(3) write an automatic translator of dialect A to dialect B, which
+will handle most cases and accurately (100%) flag any areas which
+might require hand-translation
+
+(4) same as (3), but the translator need only work for &quot;most&quot; programs
+
+(5) translate a single (perhaps large) program from dialect A to
+dialect B
+
+(6) switch from programming in dialect A to programming in dialect B
+
+-----------
+
+It seems important to concentrate on &quot;low-level&quot; differences first, in
+that things like the nature of the debugger, and the kind of window
+system you use, while most important to those in situation (6), are in
+some sense &quot;external&quot;. Thus, I'd like to leave out, at least for now,
+discussions of facilities which reside in the &quot;library&quot; of one dialect
+but could in theory be written in any other dialect.
+
+Also, I would like to concentrate on &lt;factual&gt; descriptions of
+&lt;current&gt; differences, leaving opinions about what &quot;should&quot; be done to
+some other document.
+
+The dialects being considered (please be sure to join in if you know
+of others which should be included) are:
+
+Interlisp 
+(Interlisp-10 and Interlisp-D)
+MacLisp (implementations on 10s and Multics)
+LispMachine Lisp
+Standard Lisp (multiple implementations)
+NIL (VAX)
+Franz (VAX)
+UCI-Lisp (10s)
+Lisp/370 (370)
+Lisp 1.6 (10s)
+
+Major areas of divergence:
+
+Data structures
+Evaluation
+Control structures
+input/output
+other
+
+Example:
+
+CAR/CDR of non-lists:
+
+While Lisp systems are consistent in the interpretation of CAR and CDR
+as applied to objects returned by CONS, there is divergence in the
+interpretation of those operations when applied to other data objects.
+In general, the implementations say that the result is &quot;undefined&quot;,
+but there are important exceptions:
+
+	Interlisp and MacLisp define CAR/CDR of NIL to be NIL.
+	Otherwise, result is undefined. Interlisp-D has switch which
+	causes CAR/CDR of other data to cause an error. Lisp Machine
+	Lisp invokes the message passing mechanism, which ...? NIL
+	distinguishes between the empty list () and the atom NIL.
+		CAR/CDR of NIL is (an error/undefined)
+	other dialects ...?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00536.html">Re: Standardization</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00031.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00535.html">Re: [SHRAGE: Standardization]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00031.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00538"><strong>Date</strong></a></li>
+<li><a href="threads.html#00538"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

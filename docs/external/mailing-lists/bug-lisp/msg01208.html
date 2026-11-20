@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: *LDB, *DBP -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 18 Sep 80 17:54:00 GMT -->
+<!--X-Message-Id: 4129837e92d79817e16ba3c3f2508458@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>*LDB, *DBP</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01209.html">Date Prev</a>][<a href="msg01207.html">Date Next</a>][<a href="msg01214.html">Thread Prev</a>][<a href="msg01213.html">Thread Next</a>][<a href="maillist.html#01208">Date Index</a>][<a href="threads.html#01208">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>*LDB, *DBP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: *LDB, *DBP</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 18 Sep 80 17:54:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 18 September 1980 13:54-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 18 SEP 1980 0947-EDT
+    From: JONL at MIT-MC (Jon L White)
+
+        Date: 18 September 1980 04:06-EDT
+        BTW I notice that the functions *ldb and *dpb take the byte
+        specifcation shifted left by 30 (octal).  This causes (ldb x y)
+        to expand into (*ldb (lsh x 30) y).  This seems pretty gratuitous
+        to me since it only takes one instruction to have *ldb and *dpb
+        do the lsh themselves.  (*ldb contains an unnecessary move anyway!)
+    *LDB and *DPB take a pre-shifted argument so that when, for example,
+    &quot;x&quot; is a constant, the call becomes  (*ldb &lt;x&gt;_30 y), and the executable
+    sequence then doesn't include the LSH;  this in fact is the case worth
+    optimizing.
+In fact when X is a constant (LDB X Y) expands into (BOOLE 1 (LSH Y ...) ...)
+So where is the gain?  In fact I would argue that the right solution
+is to make LDB and DPB be subrs (you remember them?  You can funcall them?)
+and have the compiler understand them (there is a LDB instruction...).
+This would be compatable as we could keep *ldb and *dpb araound.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01209.html">SETF of PROGN</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01207.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01214.html">*LDB, *DBP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01213.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01208"><strong>Date</strong></a></li>
+<li><a href="threads.html#01208"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

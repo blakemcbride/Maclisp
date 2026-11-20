@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 15 Nov 80 20:20:00 GMT -->
+<!--X-Message-Id: c9e35d164cbc8d952108e75c8c6a0d61@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01805.html">Date Prev</a>][<a href="msg01803.html">Date Next</a>][<a href="msg01805.html">Thread Prev</a>][<a href="msg01803.html">Thread Next</a>][<a href="maillist.html#01804">Date Index</a>][<a href="threads.html#01804">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 15 Nov 80 20:20:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, DEVON at MIT-MC, EAK at MIT-MC</li>
+<li><em>Original-date</em>: 15 November 1980 15:20-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 15 November 1980 14:34-EST
+    From: Kent M. Pitman &lt;KMP&gt;
+    To:   DEVON
+    cc:   BUG-LISP, EAK
+
+        Date: 15 November 1980 01:38-EST
+        From: Earl A. Killian &lt;EAK&gt;
+
+            Date: 13 November 1980 21:44-EST
+            From: Devon S. McCullough &lt;DEVON&gt;
+    	To:   BUG-CRTSTY
+
+            Would someone tell me how to use SCPOS from Lisp?
+
+        You're asking us??
+
+    See .INFO.;LISP NEWIO and .INFO.;LISP CURSOR for descriptions of cursor
+    position control in Maclisp. -kmp
+SCPOS is not cursor position control.  If DEVON really wants to use SCPOS
+(and he should read the documentation produced by doing :CALL SCPOS if he
+hasn't already), he should do (SYSCALL 2 'SCPOS HPOS VPOS -1), which
+will return a list of the old HPOS and VPOS.  Note that this merely tells
+ITS where the cursor is, and doesn't move it.  DEVON may well be wanting
+exactly this.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01805.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01803.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01805.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01803.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01804"><strong>Date</strong></a></li>
+<li><a href="threads.html#01804"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

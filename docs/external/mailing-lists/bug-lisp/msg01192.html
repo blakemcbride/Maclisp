@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SFA reading gets stale data -->
+<!--X-From-R13: Y[B,UXQ ng [WF&#45;[Q -->
+<!--X-Date: Mon, 22 Sep 80 16:58:00 GMT -->
+<!--X-Message-Id: 67d013f00618249adab92345f5548988@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SFA reading gets stale data</title>
+<link rev="made" href="mailto:KMP">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01193.html">Date Prev</a>][<a href="msg01191.html">Date Next</a>][<a href="msg01190.html">Thread Prev</a>][<a href="msg01189.html">Thread Next</a>][<a href="maillist.html#01192">Date Index</a>][<a href="threads.html#01192">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SFA reading gets stale data</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: SFA reading gets stale data</li>
+<li><em>From</em>: KMP,GJC at MIT-MC</li>
+<li><em>Date</em>: Mon, 22 Sep 80 16:58:00 GMT</li>
+<li><em>Original-date</em>: 22 SEP 1980 1258-EDT</li>
+<li><em>Sent-by</em>: GJC at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(DEFUN MY-SFA-HANDLER (SELF OP DATA) 
+  (CASEQ OP ((WHICH-OPERATIONS) '(TYI UNTYI))
+	    ((TYI) (POP (SFA-GET SELF 0.)))
+	    ((UNTYI) (COMMENT I DON/'T REALLY CARE))
+	    ((INIT) (SETF (SFA-GET SELF 0.) DATA))
+	    (T (ERROR &quot;Unsupported call&quot; (LIST 'SFA-CALL SELF OP DATA))))) 
+
+(DEFUN MAKE-AN-SFA (DATA) 
+  (LET ((SFA (SFA-CREATE 'MY-SFA-HANDLER 1. &quot;My SFA&quot;)))
+       (SFA-CALL SFA 'INIT (EXPLODEN DATA))
+       SFA)) 
+
+(SETQ A (MAKE-AN-SFA &quot;ABC &quot;))
+(READ A) =&gt; G00
+
+(GENSYM (ASCII 2.))
+(SETQ A (MAKE-AN-SFA &quot;ABC &quot;))
+(READ A) =&gt; /^B00
+
+(SETQ A (MAKE-AN-SFA &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ &quot;))
+(READ A) =&gt; /^B0043FGHIJKLMNOPQRSTUVWXYZ
+
+
+Where is this coming from? Naturally it does manifest itself in 'real'
+programs as well.  -kmp
+
+ps GJC says there is a similar effect with READLINE.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01193.html">Bignum bug?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01191.html">Bignum bug?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01190.html">Bignum bug?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01189.html">SFA reading gets stale data</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01192"><strong>Date</strong></a></li>
+<li><a href="threads.html#01192"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

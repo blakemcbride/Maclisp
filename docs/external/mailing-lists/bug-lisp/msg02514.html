@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Y&#45;OR&#45;N&#45;P doesn't errcheck well... -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 27 May 81 15:37:00 GMT -->
+<!--X-Message-Id: c6cf2b6bbad3035148d76f22dcb4348f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Y-OR-N-P doesn't errcheck well...</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02515.html">Date Prev</a>][<a href="msg02513.html">Date Next</a>][<a href="msg02515.html">Thread Prev</a>][<a href="msg02513.html">Thread Next</a>][<a href="maillist.html#02514">Date Index</a>][<a href="threads.html#02514">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Y-OR-N-P doesn't errcheck well...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-MACLISP at MIT-MC</li>
+<li><em>Subject</em>: Y-OR-N-P doesn't errcheck well...</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 27 May 81 15:37:00 GMT</li>
+<li><em>Original-date</em>: 27 May 1981 11:37-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(Y-OR-N-P TYI) seems to hang forever. ^Z'ing it and looking at the pc says that
+it is XCT'ing a .IOT B,TT. (Where B is open in .uai mode -- i guess that means
+it is TYI). Could it be that it is .IOT'ing thinking it is printing when in
+fact it is reading instead?? Note that
+(Y-OR-N-P TYI)YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+will return T on the 52nd Y. Similarly,
+(Y-OR-N-P TYI)NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+returns NIL on the 52nd N. And oddly,
+(Y-OR-N-P TYI)AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN
+does not return at the 5nd char. Anyway, this bug would go away if Y-OR-N-P
+were a bit smarter about these file objects it takes as I suggested in my
+previous note.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02515.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02513.html">Re: More Y-OR-N-P</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02515.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02513.html">Re: More Y-OR-N-P</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02514"><strong>Date</strong></a></li>
+<li><a href="threads.html#02514"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: bug in MacLisp read routine -->
+<!--X-From-R13: ROHS.FAGDSFLYK ng Q[G&#45;10O  -->
+<!--X-Date: Tue, 8 May 79 07:11:00 GMT -->
+<!--X-Message-Id: 90dc6bd337b0065c062308fcee853205@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>bug in MacLisp read routine</title>
+<link rev="made" href="mailto:DAVE.TOURETZKY at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00444.html">Date Prev</a>][<a href="msg00442.html">Date Next</a>][<a href="msg00444.html">Thread Prev</a>][<a href="msg00442.html">Thread Next</a>][<a href="maillist.html#00443">Date Index</a>][<a href="threads.html#00443">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>bug in MacLisp read routine</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-AI</li>
+<li><em>Subject</em>: bug in MacLisp read routine</li>
+<li><em>From</em>: DAVE.TOURETZKY at CMU-10A </li>
+<li><em>Date</em>: Tue, 8 May 79 07:11:00 GMT</li>
+<li><em>Cc</em>: DAVE.TOURETZKY, SCOTT.FAHLMAN, DAVID.MCDONALD</li>
+<li><em>Original-date</em>: 8 May 1979 0311-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>There appears to be a bug in the MacLisp read routine whereby,
+if the last atom on a line is in ||'s, immediately after READing
+this item TYIPEEK returns 131 instead of 13 (carriage return).
+Since the value 131 isn't even in ascii, something is clearly
+bogus here.  The following lines should be sufficient to reproduce
+the behavior I described:
+
+(DEFUN LINEREAD NIL
+  (PROG (VAL NXTCHAR)
+        (SETQ VAL NIL)
+   LOOP (SETQ VAL (NCONC VAL (NCONS (READ))))
+   LOOP2 (SETQ NXTCHAR (TYIPEEK))
+        (COND ((EQUAL NXTCHAR 13.) (RETURN VAL))
+              ((MEMQ (ASCII NXTCHAR) '(| | |)|))
+               (READCH)
+               (GO LOOP2)))
+        (GO LOOP)))
+
+(TRACE READ READCH TYIPEEK)
+
+(LINEREAD) FOO&lt;cr&gt;	; works correctly
+
+(LINEREAD) |FOO|&lt;cr&gt;
+()&lt;cr&gt;			; the () is needed to terminate the
+			; LINEREAD
+
+(LINEREAD) |FOO| )	; also works correctly
+
+Please reply to this message, whether you can fix the problem
+immediately or not.
+
+Thanks.  -- Dave Touretzky
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00444.html">FRETRY</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00442.html">READ confusing TYIPEEK</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00444.html">FRETRY</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00442.html">READ confusing TYIPEEK</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00443"><strong>Date</strong></a></li>
+<li><a href="threads.html#00443"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

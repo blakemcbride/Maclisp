@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: String Problems -->
+<!--X-From-R13: Rraavf Z. Rbhtugl &#60;RGTFK ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 7 Aug 81 13:45:00 GMT -->
+<!--X-Message-Id: 7b6191b3a9c8f6c22d5e15460224817e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>String Problems</title>
+<link rev="made" href="mailto:DUFTY at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03147.html">Date Prev</a>][<a href="msg03145.html">Date Next</a>][<a href="msg03147.html">Thread Prev</a>][<a href="msg03145.html">Thread Next</a>][<a href="maillist.html#03146">Date Index</a>][<a href="threads.html#03146">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>String Problems</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: String Problems</li>
+<li><em>From</em>: Dennis L. Doughty &lt;DUFTY at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 7 Aug 81 13:45:00 GMT</li>
+<li><em>Cc</em>: DUFTY at MIT-MC</li>
+<li><em>Original-date</em>: 7 August 1981 09:45-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+In basic vanilla XL,
+
+without string package ((LISP) STRING) loaded:
+
+(EQUAL &quot;ASDF&quot; &quot;ASDF&quot;) --&gt; NIL
+(ALPHALESSP 'A &quot;B&quot;)   --&gt; T
+
+With string package loaded:
+
+(EQUAL &quot;ASDF&quot; &quot;ASDF&quot;) --&gt; T
+(ALPHALESSP 'A &quot;B&quot;)   --&gt; NIL
+
+I really think that these should return T in all four cases...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03147.html">:LISP vs :L on MC</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03145.html">STRING-REVERSE-SEARCH-&lt;foo&gt;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03147.html">:LISP vs :L on MC</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03145.html">STRING-REVERSE-SEARCH-&lt;foo&gt;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03146"><strong>Date</strong></a></li>
+<li><a href="threads.html#03146"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

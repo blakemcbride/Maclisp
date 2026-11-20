@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: QIV ng [WF&#45;[Q (Qney I. Vbsszna) -->
+<!--X-Date: Fri, 23 Jun 78 21:41:00 GMT -->
+<!--X-Message-Id: 9a437cf07b501bf678dc065229916614@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:CWH at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02387.html">Date Prev</a>][<a href="msg02385.html">Date Next</a>][<a href="msg02388.html">Thread Prev</a>][<a href="msg02385.html">Thread Next</a>][<a href="maillist.html#02386">Date Index</a>][<a href="threads.html#02386">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: CWH at MIT-MC (Carl W. Hoffman)</li>
+<li><em>Date</em>: Fri, 23 Jun 78 21:41:00 GMT</li>
+<li><em>Cc</em>: CWH at MIT-MC, DRB at MIT-MC</li>
+<li><em>Original-date</em>: 23 JUN 1978 1741-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>READ-*-EVAL-PRINT and READ-EVAL-*-PRINT seem to be pretty much of a win.
+I would like to a see a READ-EVAL-PRINT-* appear soon as well.  Perhaps
+a more winning idea would be to create READ-*-PRINT, READ-EVAL-*, etc.
+This would allow greater control over the interpreter, yet would enable
+all of the hacks the current scheme allows.  For example, there is no
+simple way to turn off a PRINT occuring during each cycle of the loop, 
+although one can pass it an argument and give it a PRIN1 function to use.
+The READ-EVAL-* scheme would allow us to do this, yet would enable retaining
+the PRINT simpliy by putting it in the function which is the value of
+READ-EVAL-*.  I have more ideas on this if you are interested.
+
+Now for the gripes:  I think that the symbols READ-*-EVAL-PRINT,
+READ-EVAL-*-PRINT, and PRIN1 should be bound to NIL whenever an error
+or breakpoint occurs, much in the same manner as READTABLE gets bound
+to the initial readtable array pointer.  I have been having problems finding
+errors in functions used as values of PRIN1 since the error will occur
+again as the interpreter attempts to print the error message, and so on.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02387.html">Sharing of LISP jobs.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02385.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02388.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02385.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02386"><strong>Date</strong></a></li>
+<li><a href="threads.html#02386"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

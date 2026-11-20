@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Local type info for compilation -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Tue, 12 Sep 78 16:32:00 GMT -->
+<!--X-Message-Id: 896c7316b9cc2422c3c42ec7d2544d53@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Local type info for compilation</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00307.html">Date Prev</a>][<a href="msg00305.html">Date Next</a>][<a href="msg00309.html">Thread Prev</a>][<a href="msg00308.html">Thread Next</a>][<a href="maillist.html#00306">Date Index</a>][<a href="threads.html#00306">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Local type info for compilation</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC, KMP at MIT-MC</li>
+<li><em>Subject</em>: Local type info for compilation</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Tue, 12 Sep 78 16:32:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, LISPM at MIT-MC</li>
+<li><em>Original-date</em>: 12 SEP 1978 1232-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 12 SEP 1978 0523-EDT
+    From: JONL at MIT-MC (Jon L White)
+    Subject: Local type info for compilation
+    To: KMP at MIT-MC
+    CC: (BUG LISP) at MIT-MC, LISPM at MIT-MC
+
+    (+ &lt;frob&gt;)  is preferable to (+ &lt;frob&gt; 0) for announcing that &lt;frob&gt;
+    will be of type FIXNUM (similarly for +$ and FLONUM), and most likely
+    that will do whereever you wanted a local type specification.
+       If there is going to be some other key word, I would suggest something
+    without the word &quot;force&quot; in it, since the action here is not a type
+    coercion to one type or other, but rather merely the &quot;telling&quot; of 
+    information to some processor (compiler, data checker, interpreter).
+
+(LOCAL-DECLARE (FIXNUM) &lt;frob&gt;), as I think someone mentioned, would be 
+ok with me. I object strongly to saying (+ &lt;frob&gt;) because that relies on
+you telling me that the compiler will make a certain assumption at
+that point. Since you maintain the compiler this is reasonable, but is
+not what I think of as classically 'clean' - or even close. This type of
+thing wants a builtin primitive in MacLISP that could be a compiler macro
+for all I care doing exactly that - Just that I object highly to handling
+its definition at the user-level. 
+
+--kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00307.html">_FASL_ and _UNFA_</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00305.html">_FASL_ and _UNFA_</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00309.html">Local type info for compilation</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00308.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00306"><strong>Date</strong></a></li>
+<li><a href="threads.html#00306"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

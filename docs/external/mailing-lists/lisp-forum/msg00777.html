@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Thu ,25 Jun 81 02:52:00 EDT -->
+<!--X-Message-Id: 51a58961ea3d90ea51dac8414bd2f09b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00778.html">Date Prev</a>][<a href="msg00776.html">Date Next</a>][<a href="msg00779.html">Thread Prev</a>][<a href="msg00776.html">Thread Next</a>][<a href="maillist.html#00777">Date Index</a>][<a href="threads.html#00777">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BAK at MIT-AI</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Thu ,25 Jun 81 02:52:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-AI, gosper at PARC-MAXC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I don't think your macro deals with the problem at all, actually; the
+problem was what if you want to do (G x x), and you don't want to write
+and compute &quot;x&quot; twice.  In your macro it looks like you just get to say
+&quot;*&quot; once, and other &quot;*&quot;s refer to later quantities rather than letting
+you get at the first one again.
+
+It is pretty easy in Lisp to just say
+ (let ((quan &lt;form&gt;))
+    (g quan quan))
+
+If you wanted something more concise, you would need some way of getting
+quantities named without specifically putting in a form that names them.
+LOGLAN (an artifical natural language, so to speak) has this hack where
+there are five &quot;variables&quot; that automatically get assigned, in order, to
+the first five things mentioned in a sentence; you can then refer to
+these by using pronouns (I belive the words used to reference them are
+LA, LE, LI, LO, and LU or something).  This works because people break
+things up into sentences and they don't individually get too
+complicated.  (Does this remind you of registers A, B, C, D, and E?)
+
+I don't see any good way to put this into a programming language, but
+maybe someone else does...
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00778.html">NCONC and LAST of locatives</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00776.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00779.html">Antecedents</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00776.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00777"><strong>Date</strong></a></li>
+<li><a href="threads.html#00777"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

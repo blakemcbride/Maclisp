@@ -1,0 +1,85 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MACROEXPANDED not working with SETF (??) -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 30 Oct 80 00:07:00 GMT -->
+<!--X-Message-Id: 20c4325c9a95cb517e8076168601d06e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MACROEXPANDED not working with SETF (??)</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01931.html">Date Prev</a>][<a href="msg01929.html">Date Next</a>][<a href="msg01937.html">Thread Prev</a>][<a href="msg01938.html">Thread Next</a>][<a href="maillist.html#01930">Date Index</a>][<a href="threads.html#01930">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MACROEXPANDED not working with SETF (??)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: MACROEXPANDED not working with SETF (??)</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 30 Oct 80 00:07:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, GJC at MIT-MC</li>
+<li><em>Original-date</em>: 29 October 1980 19:07-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Another solution would be for SETF to be less persistant with it's
+MACROEXPANDEDness.  Basically, introduce a MACROEXPANDED-SETF form.
+(MACROEXPANDED-SETF &lt;def-count&gt; &lt;expanded&gt; &lt;original&gt;)
+
+&lt;def-count&gt; is taken from DEFMACRO-COUNTER, which is incremented whenever a
+DEFMACRO or DEFSETF is done.  When MACROEXPANDED-SETF is EVAL'd, it compares
+&lt;def-count&gt; with the global DEFMACRO-COUNTER, and if anything has been
+redefined, it re-expands.  Redefinitions are rare enough to make this an
+acceptable cost.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01931.html">Knee-jerk response</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01929.html">Infamous TYIPEEK bug</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01937.html">MACROEXPANDED not working with SETF (??)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01938.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01930"><strong>Date</strong></a></li>
+<li><a href="threads.html#01930"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: #\EOF ... Yes, again. -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Thu ,25 Sep 80 23:00:00 EDT -->
+<!--X-Message-Id: f08f3910ffa3b602508fe2165c55f4f8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: #\EOF ... Yes, again.</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00273.html">Date Prev</a>][<a href="msg00275.html">Date Next</a>][<a href="msg00273.html">Thread Prev</a>][<a href="msg00275.html">Thread Next</a>][<a href="maillist.html#00274">Date Index</a>][<a href="threads.html#00274">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: #\EOF ... Yes, again.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: #\EOF ... Yes, again.</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu ,25 Sep 80 23:00:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Well, I am somewhat encouraged that I spoke with DLW today offline and
+he thought he might be swayed so I'll lay this out clearly again once
+more, squashing the arguments I have heard:
+
+Argument: #\ should return only representations of characters.
+
+Answer: So should TYI and TYIPEEK. Over time, however, we have found it
+	useful, especially when dealing with compiler optimizations related
+	to fixpdls, to return an eof designator, -1. If it's good enough
+	for TYI and TYIPEEK, it's good enough for me.
+
+Argument: All TYI's and TYIPEEK's return -1 at eof; why not just use that?
+
+Answer: (1) All TYI's and TYIPEEK's return #o101 for &quot;A&quot; being typed, but
+	    #/A was thought to be more readable.
+	(2) If people change the representation of characters, as the
+	    LispM people have found it useful to do, negative numbers might
+	    want to acquire an interpretation as characters. Do you want
+	    to break code that does (TYI STREAM -1) and which will then
+	    perhaps perceive a premature end of file.
+	(3) No manual for any existing Lisp documents that -1 is not a 
+	    part of the possible character set. Nor does any manual document
+	    that TYI returns -1 at end of file. The fact that it just happens
+	    to annoys me. I want a documented standard.
+
+Argument: Why not do (SETQ EOF -1) and reference #.EOF instead of #\EOF.
+	  
+Answer:	(1) #.EOF doesn't supply visually as much info as #\EOF.
+	(2) It's maybe now easy but unless conventions are adopted, I
+	    don't see any reason why it won't degenerate, over the years,
+	    into:
+		(SETQ EOF #+LISPM   SI:EOF-REPRESENTATION
+			  #+NIL     *:EOF-FIXNUM
+			  #+MACLISP -1)
+	    or something silly like that. Saying DEFCONST instead of
+	    SETQ doesn't make it any less awful. The annoying part is
+	    having system dependencies at all.
+
+The bottom line:
+
+It is annoying to have this supposed abstraction which frees me of
+the `representation' specifics of my characters. If I type #/A, I
+should have to know only that it is going to return a fixnum which is
+the same fixnum as will be returned by TYI'ing an &quot;A&quot;. Similarly, I
+need to be able to say #\EOF and know that this is the same fixnum,
+whatever it is, that will be returned by TYI'ing an eof. If you don't
+grant this, then you require me to always know *some* information about
+the mapping from characters to fixnums. I have to know the shape of the
+set of valid characters so I can choose a character that's not in it.
+
+I claim that if you have an abstraction which is 98% complete, then you
+haven't really bought yourself anything. Going this extra 2% will buy
+you an elegant bit of insulation from your character set and move you
+closer to the goal of robust code that is not bothered by trivial 
+implementational details.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00273.html">Re: eof</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00275.html">Re: #\EOF ... Yes, again.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00273.html">Re: eof</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00275.html">Re: #\EOF ... Yes, again.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00274"><strong>Date</strong></a></li>
+<li><a href="threads.html#00274"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

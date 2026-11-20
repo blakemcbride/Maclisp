@@ -1,0 +1,162 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Backquote history -->
+<!--X-From-R13: Yrag [ Bvgzna &#60;Y[B N [WF&#45;[Q> -->
+<!--X-Date: Sun ,11 Mar 84 17:04:00 EDT -->
+<!--X-Message-Id: f3c0276cfd53f87ae1230e1cc8287b9f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Backquote history</title>
+<link rev="made" href="mailto:KMP@MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00854.html">Date Prev</a>][<a href="msg00849.html">Date Next</a>][<a href="msg00854.html">Thread Prev</a>][<a href="msg00849.html">Thread Next</a>][<a href="maillist.html#00853">Date Index</a>][<a href="threads.html#00853">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Backquote history</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MASINTER.PA @ PARC-MAXC</li>
+<li><em>Subject</em>: Backquote history</li>
+<li><em>From</em>: Kent M Pitman &lt;KMP @ MIT-MC&gt;</li>
+<li><em>Date</em>: Sun ,11 Mar 84 17:04:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM @ MIT-MC, Guy.Steele @ CMU-CS-A, McDermott @ YALE,    Genesereth @ SU-SCORE, Dick @ MIT-OZ, Hewitt @ MIT-OZ, GJS @ MIT-OZ</li>
+<li><em>In-reply-to</em>: Msg of 11 MAR 84 11:38 PST from MASINTER.PA at PARC-MAXC.ARPA</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 11 MAR 84 11:38 PST
+    From: MASINTER.PA at PARC-MAXC.ARPA
+    To:   LISP-FORUM at MIT-MC.ARPA
+    Re:   Backquote history
+
+    Anybody remember where backquote came from? I.e., who invented it, 
+    when it got added to MacLisp, etc?
+
+Seems like everyone and his brother had some sort of backquote.
+It may be hard to come up with a single originator. The LispM
+version predates the Maclisp version, so its presence in Maclisp
+was probably most directly a compatibility measure; though at the
+same time, obviously, a good idea in its own right. But the LispM
+crowd probably didn't originate it either. It goes back farther
+than I can remember (which would be 77 or so) anyway.
+
+What is perhaps more interesting than who created it was the amount 
+of variety in these things. Here are some of the design decisions
+that became involved ...
+
+ * There was a lot of variety in how , and ,@ things were marked. These
+   questions included what chars we could do without. eg, I was one of the
+   people making a lot of noise about &quot;,&quot; not being whitespace any more,
+   so you couldn't write (5,3) to mean ordered pairs. In retrospect, this
+   didn't turn out to be much of a loss. Also, there was a question of
+   whether two char markers like &quot;,@&quot; and &quot;,.&quot; were a good idea since 
+   for example, (LAMBDA (X @X) `(FOO ,X ,@X ,@ X , @X)) could be visually
+   confusing. But it was a choice between two char markers and losing another
+   readmacro char, and no one wanted to give up yet another char.
+
+ * There was question about where copying should be allowed. ie,
+   if you did (DEFUN F (X) `(,X Y)) could you do (SETF (CADR (F ...)) ...)
+   on the result without affecting F's future behavior. Early versions
+   of backquote guaranteed copying, so `(A B C) was like (COPYTREE '(A B C)).
+   This was eventually decided to be a bad idea. The current backquote does
+   not define the sharing behavior; it tends to share structure where possible
+   but is not defined to do so.
+
+ * There was question about how nesting worked. In particular, some people
+   claimed that ,, type things should be disallowed. Others claimed that 
+   you should do outside-in counting rather than inside-out. The current 
+   behavior is inside-out. There was a long argument between Bawden, McDermott,
+   Steele, Rees, myself and a few others. If you're interested in that,
+   MC: LSPMAI; BACKQ XMAIL contains this discussion.
+
+ * There was also question about whether quoting or non-quoting should be
+   the default. Dick Waters had a variant where quoting was not the default.
+   Without seeing it, you might not guess the advantage, but the answer is
+   that you didn't have to write LIST, CONS, etc. eg, [X Y Z] was like
+   (LIST X Y Z), [X ! Y] was like (CONS X Y). There were advantages to this,
+   but basically it loses out when you start to look at large expressions
+   with little variability, since `(LAMBDA (,X Y) (+ ,X Y)) is almost the
+   same &quot;shape&quot; as the result it will produce, which is not true of
+   ['LAMBDA [X] ['+ X 'Y]] which is not as visually similar to its result.
+
+ * I'm sure, though I can't recall specifically, there must have been heavy
+   controversy about whether destructive operations like ,. should be
+   allowed. I certainly don't like this one.
+
+ * There was also a question of what the backquote macro should read as.
+   It could either read directly as calls to LIST, CONS, etc. or it could
+   read as macros which would later expand to calls to LIST, etc. when
+   evaluted or compiled. According to the initial release notes, the first
+   version expanded at readtime, which of course meant that GRINDEF called
+   on such code gave a very verbose display. A switch, BACKQUOTE-EXPAND-WHEN,
+   was later added so that you could select EVAL or READ time expansion.
+   The default, EVAL, now allows GRINDEF to win on backquoted code.
+
+ * There were also some bogus arguments made like that we didn't need `
+   and ' to be different chars and that we should just let , be put in any
+   ' expression. Such were beaten down by appeals to expressions like `',X
+   which are quite common.
+
+On Sunday, 17-Sep-78, HIC and JONL announced backquote as an official
+autoloading part of Lisp (version 1742).
+
+On Thurday, 7-Jun-79, JONL announced the introduction of &quot;,.&quot;, the 
+BACKQUOTE-EXPAND-WHEN feature, and the ability of GRINDEF to win on this
+stuff.
+
+I doubt the names of who announced these features are related to who came
+up with them. Alan and I just tried to think of places where we
+had seen backquote-like ideas; we came up with early versions of the
+sources and/or sources to Scheme, LispM, PLASMA and Macsyma.
+It was all a product of much negotiation among many people with similar 
+but subtly differing ideas.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00854.html">Backquote history</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00849.html">Re: Backquote history</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00854.html">Backquote history</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00849.html">Re: Backquote history</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00853"><strong>Date</strong></a></li>
+<li><a href="threads.html#00853"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

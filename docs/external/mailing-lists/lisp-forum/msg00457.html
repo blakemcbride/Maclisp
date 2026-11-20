@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Open&#45;coding, and proliferation of function names -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,3 Dec 80 12:17:00 EDT -->
+<!--X-Message-Id: ccee721c458ce5e37ddbd983051122e4@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Open-coding, and proliferation of function names</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00456.html">Date Prev</a>][<a href="msg00458.html">Date Next</a>][<a href="msg00456.html">Thread Prev</a>][<a href="msg00458.html">Thread Next</a>][<a href="maillist.html#00457">Date Index</a>][<a href="threads.html#00457">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Open-coding, and proliferation of function names</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: Re: Open-coding, and proliferation of function names</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,3 Dec 80 12:17:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Although this discussion started out over MOON's observation
+(10 years late!) that MAX and MIN are still not open-coded
+in MacLISP, the general question came up about function names
+for the &quot;fixnum-only&quot; versions of arithmetic.
+    Date: 2 December 1980 18:41-EST
+    From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+    Subject:  Special names for Open-Coded Functions
+	Date: 2 December 1980 1034-EST (Tuesday)
+	From: Guy.Steele at CMU-10A
+	To:   Moon@AI, Bug-Lisp
+	Re:   MAX not open-coded
+    .  .  .
+In some kind of theoretical discussion, it might be nice to remark that 
+GREATERP and MAX can be based solely over the generic functions along with 
+type information, what conceivable practical value would accrue by flushing 
+the type-specific names, or by turning them into macros which generate the
+type-declared generic code?  You'd still have names like &quot;&lt;&quot; and &quot;&lt;$&quot; (the 
+latter for flonum LESSP -- useful primarily on machines like the VAX where 
+floating-point comparisons cannot be done with the same instructions as 
+fixed-point comparisons).
+    But in fact you go way astray in picking PLUS for an example -- the
+&quot;+&quot; function is significantly different from PLUS.  There is no way
+to make a mechanical conversion from &quot;+&quot; into PLUS, since the former
+is some kind of modular arithmetic, and the latter is one-to-one.  It is 
+primarily a convenience for efficiency that a programmer can substitute &quot;+&quot;
+for PLUS, when he knows that the two will have the same result over the
+paritcular limited domain of application.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00456.html">Re: Special names for Open-Coded Functions</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00458.html">Re: Open-coding, and proliferation of function names</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00456.html">Re: Special names for Open-Coded Functions</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00458.html">Re: Open-coding, and proliferation of function names</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00457"><strong>Date</strong></a></li>
+<li><a href="threads.html#00457"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

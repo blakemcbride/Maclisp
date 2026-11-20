@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Sat, 4 Nov 78 01:13:00 GMT -->
+<!--X-Message-Id: 7e585399c488baaea31c4ae2ce49fc03@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00147.html">Date Prev</a>][<a href="msg00144.html">Date Next</a>][<a href="msg00147.html">Thread Prev</a>][<a href="msg00144.html">Thread Next</a>][<a href="maillist.html#00145">Date Index</a>][<a href="threads.html#00145">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Sat, 4 Nov 78 01:13:00 GMT</li>
+<li><em>Original-date</em>: 3 NOV 1978 2013-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I am concerned by the following:
+
+((LAMBDA (TIME DOW DATE) ...) (STATUS DAYTIME) (STATUS DOW) (STATUS DATE))
+
+Is there a way in which I can get all three of those with some degree of
+simultaneity? Eg,  return 
+
+(STATUS TIMES)  =&gt;  (&lt;dow&gt; &lt;yr&gt; &lt;mo&gt; &lt;day&gt; &lt;hr&gt; &lt;min&gt; &lt;sec&gt;)
+
+where &lt;dow&gt; was a number from 0 to 6, all others were like (STATUS DATE)
+nconc'd to (STATUS DAYTIME) - This way you wouldn't get the screw of:
+
+DOW =&gt; FRIDAY
+TIME =&gt; (23. 59. 58.)
+DATE =&gt; &lt;the next date - Saturday&gt;
+
+if you got swapped out. If this ever happened, it could be very confusing.
+--kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00147.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00144.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00147.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00144.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00145"><strong>Date</strong></a></li>
+<li><a href="threads.html#00145"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

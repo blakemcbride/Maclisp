@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Y[B ng [WF&#45;SS -->
+<!--X-Date: Thu, 30 Oct 80 23:05:00 GMT -->
+<!--X-Message-Id: 83d36ba73182e328bbe6c085426c34cc@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-EE">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01923.html">Date Prev</a>][<a href="msg01921.html">Date Next</a>][<a href="msg01924.html">Thread Prev</a>][<a href="msg01921.html">Thread Next</a>][<a href="maillist.html#01922">Date Index</a>][<a href="threads.html#01922">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LS.GOLDFARB at MIT-EE</li>
+<li><em>From</em>: KMP at MIT-EE</li>
+<li><em>Date</em>: Thu, 30 Oct 80 23:05:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 30 Oct 1980 1805-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(1) The repositioning of the cursor at the top of the screen instead of
+    scrolling is called wraparound. It's not really a bug, just a misfeature
+    that it happens by default. They will change that in some version of
+    Maclisp soon. It's not ULisp's fault.
+
+(2) The (CVTA 16) problem is a severe Maclisp failing which ULisp inherits.
+    I am glad you pointed it out. (CVTA 16) returns the character Control-P.
+    This is a very magic character to Twenex display and Maclisp should be
+    taking care to display it as &quot;^P&quot; rather than sending the character to
+    Twenex for display as a raw control-P. I'm sure the implementors will
+    look into fixing that. (To the Maclisp maintainers: (PRINC &quot;^PC&quot; TYO)
+    in XMACLISP on EE demonstrates this lossage -- TYO is open in OUT ASCII
+    SINGLE TTY mode and should not be displaying that ^P ... I assume the
+    problem is that on ITS, the opsys takes care of this ...)
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01923.html">LEXPR-FUNCALL</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01921.html">Correcting CATCH/THROW in Maclisp</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01924.html">#*</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01921.html">Correcting CATCH/THROW in Maclisp</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01922"><strong>Date</strong></a></li>
+<li><a href="threads.html#01922"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

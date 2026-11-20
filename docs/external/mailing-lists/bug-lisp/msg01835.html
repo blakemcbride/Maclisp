@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Structures in MacLISP -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Thu, 6 Nov 80 23:45:00 GMT -->
+<!--X-Message-Id: aa97cf2c6fb27839deecf325fbb3bc39@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Structures in MacLISP</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01836.html">Date Prev</a>][<a href="msg01834.html">Date Next</a>][<a href="msg01836.html">Thread Prev</a>][<a href="msg01834.html">Thread Next</a>][<a href="maillist.html#01835">Date Index</a>][<a href="threads.html#01835">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Structures in MacLISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: TFT at MIT-MC</li>
+<li><em>Subject</em>: Structures in MacLISP</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Thu, 6 Nov 80 23:45:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 6 NOV 1980 1845-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 6 November 1980 01:25-EST
+    From: Tom Trobaugh &lt;TFT at MIT-AI&gt;
+    How do I get defstructs in MACLISP?  MACLISP used to understand
+    LISPM2;NSTRUC, but seems to have lost some of the relevant vocabulary.
+The autoloading MacLISP feature DEFVST (documented in LISP:DEFVST DOC)
+is the MacLISP/NIL way to get structures; by making two &quot;switch setting&quot;
+adjustments you can cause it to behave pretty much they way the  LISPM
+documented DEFSTRUCT works (LISPM manual P. 147); just do 
+ (SETQ CONSTRUCTOR-NAMESTRING-PREFIX '|MAKE-|  SELECTOR-NAMESTRING-STYLE () )
+The &quot;LDB&quot;-style fields, as in item &quot;(3)&quot;, Page 147 of LISPM Manual, are
+not yet implemented, but will be sooner or later.  Of course, some of the 
+many LISPM options are inherently non-NIL/non-MacLISP, such as :GROUPED-ARRAY,
+but otherwise the syntax is the same.  
+   DEFVST produces hunk-type objects, which fit into the CLASS system
+if that is loaded (see LISP;LISP RECENT), but if not loaded they just
+remain MacLISP hunks.  Since DEFVST isn't intended to be totally 100%
+compatible with DEFSTRUCT, it isn't named that, but you could conditionally
+do the switch settings mentioned above and macro-define DEFSTRUCT just
+to turn into DEFVST, and probably win in most cases.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01836.html"># (&quot;O&quot; or otherwise)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01834.html">The TRACE function, used with the kwrd &quot;ENTRY&quot;,prints all..</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01836.html"># (&quot;O&quot; or otherwise)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01834.html">The TRACE function, used with the kwrd &quot;ENTRY&quot;,prints all..</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01835"><strong>Date</strong></a></li>
+<li><a href="threads.html#01835"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

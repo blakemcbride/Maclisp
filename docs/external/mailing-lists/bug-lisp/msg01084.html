@@ -1,0 +1,128 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Initial /" macro setting in XLisp in question -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 18 Oct 80 21:23:00 GMT -->
+<!--X-Message-Id: 4d957bf32ac51dcd0250fc5ef88ce788@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Initial /&quot; macro setting in XLisp in question</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01085.html">Date Prev</a>][<a href="msg01083.html">Date Next</a>][<a href="msg01085.html">Thread Prev</a>][<a href="msg01080.html">Thread Next</a>][<a href="maillist.html#01084">Date Index</a>][<a href="threads.html#01084">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Initial /&quot; macro setting in XLisp in question</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;(FILE [JONL;JONL MAIL])&quot; at MIT-MC</li>
+<li><em>Subject</em>: Initial /&quot; macro setting in XLisp in question</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 18 Oct 80 21:23:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, ALAN at MIT-MC, KMP at MIT-MC, GSB at MIT-ML,    PSZ at MIT-ML</li>
+<li><em>Original-date</em>: 18 October 1980 17:23-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Although it may be useful for certain applications to have strings in Maclisp,
+I don't think they should be the default. XLisp seems to have a different
+default for /&quot; than previous lisps have had. The following reasons come to
+mind:
+
+[1] Practical constraints.
+    The STRING package is large. Many simple stringlike applications don't
+    require that much hair. (ERROR &quot;...&quot;) or (PRINC &quot;...&quot;) are some of the
+    more common cases. Picking apart strings is not the only reason for having
+    them.
+
+[2] Philosophical constraints.
+    Things which are the default should be assumed to be available by default
+    in a Lisp. Take an analagous situation:
+
+    It didn't used to be that LET existed. When it was introduced, people 
+    assumed they could use it whereever they wanted. This was fine because
+    it was generally agreed what functionality it needed. Now if anyone has
+    a package, FOO, which uses LET and someone tries to use the FOO package
+    who has redefined LET, then we say it is not the FOO-package maintainer's
+    fault that his code doesn't run in this person's environ because a system
+    function has been redefined.
+
+    If then, making real strings the default means that people will start
+    to write code for Maclisp which depends on having strings, then I don't
+    want it to be the default. It's fine for NIL and it's fine for LispM and
+    even fine for Multics lisp because these have the address space to spare,
+    but it's not fine for Maclisp because it doesn't. If I am running short
+    of space in my Maclisp and I still need the support of some random package
+    and it's going to in turn want STRINGs loaded.
+
+[3] Serving a user community.
+    I think the default should serve the user community in the most useful
+    way. It's easy to make real strings be your default if you want -- it's 
+    harder to undo the default (because shared packages will depend on the
+    most powerful feature defaultly available). I have just gone through and
+    deleted the (SSTATUS MACRO /&quot; '+INTERNAL-/&quot;-MACRO) all over my packages
+    because I thought that was going to be the default. I don't now want to
+    have to go through and re-enable them.
+
+    I think the argument is actually most akin to the Lisp Machine people's
+    argument about destructuring LET. People recognize the usefulness of
+    destructuring let, but they don't want it the default because their
+    applications don't happen to call for it. This means I have to load it
+    when I need it, but I don't really mind that. I'd rather have to do that
+    than have people have to be turning it off if they didn't want it.
+
+I know ALAN, GSB, and PSZ at least support me in not wanting real strings to 
+be the default for Maclisp. We need to consider this carefully before 
+attempting to release XLisp.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01085.html">(DEFUN (&lt;system-fun&gt; FOO BAR) ...)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01083.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01085.html">(DEFUN (&lt;system-fun&gt; FOO BAR) ...)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01080.html">Initial /&quot; macro setting in XLisp in question</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01084"><strong>Date</strong></a></li>
+<li><a href="threads.html#01084"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

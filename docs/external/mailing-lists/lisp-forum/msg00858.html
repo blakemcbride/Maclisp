@@ -1,0 +1,191 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Function Cells &#45;&#45; the history -->
+<!--X-From-R13: XbaZ.cnNBODQ&#45;[OJQ.ODBO -->
+<!--X-Date: Tue ,27 Sep 83 19:16:00 EDT -->
+<!--X-Message-Id: 5f2533f69455d817c5cea56408e49747@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Function Cells -- the history</title>
+<link rev="made" href="mailto:JonL.pa@PARC-MAXC.ARPA">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00623.html">Date Prev</a>][<a href="msg00857.html">Date Next</a>][<a href="msg00624.html">Thread Prev</a>][<a href="msg00857.html">Thread Next</a>][<a href="maillist.html#00858">Date Index</a>][<a href="threads.html#00858">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Function Cells -- the history</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Padget@Utah-20.ARPA</li>
+<li><em>Subject</em>: Function Cells -- the history</li>
+<li><em>From</em>: JonL.pa@PARC-MAXC.ARPA</li>
+<li><em>Date</em>: Tue ,27 Sep 83 19:16:00 EDT</li>
+<li><em>Cc</em>: Lisp-Forum@MIT-MC.ARPA</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>There are two parts to your question:
+  1) who first converted atoms (i.e. LITATOMs or SYMBOLs) from list
+     structure with weird pointer in the first CAR, to standard block 
+     record structure, and
+  2) who first differentiated between function context and argument
+     context when interpreting an atom.
+No doubt, there is an element of &quot;why&quot; in your question too.
+
+
+RE point 1:
+
+Peter Deutsch's answer is quite correct as far as I know -- BBN Lisp
+(predecessor to InterLisp) in mid 1960's.  The arguments I heard in 
+later years for justification had more to do with paging behaviour 
+of compiled code rather than any other.  It was *not* (emphasize!) for
+the purpose of implementing point 2.
+
+Interestingly, VAX/NIL had a modified &quot;structure&quot; for SYMBOLs; it had
+been noted in MACSYMA that  big systems could easily contain 2000 or 
+more symbols, only a small fraction of which utilised both the function 
+cell and the value cell.  So for space saving a kludge was perpetrated in
+which every symbol had one cell which was a pointer to either a function 
+cell, or a value cell, or a more standard block record of all requisite cells.  
+The reason this was &quot;space saving&quot; was that the implementation of
+Local-vs-Dynamic and Function-vs-Value are independent, and thus in
+fullness, one needs 4 (four!) value cells.  Speed of access isn't an issue, 
+since compiled code normally links thru the value cell itself (or function
+cell, if you must) rather than thru the symbol header; also, the extra cost
+for this &quot;hair&quot; is verry small in terms of VAX instructions.
+
+RE point 2:
+
+Did any of the replies to you so far note that this differentiation was
+part of Lisp1.5.?  See page 18 of the &quot;LISP 1.5 Programmer's Manual&quot; where 
+the classic scheme is described.   I did not &quot;invent&quot; this scheme.  Neither 
+did MacLisp, nor its predecessor PDP6 Lisp, originate it.  It was inherited 
+directly from Lisp 1.5 and CTSS Lisp  [remember CTSS?  the &quot;Compatible Time
+Sharing System&quot; on a greatly modified IBM 7090?  Most of the Lisp world
+remembers only ITS -- &quot;Incompatible Timesharing System&quot; -- and now it too 
+is passing away.  Sic Transit Gloria Mundi (sic)]
+
+I venture the opinion that the underlying reason why &quot;uniform&quot; treatment
+of identifiers is ever thought to be desirable is that it somewhat simplifies 
+the coding and conceptual complexity of the interpreter/system.  There is a
+strong series of arguments *against* this &quot;optimisation&quot;, made by users of 
+said systems.  Dan Bobrow offered the most compelling of these in his 
+answer: essentially stated, there is a general expectation that the function
+name space is global, unless otherwise stated, and that the variable name 
+space is local, unless otherwise stated.  Once this distinction is admitted, 
+there is little point in trying to force both meanings into a single &quot;value&quot; 
+cell  -- the conceptual simplicity has been forfeited, and since &quot;function 
+cell&quot; and &quot;value cell&quot; machinery are isomorphic, there is virtually no 
+coding advantage remaining.
+
+FUNCALL/APPLY* have been around &quot;since antiquity&quot; to make the exceptions
+for function syntax, but VAX/NIL and current CommonLisp permit local
+re-binding of function cells *** as an option;  The Bobrow &quot;general
+expectation&quot; is not violated in these systems.   More recently, (i.e., post-1977)
+there have been introduced declarations and/or constructs into Interlisp,
+LispMachineLisp, VAX/NIL, and CommonLisp to supply the second exception
+noted above, namely symbolic constants.
+
+I have frequently offered the observation that this distinction is also
+rooted in mathematical notation, where journals generally distinguish
+function names from variable names by any of a number of devices:  
+such as, slant type-face vs perpendicular, boldface versus regular, or
+conventional subsets of letters (e.g., &quot;f&quot; and &quot;G&quot; are clearly function 
+names, whereas &quot;x&quot; and &quot;Y&quot; are variable names).   Curiously, I've heard 
+that there is a reversal of some of these conventions between the American 
+and the European publishers.  Can anyone verify this?)
+
+There seems also to be some confusion about the implementation status of
+this &quot;distinction&quot;, that variables are by default local.   As far as I know,
+this *is* true of all major Lisp implementations I've worked with.  What
+isn't true is that that the interpreters of said systems &quot;do the right thing&quot; 
+(as opposed to the compiled code environment, which defines the semantics). 
+ Almost without exception, the interpreters implement **only** fluid 
+bindings.  VAX/NIL had an interpreter that correctly implemented both 
+local and fluid variables (see my paper in the 1982 Lisp Conference for a
+description of a non-consing scheme to do it).   Many toy interpreters have 
+been built which implement distinctions, but do so by consing up the usual
+old alist environment, or some equivalent thereof.  Another interesting
+interpreter which implements local variables was done prior to 1977 by the
+group at IBM Research Center in Yorktown Heights (in Lisp/370), in which
+the interpretation of a lambda application did a mini-compilation in order to 
+get *exactly* the same stack frame as would be built had the code been truly
+compiled; the claim was that you wouldn't see differences between compiled 
+and interpreted code in Lisp/370.
+
+
+More in defense of my conjecture above.:
+
+Bobrow tells me that the first implementation of 940Lisp (the &quot;root
+stock&quot; of BBN lisp) was with the function/variable &quot;optimisation&quot; 
+mentioned above.  On a small computer, cramped for space, with 
+a one-man implementation team  . . .  but the user community 
+balked, and convinced the implementor to re-support the 
+mathmatically grounded distinction between function context
+and value context.  Major Lisp systems today have long passsed
+the point where they are one-man projects, but happily haven't 
+reached OS syndrome yet (i.e., a system so big, with so many ad-hoc 
+extensions and patches, that no one even knows a complete subset 
+of people who collectively understand the system).
+
+Several of the SCHEME-lovers have privately expressed the opinion to me
+that the value of SCHEME is that it doesn't have a user community (except 
+for learners and tinkers), and thus *can* be kept super-simple and &quot;clean&quot;.
+David Warren, a principle implementor of PROLOG, also expressed (privately)
+such an opinion, and will rue the day that the Japanese turn Prolog into 
+some kind operating system for 5th Generation hardware.
+
+There will always be difference of viewpoint between those who want to
+&quot;muck around&quot; with program semantics and small, &quot;clean&quot; systems, and 
+those who want a full complement of &quot;power tools&quot; for doing AI research 
+and applications program development.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00623.html">Re: Function cells</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00857.html">your note on Function Cells.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00624.html">Administrative Note</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00857.html">your note on Function Cells.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00858"><strong>Date</strong></a></li>
+<li><a href="threads.html#00858"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

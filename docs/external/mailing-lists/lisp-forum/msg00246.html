@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: DIGITP and DIGIT&#45;WEIGHT -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Fri ,3 Oct 80 11:24:00 EDT -->
+<!--X-Message-Id: ef93839e22c96b74c542bf8bb430d66f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: DIGITP and DIGIT-WEIGHT</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00245.html">Date Prev</a>][<a href="msg00247.html">Date Next</a>][<a href="msg00240.html">Thread Prev</a>][<a href="msg00130.html">Thread Next</a>][<a href="maillist.html#00246">Date Index</a>][<a href="threads.html#00246">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: DIGITP and DIGIT-WEIGHT</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC (George J. Carrette)</li>
+<li><em>Subject</em>: Re: DIGITP and DIGIT-WEIGHT</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Fri ,3 Oct 80 11:24:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>GJC's note about control constructs and macros really hit home.
+I have, for some time, advocated that SOME way be found to
+grab the value of a COND predicate neatly.  I've experimented
+in SCHEME with things like
+	(COND ((DIGITP X) =&gt; (LAMBDA (WEIGHT) (HACK WEIGHT 43)))
+	      ...
+and also thought of simply that a symbol after a predicate and before
+anbother expression should get bound to the value:
+	(COND ((DIGITP X) WEIGHT (HACK WEIGHT 43))
+buit neither of these is very LISPy.  A similar idea would happen
+to work for CASEQ:
+	(CASEQ (DIGITP X) WEIGHT
+	    ((0 1 2) (HACK WEIGHT))
+	    ((3 4) (GROSS-OUT WEIGHT)) ...
+But I'm not satisfied with these, and I bet no one else is, either.
+
+The idea of an extra argument to macros is neat.  It would require
+EVAL to keep track of these contexts, however--EVAL would probably
+need the context as an extra argument also.  Maybe functions could get it,
+too!  It's hard to know where to stop.  But this striked me as a quick
+explicit patch [strikes], where one really wants is an optimizing
+compiler as GJC described that would take care of these thinsg for you.
+(For one thing, the macro expansion shown by GJC for an IF and DO
+loop couldn't be done by a simple macro--you'd need continuations.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00245.html">Re: Ooops, forgot to send this to LISP-FORUM</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00247.html">Re: DIGITP</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00240.html">Re: DIGITP and DIGIT-WEIGHT</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00130.html">Re: #|</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00246"><strong>Date</strong></a></li>
+<li><a href="threads.html#00246"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

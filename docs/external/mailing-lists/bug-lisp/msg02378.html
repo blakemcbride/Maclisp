@@ -1,0 +1,112 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: (EQUAL &#60;number&#45;of&#45;one&#45;type> &#60;another&#45;type>) -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sat, 24 Jun 78 04:31:00 GMT -->
+<!--X-Message-Id: 4eed726ccb8b320f1522fcf63acf97cb@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>(EQUAL &lt;number-of-one-type&gt; &lt;another-type&gt;)</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02379.html">Date Prev</a>][<a href="msg02377.html">Date Next</a>][<a href="msg02379.html">Thread Prev</a>][<a href="msg02376.html">Thread Next</a>][<a href="maillist.html#02378">Date Index</a>][<a href="threads.html#02378">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>(EQUAL &lt;number-of-one-type&gt; &lt;another-type&gt;)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DRB at MIT-MC</li>
+<li><em>Subject</em>: (EQUAL &lt;number-of-one-type&gt; &lt;another-type&gt;)</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sat, 24 Jun 78 04:31:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, NIL at MIT-MC</li>
+<li><em>Original-date</em>: 24 JUN 1978 0031-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>EQUAL has classically said NO to objects of differing data types
+(one minor counter to that involves treating the datatype KLUDGE4,
+KLUDGE8, KLUDGE16, KLUDGE32, and so on as lists if the KLUDGEP
+swithch is off).  So you would have to write your own version
+of NUMERIC-EQUAL to take account the fact that you want a datum
+of one numeric datatype to be equal to another kind.  E.g.,
+if it is only zero that you are worried about, then hau about
+(DEFUN N= (X Y)
+  (COND ((OR (NOT (NUMBERP X)) (NOT (NUMBERP Y))) (BARF BARF))
+        ((ZEROP X) (ZEROP Y))
+        ((EQUAL X Y))))
+Or if you have more intricate involvement, say you want 3.0 to be
+equal to 3, then hau about something like
+(DEFUN N= (X Y)
+   (LET ((TX (TYPEP X)) (TY (TYPEP Y)))
+        (COND ((EQ TX TY) (COND ((MEMQ TX '(FIXNUM FLONUM)) (= X Y))
+                                ((EQUAL X Y))))
+              ((AND (MEMQ TX '(FIXNUM FLONUM)) (MEMQ TY '(FIXNUM FLONUM)))
+               (COND ((EQ TX 'FLONUM) (SETQ Y (FLOAT Y)))
+                     (T (SETQ X (FLOAT X))))
+               (= X Y))
+           ((EQUAL X Y)))))
+Remember, flonum equality is bitwise, not in any kind of sense of
+epsilonics.  There are many schemes to try to build the epsilonics
+into the system, but generally these fail, since the loser can't really
+escape the effects of limited precision floating point. Systemic attempts
+to hide it (thru some kind of fuzz factor) give a false sense of security.
+So if the epsilonics matter in numeric equal, the loser might as well
+progrma in the test himself, such as e.g. 
+(DEFUN F= (FX FY)
+  (LET ((AFX (ABS FX)) (AFY (ABS FY)))
+       (COND ((&lt; AFX 1.E-30) (&lt; AFY 1.E-30))
+             ((&lt; AFY 1.E-30) (&lt; AFX 1.E-30))
+             ((&lt; (//$ (ABS (-$ FX FY)) (+$ AFX AFY))
+                 1.E-8))))
+The two constants could of course be made into globar variables.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02379.html">(LOAD ()) as NO-OP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02377.html">Re: Sharing of LISP jobs.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02379.html">(LOAD ()) as NO-OP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02376.html">Re: (LOAD ())</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02378"><strong>Date</strong></a></li>
+<li><a href="threads.html#02378"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

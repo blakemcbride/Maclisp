@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: TOPS&#45;10 LISP -->
+<!--X-From-R13: VWQ ng [WF&#45;[Q (Vbjneq W. Qnaaba) -->
+<!--X-Date: Fri, 23 Jun 78 22:57:00 GMT -->
+<!--X-Message-Id: 7670f45068bcdc6f65c7e793c425b611@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>TOPS-10 LISP</title>
+<link rev="made" href="mailto:HIC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02383.html">Date Prev</a>][<a href="msg02381.html">Date Next</a>][<a href="msg02389.html">Thread Prev</a>][<a href="msg02388.html">Thread Next</a>][<a href="maillist.html#02382">Date Index</a>][<a href="threads.html#02382">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>TOPS-10 LISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC, BAKER at MIT-AI</li>
+<li><em>Subject</em>: TOPS-10 LISP</li>
+<li><em>From</em>: HIC at MIT-MC (Howard I. Cannon)</li>
+<li><em>Date</em>: Fri, 23 Jun 78 22:57:00 GMT</li>
+<li><em>Original-date</em>: 23 JUN 1978 1857-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+From:     BAKER@MIT-AI
+Date: Thu, 23 Jun 78 20:51:53 GMT
+Original-Date: 06/23/78 16:51:53 EDT
+Subject: Re: TOPS-10 LISP
+    To: (BUG LISP) at MIT-AI
+    CC: BAKER at MIT-AI
+    How do I TYO non-printing weird characters?
+-------
+Try opening up the tty on another channel in image mode, and then tyoing
+to that:
+(SETQ FOO (OPEN '((TTY)) '(OUT IMAGE TTY)))
+(TYO 177 FOO)
+this wins on ITS, though I don't know if it has ever been tested on Tops-10.
+Let me know results (and I will attempt to try it on my version).
+
+--Howard
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02383.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02381.html">Re: READ-EVAL-*-PRINT, READ-EVAL-PRINT-*, READ-*-EVAL-PRINT, *-READ-EVAL-PRINT ...</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02389.html">Re: TOPS-10 LISP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02388.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02382"><strong>Date</strong></a></li>
+<li><a href="threads.html#02382"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

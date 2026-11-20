@@ -1,0 +1,4526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="/css/u8.css" /><meta charset="utf-8" />
+<title>LSPMN3.RPG[UP,DOC] - www.SailDart.org</title>
+</head>
+<body id="u8body">
+<div id="tagline">perm filename LSPMN3.RPG[UP,DOC]  blob <a href="LSPMN3.RPG[UP,DOC]_blob">sn#306401</a> filedate 1977-09-08 generic text, type C, neo UTF8</div>
+<pre id="u8lump">COMMENT ⊗   VALID 00092 PAGES
+C REC  PAGE   DESCRIPTION
+C00001 00001
+C00004 00002
+C00009 00003
+C00010 00004
+C00014 00005
+C00018 00006
+C00020 00007
+C00025 00008
+C00026 00009
+C00029 00010
+C00033 00011
+C00037 00012
+C00041 00013
+C00046 00014
+C00050 00015
+C00053 00016
+C00054 00017
+C00059 00018
+C00064 00019
+C00069 00020
+C00073 00021
+C00077 00022
+C00081 00023
+C00085 00024
+C00089 00025
+C00093 00026
+C00097 00027
+C00101 00028
+C00103 00029
+C00107 00030
+C00111 00031
+C00115 00032
+C00119 00033
+C00124 00034
+C00127 00035
+C00128 00036
+C00132 00037
+C00137 00038
+C00140 00039
+C00144 00040
+C00146 00041
+C00150 00042
+C00154 00043
+C00158 00044
+C00163 00045
+C00168 00046
+C00173 00047
+C00177 00048
+C00182 00049
+C00187 00050
+C00192 00051
+C00196 00052
+C00201 00053
+C00206 00054
+C00211 00055
+C00216 00056
+C00220 00057
+C00223 00058
+C00226 00059
+C00229 00060
+C00233 00061
+C00237 00062
+C00240 00063
+C00245 00064
+C00249 00065
+C00253 00066
+C00258 00067
+C00262 00068
+C00267 00069
+C00271 00070
+C00275 00071
+C00278 00072
+C00282 00073
+C00286 00074
+C00291 00075
+C00295 00076
+C00297 00077
+C00301 00078
+C00306 00079
+C00310 00080
+C00314 00081
+C00318 00082
+C00322 00083
+C00325 00084
+C00329 00085
+C00333 00086
+C00337 00087
+C00341 00088
+C00345 00089
+C00348 00090
+C00351 00091
+C00353 00092	βββ
+C00354 ENDMK
+C⊗;
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+                              Part 3 - The System
+
+                               Table of Contents
+
+
+
+1.      The System . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3-1
+1.1     The Top Level Function . . . . . . . . . . . . . . . . . . . . . . . 3-1
+1.2     Break Points . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3-5
+1.3     Control Characters . . . . . . . . . . . . . . . . . . . . . . . . . 3-9
+1.4     Exceptional Condition Handling . . . . . . . . . . . . . . . . . . .3-15
+1.4.1   The LISP Error System  . . . . . . . . . . . . . . . . . . . . . . .3-15
+1.4.2   User Interrupts  . . . . . . . . . . . . . . . . . . . . . . . . . .3-16
+1.4.3   Table of User Interrupt Channels . . . . . . . . . . . . . . . . . .3-19
+1.4.4   Autoload . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3-25
+1.5     Debugging  . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3-27
+1.5.1   Binding, Pdl Pointers, and the Evaluator  . . . . . . . . . . . . . 3-27
+1.5.2   Functions for Debugging  . . . . . . . . . . . . . . . . . . . . . .3-27
+1.5.3   The Trace Package  . . . . . . . . . . . . . . . . . . . . . . . . .3-34
+1.5.4   The Stepper  . . . . . . . . . . . . . . . . . . . . . . . . . . . .3-39
+1.5.5   The MAR Break Feature  . . . . . . . . . . . . . . . . . . . . . . .3-54
+1.6     Storage Management . . . . . . . . . . . . . . . . . . . . . . . . .3-58
+1.6.1   Garbage Collection . . . . . . . . . . . . . . . . . . . . . . . . .3-58
+1.6.2   Spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3-59
+1.6.3   Storage Control Functions  . . . . . . . . . . . . . . . . . . . . .3-62
+1.6.4   Dynamic Space and Pdl Expansion  . . . . . . . . . . . . . . . . . .3-63
+1.6.5   Initial Allocation . . . . . . . . . . . . . . . . . . . . . . . . .3-64
+1.7     Implementing Subsystems with MACLISP . . . . . . . . . . . . . . . .3-66
+1.7.1   Entering LISP  . . . . . . . . . . . . . . . . . . . . . . . . . . .3-66
+1.7.2   Saving an Environment  . . . . . . . . . . . . . . . . . . . . . . .3-67
+1.7.3   Gaining and Keeping Control  . . . . . . . . . . . . . . . . . . . .3-69
+1.7.4   Purity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3-70
+1.8     Miscellaneous Functions  . . . . . . . . . . . . . . . . . . . . . .3-75
+1.8.1   The Status Functions . . . . . . . . . . . . . . . . . . . . . . . .3-75
+1.8.2   Time   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3-87
+1.8.3   Escaping from Lisp . . . . . . . . . . . . . . . . . . . . . . . . .3-87
+
+
+
+
+
+
+
+
+September 8, 1977                                                       Page 3-1
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+
+
+1.  The System
+
+
+1.1  The Top Level Function
+
+
+   The following function is an approximation to what MACLISP does when it is at
+its "top level."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+September 8, 1977                    ∪3-1.                              Page 3-1
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+
+      (defun standard-top-level nil
+             (prog (↑q ↑w ↑r evalhook base ibase ... )
+              errs            ;errors, uncaught throws, etc. come here
+              ↑g              ;ctrl/G quits come here
+                   (reset-bound-vars-and-restore-pdls)
+                   (setq ↑g nil)
+                   (setq ↑w nil)
+                   (setq evalhook nil)
+                   (nointerrupt nil)
+                   (do-delayed-tty-and-alarmclock-interrupts)
+      ;Recall that errors do (setq // errlist) so lambda-binding
+      ;  errlist will work properly.  See errlist.
+           (mapc (function eval) //)
+           (or (status linmode)(terpri))
+           (do ((eof (list nil))      ;internal variables
+                (prt '* *))
+               (nil)          ;do forever (until ↑g or error)
+               (setq * (cond ((status toplevel)
+                              (eval (status toplevel)))
+                             (t (terpri)
+                                (cond (prin1 (funcall prin1 prt))
+                                      (t (prin1 prt)))
+                                (typ 40)
+                                (setq (do ((form))(nil)
+                                          (setq form (cond (read
+                                                            (funcall read eof))
+                                                           (t (read eof))))
+                                          (or (eq form eof)
+                                              (return form))
+                                          (terpri)))
+                                (and (null read)
+                                     (atom -)
+                                     (is-a-space (tyipeek))(tyi))
+                                ((lambda (+) (eval -))
+                                 (prog2 nil + (setq + -)))))))))
+
+which causes a "read-eval-print loop,"  i.e. each S-expression that is  typed in
+gets evaluated  and the value  is printed, then  the next S-expression  is read.
+Errors and ↑g quit  to top level.  That  is they reinitialize and  then re-enter
+this  loop, printing  a *  (but not  destroying the  value of  the  variable *).
+Notice that there  is a place in  the middle where the  user can insert  his own
+
+
+Page 3-2                             ∪3-1.1                    September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+special form to be evaluated, using (sstatus toplevel).  It is also  possible to
+change just the reader or just  the printer by setq'ing read or prin1.   See the
+sstatus function ().
+
+   Variables used by the top-level read-eval-print loop:
+
+*                   VARIABLE
+
+     Contains the  last S-expression  printed out  by the  read-eval-print loop,
+     that is, the value of the last  form typed in.  This is true even  after an
+     error return to top level, allowing  one to refer to the value  printed out
+     before the aborted computation.
+
++                   VARIABLE
+
+     Contains the last S-expression typed in.  This can be used to edit it or to
+     do it  over again.   (Notice how +  is bound  in the  read-eval-print loop.
+     This causes + to receive  the correct value even if the  evaluation aborts,
+     since an error or ↑g quit will undo the binding.)
+
+-                   VARIABLE
+
+     Contains the  current S-expression  typed in.   This can  be used  by user-
+     written error handlers.  It can't be usefully accessed by expressions typed
+     in, since it is set before the expression is evaluated.
+
+   By special  arrangement the  values of  +, *,  and -  are preserved  across a
+break.  When the break is first entered these have the values for the  last top-
+level operation,  during the break  they behave  the same as  at top  level, and
+after the break returns they are restored to the values for the top  level loop.
+(See break).
+
+/                   VARIABLE
+
+     / is used to temporarily hold the value of errlist when an error returns to
+     top level.   This is  so that  lambda-binding errlist  will have  an effect
+     (assuming no one lambda-binds /).  Note that / must be typed in as // since
+     the slash character is special to the LISP reader.
+
+
+
+
+
+
+September 8, 1977                    ∪3-1.1                             Page 3-3
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+errlist             VARIABLE
+
+     The value of errlist  is a list of  forms which are evaluated  when control
+     returns to top level either because  of an error or when an  environment is
+     initially  started.  It  doesn't apply  if the  environment started  up was
+     saved using (suspend).  This feature is used to provide  self-starting LISP
+     environments and to provide  special error handling for  subsystems written
+     in LISP.
+
+     The symbol errlist  is evaluated to  get the list  of forms in  the binding
+     context in which the error occurred, but the forms themselves are evaluated
+     in the top-level binding context.
+
+     Example:
+
+        ((lambda (errlist)
+                 (putprop 'foo 'bar 'baz)
+                 (hack)
+                 (remprop 'foo 'baz))
+         (cons '(remprop 'foo 'baz)
+               errlist))
+
+
+     The property list of foo will be properly restored even if  the computation
+     (hack) is aborted.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 3-4                             ∪3-1.1                    September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+1.2  Break Points
+
+
+   Break points are a mechanism to  allow the user to gain control at  any point
+in a program.  Use of the function break causes a read-eval-print  loop, similar
+to the one at top level, to be entered.  (This is also called a break loop.) The
+user  may  evaluate any  S-expressions,  and  then cause  the  break  to return,
+possibly with a value.  Normal execution then proceeds.
+
+   This mechanism can be used to allow for human intervention when an unexpected
+condition occurs.  It is used in this way by the MACLISP error system.   A break
+loop makes the full power of the LISP interpreter available for debugging.
+
+
+break               FSUBR
+
+     (break tag pred) evaluates pred, but not tag.  If the value of pred  is not
+     nil, the state of  the I/O system is saved,  ";bkpt tag" is typed  out, and
+     control  returns to  the terminal.   We say  that a  "break loop"  has been
+     entered.  tag may be any object.  It is used only as a message typed out to
+     identify  the  break.  It  is  not evaluated.   If  pred is  omitted,  t is
+     assumed.  Thus (break tag) is equivalent to (break tag t).  (break tag nil)
+     returns nil, and produces no action whatsoever.
+
+     A break loop is a read-eval-print loop similar to top level.  break does an
+     errset so that errors cannot cause an abnormal return from the break.  A ↑x
+     quit, which causes an ordinary error, will thus return to the break loop if
+     used to  interrupt a  computation started in  the break  loop.  A  ↑g quit,
+     however, returns back  to LISP top  level, resetting the  environment using
+     the errlist, as described above.
+
+     Two forms, $P and (return x), may be typed in a break loop.  If $p is typed
+     in, break  returns nil and  execution continues.  This  "$p" is  &lt;dollar> p
+     &lt;newline> in  the Multics  implementation, but &lt;altmode>  P &lt;space>  in the
+     pdp-10 implementations.  (An atom other than $P can be used to perform this
+     function  by changing  the  value of  $P  to another  (non-nil)  atom.  The
+     initial value of $P is always $P).
+
+     If (return x) is typed in, break evaluates x and returns that value.  If as
+     a  result  of  the  evaluation  of a  typed-in  form,  (throw  x  break) is
+     evaluated, break returns x as its value.
+
+     When break returns, the state of the I/O system is restored.
+
+September 8, 1977                    ∪3-1.2                             Page 3-5
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+     An approximate LISP definition of  what break does follows.  Note  that the
+     user program can modify this by using (sstatus breaklevel).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 3-6                             ∪3-1.2                    September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+
+(defun break fexpr (x)
+       (*break (eval (cadr x)) (car x)) ;note argument reversal
+
+(declare (special ↑q ↑w evalhook * + -))
+
+(defun *break (breakp breakid)
+ (and breakp
+  (do ((↑q nil) (↑w nil) (evalhook nil) (terpri t) (* *) (+ +) (- -))
+      ()                    ;bind key variables
+   (terpri msgfiles)        ;msgfiles arguments
+   (princ '|;bkpt | msgfiles)   ;  used for
+   (princ breakid msgfiles)     ;  Newio only
+   (terpri msgfiles)
+   (setq + -)               ;last form typed
+   (return
+    (prog2 nil
+     (catch
+      (do () (nil)          ;do forever (until throw)
+        (errset
+          (do ((eof (list nil)) (form))
+              (nil)
+           (cond ((status breaklevel)
+                  (eval (status breaklevel)))
+                 (t (setq form (cond (read (funcall read eof))
+                                     (t (read eof))))
+                    (and (null read)
+                         (atom form)
+                         (is-a-space (tyipeek))
+                         (tyi))
+                    (cond ((eq form eof) (terpri))
+                          ((and $p (eq form '$p)) (throw nil break))
+                          ((eq (car form) 'return)
+                           (throw (eval (cadr form)) break))
+                          (t (setq - form)
+                             (print
+                              (setq * ((lambda (+) (eval form))
+                                       (prog2 nil + (setq + -)))))
+                             (terpri))))))))
+     break)
+     (terpri)
+  ))))
+
+
+September 8, 1977                    ∪3-1.2                             Page 3-7
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+   The arguments  to break  are a breakpoint  identification and  (optionally) a
+break  switch.  If  the break  switch evaluates  to nil,  then nil  is returned.
+Otherwise,  the variables  ↑q, ↑w,  evalhook and  terpri are  bound to  nil, the
+variables *, +, and - are bound to their current values, and the  message ";bkpt
+&lt;breakid>" is printed.  A read-eval-print loop similar to the top level  loop is
+then entered.  This break loop is surrounded by an errset.  Errors or  typing ↑x
+merely cause the break loop to be re-entered.  The value of  (status breaklevel)
+serves a function similar to that of (status toplevel) in the top level loop.
+
+   As each form is read in the default break loop, there are four cases:
+
+     1.  End of file.  For console input this merely indicates rubout beyond the
+        number of input characters.  Whether input is from console or elsewhere,
+        the (terpri) is done and the reader is entered.
+
+     2.  The  form is the  atom $p  or eq to  the non-nil value  of $P.   nil is
+        returned from the break.
+
+     3.  The form is (return  value).  The form value is evaluated  and returned
+        from the break.
+
+     4.  Otherwise the form is evaluated and the result printed out in  a manner
+        analogous to the  top level read-eval-print  loop.  The variables  +, -,
+        and * are updated appropriately.  (Recall, however, that they were bound
+        on entry to *break, and so will be restored eventually.)
+
+   The way to return  from a break is  to do a throw  with a tag of  break; this
+will return from the catch which surrounds the break loop.  This is how  cases 2
+and 3 return their values; case 4 may also cause a return from the break.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 3-8                             ∪3-1.2                    September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+1.3  Control Characters
+
+
+   LISP can be directed to take certain actions by entering "control characters"
+from the terminal.  The  difference between control characters and  normal input
+is that control characters take effect as soon as they are entered  while normal
+input only takes effect when LISP asks for it, by use of functions such as read,
+or by being in the top level read-eval-print loop or in a break loop.
+
+   Control  characters can  be  typed in  from  the terminal  according  to some
+procedure that depends on the  implementation.  A program can mimic  the effects
+of the various  control characters by  directly calling the  function associated
+with the particular control key (see below).
+
+   Although control characters are usually processed as soon as they  are typed,
+they will be delayed if there is a garbage collection in progress or LISP  is in
+(nointerrupt tty) mode - see the nointerrupt function.
+
+                    Entering Control Characters in ITS LISP
+
+   In the ITS implementation of MACLISP, control characters are entered by means
+of the "CTRL" key  on the terminal.  For  example, CTRL/G is entered  by holding
+down "CTRL" and striking the "G" key.  Control characters echo as an  uparrow or
+circumflex followed by the character.
+
+   In  Newio, any  character at  all may  be made  an interrupt  character.  See
+(sstatus tty) and (sstatus ttyint).
+
+   Interrupt characters  are also  read as  part of  the terminal  input stream.
+Normally they are marked in the readtab;e as "worthless" characters.
+
+                  Entering Control Characters in TOPS-10 LISP
+
+   Control characters may be entered in the  same way as in ITS LISP if  LISP is
+currently read'ing from the terminal.  If a LISP program is actively running, it
+is necessary to first gain  its attention by typing the control-C  character one
+or two times, thereby returning to the monitor.  The monitor command REENTER may
+then be used  to re-enter the  LISP.  The LISP  will be in  such a state  that a
+single control character may be typed in and will take effect.
+
+                  Entering Control Characters in Multics LISP
+
+
+
+September 8, 1977                    ∪3-1.3                             Page 3-9
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+   In the Multics implementation of MACLISP, one signals one's desire to enter a
+"control" character by  hitting the "attention" key  on the terminal.   (This is
+called "break,"  "interrupt," "attn," "quit,"  etc. on different  terminals.  If
+Multics is being accessed through the ARPA network, an "interrupt process" (@S S
+or @S I P from a TIP) signal should be transmitted.) Lisp responds by typing out
+"CTRL/".  Now you may type one letter from the list later in this section, which
+will be interpreted to have its "control" meaning.  This control  character must
+be followed by a newline.
+
+   It is  also possible to  enter "control" characters  from an  input character
+stream, which may have its source at the terminal or in an exec←com, without the
+use of the "attention" key.  The desired control character is prefixed by a \036
+character.  If two of these prefix characters occur together, one \036 character
+is  read  and  no  "control"  action  is  performed.   Otherwise,  the character
+following the \036 is processed as a control character, then reading continues.
+
+   Control characters will be accepted  in upper or lower case.   All characters
+other than those with defined meanings are rejected with an error message.  Only
+one control  character may be  entered at  a time.  When  a "user  interrupt" is
+caused, if the  interrupt is not enabled  nothing happens.  If the  interrupt is
+enabled, then a user-specified function is called.  The interrupt may be enabled
+by binding the appropriate symbol to the function to handle it, or by  using the
+(sstatus ttyint) function ().
+
+      Example for Multics LISP:
+              (lines containing user input are preceded by ">>>")
+
+      >>>     (defun loop (x) (loop (add1 x)))
+              loop
+      >>>     (loop 0)
+                      function runs for a long time,
+      >>>     &lt;ATTN>  then user hits attention button.
+      >>>     CTRL/B  LISP types "CTRL/", user types "B"
+      >>>     ;bkpt ↑b        system enters break loop
+      >>>     x       user looks at value of x
+              4067
+      >>>     &lt;ATTN>  user hits attention button again
+      >>>     CTRL/G  and returns to top level
+              Quit
+              *
+
+
+
+
+Page 3-10                            ∪3-1.3                    September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+   In the following descriptions  of control characters, those which  can always
+be processed immediately,  even during a  garbage collection or  in (nointerrupt
+'tty) mode, will be indicated by an "!" for the ITS and TOPS-10 implementations,
+and an * for the  Multics Implemention.  When appropriate, equivalent  LISP code
+is given for producing the same result from a user program.
+Control Characters that have initially defined meanings in all implementations:
+
+  B !* runs a break  loop with breakid "↑b"  (see break).  (In the  pdp-10 oldio
+          implementation ↑h is used instead of ↑b.) (break ↑b).
+
+  C !* sets  the value  of the  atom ↑d  to nil,  turning off  garbage collector
+          messages.  (Not  available in the  TOPS-10 implementation).   (setq ↑d
+          nil).
+
+  D !* sets  the  value  of the  atom  ↑d  to t,  turning  on  garbage collector
+          messages.  (setq ↑d t)
+
+  G       quits back to the top level of lisp, rebinding all variables  to their
+          global values, resetting various system variables, and  evaluating the
+          errlist forms.  This is used  to stop a running program when  there is
+          no intention of restarting it  again.  (Prints out an *, see  the "top
+          level" function,  and the ↑g  function.)  H is  used instead of  ↑b in
+          some implementations (see above).
+
+  Q !   sets the  value of  the atom  ↑q to  t, enabling  input from  the source
+          selected by the  value of infile, or  selected by use of  the function
+          uread.   In the  ITS Newio  implementation, this  is not  an interrupt
+          character; instead ↑a is a  macro character, and takes effect  only if
+          processed by read.  (setq ↑q t).
+
+  R !   sets the value of the atom ↑r to t, enabling output to  the destinations
+          selected by the  value of outfiles, or  selected by use of  the uwrite
+          function.  (setq ↑r t).
+
+  S !   turns off  typeout until input  is read.  This  is used to  suppress the
+          rest  of  the  typeout from  the  current  request,  without effecting
+          typeout from the next request that is typed in.  It is  implemented by
+          setting ↑w to  t, then putting a  macro character in the  input stream
+          which sets ↑w to nil and does a (terpri) when it is read.
+
+  T !   sets  the  value  of  the  atom  ↑r  to  nil,  disabling  output  to the
+          destinations that CTRL/r enables.  (setq ↑r nil).
+
+
+September 8, 1977                    ∪3-1.3                            Page 3-11
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+  U       causes the current  call to read to  be restarted from  the beginning.
+          (Not available in pdp-10 implementations).
+
+  V !   sets the value of the atom  ↑w to nil, enabling output to  the terminal.
+          (setq ↑w nil).
+
+  W !   sets the value of  the atom ↑w to  t, disabling output to  the terminal.
+          (setq ↑w t)
+
+  X       causes an error which can be caught by errset.  This is a less drastic
+          "quit"  than ctrl/G.   If it  is typed  within a  break loop,  it will
+          return  no further  than  the break  loop, since  break  uses  errset.
+          (error 'quit).
+
+  Z !* On ITS  returns to ITS  command level, i.e.  DDT.  On Multics  returns to
+          Multics command level. (start re-enters lisp.) On TOPS-10 goes  to DDT
+          if a DDT has been loaded with LISP.
+                  The following control characters only exist
+
+          in the Multics implementation.
+
+  . !* does nothing, and is used merely to speed up a slow process by causing an
+          interaction.
+
+  ? !* asks the  LISP subsystem what  it is doing:  running, waiting  for input,
+          collecting garbage, or running with tty-interrupts masked off.
+
+   The following  control characters only  exist in pdp-10  implementations with
+the "moby I/O" capability.  This means the MIT-AI Laboratoray machine.  They are
+not  really interrupts,  but occur  only when  processed by  the  terminal input
+prescanner (see (sstatus ttyscan)).
+
+  F       cause graphics display slave to seize a display.
+
+  N       turn on display for character output.
+
+  O       turn off display for character output.
+
+  Y       cause display slave to release display.
+
+   The  following control  characters only  work in  the  pdp-10 implementation.
+They are not  really interrupts, but occur  only when processed by  the terminal
+input prescanner (see (sstatus ttyscan)).
+
+Page 3-12                            ∪3-1.3                    September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+  K       redisplay the current input.  This  allows you to get a clean  copy of
+          your input after rubouts have been used.
+
+  L       erases the screen if the terminal is a display, then does a control-K.
+
+
+                          Control-Character Functions
+
+
+↑g                  SUBR 0 args
+
+     Produces a quit to top level just as if a control-G had been typed.
+
+
+   These   functions  exist   only  in   the  pdp-10   oldio  and   the  Multics
+implementations - they are being phased out.
+
+
+ioc                 FSUBR
+
+     The argument to ioc is processed  as if it were a "control  character" that
+     had been typed  in.  Numbers are taken  as a whole, atomic  symbols' pnames
+     are  processed  character  by  character,  except  that  nil   is  ignored.
+     Examples:
+
+          (ioc 1) causes user interrupt 1.
+          (ioc vt) switches output to the terminal.
+          (ioc q) switches input to a file.
+          (ioc g) quits back to the top level of lisp.
+
+     If ioc returns, its value is t.
+
+
+iog                 FSUBR
+
+     iog first saves  the values of  the I/O switches ↑q,  ↑r, and ↑w.   Then it
+     processes its first argument the same as ioc.  Next the remaining arguments
+     to iog are evaluated, from left to right.  The values of the  variables ↑q,
+     ↑r, and ↑w are  restored, and the value  of the last argument  is returned.
+     Example:
+
+                         (iog vt (princ "A Message."))
+
+
+September 8, 1977                    ∪3-1.3                            Page 3-13
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+     gets a message to the console  no matter what the I/O system is  doing.  It
+     evaluates to "A Message."
+
+               (iog a x1 x2 ... xn)
+
+     can also be written
+
+               ((lambda (↑q ↑r ↑w)
+                        (ioc a)
+                        x1
+                        x2
+                        ...
+                        xn)
+                nil nil nil)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 3-14                            ∪3-1.3                    September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+1.4  Exceptional Condition Handling
+
+
+
+1.4.1  The LISP Error System
+
+
+   The  errors  detected  by  the  LISP  system  are  divided  into  two  types:
+correctable and uncorrectable.  The uncorrectable errors will be explained first
+since they are simpler.
+
+   An uncorrectable  error is an  error that causes  the evaluation in  which it
+occurs to be aborted.  When an uncorrectable error occurs, the first  thing that
+happens is the printing of an  error message.  In oldio, the error  message goes
+to  the terminal  and nowhere  else (except  echofiles), no  matter how  the I/O
+switches and variables are  set.  In newio, the  variable msgfiles is a  list of
+the files to which error messages  should be routed; this initially is  just the
+terminal.  The error message consists of some explanatory text and (usually) the
+object or form that caused the error.
+
+   After the  error message has  been printed, control  is returned to  the most
+recent  error-catcher.   There is  an  error-catcher at  top  level,  and error-
+catchers are set up by the functions errset (and break, which uses errset).  All
+variable  bindings  between the  error-catcher  and the  point  where  the error
+occurred are restored.  Thus all  variables are restored to the values  they had
+at top level or at the time  the errset was done, unless they were  setq'ed free
+(without being bound).
+
+   What happens next depends on how the error-catcher was set up.  At top level,
+the  forms on  the errlist  are  evaluated and  the top  level loop  (or  a user
+specified top level form) is re-entered.  (The symbol errlist is evaluated prior
+to the above restoration of bindings, and saved in the variable /.) If  an error
+returns to break, it simply re-enters its read-eval-print loop.  In  the Multics
+implementation the fact that break  has caught an error is signalled  by ringing
+the bell on the terminal.  If an error returns to errset, errset returns nil and
+evaluation proceeds.  If an error returns  to top level, the state of  the world
+is reset and * is typed.
+
+   The  above  description is  slightly  simplified.  The  user  can  request an
+interrupt  to occur  between the  typing  of the  message and  the  unwinding of
+bindings and  return of  control to  an error-catcher.   This user  interrupt is
+normally a break loop which allows  the user to examine the values  of variables
+
+
+September 8, 1977                    ∪3-1.4                            Page 3-15
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+before the bindings are restored, in hope of finding the cause of the error.  If
+the error  is going to  return to  top level, the  *rset-trap user  interrupt is
+signalled.  In (*rset t) mode a  break loop is entered, but in (*rset  nil) mode
+the user interrupt is ignored by  the system supplied handler.  If the  error is
+going to return to a break or  an errset, and *rset is non-nil, the  errset user
+interrupt is  signalled.  The  initial environment contains  a null  handler for
+this interrupt, but the user may supply a break loop or other handler.
+
+   Correctable errors are  errors which may  be corrected by  user intervention.
+If such an error is properly  corrected, evaluation will proceed as if  no error
+had occurred.  If the option to correct the error is not exercised, this type of
+error will be handled the same as an uncorrectable error.
+
+   When a  correctable error occurs,  a user interrupt  is signalled.   See  for
+user interrupt  channel assignments for  these errors.  The  initial environment
+contains handlers for these errors  which print an error message similar  to the
+message printed for an uncorrectable error and then enter a break loop.
+
+   The  argument  passed  to  the  user  interrupt  handler  is  usually  a list
+describing the  error.  See section  1.4.2 for details.   If the  user interrupt
+handler  is nil,  or if  it returns  a non-list,  the error  is treated  like an
+uncorrectable error.  But  if the handler returns  a list, the first  element of
+that list is used to correct the error in a way which depends on  the particular
+error which occurred.
+
+   If the most recent error-catcher is not top-level, correctable errors will be
+treated  as uncorrectable  errors unless  there is  a non-null  handler  for the
+errset interrupt.  This is  to prevent multiple confusing "nested"  error breaks
+unless the user indicates that he  is sophisticated by setting up a  handler for
+the errset interrupt.
+
+   See the functions error, err, and errset.  (The errset handler itself is only
+invoked if *rset is non-nil, however.)
+
+
+1.4.2  User Interrupts
+
+
+   LISP provides a number of "user interrupts," which are a mechanism by which a
+user  procedure  may  temporarily gain  control  when  an  exceptional condition
+happens.  The exceptional conditions that use the user interrupt  system include
+certain control characters, the alarmclock timers, asynchronous  I/O conditions,
+
+
+Page 3-16                           ∪3-1.4.1                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+the  garbage  collector,  and  many  of the  errors  that  are  detected  by the
+interpreter or by the system  functions.  Errors detected by user  functions can
+use this mechanism also.
+
+   The user interrupts are divided  up into several channels.  Each  channel has
+associated  with  it  a  service function.   If  the  service  function  is nil,
+interrupts on that channel will be ignored.  If the service function is not nil,
+it  is a  function which  is called  with one  argument when  the user-interrupt
+occurs.  The nature  of the argument depends  on which channel the  interrupt is
+on; usually it is an S-expression which can be used to localize the cause of the
+interrupt.  Some user interrupts use the value returned by the  service function
+to decide what to do about the cause of the interrupt.
+
+   The service  functions for  most user interrupts  are kept  as the  values of
+symbols with mnemonic  names.  A list  of these symbols is  on . There  are also
+user interrupts  for control  characters.  The service  functions for  these are
+declared using (sstatus ttyint).  See .
+
+   The initial values  for the service functions  of the various  interrupts are
+provided by the system as break loops for some interrupts and nil for others.
+
+   There  are  some  special considerations  for  user  interrupts  signalled by
+correctable  error  conditions.   The  argument to  the  service  function  is a
+description of the error whose exact  form is described in the table at  the end
+of this section.  If the service function returns nil (or any atom),  the normal
+error procedure occurs --  control returns to the  most recent errset or  to top
+level if there was no errset.  If the service function returns a list, the first
+element of the list is used  to attempt recovery from the error.  The  exact way
+that it is used is described in the table.  If recovery is  successful execution
+proceeds from the point where  the error occurred.  If recovery  is unsuccessful
+another error is signalled.
+
+   Here is an  example of a  user interrupt service  function.  This is  the one
+supplied  by the  system for  unbound  variable errors  when the  user  does not
+specify one.  Note that  the system-supplied error break  functions consistently
+bind  args to  the argument  supplied.  The  user can  check the  value  of this
+variable to see what is  wrong.  Note too that the system-supplied  error breaks
+restore readtable and obarray before breaking.
+
+
+
+
+
+
+September 8, 1977                   ∪3-1.4.2                           Page 3-17
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+
+      (defun +internal-ubv-break (args)
+             (declare (special args))
+             (errprint nil msgfiles)
+             ((lambda (readtable obarray)
+                      (nointerrupt nil)
+                      (break unbnd-vrbl))
+              (get 'readtable 'array)
+              (get 'obarray 'array)))
+      (setq unbnd-vrbl '+internal-ubv-break)
+
+
+alarmclock          SUBR 2 args
+
+        alarmclock is a function for controlling timers.  It can start  and stop
+     two separate  timers; one  is a  real-time timer  (which counts  seconds of
+     elapsed time) and the other is a cpu-time timer (which  counts microseconds
+     of machine  run time).   The first argument  to alarmclock  indicates which
+     timer is being referred to:  it may be the atom time to indicate  the real-
+     time timer or the atom runtime to indicate the cpu-time timer.
+
+        The second argument to alarmclock controls what is done to  the selected
+     timer.  If it is a positive (non-bignum) number the timer is started.  Thus
+     if n is a positive  fixnum or flonum, evaluating (alarmclock 'time  n) sets
+     the real-time  timer to go  off in n  seconds, and (alarmclock  'runtime n)
+     sets the  cpu-time timer to  go off  in n microseconds.   If the  timer was
+     already running the old setting is lost.  Thus at any given time each timer
+     can  only  be  running  for   one  alarm,  but  the  two  timers   can  run
+     simultaneously.
+
+        If the second argument to alarmclock is not a positive number, the timer
+     is shut off,  so (alarmclock x  nil) or (alarmclock x  -1) shuts off  the x
+     timer.
+
+        alarmclock returns t if it starts a timer, nil if it shuts it off.
+
+        When  a  timer goes  off,  the alarmclock  user  interrupt  occurs.  The
+     service function  is run in  (nointerrupt t)  mode so that  it will  not be
+     interrupted  while it  is performing  its service.   If it  wants  to allow
+     interrupts, other timers, etc.  it can evaluate (nointerrupt nil).   In any
+     case the status of the  nointerrupt flag will be restored when  the service
+     function  returns.   The  argument passed  to  the  user  interrupt service
+
+
+Page 3-18                           ∪3-1.4.2                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+     function is  a list  of one  element, the  atom time  or the  atom runtime,
+     depending on the first argument in  the call to alarmclock that set  up the
+     timer.  See also the function nointerrupt.
+
+
+nointerrupt         SUBR 1 arg
+
+        (nointerrupt  t) shuts  off LISP  interrupts.  This  prevents alarmclock
+     timers from going  off and prevents the  use of control characters  such as
+     CTRL/G and CTRL/B.   Any of these interrupts  that occur are  simply saved.
+     (nointerrupt t) mode is used  to protect critical code in  large subsystems
+     written in LISP.  A similar  deferral technique is used by the  LISP system
+     itself to protect against interrupts in the garbage collector.
+
+        (nointerrupt 'tty) prevents  control characters (typed on  the terminal,
+     or "tty") from causing interrupts; however, alarmclock interrupts are still
+     allowed.  Any alarmclock interrupts which were saved will now go off.
+
+        (nointerrupt nil) turns interrupts  back on.  Any interrupts  which were
+     saved will now get processed.  This is the normal, initial state.
+
+        The result returned from nointerrupt is the previous interrupt  status -
+     nil, t, or tty.
+
+        Example:
+
+
+           ((lambda (oldstatus)
+                    &lt;protected code>
+                    (nointerrupt oldstatus))
+            (nointerrupt t))
+
+
+
+1.4.3  Table of User Interrupt Channels
+
+
+   Each user interrupt channel has a variable whose value is a  functional form,
+the service function for that channel.  The name of the interrupt channel is the
+same  as the  name of  the  variable.  The  following lists  the  user interrupt
+channels in alphabetical order.  The  argument to which the service  function is
+applied and the value which it should return are described.  By  convention, all
+
+
+September 8, 1977                   ∪3-1.4.2                           Page 3-19
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+service functions receive one argument.  Some user interrupts are  initially set
+to a system-supplied handler which binds the variable args to this  argument and
+enters a break loop.  The name of the interrupt is used as the break identifer.
+
+   Some user interrupts ignore the value returned by the service function, while
+others distinguish two cases:  if the value is atomic, the service  function was
+not able  to recover from  the condition that  caused the interrupt.   LISP will
+take its default  action, such as returning  control to the most  recent errset.
+If  the value  is a  list, the  car of  that list  is used  to recover  from the
+condition that caused the  interrupt.  It is usually a  new piece of data  to be
+used in place of the  one that was being complained  about, or a new form  to be
+evaluated in the place of the form that erred.
+
+   If the value of the service-function variable is nil instead of  a functional
+form, the user interrupt is considered to be turned off.  The system  behaves as
+if the function had run and returned nil.
+
+   Some  user  interrupts  are  asynchronous  in  nature,  and  are  executed in
+(nointerrupt t) mode to prevent timing errors.  The interrupt handler may choose
+to run in (nointerrupt nil) mode, however, as the initial ↑b handler  does.  The
+nointerrupt mode  is restored  after the  handler is  run.  Such  interrupts are
+themselves deferred by (nointerrupt t) mode.
+
+alarmclock          VARIABLE
+
+The value of alarmclock is the service function for the user interrupt signalled
+when a timer set  up by the alarmclock function  goes off.  The argument  is the
+name  of the  timer which  went off,  time or  runtime.  The  returned  value is
+ignored.   The  service function  is  executed in  (nointerrupt  t)  mode.  This
+interrupt is initially turned off.
+
+
+autoload            VARIABLE
+
+The  value of  autoload is  the service  function for  the user  interrupt which
+provides  automatic  loading  of program  packages  into  the  environment.  The
+argument is (function-name  autoload-property).  The returned value  is ignored.
+See part 3.4 for details.  This  interrupt is initially set to a  function which
+simply loads a file.
+
+
+
+
+
+Page 3-20                           ∪3-1.4.3                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+cli-message         VARIABLE
+
+The value of cli-message service  handler for the user interrupt  signalled when
+another job has interrupted  the LISP job via  the CLI device.  The  argument is
+nil and the  returned value is  ignored.  A user handler  is expected to  open a
+file on the  CLA device and  read the message from  the other job.   The service
+function is  run in (nointerrupt  t) mode.  This  interrupt is  initially turned
+off.  Currently, it exists only in the ITS Newio implementation.
+
+
+errset              VARIABLE
+
+The value  of errset is  the service  function for the  user interrupt  which is
+signalled  when an  error is  caught by  an errset  and *rset  is  non-nil.  The
+argument  is nil  and the  returned value  is ignored.   This user  interrupt is
+initially off.  Turning it on affects the behavior of the error system (see part
+3.4).
+
+
+fail-act            VARIABLE
+
+The value of fail-act  is the service function  for the user interrupt  which is
+signalled when any of a large variety of miscellaneous error  conditions occurs.
+The argument is a list whose first element is generally a symbol which describes
+the type  of error  condition.  The rest  of the  list contains  various objects
+related to the error.  The returned  value depends on the error.  These  are not
+very standardized and will not  be described here.  This interrupt  is initially
+set to a break loop.
+
+
+gc-daemon           VARIABLE
+
+The value of gc-daemon is the  service function for the user interrupt  which is
+signalled after each garbage collection.  The argument is a list of  items; each
+item is of the form  (space-name free-before . free-after).  The  returned value
+is ignored.  This interrupt is initially turned off.
+
+
+gc-lossage          VARIABLE
+
+The value of gc-lossage is the service function for the user interrupt  which is
+signalled when there is no more available address space or when the Time Sharing
+
+
+September 8, 1977                   ∪3-1.4.3                           Page 3-21
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+Monitor rejects a request for more memory.  In the Multics implementation, there
+is always  enough memory, so  this user interrupt  never occurs.  In  the pdp-10
+implementation the argument is the name of the space that lost, and the returned
+value is ignored.  This interrupt is initially set to a break loop.
+
+
+gc-overflow         VARIABLE
+
+The value of gc-overflow is the service function for the user interrupt which is
+signalled when a space overflows its gcmax.  (see alloc and (status gcmax).) The
+argument  is  the name  of  the space.   The  returned value  is  ignored.  This
+interrupt is initially set to a break loop.
+
+
+io-lossage          VARIABLE
+
+The value of io-lossage is the service function for the user interrupt  which is
+signalled when the I/O system encounters an error (for example, a file which was
+being opened was not found).  The argument is a list of the name of the function
+which erred  and its arguments,  which may have  been standardized  or otherwise
+partially digested.  The returned value is a list of a new form to  be evaluated
+in place of the call to  the function which erred.  This interrupt  is initially
+set to a break loop.
+
+
+machine-error       VARIABLE
+
+The  value  of machine-error  is  the  service handler  for  the  user interrupt
+signalled when some difficulty is experienced by the host machine.   The service
+function receives four arguments instead of one.  The first is an  atomic symbol
+indicating the type of error:
+   eval        illegal machine operation
+   examine     attempt to reference non-existent memory
+   deposit     attempt to write into read-only memory
+   oddp        parity error
+
+The other three arguments are  fixnums which are addresses of  memory locations.
+The second is the location of  the error; the third is the program  counter when
+the error occurred;  and the fourth  is the JPC (the  program counter as  of the
+last jump instruction before the error occurred).  The machine-error handler may
+signal a different kind of error or a ↑g quit (see the ↑g function)  if desired,
+or enter a break loop.  The  subr function (see ....) may be useful  in decoding
+
+
+Page 3-22                           ∪3-1.4.3                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+the three fixnum  arguments.  If the handler  returns, the value is  ignored and
+the  erroneous operation  is  retried.  If  the user  provides  no machine-error
+handler (the  interrupt is initially  turned off), the  error is handled  in the
+default manner for the host machine.   On ITS, this puts the user in  DDT.  This
+currently exists only in the ITS Newio implementation.
+
+
+mar-break           VARIABLE
+
+The value of mar-break is  the service handler for the user  interrupt signalled
+when the memory location specified  by (sstatus mar) (see...) has  been accessed
+in the specified manner.  The argument is nil and the returned value is ignored.
+The service  function is  run in  (nointerrupt t)  mode.  Also,  LISP implicitly
+performs (sstatus mar  0 nil) before running  the user interrupt; this  helps to
+prevent infinite loops.  This  interrupt is initially turned off.   It currently
+exists only  in the ITS  Newio implementation. See  ... for more  information on
+using this interrupt.
+
+
+pdl-overflow        VARIABLE
+
+The value of pdl-overflow is  the service function for the user  interrupt which
+is signalled when  a pushdown list exceeds  its pdlmax.  (see alloc  and (status
+pdlmax).) The  argument is  the spacename  of the  pushdown list.   The returned
+value is ignored.  This interrupt is initially set to a break loop.
+
+
+sys-death           VARIABLE
+
+The value of sys-death is  the service handler for the user  interrupt signalled
+when the time-sharing  system is about  to go down,  has been revived  from that
+state, or  is being debugged.   The argument  is nil and  the returned  value is
+ignored.  A  user handler  may wish  to examine  the result  of (status  its) to
+determine the state of the system.  The service function is run  in (nointerrupt
+t) mode.  This interrupt is initially turned off.  This currently exists only in
+the ITS Newio implementation.
+
+
+tty-return          VARIABLE
+
+The value of tty-return is the service handler for the user  interrupt signalled
+when control of the terminal is returned to the LISP job by its  superior.  This
+
+
+September 8, 1977                   ∪3-1.4.3                           Page 3-23
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+allows LISP to determine that the display screen may have been changed  by other
+jobs.   The argument  is nil  and the  returned value  is ignored.   The service
+function is  run in (nointerrupt  t) mode.  This  interrupt is  initially turned
+off.  This currently exists only in the ITS Newio implementation.
+
+
+unbnd-vrbl          VARIABLE
+
+The value of unbnd-vrbl is the service function for the user interrupt  which is
+signalled when an attempt  is made to evaluate  an atomic symbol which  does not
+have a value (an unbound variable.)  The argument is a list of the  symbol which
+could not  be evaluated.  The  returned value is  a list of  a new symbol  to be
+evaluated in its place.  This interrupt is initially set to a break loop.
+
+
+undf-fnctn          VARIABLE
+
+The value of undf-fnctn is the service function for the user interrupt  which is
+signalled when an attempt is made to apply an undefined function.   The argument
+is a list of the functional form which could not be applied.  The returned value
+is  a list  of a  new  functional form  to take  its place.   This  interrupt is
+initially set to a break loop.
+
+
+unseen-go-tag       VARIABLE
+
+The value of unseen-go-tag is the service function for the user  interrupt which
+is signalled when  go or throw is  used with a tag  which does not exist  in the
+current prog body or in any catch, respectively.  The argument is a list  of the
+erroneous tag.  The returned value is a  list of a new tag to replace  it.  This
+interrupt is initially set to a break loop.
+
+
+wrng-no-args        VARIABLE
+
+The value of wrng-no-args is  the service function for the user  interrupt which
+is signalled when a function is called with the wrong number of  arguments.  The
+argument is a list of two items: First, a list of the function and the arguments
+that were passed.  Second, the  lambda-list if the function was  interpreted, or
+the same dotted pair as args returns if the function was compiled, or the atom ?
+if this information could not be determined.  The returned value is a list  of a
+new  form  to be  evaluated  in place  of  the losing  one.   This  interrupt is
+initially set to a break loop.
+
+Page 3-24                           ∪3-1.4.3                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+wrng-type-arg       VARIABLE
+
+The value of wrng-type-arg is the service function for the user  interrupt which
+is  signalled when  an argument  is passed  to a  system function  which  is not
+acceptable to that function.  The argument  is a list of the argument  which was
+not accepted.  The  returned value is  a list of a  new argument to  replace it.
+That is, directly an  argument, not a form to  be evaluated to get  an argument.
+This interrupt is initially set to a break loop.
+
+
+*rset-trap          VARIABLE
+
+The value of *rset-trap is the service function for the user interrupt  which is
+signalled when an error returns  control to top level, just before  the bindings
+are  restored.  By  convention, the  handler for  this interrupt  should  not do
+anything unless the variable  *rset is non-nil.  This  is so that the  user will
+not be bothered unless he has  put lisp in debugging mode.  The argument  is nil
+and  the  returned value  is  ignored.  This  interrupt  is initially  set  to a
+function which enters a break loop if *rset is non-nil.
+
+   There are  other interrupt handlers  which are associated  with I/O  files or
+inferior jobs.  See eoffn, endpagefn, (sstatus ttyint), and create-job.
+
+
+1.4.4  Autoload
+
+
+   The autoload feature provides the  ability for a function not present  in the
+environment to  be automatically  loaded in  from a  file the  first time  it is
+called.  When  eval, apply, funcall,  or the version  of apply used  by compiled
+LISP searches the  property list of an  atom looking for a  functional property,
+and fails to find one, if  a property is found is under the  indicator autoload,
+automatic loading will occur.
+
+   Automatic loading is performed by means of the autoload user  interrupt; thus
+the user may assert  any desired degree of  control over it.  When  the autoload
+property is encountered, the user interrupt handler is called with one argument,
+which is  a dotted pair  whose car is  the atomic symbol  which is  the function
+being autoload'ed,  and whose cdr  is the value  of the autoload  property.  The
+system-supplied handler for this user interrupt could have been defined by:
+
+
+
+
+September 8, 1977                   ∪3-1.4.3                           Page 3-25
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+
+      (setq autoload
+            (function (lambda (x) (load (cdr x)) )))
+
+From this one can see that the value of the autoload property should be the name
+of the file which contains the definition of the function.  Note:  in  the tops-
+10 implementations  the system  autoload handler  presently uses  fasload rather
+than load because  the load function requires  the newio feature.   This affects
+the form of an autoload property.
+
+   When the interrupt handler returns, it should have put a  functional property
+on the property  list of the function  being autoloaded.  If not,  an undf-fnctn
+error will occur with a message such as "function undefined after autoload."
+
+   Examples of setting up functions to be autoloaded:
+
+   In the Multics implementation:
+
+   (putprop 'foo ">udd>AutoProg>Library>foo-function" 'autoload)
+
+   In the pdp-10 oldio implementation:
+
+   (putprop 'foo '(foo fasl dsk me) 'autoload)
+
+   In the pdp-10 newio implementation:
+
+   (putprop 400 '((dsk me) foo) 'autoload)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 3-26                           ∪3-1.4.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+1.5  Debugging
+
+
+
+1.5.1  Binding, Pdl Pointers, and the Evaluator
+
+
+   The MACLISP evaluator  is based on  a push down  list (pdl), or  stack, which
+holds  bindings,  evaluation frames,  and  sundry internal  data.   Bindings are
+values of atomic  symbols which are  saved when the  symbols are used  as lambda
+variables, prog variables, or  do variables.  Evaluation frames  are constructed
+when a non-atomic form is evaluated  or when apply is used.  They  correspond to
+function calls.
+
+   As the evaluator recursively evaluates a form, information is pushed onto the
+pdl and later popped off.  When the *rset and nouuo flags are t this information
+is sufficiently detailed  to be of use  in debugging.  (See the  variables *rset
+and nouuo in the next section.)
+
+   A position within the pdl may be named by means of a "pdl pointer",  which is
+a  negative  fixnum whose  value  has meaning  to  the evaluator.   nil  is also
+accepted as a pdl pointer; it means  the top of the stack, i.e. the  most recent
+evaluation.  Note that this is different from nil as a binding  context pointer,
+which means  the bottom of  the stack  or the outermost  evaluation.  0  is also
+accepted as a pdl pointer; it  designates the frame at the bottom of  the stack.
+Pdl pointers may be used  as arguments to several debugging  functions described
+in the next section.  Since the fixnum value of a pdl pointer has  only internal
+meaning, generally a pdl pointer  cannot be obtained from user input,  except by
+the user typing in a pdl pointer chosen from a list of pdl pointers typed out at
+him.  The "frame" functions described in the next section may be used  to obtain
+pdl pointers.
+
+   An  important thing  to note  about pdl  pointers is  their limited  scope of
+validity.  If the  information on the  pdl which is named  by a pdl  pointer has
+been popped off since the pdl pointer was created, the pdl pointer no longer has
+valid meaning.
+
+
+1.5.2  Functions for Debugging
+
+
+
+
+
+September 8, 1977                    ∪3-1.5                            Page 3-27
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+*rset               SUBR 1 arg
+
+        (*rset x) sets the *rset switch to nil if x is nil, or to t if x is non-
+     nil,  and returns  the value  it set  it to.   (See below).   This function
+     exists primarily for user typing convenience.
+
+
+*rset               SWITCH
+
+        If  the  *rset switch  is  non-nil,  extra information  is  kept  by the
+     interpreter  to  allow  the  debugging  functions,  such  as  baktrace  and
+     evalframe, to work.   In addition, the  interpreter will make  extra checks
+     such as  checking the number  of arguments  passed to a  subr or  lsubr and
+     checking that array subscripts lie within the declared  bounds.  Generally,
+     the *rset switch being on means  "I am debugging"; this is known  as "*rset
+     mode".  The initial state of the switch is nil.
+
+
+nouuo               SUBR 1 arg
+
+        (nouuo t) sets the nouuo switch.
+
+        (nouuo nil) turns off the nouuo switch. (This is the initial state.)
+
+        nouuo returns t or nil  according to whether it turned the  nouuo switch
+     on or off.   (See below.)  This function  exists primarily for  user typing
+     convenience.
+
+
+nouuo               SWITCH
+
+        If the nouuo switch is on, function calls made by compiled  functions to
+     compiled  functions  or  system  functions are  forced  to  go  through the
+     interpreter each  time.  This aids  in debugging.  If  the nouuo  switch is
+     off, which is the normal case,  compiled calls can be made to  go directly,
+     which is much faster.
+
+        The nouuo switch may be turned off at any time.  Each  compiled function
+     call will only go through the interpreter once more, at which time  it will
+     be linked directly.  If the compiled code has been reloaded into the system
+     with the PURE option (see ) then this direct link may be unsnapped  and the
+     Interpreter route re-established  by (sstatus uuolinks).  Because  the PURE
+
+
+Page 3-28                           ∪3-1.5.2                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+     option requires an amount of extra  space and time, it is not  normally on;
+     thus links snapped in code reloaded as non-PURE cannot be unlinked.
+
+        The trace  package turns this  switch on when  a function is  traced, in
+     order  to  ensure  that  tracing will  work  even  for  compiled functions.
+     compiled function  calls which have  been "snapped" to  go directly  do not
+     push debugging information  in *rset mode and  cannot be traced.   See also
+     (status uuolinks).
+
+
+baktrace            LSUBR 0 to 2 args
+
+        baktrace  displays  the  stack  of  pending  function  calls.   It gives
+     detailed information only in (*rset  t) mode.  The first argument is  a pdl
+     pointer, as with evalframe.  If it is omitted, nil is assumed,  which means
+     start from the top of the  pdl.  The second argument is the  maximum number
+     of lines to be typed; if it is omitted the entire stack is displayed.  (The
+     second argument is currently permitted only in the Multics implementation.)
+     The information printed by baktrace  is not the same as that  obtained with
+     evalframe;  both should  be used  to get  the maximum  amount  of debugging
+     information.
+
+
+baklist             LSUBR 0 to 1 arg
+
+        baklist returns a list  containing the information which  baktrace would
+     print.  (This is available only on the pdp-10 implementations.)
+
+
+errframe            SUBR 1 arg
+
+        errframe returns a  list describing an error  which has been  stacked up
+     because of  a user interrupt.   The list has  the form (err  pdlptr message
+     bcp), where pdlptr is a number  which describes the location in the  pdl of
+     the error,  message is a  character string  which can be  printed out  as a
+     description of the error, and bcp is a number which can be used as a second
+     argument to eval or a third argument to apply to cause evaluation using the
+     bindings in effect just before the error occurred.
+
+        The argument to errframe  can be nil, which  means to find the  error at
+     the top of  the stack; i.e. the  most recent error.  It  can also be  a pdl
+     ptr,  in which  case  the stack  is  searched downward  from  the indicated
+
+
+September 8, 1977                   ∪3-1.5.2                           Page 3-29
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+     position.  Thus  if there  are recursive  calls to  the error  handler, the
+     second error back down the stack may be found by:
+
+                        (errframe (cadr (errframe nil)))
+
+        The argument  to errframe may  also be a  positive number, which  is the
+     negative of a  pdl ptr.  This  means start from  the position in  the stack
+     marked by the pdl ptr and search upwards.
+
+        If no error is found, errframe returns nil.
+
+
+errprint            LSUBR 1 to 2 args
+
+        errprint treats its argument the same as errframe.  The second argument,
+     in  newio implementation  only,  is the  file(s)  into which  to  print the
+     information  (see  print).   The  message portion  of  the  error  frame is
+     princ'ed.  errprint  returns t if  a message  was typed out  and nil  if no
+     error frame was found.
+
+
+evalframe           SUBR 1 arg
+
+        The argument to evalframe  is a pdl ptr,  as with errframe.  The  pdl is
+     searched for an evaluation of  a function call, using the same  rules about
+     starting point and direction as errframe uses.  evalframe always skips over
+     any calls to itself that it finds in the pdl.
+
+        The value is a list (type pdlptr form bcp), where type is eval or apply,
+     pdlptr is a pdl pointer to the evaluation in the stack, suitable for use as
+     an argument to  evalframe or errframe or  baktrace, form is the  form being
+     evaluated or  a list  of the  name of  the function  being applied  and the
+     arguments it was applied to, and bcp is a binding context pointer which can
+     be used with eval to evaluate something in the binding context  just before
+     the evaluation found by evalframe.
+
+        evalframe returns nil if no evaluation can be found.
+
+        evalframe only works in (*rset t) mode, since no extra frame information
+     is saved otherwise.
+
+
+
+
+Page 3-30                           ∪3-1.5.2                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+freturn             SUBR 2 args
+
+        (freturn p x)  returns control to the  evaluation designated by  the pdl
+     pointer p, and forces it  to return x.  This "non-local-goto"  function can
+     be used to do fancy recovery from errors.
+
+
+evalhook            VARIABLE
+
+        If the value of evalhook is non-null, then special things happen  in the
+     evaluator.  When  a form  (even an atom)  is to  be evaluated,  evalhook is
+     bound to nil and the functional form which was its value is applied  to one
+     argument - the form that was trying to be evaluated.  The value  it returns
+     is then returned from the  evaluator.  This feature is used by  the Stepper
+     package described later in this section.
+
+        evalhook is bound to nil by break, and setq'ed to nil by errors  that go
+     back to top level  and print *.  This  provides the ability to  escape from
+     this mode if something bad happens.
+
+        In order not to impair  the efficiency of the LISP  interpreter, several
+     restrictions  are imposed  on evalhook.   It only  applies to  evaluation -
+     whether in  a read-eval-print loop,  internally in evaluating  arguments in
+     forms, or  by explicit  use of  the function  eval.  It  does not  have any
+     effect on compiled function references, on use of the function apply, or on
+     the "mapping" functions.  Normally  the evaluator does not check  the value
+     of evalhook, in order to save time.  To make it check, you must both  be in
+     (*rset t) - debugging - mode, and have done (sstatus evalhook t).   Not all
+     implementations need  both of those,  but you should  always do both  to be
+     sure.  If you  use the Stepper  package, you need  not worry; it  does this
+     automatically.
+
+
+evalhook            LSUBR 2 or 3 args
+
+        (evalhook  form hook)  is a  function which  helps exploit  the evalhook
+     feature.   The  form  is  evaluated  with  evalhook  lambda-bound   to  the
+     functional  form  hook.   The  checking  of  evalhook  is  bypassed  in the
+     evaluation  of form  itself,  but not  in any  subsidiary  evaluations, for
+     instance  of  arguments  in  the form.   This  is  like  a "one-instruction
+     proceed"  in  a  machine-language debugger.   If  all  three  arguments are
+     present, the second is a binding context pointer and is used as  the second
+     argument to eval, and the third argument is the hook.
+
+September 8, 1977                   ∪3-1.5.2                           Page 3-31
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+        Example:
+
+
+           (defun hook fexpr (x)                   ;called as (hook &lt;form>)
+                  ((lambda (*rset evalhook)
+                           (prog2 (sstatus evalhook t)     ;magic sstatus
+                                  (eval (car x))           ;evaluate form
+                                  (sstatus evalhook nil))) ;more magic
+                   t
+                   'hook-function))                ;the hook function
+
+           (defun hook-function (f)
+                  (terpri)                 ;print pretty message for input
+                  (princ '|form: |)
+                  (prin1 f)
+                  ((lambda (v)             ;v gets value of form
+                           (terpri)        ;pretty output message
+                           (princ '|value: |)
+                           (prin1 v))
+                   (evalhook f 'hook-function)))   ;this is how to eval the form
+                                                   ; so as to hook sub-forms
+
+
+        The following output might be seen:
+
+                form: (cons (car (quote (a . b))) (quote c))
+                form: (car (quote (a . b)))
+                form: (quote (a . b))
+                value: (a . b)
+                form: (quote c)
+                value: c
+                value: ((a . b) . c)
+                ((a . b) . c)
+
+
+The following functions only exist in the Multics implementation.
+
+baktrace1           LSUBR 0 to 2 args
+
+        baktrace1 is the same  as baktrace except that binding  context pointers
+     suitable for use with eval and apply are displayed along with  the function
+     names.
+
+
+Page 3-32                           ∪3-1.5.2                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+baktrace2           LSUBR 0 to 2 args
+
+        baktrace2 is the  same as baktrace1  except that pdl  pointers, suitable
+     for use with baktrace and evalframe, are displayed along with  the function
+     names and binding context pointers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+September 8, 1977                   ∪3-1.5.2                           Page 3-33
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+1.5.3  The Trace Package
+
+
+   The LISP trace package provides the ability to perform various actions at the
+time a  function is called  and at the  time it returns.   This can be  used for
+traditional tracing or for more sophisticated debugging actions.
+
+   The trace  package is  not part of  the initial  environment; however,  it is
+automatically  loaded in  on the  first reference  to the  function  trace. (See
+autoload.)
+
+   The lisp trace package consists of three main functions, trace,  untrace, and
+remtrace, all of which are fexprs.
+
+   A call to trace has the following form:
+                              (trace trace←specs)
+
+A trace←spec in turn is either an  atom (the name of the function to  be traced)
+or a list:
+                      (function-name option1 option2 ...)
+
+where the options are as follows:
+
+break pred      causes  a break  after  printing the  entry trace  (if  any) but
+                before applying  the traced  function to  its arguments,  if and
+                only if pred evaluates to non-nil.
+
+cond pred       causes trace information to be printed for function entry and/or
+                exit if and only if pred evaluates to non-nil.
+
+wherein fn      causes  the function  to  be traced  only when  called  from the
+                specified function fn.  The user can give several trace specs to
+                trace,  all  specifying  the same  function  but  with different
+                wherein options,  so that  the function  is traced  in different
+                ways when called from  different functions.  Note that if  fn is
+                already being  traced itself, the  wherein option  probably will
+                not work as desired.  (Then again, it might.)  Note that  fn may
+                not be a compiled function.
+
+argpdl pdl      specifies an atom pdl  whose value trace initially sets  to nil.
+                A  list of  the current  recursion level  for the  function, the
+                function's name, and a list of the arguments is cons'ed onto the
+
+
+Page 3-34                           ∪3-1.5.3                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+                pdl when the function is  entered, and cdr'ed back off  when the
+                function is exited.  The pdl can be inspected from a breakpoint,
+                for example, and  used to determine  the very recent  history of
+                the function.  This option  can be used with or  without printed
+                trace output.  Each  function can be given  its own pdl,  or one
+                pdl may serve several functions.
+
+entry list      specifies a list of arbitrary S-expressions whose values  are to
+                be  printed  along  with the  usual  entry-trace.   The  list of
+                resultant values, when printed, is preceded by a \\  to separate
+                it from the other information.
+
+exit list       similar  to entry,  but specifies  expressions whose  values are
+                printed with the exit-trace.  Again, the list of  values printed
+                is preceded by \\.
+
+arg                     that the function's arguments, resultant value, both, or
+                specify
+value                    are to  be traced.   If not  specified, the  default is
+                neither
+both                   Any "options" following one of these four are  assumed to
+                both.
+nil                arbitrary  S-expressions whose  values are  to be  printed on
+                be
+                both  entry  and  exit  to the  function.   However,  if  arg is
+                specified, the values are  printed only on entry, and  if value,
+                only on exit.  Note that since arg, value, both, and nil swallow
+                all  following expressions  for this  purpose, whichever  one is
+                used  should  be the  last  option specified.   Any  such values
+                printed will  be preceded  by a  // and  will follow  any values
+                specified by entry or exit options.
+
+   If the variable arglist is used in any of the expressions given for the cond,
+break, entry, or  exit options, or  after the arg,  value, both, or  nil option,
+when those expressions are evaluated the value of arglist will effectively  be a
+list of the arguments given to the traced function.  Thus
+
+                    (trace (foo break (null (car arglist))))
+
+would cause a break in foo if and only if the first argument to foo is nil.
+
+   Similarly, the variable  fnvalue will effectively  be the resulting  value of
+the traced  function.  For obvious  reasons, this should  only be used  with the
+exit option.
+
+   The trace specifications may be "factored."  For example,
+
+
+September 8, 1977                   ∪3-1.5.3                           Page 3-35
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+                     (trace ((foo bar) value wherein baz))
+
+is equivalent to
+
+            (trace (foo value wherein baz) (bar value wherein baz))
+
+   All output printed by trace can be ground into an indented,  readable format,
+by simply setting the variable  sprinter to t.  Setting sprinter to  nil changes
+the output back  to use the  ordinary print function,  which is faster  and uses
+less storage but is less readable for large list structures.
+
+
+      Examples of the use of trace:
+
+      (1) To trace function foo, printing both arguments on entry and  result on
+   exit:
+                                  (trace foo)
+
+      or (trace (foo)) or (trace (foo both)).
+
+      (2) To  trace function foo  only when called  from function bar,  and then
+   only if (cdr x) is nil:
+                 (trace (foo wherein bar cond (null (cdr x))))
+
+      or (trace (foo cond (null (cdr x)) wherein bar))
+
+   As this example shows, the  order of the options makes no  difference, except
+   for arg, value, both, or nil, which must be last.
+
+      (3) To trace function quux, printing the resultant value on exiting but no
+   arguments on entry, printing  the value of (car  x) on entry, of  foo1, foo2,
+   and (foo3 bar) on exit, and of zxcvbnm and (qwerty shrdlu) on both  entry and
+   exit:
+
+        (trace (quux entry ((car x)) exit (foo1 foo2 (foo3 bar))
+               (qwerty shrdlu)))
+
+      (4)  To trace  function foo  only when  called by  functions bar  and baz,
+   printing args on entry and result  on exit, printing the value of  (quux barf
+   barph) on exit from foo  when called by baz only, and  conditionally breaking
+   when called by bar if a equals b:
+
+
+
+Page 3-36                           ∪3-1.5.3                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+
+               (trace (foo wherein bar break (equal a b))
+                      (foo wherein baz exit ((quux barf barph))))
+
+      (5) To trace  functions phoo and fu,  never printing anything  for either,
+   but saving all arguments for both on a common pdl called foopdl, and breaking
+   inside phoo if x is nil:
+
+               (trace (phoo argpdl foopdl break (null x) cond nil nil)
+                      (fu argpdl foopdl cond nil nil))
+
+      The "cond nil"  prevents anything at all  from being printed.   The second
+   nil in each  trace spec specifies  that no args or  value are to  be printed;
+   although the cond nil would prevent the printout anyway, specifying  this too
+   prevents trace from even setting up the mechanisms to do this.
+
+      trace returns as its  value a list of  names of all functions  traced; for
+   any functions traced with the wherein option, say (trace (foo  wherein bar)),
+   instead of  returning just  foo it returns  a 3-list  (foo wherein  bar).  If
+   trace finds a trace spec it  doesn't like, instead of the function's  name it
+   returns a list whose car is ?  and whose cdr is an error message.   The error
+   messages are:
+
+(? wherein foo)  trace couldn't find  an expr, fexpr, or macro property  for the
+                function specified by the wherein option.
+
+(? argpdl foo)  The  item following the argpdl  option was not a  non-nil atomic
+                symbol.
+
+(? foo  not function)  Indicates  that the function  specified to be  traced was
+                non-atomic, or  had no  functional property.   (Valid functional
+                properties are expr, fexpr, subr, fsubr, lsubr, and macro.)
+
+(? foo)         foo is not a valid option.
+
+   Thus a use of trace such as
+
+                  (trace (foo wherein (nil)) (bar argpdl nil))
+
+would return, without setting up any traces,
+
+                       ((? wherein (nil)) (? argpdl nil))
+
+
+September 8, 1977                   ∪3-1.5.3                           Page 3-37
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+   If you  attempt to specify  to trace a  function already being  traced, trace
+calls untrace before setting up the  new trace.  If an error occurs,  causing (?
+something) to be returned, the function for which the error occurred may  or may
+not have been untraced.  Beware!
+
+   It is possible to call trace with no arguments.  (trace) evaluates to  a list
+of all the functions currently being traced.
+
+   untrace is used to undo the  effects of trace and restore functions  to their
+normal, untraced state.  The argument to untrace for a given function  should be
+what trace returned for  it; i.e. if trace  returned foo, use (untrace  foo); if
+trace returned (foo wherein bar) use (untrace (foo wherein bar)).   untrace will
+take multiple specifications, e.g. (untrace foo quux (bar wherein  baz) fuphoo).
+Calling untrace  with no  arguments will untrace  all functions  currently being
+traced.
+
+   remtrace,  oddly enough,  expunges  the entire  trace package.   It  takes no
+arguments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 3-38                           ∪3-1.5.3                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+1.5.4  The Stepper
+
+                                The Rich Stepper
+
+   The Rich stepper package provides a simple, small debugging capability.
+
+                   How to Use the STEP Facility
+
+
+   The  LISP  "stepping" package  is  intended  to give  the  LISP  programmer a
+facility analogous to  the Instruction Step mode  of running a  machine language
+program.  The package contains two compiled functions which are loaded by
+
+                         (FASLOAD STEP FASL DSK LIBLSP)
+
+The user interface is through the function (fexpr) STEP, which sets  switches to
+put the LISP interpreter in and out of "stepping" mode.  The basic commands are:
+
+
+                      (STEP T)        Turn on stepping mode.
+                      (STEP NIL)      Turn off stepping mode.
+These commands are usually typed at top level, and will take  effect immediately
+(i.e. the next S-exp typed in will be evaluated in stepping mode). Also &lt;ctl G>,
+in addition to returning to top level, turns off stepping mode.
+
+   In  stepping  mode,  the LISP  evaluator  will  print out  each  S-exp  to be
+evaluated before  evaluation, and the  returned value after  evaluation, calling
+itself recursively to display the stepped evaulation of each argument, if the S-
+exp  is  a function  call.   In stepping  mode,  the evaluator  will  wait after
+displaying  each  S-exp  before  evaluation for  a  command  character  from the
+console:
+
+                &lt;space>         Continue stepping recursively.
+
+                &lt;rubout>        Show returned value from this level
+                                only, and continue stepping upward.
+
+                &lt;cr> or &lt;tab>   Turn off stepping mode. (but continue
+                                evaluation without stepping).
+
+                P               Redisplay current form in full
+                                (i.e. without prinlevel or prinlength)
+
+
+September 8, 1977                   ∪3-1.5.4                           Page 3-39
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+                B               Get breakpoint; proceed with alt-P
+
+                M               See advanced features under
+                                "stepping macro expansions"
+
+   **************** More Advanced Features *************************
+
+   Selectively turning on STEP:
+
+           (STEP FOO1 FOO2 ...)
+
+   If  this  command  is  typed  at  top  level,  stepping  will   not  commence
+immediately, but rather when the  evaluator first encounters a S-expr  whose CAR
+is one of FOO1, FOO2, etc.  This form will then display at the console,  and the
+evaluator will be in stepping mode waiting for a command character.
+
+   Stepping Macro Expansions:
+
+   If the stepper is  proceeded with a &lt;sp>, it  will not step the  execution of
+macro expansions, but will rather just show the result of the macro of expansion
+and wait for another command.
+
+   To see the execution of the macro expansion itself, proceed the  stepper with
+an M instead of a &lt;sp>.
+
+   Using STEP with breakpoints:
+
+   The above description applies to turning stepping on and off globally  at top
+level.  More detail is necessary to use STEP flexibly in and out  of breakpoints
+(e.g. together with TRACE).
+
+   If stepping is turned on by (STEP T) at top level, the evaluator will  NOT be
+in  stepping  mode  within  a  breakpoint loop.   If  you  wish  to  use stepped
+evaluation  within  a break  loop  you must  turn  it on  locally  by  (STEP T).
+Conversely, if stepping was  not turned on at top  level and it is turned  on by
+(STEP T) in a break loop, it will  NOT be on when return is made from  the break
+loop by &lt;alt>P.
+
+   However, executing  (STEP NIL)  inside a  break loop  will turn  off stepping
+globally, i.e. within the break loop, and after return has be made by &lt;alt>P.
+
+   The most useful feature is the following, however:
+
+
+Page 3-40                           ∪3-1.5.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+                   (STEP)          Command at top level has no immediate effect.
+
+   After (STEP) has been executed at top level, a subsequent (STEP T)  inside of
+a break loop will  have the effect of turning  on stepping mode both  inside the
+break loop and globally,  i.e. the evaluator will start  to step as soon  as the
+return is made from the break loop by &lt;alt>P.  Thus, for instance, one could set
+TRACE  to break  at  some special  place,  and then  use  the break  to  turn on
+stepping.
+
+   PRINLEVEL and PRINLENGTH:
+
+   IN the present version, for convenience, PRINLEVEL and PRINLENGTH are lambda-
+bound  inside the  hooking function  to 3  and 5  respectively.  These  could be
+changed by editing the EXPR code and recompiling.
+
+   When the P command is used, PRINLEVEL and PRINLENGTH are temporarily bound to
+NIL, and the toplevel printer (value of atom PRIN1) is used to redisplay current
+form.
+
+   Overhead of Stepping:
+
+   If stepping mode has  been turned off by  &lt;ctl G>, the execution  overhead of
+having the stepping packing in your LISP is identically NIL.
+
+   If stepping mode has been turned off by (STEP NIL), every call to EVAL incurs
+a small  overhead--several machine instructions,  corresponding to  the compiled
+code for a simple COND and one function pushdown.
+
+   Running with (STEP) entered at top level is the same overhead-wise as running
+with (STEP NIL).
+
+   Stopping stepping by responding  &lt;tab> incurs the same continued  overhead as
+(STEP NIL).
+
+   Running with (STEP FOO1  FOO2 ...) can be  more expensive, since a  MEMBER of
+the CAR of the  current form into the list  (FOO1 FOO2 ...) is required  at each
+call to EVAL.
+
+   Memory-wise, the total compiled stepping package occupies about  423 words of
+binary program storage.   Interaction with DEBUG and TRACE:
+
+   To the  best of my  knowledge, the STEP  package has no  special interactions
+with DEBUG, TRACE, or any other system packages.
+
+September 8, 1977                   ∪3-1.5.4                           Page 3-41
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+                            The Morganstern Stepper
+
+   The  Morganstern   Stepper  package   provides  debugging   capabilities  for
+interpreted lisp programs  that are comparable  to the capabilities  provided by
+DDT for assembler code.  These capabilities include:
+
+   1) Single  stepping through  the evaluation of  a function  and over  or into
+other interpreted functions, when called, on a selective basis as  determined by
+the user.  Each such form and its resulting value may be displayed.
+
+   2) Dynamic  breakpointing on one  or more of  the following  conditions:  the
+form or atom about to be evaluated matches a pattern you provide; the form being
+evaluated involves a  specified function; a given  atomic symbol evaluates  to a
+given value; a given atomic symbol is to be bound in a prog, either type  of do,
+or an eval'd  lambda-expression; or upon an  arbitrary condition specified  by a
+predicate written as LISP code.
+
+   3) Returning  a different value  for a given  S-expression.  This  allows for
+changing the action that would be selected by conditionals in the program and/or
+by go's in a prog or do.  You can also go to any tag inside the current prog.
+
+   4) These capabilities may be requested when the program is  initially started
+by a top-level form, or they may  be initiated at any other point in  the course
+of execution - either  from the terminal while  in a breakpoint, or  directly by
+the program.
+
+   The stepper may be invoked initially  by using the function mev as  one would
+use eval of one argument; e.g.  (mev '(fcn arg1 arg2)).  From a breakpoint or in
+a program, the stepper may be turned on by invoking (hkstart) with no arguments.
+It may be turned off by the q command described below, or of course  by control-
+G.  After mev  evaluates its argument,  it returns the  value and turns  off the
+stepper.  Note that in  the above example the form  given as an argument  to mev
+was quoted.  If, say, the value of f was the S-expression (fcn arg1  arg2), then
+one could use (mev f) instead.
+
+   At  any  point during  the  stepping, one  may  inspect the  values  of other
+variables, and  even reapply mev  to any form.   This may be  done in  either of
+three ways.  Each command will be prompted for by //, usually following the last
+form printed out.  Any S-expression that  you type which is not recognized  as a
+command will be eval'd (within  an errset to catch errors).   Alternatively, you
+can use the  e command to eval  any expression, or the  h command to get  a nice
+type of control-H break.  (This is  really a control-B break, but it used  to be
+control-H so the command happens to be called h.)
+
+Page 3-42                           ∪3-1.5.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+   In the ITS  implementation each command must  be followed by a  space (unless
+the command  is a  list).  In the  Multics implementation  each command  must be
+followed by a newline.  Actually, this depends not on the implementation  but on
+(status linmode).  Each form and result which is printed out will be followed by
+#number  indicating the  relative level  of evaluation  (i.e. stack  depth since
+invocation).
+
+   The primary commands are:
+
+d   (mnemonic for  down) Go  down to  the next  deeper level  of  evaluation and
+   display the first  form there before  evaluating it.  E.g.  if the form  is a
+   function call, this will display the first argument of the function if it has
+   arguments in the  call; otherwise it will  display the first  S-expression of
+   the body of the function.  It then prompts for the next command.
+
+e  (eval)  Can be used  to evaluate  an arbitrary expression.   It starts  a new
+   line, waits for you to type the expression, then eval's it within  an errset,
+   and prints the result.  This  is comparable to just typing the  expression or
+   atom after the //, but cannot  be confused with a command, and the  format is
+   nicer.
+
+h  (control-H) Enters  a break loop, and  when $p'ed displays the  current form.
+   Within the  break, one can  inspect the values  of variables, etc.,  and even
+   reapply mev to any form.
+
+n  (next) Display the next form at this level, without showing or inspecting the
+   evaluation of the lower levels of the current form.  The value of the current
+   form is displayed first.  If you  wish a condition to be tested for  at lower
+   levels, use nn instead.
+
+nn Like n but slower since it inspects the lower levels.  Use instead of  n when
+   testing for a condition.
+
+u  (up) Go up to the next  higher level of evaluation and show the next  form at
+   that  level.  The  form(s)  at the  current  and lower  levels  are evaluated
+   without  display.   As  an  example  of its  use,  after  you  have  seen the
+   evaluation of the arguments to a function, the next form to be  evaluated, if
+   the function  is being  interpreted, will  be the  first S-expression  of the
+   function; to avoid seeing how  the function is evaluated internally,  you can
+   type u.  Note that the lower  levels are not inspected - thus if  a condition
+   is to be tested for at these levels, use uu.
+
+
+
+September 8, 1977                   ∪3-1.5.4                           Page 3-43
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+(u num)  If  num is positive  (or zero), forms  are not inspected  nor displayed
+   until level num  is returned to.   If negative, it  goes up (abs  num) levels
+   relative to the current level.  Thus (u -1) is equivalent to u.
+
+uu Like u but slower.  Use if testing for a condition.
+
+(uu num) Like (u num) but slower.  Use if testing for a condition.
+
+q  (quit) Exit from the stepper.
+
+s  (show  or display  mode)  For  datapoints and  other display  terminals, this
+   gives  a nice  easily  read output  of  selected levels  that  constitute the
+   context  of the  current evaluation.   Specifically, it  selects  the current
+   level for sprinting  (pretty printing) as a  "header", and as you  go deeper,
+   the local context  is abbreviate-printed under  this header, and  the current
+   output will be sprinted.  s may be used as often as you like.    Headers will
+   automatically  be popped  when you  return.  The  command (s  num)  selects a
+   particular  level  as a  header.   It and  the  command sn  and  several user
+   settable parameters are described in the more detailed section below.
+
+(= s-exp)   The S-expression  is substituted  for the  current form  and another
+   command is prompted for (i.e. you can  step into or over the new form  if you
+   want to).  When the resulting value is returned it will be as if the original
+   form had yielded that value.  For example, you can change the  apparent truth
+   or falsity of predicates  or bypass a (go  label), as well as  just returning
+   different values for an S-expression.
+
+(cond ...)  Tests  for conditions prior to  evaluation of each future  form, and
+   when satisfied will print a  message, display the form, and wait  for another
+   command (which may of course be h for a break).  The argument to this cond is
+   an  arbitrary S-expression  or symbol  which is  evaluated like  a predicate.
+   This is similar to the cond feature of the trace package.
+
+   In specifying the predicate, the  form about to be evaluated may  be obtained
+   as the value of the variable %%form.  The expression (hooklevel)  returns the
+   relative level of evaluation.  More than one predicate may be given, in which
+   case they are or'ed together,  except when two arguments form a  special test
+   as described in the more  detailed section below.  The condition  will remain
+   active  at all  levels that  are inspected  by the  stepper  until explicitly
+   turned off by (cond nil).
+
+   (matchf ...) is a function which will pattern match against the current form.
+
+
+Page 3-44                           ∪3-1.5.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+   It may be used in the predicate of the cond.  (Also see its related use  as a
+   command.)  The argument  to matchf is compared  to %%form element  by element
+   from left to right, and  succeeds when each element of the  pattern succeeds.
+   Of  importance, the  pattern need  not include  the entire  form.   * matches
+   anything.   The  procedure is  applied  recursively to  sublists,  unless the
+   sublist is  of the  form (#  ...) in  which case  # is  bound to  the current
+   element of %%form and  the cdr (not cadr) of  the #-list is evaluated  as the
+   test on that element.  Except in  this case, atoms and lists should  be given
+   as in the original code  since they are not evaluated.  Some  simple examples
+   are:
+
+      (matchf xyz) succeeds if the atom xyz is about to be evaluated.
+
+      (matchf (setq alpha)) succeeds if the atom alpha is about to be setq'd.
+
+      (matchf  (putprop name  * 'source))   succeeds if  the property  source is
+         about to be  putprop'd on the  atom pointed to  by (i.e. the  value of)
+         name.
+
+      (matchf (setq (#  member # '(alpha beta  s3)))) succeeds if  either alpha,
+         beta, or s3 is about to be setq'd.
+
+      (matchf (rplacd * '(* 9))) matches (rplacd (last urlist) '(2 9 4)).
+
+      (matchf ((# member # '(foo  bar)))) succeeds if a function call  to either
+         foo or bar is about to  be evaluated (more precisely if the car  of the
+         form about to be evaluated is either foo or bar).
+
+nil (cond nil) turns the condition off and saves the current non-nil condition.
+
+(cond) When no argument is given,  the last non-nil condition (which is  the old
+   property of  %%cond) is established  as the current  condition (which  is the
+   value of %%cond).  (If the previous condition was not nil then it is saved as
+   the old property, thus allowing for alternation of two conditions.)
+
+(matchf ...) is equivalent to (cond (matchf ...)), see above.
+
+   The following functions are useful in connection with the stepper.
+
+   (hkstart) will initiate stepping when encountered in a program or  typed from
+a breakpoint.  (hkstop) will act like the q command to turn off  stepping. (Also
+see below for more info.)
+
+
+September 8, 1977                   ∪3-1.5.4                           Page 3-45
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+   (mbak) is  a function to  be used like  the lisp system's  (baklist).  (mbak)
+strips out from the result of (baklist) those functions that have to do with the
+stepper.
+
+   The remainder  of this section  is a complete  list of the  Stepper commands,
+which can be used for reference.
+
+   Commands which are not lists must be followed by a space.  You can use rubout
+before completing the command (and its space if necessary).   Alternatively, you
+may abort the command before completing it by doing control-X.
+
+   Any S-expression that you type which  is not recognized as a command  will be
+evaluated (within an errset to catch errors).  Thus you can evaluate any atom or
+do any function call simply by  typing it following the prompting // as  long as
+it is not interpretable  as one of the commands  below (or nil).  Note  that you
+can actually go to  a tag within your prog  simply by typing (go tag)  after the
+//.  To evaluate a form which  looks like a command, type (or form)  to evaluate
+it, e.g. (or a) evaluates the atom a.  If you want you can even  write functions
+which know about the stepper and treat them as commands.
+
+a    (all) Automatically  displays all forms and  values seen by the  stepper at
+     all levels.  Typing a space  at any time thereafter will cause  the stepper
+     to leave this mode and prompt  for a new command.  If you want  the stepper
+     to wait for a command after each form, you can use the d command.
+
+     Commands a  ad (a -)  c and cc  pause after each  new form is  displayed if
+     %%ac-sleep is non-nil.  Its value is used as the sleep time in seconds.
+
+ad   (all down) Automatically displays  all forms and values encountered  by the
+     stepper in evaluating the current  form (i.e. at deeper levels).   Typing a
+     space prior  to completion will  cause the stepper  to leave this  mode and
+     prompt  for a  new command.   (Also  see d.)   Sleeps after  each  form, as
+     described under the a command.
+
+(a lev)  Automatically displays all forms and values at the indicated  level and
+     lower (deeper) levels, turning itself  off when evaluation pops to  a level
+     with a  smaller level  number.   Typing  a space  prior to  completion will
+     cause the stepper to leave this  mode and prompt for a new  command.  (Also
+     see d.)  Sleeps after each form, as described under the a command.
+
+b    Sets a breakpoint  to occur after evaluation  of the current form.   At the
+     break, the value to be returned is the value of %%value, and may be changed
+
+
+Page 3-46                           ∪3-1.5.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+     by setq'ing this variable.  The  form that yielded this value is  the value
+     of %%form.  Type $p to proceed from the breakpoint.  If you prefer that the
+     system wait rather than break see the wtif command.  (b operates  by adding
+     the current hooklevel to  %%breaklist.)  You can get automatic  breaking at
+     all levels by using (retcond t) or conditional breaking as  described below
+     for the (retcond ...) command.
+
+c    (current) Automatically displays all  forms and values at just  the current
+     level.   Typing a  space at  any  time during  the display  will  cause the
+     stepper to leave this mode and prompt for a new command.  The  stepper does
+     not inspect the forms of lower levels - thus if a condition is to be tested
+     for at these levels, use  cc.   Sleeps after each form, as  described under
+     the a command.
+
+cc   Like c, but inspects the lower levels.
+
+ctog  Flips the %%condnotallow toggle which is initially t, meaning do not allow
+     c, m, n, or u commands if a condition is being tested for.  nil means allow
+     these anyway.
+
+(cond ...)  Tests for conditions  prior to evaluation of each future  form.  For
+     pattern matching against the form  using the matchf function and  for other
+     information see the description of (cond ...) above.
+
+special tests for (cond ...) :
+     To  aid  the  specification  of common  tests,  the  following  "flags" are
+     provided - the same effects could be obtained by inspecting %%form  in your
+     own predicate given to cond.  If the first argument to the cond is from the
+     set (form  formq bind bindq  atomval atomvalq fcn  fcnq and andq)  then the
+     second argument is  used to derive a  test.  This process is  repeated with
+     the remaining arguments,  if any.  The  resulting tests, together  with any
+     remaining  arguments not  satisfying  this process,  are  effectively or'ed
+     together to  derive the  overall condition  (except for  the and  andq flag
+     special  tests which  are and'ed).   The arguments  are not  evaluated when
+     typed but  are evaluated each  time the condition  is tested.   These flags
+     each may be used more than once.
+
+     The meanings of these flags are:
+
+   andq  The next argument is and'ed with the remaining tests, and must  yield a
+   non-nil  value for  the  remainder of  the  condition to  succeed.   (See the
+   comments for cond in the "complete list of commands" below regarding  the use
+   of side effects)
+
+September 8, 1977                   ∪3-1.5.4                           Page 3-47
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+   atomvalq  The next argument  should be a list  of two elements, the  first an
+   (unquoted) name of  an atom, and  the second the value  of this atom  for the
+   test to succeed.
+
+   bindq  Watch  for the  following (unquoted) atomic  symbol to  be bound  in a
+   prog, or in either type of do, or an explicitly evaluated lambda (as distinct
+   from an applied lambda or function call).
+
+   fcnq  Watch for the following (unquoted) function name to be seen by  eval as
+   the car of the form about to be evaluated.  (This cannot check for applied or
+   mapped function calls).
+
+   formq  The following (unquoted) S-expression is to be watched for.  E.g. used
+   to check when a particular variable is about to be evaluated.
+           These evaluate their  argument each time  the condition is  tested in
+  and
+           order to get the desired S-expression or atom name, and  then perform
+  bind
+           like their  "q" counterparts.  These  are particularly useful  if the
+  fcn
+           flag's argument is the value  of a variable.  (Be sure not  to change
+  form
+           the  variable's value  accidentally  while the  condition  remains in
+  atomval
+           effect.)
+
+      As  a simple  example, (cond  fcnq rplacd)  will check  and stop  when the
+      function rplacd is about  to be used (i.e. when  it is the the car  of the
+      form to be evaluated).
+
+     The  commands c,  m, n,  and  u do  not inspect  all levels,  and  thus the
+     condition cannot be tested for at these levels.  You can use cc, nn, mm, or
+     uu instead, or  use the ctog  command.  Naturally, condition  testing slows
+     the speed  of execution  at levels that  are inspected  by the  stepper but
+     which you do not have displayed.
+
+     If you choose to, you can have your predicates produce side-effects such as
+     recording information  of value  to you or  setting states  for use  by the
+     condition later.  You can  use the and, andq  flags (more than once  if you
+     like) to have the expressions executed even upon success, so long  as these
+     flags appear first in the condition.  Other conditions are evaluated in the
+     order of appearance until the first success is found.
+
+d    (down) Displays the next  level down (as described above also).   Note that
+     if the form is an atom, the effect is the same as the n command.   Hence if
+     you want the  stepper to display  every form and value,  but to wait  for a
+     command after each form, just keep using the d command.
+
+
+Page 3-48                           ∪3-1.5.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+e    (eval) Can be used to evaluate an arbitrary S-expression.  It starts  a new
+     line, waits for you to type the expression, evaluates it within  an errset,
+     and prints the  result.  Comparable to just  typing the expression  or atom
+     after the  //, but cannot  be confused  with a command,  and the  format is
+     nicer.
+
+(=  S-exp)  Replaces  the current  form with  the given  S-expression,  and then
+     prompts  for another  command, as  described above.   If two  arguments are
+     given,  then this  expression will  not be  treated as  a  stepper command,
+     rather it will be evaluated (see comments at top of this section).
+
+h    Control-H break  is executed.  The current  form is redisplayed when  $p is
+     typed.  The form about to be evaluated is the value of %%form.   Within the
+     break, one can inspect the values of variables, etc., and even  reapply mev
+     to any form.
+
+k (kill)  Does not evaluate the current form nor display any value. This is good
+     for  avoiding  side  effects   if  restepping  through  a   program  again.
+     Equivalent to (= nil) followed by m command.
+
+lr (last result) A complete rather than abbreviated printout of the  last result
+     is given. (See (p - -) for further information.)
+
+m  Next,  like n  but the result  of the  current form is  not displayed.   If a
+     condition is to be tested for at lower levels, use mm.
+
+(matchf ...)  is equivalent to  (cond (matchf ...)), see the the  description of
+     (cond ...) above.
+
+mm  Next, like nn but the result of the current form is not displayed.
+
+n  (next) Displays  the value of  the current form  and displays the  next form,
+     then awaits  the next command.   Does not inspect  the lower levels.   If a
+     condition is to be tested for at lower levels, use nn instead.
+
+nn  Like n but inspects the lower levels.
+
+o  (old)  Does (mev 'last form).  This is useful for seeing how a  form produced
+     an unexpected value when  you went over it  with n or nn.   If reevaluating
+     the form can produce side effects be careful.  Can be exited from by the xx
+     command.  (The old form is the value of %%oldform.)
+
+
+
+September 8, 1977                   ∪3-1.5.4                           Page 3-49
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+ol  (old, at current level)  Does (mev 'last form at this level).   Behaves like
+     o.  Useful to see the form (at this level) which produced the current value
+     - rather than the last form  printed out, as o would yield.  (The  old form
+     used here can be obtained by (get %%hooklevel 'oldform).)
+
+p  (print)  Redisplays the  current form.  This is  useful if you wish  to clear
+     the screen first with control-L.  Gives typical abbreviated display (see (p
+     -  -)), except  has somewhat  different effect  if in  display mode  (see s
+     command).  (For  hackers of special  data structures, e.g.  "owl", printing
+     will be done with the function which is the value of the atom prin1 if non-
+     nil - as also applies to top-level in lisp.  This value of prin1 is checked
+     only in the mev function.   Moreover, unless you request lisp not  to "snap
+     links" in compiled code, you may have to reload the stepper  after changing
+     prin1.
+
+pp (full print) Gives a complete printout of the current form.
+
+ppp  (even better  printout)  Pretty-prints  the current  form using  the sprint
+     function.  Uses a lot of screen  in general, and so will turn  on pagepause
+     for you.
+
+(p -  -) Resets the  parameters for the  abbreviated printout used  for results,
+     forms and the p command.  The first parameter is the prinlevel,  the second
+     is the prinlength; both must be given.  If nil is given instead of a number
+     no abbreviating is  done with respect to  that parameter; thus (p  nil nil)
+     turns  off   abbreviation.   (The  current   settings  are  the   value  of
+     %%hookprin.)
+
+q  (quit) Exits  from the stepper.   Previously requested breaks  and conditions
+     are disabled, and any non-nil  conditions are saved on the old  property of
+     the condition name.  (Control-G also exits as usual.)
+
+s (show or display mode)  For datapoints and other display terminals, this gives
+     a nice easily read output of selected levels that constitute the context of
+     the current  evaluation.  Specifically,  it selects  the current  level for
+     sprinting  as  a "header",  and  as you  go  deeper, the  local  context is
+     abbreviate-printed  under  this  header, and  the  current  output  will be
+     sprinted.  s may be used as often as you like.   Headers will automatically
+     be popped when  you return.  All sprinting  is done with pagepause  on.  If
+     control-X is  typed during sprinting,  that expression will  be redisplayed
+     using  abbreviated-printing  instead.  When  in  this display  mode,  the p
+     command will clear the screen from the last form down, unless  preceeded by
+
+
+Page 3-50                           ∪3-1.5.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+     control-L (or if wrap-around occurred),  in which case the screen  is fully
+     redisplayed.  Also see (s arg) for more information and options.
+
+(s arg)  If arg is positive, this selects the form at that level as the "header"
+     for s(how) mode.   If negative, it  uses the form  at arg levels  above the
+     current  one.  If  arg is  nil,  display mode  is turned  off  (headers are
+     remembered though).   (s t)  just turns  display mode  on if  currently off
+     using the previously remembered headers  if still applicable; but if  it is
+     already on,  this pops the  stack of headers  by one (normally  headers are
+     automatically popped when  the level is  returned from).  All  sprinting is
+     done  with pagepause  on.   If control-X  is typed  during  sprinting, that
+     expression will  be redisplayed  using abbreviated-printing  instead.  Also
+     see the sn command.
+
+     Several parameters are  user settable from their  defaults.  %%lowerdisplay
+     and %%lowerdisplay-min control the maximum and minimum number of  levels to
+     display  below  the  header  (defaults  of  5  and  2).   This  is  done in
+     abbreviate-printed form using %%shortprin which is a list of  the prinlevel
+     and prinlength (defaults 3 and 3).  Sprinting of forms and results  will be
+     abbreviate-sprinted  by  the  msprint  function  if  the  flatsize  of  the
+     expression exceeds %%flatsize-max  (default about 450).  The  prinlevel and
+     prinlength for the latter are  the list which is the value  of %%sprintabbr
+     (default is (7  8)).  If %%flatsize is  nil, full sprinting will  always be
+     used;  (if  negative,  abbreviate-sprinting will  always  be  used  so that
+     infinite  printing  circular structures  will  sprint  and abbreviate-print
+     finitely.  To  turn off  sprinting of results  setq %%result-sprint  to nil
+     (default  t).  If  %%mdistitle is  neither  nil nor  a number,  it  will be
+     evaluated just after the screen  is cleared, allowing printing of  a title.
+     If it is a number,  that number of blank lines  will be left at the  top of
+     the screen (also see sviewmsg function below).  If the partial  clearing of
+     the screen bothers your eyes, setq'ing %%eyestrain1 to a number  of seconds
+     (e.g. 0.5 to 2.0) will slow down the new display depending on the number of
+     lines cleared.
+
+sn  Just for  s(how) display  mode.  It  prevents clearing  of the  screen after
+     prompting for another command, but  only until the next prompting  // after
+     that.  Useful if you want a result to remain displayed a little longer.  If
+     you want to prevent clearing of the screen for more than a couple of times,
+     use (s nil), then do (s t) when you want to resume display mode.
+
+(retcond  ...)  Tests  for conditions  just after  each form  is  evaluated, and
+     breaks when  such condition is  satisfied.  At the  break, the value  to be
+
+
+September 8, 1977                   ∪3-1.5.4                           Page 3-51
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+     returned  is the  value of  %%value, and  may be  changed by  setq'ing this
+     variable.  The form that yielded  this value is the value of  %%form.  Type
+     $p to  proceed from the  breakpoint.  The conditions  are specified  as for
+     (cond ...).  Note that (retcond t)  will give you a break as each  level is
+     popped (returned from),  including levels above  the one where  the request
+     was  made.  (retcond  nil)  disables the  retcond.  If  you  prefer waiting
+     rather than breaking see the wtif command.
+
+     Two additional flags are available:
+
+   valueq  The  test (equal %%value  next-argument) is performed  as if  it were
+   and'ed with the remaining predicates in the condition.
+
+   value  Like valueq but the test is (equal %%value (eval next-argument)).  The
+   overall condition is maintained on  the value of the atom %%retcond,  and the
+   previous non-nil condition is on the old property of this atom.  If  you want
+   both  cond and  retcond conditions  to be  the same  you can  (setq %%retcond
+   %%cond).  The value and valueq predicates will be ignored in a (cond ...).
+
+u  (up)  Go up  to next  higher level.   Current and  lower levels  are executed
+     without display.  The lower levels are not inspected - thus if  a condition
+     is to be tested for at these levels, use uu.  This can be used to  skip the
+     display  of  a  function's  internal  evaluation  after  having   seen  the
+     arguments, as described in the previous section.
+
+(u num)  If  num is positive  (or zero), forms  are not inspected  nor displayed
+     until that level  number is reached.  If  negative, it goes up  this number
+     (absolute value) of levels relative  to the current level.  Thus (u  -1) is
+     equivalent to u .
+
+uu Like u, but  also inspects lower levels.  Use  if you have a condition  to be
+     tested.
+
+(uu num) Like (u  num) but slower.  Use if  testing for a condition.   Note that
+     (uu  -999) effectively  means  that you  won't  see any  levels  unless the
+     condition in a cond or retcond is satisfied.
+
+wtal  (wait-all)   Flips  a  toggle  which when  on  causes  a  pause  after the
+     evaluation of every  form, but before that  value is returned.   The system
+     waits for an input character.  Typing y(es), b(reak), or h  (for control-h)
+     followed by space will cause a break as would the b command.  Typing just a
+     space, or any  other character followed by  a space, will proceed  from the
+     pause.  Default is off.
+
+Page 3-52                           ∪3-1.5.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+wtif  (wait-if)   Flips a  toggle which  when on  causes requests  by the  b and
+     (retcond ...) commands to result in a pause rather than a break.  The pause
+     is like that  of the wtal command,  and may be proceeded  by a space;  or a
+     break initiated by typing y, b, or h followed by a space.  Default is off.
+
+xx Does a control-X type of  lisp quit.  (A control-X typed after the  // prompt
+     will be caught by  an errset.  The xx  command is executed outside  of that
+     errset.)
+
+The following other facilities exist:
+
+(gethklevel  num)   This  function  returns  the  S-expression  that  is  on the
+     execution stack of the stepper at the given level number (see hkshow).  Can
+     be used to get an unsprinted unabbreviated display of the form or to record
+     or process the form as you desire, including reapplication of mev to  it in
+     the current context.
+
+(hkshow  num)   This function  will  display  previous forms  which  are  on the
+     execution stack, as seen by  the stepper while it has been  activated.  The
+     previous  num of  levels are  shown,  with the  current form  last.   If no
+     argument is given,  then all levels are  shown.  The display is  done under
+     the control of prinlevel and prinlength  which are settable by the (p  - -)
+     command.  Of course this function can also be used as if it were  a command
+     by typing it after the prompting //.
+
+(hksprint num)  This function will sprint the form on the level whose  number is
+     given as the argument.  Can also be used as a command.
+
+(hkstart)  Use this function to invoke or reinvoke the stepper from a breakpoint
+     or  from  a program  as  described above.   If  used within  a  break, type
+     (hkstart) by itself rather than within another S-expression or function, as
+     it has to climb the stack from the point of invocation.  If an  argument is
+     given  to this  fexpr,  it will  be  evaluated just  prior  to establishing
+     stepping, with ↑w bound  to nil, so that  you can print out  information if
+     called from a program.
+
+     (It is possible for  the invocation of the  stepper by this method  to have
+     limited scope under some circumstances.  Such a boundary would be  a second
+     breakpoint higher on the stack or a previously terminated invocation of the
+     stepper that  is still  on the stack.   Also if  the program  was initially
+     started without  mev, and stepping  is retained thoughout  the rest  of the
+     execution, stepping may also remain for forms typed at top level -  to stop
+     this just do control-G (or use the q command) .)
+
+September 8, 1977                   ∪3-1.5.4                           Page 3-53
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+(hkstop)  This function  turns off the stepper  whenever executed - in  the same
+     manner as the q command would.
+
+hooklist  is  an atom whose  value is  inspected before each  attempt to  read a
+     command from the console.   If hooklist is non-nil,  it is assumed to  be a
+     list of commands to the stepper - each is printed out when used and treated
+     as if it came  from your typein.  hooklist  is also examined at  each level
+     that is inspected by the stepper  even if no command reading is  done (e.g.
+     nn or uu modes).
+
+(mbak)   This function  gives (baklist)  but without  the stepper  functions, as
+     described above.
+
+(mev top-form)  This function initiates stepping and otherwise acts like eval of
+     one argument, as described above.
+
+(msprint form)   Gives abbreviated sprinting  of the form.   A second  and third
+     numeric argument specify the effective prinlevel and prinlength  here, else
+     a list of two numbers found as the value of msprint are used.   The current
+     implementation is somewhat slow as  the regular sprint does not  respond to
+     standard abbreviating.
+
+(sviewmsg  lineno toeval)   Useful in  conjunction with  s(how) mode.   Puts the
+     cursor at the  lineno and evaluates the  second argument, then  returns the
+     cursor to its original position.  lineno = 0 means top; if  negative counts
+     from bottom, with -1 the  bottom line.  Typically have %%mdistitle  (see (s
+     -) command) be a number to  skip lines on top, and use sviewmsg  to display
+     your debugging information up there.
+
+   If you really want  specialized processing in particular situations,  you can
+inspect  and/or  change %%form  in  a (cond  ...)  predicate, and  %%value  in a
+(retcond  ...).  If  %%nohookflag  is t,  form  and value  printout  and command
+reading (except from a non-nil hooklist) is inhibited until it is reset  to nil.
+Normal command processing is invoked by (%%mhookcom) with %%nohookflag  bound to
+nil.  Also described above are %%breaklist, %%cond, %%retcond, and %%hookprin.
+
+
+1.5.5  The MAR Break Feature
+
+
+   This feature is currently available only in the ITS implementation.
+
+
+
+Page 3-54                           ∪3-1.5.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+   The MAR break feature takes advantage of a hardware feature  which interrupts
+whenever a given memory location is accessed in a specified way.  It  allows the
+LISP user to specify  an interrupt function to  run whenever a variable  or list
+cell is modified.   The user must first  "arm" the interrupt by  saying (sstatus
+mar cond loc).  cond is the condition on which to interrupt:
+
+          0       Turn off the mar feature.
+          1       Interrupt on instruction fetch.
+          2       Interrupt on write (modification).
+          3       Interrupt on all references.
+             (numbers are octal)
+
+On a KL-10 processor, additional conditions are available:
+
+          10       Interrupt on data read.
+          11       Interrupt on data read or instruction fetch.
+          12       Interrupt on data read or write.
+          13       Interrupt on instruction fetch or write.
+
+loc is any s-expression; that cell is the one monitored.
+
+
+   Example:
+
+              (setq foo (list 'a 'b))
+              (sstatus mar 2 foo)
+will interrupt if the list cell in foo is ever rplaca'd or rplacd'd.
+
+   An example of the use of the mar-break interrupt:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+September 8, 1977                   ∪3-1.5.5                           Page 3-55
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+
+      (defun mar-tracer (x)
+             ((lambda (val)
+                      (sstatus mar 2
+                               (get the-mar-variable
+                                    'value))
+                      (nointerrupt nil)                       ;let endpagfn
+                                                              ; interrupts in
+                      (terpri msgfiles)
+                      (princ '|Now the variable |
+                             msgfiles)
+                      (prin1 the-mar-variable
+                             msgfiles)
+                      (princ '| has the value|
+                             msgfiles)
+                      (prin1 val msgfiles))
+              (symeval the-mar-variable)))
+
+      (setq mar-break mar-tracer)
+
+      (defun mar fexpr (x)
+             (cond ((null x)(sstatus mar 0 nil))
+                   (t (setq the-mar-variable
+                            (car x))                          ;make sure the
+                                                              ;variable has a
+                                                              ;value cell
+                      (or (boundp the-mar-variable)
+                          (set the-mar-variable
+                               nil))
+                      (sstatus mar 2
+                                (get the-mar-variable
+                                     'value)))))
+      (mar quux)
+      (setq quux 5)
+
+      Now the variable quux has the value 5
+
+      (do ((quuz 0 (+ quux 1))) ((= quux 2))
+          (hack quux))
+
+      Now the variable quux has the value 0
+      Now the variable quux has the value 1
+      Now the variable quux has the value 2
+
+Page 3-56                           ∪3-1.5.5                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+      Now the variable quux has the value 5
+      nil
+Notice that quux is altered by the  do loop, and also by the restoration  of the
+old value 5.  This example is for a KA-10 processor.  On a KL-10  processor, the
+interrupt occurs just before a modification or access rather than just after.
+
+   The mar break feature is sometimes used by DDT to debug the LISP  system.  As
+long as DDT  and LISP do not  both try to use  the marbreak feature on  the same
+LISP at the same time, there should be no problem.  (sstatus mar 0 nil) releases
+the mar break feature entirely for use by DDT.
+
+   The suspend function will  attempt to save and  restore the state of  the mar
+break feature. If you don't want an armed mar break to persist beyond a  call to
+suspend, turn it off first with (sstatus mar 0 nil).
+
+   When a  ↑G quit  (or the ↑g  function) forces  a quit back  to top  level, it
+disables  the mar  break before  unwinding variable  bindings and  re-enables it
+afterwards.  This is because  during a ↑G quit LISP  may not be in a  good state
+for running user interrupt functions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+September 8, 1977                   ∪3-1.5.5                           Page 3-57
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+1.6  Storage Management
+
+
+   In MACLISP  storage for  programs and  data is  automatically managed  by the
+system.  The casual  user need not concern  himself with storage  management and
+need  not  read  this section.   However,  the  user who  is  curious  about the
+implementation or who has to construct a subsystem on top of MACLISP may need to
+be concerned with how the  internal storage management routines work and  how to
+control their general  functioning.  In no case  is it necessary to  control the
+exact step by step operations of storage management, but a variety  of functions
+are provided to set the  general policy followed by the lisp  storage management
+procedures.
+
+
+1.6.1  Garbage Collection
+
+
+   Garbage  collection  is the  mechanism  which LISP  uses  to  control storage
+allocation.  Whenever LISP feels that too much storage is being used,  a garbage
+collection  is  initiated.  The  garbage  collector traces  through  all  the S-
+expressions which  can be reached  by car'ing and  cdr'ing from  internal atomic
+symbols' values and property  lists, from forms and temporary  results currently
+being used by the evaluator, from data used by compiled code, and from the saved
+values of bound variables.   All the data which it  finds in this way  is "good"
+data,  in that  it is  possible for  it to  be used  again.  Everything  else is
+garbage,  which  can never  again  be used  for  anything because  it  cannot be
+accessed, so the storage used by it is reclaimed and reused.
+
+
+gc                  FSUBR
+
+        (gc) causes a garbage collection and returns nil.
+
+
+gctwa               FSUBR
+
+        gctwa  is used  to control  the garbage  collection of  "truly worthless
+     atoms," which are atomic symbols which have no value and no properties, and
+     which are not referenced by any list structure, other than the obarray (the
+     current obarray if there is more than one).
+
+        (gctwa) causes truly worthless atoms  to be removed on the  next garbage
+     collection.
+
+Page 3-58                            ∪3-1.6                    September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+        (gctwa t)  causes truly worthless  atoms to be  removed on  each garbage
+     collection from now on.  Note:  gctwa does not evaluate its argument.
+
+        (gctwa nil) causes this continual removal of truly worthless atoms to be
+     shut  off, but  it  does not  affect  whether the  next  garbage collection
+     removes twa's.
+
+        The  value returned  by  gctwa is  a fixnum  which  is 0  if  no garbage
+     collection of  truly worthless atoms  will be  done, 1 if  twa's are  to be
+     gc'ed on the next  garbage collection, 10 if twa's  are to be gc'ed  on all
+     garbage collections, or 11 if both. (These numbers are octal.)
+
+
+↑d                  SWITCH
+
+        If  the  value  of  ↑d  is  non-nil,  the  garbage  collector  prints an
+     informative message  each time  garbage collection  occurs.  In  the pdp-10
+     implementation, it also prints a  message when a space is  expanded without
+     first doing a complete garbage collection, or when a filen or  inferior job
+     is closed because  a file object was  garbage collected.  See  also (status
+     gcwho).
+
+
+See also the user interrupts gc-daemon, gc-overflow, and gc-lossage.
+
+
+1.6.2  Spaces
+
+
+   In  MACLISP  the  storage  used for  LISP  objects  is  divided  into several
+conceptual subdivisions, called spaces.  Each space contains a different type of
+object.  Allocation  proceeds separately  in the  different spaces,  but garbage
+collection of  all spaces  occurs together since  an object  in one  space could
+contain a pointer to an object in any other space.
+
+   For example, in the pdp-10 implementation, the spaces are as follows:
+
+  LIST    conses (dotted pairs) and lists.
+
+  FIXNUM  fixnums.
+
+  FLONUM  flonums.
+
+
+September 8, 1977                   ∪3-1.6.1                           Page 3-59
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+  BIGNUM  bignum headers.  Bignums also occupy fixnum and list space.
+
+  SYMBOL  atomic symbols.
+
+  HUNK4   hunks of various sizes.   PDP-10 implementations without hunks  do not
+          have these spaces.
+
+  HUNK8
+
+  HUNK16
+
+  ARRAY   "special array cells."
+
+  REGPDL  the "regular" pushdown list.
+
+  SPECPDL the "special" pushdown list, used in binding.
+
+  FXPDL   the fixnum pushdown list, used for temporary numeric values.
+
+  FLPDL   the flonum pushdown list, used for temporary numeric values.
+
+  Binary Program Space  used to hold arrays and compiled code.
+
+  pure LIST, pure FIXNUM, pure FLONUM, pure BIGNUM
+          These  spaces are  used to  store "pure"  data of  the  four indicated
+          types.  This is a feature used to make subsystems more efficient.  See
+          part 6.5.
+
+   In the Multics implementation, the spaces are:
+
+  list    conses (dotted pairs), lists, atomic symbols, bignums, and strings.
+
+  Static Storage   arrays, files, and linkage to compiled code.
+
+  markedpdl  a pushdown list of lisp objects.
+
+  unmarkedpdl  a pushdown list of machine data, not lisp objects.
+
+   Note:  in the  Multics implementation there is  no space for  numbers because
+numbers are stored in such a way that they do not take up any extra room.
+
+   The precise spaces available in  a given implementation can be  determined by
+using (status spcnames), (status purspcnames), and (status pdlnames).
+
+Page 3-60                           ∪3-1.6.2                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+   Associated  with each  space is  information determining  when an  attempt to
+allocate in that space should cause a garbage collection.  The idea is  that one
+should allocate for quite a while in  a space, and then decide that it  is worth
+the trouble  of doing an  expensive garbage collection  in order to  prevent the
+space from using too many bits of actual storage.
+
+   The exact nature  of this information varies  with the space.  In  a pushdown
+list  (pdl) space,  all information  must be  stored contiguously,  so  the only
+parameter of  interest is how  big the pdl  is.  This can  be measured  in three
+ways, so there are three parameters associated with a pdl:
+
+  pdlsize the number of words of valid data in the pdl at the moment.
+
+  pdlmax  the size to  which the pdl may  grow before intervention  is required.
+          This is used to detect infinite recursion.
+
+  pdlroom the size beyond which the pdl may not grow no matter what.
+
+   A space such as a list space has three parameters, called the  gcsize, gcmax,
+and gcmin.  These are in machine-dependent units of "words".  The gcsize  is the
+expected size of the space; as  objects are allocated in the space it  will grow
+without garbage collection until it reaches this size.  When it gets  above this
+size  garbage collection  will occasionally  be required,  under control  of the
+other two parameters.
+
+   The gcmax is the maximum size to which the space should grow; if it gets this
+big garbage collections may occur  quite frequently in an attempt to  prevent it
+from growing bigger.
+
+   The  gcmin  specifies  the  minimum amount  of  free  space  after  a garbage
+collection.  It may be either a  fixnum, which specifies the number of  words to
+be free, or a flonum, which specifies the fraction of the space to be free.  The
+exact  interpretation of  this  depends on  the implementation.   In  the pdp-10
+implementation, which uses free storage lists, the gcmin is the number  of words
+which must be on the free storage list after a garbage collection.  If there are
+not this many, the  space is grown, except if  its size approaches gcmax  it may
+not be grown by  the full amount.  In  the Multics implementation, which  uses a
+compacting garbage collector, the criterion for garbage collection is not when a
+free list is exhausted but when the space reaches a certain size.  This  size is
+the maximum of gcsize and the sum of the size after compactification  plus gcmin
+(if it  is a fixnum)  or the size  after compactification times  1/(1-gcmin) (if
+gcmin is a flonum.) The effect of this is to allow the same amount of allocation
+
+
+September 8, 1977                   ∪3-1.6.2                           Page 3-61
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+between garbage collections as there would be in the pdp-10  implementation with
+the same gcmin.
+
+   Note that these controls over the sizes of spaces are somewhat inexact, since
+there is rounding.  For  instance, the pdp-10 impementation allocates  memory to
+spaces  in blocks  512. words.   The Multics  implementation allocates  at least
+16384.  words between  garbage collections  and presently  controls the  size of
+pushdown lists in blocks of 16. words.
+
+   Some spaces,  such as Binary  Program Space in  the pdp-10  implementation or
+Static storage in the Multics implementation are not subject to detailed control
+by the user.  The management  of these spaces is entirely  automatic.  Generally
+these are spaces where the rate of allocation is fairly placid and most objects,
+once allocated, are used forever  and never freed.  Hence the exact  policy used
+for storage management in these spaces is not too important.
+
+
+1.6.3  Storage Control Functions
+
+
+alloc               SUBR 1 arg
+
+        The alloc  function is  used to  examine and  set parameters  of various
+     spaces  having  to do  with  storage management.   To  set  parameters, the
+     argument to alloc should be  a list containing an even number  of elements.
+     The first  element of  a pair is  the name  of a space,  and the  second is
+     either a fixnum  or a 3-list.   A fixnum specifies  the pdlsize (for  a pdl
+     space) or the gcsize (for  other spaces.) A 3-list specifies, from  left to
+     right,  the  gcsize,  gcmax,  and  gcmin.   nil  means  "don't  change this
+     parameter."  Otherwise  a fixnum  must  be supplied,  except  in  the third
+     element (the gcmin), where a flonum is acceptable.  A 3-list cannot be used
+     with a pdl space.
+
+        An example of this use of alloc, in the pdp-10 Bibop implementation:
+
+          (alloc '(list (30000. 5000. 0.25)
+                   fixnum (4000. 7000. nil)
+                   regpdl 2000.))
+
+     or, in the Multics implementation:
+
+
+
+
+Page 3-62                           ∪3-1.6.2                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+
+          (alloc '(list (30000. nil 0.3)
+                   markedpdl 5000.
+                   unmarkedpdl 5000.))
+
+        alloc may  also be  called with  an argument  of t,  which causes  it to
+     return a list of  all the spaces and their  parameters.  This list is  in a
+     form such that it  could be given back to  alloc at some later time  to set
+     the parameters back to what they are now.
+
+
+   See  for  some status  functions which are  related to  the topic  of storage
+spaces.
+
+
+1.6.4  Dynamic Space and Pdl Expansion
+
+
+   There are several user  interrupts generated by the storage  management.  See
+section  1.4 for  a  description of  user interrupts.   The  gc-daemon interrupt
+occurs  after each  garbage collection.   The argument  passed to  the gc-daemon
+interrupt handler is  a list of  items; each item has  the form (space  before .
+after), where space is the name of a space, before indicates the number of cells
+free before the garbage collection, and after indicates the number of cells free
+afterwards.  (In the Multics implementation, where "free cells" is a meaningless
+concept, only the difference of these two numbers is significant.  It represents
+the amount of compaction achieved.)
+
+   The gc-lossage interrupt  occurs if the garbage  collector tries to  expand a
+space but fails because, for example, the operating system will not give  it any
+more storage.  The argument passed to the interrupt service function is the name
+of the space that lost.
+
+   The pdl-overflow interrupt is  signalled when some pushdown list  exceeds its
+pdlmax.  The  pdlmax is increased  slightly so that  the interrupt  handler will
+have room to run.  The argument passed to the interrupt function is the  name of
+the pdl  that overflowed.   If the interrupt  function uses  too much  pdl, this
+interrupt will occur again.  If this happens enough times, the pdlmax will reach
+the pdlroom, there will be no room  in the pdl to take a user interrupt,  and an
+uncorrectable error will occur.
+
+   The  interrupt  function  can  decide  to  terminate  the   computation  that
+
+
+September 8, 1977                   ∪3-1.6.3                           Page 3-63
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+overflowed the pdl,  by doing an (ioc  g) or a (throw),  or it can  increase the
+pdlmax by using alloc or  (sstatus pdlmax) and then continue the  computation by
+returning.  Note  that unlike  most other user  interrupts, if  the pdl-overflow
+interrupt  function returns  nil  (or the  ";bkpt pdl-overflow"  is  $p'ed), the
+computation is continued as if the pdl overflow had not occurred.
+
+   The gc-overflow interrupt occurs when  some space (other than a  pdl) exceeds
+its gcmax.  This gives  the user a chance to  decide that the size of  the space
+should be increased  and the computation continued,  or that something  is wrong
+and the computation should be terminated.  The argument passed to  the interrupt
+handler  is the  name  of the  space  that overflowed.   The  interrupt handling
+function will be able to run  because the garbage collector makes sure  that the
+space is sufficiently large before signalling the interrupt, even if  this makes
+it become  somewhat larger than  its gcmax.  This  interrupt is similar  to pdl-
+overflow; if the interrupt handler  function returns at all, even if  it returns
+nil,  the interrupted  computation proceeds.   To terminate  the  computation an
+explicit (ioc g), (throw), or (error) must be done.
+
+
+1.6.5  Initial Allocation
+
+
+   The pdp-10 implementations  of MACLISP run on  a machine with  a limited-size
+address space.  Consequently the allocation of portions of this address space to
+different  uses,  such  as  LISP storage  spaces,  becomes  important.   This is
+particularly true of implementations  without the "Bibop" feature, which  do not
+take advantage of paging.
+
+   When LISP is first entered, it goes through a dialogue with the user known as
+"allocation."  Normally the  dialogue simply consists  of the user  declining to
+specify anything,  in which  case LISP  chooses suitable  defaults.  If  a large
+problem is  to be worked  on, the defaults  may be inappropriate  and it  may be
+necessary  to  explicitly allocate  a  larger  amount of  storage.   It  is also
+possible for the user's replies to come from a file.
+
+   If LISP is called with a command line from DDT, for example
+                            :LISP INDEX LOADER COM:
+
+it reads the indicated  file in the same way  that it would read  .LISP. (INIT).
+See below.
+
+   On the other hand,  if LISP is called  without a command line,  it identifies
+itself and asks
+
+Page 3-64                           ∪3-1.6.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+                                     ALLOC?
+
+Suitable responses  are Y, N,  and CTRL/Q.  There  are other  obscure characters
+which can be used  as replies to this  question, but these three  are sufficient
+for most purposes.  "N" means that  you do not want to specify  allocation.  You
+will  get the  default.   CTRL/Q means  to  read your  initialization  file (see
+below.)  "Y"  means  that you  wish  to  go through  the  following  sequence of
+questions and answers.
+
+   LISP types out the names of  various spaces and their sizes.  The  first one,
+"CORE", is special.   It is not  a space but the  total amount of  address space
+desired, and the size  is in pages rather  than words.  After each  question you
+may  enter  altmode,  which  terminates the  dialogue  and  gives  the remaining
+parameters default values, or space which goes on to the next  question.  Before
+your altmode or space you may put a number which is the size you want that space
+to be, instead of the number  that was printed.  Again, there are  various other
+magic characters besides space  and altmode.  CTRL/G restarts the  dialogue with
+the "ALLOC?" question.
+
+   If you reply with a control-Q, it means to read your initialization file.  In
+the  ITS implementation,  this is  either udir;  .LISP. (INIT)  or  (INIT); udir
+.LISP., where udir is your master sname.  In the TOPS-10 implementation, this is
+LISP.INI in the directory you are logged in to.  In the  Multics implementation,
+this  hd>start←up.lisp, where  hd  is your  home directory.   Since  the Multics
+implementation doesn't have  the allocation dialogue,  this file is  always read
+when the lisp command is given with no arguments.
+
+   The first form in  the file should be a  comment which is used to  answer the
+questions.  Note that supplying  nonexistent space names in the  comment doesn't
+hurt, so you  can use the  same comment for both  Bibop and non-Bibop  LISP.  An
+example of the form of this comment is:
+
+               (comment fxs 4000 fixnum 5000 fls 2000
+                        symbol 4000 flonum 2000 bignum 1400)
+
+   The remaining forms in the file are simply read and evaluated.
+
+
+
+
+
+
+
+
+September 8, 1977                   ∪3-1.6.5                           Page 3-65
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+1.7  Implementing Subsystems with MACLISP
+
+
+
+1.7.1  Entering LISP
+
+
+   A subsystem  is an entity  that exists in  most time-sharing systems.   It is
+normally a complete world  which the user enters  by typing a command.   He then
+has  whatever facilities  the  subsystem offers.   A subsystem  can  be oriented
+toward programming, as  the MACLISP subsystem itself  is, or it can  be oriented
+toward a particular application, for instance compiling LISP programs, operating
+machinery, or solving differential equations.
+
+   MACLISP  is  frequently  used  as  a  base  on  which  to  build  subsystems.
+Consequently it has  been equipped with a  number of mechanisms which  allow the
+subsystem writer to gain complete control over the operation of MACLISP, make it
+possible to  hide the vagaries  of MACLISP  from the naive  user of  a different
+subsystem, and provide  increased efficiency in  memory and processor  usage for
+heavily-used subsystems.
+                         in the Multics implementation
+
+   The  MACLISP subsystem  is entered  by issuing  the lisp  command  at Multics
+command level.   If lisp is  called with  no arguments, a  copy of  the standard
+initial environment containing  all the system  functions and variables  is made
+the current environment.   If the lisp command  is issued with an  argument, the
+argument concatenated  with ".sv.lisp"  is the pathname  of a  saved environment
+which  is copied  into the  current environment.   This saved  environment would
+contain some subsystem, which will receive control.  Additional arguments to the
+lisp command in this case are actually arguments to the subsystem.
+
+   Often one constructs  a trivial command for  getting into a  subsystem, which
+simply calls the lisp command with the right arguments.
+
+   For  instance,  the  lisp  compiler  subsystem  may  be  entered  through the
+lisp←compiler  command,  which  calls  lisp  with  the  pathname  of  the  saved
+environment  containing  the  LISP  compiler  as  the  first  argument,  and the
+arguments to the lisp←compiler command as the remaining arguments.
+
+   When the standard initial  environment (i.e. the ordinary  MACLISP subsystem)
+is  entered, it  checks for  a segment  named start←up.lisp  in the  user's home
+directory.  If such a  segment exists, it is  read in, using the  load function.
+This facility allows users to "customize" LISP.
+
+Page 3-66                            ∪3-1.7                    September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+                           in the ITS implementation
+
+   LISP may be  entered by the  :LISP command.  The  environment set up  by this
+command  is  the  standard  initial  environment.   LISP  now  goes  through  an
+allocation  dialogue and  optionally reads  your .LISP.  (INIT) file.   See  for
+information on this.
+
+   LISP may be entered  by the command :LISP name1  name2 dev dir where  dev and
+dir default  to DSK and  the user's directory,  respectively.  In this  case the
+file dev:dir;name1 name2 is read in the same way as a .LISP. (INIT)  file.  This
+can be used to start up a subsystem.
+
+   It is also possible to build a  subsystem in a LISP, then save it as  TS FOO.
+The  :FOO  command  will  now  enter  the  subsystem,  bypassing  the allocation
+dialogue.
+
+                         in the TOPS-10 implementation
+
+   LISP may be entered by  the monitor command R LISP.  The  allocation dialogue
+(see ) is entered.  Optionally a LISP.INI in the user's directory may be read.
+
+   As in the ITS  implementation, a subsystem can  be saved and then  invoked by
+the appropriate R or RUN command.
+
+
+1.7.2  Saving an Environment
+
+
+   A subsystem is constructed by  the following procedure.  One starts  with the
+ordinary MACLISP  subsystem, and  defines a number  of function  definitions and
+variable values.  This creates  an environment which is capable  of implementing
+the desired subsystem.  This environment is then saved in a file,  and necessary
+mechanisms are set  up so that an  operating-system command can invoke  lisp and
+cause  it  to  set  up  the environment  saved  in  the  file.   When  the saved
+environment  is invoked  control is  passed to  the functions  in it  which then
+proceed to do the business of the subsystem.
+
+   The  exact  way  of  saving the  environment  varies  from  implementation to
+implementation.  In the Multics implementation there is a function called save:
+
+
+
+
+
+September 8, 1977                   ∪3-1.7.1                           Page 3-67
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+save                FSUBR
+
+        (save  foo)  saves  the  current  LISP  environment  in  a   file  named
+     foo.sv.lisp in the  working directory.  foo  is not evaluated.   The saving
+     operation destroys the working copy of the environment, so when the save is
+     complete lisp returns to Multics command level.
+
+        All  variable  values,  file  objects,  array  contents,   and  function
+     definitions (and other properties) are saved, but the contents of  the push
+     down lists, including previous values of bound variables, cannot  be saved,
+     so save should only be used from top level.
+
+
+   In the pdp-10 implementations there is a function called suspend:
+
+suspend             LSUBR 0 or 1 args
+
+suspend puts  LISP in a  state such that  it can be  :PDUMP'ed (ITS)  or SSAVE'd
+(TOPS-10)  and  later  restarted.   When  the  saved  core  image  is restarted,
+everything will be the  same as it was  when suspended, and control  will return
+from the invocation of suspend.
+
+suspend may be used at any point in a computation, with the restriction  that no
+I/O devices other than the terminal may be in use.
+
+In  the ITS  implementation, care  is taken  so that  all subsystems  saved with
+suspend from the  same version of  LISP will share the  pure pages of  LISP.  In
+addition, all invocations  of a particular subsystem  will share the  pure pages
+peculiar to that subsystem.  Declaration of  data to be placed in pure  pages is
+described in a later section.
+
+In the TOPS-10  implementation, care is taken  so that all LISPs  and subsystems
+saved from LISP will share the same high segment.  There is presently no way for
+a subsystem to have its own high segment with additional shared material.
+
+After suspend has prepared the  LISP core-image for dumping, it  returns control
+to the operating system so that it can be dumped.
+
+If suspend is given an argument, that argument is explodec'ed and  the resulting
+character string  is passed back  to the operating  system as a  command.  (This
+doesn't currently work in the TOPS-10 implementation.)
+
+Commonly one will write a setup routine for a subsystem like this:
+
+Page 3-68                           ∪3-1.7.2                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+
+     (progn
+           (terpri)
+           (princ 'options:)
+           ... read in options ...
+           (terpri)
+           (princ 'loading)
+           ... load in files of functions ...
+           (suspend)
+           (start-the-subsystem)
+     ))
+
+The subsystem's environment is now ready for dumping.  Alternatively,  one might
+write
+
+     (suspend ':PDUMP/ TS/ NSUBSYS/
+     :$ALL/ DONE$/
+     )
+
+which will do the dump itself and print a message when done.
+
+
+1.7.3  Gaining and Keeping Control
+
+
+   In the Multics implementation, when a saved environment is restarted it looks
+like  an  error  that returns  to  top  level.  The  forms  in  the  errlist are
+evaluated.   These  forms  should  do whatever  is  necessary  to  start  up the
+subsystem.  The  arguments to  the command  which invoked  the subsystem  may be
+obtained via (status arg) or (status jcl).
+
+   In  the  pdp-10  implementations,  when  a  saved  environment  is  restarted
+execution continues  from the  point where  suspend was  called.  The  next form
+evaluated should do whatever is necessary to start up the subsystem.  In the ITS
+implementation, the arguments  of the command  line which invoked  the subsystem
+may be obtained via (status jcl).
+
+   If the subsystem wants to hide the underlying MACLISP from the user, it has a
+number of facilities available.   By setting up its own  user-interrupt handlers
+it can handle any  LISP errors which occur  itself.  It can replace  the MACLISP
+interpretive  interaction loop  with  its own  by using  (sstatus  toplevel) and
+(sstatus breaklevel).  It can also provide a totally-different  interaction loop
+
+
+September 8, 1977                   ∪3-1.7.2                           Page 3-69
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+by not returning control to the  lisp top level when it is started,  but instead
+retaining control in its own functions which read and respond to user input.
+
+   It is possible for a subsystem to retain the trappings of MACLISP  but change
+the way things read and print.   Macro characters and the readtable can  be used
+to change the way input is parsed.  All output by MACLISP (with the exception of
+character-string messages) is done through the function prin1, and the subsystem
+may redefine this function.  In the Mutlics implementation one  simply redefines
+it, but in the  pdp-10 implementations the variable  prin1 must be bound  to the
+function which is to substitute for prin1.
+
+   Some subsystems don't do any of this, but simply consist of  standard MACLISP
+augmented by some additional  functions which may be  used in forms typed  in at
+top level.
+
+
+1.7.4  Purity
+
+
+   In  the  pdp-10  implementations,  there  are  some  facilities  which  allow
+subsystems to  put their non-changing  data, function definitions,  binary code,
+etc.  into pure  pages.  This  decreases  the load  on memory  by  sharing pages
+between  multiple  users  of   the  same  subsystem.   (This  applies   only  to
+implementations with the "Bibop" feature.)
+
+   There are some extra storage spaces which are used to store pure (unchanging)
+LISP  objects.  These  are the  pure list,  pure fixnum,  pure flonum,  and pure
+bignum spaces.
+
+purcopy             SUBR 1 arg
+
+        This function makes and returns a copy of its argument in  pure storage.
+     This is  primarily of use  in the creation  of large sharable  systems like
+     macsyma.   In  implementations  other  than  Bibop  pdp-10 implementations,
+     purcopy simply returns its argument.
+
+
+        There  are  a number  of  features  which control  how  binary  code and
+     constants are purified when a compiled program is loaded into lisp.
+
+
+
+
+
+Page 3-70                           ∪3-1.7.3                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+bporg               VARIABLE
+
+        The value of bporg should always be a fixnum, whose value is the address
+     of the  first unused word  of binary program  space.  This  value generally
+     should not  be altered by  the user, but  only examined.  bporg  is updated
+     whenever binary code is loaded by lap or fasload.
+
+
+bpend               *** VARIABLE
+
+        This  variable should  also  always have  a  fixnum as  its  value; this
+     indicates the first address above the last available word of binary program
+     space.  This is updated by many internal lisp routines, such as the garbage
+     collector, the array allocator, and lap and fasload.
+
+
+pagebporg           SUBR no args
+
+        Causes the variable bporg to be adjusted upwards so as to lie on  a page
+     boundary.   This  is principally  useful  on ITS  in  conjunction  with the
+     function purify.  pagebporg returns the new value of bporg.
+
+
+purify              SUBR 3 args
+
+        The first two arguments to purify should be fixnums, and delimit a range
+     of memory within the lisp system.  The third argument is a flag.  If  it is
+     nil,  then the  pages covered  by the  specified range  of memory  are made
+     impure, i.e.  writable.   If it is  t, then the  pages are made  pure, i.e.
+     read-only and sharable.  If it is bporg, then the pages are also made pure,
+     but in addition some work is done  to make sure that no UUO on  those pages
+     may ever be  "clobbered".  This option should  always be used if  the pages
+     involved contain binary  code loaded by  lap or fasload.   Presently purify
+     does nothing in  the TOPS-10 implementation;  it is intended  primarily for
+     producing systems built on lisp, such  as Macsyma, in such a way  that pure
+     pages  can be  shared between  users.  Example:  The following  sequence of
+     commands might be used to produce a sharable system on ITS:
+
+
+
+
+
+
+
+September 8, 1977                   ∪3-1.7.4                           Page 3-71
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+
+           (setq lopage (pagebporg))     ;save low page address
+           (setq pure t)                 ;specifies pure code
+           (fasload funny fasl)          ;load up system
+           (fasload weird fasl)
+           (uread some lap)
+                        ...
+           (setq errlist '((terpri)      ;stuff for system startup
+                           (princ 'welcome/ to/ supersystem/!)
+                           (terpri)))
+           (sstatus toplevel             ;set up top level for system
+                    '(top-handler))
+           (setq hipage (pagebporg))     ;save high page address
+           (purify lopage (1- hipage) 'bporg)   ;purify pages
+           (suspend ':pdump/ sys:ts/ super/↑M)  ;tell ddt to dump
+           (err)                         ;run errlist
+
+
+pure                VARIABLE
+
+        This variable, initially nil, should be made non-nil by the  user before
+     loading binary code which is to  be made pure.  It signals lap  and fasload
+     to be circumspect about any UUO's in the code, because pure UUO's cannot be
+     clobbered to be PUSHJ's or  JRST's.  lap solves this problem  by clobbering
+     the UUO immediately  if the referenced function  is already defined  and is
+     itself a subr  rather than an expr;  otherwise the UUO is  made permanently
+     unclobberable (i.e. CALL is converted to CALLF, etc.).
+
+        fasload  is somewhat  more  clever: it  too  tries to  clobber  each UUO
+     immediately, but  if it  can't it  puts the address  of the  UUO on  a list
+     called purclobrl, which is checked at the end of each call to  fasload, and
+     each UUO on the list is clobbered at that time, if the appropriate function
+     had been loaded by  that call to fasload.   If the function never  does get
+     defined, then purify will also check purclobrl and convert each UUO  to its
+     permanently unclobberable form.
+
+        If pure has a  fixnum as its value,  then fasload (but not  lap) behaves
+     somewhat differently.  If the value of pure (which must be between 1  and 8
+     or so) is,  say, 3, then fasload  calls pagebporg, and then  reserves 6=2*3
+     pages  of binary  program  space, unless  a  previous call  to  fasload has
+     already reserved them (i.e. they are reserved only once).  Thus fasload has
+     two sets of 3 pages to work with; we shall call the first set "area  1" and
+
+
+Page 3-72                           ∪3-1.7.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+     the second set  "area 2".  Now whenever  fasload has to load  a clobberable
+     UUO, it does not  place it in the code  being loaded, but rather  hashes it
+     and places it in area  1 if it was not  there already; a copy is  placed in
+     the same relative position in area 2.  Then an XCT instruction  pointing to
+     the UUO in area 1 is placed in the binary code.  When all loading  has been
+     done, area 2 may be purified, but area 1 may not.
+
+        Now when  running the code,  the UUO's  pointed to by  the XCT's  may be
+     clobbered (the pdp-10 lisp UUO  handler is clever about XCT), and  the code
+     will run  faster the  second time around  because the  XCT's will  point to
+     PUSHJ's.  However, if (sstatus uuolinks)  is called, then area 2  is copied
+     back into area  1, effectively unclobbering  all the UUO's.   Naturally, an
+     area large  enough to  contain all  the UUO's  should be  reserved; (status
+     uuolinks) (q.v.) yields information relevant to this.
+
+        Thus the example given under the purify function above might be modified
+     as follows:
+
+           (setq lopage (pagebporg))     ;save low page address
+           (setq pure 3)                 ;specifies pure code
+           (setq lopage (+ lopage 6000)) ;allow for area 1
+           (fasload funny fasl)          ;load up system
+           (fasload weird fasl)
+           (uread some lap)
+                ...
+           (setq errlist '((terpri)      ;stuff for system startup
+                           (princ 'welcome/ to/ supersystem/!)
+                           (terpri)))
+           (sstatus toplevel             ;set up top level for system
+                    '(top-handler))
+           (setq hipage (pagebporg))     ;save high page address
+           (purify lopage (1- hipage) 'bporg)   ;purify pages
+           (suspend ':pdump/ sys:ts/ super/↑M)  ;tell ddt to dump
+           (err)                         ;run errlist
+
+
+*pure               VARIABLE
+
+        This  variable  controls  automatic  purification  of  S-expressions and
+     atomic symbols.  If it is set non-nil (the initial value is nil),  then the
+     following  are placed  in pure  storage spaces  instead of  regular storage
+     spaces:   pnames  of  atomic  symbols;  list,  fixnum,  flonum,  and bignum
+
+
+September 8, 1977                   ∪3-1.7.4                           Page 3-73
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+     constants used by code loaded with fasload; properties whose indicators are
+     in the  list which is  the value of  the variable putprop  (initially subr,
+     fsubr, and lsubr).
+
+
+purclobrl           VARIABLE
+
+        Used by  fasload to keep  track of UUO's  which are potentially  but not
+     immediately clobberable.
+
+
+        The putprop  and remprop functions  know about purified  property lists.
+     If necessary,  they will  copy the  property list  (but not  the properties
+     themselves) into non pure storage so that it can be modified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 3-74                           ∪3-1.7.4                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+1.8  Miscellaneous Functions
+
+
+
+1.8.1  The Status Functions
+
+
+status              FSUBR
+
+   The  status  special  form  is  used  to  get  the  value  of  various system
+parameters.  Its first argument,  not evaluated, is an atomic  symbol indicating
+which  of its  many  functions status  should  perform.  The  use  of additional
+arguments depends on what the first argument is.  These arguments may or may not
+be evaluated, depending on the first argument.  If certain  additional arguments
+are omitted, a default value,  usually nil is supplied, again depending  on what
+the first argument is.  The various status functions are listed below.
+
+sstatus             FSUBR
+
+        The sstatus  special form  is used to  set the  value of  various system
+     parameters.  Its arguments are similar to those of status.
+
+These are the things that you can do with status and sstatus:
+
+STATUS FUNCTIONS FOR I/O
+
+tabsize   (status  tabsize) returns  the number  of character  positions assumed
+          between tab stops, which depends on the implementation.
+
+newline   (status newline)  returns a  fixnum which  is the  ascii code  for the
+          character which  marks the end  of a line  of input.  For  example, (=
+          (setq ch (tyi)) (status newline))
+
+charmode  (status charmode f) returns the value of the character-mode switch for
+          the file f.   If f is  t or omitted the  terminal is assumed.   If the
+          character-mode switch is t  (the normal case for the  terminal) output
+          is sent to the  device as soon as it  is generated.  If the  switch is
+          nil (the normal case for files other than the terminal) output is held
+          until a newline is typed, an error occurs, input is requested,  or the
+          buffer becomes  full.  (You can  also cause the  buffer to be  sent by
+          using the force-output  function.) This provides  increased efficiency
+          at the cost of not immediately seeing all output in some cases.
+
+
+September 8, 1977                    ∪3-1.8                            Page 3-75
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+          (sstatus charmode x f) sets the character-mode switch of the file f (f
+          may be t or omitted to signify the terminal) to x, which may be nil or
+          t.  x and f are evaluated.
+
+linmode   (status linmode) reads the  "line mode," and (sstatus linmode  x) sets
+          the "line  mode" to  x (t or  nil.) These  functions take  an optional
+          extra argument, which is the file whose line mode is  being discussed.
+          This defaults to t,  the terminal.  In any  case, this file must  be a
+          terminal.  In some implementations the "line mode" may not be changed.
+          If the "line mode"  is t, user input is  buffered up a line at  a time
+          before being sent to LISP.  The input-editing conventions of  the host
+          operating system are used.  If the "line mode" is nil, LISP  sees each
+          character  as  it  is   typed  and  applies  its  own   input  editing
+          conventions.  This  mode can provide  input facilities more  suited to
+          LISP and  possibly better handling  of the terminal,  if it is  a type
+          that LISP  knows a great  deal about.  However,  it uses  more machine
+          resources.  It is possible for  a user program to take  direct control
+          of the terminal when the "line mode" is nil, however this  may require
+          knowledge  of the  undocumented (sstatus  tty) function.   The Multics
+          implementation always operates with a "line mode" of t.  See  also the
+          (sstatus ttyscan) function below.
+
+ttyint    (sstatus ttyint char  func file) turns  on a tty  interrupt character.
+          When  the character  char is  typed on  the input  tty file,  the LISP
+          program will be interrupted and  the function func will be  applied to
+          two arguments -  file and char.  If  file is omitted, t,  the ordinary
+          tty input, is assumed.  The char may be either a character object or a
+          fixnum (ascii code).   Any of the 128.  ascii characters may  be used.
+          The func may be either an ordinary functional form or a  fixnum, which
+          means the default  system action for  that character.  For  instance a
+          func of 7 means  quit back to the  top level of lisp  (control-G).  If
+          func is nil, the  char is made non-interrupting.  All  three arguments
+          are evaluated.
+
+          (status ttyint char file) returns func, the interrupt function for the
+          character char on the tty file.  file may be omitted.  It  defaults to
+          t.
+
+ttycons   (sstatus ttycons tty1 tty2) binds  two tty files into a  console.  One
+          should be an input tty and  the other an output tty.  If tty1  or tty2
+          is t,  it will be  taken as the  appropriate direction of  the regular
+          terminal.  The binding into  a console is basically used  for purposes
+
+
+Page 3-76                           ∪3-1.8.1                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+          of echoing.  In addition,  interrupt characters typed on an  input tty
+          file should affect  the output on  its corresponding output  tty file,
+          not on some other tty.
+
+          To put echoing at the bottom of the screen, distinct from output,
+
+               (sstatus ttycons t
+                                (open 'tty: '(echo out tty)))
+
+          which conses tty input with a  new tty output channel which is  set to
+          go to the echo area at the bottom of the screen.
+
+          (status ttycons tty1) returns the other tty file which is bound into a
+          console with tty1, or nil if there is none.
+
+filemode  (status filemode  file) =>  (open-mode-list .  internal-cruft).  open-
+          mode-list  is  a  suitable  second  argument  for  the  open function.
+          internal-cruft is a list of implementation-dependent information which
+          may sometimes be needed by special programs.
+
+          The following  symbols may appear  in internal-cruft.  (These  are the
+          standardized ones; additional symbols may appear at the  discretion of
+          the implementation.)
+
+          cursorpos      This file (an output  tty) has the ability  to position
+                         its cursor anywhere on the screen.
+
+          rubout         This  file   (an  output   tty)  has   selective  erase
+                         capability.  (cursorpos 'x) will work.
+
+          sail           This  file  (an  output  tty)  has  the  so-called SAIL
+                         character set.  This is an extension of ascii  which is
+                         related but not eq to the SAIL character set.
+
+ttyscan   (sstatus ttyscan func file) allows the user to supply a function which
+          performs initial processing of  terminal input.  func is  a functional
+          form, and  file must  be a  tty input file.   If it  is omitted,  t is
+          assumed.  Both arguments are evaluated.
+
+          When LISP wants  to take input from  file, it first calls  the prescan
+          function, which is  supposed to gobble down  a complete unit  of input
+          (for instance an S-expression)  and return a list of  characters.  The
+
+
+September 8, 1977                   ∪3-1.8.1                           Page 3-77
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+          prescanner supplied  automatically by  LISP when a  tty input  file is
+          first opened  counts parentheses and  does fancy rubout  processing on
+          display terminals.  It  also implements the control-K,  control-L, and
+          control-U characters which allow the complete input to  be redisplayed
+          or cancelled, and takes care of force-feed characters.  A user-written
+          prescanner   might  provide   additional  features   such   as  super-
+          parentheses, name recognition and completion, or fancy editing.
+
+          The prescan function func is applied to three arguments: the file, the
+          name of the input function on whose behalf it is acting (read, readch,
+          or readline), and a fixnum which, in the case of read, is the count of
+          the number of unmatched left-parentheses.  It is supposed to  return a
+          list  of fixnums,  which represent  characters.  The  prescan function
+          should read the input with tyi, since it and tyipeek is the only input
+          function which doesn't call the prescan.
+
+          If the pre-scan function returns nil, an eof condition occurs  for the
+          input file.  This is the standard way to signal over-rubout.
+
+          There  is  a  function  called rubout  to  assist  the  pre-scanner in
+          processing rubouts.  It is described on page .
+
+          It is a good idea for the prescan function to lambda-bind echofiles to
+          nil so that characters do not  appear in the echo files twice,  and so
+          that the echo files reflect the "clean" input after rubout processing.
+
+          (status ttyscan file) returns the file's func.
+
+          This feature does not presently exist in the Multics implementation.
+
+STATUS FUNCTIONS FOR THE OLD I/O SYSTEM
+
+uread     (status uread) returns a 4-list for the current uread input source, or
+          nil if uread is not being done.
+
+          (sstatus uread --args--) is the same as (uread --args--)
+
+uwrite    (status  uwrite)  returns the  2-list  for the  current  uwrite output
+          destination.
+
+          (sstatus uwrite --args--) is the same as (uwrite --args--)
+
+
+
+Page 3-78                           ∪3-1.8.1                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+crunit    (status crunit) returns a 2-list of the current unit; i.e.  device and
+          directory.
+
+          (sstatus crunit device directory) sets the current default  device and
+          directory for uread, etc.  The arguments are not evaluated.
+
+crfile    (status crfile) returns a 2-list giving the file names for the current
+          file in the "uread" I/O system.
+
+          (sstatus crfile name1 name2)  sets the current default file  names for
+          uread, etc.  The arguments are not evaluated.
+
+STATUS FUNCTIONS FOR THE READER
+
+   See section  13.6.2 for  a description  of how  the parameters  controlled by
+these functions  are used.   Note: in  the following,  c represents  an argument
+specifying a character.  If c is non-atomic it is evaluated, and the  value must
+be a fixnum which is the ascii code  for a character.  If c is atomic it  is not
+evaluated, and it may be a fixnum or a character object.
+
+chtran    (status chtran c) gets  the character translation table entry  for the
+          character c.  This is the ascii code of a character substituted  for c
+          when it appears in a pname being read in.  This feature is used in the
+          pdp-10 implementations to translate lower-case input to upper case.
+
+          (sstatus chtran c k) sets  c's character translation to k.   k follows
+          the  same rules  as c,  i.e. it  may be  a list  which evaluates  to a
+          fixnum, or an unevaluated atom such as a fixnum or a character object.
+          The value returned is k as a fixnum ascii code.
+
+syntax    (status syntax c)  returns the syntax bits  for the character c,  as a
+          fixnum.
+
+          (sstatus syntax c m)  sets c's syntax bits  to m.  m is  evaluated and
+          returned.  The setsyntax function is usually a better way to  do this,
+          however.
+
+          Note that in the above two sstatus calls, if c is a macro character it
+          is changed back to its standard syntax and chtran before the requested
+          operation is performed.  However, if in the standard readtable c  is a
+          macro (i.e. ' and ;), instead of being changed to its  standard syntax
+          and chtran its syntax  is set to 502 (slashified  extended alphabetic)
+          and its chtran is set to itself.
+
+September 8, 1977                   ∪3-1.8.1                           Page 3-79
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+macro     (status macro c) returns nil if c is not a macro character.  If c is a
+          macro character it returns a list of the macro character  function and
+          the type, which is nil for normal macros and s for splicing macros.
+
+          (sstatus macro c f) makes c a macro character which calls the function
+          f with no  arguments.  f is evaluated.   A fourth argument  to sstatus
+          may be  supplied.  It  is not evaluated.   If it  is an  atomic symbol
+          whose pname begins with s, c  is made a splicing macro.  If f  is nil,
+          instead of  c being  made a macro-character,  c's macro  abilities are
+          taken away  and c becomes  an ordinary  extended-alphabetic character.
+          The setsyntax function is generally a better way to do this, however.
+
++         (status +) gets the value of the + switch (t or nil).  This  switch is
+          normally nil.  If it is t, atomic symbols more than one character long
+          beginning with a  + or a  - are interpreted  as numbers by  the reader
+          even if  they contain  letters.  This  allows the  use of  input bases
+          greater than ten.
+
+          (sstatus + x) sets the + switch  to t or nil depending on x,  which is
+          evaluated.  The new value of the + switch is returned.
+
+ttyread   (status ttyread file) returns the value of the ttyread switch  for the
+          file file.  If file is omitted  t is assumed.  At present this  is not
+          used  for  anything  in the  Multics  implementation.   In  the pdp-10
+          implementation  it controls  whether tty  "force feed"  characters are
+          used.  See section 13.6.2 for details of force feed characters.
+
+          (sstatus ttyread x file) sets the ttyread switch for file to t  or nil
+          depending on x, which is  evaluated.  Again, file defaults to  t.  The
+          new value of the switch is returned.
+
+STATUS FUNCTIONS FOR THE PRINTER
+
+terpri    (status terpri file) returns the value (t or nil) of the terpri switch
+          for the file, which defaults  to t.  This switch is normally  nil.  If
+          it is t, the  output functions such as  print and tyo will  not output
+          any extra newlines when lines longer than linel are typed out.
+
+          (sstatus terpri x file) sets the terpri switch.
+
+
+
+
+
+Page 3-80                           ∪3-1.8.1                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+←         (status ← file) returns the value  (t or nil) of the ← switch  for the
+          file, which  defaults to t.   If this  switch is t,  the ←  format for
+          fixnums with lots of trailing zeroes is not used.
+
+          (sstatus ← x file) sets the ← switch to the value of x, t or nil.
+
+abbreviate(status  abbreviate) returns  the value  of the  abbreviation control.
+          See section 13.7 for a description of the abbreviation control.
+
+          (sstatus abbreviate n) sets the abbreviation control to n.
+
+          (sstatus abbreviate nil) turns off abbreviation.
+
+          (sstatus abbreviate t) turns on a maximal amount of abbreviation.
+
+STATUS FUNCTION FOR THE GARBAGE COLLECTOR
+
+gctime    (status  gctime) returns  the  number of  microseconds  spent garbage-
+          collecting.
+
+          (sstatus gctime  n) resets  the gctime  counter to  n and  returns the
+          previous value of the gctime counter.
+
+(status spcnames)  returns a  list of the names  of all the spaces  available in
+          the LISP  being used.   These are  the names  acceptable to  the alloc
+          function.
+
+(status spcsize  space)  returns the  actual, current size  of space,  in words.
+          space is evaluated.
+
+(status pdlsize space)  returns the current number of words on a pdl.
+
+(status pdlroom space)  returns the "pdlroom" of a pdl, i.e. the maximum size to
+          which it may ever grow.
+
+(status pdlmax space)  returns the current value of the "pdlmax" parameter  of a
+          pdl.
+
+(sstatus pdlmax  space size)   sets the pdlmax  parameter for  the pdl  space to
+          size.  Both arguments are evaluated.
+
+
+
+
+September 8, 1977                   ∪3-1.8.1                           Page 3-81
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+ENVIRONMENT ENQUIRIES
+
+date      (status date) returns a  3-list indicating the current date  as (last-
+          two-digits-of-the-year month-number day).
+
+dow       (status dow) returns an atomic symbol which is the name of the current
+          day of the week.
+
+daytime   (status daytime) returns a 3-list of the 24-hour time of day  as (hour
+          minute second).
+
+time      (status time) is the same as (time), the number of seconds  the system
+          has been up.
+
+runtime   (status runtime) is the same as (runtime), the number  of microseconds
+          of cpu time that have been used.
+
+system    (status  system x)  returns a  list of  the system  properties  of the
+          atomic  symbol x,  which is  evaluated.  This  list may  contain subr,
+          fsubr, macro, or lsubr  if x is a  system function, and value  if this
+          atomic symbol is a system variable.
+
+uname     (status  uname) returns  an atomic  symbol whose  pname is  the user's
+          login  name.  In  the  Multics implementation  this is  in  the format
+          User.Project; the dot will be  slashified if print is used  to display
+          this.  In  the TOPS-10  implementation this is  actually a  list (proj
+          prog) rather than a symbol.
+
+udir      (status udir) returns  the name of the  user's directory.  In  the ITS
+          implementation this is the user's "master sname," which is usually the
+          same as the user's name as returned by (status uname).  In the Multics
+          implementation this is the  user's default working directory.   In the
+          TOPS-10 implementation this is a list (proj prog).
+
+lispversion
+          (status lispversion) returns the version identification of lisp.  This
+          is usually an atomic symbol.
+
+jcl       (status  jcl) returns  the  "job command  line"  from DDT  in  the ITS
+          implementation.  Only  the command part  (after altmode)  is returned.
+          The initialization file name that precedes the altmode is  retained by
+          LISP.   In  the  Multics implementation  this  returns  the explodec'd
+
+
+Page 3-82                           ∪3-1.8.1                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+          second argument of the lisp  command, or else nil if the  lisp command
+          did not have two arguments.  If lisp was invoked by
+
+                        lisp environment←name "foo bar"
+
+          then (status jcl) => (f o o /  b a r)
+
+          This function is used by  subsystem implemented in MACLISP to  pick up
+          the arguments from the command which invoked them.
+
+   The following status functions only exist in the Multics implementation.
+
+paging    (status paging)  returns a  list of the  paging-device page  reads and
+          total page reads that have been caused by this process.
+
+arg       (status  arg  n) returns  the  n+1'th argument  of  the  command which
+          invoked  the  subsystem, as  an  interned atomic  symbol.   (The first
+          argument,  (status arg  0),  is the  name  of the  subsystem.)  nil is
+          returned if n is greater than the number of arguments to the command.
+
+MISCELLANEOUS STATUS FUNCTIONS
+
+evalhook  (sstatus evalhook t)  enables the evalhook feature;  (sstatus evalhook
+          nil) disables it.  (status evalhook) returns the state of  the switch.
+          See  for the details of this feature.
+
+toplevel  (status  toplevel) returns  the top-level  form, which  is continually
+          evaluated when LISP  is at its  top level.  If  this is nil,  a normal
+          read-eval-print loop is used.
+
+          (sstatus toplevel x)  evaluates and returns x  and sets the  top level
+          form to this value.
+
+          For example, to  make MACLISP have an  evalquote top level  similar to
+          LISP 1.5:
+
+               (sstatus toplevel
+                        '(progn (print *)
+                                (apply (read) (read)) ))
+
+          See section 12.1 for further details.
+
+
+
+September 8, 1977                   ∪3-1.8.1                           Page 3-83
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+breaklevel (status breaklevel) returns the break-loop form.  (sstatus breaklevel
+          x) sets this form.  See  for how this is used.
+
+uuolinks  (status  uuolinks) returns  a number  which represents  the  number of
+          available slots for linking between compiled functions.
+
+          (sstatus uuolinks) causes all  links between compiled functions  to be
+          "unsnapped."  This should be done whenever (nouuo t) is done to insure
+          that  the  interpreter  always   gets  a  chance  to   save  debugging
+          information on every function call.
+
+divov     (status divov) returns the state of the "divide overflow"  switch.  If
+          this switch is nil an attempt  to divide by zero causes an  error.  If
+          the switch is t the result of a division by zero is the numerator plus
+          1.
+
+          (sstatus divov x) sets the "divide overflow" switch to x.
+
+          In the pdp-10 implementation, divov applies only to quotient.   // and
+          //$ do not detect division by zero.
+
+features  (status features) returns a list of symbols representing  the features
+          implemented in the LISP being used.  The following symbols  may appear
+          in this list:
+
+               bibop         pdp-10 big-bag-of-pages memory management scheme
+
+               lap           this LISP has a Lisp Assembly Program
+
+               sort          the sorting functions  described in chapter  11 are
+                              present
+
+               edit          the  edit  function  described  in  chapter  18  is
+                              present
+
+               fasload       the  fasload facility  described in  chapter  14 is
+                              present
+
+               ↑f            the "moby I/O" facility is present
+
+               bignum        the   arbitrary-precision  arithmetic   package  is
+                              included in this LISP
+
+
+Page 3-84                           ∪3-1.8.1                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+               strings       character  strings   and  the  functions   on  them
+                              described in chapter 8 are present
+
+               newio         the  I/O  functions  described  in  chapter  13 are
+                              included  in this  LISP;  if this  feature  is not
+                              present   only   some  of   those   functions  are
+                              available.
+
+               trace         the trace package (chapter 15) is present.
+
+               grindef       the function  definition formatter (chapter  16) is
+                              present.
+
+               grind         the file formatter (chapter 16) is present.
+
+               compiler      this is the LISP compiler (chapter 14)  rather than
+                              the interpreter.
+
+               fastarith     the  fast-arithmetic features  of the  compiler are
+                              present
+
+               ml            this LISP is on the MathLab machine at MIT
+
+               ai            this LISP is on the AI machine at MIT
+
+               H6180         this  LISP  is on  an  H6180 Multics  machine  or a
+                              compatible machine such as a 68/60 or a 68/80.
+
+               its           this LISP is on some ITS system
+
+               Multics       this LISP is on some Multics system
+
+               dec10         this LISP is on some DEC TOPS-10 system; or on some
+                              TENEX system  since the TENEX  implementation runs
+                              under a TOPS-10 emulator.
+
+          A  package being  "present" means  that it  has been  loaded  into the
+          environment.  If (status  features) claims it  is not present,  it may
+          still  be  available  because  it  may  be  automatically  loaded when
+          required.  This does not apply to the compiler.
+
+          (car (last (status features))) is an implementation name, such  as its
+
+
+September 8, 1977                   ∪3-1.8.1                           Page 3-85
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+          or dec10 or Multics.  The main idea behind this status call is that an
+          application package can be loaded into any MACLISP  implementation and
+          can decide what to do on the basis of the features it finds available.
+
+feature   (status  feature  foo) is  roughly  equivalent to  (memq  'foo (status
+          features)), i.e. it determines whether this LISP has  the foo-feature.
+          Note that foo is not evaluated.
+
+          (sstatus feature foo) makes foo a feature.  foo is not evaluated.  For
+          example, the  trace package  does (sstatus feature  trace) when  it is
+          loaded.
+
+          Example:
+
+             (cond ((status feature bignum)
+                    (prog2 nil (eval (read)) (read)))  ;use first
+                   (t (read) (eval (read)) ))          ;use second
+
+             (defun factorial (n)    ;bignum version
+                 (cond ((zerop n) 1)
+                       ((times n (factorial (sub1 n))))
+                   ))
+
+             (defun factorial (n)    ;fixnum-only version
+              (do () ((not (> n 13.)))  ;do until n &lt;λ← 13.
+                     (error "argument too big - factorial"
+                            n
+                            'wrng-type-arg))
+                 (cond ((zerop n) 1)
+                       ((* n (factorial (1- n)))) ))
+
+nofeature (sstatus  nofeature foo)  makes  foo not  be  a feature.   foo  is not
+          evaluated.
+
+          (status nofeature foo) is equivalant to (not (status feature foo)).
+
+status    (status status foo) returns t  if foo is a valid status  function.  If
+          it is not, nil is returned.
+
+          (status status) returns a  list of valid status functions.   The names
+          are truncated to  some implementation-dependent number  of characters,
+          such as 4 or 5.
+
+
+Page 3-86                           ∪3-1.8.1                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+sstatus   (status sstatus foo) returns t if foo is a valid sstatus function.  If
+          it is not, nil is returned.
+
+          (status sstatus) returns a  list of valid sstatus functions.   As with
+          (status  status),  the  names are  truncated  to  some implementation-
+          dependent number of characters, such as 4 or 5.
+
+
+1.8.2  Time
+
+
+runtime             SUBR no args
+
+          (runtime) returns as a fixnum  the number of microseconds of  cpu time
+          used so far by the  process in which LISP is running.   The difference
+          between two  values of (runtime)  indicates the amount  of computation
+          that was done between the two calls to runtime.
+
+
+time                SUBR no args
+
+          (time) returns the time that the system has been up, in seconds. (As a
+          flonum.)  The difference  between  the results  of two  calls  to time
+          indicates   the   amount  of   elapsed   real  time.    (In   the  ITS
+          implementation, time that elapses  while the system is stopped  due to
+          memory errors is not considered "real" and not counted.)
+
+
+sleep               SUBR 1 arg
+
+          (sleep n) causes  a real-time delay of  n seconds, then returns  n.  n
+          may be a fixnum or a flonum.
+
+
+See also the alarmclock function, section 1.4.3, and the date, daytime,  and dow
+functions of the status special form, described in the preceding section.
+
+
+1.8.3  Escaping from Lisp
+
+
+   It is possible to  escape temporarily from LISP  to execute a command  in the
+
+
+September 8, 1977                   ∪3-1.8.1                           Page 3-87
+
+**DRAFT**                   Maclisp Reference Manual                   **DRAFT**
+
+
+host  operating system.   Of course,  the program  (or user)  that  supplies the
+command has  to know which  operating system  it is running  under.  It  is also
+possible for  LISP to  return permanently  to the  host operating  system.  This
+discards the LISP environment and gives back whatever resources, such as memory,
+it was using.
+                         in the Multics implementation
+
+cline               SUBR 1 arg
+
+        (cline x), where x is a character string, executes the Multics command x
+     and returns nil.  Example:
+                              (cline "who -long")
+
+quit                SUBR no args
+
+        (quit) returns from the lisp command, freeing up the  temporary segments
+     that were used to hold the LISP environment.
+
+
+                           in the ITS implementation
+
+valret              LSUBR 0 or 1 args
+
+        (valret) is like (ioc  z); that is, it does  a .LOGOUT if LISP is  a top
+     level procedure, and otherwise valrets ":VK " to DDT.
+
+        (valret x) effectively performs an explodec on x (in practice x  is some
+     strange  atomic symbol  like :PROCED/  :DISOWN/   , but  it may  be  any S-
+     expression).  If the  string of characters is  one of "$↑X.", ":KILL  ", or
+     ":KILL↑M"  then  valret performs  a  "silent kill"  by  executing  a .BREAK
+     16,20000; otherwise valret performs  a .VALUE, giving the  character string
+     to DDT to evaluate as commands.
+
+        Examples:
+
+        (valret ':PROCED/ :DISOWN/ )
+
+        starts the LISP running on its own without a terminal.
+
+        (valret '/ :KILL/ :TECO/↑M)
+
+        kills the LISP and starts up a TECO.
+
+
+Page 3-88                           ∪3-1.8.3                   September 8, 1977
+
+**DRAFT**                          The System                          **DRAFT**
+
+
+        (valret '0$N)
+
+        causes DDT to print out the contents of all non-zero locations in LISP.
+
+
+                         in the TOPS-10 implementation
+
+        There is currently  no way for  LISP to return  a command string  to the
+     Monitor  in  the  TOPS-10 implementation.   However,  (valret)  will return
+     control to the monitor so that a command may be manually typed.   Then type
+     CONTINUE to resume lisp.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+September 8, 1977                   ∪3-1.8.3                           Page 3-89
+βββ
+</pre>
+</body>
+</html>

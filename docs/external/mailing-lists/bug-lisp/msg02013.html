@@ -1,0 +1,114 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SFAs are almost as much fun as HUNKs! -->
+<!--X-From-R13: OZO@ ng [WF&#45;[Q (Oyna Pnjqra) -->
+<!--X-Date: Sat, 29 Mar 80 19:57:00 GMT -->
+<!--X-Message-Id: 3d6bf4874ec1ad678cb7a0042482e6d5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SFAs are almost as much fun as HUNKs!</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02014.html">Date Prev</a>][<a href="msg02012.html">Date Next</a>][<a href="msg02014.html">Thread Prev</a>][<a href="msg02012.html">Thread Next</a>][<a href="maillist.html#02013">Date Index</a>][<a href="threads.html#02013">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SFAs are almost as much fun as HUNKs!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: SFAs are almost as much fun as HUNKs!</li>
+<li><em>From</em>: ALAN at MIT-MC (Alan Bawden)</li>
+<li><em>Date</em>: Sat, 29 Mar 80 19:57:00 GMT</li>
+<li><em>Original-date</em>: 29 MAR 1980 1457-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In a bare lisp 1914 the following dialog took place:
+
+;;;An SFA that simply passes its output on to someone else:
+(defun foo-function (foo op arg) 
+  (caseq op
+	 (tyo ((lambda (f) 
+		 (cond ((or (&lt; arg 0) (&gt; arg 177))
+			(tyo 133 f)	;strange negative numbers are printed
+			(prin1 arg f)	;enclosed in square brackets.
+			(tyo 135 f))
+		       (t (tyo arg f))))
+	       (sfa-get foo 0)))
+	 (which-operations '(tyo))))
+FOO-FUNCTION 
+
+;;;Make one:
+(setq foo (sfa-create 'foo-function '1 '|Foo|))
+#SFA-|Foo|-70740 
+
+;;;Stuff it with someone to talk to:
+(sfa-store foo 0 tyo)
+#FILE-OUT-|TTY:* *|-70014 
+
+(setq terpri t)			;just to be sure (the default these days)
+T 
+
+(print '(a b c) foo)
+(A B C)				;looks fine
+T 
+
+(setq terpri nil)		;used to be the default
+NIL 
+
+(print '(a b c) foo)
+[-4]A [-3]B [-4]C)		;well, there are the funny negative numbers
+T				;but where is my open paren??
+
+;;;If I remove the code to print the square bracketed negative numbers
+;;;then the open parens come back.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02014.html">STRING bug, and NILAID on twenex</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02012.html">GRINDEF/SETF</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02014.html">STRING bug, and NILAID on twenex</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02012.html">GRINDEF/SETF</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02013"><strong>Date</strong></a></li>
+<li><a href="threads.html#02013"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

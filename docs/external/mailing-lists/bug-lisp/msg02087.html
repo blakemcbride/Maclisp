@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Use of New Keyboards with ITS. -->
+<!--X-From-R13: [AA@ ng [WF&#45;[Q (Rnivq O. [bba) -->
+<!--X-Date: Tue, 4 Mar 80 04:37:00 GMT -->
+<!--X-Message-Id: 71ae1dfa754b9a2865d0b7befdabeba2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Use of New Keyboards with ITS.</title>
+<link rev="made" href="mailto:MOON at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02088.html">Date Prev</a>][<a href="msg02086.html">Date Next</a>][<a href="msg02088.html">Thread Prev</a>][<a href="msg02086.html">Thread Next</a>][<a href="maillist.html#02087">Date Index</a>][<a href="threads.html#02087">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Use of New Keyboards with ITS.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JLK at MIT-MC</li>
+<li><em>Subject</em>: Use of New Keyboards with ITS.</li>
+<li><em>From</em>: MOON at MIT-MC (David A. Moon)</li>
+<li><em>Date</em>: Tue, 4 Mar 80 04:37:00 GMT</li>
+<li><em>Cc</em>: CPR at MIT-MC, (BUG DDT) at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Cc</em>: (BUG ITS) at MIT-MC, (BUG TECO) at MIT-MC</li>
+<li><em>Original-date</em>: 3 MAR 1980 2337-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I don't think ITS is going to be able to accomodate all of the new
+modifier bits.  There are no free bits in the present internal
+(18-bit) character code.  I don't think making Greek input work
+is very important, since we certainly aren't going to go to the
+very large amount of trouble required to make Greek output work
+and have a more-than-7-bit printing-character set.
+
+It would be nice to make Super and Hyper work to ITS, although there
+are not enough bits available.  Note that shift-lock has already been
+recycled.  Shift is sort of recycled and sort of vestigially still
+there; it could be recycled for this.  It isn't necessary to be able to
+represent all 16 combinations of the &quot;bucky bits&quot;; for instance there
+are 8 combinations of 0, 1, or 2-adjacent buckies.
+
+Since the function keys are there, you may as well make up top+&gt;40
+codes for them.  Some of the function keys map into keys on the old
+keyboard; see the #\ table in LMIO;READ for something from which this
+mapping can be derived, as we are doing it on the Lisp machine now.
+From memory, it's clear-screen-&gt;form, delete-&gt;vt, clear-input-&gt;clear,
+macro-&gt;back-next (but should be system-&gt;backnext in your case), terminal-&gt;esc.
+
+It's not obvious that new keyboards will ever be attached to the AI TVs.
+We might, and we might not.  It would involve slowing down the keyboard
+scanner substantially, and we might have to put some buffering in the
+keyboard microprocessor.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02088.html">Use of New Keyboards with ITS.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02086.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02088.html">Use of New Keyboards with ITS.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02086.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02087"><strong>Date</strong></a></li>
+<li><a href="threads.html#02087"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

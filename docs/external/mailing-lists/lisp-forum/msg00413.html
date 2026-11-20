@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: macro/expr property selection by funcall -->
+<!--X-From-R13: Uyraa E. Phexr &#60;UEP ng [WF&#45;[Z> -->
+<!--X-Date: Tue ,19 Aug 80 22:39:00 EDT -->
+<!--X-Message-Id: e8ffabacbb3d1e167c446f01d57190fc@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: macro/expr property selection by funcall</title>
+<link rev="made" href="mailto:GSB at MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00110.html">Date Prev</a>][<a href="msg00111.html">Date Next</a>][<a href="msg00110.html">Thread Prev</a>][<a href="msg00111.html">Thread Next</a>][<a href="maillist.html#00413">Date Index</a>][<a href="threads.html#00413">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: macro/expr property selection by funcall</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Multics-Lisp-People at MIT-MC</li>
+<li><em>Subject</em>: Re: macro/expr property selection by funcall</li>
+<li><em>From</em>: Glenn S. Burke &lt;GSB at MIT-ML&gt;</li>
+<li><em>Date</em>: Tue ,19 Aug 80 22:39:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-ML</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Having the funcall mechanism ignore a macro property preceding
+some other applicable property is a loss, and will probably cause
+bugs and confusion if people try to redefine things.  Crocks like
+this should be limited to the compiler, if they are allowed at all;
+i believe that it is defined behaviour for complr to use any macro
+property, even one preceded on the plist by another functional
+property.  I know i have seen this used in the past.  So if you need
+to have both of them present, make the macro come last.
+    A somewhat nicer alternative would be to have a property used
+similarly to the MACRO property, but ONLY used by the compiler.  The
+multics lisp compiler has such a beast, but the property name is not
+available to the user (wrong obarray).  Then again, an appropriately
+constructed OPTIMIZER (ala lispm) could subsume such a function, and
+would be more useful in the long run.
+    My own solution, which is neither pretty nor easy to use without
+support code, has been to use MACROLIST in pdp-10 maclisp, the *MACRO
+property on multics (would you believe a load-time-eval to get the
+symbol off the right obarray?), and the COMPILER:OPTIMIZERS property
+on the lispm.
+    As for open coding, if i were doing it by using the ordering of
+the macro/expr properties, i would want random interpreted calls to
+go through the expr version rather than the macro.  That if nothing
+else would determine the order i would put the properties on in.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00110.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00111.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00110.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00111.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00413"><strong>Date</strong></a></li>
+<li><a href="threads.html#00413"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

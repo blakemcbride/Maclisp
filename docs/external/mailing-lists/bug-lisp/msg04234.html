@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: ARRAYCALL vs FUNCALL -->
+<!--X-From-R13: Uyraa E. Phexr &#60;UEP ng [WF&#45;[Z> -->
+<!--X-Date: Mon, 14 Apr 80 16:56:00 GMT -->
+<!--X-Message-Id: 20ae7afa016380a2a21b84bf0f431395@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ARRAYCALL vs FUNCALL</title>
+<link rev="made" href="mailto:GSB at MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04235.html">Date Prev</a>][<a href="msg04233.html">Date Next</a>][<a href="msg04235.html">Thread Prev</a>][<a href="msg04232.html">Thread Next</a>][<a href="maillist.html#04234">Date Index</a>][<a href="threads.html#04234">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ARRAYCALL vs FUNCALL</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC, CWH at MIT-MC</li>
+<li><em>Subject</em>: ARRAYCALL vs FUNCALL</li>
+<li><em>From</em>: Glenn S. Burke &lt;GSB at MIT-ML&gt;</li>
+<li><em>Date</em>: Mon, 14 Apr 80 16:56:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-ML</li>
+<li><em>Original-date</em>: 14 April 1980 11:56-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>There are two solutions to the problem of evaluating an array reference
+of unknown type, without that huge macro with a dispatch, if the arrays
+are all array pointers.
+    One is to have routines like AR-n and AREF, which can be simply
+open-coded into a pushj into the asar of the array, which is (i believe)
+effectively what FUNCALL does, but only after the uuo and hairy dispatch.
+    The other (which JONL suggested some time ago) is similar, but
+differs in that the subscript(s) have already been mapped down to one
+dimension by the compiler.  An internal entry in lisp (JSP presumably)
+would then do the type dispatch and fetch.  AR-1 etc could also be
+open-coded into this.
+    The third alternative, which is less optimal but trivially realized,
+is simply to have AR-1 etc defined as exprs.  I'm not sure, but it is
+possible that even with type checking they might be faster than FUNCALL,
+but again, the array must be an array pointer.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04235.html">ARRAYCALL vs FUNCALL</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04233.html">*CATCH vs named PROG</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04235.html">ARRAYCALL vs FUNCALL</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04232.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04234"><strong>Date</strong></a></li>
+<li><a href="threads.html#04234"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Antecedents -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Wed ,24 Jun 81 14:41:00 EDT -->
+<!--X-Message-Id: 24Jun81 144152 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Antecedents</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00780.html">Date Prev</a>][<a href="msg00778.html">Date Next</a>][<a href="msg00782.html">Thread Prev</a>][<a href="msg00777.html">Thread Next</a>][<a href="maillist.html#00779">Date Index</a>][<a href="threads.html#00779">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Antecedents</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Gosper at PARC-MAXC</li>
+<li><em>Subject</em>: Antecedents</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Wed ,24 Jun 81 14:41:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Bill,
+   Granted that it's a pain to ahve to name trivial quantities
+you only want to use twice, nevertheless I dispute the claim that
+&quot;LISP is guiltier than machine language&quot; for the example described:
+    Suppose (F a) is any function, (G a b) is a recursive function,
+    and x stands for a large (or costly) expression.  Now suppose
+    you want (G x (F x))) (or just (G x x)).  In machine language,
+    (and presumably in the compiler's model), the second x is
+    readily available in a register or arg vector or stack as
+    part of the setup to call G, but in LISP there seems to be no
+    way to exploit this, necessitating the invention of a
+    temporary.
+    ...
+    Reservation:  a numeric designator (&quot;N args ago&quot;) is unflavorful
+    on grounds of readability and editability, hatching gross bugs
+    on failure to increment or decrement the Ns upon insertion or
+    deletion of intervening args.
+As a rule, in machine language you must give *everything* a name
+(for the most part, what is a register but a pronoun, or at least a
+short name?); thus you don't notice it expecially when a trivial
+intermediate quantity gets a name also.  For PDP-10 MacLISP:
+	HRRZ A,@.SPECIAL FOO		;(BAR (CADR FOO) 'QUUX (CADR FOO))
+	HLRZ A,(A)
+	MOVEI B,.QUOTE QUUX
+	MOVEI C,(A)			;Copy first arg to third
+	PUSHJ P,BAR
+Here we easily grabbed the first argument to copy into the third, but
+that's because it had the name A!  (We gave the new one the name C --
+or rather, the calling conventions *require* that we name the third
+argument C.)
+
+A partial exception is stack quantities, which don't have names,
+but those are then generally accessed by numeric designator.
+	PUSH P,[RETADR]
+	HRRZ A,@.SPECIAL FOO		;Same example, but BAR is LSUBR
+	HLRZ A,(A)
+	PUSH P,A
+	PUSH P,[.QUOTE QUUX ]
+	PUSH P,-1(P)			;Copy first arg to third
+	MOVNI T,3
+	JRST BAR
+RETADR:
+Here we had to use a numeric offset to refer to the first argument.
+
+In summary, I suggest that LISP probably lets you elide more names
+than typical machine code, and lets you choose your own names for the
+rest, rather than requiring a fixed small set of register names.
+--Guy
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00780.html">NCONC and LAST of locatives</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00778.html">NCONC and LAST of locatives</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00782.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00777.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00779"><strong>Date</strong></a></li>
+<li><a href="threads.html#00779"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

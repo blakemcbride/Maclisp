@@ -1,0 +1,121 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LDB -->
+<!--X-From-R13: Uyraa E. Phexr &#60;UEP ng [WF&#45;[Z> -->
+<!--X-Date: Thu, 18 Sep 80 21:54:00 GMT -->
+<!--X-Message-Id: e2a5ea7021c6f81fb3bd6ad7d05ca26e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LDB</title>
+<link rev="made" href="mailto:GSB at MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01199.html">Date Prev</a>][<a href="msg01197.html">Date Next</a>][<a href="msg01199.html">Thread Prev</a>][<a href="msg01197.html">Thread Next</a>][<a href="maillist.html#01198">Date Index</a>][<a href="threads.html#01198">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LDB</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: LDB</li>
+<li><em>From</em>: Glenn S. Burke &lt;GSB at MIT-ML&gt;</li>
+<li><em>Date</em>: Thu, 18 Sep 80 21:54:00 GMT</li>
+<li><em>Original-date</em>: 18 September 1980 17:54-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>; The following goes into the autoloadable LODBYT file, or in Lisp itself.
+
+(lap-a-list
+  '((lap ldb subr)
+	(push p (% 0 0 fix1))
+	(jsp t fxnv1)
+	(jsp t fxnv2)
+	(caia)
+    (entry +internal-ldb subr)
+	(push p (% 0 0 fix1))
+	(hrlz d 0 a)
+	(lsh d 6)
+	(tlo d b)
+	(ldb tt d)
+	(popj p)
+    nil))
+
+; You might note that +INTERNAL-LDB has the same number of instructions as
+; *LDB.  If it were lisp-internal, it could have an ACS property of 2.
+
+; The following goes into a file which gets loaded into the compiler
+; (presumably it would be pre-loaded):
+
+(defun ldb-hacker (form)
+  (let* (((ppss n) (cdr form))
+	 (foo (lsb:constantp ppss)))
+    (cond ((or (null foo) (not (fixp foo))) `(+internal-ldb ,ppss ,n))
+	  (t `(boole 1 (lsh n ,(- (lsh foo -6.))) ,(ldb-make-mask foo))))))
+
+(push '(ldb . ldb-hacker) macrolist)
+
+(defun ldb-make-mask (ppss)
+    (lsh -1 (- (boole 1 ppss #o77) 36.)))
+
+This division keeps the interpreter from bloating (after all, all it needs
+is a subr, not code which knows how to compile LDB) and lets one have
+easy LDBs hacked nicely by the compiler.  If the compiler were ever to
+hack LDB then you just flush the compile-time file.
+P.s:  LSB:CONSTANTP returns the constant if the thing is a constant, with
+(QUOTE number) being canonicalized to the number.
+
+As a side comment, it is fine to have things be macros, but if there
+are lots of them they cause the size of interpreted code to blow up
+badly, increasing paging and gc time, and maybe making one run out
+of core.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01199.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01197.html">Bad GRINDEF/TRACE interaction</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01199.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01197.html">Bad GRINDEF/TRACE interaction</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01198"><strong>Date</strong></a></li>
+<li><a href="threads.html#01198"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Interrupts in 20X MacLisp -->
+<!--X-From-R13: [nex Z. [vyyre &#60;[WZZSD ng [WF&#45;OW> -->
+<!--X-Date: Sun, 6 May 79 18:39:00 GMT -->
+<!--X-Message-Id: 53ff1a5fefe0040aae154009c14103eb@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Interrupts in 20X MacLisp</title>
+<link rev="made" href="mailto:MILLER at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00449.html">Date Prev</a>][<a href="msg00447.html">Date Next</a>][<a href="msg00449.html">Thread Prev</a>][<a href="msg00447.html">Thread Next</a>][<a href="maillist.html#00448">Date Index</a>][<a href="threads.html#00448">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Interrupts in 20X MacLisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MILLER at MIT-AI, BUG-LISP at MIT-AI, steve at SRI-KL,    DEKLEER at PARC-MAXC2</li>
+<li><em>Subject</em>: Interrupts in 20X MacLisp</li>
+<li><em>From</em>: Mark L. Miller &lt;MILLER at MIT-AI&gt;</li>
+<li><em>Date</em>: Sun, 6 May 79 18:39:00 GMT</li>
+<li><em>Original-date</em>: 6 May 1979 14:39-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>More generally, as I understand it, there are many characters (^C, ^G)
+which are hard-wired in 20X maclisp.  This is a gross loss (please
+correct me if I am confused!).  [I realize DEC may be at fault!]
+
+In general, any programming system which does not support (or at least
+ALLOW under some degree of user effort) full 128 character,
+character-at-a-time I/O (preferably 256 chars) is a loss for a CS
+research&amp;development system.  For example, you cannot simulate (much less
+implement for serious use) Emacs!  Every char should be user-redefinable,
+as an interrupt included.  The more compromises that are made with this,
+the worse off you are.  If it cannot be fixed, it will eventually
+contribute to the outside world's decision that Lisp not be taken
+seriously.
+
+Regards, Mark
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00449.html">LEDIT on TOPS-20 and TNX.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00447.html">Retry function for debugger.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00449.html">LEDIT on TOPS-20 and TNX.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00447.html">Retry function for debugger.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00448"><strong>Date</strong></a></li>
+<li><a href="threads.html#00448"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

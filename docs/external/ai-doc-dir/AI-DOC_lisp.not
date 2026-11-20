@@ -1,0 +1,41 @@
+Directories with MacLISP relevance are:
+	LISP;	-- FASL and binary (dump) files for maclisp system
+	L;	-- MIDAS sources for main lisp file, and for others
+ 	COMLAP;	-- COMpiler (with FASLAP) and LAP assembler
+	LSPSRC; -- Various auxillary out-of-core files written in lisp
+	NILCOM;	-- Portable LISP system software written in NIL.
+	LSPMAI;	-- Bug mail and other notices.
+
+Please follow normal reaping courtesies if necessary to reap 
+any of these dirs but LISP;.
+
+Please DO NOT delete files from the LISP; directory without
+consulting JONL, RWK, or RLB.  The LISP; directory is referred to 
+by programs which aren't as smart as a GFR.
+
+If you absolutely must delete a
+file, then follow these rules:
+[a] Do not delete a file which is not backed up.
+[b] Do not delete a file unless there is more than one
+    version of it around.
+[c] If there are only two versions, think twice.  If you
+    must delete, delete the lower-numbered one.
+[d] If there are three or more, try to preserve the version
+    for the current LISP as well as the latest version (this
+    usually means deleting the one in the *middle*).
+Again, before deleting any files consider sending a message to
+JONL, RWK, or RLB first - usually one of us in in within
+twelve to eighteen hours.  Thanks.
+
+Files whose first file name is BBLISP are binary files.
+The second file name is of the form nnnxxx, where nnn is the
+three digits of the version number, and xxx is a distinguishing
+identifier, such as BIB for a Bibop LISP, or QIO
+for a LISP with the new I/O code.
+Files whose first file name is LSPTTY contain the
+output by MIDAS to the tty during an assembly.  The second
+file names are as above.
+Most other files are source files.  Occasional random files
+are put here also, whose second file names are not numeric
+(e.g. this file!).
+

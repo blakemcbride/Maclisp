@@ -1,0 +1,132 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: DIGITP and DIGIT&#45;WEIGHT -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Thu ,2 Oct 80 17:59:00 EDT -->
+<!--X-Message-Id: dea9137ca0604f85c958401a98c90d1b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: DIGITP and DIGIT-WEIGHT</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00239.html">Date Prev</a>][<a href="msg00242.html">Date Next</a>][<a href="msg00242.html">Thread Prev</a>][<a href="msg00246.html">Thread Next</a>][<a href="maillist.html#00240">Date Index</a>][<a href="threads.html#00240">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: DIGITP and DIGIT-WEIGHT</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: DIGITP and DIGIT-WEIGHT</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu ,2 Oct 80 17:59:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Isn't the problem here that lisp as we
+think of it has the strange property of non-null truthity?	
+We get efficiency in runtime and codesize by having
+predicates return useful values. However, most
+of our control structures still don't support
+this fully (although many suggestions and private macros abound).
+I think the elegance of a return value of a predicate is wiped
+out if I then see people doing:
+
+(DEFUN FOO ( .... &amp;AUX TEMP)
+
+   (CASEQ (SETQ TEMP (FOOBARP X))
+	   &lt;code-section-1&gt; )  &lt;code-section-2&gt;)
+
+This is especialy gross if because of compiler deficiency
+the programmer re-uses (i.e. SETQ's), the variable TEMP
+in either code sections 1 or 2.
+
+Having a uniform set of predicates doesn't solve the whole 
+efficiency/modularity/elegance problem if its not backed
+up by good control structures.
+
+Another perhaps parallel way of aproaching this is to give
+predicates very special consideration in the compiling.
+When compiling &quot;(IF (FOOBARP X) ...)&quot; you might try
+&quot;opening up&quot; the routine FOOBARP if it is suggested by the
+properties of FOOBARP. This is not very novel and will only
+win (be practical) under certain conditions, however it
+does allow you to have your cake (general predicates)
+and it eat too (efficiency), in many cases.
+
+This DIGITP guy seems to cry out for a macro expansion
+generalization which I heard about first from ALAN.
+If the macro DIGITP gets a second argument of VALUE, EFFECT, or 
+PREDICATE. Then it can do nice things, (IF (DIGITP X) ...) =&gt;
+(IF (MEMBER X '(#/0 #/1 ... #/9)) ...) Which in turn opens
+up to a LOOP construct with two exit forms, one for the IF and one
+for the THEN conditions. 
+
+&quot;Compilation&quot; of a predicate (either by machine or by hand),
+then becomes one of generating the usual code for returning NIL
+or a value, and also generating optimizers and predicates to
+look for possible optimizations. Automaticaly getting
+feedback from user code (which all passes through the compiler),
+is then probably more important than any amount of
+arguing tivialities like DIGITP/DIGIT-WEIGHT.
+
+
+-gjc
+
+p.s. I wish ALAN's second argument to macros was implemented
+as soon as possible by all reasonable lisps. It would give
+us more to play with and less to argue about.
+
+Think about (IF (DIGITP X) &lt;FOO&gt; &lt;BAR&gt;) going to
+
+(DO ((J #/0 (1+ J)))
+    ((&gt; J #/9) &lt;BAR&gt;)
+    (AND (= X J) (RETURN &lt;FOO&gt;)))
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00239.html">Re: Why DIGITP and DIGIT-WEIGHT?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00242.html">Re: Why DIGITP and DIGIT-WEIGHT?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00242.html">Re: Why DIGITP and DIGIT-WEIGHT?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00246.html">Re: DIGITP and DIGIT-WEIGHT</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00240"><strong>Date</strong></a></li>
+<li><a href="threads.html#00240"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

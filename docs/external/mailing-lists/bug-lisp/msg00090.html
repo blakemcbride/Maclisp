@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Fri, 24 Nov 78 23:51:00 GMT -->
+<!--X-Message-Id: 9eb7b2cfdb00e67c9ec5f6b2f479eb22@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00091.html">Date Prev</a>][<a href="msg00089.html">Date Next</a>][<a href="msg00091.html">Thread Prev</a>][<a href="msg00089.html">Thread Next</a>][<a href="maillist.html#00090">Date Index</a>][<a href="threads.html#00090">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: PRATT at MIT-MC</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Fri, 24 Nov 78 23:51:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 24 NOV 1978 1851-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    MSG: DIFF   1     
+From:     PRATT@MIT-AI
+Date: Thu, 24 Nov 78 20:10:25 GMT
+Original-Date: 11/24/78 16:10:25 EDT
+Subject: Re: What difference does one argument make?
+    ...  However, for the case of one argument (- 3) yields -3
+    and (-$ 3.0) yields -3.0 as one might expect, whereas (DIFFERENCE 3)
+    yields 3.  Does anyone own a program that would not work if DIFFERENCE were
+    brought into line?  Does anyone care either way?
+
+(MINUS 3.0) returns -3.0 - the problem is that the two generic operators
+map into the single fixnum operator. I would rather see there created fixnum
+and flonum analogs of both MINUS and DIFFERENCE rather than have DIFFERENCE
+altered. A distinction should be made between the use of the unary minus
+and the use of an N-ary minus which just happens to have only one term.
+Both can be useful at times. Since there are probably existing programs 
+(especially macros) which generate code relying on DIFFERENCE to work a certain
+way it seems like these would get messed up by your proposed change. I would
+not want to have to search all of my files changing such a thing.
+
+--kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00091.html">Point for Clarification</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00089.html">FORMAT</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00091.html">Point for Clarification</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00089.html">FORMAT</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00090"><strong>Date</strong></a></li>
+<li><a href="threads.html#00090"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

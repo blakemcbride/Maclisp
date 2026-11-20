@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Why does @INFORMATION (ABOUT) FILES ... say "restricted JFN"? -->
+<!--X-From-R13: TSW@PSDU ng Q[G&#45;20Q -->
+<!--X-Date: Wed, 3 Mar 82 02:59:00 GMT -->
+<!--X-Message-Id: 9793cb752837a1b55a71f5f48e59a1e2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Why does @INFORMATION (ABOUT) FILES ... say &quot;restricted JFN&quot;?</title>
+<link rev="made" href="mailto:FEINBERG at CMU-20C">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00931.html">Date Prev</a>][<a href="msg00929.html">Date Next</a>][<a href="msg00931.html">Thread Prev</a>][<a href="msg00929.html">Thread Next</a>][<a href="maillist.html#00930">Date Index</a>][<a href="threads.html#00930">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Why does @INFORMATION (ABOUT) FILES ... say &quot;restricted JFN&quot;?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Subject</em>: Why does @INFORMATION (ABOUT) FILES ... say &quot;restricted JFN&quot;?</li>
+<li><em>From</em>: FEINBERG at CMU-20C</li>
+<li><em>Date</em>: Wed, 3 Mar 82 02:59:00 GMT</li>
+<li><em>Cc</em>: BUG-MACLISP at MIT-MC</li>
+<li><em>Original-date</em>: 2 March 1982  21:59-EST (Tuesday)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Howdy!
+	I beg to differ with you, JONL.  Here is a excerpt from 
+QIO.MID.750:
+
+;HERE TO ALLOCATE A FRESH JFN AND OPEN THE FILE
+OPEN3D:	PUSH FXP,TT		;SAVE THE TTSAR
+	MOVEI T,F.DEV(TT)
+	HRLI T,-L.F6BT
+	PUSH FXP,(T)		;COPY THE GIVEN DEVICE NAMES ONTO THE STACK
+	AOBJN T,.-1
+	PUSHJ P,6BTTLS		;CONVERT TO A NAMESTRING IN PNBUF
+	POP FXP,TT		;GET TTSAR
+	MOVE T,(FXP)		;RESTORE MODE BITS IN T
+	MOVSI 1,(GJ%ACC+GJ%SHT)	.SEE .GJDEF
+	TRNE T,1		
+	 TLNE T,FBT.AP
+	  TLOA 1,(GJ%OLD)	;FOR INPUT OR APPEND, WE WANT AN EXISTING FILE
+	   TLO 1,(GJ%FOU+GJ%NEW) ;FOR OUTPUT, A NON-EXISTENT FILE
+	MOVE 2,PNBP
+	GTJFN			;GET A JFN
+
+The line MOVSI 1,(GJ%ACC+GJ%SHT) sets the Restricted Access bit.
+There are apparently many GJ%ACCs throughout QIO.MID.  If there is a
+good reason for them to be there, that is one thing.  Denying that
+they are there is a different story.  I would proposed eliminating
+GJ%ACC from all GTJFN calls. This would make debugging easier.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00931.html">Why does @INFORMATION (ABOUT) FILES ... say &quot;restricted JFN&quot;?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00929.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00931.html">Why does @INFORMATION (ABOUT) FILES ... say &quot;restricted JFN&quot;?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00929.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00930"><strong>Date</strong></a></li>
+<li><a href="threads.html#00930"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

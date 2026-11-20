@@ -1,0 +1,110 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: array garbage collection. -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 14 Jun 81 15:12:00 GMT -->
+<!--X-Message-Id: a5fada04c68f3bf802db03a1abce21c5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>array garbage collection.</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02456.html">Date Prev</a>][<a href="msg02454.html">Date Next</a>][<a href="msg02459.html">Thread Prev</a>][<a href="msg02470.html">Thread Next</a>][<a href="maillist.html#02455">Date Index</a>][<a href="threads.html#02455">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>array garbage collection.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: array garbage collection.</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 14 Jun 81 15:12:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 14 June 1981 11:12-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>It is very easy to illustrate the bug, I put a file which did in
+L;GCBIB BUG. Somebody deleted it though. Here it is:
+
+(ARRAY K NIL 10) ; a NON-GC array for looking at things.
+(DO ((A (*ARRAY NIL T 10)))
+    (T
+     (STORE (ARRAYCALL T A 0) A) ; array points to itself.
+     (STORE (K 0) A)
+     ()))
+(PROGN (STORE (K 1) (*ARRAY NIL T 10)) ())
+
+(K 0) ; ok.
+(K 1) ;
+()()()    ; Clear the value of *
+
+(GC)
+(K 1) =&gt; dead array. ; ok.
+(K 0) =&gt; live array. ; the sucker didn't get GC'd.
+
+If you look at the code for GC-marking of the ARRAY datatype
+you will see that it can't possibly garbage collect the array in (K 0).
+No matter how many times you GC.
+
+Anyway, the body of a HUNK is marked correctly, I don't really see why
+the body of an ARRAY could be that much more difficult to handle.
+I'll admit the GC code is a bit &quot;tight&quot; as far as register-saving
+conventions, etc., so it will take a bit of effort to figure out how to
+change the code. But with all the work being put into maclisp lately
+it is a shame to see fundamental and fixable bugs simply ignored.
+
+-gjc
+
+p.s. This bug should be mentioned in the documentation for *ARRAY.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02456.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02454.html">[GJS at MIT-AI: Forwarded]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02459.html">array garbage collection.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02470.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02455"><strong>Date</strong></a></li>
+<li><a href="threads.html#02455"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

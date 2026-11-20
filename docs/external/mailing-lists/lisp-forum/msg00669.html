@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: backquote trivia, for you history fans. -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,11 Jan 82 13:21:00 EDT -->
+<!--X-Message-Id: 65bc3561871780a80796eff7c95c2a05@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>backquote trivia, for you history fans.</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00670.html">Date Prev</a>][<a href="msg00668.html">Date Next</a>][<a href="msg00666.html">Thread Prev</a>][<a href="msg00668.html">Thread Next</a>][<a href="maillist.html#00669">Date Index</a>][<a href="threads.html#00669">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>backquote trivia, for you history fans.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Morrison at UTAH-20</li>
+<li><em>Subject</em>: backquote trivia, for you history fans.</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,11 Jan 82 13:21:00 EDT</li>
+<li><em>Cc</em>: Lisp-Forum at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The PDP-10 Maclisp implementation of Backquote works at macroexpansion
+time as you wanted. This was done for ease of GRINDEF'ing.
+The Lispmachine implementation provides special synonyms for LIST, CONS,
+LIST*, APPEND, etc, and uses a simple pattern matcher to create a cannonical
+pretty form for GRINDEF. The NIL implementation uses code lifted from
+code from which the Multics Maclisp backquote was derived, which is also
+related in some way to the Lispmachine backquote.
+
+In all implementations there are &quot;car-position&quot; markers for &quot;,&quot; &quot;,@&quot; and &quot;,.&quot;
+and some simple entry to the &quot;BACKQUOTIFY&quot; function called by &quot;`&quot;
+either at read or eval times.
+
+Q: What is the deepest nesting of backquote found to arise in practice?
+
+-gjc
+
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00670.html">backquote query</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00668.html">Backquote depth</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00666.html">backquote query</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00668.html">Backquote depth</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00669"><strong>Date</strong></a></li>
+<li><a href="threads.html#00669"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

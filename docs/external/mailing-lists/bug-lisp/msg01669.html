@@ -1,0 +1,83 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Sqjneq Pnegba &#60;SP ng [WF&#45;OW> -->
+<!--X-Date: Tue, 27 Jan 81 15:32:00 GMT -->
+<!--X-Message-Id: c315e8b71b8ddee4e7f5309b21e09eb9@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:EB at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01670.html">Date Prev</a>][<a href="msg01668.html">Date Next</a>][<a href="msg01671.html">Thread Prev</a>][<a href="msg01667.html">Thread Next</a>][<a href="maillist.html#01669">Date Index</a>][<a href="threads.html#01669">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-AI</li>
+<li><em>From</em>: Edward Barton &lt;EB at MIT-AI&gt;</li>
+<li><em>Date</em>: Tue, 27 Jan 81 15:32:00 GMT</li>
+<li><em>Original-date</em>: 27 January 1981 10:32-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(alphalessp nil 'D) and (alphalessp 'd nil) are both NIL in XLISP
+on AI.  I'm not a LISP internals hacker, but my hypothesis is as
+follows.  Last time I checked, ALPHALESSP began with instances of
+a type-checking macro names SKOTT or something.  It's my understanding
+that that macro just checks the type bits to see if they correspond
+to being a symbol and doesn't do anything special for NIL.  So it
+doesn't think NIL is a symbol, and it doesn't retrieve the PNAME
+properly.  A couple of JUMPE's or something might be in order.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01670.html">sfa error checking</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01668.html">DEFUN&amp;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01671.html">SFA Lossage</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01667.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01669"><strong>Date</strong></a></li>
+<li><a href="threads.html#01669"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

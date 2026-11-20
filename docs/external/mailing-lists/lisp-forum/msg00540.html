@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Consistency: #\... and (FORMAT s "~:C" c) -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sat ,20 Dec 80 21:38:00 EDT -->
+<!--X-Message-Id: a4464b9c24d348f6ef3eeb8da6bfe5bb@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Consistency: #\... and (FORMAT s &quot;~:C&quot; c)</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00376.html">Date Prev</a>][<a href="msg00502.html">Date Next</a>][<a href="msg00376.html">Thread Prev</a>][<a href="msg00502.html">Thread Next</a>][<a href="maillist.html#00540">Date Index</a>][<a href="threads.html#00540">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Consistency: #\... and (FORMAT s &quot;~:C&quot; c)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: Consistency: #\... and (FORMAT s &quot;~:C&quot; c)</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat ,20 Dec 80 21:38:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Someone once proposed that #\ and/or #/ should do a vanilla read if followed
+by an alphabetic character. This would mean you could say #/ or #/ALTMODE to
+mean the same thing. This makes a lot of sense, I think, and I'm wondering why
+we never did it. We could retain #\ for compatibility, but encourage people to
+change to the more uniform scheme. I was just thinking about symmetry a bit 
+ago and it seems to me that the appropriate symmetry is the following:
+
+	(DO ((I 0. (1+ I)))
+	    ((= I #o200) &quot;What a winning I\O scheme!&quot;)
+	  (IF (NOT (EQUAL I (READLIST (EXPLODEN (FORMAT () &quot;#/~:C&quot; I)))))
+	      (RETURN '&quot;I\O isn't symmetric&quot;)))
+
+Typing this into Maclisp (using #\ and an upper bound of 32.) dies immediately
+with a diagnostic of #\DOWNARROW not being defined. I think it would be well
+if #\ and FORMAT's ~:C option agreed on a set of names to be used. 
+
+Anyone now doing something like (#/ABC) and expecting this to read as (#/A BC)
+is losing, so I think this is fully upward-compatible with the existing 
+implementation.
+
+This isn't really a new proposal, just new motivation (a more coherent i/o
+philosophy) for an old proposal. Any comments?
+
+-kmp
+
+ps Apologies in advance to those LispM types who are offended by the
+   'obsolete' function EXPLODEN (is READLIST obsolete, too? how sad)
+   in my example. That was the easiest way I could think of to describe
+   the desired relation.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00376.html">Re: Is LEXPR-FUNCALL a pain?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00502.html">Re: Once again a plea for slash</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00376.html">Re: Is LEXPR-FUNCALL a pain?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00502.html">Re: Once again a plea for slash</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00540"><strong>Date</strong></a></li>
+<li><a href="threads.html#00540"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

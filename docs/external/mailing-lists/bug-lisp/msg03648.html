@@ -1,0 +1,85 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Definate bug in complr -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 17 Dec 80 01:51:00 GMT -->
+<!--X-Message-Id: 53ff8b34e9656f5331bca68ea12e443d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Definate bug in complr</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03649.html">Date Prev</a>][<a href="msg03647.html">Date Next</a>][<a href="msg03649.html">Thread Prev</a>][<a href="msg03647.html">Thread Next</a>][<a href="maillist.html#03648">Date Index</a>][<a href="threads.html#03648">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Definate bug in complr</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-MACLISP at MIT-MC</li>
+<li><em>Subject</em>: Definate bug in complr</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 17 Dec 80 01:51:00 GMT</li>
+<li><em>Cc</em>: HARRIS at MIT-EECS</li>
+<li><em>Original-date</em>: 16 December 1980 20:51-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>See RWK;HARRIS BUG.  As you can see, she is defining a function SORT of one
+argument.  Despite this conflict with LISP's SORT function, COMPLR fails to
+do give the right error message (claims 'has been used before with the wrong
+number of arguments', instead of 'redefining system function') and it
+then ignores the ARGS-INFO property in favor of the FUNTYPE property, thus
+leading it to breakpoint complaining of the wrong-number of arguments when it
+finally IS used.
+
+I have suggested to HARRIS that she call her function something else.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03649.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03647.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03649.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03647.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03648"><strong>Date</strong></a></li>
+<li><a href="threads.html#03648"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

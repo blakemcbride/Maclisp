@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: VWQ, OZna, Oepul ng [WF&#45;[Q -->
+<!--X-Date: Mon, 7 Jan 80 02:34:00 GMT -->
+<!--X-Message-Id: 4ff402d24859028549a0677e1a676b7b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:HIC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03800.html">Date Prev</a>][<a href="msg03798.html">Date Next</a>][<a href="msg03800.html">Thread Prev</a>][<a href="msg03798.html">Thread Next</a>][<a href="maillist.html#03799">Date Index</a>][<a href="threads.html#03799">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: HIC, ALan, Archy at MIT-MC</li>
+<li><em>Date</em>: Mon, 7 Jan 80 02:34:00 GMT</li>
+<li><em>Original-date</em>: 6 JAN 1980 2134-EST</li>
+<li><em>Sent-by</em>: ARCHY at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Take a look at the file ALAN;READ LOSS.  It is the printed
+representation of some HUNK structure.  When read in one of the
+fixnums gets read in negative (same magnitude).  The setting of
+IBASE doesn't seem to matter.
+
+HIC: The bug is that RDHNK jumps back to RDLS3Y which doesn't
+clear the left half bits in T.  I suggest:
+
+RDLST0: MOVE B,AR2A
+RDHNKA:	TLZA T,-1#200002
+
+and at RDHNK+12
+JRST RDHKNA instead of RDLS3Y
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03800.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03798.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03800.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03798.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03799"><strong>Date</strong></a></li>
+<li><a href="threads.html#03799"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

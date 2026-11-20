@@ -1,0 +1,138 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: DEFUN&#38; -->
+<!--X-From-R13: XA@ZN[WF&#45;OW -->
+<!--X-Date: Mon, 22 Aug 78 18:16:18 GMT -->
+<!--X-Message-Id: 92a309588280635fe0634615e1780871@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: DEFUN&amp;</title>
+<link rev="made" href="mailto:JONL@MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00353.html">Date Prev</a>][<a href="msg00351.html">Date Next</a>][<a href="msg00353.html">Thread Prev</a>][<a href="msg02980.html">Thread Next</a>][<a href="maillist.html#00352">Date Index</a>][<a href="threads.html#00352">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: DEFUN&amp;</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-AI</li>
+<li><em>Subject</em>: Re: DEFUN&amp;</li>
+<li><em>From</em>: JONL@MIT-AI</li>
+<li><em>Date</em>: Mon, 22 Aug 78 18:16:18 GMT</li>
+<li><em>Cc</em>: NIL at MIT-AI, (BUG LISP) at MIT-AI, (BUG LISPM) at MIT-AI</li>
+<li><em>Original-date</em>: 08/22/78 14:16:18 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I like the DEFUN&amp; stuff I saw on your direectory - would you like to make
+it available to the MACLISP community by installing it on LIBLSP and
+LIBDOC?  I have three suggestions that you might want to consider
+seriously first, however.
+
+1.) Use a gensymmed symbol for the LEXPR lambda variable;  it won't make 
+    any difference when compiling, since this variable should be purely 
+    local, but you will avoid two pitfalls:
+      1a) Inadvertent capturing of a binding by a free variable in
+	  interpretive code - interpretive bindings in MACLISP do not shield
+	  the local variables from other, non-lexically-apparent functions.
+      1b) Inadvertent SPECIALization of the lambda variable during
+	  compilation.
+
+2.) The meaning of a DECLARE, in a DEFUN immediately following the dummy 
+    argument list, cannot be retained correctly unless it is placed either 
+    before the internal lambda-bindings for the optional variables, or 
+    immediately after any such lambda-variable-list that has some affected 
+    variables.  Thus, the form
+	(DEFUN&amp; FOO (A &amp;optional B) 
+		(DECLARE (SPECIAL A) (FIXNUM B)) 
+		(PRINT (LIST A B)))
+    must expand into something like
+	(DEFUN FOO G0025
+	       (DECLARE (SPECIAL A) (FIXNUM B))
+	       (AND (OR (&lt; G0025 1) (&gt; G0025 2)) 
+		    (ERROR 'WNA (LIST 'FOO G0025 '(1 . 2))))
+	       ((LAMBDA (A) 
+			((LAMBDA (B)
+				 (PROGN (PRINT (LIST A B))))
+			    (ARG 2)))
+		    (ARG 1)))
+    rather than
+	(DEFUN FOO G0025
+	       (AND (OR (&lt; G0025 1) (&gt; G0025 2)) 
+		    (ERROR 'WNA (LIST 'FOO G0025 '(1 . 2))))
+	       ((LAMBDA (A) 
+			((LAMBDA (B)
+				 (PROGN (DECLARE (SPECIAL A) (FIXNUM B))
+					(PRINT (LIST A B))))
+			    (ARG 2)))
+		    (ARG 1)))
+
+
+3.) Also, I THINK the &quot;flattening&quot; of contours, where there is no need
+    for the sequentialization of optional arg computations, would be a 
+    very easy step which could make the code more readable to the human
+    eye, and less likely to produce multiple SPECBINDings in the compileed
+    code.   Thus the example above could turn into
+	(DEFUN FOO G0025
+	       (DECLARE (SPECIAL A))
+	       (AND (OR (&lt; G0025 1) (&gt; G0025 2)) 
+		    (ERROR 'WNA (LIST 'FOO G0025 '(1 . 2))))
+	       ((LAMBDA (A B) 
+			(PROGN (PRINT (LIST A B))))
+		    (ARG 1) (ARG 2)))
+Some function, perhaps like the one in my file AI:JONL;CNVD &gt;
+    (DEFUN CERTIFY-NO-VAR-DEPENDENCY (FORM BAD-VARS BOUND-VARS) . . . 
+could be pressed into service, applying it to the various initialization
+forms with BAD-VARS starting out as alist of all required and optional
+arguments, and BOUND-VARS starting out () .
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00353.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00351.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00353.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02980.html">Re:  defun&amp;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00352"><strong>Date</strong></a></li>
+<li><a href="threads.html#00352"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

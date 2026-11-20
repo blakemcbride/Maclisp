@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Thu, 26 Feb 81 02:12:00 GMT -->
+<!--X-Message-Id: 95f9f9458dc5ceed354d9ef80d963bb5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01499.html">Date Prev</a>][<a href="msg01497.html">Date Next</a>][<a href="msg01499.html">Thread Prev</a>][<a href="msg01497.html">Thread Next</a>][<a href="maillist.html#01498">Date Index</a>][<a href="threads.html#01498">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Thu, 26 Feb 81 02:12:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 25 FEB 1981 2112-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 23 February 1981 01:08-EST
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    Is there a way to get a call to a LEXPR to compile
+    as a call to an EXPR? .  .  .
+A typical thing to do, as was done with the systemic functions
+EVAL and PRINT, is to introduce new names (in these cases *EVAL
+and *PRINT) which are subr's of a specific number of arguments,
+and then they set up the lsubr call;  indeed it does save space
+in the compiled code, and there is no UUO overhead at all.
+If you can't pick a &quot;common case&quot; w.r.t. number of args, you might
+have two or three such new names, and have something like a
+SOURCE-TRANS to expand into the appropriate one.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01499.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01497.html">Default-setting of DEFUN&amp;-CHECK-ARGS</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01499.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01497.html">Default-setting of DEFUN&amp;-CHECK-ARGS</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01498"><strong>Date</strong></a></li>
+<li><a href="threads.html#01498"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

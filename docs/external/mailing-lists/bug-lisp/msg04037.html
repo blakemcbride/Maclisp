@@ -1,0 +1,132 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: AAAARRRRRrrrggggghhhhhhh!!!!!!! -->
+<!--X-From-R13: "Uhl Z. Egrryr, Xe." &#60;UZE ng [WF&#45;OW> -->
+<!--X-Date: Fri, 27 Jun 80 21:08:00 GMT -->
+<!--X-Message-Id: 65b49b66dc9246843f4414754ac0940f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>AAAARRRRRrrrggggghhhhhhh!!!!!!!</title>
+<link rev="made" href="mailto:GLS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04038.html">Date Prev</a>][<a href="msg04036.html">Date Next</a>][<a href="msg04038.html">Thread Prev</a>][<a href="msg04036.html">Thread Next</a>][<a href="maillist.html#04037">Date Index</a>][<a href="threads.html#04037">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>AAAARRRRRrrrggggghhhhhhh!!!!!!!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISPM at MIT-AI</li>
+<li><em>Subject</em>: AAAARRRRRrrrggggghhhhhhh!!!!!!!</li>
+<li><em>From</em>: &quot;Guy L. Steele, Jr.&quot; &lt;GLS at MIT-AI&gt;</li>
+<li><em>Date</em>: Fri, 27 Jun 80 21:08:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-AI, GLS at MIT-AI, GJS at MIT-AI, nil at MIT-MC</li>
+<li><em>Original-date</em>: 27 June 1980 17:08-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>In system 29.95 NWS, with microcode 669, on LISP Machine Eight:
+
+RETURN-FROM is incorrectly implemented, I claim.
+Consider this piece of code:
+
+(DEFUN FOO ()
+  (PROG ()
+	(PRINT 'A)
+	(PROG T ()
+	      (PRINT 'B)
+	      (RETURN-FROM T (PROGN (PRINT 'C) (RETURN)))
+	      (PRINT 'D))
+	(PRINT 'E)))
+
+The LISP Machine Manual claims that a PROG with name T is
+invisible to the RETURN function, and can be returned from
+only with RETURN-FROM T.  Therefore, I would expect FOO to
+print the symbols A, B, and C, and then return from the
+outer PROG.  However, it prints A, B, C, and E!  Evidently
+the fact that RETURN occurs within an argument to RETURN-FROM T
+causes it to exit the inner PROG, not the outer.
+
+This is an **enormous** screw, and wasted over an hour of my time.
+I have a macro, which I believe is written according to the approved
+stype, using PROG T:
+
+(defmacro select! (item . clauses)
+  `(prog t (%%item%%)
+	 (setq %%item%% ,item)
+      retry-select!
+	 (select %%item%%
+	   ,@(forlist (clause clauses)
+	       `(,(car clause) (return-from t (progn ,@(cdr clause)))))
+	   (otherwise
+	       (setq %%item%%
+		     (cerror t () ':wrong-type-argument
+			     &quot;The selector ~S was not found in a SELECT! construct.&quot;
+			     %%item%%))
+	       (go retry-select!)))))
+
+This is a version of SELECT that provides its own OTHERWISE clause
+and arranges to retry with a correctable error if the key is not known.
+I need a PROG to make a loop.  However, if a RETURN occurs in a clause
+to SELECT!, I want it to return from whatever PROG surrounds SELECT!
+
+In the interpreter, the problem is that RETURN-FROM binds RETPROGDESC
+and then cretinously calls EVAL, giving it a consed-up RETURN form.
+Of course, if the argument to the consed-up RETURN form contains a RETURN,
+as here, things get really fouled up.  The fix is that RETURN-FROM
+should evaluate its argument **first**, before binding RETPROGDESC,
+and then cons up a form (RETURN '&lt;the-result&gt;) to eval if it must be done
+that kludgy way.
+
+I have no idea how the compiler manages to screw up the same way.
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04038.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04036.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04038.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04036.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04037"><strong>Date</strong></a></li>
+<li><a href="threads.html#04037"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

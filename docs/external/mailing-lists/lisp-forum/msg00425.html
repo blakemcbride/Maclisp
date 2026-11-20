@@ -1,0 +1,133 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: [ODQ ng [WF&#45;JJ -->
+<!--X-Date: Tue ,11 Nov 80 14:15:00 EDT -->
+<!--X-Message-Id: e01b37bfe284bbfe51082868c213edca@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:MARC at MIT-XX">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00424.html">Date Prev</a>][<a href="msg00426.html">Date Next</a>][<a href="msg00424.html">Thread Prev</a>][<a href="msg00426.html">Thread Next</a>][<a href="maillist.html#00425">Date Index</a>][<a href="threads.html#00425">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC, SHRAGE at WHARTON-10</li>
+<li><em>From</em>: MARC at MIT-XX</li>
+<li><em>Date</em>: Tue ,11 Nov 80 14:15:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, LISP-DISCUSSION at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>	MDL has had a similar construct for quite some time (five years?).
+There are two SUBRs, MAPF (MAP-First) and MAPR (MAP-Rest), which map over
+successive elements and successive RESTs (CDRs) of structures.  The syntax
+is:
+	&lt;MAPF	;&quot;or MAPR&quot;
+	  finalf
+	  loopf
+	  struc1 ... strucN &gt;
+
+The way it works is that the loopf (usually an imbedded FUNCTION but also
+permitted to be an externally defined function or a SUBR) is applied to
+successive elements (or RESTs) of the strucs.  This continues until one
+of the strucs &quot;runs out&quot; (becomes empty), or the loopf performs a MAPLEAVE
+or a MAPSTOP.
+
+	If the finalf is a FALSE (NIL in conventional Lisps), MAPF/R is
+thus just a FOR-EACH style loop.  If the finalf is applicable, it is
+applied to the accumulated values of the applications of the loopf.  The
+loopf may control the accumulation of values itself by performing MAPRETs
+inside itself.  The arguments of MAPRET (any number) become the values from
+that application of the loopf.  MAPSTOP is like MAPRET except that it says,
+after accumulating these arguments, apply the finalf and return.
+
+	MAPLEAVE says &quot;return my argument as the value of the MAPF/R&quot;.
+
+	Note also that if no strucs are supplied, MAPF becomes a sort of
+generator function to build structures.
+
+	Examples:
+
+	&lt;MAPF ,LIST
+	      &lt;FUNCTION (X)
+		&lt;COND (&lt;WIN? .X&gt; &lt;MAPRET .X&gt;)
+		      (ELSE &lt;MAPRET&gt;)&gt;&gt;
+	      .CANDIDATES&gt;
+
+returns a list of the members of CANDIDATES that pass a certain test.
+
+	&lt;MAPR &lt;&gt;
+	      &lt;FUNCTION (X)
+		&lt;COND (&lt;==? &lt;1 .X&gt; .Y&gt; &lt;MAPLEAVE .X&gt;)&gt;&gt;
+	      .X&gt;
+
+is precisely &lt;MEMQ .Y .X&gt;.
+
+	&lt;MAPF ,LIST
+	      &lt;FUNCTION (BUCKET)
+		&lt;MAPRET !.BUCKET&gt;&gt;
+	      .HASH-TABLE&gt;
+
+returns a list of the elements in a hash-table.  (! is the MDL construct
+that means &quot;take my elements instead of me&quot;)
+
+	MDL, of course, is coming soon to a machine near you...
+
+		Yours,
+
+		Marc Blank
+		Dave Lebling
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00424.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00426.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00424.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00426.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00425"><strong>Date</strong></a></li>
+<li><a href="threads.html#00425"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

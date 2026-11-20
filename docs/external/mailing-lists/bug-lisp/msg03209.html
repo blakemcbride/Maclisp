@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 20 Jul 81 20:15:00 GMT -->
+<!--X-Message-Id: e350ef02de9df51fe24cab1c52c13be7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: GJC at MIT&#45;MC -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03210.html">Date Prev</a>][<a href="msg03208.html">Date Next</a>][<a href="msg03210.html">Thread Prev</a>][<a href="msg03208.html">Thread Next</a>][<a href="maillist.html#03209">Date Index</a>][<a href="threads.html#03209">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 20 Jul 81 20:15:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>In-reply-to</em>: The message of 20 Jul 81 14:06-EDT from George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Original-date</em>: Monday, 20 July 1981, 16:15-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>George, let me help you out.  Don't scream about there being too many
+optimizations.  The problem here is the lack of one.  Don't scream about
+correctness... I think that's why = and EQ were being used, the reasoning
+being along the lines of simple translation with an exception for them
+nasty fixnums.  Remember when you were flaming about defining a new
+predicate to do this kind of comparison?  I could be wrong, but I think
+this was probably what JONL was thinking...it certainly was when I saw
+what he did.
+
+So anyway, I now perceive that you are (currently at least) perceiving
+the situation correctly.  I apologize for all my flaming back at you.
+I admit I didn't get much sleep last night and am probably overreacting
+to the flaming tone and content of your notes with flaming of my own.
+
+Rather than try to show you on a point by point basis why I was mislead
+by your notes, let me just show you how easily you could have said what
+I now think you meant.
+
+What you really wanted to tell us:
+
+1)  You have a bug (unquoted symbol).  Please check before installing.
+2)  You can optimize out the (AND (NOT &lt;fixnump&gt;) ...) check
+3)  You can optimize for codesize (typically a 30% savings, for my guess
+    of &quot;typical&quot; code) at mere order-of-magnitude cost in speed, and GJC
+    believes it's worth it in MacLisp.  Use EQ on clauses with single symbols,
+    otherwise use MEMBER or EQUAL.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03210.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03208.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03210.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03208.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03209"><strong>Date</strong></a></li>
+<li><a href="threads.html#03209"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

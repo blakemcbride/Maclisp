@@ -1,0 +1,163 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: DEFINEM -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Wed ,22 Oct 80 11:32:00 EDT -->
+<!--X-Message-Id: b86a148350bf1b7df94f98e3e048f256@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: DEFINEM</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00604.html">Date Prev</a>][<a href="msg00339.html">Date Next</a>][<a href="msg00604.html">Thread Prev</a>][<a href="msg00339.html">Thread Next</a>][<a href="maillist.html#00338">Date Index</a>][<a href="threads.html#00338">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: DEFINEM</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: eak at MIT-MC, lisp-forum at MIT-MC</li>
+<li><em>Subject</em>: Re: DEFINEM</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Wed ,22 Oct 80 11:32:00 EDT</li>
+<li><em>Cc</em>: gjs at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 21 October 1980 19:46-EDT
+    From: Earl A. Killian &lt;EAK at MIT-MC&gt;
+    Subject:  LABELS, GOSUB (yech), etc.
+    Is there any problem in defining the following in SCHEME?
+    
+    (DEFINEM external-list
+	(F1 (LAMBDA ...))
+	(F2 (LAMBDA ...))
+	...)
+    
+    where F1, F2, ... are defined and closed together a la LABELS,
+    and the definitions of those functions that are also on
+    &lt;external-list&gt; are defined (like DEFINE) in the environment
+    containing the DEFINEM.
+    
+    Example:
+    (DEFINEM (NREVERSE)
+	(NREVERSE (LAMBDA (X)
+			  (COND ((NULL X) '())
+				(T (NREVERSE1 X '())))))
+	(NREVERSE1 (LAMBDA (X Y)
+			   (COND ((NULL (CDR X)) (RPLACD X Y))
+				 (T (NREVERSE1 (CDR X) (RPLACD X Y)))))))
+    
+    The DEFINEM acts as a sort of module definition, which only
+    exports certain functions.  Sometimes this would be clearer than
+    using a LABELS, especially when you have several co-equal-recursive
+    functions, only a few of which want to be externally visible.
+    Also, this should give you the efficiency of block-compiling in
+    Interlisp.
+    
+    My first idea about defining this with LABELS was to do something
+    like
+    (DEFMACRO DEFINEM (ELIST . BODY)
+	`(MAPCAR ASET ',ELIST (LABELS ,BODY (LIST . ,ELIST))))
+    but its not clear this wouldn't choke the compiler.  Note that
+    while this is an upward funarg, the environment is constant, and
+    so should compile out.
+
+That's about the best I can think of.  Unfortunately, all the
+LAMBDA-games to avoid variable clashes without GENSYMs break
+down somewhat in the face of ASET', for some reason.  I tried
+to write a version that avoided calling LIST and couldn't.  SCHEME
+is certainly not the answer to all the world's problems.  You might
+be amused by this solution, however, which makes use of an extension
+inspired by a paper by Klaus Berkling on something he calls
+&quot;lambda-bar&quot; calculus.  Let &quot;-LAMBDA&quot; be an environmental operator
+which has the same syntax as LAMBDA, but has the effect of *cancelling*
+one outer LAMBDA contour for those variables.  (Therefore it is illegal to
+mention a variable in a -LAMBDA expression unless it is bound in some
+uncancelled surrounding LAMBDA expression.)  It does not evaluate to a
+function; it just evaluates its body.  This is not too hard to add
+to the SCHEME interpreter--you just add the variable &quot;bindings&quot; to
+the environment with a &quot;cancel&quot; marker (like an &quot;unbound&quot; marker) as the
+value, and when you encounter such a marker on lookup, you just keep
+looking up, balancing cancels and real values like parentheses.  The
+compiler has no problem--it is all resolvable lexically.  It is purely
+a scoping operator, with no run-time overhead when compiled.  So:
+  (DEFMACRO DEFINEM (ELIST . BODY)
+    (LET ((TEMPS (DOLIST (IGNORE ELIST) (GENSYM-NOT-IN ELIST))))
+	`(LABELS ,BODY
+		 ((LAMBDA ,TEMPS
+			  (-LAMBDA ,ELIST
+				   ,@(DOLISTS ((E ELIST) (X TEMPS))
+					`(ASET' ,E ,X))))
+		  ,ELIST))))
+This uses GENSYM-NOT-IN, which generates a symbol not among those
+in its argument list.  This makes me a little more comfortable than
+plain old GENSYM, since it *guarantees* the absence of variable name
+conflicts.
+Or, if you assume that (ASET (-LAMBDA (X) 'X) Y) works (actually, it
+couldn't, but some appropriate syntax could be found), you can simplify
+this to:
+  (DEFMACRO DEFINEM (ELIST . BODY)
+	`(LABELS ,BODY
+		 ,@(DOLIST (E ELIST) `(ASET (-LAMBDA (,E) ',E) ,E))))
+				
+
+    Also, it seems like it might be a win for DEFINE to define the
+    function in an environment with the function name bound to the
+    function.  Then a recursive call to the function could jump/call
+    to the subroutine itself, rather than indirecting through the
+    function name's value cell.
+    
+Actually, I believe that the SCHEME-78 chip actually did leave the function
+in the environment, so that this sort of trick could be pulled--see the
+AI Memo on that subject.  One problem, of course, is that it defeats
+the TRACE package, which is the usual problem with &quot;block compilers&quot;.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00604.html">Re: Response to Goto's lisp timings</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00339.html">Re: SKIPE and SKIPN</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00604.html">Re: Response to Goto's lisp timings</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00339.html">Re: SKIPE and SKIPN</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00338"><strong>Date</strong></a></li>
+<li><a href="threads.html#00338"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

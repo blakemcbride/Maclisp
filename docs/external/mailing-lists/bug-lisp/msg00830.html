@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: JSYS calls under twenex maclisp -->
+<!--X-From-R13: XbaZ ng BODQ&#45;[OJQ -->
+<!--X-Date: Mon, 26 Jul 82 11:48:00 GMT -->
+<!--X-Message-Id: 404012c3f58f9bec43f26225b7247ed8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: JSYS calls under twenex maclisp</title>
+<link rev="made" href="mailto:JonL at PARC-MAXC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00831.html">Date Prev</a>][<a href="msg00829.html">Date Next</a>][<a href="msg00833.html">Thread Prev</a>][<a href="msg00829.html">Thread Next</a>][<a href="maillist.html#00830">Date Index</a>][<a href="threads.html#00830">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: JSYS calls under twenex maclisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: David Vinayak Wallace &lt;GUMBY at MIT-AI&gt;</li>
+<li><em>Subject</em>: Re: JSYS calls under twenex maclisp</li>
+<li><em>From</em>: JonL at PARC-MAXC</li>
+<li><em>Date</em>: Mon, 26 Jul 82 11:48:00 GMT</li>
+<li><em>Cc</em>: INFO-LISP at MIT-AI, Zubkoff at CMU-20C, CSD.FREEMAN at SU-SCORE</li>
+<li><em>In-reply-to</em>: GUMBY's message of 25 July 1982 20:02-EDT</li>
+<li><em>Original-date</em>: 26 Jul 1982 04:48 PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>RE:
+
+    How can I access values returned in random registers after a jsys call
+    (i.e &quot;returns +1 if unsuccessful, error code in acc 2&quot;)?
+
+The SUBFORK package, available with MacLisp on Twenex systems, has
+a function JSYS which does just what you want.
+  (JSYS &lt;jsys-number&gt; &lt;AC1&gt; &lt;AC2&gt; &lt;AC3&gt; &lt;ac-number-of-result&gt;)
+Thus the fifth argument tells which acumulator's contents to return as
+the result of the JSYS call.  
+
+JSYS currently doesn't make any distinction between successful and 
+unsuccessful returns, but it could be fairly easily hacked in thru the
+MULTIPLE-VALUE mechanism currently in MacLisp.
+
+The SUBFORK package is primarily a &quot;spin-off&quot; of the MacLisp/EMACS
+interface for Twenex users -- it provides a convenient way to run
+other subsystems as a subfork of your MacLisp job.  I'm not sure if it
+ever got documented for general consumption, but there are several
+little goodies in it that are probably of general interest.
+
+
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00831.html">Re:</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00829.html">JSYS calls under twenex maclisp</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00833.html">JSYS calls under twenex maclisp</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00829.html">JSYS calls under twenex maclisp</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00830"><strong>Date</strong></a></li>
+<li><a href="threads.html#00830"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

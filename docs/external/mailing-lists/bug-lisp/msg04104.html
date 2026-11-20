@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: READ flushing atom delimiters -->
+<!--X-From-R13: [AA@ ng [WF&#45;[Q (Rnivq O. [bba) -->
+<!--X-Date: Fri, 30 May 80 20:31:00 GMT -->
+<!--X-Message-Id: b65538b5ee188ab7a674ee7d3d1b3655@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>READ flushing atom delimiters</title>
+<link rev="made" href="mailto:MOON at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04105.html">Date Prev</a>][<a href="msg04103.html">Date Next</a>][<a href="msg04105.html">Thread Prev</a>][<a href="msg04103.html">Thread Next</a>][<a href="maillist.html#04104">Date Index</a>][<a href="threads.html#04104">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>READ flushing atom delimiters</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: READ flushing atom delimiters</li>
+<li><em>From</em>: MOON at MIT-MC (David A. Moon)</li>
+<li><em>Date</em>: Fri, 30 May 80 20:31:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, gsb at MIT-ML</li>
+<li><em>Original-date</em>: 30 MAY 1980 1631-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Well, I discussed that very issue with GSB and decided that on the
+whole it was a little bit better to have a variable you could bind
+rather than a separate function or an additional optional argument to
+READ.  It certainly would not be a win to globally setq the special
+variable &quot;to make the whole Lisp work the old way&quot;, but my idea is that
+certain reader macros, e.g. the LMS open bracket, would bind it on and
+then their various internal calls to READ would be automatically
+changed.
+
+One example of where a problem occurs with the separate-function
+approach (which does not actually show up in LMS I believe) is if
+you have something which wants to see the delimiter and calls READ
+on an S-expression which turns out to be ' (single-quote) and an
+ATOM.  The single-quote macro would have no way of knowing to
+call the other version of READ, and hence would swallow the space
+after the quoted atom, which presumably is not what the caller wants.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04105.html">READ flushing atom delimiters</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04103.html">Re: READ flushing atom delimiters</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04105.html">READ flushing atom delimiters</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04103.html">Re: READ flushing atom delimiters</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04104"><strong>Date</strong></a></li>
+<li><a href="threads.html#04104"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

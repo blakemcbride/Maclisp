@@ -1,0 +1,120 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: destructuring within "argument" positions -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed ,1 Oct 80 17:35:00 EDT -->
+<!--X-Message-Id: 02a5403f67b37e3b65ebcf254f4cda1b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: destructuring within &quot;argument&quot; positions</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00128.html">Date Prev</a>][<a href="msg00005.html">Date Next</a>][<a href="msg00574.html">Thread Prev</a>][<a href="msg00005.html">Thread Next</a>][<a href="maillist.html#00190">Date Index</a>][<a href="threads.html#00190">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: destructuring within &quot;argument&quot; positions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-MC</li>
+<li><em>Subject</em>: Re: destructuring within &quot;argument&quot; positions</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed ,1 Oct 80 17:35:00 EDT</li>
+<li><em>Cc</em>: DLW at MIT-AI, Guy.Steele at CMU-10A</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Commentary and BNF for Bound-variable-lists ocasioned by ALAN's note
+below, and all the other notes flaming around this issue.
+    Date: 30 September 1980 03:36-EDT
+    From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+    Subject: destructuring and &amp;mumbles
+    .  .  .
+    As the person who first combined destructuring and &amp;mumbles in
+    defmacro, let me tell you what I thought I was doing:
+    .  .  .
+    I don't think that &amp;mumbles and destructuring combine to make any kind
+    of reasonable pattern matcher.  If the interaction had turned out to
+    be amazingly elegant, then perhaps we would have moved the combined
+    mess back into defun, but it ISN'T.  In defmacro you frequently want
+    BOTH features, but in defun you rarely need destructuring so there is
+    no reason to clutter it up.
+&quot;destructuring&quot; and &amp;mumbles are independent features of a bound
+variable list, and it is a sad commentary that two years after the
+consistent and simple notion of &quot;pattern-matching-destructuring&quot; for
+argument positions was introduced, there still has to be flaming
+about it (&quot;elegant&quot; in DEFMACRO, but &quot;kludgy&quot; in DEFUN -- really?)
+Admittedly, there is an alternate proposal for destructuring&quot; -- RMS's
+idea of destructuring over programs rather than data forms -- but this
+does not change the incredibly simple syntax for a DEFUN/DEFMACRO with
+destructuring.  Leaving aside for the moment the &amp;AUX as irrelevant,
+and the potential for destructuring over Vectors in NIL, we can have
+the following BNF-like definitions:
+
+  &lt;vsymbol&gt; ::= any symbol usable as a variable (which excludes NIL 
+		and T in MacLISP)
+
+  &lt;dvar&gt;    ::= &lt;vsymbol&gt; | ( &lt;dvar&gt; . &lt;dvar&gt; ) 
+
+  &lt;ivar&gt;    ::= &lt;vsymbol&gt; | ( &lt;dvar&gt; &lt;form&gt; ) | ( &lt;dvar&gt; &lt;form&gt; &lt;vsymbol&gt;) 
+
+  &lt;bvl&gt;     ::= ( {&lt;dvar&gt;}* {&amp;OPTIONAL {&lt;ivar&gt;}*1} {&amp;REST &lt;ivar&gt;} )
+
+The name &lt;dvar&gt; is for an argument position which is destructurable;
+&lt;ivar&gt; is for a position which admits an initialization value when it 
+is optionally not supplied (and also an optional &quot;supplied-p&quot; variable);
+the construct {...}* means 0 or more repetitions of the construct within
+brackets, and {...}*1 means 1 or more.  This definition for &lt;bvl&gt; is
+adequete then for both DEFUN and DEFMACRO, with the additional
+proviso that  (&lt;item-1&gt; ... &lt;item-n&gt; . &lt;vsymbol&gt;) is an additional
+kind of destructuring for DEFMACRO, which coincidently happens to be
+equivalent to  (&lt;item-1&gt; ... &lt;item-n&gt; &amp;REST &lt;vsymbol&gt;).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00128.html">Re: #| One last comment on #| |#</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00005.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00574.html">Re: Use of strings in PDP10 MACLISP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00005.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00190"><strong>Date</strong></a></li>
+<li><a href="threads.html#00190"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

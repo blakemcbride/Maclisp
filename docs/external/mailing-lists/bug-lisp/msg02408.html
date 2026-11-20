@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Local function bindings -->
+<!--X-From-R13: UZE ng EG&#45;OW (Uhl Egrryr) -->
+<!--X-Date: Wed, 21 Jun 78 18:54:00 GMT -->
+<!--X-Message-Id: a76c50da511390f59541e39e50539043@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Local function bindings</title>
+<link rev="made" href="mailto:GLS at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02409.html">Date Prev</a>][<a href="msg02407.html">Date Next</a>][<a href="msg02409.html">Thread Prev</a>][<a href="msg02407.html">Thread Next</a>][<a href="maillist.html#02408">Date Index</a>][<a href="threads.html#02408">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Local function bindings</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: nil at MIT-MC</li>
+<li><em>Subject</em>: Local function bindings</li>
+<li><em>From</em>: GLS at SU-AI (Guy Steele)</li>
+<li><em>Date</em>: Wed, 21 Jun 78 18:54:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MIT-MC   </li>
+<li><em>Original-date</em>: 21 Jun 1978 1154-PDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+It has occurred to me that the distinction of local/dynamic
+and the distinction of function cell/vale cell are orthogonal.
+Moreover, I think I may have an application for local function
+cells: to make a macro which temporarily and locally changes the
+meanings of names of functions.  The locality is important,
+so that a compiler can determine what is going on.  (Indeed,
+an unresolved dilemma is how to tell the compiler that some
+global functon reference is to a function cell that someone
+else may bind dynamically.  I suppose we need a declaration
+for this.)  I therefore propose that NIL permit the local
+binding of function cells.  This is indeed one more thing
+for the interpreter to keep track of, but in the usual case
+the local function environment will be empty anyway, and so
+can be checked quickly.
+
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02409.html">TYPECASEQ and the Type Hierarchy</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02407.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02409.html">TYPECASEQ and the Type Hierarchy</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02407.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02408"><strong>Date</strong></a></li>
+<li><a href="threads.html#02408"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

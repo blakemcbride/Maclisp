@@ -1,0 +1,107 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: SXHASH -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Fri ,31 Oct 80 11:30:00 EDT -->
+<!--X-Message-Id: 5efaa318146e83c35e73b56e2f8d4d8d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: SXHASH</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00596.html">Date Prev</a>][<a href="msg00598.html">Date Next</a>][<a href="msg00596.html">Thread Prev</a>][<a href="msg00598.html">Thread Next</a>][<a href="maillist.html#00597">Date Index</a>][<a href="threads.html#00597">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SXHASH</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Subject</em>: Re: SXHASH</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Fri ,31 Oct 80 11:30:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I was under the impression that MACSYMA kept files on disk that contained
+SXHASH values, and that this was the main reason for imposing the rule
+that the implementation of SXHASH not change.  If this is not or is no longer
+true, then there is no reason not to &quot;fix&quot; SXHASH, other than the possibly
+considerable initial inconveniences you noted with regard to FASL files.
+Rotating the CDR instead of the CAR would help.  If you assume the ROT
+merely divides the hash value by 2 (which it tends to do for leaves
+of the tree being hashed which are symbols with short print names --
+a ROT by 1 would be better for this, but less good for fixnums),
+and if you assume the addition never overflows (these are pessimal
+assumptions), then two leaves are currently (resp. under proposed change)
+distinguished iff the paths from them to the root follow
+the same number of CAR (resp. CDR) chains, *regardless* of the
+number of CDR (resp. CAR) chains.  Now in a list, every leaf
+except the terminating () is one CAR chain away from the root
+(and some number of CDRs).
+It would seem better to make the &quot;weight&quot; of a leaf at the root depend
+on both the number of CARs and number of CDRs.  Therefore I would
+propose to rotate both the CAR and the CDR, preferably by amounts
+that are relativelylarge and relatively prime.  So I would suggest
+a function like (+ (ROT THE-CAR 11.) (RTHE-CDR 7)) or something.
+
+WHat we really want is to find three operators $, %, and #,
+the first two being unary and the third binary.  The function
+would then be (# ($ THE-CAR) (% THE-CDR)).  WHat properties should
+these have?  Ideally, $ and % would not distribute over #,
+or if they did then at least $ and % should not commute ($%X shouldn't
+equal %$X -- of course, the ROT suggestion above doesn't satisfy this).
+The non-commutation property means that the CDAR and CADR of a hashed
+tree are distinguished (by which I mean that exchanging those two
+subtrees will alter the hash if the subtrees have different hashes).
+Perhaps someone would care to pursue a theoretical approach further.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00596.html">Re: SXHASH</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00598.html">Re: Poor ROTten SXHASH</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00596.html">Re: SXHASH</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00598.html">Re: Poor ROTten SXHASH</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00597"><strong>Date</strong></a></li>
+<li><a href="threads.html#00597"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

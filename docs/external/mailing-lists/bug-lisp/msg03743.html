@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: #+LISPM on ITS -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Mon, 4 Feb 80 01:44:00 GMT -->
+<!--X-Message-Id: 1f7fe5fd2a08f0fa22cc9a5ec1431dde@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>#+LISPM on ITS</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03744.html">Date Prev</a>][<a href="msg03742.html">Date Next</a>][<a href="msg03744.html">Thread Prev</a>][<a href="msg02178.html">Thread Next</a>][<a href="maillist.html#03743">Date Index</a>][<a href="threads.html#03743">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>#+LISPM on ITS</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: #+LISPM on ITS</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Mon, 4 Feb 80 01:44:00 GMT</li>
+<li><em>Cc</em>: (BUG LISPM) at MIT-MC</li>
+<li><em>Original-date</em>: 3 FEB 1980 2044-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>This bothers me:
+On ITS, #+LISPM &lt;form&gt; causes all the symbols in &lt;form&gt; to get INTERN'd even
+on ITS because the real reader is called. 
+Less annoying, but an artifact of the same problem, is that
+#+LISPM #.(PRINT 'FOO) will print FOO even on ITS. Must I really do
+#. #+LISPM (PRINT 'FOO) #-LISPM () 
+in order to win? I wonder if we shouldn't look into making the reader
+recognize it's in a no-op state to suppress #. and INTERN and some of these
+other things from really doing their thing. I don't want to do this in a
+hackish way so am looking for suggestions for reasonable schemes. The main
+intention being that I don't have to do a huge GCTWA when all done reading
+some conditionalized file.
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03744.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03742.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03744.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02178.html">#+LISPM on ITS</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03743"><strong>Date</strong></a></li>
+<li><a href="threads.html#03743"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

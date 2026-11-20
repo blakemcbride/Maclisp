@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: PROGN 'COMPILE -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Mon ,8 Dec 80 16:46:00 EDT -->
+<!--X-Message-Id: d3af4294818ecc1ca2aa344cfec61e82@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: PROGN 'COMPILE</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00134.html">Date Prev</a>][<a href="msg00136.html">Date Next</a>][<a href="msg00134.html">Thread Prev</a>][<a href="msg00136.html">Thread Next</a>][<a href="maillist.html#00135">Date Index</a>][<a href="threads.html#00135">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: PROGN 'COMPILE</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC</li>
+<li><em>Subject</em>: Re: PROGN 'COMPILE</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon ,8 Dec 80 16:46:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Kent, if DEFUN were implemented as 
+(defmacro defun (name args &amp;rest body)
+          `(setf #',name #'(lambda ,args ,@body)))
+then even random function calls
+(FOO-BAR (DEFUN X () ...)
+         (DEFUN Y () ...))
+at top-level would have the &quot;flattening out&quot; effect 
+that PROGN 'COMPILE does; in fact, there would be
+no need to have PROGN 'COMPILE since all forms would be
+treated uniformly. In that situation the only reasonable
+form for &quot;protecting&quot; yourself from the compiler
+(why would you want to is another question), is
+(EVAL '(PROGN ...)).
+
+So, I would recomend removing this PROGN 'COMPILE hack,
+on the grounds that it doesn't reflect a coherent design
+philosphy, and the semantics are somewhat dependant on
+the implementation of DEFUN.
+
+-gjc
+
+p.s. I think it almost goes without saying that the places
+which depend on protecting themeselves from the compiler
+are very few, and should be well marked.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00134.html">Re: PROGN 'COMPILE</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00136.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00134.html">Re: PROGN 'COMPILE</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00136.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00135"><strong>Date</strong></a></li>
+<li><a href="threads.html#00135"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

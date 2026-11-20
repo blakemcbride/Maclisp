@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Thu, 20 Sep 79 12:04:00 GMT -->
+<!--X-Message-Id: 926b99f3a0dd53ff760a7b05a3e73d2d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02769.html">Date Prev</a>][<a href="msg02767.html">Date Next</a>][<a href="msg02769.html">Thread Prev</a>][<a href="msg02767.html">Thread Next</a>][<a href="maillist.html#02768">Date Index</a>][<a href="threads.html#02768">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GRAND at MIT-AI</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Thu, 20 Sep 79 12:04:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 20 SEP 1979 0804-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     GRAND@MIT-AI
+Date: Wed, 20 Sep 79 11:08:14 GMT
+Original-Date: 09/20/79 07:08:14 EDT
+Subject:
+    To: (BUG LISP) at MIT-AI
+	    This isn't a bug (I hope). I have a program in which I
+    wanted to employ the default readtable without changing the
+    global environment. I wrote:
+    (PROG ( ...READTABLE... ) (*ARRAY READTABLE READTABLE T) ... )
+    and got
+    ;NIL BAD VALUE FOR READTABLE
+What you should do is, first, look at the section of LISP NEWS
+(dsk:lisp;lisp news) for the entry of &quot;APRIL 23,1974&quot; entitled
+&quot;[3] NEW ARRAY SCHEME&quot;.  Probably you want the syntax
+(LET ((READTABLE (*ARRAY () 'READTABLE 'T)))
+     ...)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02769.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02767.html">Subr version of INCLUDE</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02769.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02767.html">Subr version of INCLUDE</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02768"><strong>Date</strong></a></li>
+<li><a href="threads.html#02768"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Just for the record ... -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Sat, 19 Jul 80 09:35:00 GMT -->
+<!--X-Message-Id: 1265b9fa845cfe45d782384486a48bcf@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Just for the record ...</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01358.html">Date Prev</a>][<a href="msg01356.html">Date Next</a>][<a href="msg01358.html">Thread Prev</a>][<a href="msg01356.html">Thread Next</a>][<a href="maillist.html#01357">Date Index</a>][<a href="threads.html#01357">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Just for the record ...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Just for the record ...</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Sat, 19 Jul 80 09:35:00 GMT</li>
+<li><em>Original-date</em>: 19 JUL 1980 0535-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(DEFUN&amp;) =&gt; NIL
+(PLIST 'NIL) =&gt; (EXPR (LAMBDA NIL (COMMENT ARGLIST = NIL)))
+(NIL)
+;NIL UNDEFINED FUNCTION OBJECT
+
+
+Yes, I realize this is hard to get NIL to do correctly -- presumably 
+EVAL is looking at NIL's other CDR ... Mostly just noting this oddity for
+the record. 
+
+(DEFUN NIL NIL NIL) 
+
+gives the same bug. Perhaps these guys should complain about bad format to
+DEFUN or something, for the case where some macro (eg, DEFUN&amp;) produces them
+without realizing it ...
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01358.html">LINEREAD broken</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01356.html">For Your Amusement?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01358.html">LINEREAD broken</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01356.html">For Your Amusement?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01357"><strong>Date</strong></a></li>
+<li><a href="threads.html#01357"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

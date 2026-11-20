@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: #| ... |# -->
+<!--X-From-R13: OZO@N[WF&#45;[Z -->
+<!--X-Date: Fri, 16 Jan 82 03:50:56 GMT -->
+<!--X-Message-Id: f3e5efd3ced3fd25d3b05f670b7e7c98@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: #| ... |#</title>
+<link rev="made" href="mailto:ALAN@MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00963.html">Date Prev</a>][<a href="msg00961.html">Date Next</a>][<a href="msg01123.html">Thread Prev</a>][<a href="msg01124.html">Thread Next</a>][<a href="maillist.html#00962">Date Index</a>][<a href="threads.html#00962">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: #| ... |#</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-ML</li>
+<li><em>Subject</em>: Re: #| ... |#</li>
+<li><em>From</em>: ALAN@MIT-ML</li>
+<li><em>Date</em>: Fri, 16 Jan 82 03:50:56 GMT</li>
+<li><em>Original-date</em>: 01/15/82 23:50:56 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>An important feature is that nesting &quot;#| ... |#&quot; pairs within such a
+comment &quot;work&quot;.  In other words, the #| macro must count containing
+&quot;#|&quot;s and &quot;|#&quot;s to be certain it is finished.  (This is the opposite
+of the way the PL/1 /* ... */ comment works, but the Multics PL/1
+community tells me that this is a loss and that they would rather it
+work the #| way.)
+
+I bring this up now, because I just now screwed myself by forgetting
+that PDP10 MacLisp doesn't have it.
+
+If you are interested in introducing this bit of compatability into
+PDP10 MacLisp, please take a look at the algorithm the LispMachine
+uses to parse the stuff in the comment (AI:LMIO;READ the function
+xr-/#/|-macro) so that we both parse them the same way.  (I'll gladly
+consider any improvements you might suggest.)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00963.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00961.html">Will this ever get fixed?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01123.html">#| ... |#</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01124.html">Use of strings in PDP10 MACLISP</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00962"><strong>Date</strong></a></li>
+<li><a href="threads.html#00962"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

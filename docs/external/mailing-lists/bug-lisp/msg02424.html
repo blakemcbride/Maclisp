@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: RMS -->
+<!--X-From-R13: UZE ng [WF&#45;[Q (Uhl Z. Egrryr, Xe.) -->
+<!--X-Date: Mon, 19 Jun 78 23:19:00 GMT -->
+<!--X-Message-Id: f66793777211996508ba97be29cc23f5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>RMS</title>
+<link rev="made" href="mailto:GLS at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02425.html">Date Prev</a>][<a href="msg02423.html">Date Next</a>][<a href="msg03270.html">Thread Prev</a>][<a href="msg03269.html">Thread Next</a>][<a href="maillist.html#02424">Date Index</a>][<a href="threads.html#02424">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RMS</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: RMS</li>
+<li><em>From</em>: GLS at MIT-MC (Guy L. Steele, Jr.)</li>
+<li><em>Date</em>: Mon, 19 Jun 78 23:19:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 19 JUN 1978 1919-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 17 JUN 1978 1449-EDT
+    From: JONL at MIT-MC (Jon L White)
+    Subject: RMS
+    To: (BUG LISP) at MIT-MC
+
+    The poooooor compiler must intercept any flavor of DISPLACE and imitate
+    it without actually doing the RPLAC's, but rather by copying.  The reason
+    is that ocasionally the complr likes to &quot;back-up&quot;, and any munging of the
+    original code (as read in) would be bad.  Even if there are multiple
+    pointers to a given cell in code, it would not be bad to run the
+    macro expander twice or more, since the macro-expansion occurs only
+    once per instance in code (rather than once per use in normal lisp
+    running enviromnent).  Apparently the expansion of macros more than once
+    (due to the &quot;backing-up&quot;) has caused some consternation to some 
+    people, so it is apparently something a compiler user will have to
+    live with, or else use read-time macros (instead of eval-time macros
+    which BLAIR calls &quot;meta-composition&quot;).
+It seems to me that the compiler could back up properly by noticing the
+DISPLACED form, if DISPLACE/DISPLACED were institutionalized.  On the othher
+hand, there are other goood reasons why re-performing a macro shouldn't
+cause screewwage.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02425.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02423.html">&quot;Inline-able&quot;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03270.html">RMS</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03269.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02424"><strong>Date</strong></a></li>
+<li><a href="threads.html#02424"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

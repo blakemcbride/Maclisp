@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: ASSOC and ASSQ on lists with atomic entries -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 20 Nov 79 14:51:00 GMT -->
+<!--X-Message-Id: c2788e0a36f400e0be4815dfa8983e28@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ASSOC and ASSQ on lists with atomic entries</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03973.html">Date Prev</a>][<a href="msg03971.html">Date Next</a>][<a href="msg03973.html">Thread Prev</a>][<a href="msg03971.html">Thread Next</a>][<a href="maillist.html#03972">Date Index</a>][<a href="threads.html#03972">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ASSOC and ASSQ on lists with atomic entries</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: TLP at MIT-MC, ALAN at MIT-MC, RWK at MIT-MC, RMS at MIT-MC</li>
+<li><em>Subject</em>: ASSOC and ASSQ on lists with atomic entries</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 20 Nov 79 14:51:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, (BUG LISPM) at MIT-MC</li>
+<li><em>Original-date</em>: 20 NOV 1979 0951-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>1) as for maclisp, it appears to be a bug  in the manual that this
+   isn't documented - the manual seems to imply that &quot;association lists&quot;
+   must contain only dotted pairs.  The &quot;feature&quot; of maclisp's ASSQ 
+   under which it really takes car of each item in the association
+   list must be considered a speed kludge in the same cattegory as that
+   of converting ATOM check for end of list in the various MAPs into
+   a NULL check in compiled code;  one  could construct pathological
+   cases which exploited/demonstrated this difference, but in fact in
+   the 5+ years that it has been installed, there has never been a
+   naturally-occurring complaing agains ASSQ/ASSOC.  (on the other hand,
+   there have been a few complaints that compiled MAPs do not do the
+   same endtest check as the interpreted version, i.e. that NULL has
+   been substituted for ATOM).
+2) the utility of being able to delete entries from an &quot;association list&quot;
+   by means of RPLACAing them to (), rather than having to re-invent
+   and/or open-code the mechanisms of DELETE, is supremely useful;  
+   likely we should ensure that all of MACLISP/LISPM/NIL permit it.
+3) some of us will receive multiple copies of this note, due to the
+   mail-forwarding process - should we perhaps define a new mailing
+   list which reaches BUG-LISP, BUG-LISPM, and NIL mailing lists?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03973.html">Re:  Grief with T and NIL as Filespecs</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03971.html">Re: ASSOC and ASSQ on lists with atomic entries</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03973.html">Re:  Grief with T and NIL as Filespecs</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03971.html">Re: ASSOC and ASSQ on lists with atomic entries</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03972"><strong>Date</strong></a></li>
+<li><a href="threads.html#03972"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

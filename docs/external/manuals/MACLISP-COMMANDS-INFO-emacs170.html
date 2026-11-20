@@ -1,0 +1,1314 @@
+<html><head><!--htdig_noindex-->
+<title>PDP-10 Archive: info/maclisp-commands.info from mit_emacs_170_teco_1220</title>
+<link rel="stylesheet" TYPE="text/css" HREF="/css/pre.css" TITLE="Default">
+</head><body>
+
+
+<!-- SiteSearch Google -->
+<form method="get" action="https://www.google.com/custom" target="_top">
+<table border="0" bgcolor="#ffffff">
+<tr><td nowrap="nowrap" valign="top" align="left" height="32">
+<a href="https://www.google.com/">
+<img src="https://www.google.com/logos/Logo_25wht.gif" border="0" alt="Google" align="middle"></img></a>
+</td>
+<td nowrap="nowrap">
+<input type="hidden" name="domains" value="pdp-10.trailing-edge.com"></input>
+<label for="sbi" style="display: none">Enter your search terms</label>
+<input type="text" name="q" size="31" maxlength="255" value="" id="sbi"></input>
+<label for="sbb" style="display: none">Submit search form</label>
+<input type="submit" name="sa" value="Search" id="sbb"></input>
+</td></tr>
+<tr>
+<td>&nbsp;</td>
+<td nowrap="nowrap">
+<table>
+<tr>
+<td>
+<input type="radio" name="sitesearch" value="" checked id="ss0"></input>
+<label for="ss0" title="Search the Web"><font size="-1" color="#000000">Web</font></label></td>
+<td>
+<input type="radio" name="sitesearch" value="pdp-10.trailing-edge.com" id="ss1"></input>
+<label for="ss1" title="Search pdp-10.trailing-edge.com"><font size="-1" color="#000000">pdp-10.trailing-edge.com</font></label></td>
+</tr>
+</table>
+<input type="hidden" name="client" value="pub-0220999368205339"></input>
+<input type="hidden" name="forid" value="1"></input>
+<input type="hidden" name="ie" value="ISO-8859-1"></input>
+<input type="hidden" name="oe" value="ISO-8859-1"></input>
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1"></input>
+<input type="hidden" name="hl" value="en"></input>
+</td></tr></table>
+</form>
+<!-- SiteSearch Google -->
+
+
+
+<hr>
+<strong><A href="http://www.trailing-edge.com/">Trailing-Edge</A>
+-
+<A href="http://pdp-10.trailing-edge.com/">PDP-10 Archives</A>
+-
+<A href="http://pdp-10.trailing-edge.com/mit_emacs_170_teco_1220/index.html">mit_emacs_170_teco_1220</A>
+-
+info/maclisp-commands.info</strong>
+<hr>
+There are no other files named maclisp-commands.info in the archive.<hr><!--/htdig_noindex--><PRE>
+</PRE><PRE>
+File: Maclisp-Commands, Node: Top, Up: (Languages)Maclisp
+
+atom            SUBR 1 arg
+     The atom predicate is nil if its argument is a dotted-pair  or  a
+     list,  and t if it is any kind of atomic object such as a number,
+     a character string, or an atomic symbol.
+
+fixp            SUBR 1 arg
+     The fixp predicate returns t if its argument is  a  fixnum  or  a
+     bignum, otherwise nil.
+
+floatp          SUBR 1 arg
+     The  floatp  predicate returns t if its argument is a flonum, nil
+     if it is not.
+
+
+numberp         SUBR 1 arg
+     The numberp predicate returns t if its argument is a number,  nil
+     if it is not.
+
+
+typep           SUBR 1 arg
+     typep  is  a general type-predicate.  It returns an atomic symbol
+     describing the type of its argument, chosen from the list
+               (fixnum flonum bignum list symbol string random)
+
+
+eval            LSUBR 1 or 2 args
+     (eval x) evaluates x, just as if it had  been  typed  in  at  top
+     level, and returns the result.  Note that since eval is an lsubr,
+     its argument actually will be evaluated twice.
+
+
+apply           LSUBR 2 or 3 args
+     (apply f y) applies the function f to the list  of  arguments  y.
+     Unless  f  is  an  fsubr  or  fexpr such as 'cond' or 'and' which
+     evaluates its arguments in a funny way, the arguments in the list
+     y are used without being evaluated.
+     Examples:
+         (setq f '+) (apply f '(1 2 3)) =&gt; 6
+         (setq f '-) (apply f '(1 2 3)) =&gt; -4
+          (apply 'cons '((+ 2 3)  4))  =&gt;
+               ((+ 2 3) .  4) not (5 . 4)
+     (apply f y p) works like apply with 2 arguments except  that  the
+     application  is  done in the binding environment specified by the
+     "a-list" pointer p.
+
+
+function                FSUBR
+     Function  is  like  quote except that its argument is a function.
+     It is used when passing a functional argument.  Example:
+     (f00 x (function (lambda (p q)
+                         (cond ((numberp q) p)
+                               ((numberp p) q)
+                         ;or any other random function in here
+                               (t (cons p q)) )))
+               y)
+     calls f0 with 3 arguments, the second of which is  the  function
+     defined by the lambda-expression.
+     Note:  quote  and  function  are  completely  equivalent  in  the
+     interpreter.  The compiler sometimes needs function  to  tell  it
+     that a lambda-expression is a function to be compiled rather than
+     a constant.
+
+
+comment             FSUBR
+     comment  ignores  its  arguments  and  returns  the atomic symbol
+     comment.  Used in commenting code.  ; is preferred.
+
+prog2           LSUBR 2 or more args
+     Prog2  evaluates  its  arguments  from  left  to  right, like any
+     lsubr, and returns the value of its second argument.
+     Examples:
+         (prog2 (do-this) (do-that))         ;get 2  things evaluated
+         (setq x (prog2 nil y
+                         (setq y x)))        ;parallel assignment.
+                                             ;exchanges x and  y.
+
+
+progn           LSUBR 1 or more args
+     progn essentially evaluates all of its arguments and returns  the
+     value  of the last one.  Although lambda-expressions, prog-forms,
+     do-forms, cond-forms and  iog-forms  all  use  progn  implicitly,
+     there  are occasions upon which one needs to evaluate a number of
+     forms for side-effects when not in these forms. progn serves this
+     purpose. Example:
+          (progn (setq a 1) (cons a '(stuff))) =&gt; (1 stuff)
+
+
+arg             SUBR 1 arg
+     (arg nil), when evaluated inside a lexpr,  gives  the  number  of
+     arguments supplied to that lexpr.
+     (arg  i),  when  evaluated inside a lexpr, gives the value of the
+     i'th argument to the lexpr.  i must be a fixnum in this case.  It
+     is  an  error  if  i is less than 1 or greater than the number of
+     arguments supplied to the lexpr.  Example:
+     (defun foo nargs            ; define a lexpr foo.
+         (print (arg nil))       ; print the number of args supplied.
+         (print (arg 2))         ; print the second argument.
+         (+ (arg 1) (arg 3)))    ; return the sum of 1st and 3rd args.
+
+
+setarg          SUBR 2 args
+     Setarg is used only inside  a  lexpr.   (setarg  i  x)  sets  the
+     lexpr's  i'th argument to x.  i must be greater than zero and not
+     greater than the number of arguments passed to the lexpr.   After
+     (setarg i x) has been done, (arg i) will return x.
+
+listify         SUBR 1 arg
+     listify  is a function which efficiently manufactures a list of n
+     of the arguments of a lexpr.  With  a  positive  argument  n,  it
+     returns  a  list  of  the first n arguments of the lexpr.  With a
+     negative argment n, it  returns  a  list  of  the  last  (abs  n)
+     arguments of the lexpr.
+
+
+funcall         LSUBR 1 or more args
+     (funcall f a1 a2 ... an) calls the function f with the  arguments
+     a1, a2, ..., an.  It is similar to apply except that the seperate
+     arguments  are given to funcall, rather than a list of arguments.
+     If f is an expr, a lexpr, a subr, or an lsubr, the arguments  are
+     not  re-evaluated.   If  f  is  a fexpr or an fsubr there must be
+     exactly one argument.  f may not be a macro.
+     Example:
+     (setq cons 'plus)
+     (cons 1 2) =&gt; (1 . 2)
+     (funcall cons 1 2) =&gt; 3
+
+cdr             SUBR 1 arg
+     Note: the cdr of an atomic symbol is its property list.
+
+assoc           SUBR 2 args
+     (assoc x y) looks up x in the association list  (list  of  dotted
+     pairs)  y.  The value is the first dotted pair whose car is equal
+     to x, or nil if there is none such.
+     Examples:
+          (assoc 'r '((a . b) (c . d) (r . x) (s . y) (r . z)))
+               =&gt;  (r . x)
+          (assoc 'fooo '((foo . bar) (zoo . goo))) =&gt; nil
+
+assq            SUBR 2 args
+     Assq  is like assoc except that the comparison uses eq instead of
+     equal.
+
+
+sassoc          SUBR 3 args
+     (sassoc x y z) is like (assoc x y) except that if x is not  found
+     in  y,  instead of returning nil sassoc calls the function z with
+     no arguments.
+
+
+sassq           SUBR 3 args
+     (sassq x y z) is like (assq x y) except that if x is not found in
+     y, instead of returning nil sassq calls the function  z  with  no
+     arguments.
+
+
+length          SUBR 1 arg
+     Length  returns the length of its argument, which must be a list.
+     The length of a list is the number of  top-level  conses  in  it.
+     The  warning  about dotted lists given under last applies also to
+     length.
+
+
+member          SUBR 2 args
+     (member x y) returns nil if x is not a  member  of  the  list  y.
+     Otherwise,  it  returns the portion of y beginning with the first
+     occurrence of x.  The comparison is made by equal.  y is searched
+     on the top level only.  Example:
+               (member 'x '(1 2 3 4)) =&gt; nil
+               (member 'x '(a (x y) c x d e x f)) =&gt; (x d e x f)
+
+memq            SUBR 2 args
+     Memq  is like member, except eq is used for the comparison.
+
+sxhash          SUBR 1 arg
+     Sxhash computes a hash code of an S-expression, and returns it as
+     a fixnum which may be positive or nagative.  A property of sxhash
+     is that (equal x y) implies  (=  (sxhash  x)  (sxhash  y)).   The
+     number  returned  by  sxhash is some possibly large number in the
+     range allowed by fixnums.  It is guaranteed that:
+     1) sxhash for an atomic symbol will always be positive.
+     2) sxhash of any particular expression  will  be  constant  in  a
+     particular implementation for all time.
+     3)  Two  different  implementations  may hash the same expression
+     into different values.
+     4) sxhash of any object of type random will be zero.
+     5) sxhash of a fixnum will = that fixnum.
+
+
+cons            SUBR 2 args
+        This is a primitive function to construct a  new  dotted  pair
+     whose  car  is  the  first argument to cons, and whose cdr is the
+     second argument to cons.  Thus the following identities hold:
+         (eq (car (cons x y)) x) =&gt; t
+         (eq (cdr (cons x y)) y) =&gt; t
+     Examples:
+         (cons 'a 'b) =&gt; (a . b)
+         (cons 'a (cons 'b (cons 'c nil))) =&gt; (a b c)
+         (cons 'a '(b c d e f)) =&gt; (a b c d e f)
+
+
+ncons           SUBR 1 arg
+     (ncons x) = (cons x nil) = (list x)
+
+
+xcons           SUBR 2 args
+     xcons ("exchange cons") is like cons except  that  the  order  of
+     arguments is reversed.
+     Example:
+         (xcons 'a 'b) =&gt; (b . a)
+
+
+list            LSUBR 0 or more args
+     list  constructs  and  returns  a  list  of  the  values  of  its
+     arguments.
+     Example:
+        (list 3 4 'a (car '(b . c)) (+ 6 -2)) =&gt; (3 4 a b 4)
+
+append          LSUBR 0 or more args
+     The arguments to append are lists.  The result is a list which is
+     the concatenation  of  the  arguments.   The  arguments  are  not
+     changed (cf nconc).  For example,
+          (append '(a b c) '(d e f) nil '(g)) =&gt; (a b c d e f g)
+
+
+subst           SUBR 3 args
+     (subst  x  y  z) substitutes x for all occurrences of y in z, and
+     returns the modified z.  The original z is  unchanged,  as  subst
+     recursively  copies  all  of  z  replacing elements eq to y as it
+     goes.  If x and y are nil, z is completely  copied,  which  is  a
+     convenient way to copy arbitrary list structure.
+     Example:
+        (subst 'Tempest 'Hurricane
+               '(Shakespeare wrote (The Hurricane)))
+          =&gt; (Shakespeare wrote (The Tempest))
+
+
+sublis          SUBR 2 args
+     sublis makes substitutions for atomic symbols in an S-expression.
+     The  first  argument  to  sublis  is a list of dotted pairs.  The
+     second argument is an S-expression.   The  return  value  is  the
+     S-expression  with  atoms  that  are  the  car  of  a dotted pair
+     replaced by the cdr of that dotted pair.   The  argument  is  not
+     modified  - new conses are created where necessary and only where
+     necessary, so the newly created structure shares as much  of  its
+     substructure  as  possible  with  the  old.   For  example, if no
+     successful substitutions are made, the result is eq  to  sublis's
+     second argument.
+     Example:
+         (sublis '((x . 100) (z . zprime))
+                 '(plus x (minus g z x p) 4))
+            =&gt; (plus 100 (minus g zprime 100 p) 4)
+
+rplaca          SUBR 2 args
+     (rplaca x y) changes the car of x to y and returns (the modified)
+     x.  Example:
+         (setq x '(a b c))
+         (rplaca x 'd) =&gt; (d b c)
+        Now x =&gt; (d b c)
+
+
+rplacd          SUBR 2 args
+     (rplacd x y) changes the cdr of x to y and returns (the modified)
+     x.  Example:
+         (setq x '(a b c))
+         (rplacd x 'd) =&gt; (a . d)
+        Now x =&gt; (a . d)
+
+
+nconc           LSUBR 0 or more args
+     nconc  takes  lists as arguments.  It returns a list which is the
+     arguments concatenated  together.   The  arguments  are  changed,
+     rather than copied. (cf. append)
+     Example:
+               (nconc '(a b c) '(d e f)) =&gt; (a b c d e f)
+     Note that the constant (a b c) has been changed to (a b c d e f).
+     If  this  form is evaluated again, it will yield (a b c d e f d e
+     f).
+
+
+nreverse                SUBR 1 arg
+     nreverse reverses its argument, which  should  be  a  list.   The
+     argument  is  destroyed  by  rplacd's  all  through the list (cf.
+     reverse).
+     Example:
+               (nreverse '(a b c)) =&gt; (c b a)
+
+
+delete          LSUBR 2 or 3 args
+     (delete x y) returns the list y with all top-level occurrences of
+     x  removed.  Equal is used for the comparison.  The argument y is
+     actually modified (rplacd'ed) when instances  of  x  are  spliced
+     out.
+     (delete  x  y  n)  is  like  (delete x y) except only the first n
+     instances of x are deleted.  n is allowed to be zero.   If  n  is
+     greater  than  the  number  of  occurences  of x in the list, all
+     occurrences of x in the list will be deleted.
+     Example:  (delete 'a '(b a c (a b) d a e)) =&gt; (b c (a b) d e)
+
+
+delq            LSUBR 2 or 3 args
+     delq is the same as  delete  except  that  eq  is  used  for  the
+     comparison instead of equal.
+
+
+
+prog            FSUBR
+     prog is the "program"  function.  It provides temporary variables
+     and the ability to do "go-tos."
+        The  first  thing  in  a prog is a list of temporary variables
+     &lt;var&gt;.  Each variable has  its  value  saved  when  the  prog  is
+     entered  and  restored  when the prog is left.  The variables are
+     initialized to nil when the prog is entered, thus they  are  said
+     to be "bound to nil" by the prog.
+        The rest of a prog is the body.  An item in the body may be an
+     atomic symbol which is a &lt;tag&gt; or a non-atomic &lt;statement&gt;.
+        prog,  after  binding  the  temporary variables, evaluates its
+     body sequentially.  &lt;tag&gt;s are skipped  over;   &lt;statement&gt;s  are
+     evaluated but the values are ignored.  If  the end of the body is
+     reached,   prog  returns  nil.   If (return x) is evaluated, prog
+     stops evaluating its body and returns the value  of  x.   If  (go
+     tag)  is  seen, prog  jumps to the part of the body labelled with
+     the tag.  The argument to 'go' is  not  evaluated  unless  it  is
+     non-atomic.
+
+
+setq            FSUBR
+     setq  is  used  to  assign  values to variables (atomic symbols.)
+     setq  takes  its  arguments  in   pairs,   and   processes   them
+     sequentially,  left  to  right.  The first member of each pair is
+     the variable, the second is the value.  The  value  is  evaluated
+     but the variable is not.  The value of the variable is set to the
+     value  specified.   You  must  not setq the special atomic-symbol
+     constants t and nil.  The value returned  by  setq  is  the  last
+     value assigned, i.e. the value of its last argument.
+     Example:  (setq x (+ 1 2 3) y (cons x nil))
+        returns (6) and gives x a value of 6 and y a value of (6).
+     Note  that  the  first  assignment is processed before the second
+     assignment is done, resulting in the second use of x getting  the
+     value assigned in the first pair of the setq.
+
+
+set             SUBR 2 args
+     Set  is  like  setq  except that the first argument is evaluated;
+     also set only takes one pair of arguments.   The  first  argument
+     must  evaluate to an atomic symbol, whose value is changed to the
+     value of the second argument.   Set  returns  the  value  of  its
+     second argument.  Example:
+         (set (cond ((predicate) 'atom1) (t 'atom2))
+               'stba)
+     evaluates  to  stba  and  gives  either atom1 or atom2 a value of
+     stba.
+
+
+boundp          SUBR 1 arg
+     The argument to boundp must be an atomic symbol.   If  it  has  a
+     value, cons of nil with that value is returned.  Otherwise nil is
+     returned.  Example:
+        (boundp 't) =&gt; (nil . t)   ;since the value of t is t
+
+definedp                SUBR 1 arg
+     This  predicate returns t if its argument (a symbol) has a value,
+     and nil otherwise.
+
+makunbound      SUBR 1 arg
+     The argument to makunbound must be an atomic symbol.   Its  value
+     is  removed  and it becomes undefined, which is the initial state
+     for atomic symbols.
+
+
+get             SUBR 2 args
+     (get  x  y)  gets x's y-property.  x can be an atomic symbol or a
+     disembodied property list.   The  value  of  x's  y  property  is
+     returned,  unless  x  has  no  y-property  in  which  case nil is
+     returned.
+
+
+getl            SUBR 2 args
+     (getl x  y) is like get except that y is  a  list  of  properties
+     rather  than just a single property.   Getl searches x's property
+     list until a property in the list y is found.  The portion of x's
+     property list beginning with this property is returned.  The  car
+     of  this is the property name and the cadr is what get would have
+     returned.  Getl returns nil if none of the properties in y appear
+     on the property list of x.
+
+
+putprop         SUBR 3 args
+     (putprop x y z) gives x a  z-property of  y and  returns  y.    x
+     may  an  atomic  symbol  or a disembodied property list.  This is
+     like defprop except that  the  arguments  are  evaluated.   After
+     somebody does (putprop x y z), (get x z) will return  y.
+
+
+defprop         FSUBR
+     (defprop x y z) gives x a z-property of y.  The arguments are not
+     evaluated.
+
+
+remprop         SUBR 2 args
+     (remprop  x  y) removes x's y-property, by splicing it out of x's
+     property list.  The value is t if x had a y-property, nil  if  it
+     didn't.   x  may  be  an  atomic symbol or a disembodied property
+     list.  Example:
+
+samepnamep      SUBR 2 args
+     The arguments to samepnamep must evaluate to atomic symbols or to
+     character  strings.  The result is t if they have the same pname,
+     nil otherwise.  The pname of a character string is considered  to
+     be the string itself.
+     Examples:
+         (samepnamep 'xyz (maknam '(x y z))) =&gt; t
+         (samepnamep 'xyz (maknam '(w x y))) =&gt; nil
+         (samepnamep 'x "x") =&gt; t
+
+alphalessp      SUBR 2 args
+     (alphalessp  x  y),  where x and y evaluate to atomic symbols  or
+     character strings, returns t if the pname of x occurs earlier  in
+     alphabetical  order  than  the  pname  of  y.   The   pname  of a
+     character  string   is  considered  to  be   the  string  itself.
+     Examples:
+               (alphalessp 'x 'x1) =&gt; t
+               (alphalessp 'z 'q) =&gt; nil
+               (alphalessp "x" 'y) =&gt; t
+
+
+getchar         SUBR 2 args
+     (getchar  x  n),  where  x is an atomic symbol and n is a number,
+     returns the nth character of x's pname, where n = 1  selects  the
+     first  character.   The  character  is  returned  as  a character
+     object.  nil is returned if n is out of bounds.
+
+
+maknam          SUBR 1 arg
+     Maknam takes as its argument a list of characters, like readlist,
+     and  returns  an uninterned atom whose pname is determined by the
+     list of characters.  Example:
+               (maknam '(a b 60 d)) =&gt; ab0d
+
+gensym          LSUBR 0 or more args
+     gensym creates and returns a new  atomic  symbol,  which  is  not
+     interned  on the obarray (is not recognized by read.)  The atomic
+     symbol's pname is of the form &lt;prefix&gt;&lt;number&gt;, e.g. g0001.   The
+     &lt;number&gt; is incremented each time.
+     If  gensym  is given arguments, a numeric argument is used to set
+     the &lt;number&gt;.  The pname of an atomic-symbol argument is used  to
+     set the &lt;prefix&gt;.  E.g. (gensym 'foo 40) =&gt; f0032
+     Note  that the &lt;number&gt; is in decimal and always four digits, and
+     the &lt;prefix&gt; is always one character.
+
+args            LSUBR 1 or 2 args
+     (args 'f) determines the number of arguments expected by f.  If f
+     wants  n arguments, args returns (nil . n).  If f can take from m
+     to n arguments, args returns (m . n).  If f  is  an  fsubr  or  a
+     lexpr, expr, or fexpr, the results are meaningless.
+
+
+defun           FSUBR
+     defun is used for defining functions.  The general form is:
+               (defun &lt;name&gt; &lt;optional-type&gt;
+                      ( &lt;lambda-variable&gt;...)
+                      &lt;body&gt;...)
+     however, &lt;name&gt; and &lt;type&gt; may be interchanged.   &lt;type&gt;  may  be
+     expr,  fexpr,  or  macro.   If  it  is  omitted, expr is assumed.
+     Examples:
+     (defun addone (x) (1+ x))     ;defines an expr
+     (defun quot fexpr (x) (car x))          ;defines a fexpr
+     (defun fexpr quot (x) (car x))          ;is the same
+     (defun zzz expr x
+         (foo (arg 1)(arg 2)))     ;this is how you define a lexpr.
+     Note:  the functions defprop and putprop may  also  be  used  for
+     defining functions.
+
+
+bigp            SUBR 1 arg
+     The predicate bigp returns its argument if  that  argument  is  a
+     bignum, and nil otherwise.
+
+smallnump               SUBR 1 arg
+     The  smallnump  predicate  returns its argument if it is a fixnum
+     (as opposed to a bignum or a flonum), nil otherwise.
+
+
+zerop           SUBR 1 arg
+     The zerop predicate returns t if its argument is fixnum  zero  or
+     flonum  zero.   (There  is no bignum zero.)  Otherwise it returns
+     nil.
+
+
+plusp           SUBR 1 arg
+     The plusp predicate returns t if its argument is strictly greater
+     than zero, nil if it is zero or  negative.  It is  an   error  if
+     the argument is  not a number.
+
+
+minusp          SUBR 1 arg
+     The  minusp  predicate  returns  t  if its argument is a negative
+     number, nil if it is a non-negative number.  It is  an  error  if
+     the argument is not a number.
+
+
+oddp            SUBR 1 arg
+     The  oddp  predicate  returns t if its argument is an odd number,
+     otherwise nil.  The argument must be a fixnum or a bignum.
+
+
+signp           FSUBR
+     The signp predicate is used to test the sign of a number.  (signp
+     c x) returns t if x's sign satisfies the test c, nil if  it  does
+     not.   x is evaluated but c is not.  It is an error if x is not a
+     number.  c can be one of the following:
+               l         means     x&lt;0
+               le          "       x&lt;0
+               e           "       x=0
+               n           "       x/=0
+               ge          "       x&gt;0
+               g           "       x&gt;0
+     Examples:
+         (signp le -1) =&gt; t
+         (signp n 0) =&gt; nil
+
+=               SUBR 2 args
+     (= x y) is t if x and y are numerically equal.  x and y  must  be
+     both fixnums or both flonums.
+
+
+greaterp                LSUBR 2 or more args
+     Greaterp compares its arguments, which must be numbers, from left
+     to right.  If any argument is not greater than the next, greaterp
+     returns  nil.   But  if  the  arguments  to greaterp are strictly
+     decreasing, the result is t.
+
+
+&gt;               SUBR 2 args
+     (&gt; x y) is t if x is strictly greater than y, and nil  otherwise.
+     x and y must be both fixnums or both flonums.
+
+
+lessp           LSUBR 2 or more args
+     Lessp compares its arguments, which must be numbers, from left to
+     right.   If any argument is not less than the next, lessp returns
+     nil.  But if the arguments to lessp are strictly increasing,  the
+     result is t.
+
+
+&lt;               SUBR 2 args
+     (&lt;  x y) is t if x is strictly less than y, and nil otherwise.  x
+     and y must be both fixnums or both flonums.
+
+
+max             LSUBR 1 or more args
+     Max returns the largest of its arguments, which must be numbers.
+
+
+min             LSUBR 1 or more args
+     Min returns the smallest of its arguments, which must be numbers.
+
+
+fix             SUBR 1 arg
+     (fix x) converts x to a fixnum  or  a  bignum  depending  on  its
+     magnitude.  Examples:
+               (fix 7.3) =&gt; 7
+               (fix -1.2) =&gt; -2
+
+
+float           SUBR 1 arg
+     (float x) converts x to a flonum.  Example:
+               (float 4) =&gt; 4.0
+
+
+abs             SUBR 1 arg
+     (abs  x)  =&gt;  |x|, the absolute value of the number x.
+
+
+minus           SUBR 1 arg
+     Minus returns the negative of its argument, which can be any kind
+     of number.
+
+
+plus            LSUBR 0 or more args
+     Plus returns the sum of its arguments, which may be any  kind  of
+     numbers.
+
+
++               LSUBR 0 or more args
+     +  returns  the  sum  of  its  arguments.   The arguments must be
+     fixnums, and the result is always a fixnum.  Overflow is ignored.
+     Examples:
+               (+  2 6 -1) =&gt; 7
+               (+ 3) =&gt; 3          ;trivial case
+               (+) =&gt; 0            ;identity element
+
+
++$              LSUBR 0 or more args
+     +$ returns the sum of  its  arguments.   The  arguments  must  be
+     flonums and the result is always a flonum.  Examples:
+               (+$ 4.1 3.14) =&gt; 7.24
+               (+$  2.0 1.5  -3.6)  =&gt; -0.1
+               (+$ 2.6) =&gt; 2.6               ;trivial case
+               (+$)  =&gt; 0.0                  ;identity element
+
+
+add1            SUBR 1 arg
+     (add1 x) =&gt; x + 1.  x may be any kind of number.
+
+
+1+              SUBR 1 arg
+     (1+  x)  =&gt;  x+1.   x  must  be a fixnum.  The result is always a
+     fixnum.  Overflow is ignored.
+
+
+1+$             SUBR 1 arg
+     (1+$ x) =&gt; x+1.0.  x must be a flonum.  The result  is  always  a
+     flonum.
+
+
+difference      LSUBR 1 or more args
+     difference  returns  its  first  argument  minus  the rest of its
+     arguments.  It works for any kind of numbers.
+
+
+-               LSUBR 0 or more args
+     This is the fixnum-only subtraction function.  It does not detect
+     overflows.
+     (-) =&gt; 0, the identity element
+     (- x) =&gt;  the negative of x.
+     (- x y) =&gt;  x  -  y.
+     (- x y z) =&gt; x - y - z
+     etc.
+
+-$              LSUBR 0 or more args
+     This is the flonum-only subtraction function.
+     (-$) =&gt;  0.0, the identity element
+     (-$ x)  =&gt; the negation  of x.
+     (-$ x y) =&gt; x - y.
+     (-$ x y z) =&gt; x - y  -  z.
+     etc.
+
+*dif            SUBR 2 args
+     This is an obsolete arithmetic difference function.
+     (*dif x y) =&gt; x - y.
+
+
+sub1            SUBR 1 arg
+     (sub1 x) =&gt; x-1.  X may be any kind of number.
+
+
+1-              SUBR 1 arg
+     (1- x) =&gt; x-1.  x must be a  fixnum.   The  result  is  always  a
+     fixnum and overflow is not detected.
+
+
+1-$             SUBR 1 arg
+     (1-$ x) =&gt; x-1.0.  x must be a flonum.
+
+
+times           LSUBR 0 or more args
+     Times  returns  the  product  of its arguments.  It works for any
+     kind of numbers.
+
+
+*               LSUBR 0 or more args
+     * returns the product of its arguments.  The  arguments  must  be
+     fixnums.   Th  result  is  always  a  fixnum.   Overflow  is  not
+     detected.  Examples:
+               (* 4 5 -6) =&gt; -120.
+               (* 3) =&gt; 3          ;trivial case
+               (*) =&gt; 1            ;identity element
+
+
+*$              LSUBR 0 or more args
+     *$ returns the product of its arguments.  The arguments  must  be
+     flonums and the result is always a flonum.  Examples:
+               (*$ 3.0 2.0 4.0) =&gt; 24.0
+               (*$ 6.1) =&gt; 6.1     ;trivial case
+               (*$) =&gt; 1.0         ;identity element
+
+
+quotient                LSUBR 1 or more args
+     Quotient  returns its first argument divided by  the  rest of its
+     arguments.  The arguments may any kind of number.    (cf.  /  and
+     /$) Examples:
+         (quotient 3 2)  =&gt; 1      ;fixnum division truncates
+         (quotient 3 2.0) =&gt;  1.5  ;but flonum division does not..
+         (quotient 6.0 1.5  2.0) =&gt; 2.0
+
+//              LSUBR 0 or more args
+     This is the fixnum-only division function.  The arguments must be
+     fixnums  and  the  result  of  the  division  is  truncated to an
+     integer and returned  as a fixnum.  Note that the  name  of  this
+     function  must  be   typed   in  as  //, since LISP uses /  as an
+     escape character.
+     (//) =&gt; 1, the identity element.
+     (//  x) =&gt; the fixnum reciprocal of x, which is 0 if  |x| &gt;  1.
+     (// x  y) =&gt; x/y.
+     (// x  y z) =&gt;  (x/y)/z.
+     etc.
+
+
+//$             LSUBR 0 or more args
+     This is the flonum-only division function.   Note  that the  name
+     of  this  function must be typed in as  //$, since LISP uses / as
+     an escape  character.
+     (//$) =&gt; 1.0, the identity element
+     (//$ x) =&gt; the  reciprocal of x.
+     (//$ x y) =&gt; x/y
+     (//$ x y z) =&gt; (x/y)/z.
+     etc.
+
+
+remainder               SUBR 2 args
+     (remainder x y) =&gt; the remainder of the division of x by y.   The
+     sign  of  the  remainder is the same as the sign of the dividend.
+     The arguments must be fixnums or bignums.
+
+
+        SUBR 2 args
+     (x y) returns the remainder of x divided by y, with the sign of
+     x.  x and y must be fixnums.  Examples:
+               (5 2) =&gt; 1
+               (65. -9.) =&gt; 2
+               (-65. 9.) =&gt; -2
+
+
+gcd             SUBR 2 args
+     (gcd x y) =&gt; the  greatest  common  divisor  of  x  and  y.   The
+     arguments must be fixnums or bignums.
+
+
+expt            SUBR 2 args
+                   y
+     (expt x y) = x
+     The  exponent  y  may  be  a bignum if the base x is 0, 1, or -1;
+     otherwise y must be a fixnum.  x may be any kind of number.
+
+
+sqrt            SUBR 1 arg
+     (sqrt x) =&gt; a flonum which is the square root of the number x.
+
+
+isqrt           SUBR 1 arg
+     (isqrt x) =&gt; a fixnum which is the square root of x, truncated to
+     an integer.
+
+
+exp             SUBR 1 arg
+                x
+     (exp x) = e
+
+
+log             SUBR 1 arg
+     (log x) = ln x, the natural log of x.
+
+
+sin             SUBR 1 arg
+     (sin x) gives the trigonometric sine of x.  x is in  radians.   x
+     may be a fixnum or a flonum.
+
+
+cos             SUBR 1 arg
+     (cos  x)  returns  the cosine of x.  x is in radians.  x may be a
+     fixnum or a flonum.
+
+
+atan            LSUBR 1 or 2 args
+     (atan x) returns the arctangent of x, in radians.  x and y may be
+     fixnums or flonums.  (atan x y) returns the arctangent of x/y, in
+     radians.  y may be 0 as long as x is not also 0.
+
+
+random          LSUBR 0 or 1 arg
+     (random) returns a random fixnum.
+     (random nil) restarts the random sequence at its beginning.
+     (random x), where x is a fixnum, returns a random fixnum  between
+     0 and x-1 inclusive.
+
+
+ascii           SUBR 1 arg
+     (ascii  x), where x is a number, returns the character object for
+     the ascii code x.
+     Examples:
+        (ascii 101) =&gt; A
+        (ascii 56) =&gt; /.
+
+
+explode         SUBR 1 arg
+     (explode  x)  returns  a  list  of  characters,  which  are   the
+     characters  that would have been typed out if (prin1 x) was done,
+     including slashes for special characters but not including  extra
+     newlines  inserted  to  prevent  characters  from running off the
+     right margin.  Each  character  is  represented  by  a  character
+     object.
+     Example:
+          (explode '(+ 1x 3)) =&gt; ( /( + /  // /1  x /  /3 /) )
+               ;;Note the presence of slashified spaces in this list.
+
+
+explodec                SUBR 1 arg
+     (explodec   x)  returns  a  list  of  characters  which  are  the
+     characters that would have been typed out if (princ x) was  done,
+     not  including extra newlines inserted to prevent characters from
+     running  off  the  right  margin.   Special  characters  are  not
+     slashified.  Each character is represented by a character object.
+     Example:
+         (explodec '(+  1x 3)) =&gt; ( /( + /  /1 x /  /3 /) )
+
+
+exploden                SUBR 1 arg
+     (exploden   x)  returns  a  list  of  characters  which  are  the
+     characters that would have been typed out if (princ x) was  done,
+     not including extra newlines inserted to prevent lines characters
+     from  running  off  the right margin.  Special characters are not
+     slashified.  Each character is represented by a number  which  is
+     the ascii code for that character.  cf. explodec.  Example:
+         (exploden '(+ 1x 3)) =&gt; (50 53 40 61 170 40 63 51)
+
+
+flatc           SUBR 1 arg
+     Flatc returns the length of its argument in characters, if it was
+     printed out without slashifying special characters.  (flatc x) is
+     the same as (length (explodec x)).
+
+
+flatsize                SUBR 1 arg
+     Flatsize  returns the length of its argument in characters, if it
+     was printed out with special characters slashified.  (flatsize x)
+     is the same as (length (explode x)).
+
+
+readlist                SUBR 1 arg
+     The argument to readlist is a list of characters.  The characters
+     may  be  represented  either  as  numbers  (ascii  codes)  or  as
+     character objects.  The characters in the list are assembled into
+     an  S-expression as if they had been typed into read (See chapter
+     12 for a description of read.)  If macro characters are used, any
+     calls to read, readch, tyi, or tyipeek  in  the  macro  character
+     functions  take their input from readlists's argument rather than
+     from an I/O device or a file.
+     Examples:
+         (readlist '(a b c)) =&gt; abc
+         (readlist '( /( p r 151 n t /  /' f o o /) ))
+               =&gt; (print (quote foo))
+     ;;Note the use of the slashified special characters  left  paren,
+     space, quote, right paren in the argument to readlist.
+
+*array          LSUBR 3 or more args
+     (*array x y b1 b2 ... bn) defines x to be an n-dimensional array.
+     The  first  subscript may range from 0 to b1-1, the second from 0
+     to b2-1, etc.  If y is t a normal array is created; if y  is  nil
+     an "ungarbage-collected" array is created.
+
+
+array           FSUBR
+     (array x y b1 b2 ... bn) is like (*array x y b1 b2 ... bn) except
+     that x is not evaluated.  The other arguments are evaluated.
+
+
+*rearray                LSUBR 1 or more args
+     *rearray is used to redefine the dimensions of an array.
+     (*rearray  x)  gets rid of the array x.  x is evaluated - it must
+     evaluate to an atomic symbol.  The value is t if it was an array,
+     nil if it was not.
+     (*rearray x type dim1 dim2 ... dimn) is like (*array x type  dim1
+     dim2  ...  dimn)  except  that  the  contents  of  the previously
+     existing array named x are copied into the new array named x.
+
+
+store           FSUBR
+     The first argument to store must be a subscripted reference to an
+     array.  The second argument is  evaluated  and  stored  into  the
+     referenced  cell  of  the  array.   Store  evaluates  its  second
+     argument before its first argument.
+     Examples:
+         (store (data i j) (plus i j))
+        (store (sine-values (fix (*$ x 100.0)))
+               (sin x))
+
+
+arraydims               SUBR 1 arg
+     (arraydims 'x), where x is an array, returns a list of  the  type
+     and  bounds  of  x.   Thus if x was defined by (array x t 10 20),
+     (arraydims 'x) =&gt; (t 10 20)
+
+
+bltarray                SUBR 2 args
+     Bltarray is used to copy one array into another.
+     (bltarray x y) moves  the  contents  of  the  array  x  into  the
+     contents of the array y.  If x is bigger than y, it is truncated.
+     If x is smaller than y, the rest of y is unchanged.  x and y must
+     evaluate to atomic symbols which have array properties.
+
+
+fillarray               SUBR 2 args
+     (fillarray &lt;array&gt; &lt;list&gt;) fills the array with consecutive items
+     from the list; thus fillarray could have been defined by:
+     (defun fillarray (a x)
+         (do ((x x (cdr x)) ((n 0 (1+ n)))
+             ((null x))
+               (store (a n) (car x))
+          ))
+     If  the  array is too short to contain all the items in the list,
+     the extra items are ignored.  (This is not reflected in the  LISP
+     definition  above.)   If  the  list  is  too short to fill up the
+     array, the last element of the list is used to fill each  of  the
+     remaining  slots  in  the  array.  An additional flaw in the LISP
+     definition is that fillarray will work with arrays of  more  than
+     one  dimension,  filling the array in row-major order.  fillarray
+     returns its first argument.
+
+
+listarray               SUBR 1 arg
+     (listarray  &lt;array-name&gt;)  takes  the  elements  of   the   array
+     specified  by  &lt;array-name&gt; and returns them as the elements of a
+     list.  The length of the list is the size of the  array  and  the
+     elements  are  present  in the list in the same order as they are
+     stored in the array, starting with the zeroth element.
+
+
+map                 LSUBR 2 or more args
+     The  first  argument  to  map  is  a  function, and the remaining
+     arguments are lists.  Map "goes down"  the  lists,  applying  the
+     function  to  the  lists each time.  The value returned by map is
+     its second argument.  Map stops as soon as one of  the  lists  is
+     exhausted.  Example:
+     (map '(lambda (x y z) (print (list x y z)))
+          '(1 2 3 4) '(a b c d e) '(+ - * |))
+     prints
+     ((1 2 3 4) (a b c d e) (+ - * |))
+     ((2 3 4) (b c d e) (- * |))
+     ((3 4) (c d e) (* |))
+     ((4) (d e) (|))
+     and returns (1 2 3 4).
+
+
+mapc            LSUBR 2 or more args
+     Mapc  is  just  like  map  except that the function is applied to
+     successive elements  of  the  lists  rather  than  to  the  lists
+     themselves.  Thus the example given under map would print
+     (1 a +)
+     (2 b -)
+     (3 c *)
+     (4 d |)
+     and return (1 2 3 4)
+
+
+mapcar          LSUBR 2 or more args
+     Mapcar is like mapc except that the return value is a list of the
+     results  of  each  application of the function.  Thus the example
+     given with mapc would return, not (1 2 3 4), but
+     ((1 a +) (2 b -) (3 c *) (4 d |))
+
+
+maplist         LSUBR 2 or more args
+     Maplist is like map except that the return value is a list of the
+     results of each application of the function.   Thus  the  example
+     given with map would return, not (1 2 3 4), but
+     (((1 2 3 4) (a b c d e) (+ - * |)) ((2 3 4) (b c d e) (- * |))
+      ((3 4) (c d e) (* |)) ((4) (d e) (|)))
+
+
+mapcan          LSUBR 2 or more args
+     Mapcan  is  like  mapcar  except  that the values returned by the
+     function are nconc'ed together instead of being listed  together.
+     Thus the example would return
+     (1 a + 2 b - 3 c * 4 d |)
+
+
+mapcon          LSUBR 2 or more args
+     Mapcon  is  like  maplist  except that the values returned by the
+     function are nconc'ed together instead of being listed  together.
+     This  can  have  disastrous effects on the arguments to mapcon if
+     one is not careful.  The example would return
+     ((1 2 3 4) (a b c d e) (+ - * |) (2 3 4) (b c d e) (- * |)
+      (3 4) (c d e) (* |) (4) (d e) (|))
+
+
+sort            SUBR 2 args
+        The first argument to  sort  is  an  S-expression  array,  the
+     second a predicate of two arguments.  The domain of the predicate
+     must include all objects in the array; thus if the array contains
+     only  atomic  symbols,  the  predicate  need only apply to atomic
+     symbols, but  if  the  array  also  contains  S-expressions,  the
+     predicate must apply to them also.  The predicate should take two
+     arguments,  and  return non-nil if and only if the first argument
+     is strictly less than the second  (in  some  appropriate  sense).
+     The  sort  function  proceeds  to  sort the contents of the array
+     under the ordering imposed by  the  predicate,  and  returns  its
+     first   argument.    Note   that   since  sorting  requires  many
+     comparisons, and thus many calls to the predicate,  sorting  will
+     be  much  faster  if  the predicate is a compiled function rather
+     than interpreted.
+     Example:  (defun mostcar (x)
+         (cond ((atom x) x)
+               ((mostcar (car x)))))
+     (sort fooarray
+           (function (lambda (x y)
+               (alphalessp (mostcar x) (mostcar y)))))
+     If fooarray contained these items before the sort:
+     (tokens (the lion sleeps tonight))
+     (carpenters (close to you))
+     ((rolling stones) (brown sugar))
+     ((beach boys) (i get around))
+     (beatles (i want to hold your hand))
+     then after the sort fooarray would contain:
+     ((beach boys) (i get around))
+     (beatles (i want to hold your hand))
+     (carpenters (close to you))
+     ((rolling stones) (brown sugar))
+     (tokens (the lion sleeps tonight))
+
+
+sortcar         SUBR 2 args
+        sortcar is exactly like sort,  but  the  items  in  the  array
+     should  all  be  non-atomic.   sortcar takes the car of each item
+     before handing two items to the predicate.  Thus  sortcar  is  to
+     sort as mapcar is to maplist.
+
+
+     (status  date)  returns  a  3-list indicating the current date as
+     (year-1900. month-number day)
+     (status daytime) returns a 3-list of the 24-hour time of  day  as
+     (hour minute second).
+     (status  time)  is  the same as (time), the number of seconds the
+     system has been up.
+     (status  runtime)  is  the  same  as  (runtime),  the  number  of
+     microseconds of cpu time that has been used.
+     (status  system x) returns a list of the system properties of the
+     atomic symbol x, which is evaluated.  This list may contain subr,
+     fsubr, macro, or lsubr if x is a  function,  and  value  if  this
+     atomic symbol is a system variable.
+     (status  uname)  returns  an  atomic  symbol  whose  pname is the
+     current user's name.  In the Multics implementation  this  is  in
+     the  format  User.Project; the dot will be slashified if print is
+     used to display this.
+     (status udir) returns the name of the user's directory.   In  the
+     ITS  implementation  this  is  the  same  as  the  user's name as
+     returned by (status uname).  In the Multics  implementation  this
+     is the user's default working directory.
+     (status lispversion) returns the version number of lisp.
+               lisp environment "foo bar"
+
+
+sysp            SUBR 1 arg
+     The sysp predicate takes an atomic symbol as an argument.  If the
+     atomic  symbol is the name of a system function (and has not been
+     redefined), sysp returns the type of function  (subr,  lsubr,  or
+     fsubr).  Otherwise sysp returns nil.
+     Examples:
+         (sysp 'foo) =&gt; nil
+         (sysp 'car) =&gt; subr
+         (sysp 'cond) =&gt; fsubr
+
+
+runtime         SUBR no args
+     (runtime)  returns the number of microseconds of cpu time used so
+     far by the process in which  LISP  is  running.   The  difference
+     between   two   values  of  (runtime)  indicates  the  amount  of
+     computation that was done between the two calls to runtime.
+
+
+time            SUBR no args
+     (time) returns the time that the system has been up, in  seconds.
+     (As a flonum.)
+
+
+sleep           SUBR 1 arg
+     (sleep  n) causes a real-time delay of n seconds, then returns n.
+     n may be a fixnum or a flonum.
+     lisp  is  (mapc 'eval errlist), which allows the user programs to
+     start up.
+
+
+quit            SUBR no args
+     (quit)  causes the lisp subsystem to remove itself and return  to
+     its caller.  The current environment is lost.  (cf. save).
+
+
+namelist                SUBR 1 arg
+     Namelist  converts  its  argument  to  a  namelist.  Omitted or *
+     components in the argument produce *'s in the result.
+
+
+namestring      SUBR 1 arg
+     Namestring converts its argument from a namelist to a namestring.
+     It is the opposite of namelist.
+
+
+shortnamestring SUBR 1 arg
+     shortnamestring is just like namestring except that there  is  no
+     mention of directory or device in the resulting string.  Example:
+               (shortnamestring '(abc d e)) =&gt; "d.e"
+
+
+names           LSUBR 1 or 2 args
+     (names f), where f is a file object, gets f's namelist.
+     (names  nil)  gets the default namelist.  In Multics MACLISP, the
+     default namelist is initially set to
+                         (&lt;working-directory&gt; . *)
+     when lisp is entered.
+     In ITS MACLISP, the default namelist is initially set to
+                               (&lt;udir&gt; . *)
+     when lisp is entered, where &lt;udir&gt; is the name by which the  user
+     logged in.
+     (names nil x) sets the default namelist to x and returns x.
+
+
+open            LSUBR 1 or two args
+     OPEN takes one or two arguments.  It may take a namelist, namestring,
+     short namestring, or file-object as the first argument.  It takes an
+     optional list of modes as the second, or a single atom if there is only
+     one mode.  The most important modes are IN and OUT, the default is IN
+     except in the case of the file-object, in which case it defaults to the
+     mode it was opened in in the first place.
+     (open &lt;file or namelist or namestring&gt; &lt;mode&gt;)
+
+
+close           SUBR 1 arg
+     (close  x),  where  x is a file, closes x and returns t.  If x is
+     already closed nothing happens,  otherwise  the  file  system  is
+     directed to return x to a quiescent state.
+
+read            LSUBR 0 to 2 args
+     This is the S-expression input function.
+     (read) reads an S-expression from the default input source.
+     (read f), where f is a file or nil meaning the terminal, reads an
+     S-expression from f.  During the reading, infile and ^q are bound
+     so that evaluation of (read) within  a  macro-character  function
+     will read from the correct input source.
+     (read  x),  where  x  is  not  a file and not nil, passes x as an
+     argument to the end-of-file function of the input source  if  the
+     end  of  the  file is reached.  Usually this means that read will
+     return x if there are no more S-expressions in the file.
+     (read t) suppresses the calling of the  end-of-file  function  if
+     the end of the file is reached.  Instead, read just returns t.
+     (read  x  f)  or (read f x) specifies the end-of-file value x and
+     selects the input source f.
+
+
+readch          LSUBR 0 to 2 args
+     Readch reads in one character and  returns  a  character  object.
+     The arguments are the same as for read.
+
+
+readline                LSUBR 0 to 2 args
+     readline  reads  in  a  line  of  text,  strips  off  the newline
+     character or characters at the end, and returns it in the form of
+     a character string.  The arguments are the same as for read.  The
+     main use for readline is reading in file names typed by the  user
+     at his terminal in response to a question.
+
+
+tyi             LSUBR 0 to 2 args
+     Tyi  inputs one character and returns a fixnum which is the ascii
+     code for that character.  The arguments are the same as for read.
+
+
+tyipeek         LSUBR 0 or 1 arg
+     (tyipeek) is like (tyi) except that the character is  not  eaten;
+     it  is  still in the input stream where the next call to an input
+     function will find it.  Thus (= (tyipeek) (tyi)) is  t.   If  the
+     end  of  the  file is reached, tyipeek returns 3, (the ascii code
+     for "end of text.") The end of file function is not called.
+     (tyipeek n), where  n  is  a  fixnum  &lt;  200  octal,  skips  over
+     characters of input until one is reached with an ascii code of n.
+     That character is not eaten.
+     (tyipeek  n),  where  n  is  a  fixnum  &gt;  1000 octal, skips over
+     characters of input until one is reached whose syntax  bits  from
+     the readtable, logically anded with (lsh n -9.), are nonzero.
+     (tyipeek t) skips over characters of input until the beginning of
+     an  S-expression  is reached.  Splicing macro characters, such as
+     ";" comments, are not considered to begin an object.  If  one  is
+     encountered,  its associated function is called as usual (so that
+     the text of the comment  can  be  gobbled  up  or  whatever)  and
+     tyipeek continues scanning characters.
+
+
+prin1           LSUBR 1 or 2 args
+     (prin1  x)  outputs x  to the current output destination(s), in a
+     form suitable for reading back in.
+     (prin1 x  f) outputs x on the file f, or the  terminal  if  f  is
+     nil.
+
+
+print           LSUBR 1 or 2 args
+     Print  is  like  prin1  except  that  the output is preceded by a
+     newline and followed by a space.  This  is  the  output  function
+     most often used.
+     (print x) prints x to the default output destinations.
+     (print  x  f)  prints x to the file f, or to the terminal if f is
+     nil.
+
+
+princ           LSUBR 1 or 2 args
+     Princ is  like prin1  except  that  special  characters  are  not
+     slashified and strings are  not quoted.
+     (princ x) outputs x to  the current output destination(s).
+     (princ x f) outputs x to the file f, or the terminal if f is nil.
+
+
+tyo             LSUBR 1 or 2 args
+     (tyo  n)  types  out  the  character whose ascii code is n on the
+     current output destination(s).
+     (tyo n f) types out the character whoe ascii code  is  n  on  the
+     file  f  or  on  the terminal if f is nil.  Tyo returns its first
+     argument.
+
+
+terpri          LSUBR 0 or 1 arg
+     (terpri) sends a newline to the current output destination(s).
+     (terpri x) sends a newline to x, where x may be an output file or
+     nil meaning the terminal.
+
+cursorpos               LSUBR 0 or 2 args
+     The  cursorpos  function  is  used  to manipulate the cursor on a
+     display terminal.
+     With no arguments it returns the dotted  pair  (line  .  column),
+     where  line is the line number, starting from 0 at the top of the
+     screen, and column is the column position, starting from 0 at the
+     left edge of the screen.  If the terminal being  used  is  not  a
+     display  terminal  with  this  type  of  cursor,  nil is returned
+     instead.
+     With two arguments, (cursorpos line  column)  moves  the  display
+     cursor  to  the  indicated  position  and  returns  t  if  it was
+     successful, or nil if the terminal was incapable of doing this.
+
+
+listen          SUBR no args
+     (listen) returns a fixnum which is non-zero if there is any input
+     that has been typed in on the terminal but has not yet been read.
+
+deletef         SUBR 1 arg
+     (deletef x), where x specifies a file, deletes  that  file.   The
+     return  value  is the namelist of the file actually deleted, i.e.
+     x mergef'ed over the defaults.
+
+
+rename          SUBR 2 args
+     (rename x y), where x and y are namelists or namestrings, renames
+     the file  specified  by  (mergef  x  (names  nil))  to  the  name
+     specified  by  (mergef y x (names nil)).  The directory part of y
+     is ignored; a file may not be renamed onto a different device  or
+     directory.   The  return value is the namelist of the new name of
+     the file.
+
+
+clear-input     SUBR 1
+     (clear-input  x),  where x is a file or nil meaning the terminal,
+     causes any input that has been received from the device  but  has
+     not  yet been read to be thrown away, if that makes sense for the
+     particular device involved.
+
+
+force-output            SUBR 1
+     (force-output x), where x is a file or nil meaning the  terminal,
+     causes any buffered output to be immediately sent to the device.
+ 
+</PRE></body></html>

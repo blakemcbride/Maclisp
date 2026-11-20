@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: SXHASH -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Fri ,31 Oct 80 11:01:00 EDT -->
+<!--X-Message-Id: 1ec88265791d43644b5c38dc1b533b4d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: SXHASH</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00595.html">Date Prev</a>][<a href="msg00597.html">Date Next</a>][<a href="msg00595.html">Thread Prev</a>][<a href="msg00597.html">Thread Next</a>][<a href="maillist.html#00596">Date Index</a>][<a href="threads.html#00596">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: SXHASH</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: Re: SXHASH</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri ,31 Oct 80 11:01:00 EDT</li>
+<li><em>Cc</em>: ALAN at MIT-MC, GSB at MIT-MC, LISP-FORUM at MIT-MC, jerryb at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>JONL, since you mentioned Macsyma, I'd like to point out that
+since the HASH that one wants to use depends heavily on the EQUAL in
+use, Macsyma uses its own definition of HASH, and uses SXHASH only
+to get that HASH for SYMBOLS. Also, how fancy the hash wants to
+be depends on what it is used for, and the relative expense
+of the EQUAL algorithm for the objects in use.
+
+In other words, I don't think any good programmer who knows and cares
+about the various hashing methods etc., should depend on the behavior
+of a built-in like SXHASH anyway. (Except insofar as the SXHASH is defined
+to do some kind of class dispatching for hashing the sub-nodes of a node).
+
+-gjc
+
+p.s. For writing ones own hash function it would be *nice* if
+
+(CASEQ (TYPEP X)
+       (SYMBOL ...)
+       (FOOBAR ...) )
+
+turned into code which, well, I'm sure you can guess.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00595.html">Re: SXHASH</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00597.html">Re: SXHASH</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00595.html">Re: SXHASH</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00597.html">Re: SXHASH</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00596"><strong>Date</strong></a></li>
+<li><a href="threads.html#00596"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

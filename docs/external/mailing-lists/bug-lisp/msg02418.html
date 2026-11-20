@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 20 Jun 78 22:58:00 GMT -->
+<!--X-Message-Id: 22821c455a76c1357a54958aec8a6bb7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02419.html">Date Prev</a>][<a href="msg02417.html">Date Next</a>][<a href="msg02419.html">Thread Prev</a>][<a href="msg02417.html">Thread Next</a>][<a href="maillist.html#02418">Date Index</a>][<a href="threads.html#02418">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 20 Jun 78 22:58:00 GMT</li>
+<li><em>Cc</em>: JM at MIT-MC, MRG at MIT-MC, JPG at MIT-MC, KMP at MIT-MC</li>
+<li><em>Original-date</em>: 20 JUN 1978 1858-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>MRG, JM, and myself discussed the problem of COMPLEX and DOUBLE precision
+this morning, and came to the conclusion that
+1) COMPLEX with arbitrary-valued components are what is required, and the
+   operations on two complices  will have to be done with the generic
+   rational operations (since BIGNUMs or FLONUM could occur).  This seems
+   to be acceptible especially since we are not now planning to open-compile
+   the COMPLEX arithmetic.  For a discussion why, see me.
+2) On all new machines, there will be only one FLONUM type, namely what the
+   machine will reasonably support.  Generally this means 50 to 100 bits.
+   Whatever is less is generally unsatisfactory, and all new winning machines
+   do floating-point operations on quantities of this size just as fast as
+   on smaller-sized operands (modulo a little epsilon).  The retrofit to
+   the KL10 for this would probalby take about 4-6 man months since it
+   would mean completely changeing the FLONUM format; and even though this
+   could be done in a way that only wasted space (the second word would merely
+   be a waste on the KA10s since they dont really have Doubleprecision
+   instructions - the loader having converted from DFBSR to FBSR)
+   we still dont think the retrofit is worth it.  So for the PDP10 series
+   we will admit the new data type DOUBLE, which will be closed-compiled.
+   At least some of the benefit of the KL10 floating-point hardware will
+   be realized.  Since standard flonums will compile as at present, then
+   most of the IMSL stuff will still compile adequately.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02419.html">RMS and the problem of macro-expansion during compilation</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02417.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02419.html">RMS and the problem of macro-expansion during compilation</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02417.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02418"><strong>Date</strong></a></li>
+<li><a href="threads.html#02418"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

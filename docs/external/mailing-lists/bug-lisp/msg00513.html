@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: The tops&#45;10 padding problem. -->
+<!--X-From-R13: EG@ ng [WF&#45;[Z (Oyrk Ehathebss) -->
+<!--X-Date: Thu, 29 Mar 79 23:06:00 GMT -->
+<!--X-Message-Id: b225fe92b35260e419a8f084a4fe20fc@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>The tops-10 padding problem.</title>
+<link rev="made" href="mailto:SUN at MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00514.html">Date Prev</a>][<a href="msg00512.html">Date Next</a>][<a href="msg00514.html">Thread Prev</a>][<a href="msg00511.html">Thread Next</a>][<a href="maillist.html#00513">Date Index</a>][<a href="threads.html#00513">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>The tops-10 padding problem.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-ML</li>
+<li><em>Subject</em>: The tops-10 padding problem.</li>
+<li><em>From</em>: SUN at MIT-ML (Alex Sunguroff)</li>
+<li><em>Date</em>: Thu, 29 Mar 79 23:06:00 GMT</li>
+<li><em>Cc</em>: RPG at MIT-ML</li>
+<li><em>Original-date</em>: 29 MAR 1979 1806-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>No it is not a tops-10 problem but a LISP problem since
+it is a feature of 1804 and not of 1771. The p[roblem
+is first evedent by the fact that the * at top-level is
+missing part of the time.  Where it really shows up however
+is when ^K or ^L is used and the first 5 characters are
+never printed.  Anyway it used to be fine in all lisps
+before 1804 (i.e. 1771 for example).
+
+Also 1804 still has the truname bug (did I already report that??)
+
+Ah well, I made a COMPLR with CCLOAD which now works fine.
+Everything else looks ok.  Ah, I looked in the code and saw
+code that was attempting to grab the pure page violations
+of setqing t and nil. But that code must be turned off, since
+the monitor gets the trap.
+
+
+See you around.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00514.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00512.html">Re: FORMAT</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00514.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00511.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00513"><strong>Date</strong></a></li>
+<li><a href="threads.html#00513"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

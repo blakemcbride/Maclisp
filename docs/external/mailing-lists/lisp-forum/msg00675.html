@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: C*R improvement -->
+<!--X-From-R13: Epbgg.Tnuyzna ng Q[G&#45;10O -->
+<!--X-Date: Wed ,9 Dec 81 13:49:00 EDT -->
+<!--X-Message-Id: 09Dec81 124912 SF50@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>C*R improvement</title>
+<link rev="made" href="mailto:Scott.Fahlman at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00677.html">Date Prev</a>][<a href="msg00676.html">Date Next</a>][<a href="msg00676.html">Thread Prev</a>][<a href="msg00674.html">Thread Next</a>][<a href="maillist.html#00675">Date Index</a>][<a href="threads.html#00675">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>C*R improvement</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at mit-ai</li>
+<li><em>Subject</em>: C*R improvement</li>
+<li><em>From</em>: Scott.Fahlman at CMU-10A</li>
+<li><em>Date</em>: Wed ,9 Dec 81 13:49:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+While CADADDAADDDAAADDDR is sexy, it really doesn't go far enough.  Much
+better would be to allow numbers in among the A's and D's, which would serve
+as multipliers for the following letters.  For instance C3A2DAR would
+be equivalent to CAAADDAR.  Of course, we'd have to be careful about radix
+issues -- better expand this at readtime and look at IBASE then.  Better still
+we could have some sort of escape convention (for now I will call it #?) that
+lets you insert a variable whose current value (an integer or a string of
+C's and D's is inserted at that point).  So
+
+(setq foo 4)
+(cad#?fooadr x)
+
+is eqivalent to (cad4adr x) ==&gt; (cadaaaadr x).  This clearly wants to
+expand at runtime so that the value of foo can be changed to get
+different effects.
+
+One could evan imagine allowing the user to insert arbitrary Lisp expressions
+in to C*R form, but in my opinion this would be confusing and not very
+useful.
+
+Cheers,
+Scott
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00677.html">Multiple-valued SQRT</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00676.html">Re:  Multiple-valued SQRT</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00676.html">Re:  Multiple-valued SQRT</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00674.html">More Lisp History Trivia Quiz</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00675"><strong>Date</strong></a></li>
+<li><a href="threads.html#00675"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

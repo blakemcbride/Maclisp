@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Lossages in CMUA MACLISP -->
+<!--X-From-R13: Epbgg Tnuyzna ng Q[G&#45;10O (Q380ET50) -->
+<!--X-Date: Sun, 29 Oct 78 01:51:00 GMT -->
+<!--X-Message-Id: 28Oct78 215125 SF50@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Lossages in CMUA MACLISP</title>
+<link rev="made" href="mailto:Scott Fahlman at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00163.html">Date Prev</a>][<a href="msg00161.html">Date Next</a>][<a href="msg00163.html">Thread Prev</a>][<a href="msg00161.html">Thread Next</a>][<a href="maillist.html#00162">Date Index</a>][<a href="threads.html#00162">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Lossages in CMUA MACLISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp @ mit-ai</li>
+<li><em>Subject</em>: Lossages in CMUA MACLISP</li>
+<li><em>From</em>: Scott Fahlman at CMU-10A (C380SF50)</li>
+<li><em>Date</em>: Sun, 29 Oct 78 01:51:00 GMT</li>
+<li><em>Cc</em>: fahlman at CMU-10A, touretzky at CMU-10A</li>
+<li><em>Original-date</em>: 28 Oct 1978 2151-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+We are using an internal LISP editor here until such time as we can get an
+EMACS/LEDIT system running.  In such a system it is inconvenient to have
+displace do its thing, since it puts out the expanded form into the edited
+source.  I can think of other situations in which DISPLACE wants to be 
+inhibited as well.  How about having DISPLACE be a no-op unless the variable
+displace is NON-NIL.  Most of the old hand-written displace functions had this
+feature.
+
+A number of errors punt the user out of LISP and back to the TOPS-10 system.
+Two examples are typing alt-P to the PDL-OVERFLOW error handler, which
+causes an IRREPARABLE-PDL-OVERFLOW (I know it's stupid, but it's easy to do
+by accident) and setting T or NIL, which causes an attempt to write into
+read-only memory error, and exits to the system with no intervening break.
+When this happens, it should be easy to get back to the top-level of the
+existing LISP.  It turns out that START does this, but REE or CONTIN flame
+out destructively.  Is this easy to correct?  It is particularly tragic to
+flame out a LISP when editing internally, since fuction definitions
+representing a lot of work may be lost.
+
+Aside from such minor lossages, we are winning.  The active MACLISP
+community now stands at four members, Dave McDonald has adapted the
+UCI-Lisp editor for MACLISP, and Dave Touretzky has created an init
+file and some IO functions which move around nicely through the 
+cretinous CMU directory structure.
+
+Scott Fahlman
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00163.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00161.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00163.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00161.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00162"><strong>Date</strong></a></li>
+<li><a href="threads.html#00162"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

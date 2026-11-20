@@ -1,0 +1,108 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: c*r -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Fri ,4 Dec 81 22:16:00 EDT -->
+<!--X-Message-Id: 6ae0f5fe05e4dad88453825dfd3063c2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>c*r</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00698.html">Date Prev</a>][<a href="msg00696.html">Date Next</a>][<a href="msg00698.html">Thread Prev</a>][<a href="msg00696.html">Thread Next</a>][<a href="maillist.html#00697">Date Index</a>][<a href="threads.html#00697">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>c*r</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: CSVAX.jkf at UCB-C70</li>
+<li><em>Subject</em>: c*r</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri ,4 Dec 81 22:16:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, CSVAX.fateman at UCB-C70</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    From: John Foderaro &lt;CSVAX.jkf at Berkeley&gt;
+    ...
+     I always though it was ridiculous that in one of the macsyma macro 
+     packages there were things like 
+     (defmacro caaaaar (x) `(caaaar (car ,x))) ...
+
+Indeed, it is truly ridiculous, but how unfortunate it is that you
+did not ask an experienced lisp programmer about &quot;why&quot; it was ridiculous.
+
+Just because I think it is bad to automatically support all possible c*r's
+does not support your conclusion that I am proud of the fact
+that macsyma contains (DEFMACRO CAADADR (X) `(CAADAR (CDR ,X))), where
+a family of about 10 of these macros is defined in the macro module &quot;MRGMAC&quot;,
+which is not defaultly included in the macsyma compilation environment.
+Use of these macros is only in a very few macsyma modules.
+
+On the contrary, the few macsyma programers that used these macros
+were losing badly. They avoided data abstraction at all costs!
+The road to unreadable code is paved with vast nestings of Car &amp; Cdr.
+
+In contrast, here is something KMP defined for dealing with the
+&quot;MDO&quot; structure in Macsyma.
+
+ (DEFMACRO MAKE-MDO () '(LIST (LIST 'MDO) NIL NIL NIL NIL NIL NIL NIL))
+ ...
+ (DEFMACRO MDO-NEXT (X)   `(CAR (CDDDDR ,X)))
+ (DEFMACRO MDO-THRU (X)   `(CAR (CDR (CDDDDR ,X))))
+ (DEFMACRO MDO-UNLESS (X) `(CAR (CDDR (CDDDDR ,X))))
+
+The &quot;c*r&quot; feature of franz encourages some of the things that give LISP
+a bad name.
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00698.html">c*r</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00696.html">C*R</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00698.html">c*r</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00696.html">C*R</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00697"><strong>Date</strong></a></li>
+<li><a href="threads.html#00697"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

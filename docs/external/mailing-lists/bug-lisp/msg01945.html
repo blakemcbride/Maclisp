@@ -1,0 +1,113 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MACROEXPANDED not working with SETF -->
+<!--X-From-R13: UXQ ng [WF&#45;[Q (Urbetr X. Qneerggr) -->
+<!--X-Date: Tue, 28 Oct 80 22:25:00 GMT -->
+<!--X-Message-Id: 5cd4ebc4d36208f25fe625fdedd1d6ef@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MACROEXPANDED not working with SETF</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01946.html">Date Prev</a>][<a href="msg01944.html">Date Next</a>][<a href="msg01051.html">Thread Prev</a>][<a href="msg01944.html">Thread Next</a>][<a href="maillist.html#01945">Date Index</a>][<a href="threads.html#01945">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MACROEXPANDED not working with SETF</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: MACROEXPANDED not working with SETF</li>
+<li><em>From</em>: GJC at MIT-MC (George J. Carrette)</li>
+<li><em>Date</em>: Tue, 28 Oct 80 22:25:00 GMT</li>
+<li><em>Original-date</em>: 28 OCT 1980 1825-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>; I suppose you know about this already, but here it is
+; anway.
+
+(setq x '(nil nil))
+(NIL NIL) 
+
+(defmacro foo (m) `(car ,m))
+FOO 
+
+(defun c-b (l v) (setf (foo l) v))
+C-B 
+
+(c-b x 9)
+11 
+
+x 
+(11 NIL) 
+
+(defmacro foo (m) `(cadr ,m))
+FOO 
+
+(c-b x 99)
+121 
+
+x 
+(121 NIL) 
+
+; It is evident from the SETF MACROEXPANDED form that it doesn't
+; remember the &quot;versions&quot; of all the macros it had to forcebly
+; expand in order to do its own expansion.
+
+; Might as well not bother with the MACROMEMO scheme and just have
+; all macros displace if it isn't going to work in the one of
+; the most common cases, SETF.
+
+; By the way, I think its a win that SETF is a macro anyway.
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01946.html">Re: Shifted-0, Modular arithmetic</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01944.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01051.html">&amp;WHOLE</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01944.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01945"><strong>Date</strong></a></li>
+<li><a href="threads.html#01945"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

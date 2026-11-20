@@ -1,0 +1,125 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: bugs in tops&#45;10 lisp (from FININ@mit&#45;ai) -->
+<!--X-From-R13: Vbjneq W. Qnaaba &#60;VWQ ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 14 Apr 79 20:59:00 GMT -->
+<!--X-Message-Id: 0b86ba1e73df69a4b97e4db7aedd8b1c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>bugs in tops-10 lisp (from FININ@mit-ai)</title>
+<link rev="made" href="mailto:HIC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00479.html">Date Prev</a>][<a href="msg00477.html">Date Next</a>][<a href="msg00484.html">Thread Prev</a>][<a href="msg00483.html">Thread Next</a>][<a href="maillist.html#00478">Date Index</a>][<a href="threads.html#00478">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>bugs in tops-10 lisp (from FININ@mit-ai)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: DEWOLF at WPAFB-AFAL</li>
+<li><em>Subject</em>: bugs in tops-10 lisp (from FININ@mit-ai)</li>
+<li><em>From</em>: Howard I. Cannon &lt;HIC at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 14 Apr 79 20:59:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, FININ at MIT-AI</li>
+<li><em>Original-date</em>: 14 April 1979 15:59-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    [1] .INI files
+       Initialization files are not being read properly.  More
+       often than not, some characters in a .INI file are mis-read.
+-----
+Can you give a specific example of this.  INI files seem to work on other systems.
+Sending an init file that fails would be greatly appreciated.
+-----
+    [2] Supressing a .INI file
+       There is no way to supress the reading of a .INI file.  Specifically,
+    	RUN COM:NLISP;
+    	RUN COM:NLISP; . 
+-----
+Yeah, on eof these days when I get off my butt....
+-----
+    [3] BPS space fixed
+       From Peter Dewolf[1,762] on April 5, 1979 at 2:44 PM
+       I recall seeing (during my scan of lisp.new) that they were adding assembly
+       conditionals based on processor type--ka, ki, kl.   If you are on a ki or kl
+       running under a virtual memory monitor, you can do core allocation with PAGE.
+       UUOs, which allow you to allocate a page anywhere you want.  The only thing
+       you have to be careful of doing is shrinking core with a CORE UUO, which will
+       deallocate the non-contiguous pages too.  Given this fact, I wonder why they
+       complain about tops-10?  Maybe they don7t want to do much work on a tops-10
+       version of maclisp, and hence do not want to have to write code that will
+       check if you are using a vm monitor (which is easy to check) and do page. uuo
+       core allocation if so.  (another probelm with that is that individual users
+       may or may not have the ability to go virtual.  I would hope that they could
+       use page. uuos within their physical cormax, though!)
+-----
+Use of Tops-10 VM is planned.  I will probably hack this during the summer sometime
+at CMU, and will have a version ready for release by September if all goes well.
+-----
+    [4]  ^U disabled
+      From Peter Dewolf[1,762] on April 5, 1979 at 2:36 PM
+      is it my imagination, or does ^U no longer work in nlisp to erase the
+      current line?
+     
+ Yes indeed, ^U has been disabled.  I don't know if there is a substitute,
+     or if one can be programed easily.
+-----
+Hmmm...yeah, default is character mode I/O.  If you do an (SSTATUS LINMODE T) you
+will probably get ^U processing.
+-----
+    As a whole, this versions seems to run pretty well.
+-----
+Thanks!
+
+
+--Howard
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00479.html">Correction</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00477.html">Re: +INTERNAL-/;-MACRO</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00484.html">bugs in tops-10 lisp (from FININ@mit-ai)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00483.html">SYSCALL of two args</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00478"><strong>Date</strong></a></li>
+<li><a href="threads.html#00478"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

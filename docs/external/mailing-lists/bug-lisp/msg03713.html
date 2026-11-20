@@ -1,0 +1,105 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SYMBOLCONC, STRINGs, and other things being D.E.A.D. -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 6 Dec 80 23:41:00 GMT -->
+<!--X-Message-Id: 72d52a520528b51827bd0336f2d3e610@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SYMBOLCONC, STRINGs, and other things being D.E.A.D.</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03714.html">Date Prev</a>][<a href="msg03712.html">Date Next</a>][<a href="msg03718.html">Thread Prev</a>][<a href="msg03717.html">Thread Next</a>][<a href="maillist.html#03713">Date Index</a>][<a href="threads.html#03713">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SYMBOLCONC, STRINGs, and other things being D.E.A.D.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: SYMBOLCONC, STRINGs, and other things being D.E.A.D.</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 6 Dec 80 23:41:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, KMP at MIT-MC</li>
+<li><em>Original-date</em>: 6 December 1980 18:41-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 6 December 1980 06:22-EST
+    From: Jon L White &lt;JONL at MIT-MC&gt;
+    Subject: SYMBOLCONC, STRINGs, and other things being D.E.A.D.
+    To: KMP at MIT-MC
+    cc: BUG-LISP at MIT-MC, RWK at MIT-MC
+
+    Re:
+        Date: 5 December 1980 16:49-EST
+        From: Kent M. Pitman &lt;KMP at MIT-MC&gt;
+	In Maclisp, with STRING loaded, (SYMBOLCONC &quot;FOO&quot; &quot;BAR&quot;) gives a
+	circular .  .  .
+    This is entirely and wholly due to a buggy SENDI file installed by RWK
+    yesterday at 15:05:46 -- the problem is the failure of the new SENDI to set
+    up the variables SI:CLASS-MARKER and *:CLASS-MARKER.  Not only does
+    SYMBOLCONC give &quot;bizarre&quot; results, but any use whatsoever of any data
+    interfaceing to the CLASS system is effectively dead.
+
+    Fixed in SENDI 97.
+
+    RWK: do a SRCCOM on SENDI to see what I changed -- I believe that the
+	 second BOUNDP in the .SXEVAL is the loss.
+
+Well, all I can say is I was lead astray by GJC reporting that it worked (after
+previous problems) I guess all he really determined was that it loaded.  Guess
+I should do my own testing...  The reason SENDI was installed early was to
+enable it to work in both regimes.  Clarification:  Note that the problem is
+note exactly the failure of SENDI to set up the variables SI:CLASS-MARKER and
+*:CLASS-MARKER.  That is and was the responsibility of EXTEND.  The .SXEVAL is
+merely a cross-compatibility hack that failed, sigh.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03714.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03712.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03718.html">SYMBOLCONC, STRINGs, and other things being D.E.A.D.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03717.html">CERROR, and the ubiquitous FORMAT</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03713"><strong>Date</strong></a></li>
+<li><a href="threads.html#03713"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: BLOAT bug? -->
+<!--X-From-R13: DS[ ng [WF&#45;[Q (Dboreg Sygba [nnf) -->
+<!--X-Date: Tue, 11 Sep 79 11:44:00 GMT -->
+<!--X-Message-Id: 340a3b516d8d02b89e5dfb1b06a6c003@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>BLOAT bug?</title>
+<link rev="made" href="mailto:REM at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02793.html">Date Prev</a>][<a href="msg03999.html">Date Next</a>][<a href="msg02793.html">Thread Prev</a>][<a href="msg03999.html">Thread Next</a>][<a href="maillist.html#02792">Date Index</a>][<a href="threads.html#02792">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>BLOAT bug?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: BLOAT bug?</li>
+<li><em>From</em>: REM at MIT-MC (Robert Elton Maas)</li>
+<li><em>Date</em>: Tue, 11 Sep 79 11:44:00 GMT</li>
+<li><em>Cc</em>: RWG at MIT-MC</li>
+<li><em>Original-date</em>: 11 SEP 1979 0744-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I currently believe that I am experiencing the same bug in L (i.e. LISP)
+that I experienced in LINREL in MACSYMA.  I am doing a lot of bignum
+arithmetic, and LIST SPACE is filling up and not emptying even though I
+return to the top level and repeat the same computation.  Storage gradually
+gets more and more full as I repeat the same calculation several times.
+My calculation doesn't grow any global data structures.  It creates some
+during each time I repeat the calculation (the same ones each time) and
+they should go away when I ^G out of the ;BKPT GC-OVERFLOW and restart.
+But they don't seem to go away.  Turning on ^D from inside the BKPT and
+doing an explicit (GC) shows LIST is 25% empty which is consistant with
+getting the BKPT.  Doing a $P somehow reclaims all but 10% by the time
+the next GC is done, even though a check of my EVALFRAMEs in the most
+likely spot shows only a tiny amount of storage is being used by my
+program (this check is NOT exhaustive; this isn't the prime reason for my
+belief in bug in LISP).  Doing a ^G then a (GC) also seems to reclaim
+all but 10%, but since the next repeat of the same calculation yields
+quicker ;BKPT (thus indicating that there is less storage available at
+the start of the calculation) I'm bewildered.  Is there any way to easily
+diagnose such problems?  I'd like to call some function which will map
+down (1) atoms (2) stacks (3) accumulators  and tell me the name or
+machine address where any suspicious giant data structure is located,
+or simply add up the total sizes of all objects and tell me how much
+I'm really using in each category.  MAPATOMS works for atoms, but I
+don't know the internal pointers to stacks nor which acs are in use for
+s-expressions so can't write these diagnostics myself without help.
+Not wanting to spend weeks reading source code at 300 baud, I'm asking
+the wizards for suggestions...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02793.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03999.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02793.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03999.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02792"><strong>Date</strong></a></li>
+<li><a href="threads.html#02792"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

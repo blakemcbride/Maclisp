@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: CR in LISP -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 26 Oct 79 02:49:00 GMT -->
+<!--X-Message-Id: 2baf8b0a5d633ea550cf4dd8a793a52e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CR in LISP</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02683.html">Date Prev</a>][<a href="msg02681.html">Date Next</a>][<a href="msg02696.html">Thread Prev</a>][<a href="msg02695.html">Thread Next</a>][<a href="maillist.html#02682">Date Index</a>][<a href="threads.html#02682">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>CR in LISP</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RBRN at MIT-AI</li>
+<li><em>Subject</em>: CR in LISP</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 26 Oct 79 02:49:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 25 October 1979 22:49-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     Date:
+Date: Sun, 22 Oct 79 15:33:26 GMT
+Original-Date: 10/22/79 11:33:26 EDT
+Subject:
+    From: RBRN at MIT-AI
+    To:   (BUG LISP) at MIT-AI, rwk
+    Re:   CR in LISP
+
+    Although there probably are not many programs that depend on CR being ignored, there are
+    (or at least historically were) several programs that groveled over LISP code,
+    and introduced CRs where none were before. For this
+    reason the syntax of CR should be left alone.
+    	Besides, what would be the purpose of such a change? 
+    	Anyway, for your own use you could probably just modify the syntax via your
+    own LISP init file.
+
+What programs are these?  Are there any still in use?  If you mean GRIND,
+it hasn't done that in many years.  I can't think of any reason why a
+reasonable program would introduce CR's in the middle of an atom.  The purpose
+of the change is to make things more compatible with the rest of the world.
+Currently, ITS MACLISP is incompatible with Multics MacLisp even.  The LISP
+Machine already does things this way; wouldn't you like your code to be
+compatible between it and ITS?
+
+Obviously, this has nothing to do with my own use.  It would be a mistake
+for me to set it this way in my init file, since then I would be incompatible
+with everybody else.  I think most people do want it changed.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02683.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02681.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02696.html">Re: CR in LISP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02695.html">Changing CR in LISP, reply/opinion</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02682"><strong>Date</strong></a></li>
+<li><a href="threads.html#02682"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

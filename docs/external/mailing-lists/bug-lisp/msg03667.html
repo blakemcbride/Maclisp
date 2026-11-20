@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Linkage assumptions. -->
+<!--X-From-R13: UXQ ng [WF&#45;[Q (Urbetr X. Qneerggr) -->
+<!--X-Date: Sat, 13 Dec 80 19:11:00 GMT -->
+<!--X-Message-Id: c2c4624f1e95a40a2adb1b19e0d97dd5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Linkage assumptions.</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03668.html">Date Prev</a>][<a href="msg03666.html">Date Next</a>][<a href="msg03668.html">Thread Prev</a>][<a href="msg03666.html">Thread Next</a>][<a href="maillist.html#03667">Date Index</a>][<a href="threads.html#03667">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Linkage assumptions.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Linkage assumptions.</li>
+<li><em>From</em>: GJC at MIT-MC (George J. Carrette)</li>
+<li><em>Date</em>: Sat, 13 Dec 80 19:11:00 GMT</li>
+<li><em>Original-date</em>: 13 DEC 1980 1411-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(1) When the compiler assumes FOO as *EXPR, and then finds out
+    FOO is *LEXPR it barfs, failing to compile the function it
+    was working on, even though the code would still run.
+(2) At uuolinks snap time, (or Fasload), when the system finds that
+    FOO which was assumed *EXPR in a given place is actually *LEXPR
+    it provides no messages.
+
+These two things work together to make it difficult to
+compile all of macsyma in the same environment on MC.
+In other words one has to go out of his way to track
+these things down, and can't just find out about them
+and fix them in a painless incremental way.
+
+How much trouble would it be to provide a switch in complr to prevent
+&quot;(1)&quot;. How much trouble to provide some kind of UUOLINKS daemon solve
+&quot;(2)&quot;?
+
+The fact that it has been difficult/impossible in practice, to compile
+all of macsyma in the same environment on MC has made it more
+difficult to transport the code. Which is the only reason
+I'd mention this.
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03668.html">Re: JCL to Maclisp on Twenex</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03666.html">PUTPROP twice PURCOPY bug?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03668.html">Re: JCL to Maclisp on Twenex</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03666.html">PUTPROP twice PURCOPY bug?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03667"><strong>Date</strong></a></li>
+<li><a href="threads.html#03667"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

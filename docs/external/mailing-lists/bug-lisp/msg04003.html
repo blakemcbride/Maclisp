@@ -1,0 +1,131 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Atomic Macros -->
+<!--X-From-R13: OZO@ ng [WF&#45;[Q (Oyna Pnjqra) -->
+<!--X-Date: Wed, 16 Jul 80 05:17:00 GMT -->
+<!--X-Message-Id: 4a9c85026a7a93fe4d5a704bb12f3b6b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Atomic Macros</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04004.html">Date Prev</a>][<a href="msg04002.html">Date Next</a>][<a href="msg04004.html">Thread Prev</a>][<a href="msg01367.html">Thread Next</a>][<a href="maillist.html#04003">Date Index</a>][<a href="threads.html#04003">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Atomic Macros</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC, (BUG LISPM) at MIT-MC, GJC at MIT-MC</li>
+<li><em>To</em>: HIC at MIT-MC, PSZ at MIT-MC</li>
+<li><em>Subject</em>: Atomic Macros</li>
+<li><em>From</em>: ALAN at MIT-MC (Alan Bawden)</li>
+<li><em>Date</em>: Wed, 16 Jul 80 05:17:00 GMT</li>
+<li><em>Cc</em>: LIL at MIT-MC</li>
+<li><em>Original-date</em>: 16 JUL 1980 0117-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Perhaps we should be working towards a &quot;Fusion Macro&quot;?
+
+Seriously, I would like to offer some arguments about atomic macros.
+First let me say that I am opposed to adding atomic macros to MacLisp
+or LispMachine lisp.  My reasons for this are probably similar to
+PSZs: although the feature has some merit, it is really not something
+that can be added to the language at this point without causing
+complete and total upheaval.
+
+SET and PROGV are one problem.  Another: suppose we say that
+(LET ((X 0)) ...) atomicmacroexpands the X to see if it is going to
+expand into another symbol.  What if it expands into (MUMBLE 'X)?  Do
+we continue to macroexpand, or do we stop and destructure?  (I don't
+like destructuring either, but there it is.)  If you think we should
+continue to macroexpand then suppose the guy wrote
+(LET (((MUMBLE 'X) 0)) ...) in the first place?  If you think we
+should destructure then by what right do you differentiate between
+X =&gt; (MUMBLE 'X) =&gt;Y and X =&gt; Y (&quot;=&gt;&quot; indicates one level of
+macroexpansion)?
+
+Perhaps you can solve these problems, (I just thought of a way out
+myself) but there are going to be others you haven't thought of yet.
+In particular you have just screwed every macro writer who ever did
+(ATOM FOO) to determine if it was safe to substitute the value of FOO
+directly into some code that might evaluate it twice.  (&quot;But nobody in
+their right mind would define an atomic macro whose expansion
+evaluated with side effects&quot; I can hear several people yelling...  I
+know.)
+
+I bet I can think up more.  I bet nobody is willing to put the effort
+into implimenting them.  I bet we can continue to live without them.
+
+Now, for those of you who are wondering why I put atomic macros into
+LIL if I think they are such losers:
+
+1) In LIL we have no destructuring.
+
+2) LIL has no interpreter where there are symbols that can be passed as
+arguments to things like SET and PROGV.
+
+3) We don't let atomic macros do anything in LETs, it is an error to
+do (LET ((X 0)) ...) if X is an atomic macro.  This is so that we can
+do the right thing when we decide what that is.  I tend to think that
+the HIC solution (GJC's &quot;atomic macro of the second kind&quot;) is the right one
+at the moment.
+
+4) Since LIL is growing from the ground up, we have no commitment to any
+other past features that might screw us.
+
+5) We have no users with existing code that this might break.
+
+Basically the point is that this atomic macro thing is a good idea,
+but only as something you have in mind from day 1, not something that
+you add in 10 years later when you first think of it.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04004.html">Bad ideas</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04002.html">Funny symbols/strings</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04004.html">Bad ideas</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01367.html">Atomic Macros</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04003"><strong>Date</strong></a></li>
+<li><a href="threads.html#04003"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

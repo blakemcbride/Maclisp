@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SHARPM/GRINDEF fails on "FUNCTION" -->
+<!--X-From-R13: ZEV ng [WF&#45;[Q (Znef E. Vbeasryqg) -->
+<!--X-Date: Thu, 10 Apr 80 14:23:00 GMT -->
+<!--X-Message-Id: e94a556a4b722b9d54ba475b8509bf21@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SHARPM/GRINDEF fails on &quot;FUNCTION&quot;</title>
+<link rev="made" href="mailto:LSH at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01979.html">Date Prev</a>][<a href="msg01977.html">Date Next</a>][<a href="msg01979.html">Thread Prev</a>][<a href="msg01977.html">Thread Next</a>][<a href="maillist.html#01978">Date Index</a>][<a href="threads.html#01978">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SHARPM/GRINDEF fails on &quot;FUNCTION&quot;</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC, LSH at MIT-MC</li>
+<li><em>Subject</em>: SHARPM/GRINDEF fails on &quot;FUNCTION&quot;</li>
+<li><em>From</em>: LSH at MIT-MC (Lars S. Hornfeldt)</li>
+<li><em>Date</em>: Thu, 10 Apr 80 14:23:00 GMT</li>
+<li><em>Original-date</em>: 10 APR 1980 0923-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>	From: Lars S. Hornfeldt &lt;LSH at MIT-MC&gt;
+	Subject: GRINDEF of something that contains FUNCTION
+	Example:
+	(defun test (x) (mapcar (FUNCTION (lambda (y) y)) x))
+
+	(GRINDEF test)                  now starts:
+
+	(defun test (x) (mapcar         and then gives the ERROR:
+	;QUOTE NON-FIXNUM VALUE
+
+	When replacing FUNCTION with '  it works.
+
+Complement: It's necessary to have   (SHARPM FASL MC LISP)
+	loaded also, before or after (GRN    FASL MC LISP),
+	for the error to occur.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01979.html">GRINDEF of something that contains FUNCTION</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01977.html">SHARPM/GRINDEF fails on &quot;FUNCTION&quot;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01979.html">GRINDEF of something that contains FUNCTION</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01977.html">SHARPM/GRINDEF fails on &quot;FUNCTION&quot;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01978"><strong>Date</strong></a></li>
+<li><a href="threads.html#01978"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

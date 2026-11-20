@@ -1,0 +1,85 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XAVO@ ng [WF&#45;[Q (Xbuna qr Yyrre) -->
+<!--X-Date: Sun, 25 Feb 79 04:12:00 GMT -->
+<!--X-Message-Id: d8f5fa60e0b866715b128931dd7fc6df@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JOHAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00544.html">Date Prev</a>][<a href="msg00542.html">Date Next</a>][<a href="msg00544.html">Thread Prev</a>][<a href="msg00542.html">Thread Next</a>][<a href="maillist.html#00543">Date Index</a>][<a href="threads.html#00543">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>From</em>: JOHAN at MIT-MC (Johan de Kleer)</li>
+<li><em>Date</em>: Sun, 25 Feb 79 04:12:00 GMT</li>
+<li><em>Cc</em>: dekleer at PARC-MAXC</li>
+<li><em>Original-date</em>: 24 FEB 1979 2312-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The long gtjfn just before jfn6bt is defaulting the device incorrectly.
+i.e. (mergef '|&lt;dekleer&gt;readline.lsp| nil) fails while
+(mergef '|dsk:&lt;dekleer&gt;readline.lsp| nil) succeeds.  Solution
+(patch) is to deposit 0 into lfgblk+2.  Note that this is an incompatibility
+between TENEX and TOPS-20.
+
+Also note that although (open (mergef '|&lt;dekleer&gt;readline.lsp| nil)) works
+(open (mergef '|&lt;dekleer&gt;readline.lsp;1| nil)) loses.  Problem is that
+OPEN seems to do incorrect things with file extension if it is non empty
+i.e. || or *.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00544.html">Re: (read)(+1 5) =&gt; (1 5)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00542.html">(+1 5)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00544.html">Re: (read)(+1 5) =&gt; (1 5)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00542.html">(+1 5)</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00543"><strong>Date</strong></a></li>
+<li><a href="threads.html#00543"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

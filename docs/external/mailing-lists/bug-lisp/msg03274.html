@@ -1,0 +1,106 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: many DISPLACEs -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Fri, 16 Jun 78 07:41:00 GMT -->
+<!--X-Message-Id: 871f545706595debd471e24c6425bf0a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>many DISPLACEs</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03275.html">Date Prev</a>][<a href="msg03273.html">Date Next</a>][<a href="msg03275.html">Thread Prev</a>][<a href="msg03272.html">Thread Next</a>][<a href="maillist.html#03274">Date Index</a>][<a href="threads.html#03274">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>many DISPLACEs</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: many DISPLACEs</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Fri, 16 Jun 78 07:41:00 GMT</li>
+<li><em>Original-date</em>: 16 JUN 1978 0341-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I'm perfectly happy with either the current definition of DISPLACE,
+or with the one proposed by RMS, and am all in favor of &quot;giving the
+user what he wants&quot;.  But before we go out to take a hasty vote,
+it might be a good idea to examine all the consequences of the
+more &quot;totalitarian&quot; choice.  For example,
+1) Should the functions be called &quot;DISPLACE&quot;, since its action is
+   more of a macro-expansion shunting.  Would the naive user be
+   aware that could not use &quot;DISPLACE&quot; for displacement, due to the
+   extra cruft pushed in.
+2) Some macro-expansions take a monsterous amount of code, and produce
+   even more - the &quot;DISPLACED&quot; scheme saves both around, with no
+   choice available to the user, so that gc may be impacted.  Admittedly
+   many users would like to be able to retrieve the source that the
+   expansion came from, but then again most wouldn't go to any effort
+   to save it.  see 3.
+3) The current definition is essentially the one that has been in the
+   LISP lore for the past 12 years, and one advantage of putting it
+   in the &quot;system&quot; is that it can become the SUBR that it rightly is
+   rather than hacking it in as another level of MACRO.  Its persistent
+   use, in this form, would not seem to support the statement &quot;Putting
+   in any other sort of DISPLACE [than SDISPLACE] is tantamount to not
+   putting in any, but creating some random system function instead.&quot;
+4) My suggestion of a standard MACRO libaray, which would supply
+   SDISPLACE (or better yet, MACRO-DISPLACE), doesn't seem to require
+   that &quot;each user must define it himself&quot;.  Or at least I didn't 
+   think so.  Anyway, there are probably hordes of users who wont displace
+   anything, but will be content with ordinary macro expansion.  How
+   dull!  But if I read the most recent rmsuggestion correctly, we would
+   have to require everyone to use the new &quot;SDISPLACE&quot; form of macros
+   in order for automatic code analysis programs to have any success.
+   Hence the appellation &quot;totalitarian&quot;.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03275.html">Re: DISPLACE for anything besides macros.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03273.html">Re:  displace</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03275.html">Re: DISPLACE for anything besides macros.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03272.html">Re: GC printing out garbage</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03274"><strong>Date</strong></a></li>
+<li><a href="threads.html#03274"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

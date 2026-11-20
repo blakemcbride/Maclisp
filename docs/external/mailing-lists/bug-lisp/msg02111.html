@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: GRINDEF bites the bag on LET -->
+<!--X-From-R13: "Uhl Z. Egrryr, Xe." &#60;UZE ng [WF&#45;OW> -->
+<!--X-Date: Wed, 27 Feb 80 00:32:00 GMT -->
+<!--X-Message-Id: 2090fa8ddd0ddd57eb770d3aaa8d4918@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>GRINDEF bites the bag on LET</title>
+<link rev="made" href="mailto:GLS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02112.html">Date Prev</a>][<a href="msg02110.html">Date Next</a>][<a href="msg02112.html">Thread Prev</a>][<a href="msg02109.html">Thread Next</a>][<a href="maillist.html#02111">Date Index</a>][<a href="threads.html#02111">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>GRINDEF bites the bag on LET</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-AI</li>
+<li><em>Subject</em>: GRINDEF bites the bag on LET</li>
+<li><em>From</em>: &quot;Guy L. Steele, Jr.&quot; &lt;GLS at MIT-AI&gt;</li>
+<li><em>Date</em>: Wed, 27 Feb 80 00:32:00 GMT</li>
+<li><em>Cc</em>: GLS at MIT-AI</li>
+<li><em>Original-date</em>: 26 February 1980 19:32-EST</li>
+<li><em>Sender</em>: GLS0 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>GIRINDEF seem to lose completely on LET-forms.  For example:
+
+
+(DEFUN OPTIMIZE-0 (FUNCLIST TSTLIST) 
+  (CONS (LIST 'DEFUN
+	      (CAR (CAR FUNCLIST))
+	      (CADR (CAR FUNCLIST))
+	      (LET ((SEXPR-0 (LET ((BODY (CDDR (CAR FUNCLIST)))) (COND ((NULL (CDR BODY)) (CAR BODY)) (T (CONS '
+														PROGN BODY)))))) 
+		 (COND ((ATOM SEXPR-0) SEXPR-0) (T (EXPAND-0 SEXPR-0 TSTLIST NIL NIL)))))
+	(COND ((NULL (CDR FUNCLIST)) NIL) (T (OPTIMIZE-0 (CDR FUNCLIST) TSTLIST)))))
+
+Looking at the code, I notice that the bindings of LET are ground as a block.
+The bug may be related to this.  In any case, I object loudly to this anyway.
+If all the variables won't fit on one line, I want them all on separate
+lines where I can see them by a simple vertical scan.  (Same goes for
+arguments to functions, right?)
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02112.html">&quot;open&quot; init files from LISP</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02110.html">GRINDEF</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02112.html">&quot;open&quot; init files from LISP</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02109.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02111"><strong>Date</strong></a></li>
+<li><a href="threads.html#02111"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

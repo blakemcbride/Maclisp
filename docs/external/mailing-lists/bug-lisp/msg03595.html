@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: ERRLIST: Does it really claim to do that? -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 8 Jan 81 19:01:00 GMT -->
+<!--X-Message-Id: a11158aeb53378220b7ab2903f703639@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ERRLIST: Does it really claim to do that?</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03596.html">Date Prev</a>][<a href="msg03594.html">Date Next</a>][<a href="msg03587.html">Thread Prev</a>][<a href="msg03594.html">Thread Next</a>][<a href="maillist.html#03595">Date Index</a>][<a href="threads.html#03595">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ERRLIST: Does it really claim to do that?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJS at MIT-AI</li>
+<li><em>Subject</em>: ERRLIST: Does it really claim to do that?</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 8 Jan 81 19:01:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-AI</li>
+<li><em>Original-date</em>: 8 January 1981 14:01-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 31 December 1980 15:49-EST
+    From: Gerald Jay Sussman &lt;GJS at MIT-AI&gt;
+    To:   BUG-LISP at MIT-AI
+
+    LISP manual claims that ERRLIST is evaluated before dynamic variables are
+    unwound.  Unfortunately system doesn't see it the same way.
+-----
+Where is that stated? As nearly as I can tell, the 1974 MacLisp Manual says
+
+	The value of errlist is a list of forms which are evaluated
+	when control returns to top level either because of an error
+	or when an environment is initially started.  This feature
+	is used to provide self-starting LISP environments and to
+	provide special error handling for subsystems written in LISP.
+
+which seems to imply that the evaluation is after unwind. My evolving Lisp
+manual, having stolen its documentation from the 74 manual, says the same.
+The Moonual doesn't document it anyplace that I see; neither does Touretzky's
+guide or even the LispM manual.
+
+So if there really is someplace that this guarantee is made, please let us 
+know the document (there being many sources of documentation and none being
+very complete (alas)) and page number, etc. so that we can look into it.
+
+Thanks, 
+ -kmp
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03596.html">Macro-Cache'ing a pure cell?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03594.html">Re: ERRLIST: Does it really claim to do that?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03587.html">Macro-Cache'ing a pure cell?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03594.html">Re: ERRLIST: Does it really claim to do that?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03595"><strong>Date</strong></a></li>
+<li><a href="threads.html#03595"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

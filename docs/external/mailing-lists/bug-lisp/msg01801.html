@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Incredible STRING band! -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sun, 16 Nov 80 05:36:00 GMT -->
+<!--X-Message-Id: 607ebc13b3ca7d55616910d74ba96a13@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Incredible STRING band!</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01802.html">Date Prev</a>][<a href="msg01800.html">Date Next</a>][<a href="msg01802.html">Thread Prev</a>][<a href="msg01800.html">Thread Next</a>][<a href="maillist.html#01801">Date Index</a>][<a href="threads.html#01801">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Incredible STRING band!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: SOLEY at MIT-MC</li>
+<li><em>Subject</em>: Incredible STRING band!</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sun, 16 Nov 80 05:36:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, NILE at MIT-MC</li>
+<li><em>Original-date</em>: 16 NOV 1980 0036-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I've just installed a new STRING (and STRAUX) package, which
+corrects a coulple of serious bugs, and utilizes the new
+error checking facilities;  if &quot;latent&quot; features defelop,
+there is a STRING.OFASL and STRAUX.OFASL on MC's LISP directory.
+1) STRAUX makes certain that there are four functions
+   +INTERNAL-CHAR-N, +INTERNAL-RPLACHAR-N, +INTERNAL-STRING-WORD-N,
+   and +INTERNAL-SET-STRING-WORD-N.  These are non-checking versions,
+   in in XLISP they are coded in the system in order to insure
+   correct interruptibility.  This has made it possible to rewrite
+   a lot of string functions which used to lambda-bind *RSET so as
+   not to bind now.  (still, there are a few functions which will bind
+   *RSET  to stop checking on sub-recursive calls -- primarily 
+   STRING-SEARCH and STRING-APPEND).
+2) The backwards versions of POSQ (like, STRING-BPOSQ-N) were buggy!
+   This probably schrod a bunch of other backwards functions --
+   like maybe backwards searching.  This is now fixed.
+Hopefully, within a few days I'll have the new MACROEXPANDED scheme
+in DEFMAX, and will build a new NILAID.  In the meantime, I'd
+appreciate feedback from you regarding possible bugs mentioned in 2.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01802.html">3-way versions of &lt;= and &gt;=</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01800.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01802.html">3-way versions of &lt;= and &gt;=</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01800.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01801"><strong>Date</strong></a></li>
+<li><a href="threads.html#01801"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

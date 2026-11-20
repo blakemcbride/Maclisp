@@ -1,0 +1,115 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Thu, 20 Mar 80 13:55:00 GMT -->
+<!--X-Message-Id: d35abf6446990b0462c0bf791e49bdb2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02043.html">Date Prev</a>][<a href="msg02041.html">Date Next</a>][<a href="msg02044.html">Thread Prev</a>][<a href="msg02041.html">Thread Next</a>][<a href="maillist.html#02042">Date Index</a>][<a href="threads.html#02042">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC, NIL at MIT-MC</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Thu, 20 Mar 80 13:55:00 GMT</li>
+<li><em>Original-date</em>: 20 MAR 1980 0855-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Wednesday  June 14,1978   FQ+1D.8H.19M.18S.   LISP 1633  -HIC-
+
+Changes that affect ITS NEWIO:
+...
+[1] PUSH, POP, and DISPLACE FEXPR's in interpreter
+...
+    SUBR:  (DISPLACE X Y) ==&gt;  (PROGN (RPLACA X (CAR Y)) (RPLACD X (CDR Y)) X)
+...
+--------
+This was what was announced in Lisp news a month afterward. I think it's
+fine if it was originally intended for use with MACRO's but it was given
+a very precise definition if you ask me ... The fact that it was later
+extended to handle DISPLACE'ing atoms into itself was not unreasonable
+as it provided an upward compatible extension. The proposed change that you
+are asking for is not upward compatible. It says that if it fails to 
+accomplish what it has been documented to do, it may not err out and I
+may just find out later at random ... I have used DISPLACE all over in my
+code because it was defined in a general fashion. I like the definition as
+is and find it immensely useful.
+
+Take an example of SUBST -- its stated purpose is to do substitution -- it
+was only an accident that it does copying. Would you say then that it is
+reasonable to change how it operates -- perhaps making it more conservative
+about copying, like SUBLIS is? I should hope not.
+
+I think a 2-year-old description of the functionality of something should
+stand. HIC chose to document its function, for good or bad, in Lisp. If
+the function has any contract, that is surely it.
+
+I see a very bad thing happening to MacLISP in recent days. It is being
+treated more and more like a set of midas macros for booting up a better
+lisp. While I think it is good to see the new semantics brought about,
+I do not agree that the way to do it is to introduce funny little variables
+here and special case crocks there that only serve to support the 
+implementors of the up-and-coming world and generally make the language
+harder and harder to explain, less and less elegant ... Maybe the thing
+to do is freeze MacLISP and then we wouldn't have to worry. Existing
+code could continue to run -- new code could be developed for NIL and
+such...
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02043.html">DISPLACE</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02041.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02044.html">Wrong function</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02041.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02042"><strong>Date</strong></a></li>
+<li><a href="threads.html#02042"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

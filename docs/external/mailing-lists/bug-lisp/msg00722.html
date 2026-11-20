@@ -1,0 +1,105 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: A minor update for Top&#45;20 Maclisp -->
+<!--X-From-R13: [negva Rnivq Qbaabe &#60;[ODFK ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 22 Nov 82 07:46:00 GMT -->
+<!--X-Message-Id: 74778903c3274d1a3ce16c6b6ec56302@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>A minor update for Top-20 Maclisp</title>
+<link rev="made" href="mailto:MARTY at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00723.html">Date Prev</a>][<a href="msg00721.html">Date Next</a>][<a href="msg00723.html">Thread Prev</a>][<a href="msg00721.html">Thread Next</a>][<a href="maillist.html#00722">Date Index</a>][<a href="threads.html#00722">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>A minor update for Top-20 Maclisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GSB at ML</li>
+<li><em>Subject</em>: A minor update for Top-20 Maclisp</li>
+<li><em>From</em>: Martin David Connor &lt;MARTY at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 22 Nov 82 07:46:00 GMT</li>
+<li><em>Cc</em>: Bug-Lisp at MC</li>
+<li><em>Original-date</em>: 22 November 1982  02:46-EST (Monday)</li>
+<li><em>Sender</em>: MARTY at MIT-OZ</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+I found the following in MC:L;STATUS &gt;
+
+Specifically in the (sstatus ttyint ... ) code:
+	...
+
+SSTIN1:	HRRM B,(TT)
+	...
+IFN D20,[
+	POP P,TT		;RESTORE TTSAR
+	ROT F,1			;RESTORE CHARACTER
+	CAIE F,3		;DON'T ALLOW USE TO ASSIGN ^C
+==&gt;	 CAILE F,26.		;TOPS-20 ONLY SUPPORTS TO ^Z
+|	  JRST UNLKTRUE		;RETURN TRUE, BUT DON'T DO TELL THE OP SYS
+|	     ...
+|
+= Well, this perhaps used to be true, but is no longer. these days,
+  one can assign several other characters.
+
+  I think the update I would suggest is to remove the test altogether,
+  since the bit values for the interrupt word on the 20 after the
+  altmode would have to be special cased.
+
+  For my particular application I need to get control at interrupt
+
+  I made myself a patched lisp until this is changed, and I indeed am
+  able to get the altmode interrupt properly.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00723.html">&quot;Howdy!&quot;</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00721.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00723.html">&quot;Howdy!&quot;</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00721.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00722"><strong>Date</strong></a></li>
+<li><a href="threads.html#00722"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

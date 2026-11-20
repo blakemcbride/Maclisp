@@ -1,0 +1,115 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: eoffn -->
+<!--X-From-R13: Rnivq Q. Byhzzre &#60;RQB ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 13 Jun 81 16:29:00 GMT -->
+<!--X-Message-Id: 9b77aa188fe7347701f15488a92261d2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>eoffn</title>
+<link rev="made" href="mailto:DCP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02462.html">Date Prev</a>][<a href="msg02460.html">Date Next</a>][<a href="msg02464.html">Thread Prev</a>][<a href="msg02460.html">Thread Next</a>][<a href="maillist.html#02461">Date Index</a>][<a href="threads.html#02461">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>eoffn</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-MACLISP at MIT-MC</li>
+<li><em>Subject</em>: eoffn</li>
+<li><em>From</em>: David C. Plummer &lt;DCP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 13 Jun 81 16:29:00 GMT</li>
+<li><em>Original-date</em>: 13 June 1981 12:29-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(I would cc this to BUG-MANUAL, but that list seems to be dead.)
+
+The documentation in   :info maclisp input ...  which describes
+eoffn does not conform to practice (or vice versa). 
+
+[for a file opened with  (open ... '(in fixnum single))]
+doc: when eof is reached, the end-of-file function is called with
+  two arguments...
+practice: the end-of-file function gets only one argument: the
+  file object. (for ascii files it gets two arguments)
+doc: the second argument is the eofval made on the call to the
+  reader, or nil if none was supplied
+practice: in the (in ...) case, none CAN be supplied (maybe one
+  should be possible), and therefore I suggest that the newly
+  created second argument to the eoffn be made nil. 
+
+This should be made more general (if it doesn't break 3.14*10^100
+programs already in existence).
+
+Also, on the same subject of (open ... '(in fixnum single))
+
+doc: if the end-of-file function returns neither t nor nil, then
+  the result is immediately returned as the value of the input.
+practice: (eoffn &lt;file object&gt; '(lambda (x) -1))  does NOT return
+  -1, it returns a number similar to 100040075056(octal). I don't
+  care where this number came from, since it is supposed to be
+  -1. In fact, if I try to return '(this is a list) I get 0, and
+  if I try &quot;this is a string&quot; I get 10000075061(8). I did a
+  maknum on these, and 100040075056 is FIXNUM, 0 in NIL, and
+  10000075061 is SYMBOL (I don't know which string package I
+  have, it doesn't matter).
+
+Would somebody mind removing all the extra code that is necessary
+to produce such bizzare results and just make it simple and
+general and CORRECT !!!!!
+
+Separate bug -- on TWENEX, as far as I can tell eoffn does not
+  work for files opened for (in fixnum single). When eof is
+  reached, it complains that eof is reached and does not check
+  for an eoffn.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02462.html">array garbage collection.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02460.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02464.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02460.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02461"><strong>Date</strong></a></li>
+<li><a href="threads.html#02461"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

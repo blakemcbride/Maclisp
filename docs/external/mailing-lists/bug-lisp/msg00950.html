@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Uyraa E. Phexr &#60;UEP ng [WF&#45;[Z> -->
+<!--X-Date: Wed, 3 Feb 82 04:58:00 GMT -->
+<!--X-Message-Id: df2f2512fe7727dab1ff557f795fd09a@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:GSB at MIT-ML">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00951.html">Date Prev</a>][<a href="msg00949.html">Date Next</a>][<a href="msg00951.html">Thread Prev</a>][<a href="msg00949.html">Thread Next</a>][<a href="maillist.html#00950">Date Index</a>][<a href="threads.html#00950">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: WGD at MIT-MC</li>
+<li><em>From</em>: Glenn S. Burke &lt;GSB at MIT-ML&gt;</li>
+<li><em>Date</em>: Wed, 3 Feb 82 04:58:00 GMT</li>
+<li><em>Cc</em>: BUG-LOOP at MIT-MC, BUG-MACLISP at MIT-MC</li>
+<li><em>Original-date</em>: 2 February 1982 23:58-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 2 February 1982 10:03-EST
+    From: William G. Dubuque &lt;WGD at MIT-MC&gt;
+    Sender: BIL at MIT-MC
+
+    (loop for (ignore x) in pairs ...) doesn't ignore; however using
+    () instead of ignore works.  Is this the defined behavior for
+    loop?
+Yes.
+    [I realize that the ignore conventions aren't standardized across
+    Lisps; perhaps the MacLisp compiler could be made to recognize
+    ignore also.]
+It does.  The problem here is that IGNORE is only specially recognized
+when used in a variable-binding position.  As i remember it, it
+isn't recognized in such things as (multiple-value (ignore foo) ...)
+(i'm talking lispm here--maybe this has been &quot;fixed&quot; but i don't think
+so).  What you are saying is that
+    (SETQ IGNORE (CAR L))
+should do something special, like not bother.  (I could say something
+nasty like &quot;it's bad enough that the symbols T and NIL are treated
+specially, you want IGNORE to be also?&quot;, but i won't.)
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00951.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00949.html">who is EPSS</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00951.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00949.html">who is EPSS</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00950"><strong>Date</strong></a></li>
+<li><a href="threads.html#00950"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

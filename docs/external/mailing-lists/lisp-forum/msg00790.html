@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Binding functions vs packages. -->
+<!--X-From-R13: Dvpuneq [. Egnyyzna &#60;D[E ng [WF&#45;OW> -->
+<!--X-Date: Thu ,18 Jun 81 05:44:00 EDT -->
+<!--X-Message-Id: e44adb389bb0c254cd19341a405423c0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Binding functions vs packages.</title>
+<link rev="made" href="mailto:RMS at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00793.html">Date Prev</a>][<a href="msg00789.html">Date Next</a>][<a href="msg00793.html">Thread Prev</a>][<a href="msg00788.html">Thread Next</a>][<a href="maillist.html#00790">Date Index</a>][<a href="threads.html#00790">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Binding functions vs packages.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-AI</li>
+<li><em>Subject</em>: Binding functions vs packages.</li>
+<li><em>From</em>: Richard M. Stallman &lt;RMS at MIT-AI&gt;</li>
+<li><em>Date</em>: Thu ,18 Jun 81 05:44:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The use of syntactically nested functions is very bad for
+extensibility.  If I have FOO which calls BAR, and BAR is defined
+separately, I can redefine either one separately.
+If FOO contains a LABELS which defines BAR, then I cannot redefine
+just one of them without redefining the other (trivially).
+
+I hear that GJS and HAL have a plan for manipulating &quot;lexical&quot;
+environments in a fashion which is not really syntactically nested,
+and this may solve the problem.  But it is not simply ordinary lexical
+binding of function names.  Anything which is really syntactically
+local does not do the job.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00793.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00789.html">Variable binding discipline</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00793.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00788.html">Binding functions vs packages.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00790"><strong>Date</strong></a></li>
+<li><a href="threads.html#00790"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

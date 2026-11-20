@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: exitlist in new&#45;style DO -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 23 Feb 81 00:28:00 GMT -->
+<!--X-Message-Id: dda6a7d9056b3ad0cc02a1a553a5846e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>exitlist in new-style DO</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01506.html">Date Prev</a>][<a href="msg01504.html">Date Next</a>][<a href="msg01506.html">Thread Prev</a>][<a href="msg01503.html">Thread Next</a>][<a href="maillist.html#01505">Date Index</a>][<a href="threads.html#01505">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>exitlist in new-style DO</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Dave.Touretzky at CMU-10A, Paul.Hilfinger at CMU-10A</li>
+<li><em>Subject</em>: exitlist in new-style DO</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 23 Feb 81 00:28:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 22 February 1981 19:28-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 21 February 1981 1540-EST
+    From: Paul.Hilfinger at CMU-10A
+
+    Is there some deep underlying reason why in the expression
+    
+	    (do ( ... ) (e1)  ... )
+    
+    MacLisp does not treat e1 as thelast element in the EXITLIST and returns
+    (instead) NIL?  Grumble.
+
+My understanding has always been that it works this way so that:
+
+	(do var init step stop body)
+
+and
+
+	(do ((var init step)) (stop) body)
+
+will do exactly the same thing.
+
+Of course you could write &quot;(stop nil)&quot; if that is what you really
+wanted, right?  If we are going to consider changing the behavior of
+DO, perhaps we should consider removing this wierd case:
+
+	(do ( ... ) nil ... )
+
+How many of you even know about the wierd thing that this is defined to
+do?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01506.html">exitlist in new-style DO</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01504.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01506.html">exitlist in new-style DO</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01503.html">exitlist in new-style DO</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01505"><strong>Date</strong></a></li>
+<li><a href="threads.html#01505"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

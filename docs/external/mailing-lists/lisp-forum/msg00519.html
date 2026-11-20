@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: LISP security query -->
+<!--X-From-R13: Pneel [netbyva &#60;[netbyva ng [WF&#45;[hygvpf> -->
+<!--X-Date: Sun ,15 Mar 81 17:29:00 EDT -->
+<!--X-Message-Id: 14b5e9af023c26e1c5a8e939589f4da4@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: LISP security query</title>
+<link rev="made" href="mailto:Margolin at MIT-Multics">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00165.html">Date Prev</a>][<a href="msg00520.html">Date Next</a>][<a href="msg00166.html">Thread Prev</a>][<a href="msg00520.html">Thread Next</a>][<a href="maillist.html#00519">Date Index</a>][<a href="threads.html#00519">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: LISP security query</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: SHRAGE at Wharton-10</li>
+<li><em>Subject</em>: Re: LISP security query</li>
+<li><em>From</em>: Barry Margolin &lt;Margolin at MIT-Multics&gt;</li>
+<li><em>Date</em>: Sun ,15 Mar 81 17:29:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I suppose one way to keep the insides of a program fairly secret is to
+compile the function.  Unfortunately, I don't know of ANY language which
+handles security IN the language.  Usually, security is handled in the
+operating system, i.e. the Multics system has a very robust system of
+Access Control Lists, which specify who can access a file.  In such a
+system, the language has very little to do with the security.
+
+As for your p[roblem about passwords, the whole idea of passwords is
+that the person running the program should have to type the password in.
+If you put the password in a program, in ANY language, you are
+compromising it and the security it tries to maintain, since anybody who
+uses your program has access to the file.  Inn addition, in any
+languager, someone can look at the source and figure out what the
+password is.
+
+I don't think this is a LISP problem.
+
+                                        barmar
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00165.html">Re: Data-types for &quot;descending&quot; during copying</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00520.html">Re: LISP security query</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00166.html">Re: Data-types for &quot;descending&quot; during copying</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00520.html">Re: LISP security query</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00519"><strong>Date</strong></a></li>
+<li><a href="threads.html#00519"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: STRING subsequencing functions, etc -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Fri ,13 Feb 81 21:50:00 EDT -->
+<!--X-Message-Id: 5b1a908d6101aa6c5cdf485baf9764ee@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: STRING subsequencing functions, etc</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00578.html">Date Prev</a>][<a href="msg00580.html">Date Next</a>][<a href="msg00577.html">Thread Prev</a>][<a href="msg00580.html">Thread Next</a>][<a href="maillist.html#00579">Date Index</a>][<a href="threads.html#00579">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: STRING subsequencing functions, etc</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: STRING subsequencing functions, etc</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri ,13 Feb 81 21:50:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 12 February 1981 2335-EST (Thursday)
+    From: Guy.Steele at CMU-10A
+    I observe that as a general rule string functions specifying substrings
+    use a start position and end position on the LISP Machine, but in NIL
+    theytake a start position and a count. . . .   LM has
+    SUBSTRING and NIL has STRING-SUBSEQ, etc.
+This &quot;general rule&quot; is a false cognate -- NIL compatibly has all the LISPM 
+string-specific functions except NSUBSTRING (yes, I'm aware that this
+wasn't mentioned in MC:NIL;NEWFUN &gt; -- that document is a bit out-of-date,
+and for that past year we've been coding so much that there seems to be
+little interest in keeping it fully up-to-date.)  In addition, there are all
+the newly-invented generic sequence functions, whose names don't &quot;cross 
+paths&quot; with the LISPM names;  it is the latter series which has the PL/I
+convention for substring denotation.  Thus, STRING-SUBSEQ is just SUBSEQ 
+restricted to STRINGs, and differs from SUBSTRING only in the way
+of specifying the substring length.
+
+    I think LM has STRING-EQUAL and NIL has STRING-EQUALP, .  .  .
+
+I don't think NIL has STRING-EQUALP really;  it does have STRING-EQUAL
+just as on the LISPM.  For a long time, there has been a lobbying effort 
+here (and I believe from you too, GLS) to insure that EQUAL doesn't use
+this &quot;friendly function&quot; when applied to strings -- EQUAL shouldn't 
+ignore case.  The NIL function which is almost equivalent to the
+case-sensitive comparison is STRING-MISMATCHQ.
+    If that's not enough, the function STRING does different things
+    on the two machines (though I think they could be merged compatibly).
+There isn't a definition for STRING in NIL yet -- but there is
+TO-STRING, which does essentially the same thing;  in fact there are
+a bunch of other functions TO-&lt;mumble&gt;, for various values of &lt;mumble&gt;,
+and these were discussed about a year ago under the notion of 
+&quot;Coercion functions&quot;.  One bad feature of the LISPM definition for
+STRING is that it is not symmetric with the function LIST, VECTOR etc
+which take n arguments and compose them into a list, vector, etc
+respectively;  by this analogy, one would think that 
+    (STRING ~A #/b 67. 'D)
+should yield &quot;AbCD&quot;
+
+
+NIL's decision to use a COUNT indicator for sub-sequences, rather than
+and BOUNDARY was influenced partly by other languages and partly by
+the format of some existing machine instructions which take a COUNT -- 
+e.g., all the string instructions on the VAX take an operand which is 
+a &quot;length count&quot;, and the move-characters instruction of the 370 also
+does this.  Thus, STRING-SEARCHQ could be open-coded for the VAX
+using the MATCHC instruction, but STRING-SEARCH (as defined in the LISPM)
+would require the BOUNDARY/COUNT patch-up at all usages.  As it 
+happens, since the LISPM definition for STRING-SEARCH used to use
+a case-ignoring comparison, it couldn't have been open-coded anyway.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00578.html">Re: Getting act together on strings</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00580.html">Re: Foot-in-mouth disease</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00577.html">Re: SLightly unwarranted flame</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00580.html">Re: Foot-in-mouth disease</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00579"><strong>Date</strong></a></li>
+<li><a href="threads.html#00579"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

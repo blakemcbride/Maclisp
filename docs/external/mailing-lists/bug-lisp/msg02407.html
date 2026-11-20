@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: VWQ ng [WF&#45;[Q (Vbjneq W. Qnaaba) -->
+<!--X-Date: Thu, 22 Jun 78 00:14:00 GMT -->
+<!--X-Message-Id: 2489fb5bffce982ea3b25d7372759550@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:HIC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02408.html">Date Prev</a>][<a href="msg02406.html">Date Next</a>][<a href="msg02408.html">Thread Prev</a>][<a href="msg02406.html">Thread Next</a>][<a href="maillist.html#02407">Date Index</a>][<a href="threads.html#02407">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC, RPG at SU-AI</li>
+<li><em>From</em>: HIC at MIT-MC (Howard I. Cannon)</li>
+<li><em>Date</em>: Thu, 22 Jun 78 00:14:00 GMT</li>
+<li><em>Original-date</em>: 21 JUN 1978 2014-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 21 Jun 1978 1021-PDT
+    From: RPG at SU-AI (Dick Gabriel)
+    There's still a screw in the hiseg stuff. Namely, consider this
+    protocol:
+    	r nlisp
+    	&lt;make up a hiseg system&gt;
+    	&lt;save it as mumble&gt;
+
+
+    	ru mumble
+    	&lt;start to add stuff to hiseg again&gt;
+    	&lt;other loser runs mumble&gt;
+
+    in this case we end up with two people with the same hiseg although
+    one guy is changing it. This was why in the oldio version we named the
+    hiseg nnnlsp shifted - so that no one else could attach to it. The
+    -------
+Well, the code from OLDIO was being used, but it was wrong in the fasload
+case (perhaps I brooke it at some time, but I don't recall doing so.).
+
+In any case, it should now not have that lossage.  The other remaining thing
+to do with NEWIO (other than to fix bugs) is to add the alarmclock stuff
+which I didn't put in at my first pass over the interrupt system.  I also need
+to test the interrupt system thouroughly.
+
+--Howard
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02408.html">Local function bindings</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02406.html">Compiler/Interpreter problems</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02408.html">Local function bindings</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02406.html">Compiler/Interpreter problems</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02407"><strong>Date</strong></a></li>
+<li><a href="threads.html#02407"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

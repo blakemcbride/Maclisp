@@ -1,0 +1,137 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,11 Nov 80 13:32:00 EDT -->
+<!--X-Message-Id: 0ce3a0b7c6180e7c85e14d530442e8c5@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00402.html">Date Prev</a>][<a href="msg00425.html">Date Next</a>][<a href="msg00402.html">Thread Prev</a>][<a href="msg00425.html">Thread Next</a>][<a href="maillist.html#00424">Date Index</a>][<a href="threads.html#00424">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: SHRAGE at WHARTON-10</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,11 Nov 80 13:32:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, LISP-DISCUSSION at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date:  9 Nov 1980 (Sunday) 0116-EDT
+    From: SHRAGE at WHARTON (Jeffrey Shrager)
+    Subject: A suggested enhanced naming convention 
+    How about addiing functions to replace (eventually) the MAPCAR, MAPCAN...
+    .  .  .
+NIL has the special form &quot;MAPF&quot;, which even works in MacLISP;  it isn't
+&quot;autoloadable&quot; in maclisp, but comes defined as a macro in the file
+LISP:DRAMMP.FASL  (several other NIL facilities are in that file).
+There may be some more general extension beyond MAPF, but for those
+of you who weren't in on the discussion of two years ago, the definition 
+of MAPF follows, lifted from the file MC:NIL;NEWFUN &gt;
+
+MAPF  -  (MAPF &lt;result-kind&gt; &lt;source-kinds&gt; &lt;function&gt; &lt;as1&gt; &lt;as2&gt; ... &lt;asn&gt;)
+	This is an attempt to generalize all the various mappers by having
+	the first two arguments specify the various options.  *** These first
+	two items are not evaluated, but the remaining arguments are evaluated
+	just as in MACLISP.
+      &lt;result-kind&gt; must be among  
+	  {LIST, NCONC, PROJ1, VECTOR, STRING, BITS, +, +$}
+      &lt;source-kinds&gt; is a list of symbols which are source-descriptors;  a
+	single symbol is treated like an infinite list of that symbol.  The
+	descriptors are among 
+	  {LIST, CAR, VECTOR, STRING, BITS, 1+, 1-, 1+$, 1-$, CONSTANT}
+      &lt;function&gt; should evaluate to a  function of n arguments, and 
+      &lt;as1&gt; ... &lt;asn&gt; evaluate to the argument sources for &lt;function&gt;
+	The meaning of the  &lt;result-kind&gt; is:
+	    LIST 	Return a LIST of all the successive results of the
+			   application of &lt;function&gt;
+	    NCONC 	Same as LIST, but as if NCONC were applied to the 
+			   result, flattening it by one level.
+	    PROJ1   	Return the value of &lt;as1&gt;, as MAPC would.
+	    VECTOR 	Return a VECTOR of all the successive results of the
+			   application of &lt;function&gt;
+	    STRING 	The result of each application must be a CHARACTER - 
+			   Return, then, the STRING of all those CHARACTERs.
+	    BITS 	The result of each application must be either 0 or 1 - 
+			   the resultant 0's and 1's are packed into a BITS.
+	    +, +$	Return the numerical sum of all outputs.  &quot;+&quot; specifies
+			  that they will all be FIXNUMs, &quot;+&quot; for FLONUMs.
+	The meaning of the &lt;source-kinds&gt; is:
+	    LIST 	The argument source is a list, which is successivly
+			   CDR'd after successive applications.
+	    CAR 	Same as LIST, except CAR of the list is given as
+			   the argument to &lt;function&gt;
+	    VECTOR 	The successive items of a VECTOR are given
+	    STRING 	The successive characters of a STRING are given
+	    BITS 	The successive bits (0's or 1's) of a BITS are given
+	    1+, 1+$	The argument source is a FIXNUM (or FLONUM in the 
+			  &quot;1+$&quot; case) which is successively incremented by 1.
+	    1-, 1-$	Same as &quot;1+&quot; case, but is decremented by 1.
+	    CONSTANT 	The argument source is repeatedly given, unmodified
+			  as the corresponding argument to &lt;function&gt;; it
+			  ** DOES NOT ** mean that the type of the source is
+			  a constant, but only that it is not &quot;stepped&quot;.
+	 Right now, not all the combinations are worked out, but these will
+	 certainly be installed initially:
+	    (MAP     FOO . rst)	==&gt;  (MAPF 'PROJ1 'LIST FOO . rst)
+	    (MAPLIST FOO . rst)	==&gt;  (MAPF 'LIST  'LIST FOO . rst)
+	    (MAPC    FOO . rst)	==&gt;  (MAPF 'PROJ1 'CAR  FOO . rst)
+	    (MAPCAR  FOO . rst)	==&gt;  (MAPF 'LIST  'CAR  FOO . rst)
+	    (MAPCON  FOO . rst)	==&gt;  (MAPF 'NCONC 'LIST FOO . rst)
+	    (MAPCAN  FOO . rst)	==&gt;  (MAPF 'NCONC 'CAR  FOO . rst)
+	    (MAPVECTOR FOO . rst)   ==&gt;  (MAPF 'VECTOR 'VECTOR FOO . rst)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00402.html">Re: Applicable Macros?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00425.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00402.html">Re: Applicable Macros?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00425.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00424"><strong>Date</strong></a></li>
+<li><a href="threads.html#00424"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

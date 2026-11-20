@@ -1,0 +1,96 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: clarification regarding backquote query -->
+<!--X-From-R13: Rba [beevfba &#60;[beevfba ng GFOV&#45;20> -->
+<!--X-Date: Mon ,11 Jan 82 19:01:00 EDT -->
+<!--X-Message-Id: 03d0145b4d15a475bed329d0769388a6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>clarification regarding backquote query</title>
+<link rev="made" href="mailto:Morrison at UTAH-20">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00666.html">Date Prev</a>][<a href="msg00664.html">Date Next</a>][<a href="msg00668.html">Thread Prev</a>][<a href="msg00664.html">Thread Next</a>][<a href="maillist.html#00665">Date Index</a>][<a href="threads.html#00665">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>clarification regarding backquote query</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at MIT-AI</li>
+<li><em>Subject</em>: clarification regarding backquote query</li>
+<li><em>From</em>: Don Morrison &lt;Morrison at UTAH-20&gt;</li>
+<li><em>Date</em>: Mon ,11 Jan 82 19:01:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The sort of thing I had in mind for a complicated macro producing macro
+was to have a macro producing macro foo consing up the final form,  but
+bits and pieces it stuffs in are being created by a function bar.   The
+value which foo finally  returns will be  some hairy conglomeration  of
+conses, lists, and appends, such  as backquote is particularly good  at
+creating.  But the pieces  which bar creates  will mostly be  constant,
+but sometimes I'd like bar to be able to return a piece which  contains
+a call  on unquote,  which  unquote will  be  seen by  the  dynamically
+surrounding  backquote  (i.e.   in   foo),  rather  than  a   lexically
+surrounding one. Perhaps  this is  too complicated to  be done  clearly
+(this description certainly  is so  complicated that I  doubt it  would
+ever be clear) with  backquote, but I seem  to remember having  created
+such a beast  where this  seemed more  perspicuous than  the hard  way.
+Unfortunately I can't remember the exact example, and all the  examples
+I can now dream up don't warrant such a procedure; seems that in all my
+toy examples simply adding an unquote in the caller and a backquote  in
+the callee  works.   Perhaps  the &quot;dynamic  version&quot;  is  never  really
+useful.  And anyway, I gather from  some of the replies that there  are
+functional entry points to the required pieces available in MACLISP and
+friends, though I still don't know their names. 
+-------
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00666.html">backquote query</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00664.html">'backquote' actions</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00668.html">Backquote depth</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00664.html">'backquote' actions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00665"><strong>Date</strong></a></li>
+<li><a href="threads.html#00665"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

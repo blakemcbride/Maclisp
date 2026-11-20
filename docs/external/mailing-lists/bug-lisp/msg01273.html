@@ -1,0 +1,139 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Multiple&#45;value SETQ/RETURN -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Sat, 23 Aug 80 15:22:00 GMT -->
+<!--X-Message-Id: 239c4c10e158aa4519cd9307140fce87@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Multiple-value SETQ/RETURN</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01274.html">Date Prev</a>][<a href="msg01272.html">Date Next</a>][<a href="msg01274.html">Thread Prev</a>][<a href="msg01272.html">Thread Next</a>][<a href="maillist.html#01273">Date Index</a>][<a href="threads.html#01273">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Multiple-value SETQ/RETURN</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: Multiple-value SETQ/RETURN</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat, 23 Aug 80 15:22:00 GMT</li>
+<li><em>Cc</em>: MACSMA-I at MIT-MC, NIL at MIT-MC, BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 23 August 1980 11:22-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Actually, I am not all that thrilled with multiple value returns.
+Chuck Linton needed to run some of HIC's lispm code in maclisp,
+so instead of changing the multiple value returns into 
+&quot;(PROGN (SETQ *RETURN1* &lt;FOO&gt;) (SETQ *RETURN2* &lt;BAR&gt;))&quot; by hand
+I made up a little macro to hide the SETQ's.
+
+The reason I am not too thrilled is that multiple value return
+complicates the compiler, and cannot be done correctly with a macro,
+(remember that I impose a condition, that macros are not allowed
+to call macro-expand).
+
+You mention in NIL;NEWFUN &gt; that the following will not
+work correctly in NIL:
+
+(MSETQ-CALL (X Y)
+	    (PROG1 (FIND-POLAR-POSITION SHIP) (FROB)))
+
+This may make MSETQ-CALL dangerous to use in code which undergoes
+macro expansion. The poor luser writes (MSETQ-CALL (X Y) (FOO)) and (FOO)
+expands. Resticting what (FOO) can expand into is a gross violation
+of the lisp semantic contract. Do you seriously want to introduce
+a language construct for which you are unable to generate correct code?
+
+Right now I am thinking about working on a maclisp macro which works
+in the above case, (it violates my condition of course), using the
+same META EVALUATOR code that I suggested JKF use for lambda-binding
+optimization (remember &amp;PROTECT). That suggestion met with such
+positive response of course!
+
+The way it works is to generate temporaries for X and Y. GENSYMS.
+And then target these to recieve the return values of the PROG1.
+The PROG1 the targets these to recieve the return values of its
+first argument, and so on. It is incredibly simple to do if
+you are not worried about the efficiency of the number of needless
+LAMBDA BINDs or SETQ's that you generate. Look what might be
+generated:
+
+(MSETQ-CALL (X Y) (SOME-SUBR)) ; SOME-SUBR is not a macro.
+
+(PROGN (SETQ G0001 (SOME-SUBR)  
+             G0002 *RETURN-REGISTER-2* 
+	     X G0001
+             Y G0002)
+       G0001)
+
+Of course, the over-caution lets you generate CORRECT code for the PROG1.
+
+(PROGN (SETQ G0001 (FIND-POLAR-POSITION SHIP)
+	     G0002 *RETURN-REGISTER-2*)
+       ; now we can evaluate the rest of the PROG1 without worry.
+       (FROB)
+       ; now take care of the MSETQ
+       (SETQ X G0001 Y G0002)
+	; lastly, the return value of prog1 and the MSETQ
+       G0001)
+
+I have left out the details of where the temporaries get allocated.
+Wrapping a (LET (G0001 G0002) ...) around things suggests that
+they get pushed onto some stack as needed.
+
+So JONL, do you think you can get this to work correctly and efficiently
+in NIL?
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01274.html">Multiple-value SETQ/RETURN</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01272.html">Multiple-value SETQ/RETURN</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01274.html">Multiple-value SETQ/RETURN</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01272.html">Multiple-value SETQ/RETURN</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01273"><strong>Date</strong></a></li>
+<li><a href="threads.html#01273"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

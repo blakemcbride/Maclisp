@@ -1,0 +1,147 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MacLISP's Floating point -->
+<!--X-From-R13: [nex Z. [vyyre &#60;[WZZSD ng [WF&#45;OW> -->
+<!--X-Date: Wed, 24 Sep 80 03:27:00 GMT -->
+<!--X-Message-Id: a27dad56c2f826cb5aba3f39f8dc3779@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MacLISP's Floating point</title>
+<link rev="made" href="mailto:MILLER at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01171.html">Date Prev</a>][<a href="msg01170.html">Date Next</a>][<a href="msg01241.html">Thread Prev</a>][<a href="msg01240.html">Thread Next</a>][<a href="maillist.html#01168">Date Index</a>][<a href="threads.html#01168">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MacLISP's Floating point</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: MacLISP's Floating point</li>
+<li><em>From</em>: Mark L. Miller &lt;MILLER at MIT-AI&gt;</li>
+<li><em>Date</em>: Wed, 24 Sep 80 03:27:00 GMT</li>
+<li><em>Cc</em>: KEN at MIT-AI, GJS at MIT-AI, PHW at MIT-AI, TBlocker at BBNA,    MMiller at BBNA, ben at MIT-ML, BUG-LISP at MIT-MC,    BRoberts at BBNC</li>
+<li><em>Original-date</em>: 23 September 1980 23:27-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Please see my comments on the **'d item below ...
+    Date:  9 SEP 1980 0225-EDT
+    From: JONL at MIT-MC (Jon L White)
+
+        Date: 8 September 1980 14:03-EDT
+        From: Benjamin Kuipers &lt;BEN at MIT-ML&gt;
+        TOPS-10 MACLISP still has the problem of using KA-10
+        floating point instructions, which must be software
+        simulated on the Tufts KL-10.  Are there any plans to
+        fix this?
+    Not that I know of.   Several other people have complained about
+    this -- especially Ken Kahn who is trying to use MacLISP on a
+    Swedish TOPS-10 that apparently doesn't support much in hte way of
+**  compatibility -- but there's just not a lot of &quot;steam&quot; here on our
+**  side to maintain the TOPS-10 version.  Hopefully, some combination
+**  of TOPS-10 MacLISP users could delve into these things? (the
+    CMUA crew, and maybe someone from Tufts?).
+
+I hate to criticize, since I know everyone there as friends and know that
+they do the best that they can, given human time limitations.  Moreover,
+the result of years of software development work has been freely
+distributed, and for this we should all be grateful.  But this situation,
+which I will describe as &quot;The Inferiority of MacLisp Support on non-I.T.S.
+Systems&quot; is a very serious problem for MacLisp AND THUS (if you believe, as
+I do, that it represents the future whereas InterLisp represents the past)
+FOR THE AI COMMUNITY AT LARGE.
+
+The documentation situation is equally embarrassing for MacLisp advocates.
+
+Byron and I, here at TI, have tried hard to &quot;sell&quot; MacLisp, but due to
+better documentation and 20X support, INTERLISP may win here in the end.
+(&quot;Hopefully you users will do it&quot; is, unrealistic outside of the university
+setting -- although we ARE TRYING to bootleg some Tops-20 improvements to
+MacLisp, like cursorpos and such.)  This is particularly sad since we are
+trying to buy (indeed may be within days of ordering) LISPM's.  Those of
+you who have only lived in the I.T.S. world cannot appreciate just how
+inferior MacLisp is on other operating systems, relative to its state on
+I.T.S.  Given the number of sites running I.T.S. (!) this seems a bit
+parochial, even if understandable from the MIT point of view.
+
+I don't know what the right answer is, or how to improve the situation.
+But ignoring it doesn't help.
+
+One possible solution might be to propagate I.T.S. along with Emacs and
+MacLisp.  What is the legal status of this?  Can any site with a 10/20
+choose to run that instead (not just universities or just MIT)?  Who would
+I ask, to get a tape?  What special hardware configurations, if any, would
+be required?  What about updates?  Would it mean no further support from
+either DEC or maintenance houses when things crash?  SUPPOSE WE BOUGHT ALL
+FUTURE 10/20-class MACHINES FROM FOONLY, INC., INSTEAD OF DEC?  Could THEY
+supply I.T.S., and will they help out when an I.T.S.-based machine crashes?
+
+Or, is there any chance that M.I.T. will move over to Tops-20 release N,
+after most of the good features of I.T.S. get stolen by DEC?  The version
+from CMU, with multi-forking and PCL commands, release 4, is pretty nice;
+in some ways nicer (certainly friendlier to learn) than I.T.S.  Mostly what
+it lacks is operating system level display support -- each application
+(like Emacs) must reinvent the wheel.
+
+Please accept these comments as constructive feedback.  For now, we will
+continue to try to improve the Tops-20 user environment; we may even
+attempt a manual on the scale of the recent UCI document.  On the other
+hand, this task seems so ominous for a new group that we may well have to
+go over to INTERLISP in order to get some things running to show off to
+management.  At the end of the year, we can't just say &quot;we wrote a manual
+for LISP and fixed some bugs specific to the Tops-20 version of our
+favorite dialect&quot;.
+
+If you have other suggestions, they'd be welcome.
+    Regards, Mark
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01171.html">DIGITP again, and again and again</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01170.html">Cursorpos on XX Losing</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01241.html">MacLISP's Floating point</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01240.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01168"><strong>Date</strong></a></li>
+<li><a href="threads.html#01168"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

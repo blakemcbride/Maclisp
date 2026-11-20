@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: GC bug (?) -->
+<!--X-From-R13: VWQ ng [WF&#45;[Q (Vbjneq W. Qnaaba) -->
+<!--X-Date: Wed, 25 Jul 79 19:53:00 GMT -->
+<!--X-Message-Id: 720a8e14bcd91eefba174ecf72519b51@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>GC bug (?)</title>
+<link rev="made" href="mailto:HIC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02928.html">Date Prev</a>][<a href="msg02926.html">Date Next</a>][<a href="msg02928.html">Thread Prev</a>][<a href="msg02926.html">Thread Next</a>][<a href="maillist.html#02927">Date Index</a>][<a href="threads.html#02927">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>GC bug (?)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: REM at MIT-MC</li>
+<li><em>Subject</em>: GC bug (?)</li>
+<li><em>From</em>: HIC at MIT-MC (Howard I. Cannon)</li>
+<li><em>Date</em>: Wed, 25 Jul 79 19:53:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 25 JUL 1979 1553-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I have found your bug.  The problem was that you were running a complicated function
+(namely, (TEST)) before the FASLOAD finished.  Unfourtunatly, due to a misfeature
+in FASLOAD, numbers don't get GCPROTECTED until **AFTER** the fasload is done.
+Therefore, simply completeing the fasload before calling (TEST) wins.
+
+JONL:  What should happen is that instead of the stupid refernece bit approach,
+       whenever a thing in the atom table gets used, it should be GCPROTECTED if
+       it hasn't been before (I guess the reference bit could be redefined).
+       This bug came up with symbols, and I fixed it once for that, but not in
+       the most general fashion.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02928.html">(CURSORPOS 'R/S)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02926.html">Complr bug</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02928.html">(CURSORPOS 'R/S)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02926.html">Complr bug</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02927"><strong>Date</strong></a></li>
+<li><a href="threads.html#02927"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

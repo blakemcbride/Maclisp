@@ -1,0 +1,219 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Special names for Open&#45;Coded Functions -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,2 Dec 80 19:41:00 EDT -->
+<!--X-Message-Id: 8b496d8f86365b1a1e98ad85a59ef460@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Special names for Open-Coded Functions</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00455.html">Date Prev</a>][<a href="msg00457.html">Date Next</a>][<a href="msg00452.html">Thread Prev</a>][<a href="msg00457.html">Thread Next</a>][<a href="maillist.html#00456">Date Index</a>][<a href="threads.html#00456">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Special names for Open-Coded Functions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Guy.Steele at CMU-10A</li>
+<li><em>Subject</em>: Re: Special names for Open-Coded Functions</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,2 Dec 80 19:41:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 2 December 1980 1034-EST (Tuesday)
+    From: Guy.Steele at CMU-10A
+    To:   Moon@AI, Bug-Lisp
+    Re:   MAX not open-coded
+
+    I lobbied some time ago to change the current MAX and MIN to MAXIMUM
+    and MINIMUM, and have MAX, MIN, MAX$, MIN$ -- but it would have
+    been incompatible.  Sigh.
+-----
+I'm not convinced that the idea of making special operators that do the
+same thing as generic operators. Several issues get mixed every time this 
+comes up and I think it's deserving of some group analysis. Let me break
+things into what I think are distinct cases...
+
+[a] `Simple' Open-Coding
+
+    It is the case, however, that (I'll uses GLS's MAX naming convention
+    from above)
+
+	(MAX x y) is in all cases the same as (MAXIMUM (FIXNUM-IDENTITY x)
+						       (FIXNUM-IDENTITY y))
+
+    in the interpreter, so it is reasonable to open-code this in the compiler.
+    In some sense then, having a name around (MAX x y) is only sugar and
+    not really necessary. Surely any compiler that could recognize one case
+    could recognize the other. Moreover, even if it was looking for MAX,
+    we should hope that writing (MAXIMUM (FIXNUM-IDENTITY ...) 
+    (FIXNUM-IDENTITY ...)) would not slow us down, since we've supplied enough
+    information to trivially allow the compiler to do the right thing in all
+    cases.
+
+    That means, then, that we'll at least have to justify having the abstract
+    operation MAX being different than MAX.
+
+[b] `Hard' Open-Coding
+
+    There is a problem with +/+$/PLUS in that there are differences in 
+    effect between some of them. Eg,
+
+	(+ x y) is not the same as (PLUS (FIXNUM-IDENTITY x)
+					 (FIXNUM-IDENTITY y))
+
+    in the Maclisp interpreter and it's a (maybe good, maybe bad)
+    efficiency hack that they're compiled the same. Eg,
+
+	(PLUS (FIXNUM-IDENTITY #o377777777777)
+	      (FIXNUM-IDENTITY #o377777777777))
+
+    is not the same as 
+
+	(+ #o377777777777 #o377777777777)
+
+    in Maclisp. Compiled, both return -2 while interpreted the former returns
+    #o777777777776, a bignum.
+
+    I think here that the Maclisp compiler does the user a dis-service by
+    turning (PLUS (FIXNUM-IDENTITY ...) (FIXNUM-IDENTITY ...)) into (+ ...)
+    because now cases where the user has a macro (FOO) which expands into
+    a piece of code that is (FIXNUM-IDENTITY ...) and a macro BAR which he
+    has not written but which turns out to be clever enough to realize that
+    (BAR (FIXNUM-IDENTITY ...)) is the same as (FIXNUM-IDENTITY (BAR ...))
+    -- eg, SETF? -- and he does (PLUS (BAR (FOO)) 3) someplace where he
+    really wants to force the fancy PLUS addition that makes overflow turn
+    to bignums, he has no way of expressing that want or even of trivially
+    recognizing that an open-coding will occur. So let's assume that this
+    equivalence is a bug in Maclisp.
+
+    Ignoring the issue of how to APPLY or MAP macros, we couldn't even say
+
+	(+ x1 x2 x3 ...) &lt;=&gt; (FIXNUM-IDENTITY (PLUS (FIXNUM-IDENTITY x1)
+						    (FIXNUM-IDENTITY x2)
+						    (FIXNUM-IDENTITY x3) ...))
+
+    because something like 
+
+	    (FIXNUM-IDENTITY 
+	       (PLUS (FIXNUM-IDENTITY #o377777777777)
+		     (FIXNUM-IDENTITY #o377777777777)
+		     (FIXNUM-IDENTITY (- #o377777777777))))
+
+    is simply not the same as
+
+	    (+ #o377777777777 #o377777777777 (- #o377777777777))
+
+    because + asserts something overly strong for this case. Namely,
+
+	    (FIXNUM-IDENTITY 
+	       (PLUS (FIXNUM-IDENTITY
+			 (PLUS (FIXNUM-IDENTITY #o377777777777)
+			       (FIXNUM-IDENTITY #o377777777777)))
+		     (FIXNUM-IDENTITY #o377777777777))).
+
+    So let's have a simplicity criterion here that says MAXIMUM are
+    simple to open code (relatively speaking) on a given set of inputs 
+    that are homogeneous in type because the correct MAX algorithm can
+    be chosen from just that criterion. By the same criterion, PLUS (of
+    more than 2 arguments) is hard to open code because it involves 
+    making assumptions about the intermediate results expected.
+
+By this criterion, I think +/PLUS really do have a better justification 
+for having separate names.
+
+I'd like to see us get away from having lists of the optimizations we
+know to expect and trying to do a particular declaration so that a 
+particular optimization we know of will happen. FIXNUM-IDENTITY and
+FLONUM-IDENTITY are useful tools in that respect -- they're just far too
+hard to type and probably too restrictive. Wouldn't it be neat if you
+could do (MAX (ASSERT (CAR LIST) #'PLUSP) (ASSERT (CDR LIST) #'MINUSP))
+and have the compiler infer this to be the same as (CAR LIST)? (Probably
+supplying a predicate wouldn't be the right thing, but you get the idea.)
+In any case, I think the LispM is going the wrong way by assuming that
+just because arithmetic is handled in microcode, that interpreted error
+checking and compiler-error-checking primitives like FIXNUM-IDENTITY,
+etc. are bad. We need to encourage people to put down anything they are
+willing to. Fine if they don't want to, but they'll reap benefits for so 
+doing in terms of running speed, compilation speed, and error diagnostics.
+
+Additionally, I think short names for these operators would make people 
+less-afraid of using them. Maybe (FIX-I exp) and (FLO-I exp) ...? 
+
+Anyway, I don't think MAX/MAXIMUM deserve two names. Neither do ^$ and EXPT.
+As often as ^$ has ever been used in Maclisp, I doubt that a 
+
+    (DEFMACRO ^$ (X Y) (EXPT (FLO-I X) (FIX-I Y)))
+
+wouldn't have been just as good. 
+
+-kmp
+
+ps Perhaps more flexible control of open-coding would be good. Eg, one or
+   more of these ideas might be useful:
+
+   * MAX wouldn't open code unless you did (DECLARE (SHOULD-OPEN-CODE MAX))
+     or would unless you did		   (DECLARE (SHUDNT-OPEN-CODE MAX))
+
+     You could force the opposite of the default by saying 
+     (PLEASE-OPEN-CODE ...) or (REFRAIN-FROM-OPEN-CODING ...)
+     -- I'm not sure if the ... should be the function or the form. 
+
+   * (DECLARE (CONSERVE SPACE)) or TIME or STACK or whatever...
+     so that the compiler would open-code iff it would be more efficient for
+     CONSERVE'd resources... An alternate flavor on this would be
+     (DECLARE (CONSERVE-IN-ORDER-OF-PRIORITY
+	         STACK SPACE HUNK8-SPACE MULTICS-FUNNY-MONEY TIME GCTIME ...))
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00455.html">Re: null LAMBDA bodies?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00457.html">Re: Open-coding, and proliferation of function names</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00452.html">Re: ((LAMBDA ())) =&gt; NIL ?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00457.html">Re: Open-coding, and proliferation of function names</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00456"><strong>Date</strong></a></li>
+<li><a href="threads.html#00456"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

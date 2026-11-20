@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Terminology and resolution of "restricted JFN" problem;  and functions OPENF and TNX&#45;GTJFN -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 5 Mar 82 16:20:00 GMT -->
+<!--X-Message-Id: 180114411c43cfdd9a0131a45246f848@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Terminology and resolution of &quot;restricted JFN&quot; problem;  and functions OPENF and TNX-GTJFN</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00929.html">Date Prev</a>][<a href="msg00927.html">Date Next</a>][<a href="msg00929.html">Thread Prev</a>][<a href="msg00927.html">Thread Next</a>][<a href="maillist.html#00928">Date Index</a>][<a href="threads.html#00928">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Terminology and resolution of &quot;restricted JFN&quot; problem;  and functions OPENF and TNX-GTJFN</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Feinberg at CMU-20C</li>
+<li><em>Subject</em>: Terminology and resolution of &quot;restricted JFN&quot; problem;  and functions OPENF and TNX-GTJFN</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 5 Mar 82 16:20:00 GMT</li>
+<li><em>Cc</em>: BUG-MACLISP at MIT-MC, BUG-TWENEX at MIT-MC</li>
+<li><em>Original-date</em>: 5 March 1982 11:20-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 2 March 1982  21:59-EST (Tuesday)
+    From: FEINBERG at CMU-20C
+    Subject: Why does @INFORMATION (ABOUT) FILES ... say &quot;restricted JFN&quot;?
+	    I beg to differ with you, JONL.  Here is a excerpt from 
+    QIO.MID.750:
+    . . . 
+    The line MOVSI 1,(GJ%ACC+GJ%SHT) sets the Restricted Access bit.
+    . . . 
+Since I offered the ARYFIL package as a way to get a &quot;handle&quot; on any
+JFN created by LISP, I assumed the complaint from EB was related to
+&quot;restricted&quot; access of files.  My &quot;denial&quot; only applies to the file
+access, which @INFORMATION (ABOUT) FILE... doesn't pertain;  in fact
+I am the one who was confused for thinking that the @INFORMATION
+command tells you anything at all about the file access mode, as 
+opposed to the JFN access.
+
+But back to the point which raised this issue -- I'd be reluctant to make 
+such a sweeping change (removing all the GJ%ACC bits) from LISP system 
+code since it was put there in the first place to protect LISP from 
+randomness.  If an application intends to hack multiple forking (such as 
+LEDIT does) then it will likely have the SUBFORK package loaded.  SUBFORK
+has the function OPENF which allows you to specify both the JFN mode and 
+file-access mode for opening files, and the function TNX-GTJFN which
+allows you to specify the JFN mode for random GTJFN's.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00929.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00927.html">Terminology and resolution of &quot;restricted JFN&quot; problem;  and functions OPENF and TNX-GTJFN</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00929.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00927.html">Terminology and resolution of &quot;restricted JFN&quot; problem;  and functions OPENF and TNX-GTJFN</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00928"><strong>Date</strong></a></li>
+<li><a href="threads.html#00928"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

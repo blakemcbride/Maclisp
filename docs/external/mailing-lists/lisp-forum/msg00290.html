@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: eval&#45;when -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;RZI ng [WF&#45;OW> -->
+<!--X-Date: Sat ,16 Aug 80 18:48:00 EDT -->
+<!--X-Message-Id: f74b7b9286190c8474dcfedb44b7406e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: eval-when</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00085.html">Date Prev</a>][<a href="msg00086.html">Date Next</a>][<a href="msg00289.html">Thread Prev</a>][<a href="msg00069.html">Thread Next</a>][<a href="maillist.html#00290">Date Index</a>][<a href="threads.html#00290">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: eval-when</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Greenberg.Multics at MIT-MULTICS, LISP-FORUM at MIT-MC</li>
+<li><em>Subject</em>: Re: eval-when</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;</li>
+<li><em>Date</em>: Sat ,16 Aug 80 18:48:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    ...to distinguish between evaluate at load time without
+    going through the compiler expansion, and load the result of compiler 
+    processing.  The standard forms for doing this are (PROGN ...) and
+    (PROGN 'COMPILE ...) respectively.
+
+Naively viewed, what you seem to be talking about is a distinction
+between compiled code running at LOAD-time and evaluated code running
+at LOAD-time.  Is this right?  If so, why does it matter?
+
+(eval-when (load-evaluated) ...) is the best name I can think of,
+if this is really needed for anything.  If this extension is made,
+(eval-when (load-compiled) ...) should also be defined, as a synonym
+for (eval-when (load) ...), for obvious reasons.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00085.html">Re: character objects &amp; representation issues</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00086.html">Re: Bawden's remarks on characters</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00289.html">Re: eval-when</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00069.html">Re: #/ returning a &quot;character object&quot;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00290"><strong>Date</strong></a></li>
+<li><a href="threads.html#00290"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

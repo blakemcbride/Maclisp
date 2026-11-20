@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: COMPLR can't do DO -->
+<!--X-From-R13: Dbq Pebbxf &#60;DAR ng EG&#45;OW> -->
+<!--X-Date: Fri, 16 Jan 81 11:19:00 GMT -->
+<!--X-Message-Id: e86b484fee35ddd3ef5472f0609009c8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>COMPLR can't do DO</title>
+<link rev="made" href="mailto:ROD at SU-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01706.html">Date Prev</a>][<a href="msg01704.html">Date Next</a>][<a href="msg01706.html">Thread Prev</a>][<a href="msg01704.html">Thread Next</a>][<a href="maillist.html#01705">Date Index</a>][<a href="threads.html#01705">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>COMPLR can't do DO</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC    </li>
+<li><em>Subject</em>: COMPLR can't do DO</li>
+<li><em>From</em>: Rod Brooks &lt;ROD at SU-AI&gt;</li>
+<li><em>Date</em>: Fri, 16 Jan 81 11:19:00 GMT</li>
+<li><em>Original-date</em>: 16 Jan 1981 0319-PST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I have vague memories of complaining about something like this years ago
+but maybe this is different. In any case I wish it didn't happen this way.
+
+(defun baz (n)
+       (do ((old 1 new)
+	    (new 2 (1+ new))
+	    (l () (cons (list old new) l))
+	    (i 0 (1+ i)))
+	   ((= i n) l)))
+
+interpreted:
+(baz 4) ==&gt; ((4 5) (3 4) (2 3) (1 2)) 
+
+compiled (both 905 and 924):
+(baz 4) ==&gt; ((5 5) (4 4) (2 3) (1 2)) 
+
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01706.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01704.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01706.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01704.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01705"><strong>Date</strong></a></li>
+<li><a href="threads.html#01705"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

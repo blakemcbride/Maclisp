@@ -1,0 +1,137 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Twenex MacLisp screw (rilly?) -->
+<!--X-From-R13: Epbgg ng EDW&#45;YZ (Epbgg X. Yenzre) -->
+<!--X-Date: Mon, 18 Feb 80 14:14:00 GMT -->
+<!--X-Message-Id: a473b6c462731240415e5aed30585f98@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Twenex MacLisp screw (rilly?)</title>
+<link rev="made" href="mailto:Scott at SRI-KL">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02134.html">Date Prev</a>][<a href="msg02132.html">Date Next</a>][<a href="msg02134.html">Thread Prev</a>][<a href="msg02131.html">Thread Next</a>][<a href="maillist.html#02133">Date Index</a>][<a href="threads.html#02133">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Twenex MacLisp screw (rilly?)</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-lisp at MIT-MC</li>
+<li><em>Subject</em>: Twenex MacLisp screw (rilly?)</li>
+<li><em>From</em>: Scott at SRI-KL (Scott J. Kramer)</li>
+<li><em>Date</em>: Mon, 18 Feb 80 14:14:00 GMT</li>
+<li><em>Original-date</em>: 18 Feb 1980 0614-PST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>!l:
+
+LISP 1920
+Alloc? n
+
+
+* 
+(tyi)a			 {Standard (TYI), no problem}
+141 
+(tyi)A
+101 
+
+(sstatus linmo t)T	 {Turn on Twenex RDTTY crock, can we use TEXTI JSYS
+			  perhaps??}
+
+(tyi)a	 &lt;---{Had to type &lt;cr&gt; to activate due to use of RDTTY JSYS}
+141 
+
+(fasload qtrace)	 {KMP's QTRACE package, to demo this bug}
+117453 
+(qtrace ledit jsys)
+
+;Loading TRACE 66 (LEDIT JSYS) 
+(ledit)			 {Run the thing!}
+
+         {Typed &lt;sp&gt; here, no &lt;cr&gt; needed, doing a (TYI TYI)}
+                              |
+                              |
+                              V
+(1 ENTER LEDIT NIL) --Break?--  [Yes]   
+;BKPT LEDIT
+
+QUIT*                  {^G quit}
+
+;BKPT ^B               {Typed ^B here}
+(ledit)                {Rerun LEDIT, still QTRACEd}
+                                   
+          {Typed &lt;sp&gt; here but it hangs until &lt;cr&gt; is typed}
+                              |
+                              |
+                              V
+(1 ENTER LEDIT NIL) --Break?--           &lt;cr&gt;
+ [Yes]
+;BKPT LEDIT
+
+QUIT*                {^G quit}
+(ledit)
+
+(1 ENTER LEDIT NIL) --Break?--            {Still hangs}
+ [Yes]
+;BKPT LEDIT
+***************************************************************************
+
+There is a problem with (TYI TYI) hanging in &quot;RDTTY mode&quot; which appears
+to be caused by the ^B interrupt.  Also, what is the possiblity of using
+TEXTI and staying in (STATUS LINMO) =&gt; () mode and having rubout processing?
+The problem shown above causes minor disasters in things like STEP which
+wants a &lt;sp&gt; to continue stepping and it is frustrating to naive users who
+don't know to type &lt;sp&gt;&lt;cr&gt; to get it working.
+
+	-sjk
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02134.html">More on GFN</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02132.html">Re: format</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02134.html">More on GFN</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02131.html">Forwarded Mail</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02133"><strong>Date</strong></a></li>
+<li><a href="threads.html#02133"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

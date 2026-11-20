@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Sub&#45;jobs, and bi&#45;directional i/o. -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 30 Dec 80 03:02:00 GMT -->
+<!--X-Message-Id: 2ef62fa510a80c22549d209540a61a34@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Sub-jobs, and bi-directional i/o.</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03616.html">Date Prev</a>][<a href="msg03614.html">Date Next</a>][<a href="msg03617.html">Thread Prev</a>][<a href="msg03613.html">Thread Next</a>][<a href="maillist.html#03615">Date Index</a>][<a href="threads.html#03615">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Sub-jobs, and bi-directional i/o.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Leonard.Zubkoff at CMU-10A, Dave.Touretzky at CMU-10A</li>
+<li><em>Subject</em>: Sub-jobs, and bi-directional i/o.</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 30 Dec 80 03:02:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 29 DEC 1980 2202-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 26 December 1980 2158-EST (Friday)
+    From: Leonard.Zubkoff at CMU-10A (C410LZ60)
+    Subject:  PTYs in LISP
+    Message-Id: &lt;26Dec80 215856 LZ60@CMU-10A&gt;
+    I have been trying to open a PTY for both input and output in order to 
+    control a subjob from LISP on CMU-20C (TOPS-20) with no success.  I 
+    receive an invalid simultaneous access error whenever I try this.  Is 
+    there a way to control a sub job through PTYs in LISP on the 20?  Thanks.
+    -  -  -  -  
+    Date: 26 December 1980 2300-EST
+    From: Dave Touretzky at CMU-10A
+    Why bother?  Since you're running on the 20, wouldn't the SUBFORK package
+    do what you needed?
+    MacLisp i/o seems to be somewhat wedged in that you cannot do input and
+    output through the same file object (as far as I know.)  This means that
+    you can't open a random access file for &quot;update&quot;, i.e. read followed by
+    write.  Perhaps the same lossage is responsible for your PTY difficulties.
+True, a subforking would be much better than a PTY.  However, one could use
+a SFA to combind two file-arrays into one file-like object (the sfa) thru
+which you could do bi-directional i/o.  See the example in the file
+MC:LSPSRC;YESNOP &gt;   -- the function QUERY-IO-HANDLER is the sfa function
+which is set up later in the file (look for the usage of sfa-create).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03616.html">DISPLACE</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03614.html">DISPLACE</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03617.html">Purity and DISPLACE</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03613.html">EVAL-THE-ARGS-BEFORE-THE-FUNCTION STRIKES AGAIN</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03615"><strong>Date</strong></a></li>
+<li><a href="threads.html#03615"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: xzc ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Tue, 17 Feb 81 21:11:00 GMT -->
+<!--X-Message-Id: 0f8909cba8fa4d339749f84752e8899f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:kmp at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01547.html">Date Prev</a>][<a href="msg01546.html">Date Next</a>][<a href="msg01547.html">Thread Prev</a>][<a href="msg01546.html">Thread Next</a>][<a href="maillist.html#01553">Date Index</a>][<a href="threads.html#01553">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>From</em>: kmp at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Tue, 17 Feb 81 21:11:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 17 FEB 1981 1611-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From the lisp 1.5 programmer's manual
+
+   (defun listp (x)
+      (or (null x) (and (not (atom x)) (listp (cdr x))))
+
+The idea of making hunks not answer T to the atom test
+is a new one and one that was allowed in only for USRHUNKs because
+many implementors (myself included) use HUNK as an extended
+cons. 
+
+Since property lists are allowed to be disembodied, then
+hunks may implement that. Saying that certain functions were advertised
+to work on hunks doesn't mean that others were not. In the
+case of hunks, I don't think anyone will claim that hunks were
+not known to be GETable. 
+
+Is there anyone else in the Bug-Lisp community that thinks
+that this was not the interpretation up until JONL's recent 'fix'?
+
+HUNKs are an implementational tool for all sorts of things. They
+need to be left as flexible as possible. There was a perfectly reasonable
+way to get both functionalities. Why must you break that? There was
+a perfectly reasonable rule about when HUNKs were thought of as atoms.
+Why must you break that? I am very annoyed that you make decisions this
+large without consulting the rest of the community. 
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01547.html">Re: hunks again</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01546.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01547.html">Re: hunks again</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01546.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01553"><strong>Date</strong></a></li>
+<li><a href="threads.html#01553"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

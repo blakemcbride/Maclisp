@@ -1,0 +1,103 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: UUOLINKS and numbers... -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Wed ,22 Oct 80 12:49:00 EDT -->
+<!--X-Message-Id: 32d9c80f3ecf35be6e2167c0ef22ae1f@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: UUOLINKS and numbers...</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00339.html">Date Prev</a>][<a href="msg00326.html">Date Next</a>][<a href="msg00340.html">Thread Prev</a>][<a href="msg00326.html">Thread Next</a>][<a href="maillist.html#00605">Date Index</a>][<a href="threads.html#00605">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: UUOLINKS and numbers...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: boyer at sri-kl, csd.dea at su-score, masinter at PARC-MAXC,      tyson at utexas-11, lisp-discussion at MIT-MC, bboard at SU-AI,      bboard at su-score</li>
+<li><em>Subject</em>: Re: UUOLINKS and numbers...</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Wed ,22 Oct 80 12:49:00 EDT</li>
+<li><em>Cc</em>: lisp-forum at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Some notes on JONL's message:
+The UUOLINKS scheme was introduced into MacLISP in 1973 or thereabouts.
+JONL's paper &quot;A Historical Perspective on MacLISP&quot; in Proc. 1977
+MACSYMA Users Conference (181-189) states that it was in 1973 and that
+the idea was indeed copied from LISP 1.6.  I don't remember ever being
+told that, but the idea was certainly developed collaboratively, so
+LISP .6 may indeed have inspired the idea.  I remember distinctly,
+however, that the primary reason I was to implement it was to allow
+MACSYMA to have both speed and debuggability.  The difficulty was that,
+prior to the UUOLINKS hack, links to subroutines could indeed be &quot;snapped&quot;,
+but this was done by clobbering the UUO linking instruction in the code
+with a PUSHJ instruction.  This clobbering was not easy to reverse,
+and also required that the code be writable.  Now, MACSYMA was (and is)
+a huge system running on a time-shared, paging operating system (ITS),
+and for system efficiency it was imperative that as many pages of
+MACSYMA be read-only as possible, so that such pages could be shared
+among the multiple running instances of MACSYMA to improve paging
+performance.  Before UUOLINKS, the solution was to cause all the links
+to be clobbered, then make all the code pages read-only.  This meant
+that bugs encountered by a MACSYMA user were very difficult to track
+down, because the snapped links left no debugging information around.
+With the UUOLINKS scheme, all the code could still be read-only,
+and the links could be dynamically snapped and unsnapped for
+speed and debugging, respectively.
+
+For information about the fast arithmetic stuff, see my paper
+&quot;Fast Arithmetic in MacLISP&quot; (Proc. 1977 MACSYMA Users Conference,
+and also MIT AI Memo 421).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00339.html">Re: SKIPE and SKIPN</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00326.html">Re: Format's C</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00340.html">Re: SKIPE and SKIPN</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00326.html">Re: Format's C</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00605"><strong>Date</strong></a></li>
+<li><a href="threads.html#00605"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

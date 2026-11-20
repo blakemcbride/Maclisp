@@ -1,0 +1,112 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: #\EOF -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sat ,20 Sep 80 14:16:00 EDT -->
+<!--X-Message-Id: 76584bb2c62446a1fb93c0fea941d6af@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: #\EOF</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00267.html">Date Prev</a>][<a href="msg00269.html">Date Next</a>][<a href="msg00267.html">Thread Prev</a>][<a href="msg00270.html">Thread Next</a>][<a href="maillist.html#00268">Date Index</a>][<a href="threads.html#00268">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: #\EOF</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>Subject</em>: Re: #\EOF</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat ,20 Sep 80 14:16:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, GJC at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 19 September 1980 21:32-EDT
+    From: David A. Moon &lt;MOON at MIT-MC&gt;
+
+    ... TYI is defined to return -1 at EOF.  This is part of the language,
+    it is not an operating system dependency and should not be expected to vary
+    across systems. (In fact, ITS returns 777777000003 at EOF, not -1).
+
+That's not true. The Maclisp TYI function runs the EOFFN if it exists, but if
+no EOFFN exists, it returns its second arg (if no 2nd arg and no eoffn, then
+an error). Eg, (TYO stream 3) is going to return 3 on end of file. Since -1
+is a good end of file value, #\EOF would be a good equivalent. 
+(TYIPEEK () stream n) should also return n on EOF but fails to due to a Maclisp
+bug which leaves it returning -1 always. In any case, the -1 makes very little
+sense conceptually while the #\EOF reminds the reader of its intent.
+
+    Furthermore, TYI is the only function that returns -1 at EOF.  READ and
+    READLINE take an argument which is what to return (and it doesn't default
+    to -1!) and IN doesn't return anything, but gives an error.
+
+I am not swayed by this argument any more than I would be swayed by an argument
+that #\TAB is a meaningless thing to have around because READLINE could never
+return it. In fact, (READLINE stream #\EOF) would be perfectly well-defined.
+So would (READ stream #\EOF) although the result of such a read would be a
+bit ambiguous.
+
+The fact that IN cannot take such an arg is sad, but I don't know what to say.
+Perhaps IN should take an optional second arg in case the stuff being IN'd is
+sufficiently constrained to make it useful to say (IN stream n).
+
+The particular semantics of IN/OUT, READ, TYI, etc are not really in question,
+however. The point is that I have to specify a number. In some system where
+negative numbers meant something to TYI, my code would break. I admit that's
+a case *not* worth worrying about, but it still happens that I would like
+symbolic type-in modes (ie #\ or #/ things) for all character primitives and
+-1 is something TYI could return.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00267.html">Re: #\EOF</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00269.html">Re: #\EOF  (look before you leap)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00267.html">Re: #\EOF</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00270.html">Re: #\EOF</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00268"><strong>Date</strong></a></li>
+<li><a href="threads.html#00268"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Dave Touretzky's message on macros, destructuring, and functions -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;qyj ng [WF&#45;OW> -->
+<!--X-Date: Wed ,1 Oct 80 14:08:00 EDT -->
+<!--X-Message-Id: bda2e9b50a6215f6389faf0f15be4e0c@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Dave Touretzky's message on macros, destructuring, and functions</title>
+<link rev="made" href="mailto:dlw at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00188.html">Date Prev</a>][<a href="msg00123.html">Date Next</a>][<a href="msg00187.html">Thread Prev</a>][<a href="msg00121.html">Thread Next</a>][<a href="maillist.html#00189">Date Index</a>][<a href="threads.html#00189">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Dave Touretzky's message on macros, destructuring, and functions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: LISP-FORUM at MIT-MC, MACSYMA-I at MIT-MC</li>
+<li><em>Subject</em>: Re: Dave Touretzky's message on macros, destructuring, and functions</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;</li>
+<li><em>Date</em>: Wed ,1 Oct 80 14:08:00 EDT</li>
+<li><em>Sender</em>: dlw at CADR8 at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>What Kent suggests will certainly work.  However, I was hoping to use
+the name DESTRUCTURE on the Lisp Machine to be a special form which
+is exactly destructuring LET.  Then you can write:
+
+(defun foo (x)
+   (destructure (((a b .c) d) x)
+	&lt;body&gt;))
+
+to get the simple &quot;destructuring DEFUN&quot;, but you could also take several
+arguments and destructure one (or many) of them, destructure results of
+function calls, etc, all with a very simple form.  I'd like to see the
+LispM destructuring LET installed, but under the name DESTRUCTURE.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00188.html">Re: Clearing up a fine point in your reply to Touretzky</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00123.html">Re: #| One last comment on #| |#</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00187.html">Re: Dave Touretzky's message on macros, destructuring, and functions</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00121.html">Re: #|...|#</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00189"><strong>Date</strong></a></li>
+<li><a href="threads.html#00189"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

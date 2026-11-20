@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: defstruct in MacLisp -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 6 Nov 80 07:18:00 GMT -->
+<!--X-Message-Id: 58c49db49d16583119ad80db8e1d6fd0@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>defstruct in MacLisp</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01839.html">Date Prev</a>][<a href="msg01837.html">Date Next</a>][<a href="msg01839.html">Thread Prev</a>][<a href="msg01837.html">Thread Next</a>][<a href="maillist.html#01838">Date Index</a>][<a href="threads.html#01838">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>defstruct in MacLisp</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: TFT at MIT-AI</li>
+<li><em>Subject</em>: defstruct in MacLisp</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 6 Nov 80 07:18:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-AI</li>
+<li><em>Original-date</em>: 6 November 1980 02:18-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>ALAN;STRUCT FASL on AI or MC is a still experimental defstruct that we
+plan on installing on the LispMachine sometime soon.  It tries to be
+99% compatable with the old (current) LispMachine defstruct but it
+also has new features, and it works (and will continue to work) in
+MacLisp.  (It grew out of my private defstruct for MacLisp.)
+
+It lacks one major feature that the current LispMachine defstruct has,
+it doesn't do &quot;components&quot;, that is, slots of the form
+((&lt;name&gt; &lt;ppss&gt;) (&lt;name&gt; &lt;ppss&gt;)).  This it what is keeping us from
+installing it, I have to get around to putting this feature in.  But
+if you don't use this feature, then you can start using it now.
+
+You can find fairly complete documentation for it in ALAN;STRUCT DOC.
+
+There is also a QFASL, but it is not necessarily in phase with the
+current FASL.  It's also not a good idea to use it unless you have to,
+since it will break your LispMachine world in several small (not
+fatal, just annoying) ways.
+
+Let me know if you are going to use this so I can add you to my
+mailing list of people to inform when I break the thing!
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01839.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01837.html">Re: #o, picky picky</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01839.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01837.html">Re: #o, picky picky</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01838"><strong>Date</strong></a></li>
+<li><a href="threads.html#01838"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

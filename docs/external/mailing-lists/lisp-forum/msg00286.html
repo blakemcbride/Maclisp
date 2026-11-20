@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: eval&#45;when -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;RZI ng [WF&#45;OW> -->
+<!--X-Date: Thu ,14 Aug 80 23:19:00 EDT -->
+<!--X-Message-Id: 85e1d65c89cde2d1b2c80d7adf6b53df@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: eval-when</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00071.html">Date Prev</a>][<a href="msg00072.html">Date Next</a>][<a href="msg00285.html">Thread Prev</a>][<a href="msg00287.html">Thread Next</a>][<a href="maillist.html#00286">Date Index</a>][<a href="threads.html#00286">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: eval-when</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC</li>
+<li><em>Subject</em>: Re: eval-when</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;</li>
+<li><em>Date</em>: Thu ,14 Aug 80 23:19:00 EDT</li>
+<li><em>Cc</em>: Greenberg.Multics at MIT-MULTICS, LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    But consider:
+
+    (eval-when (compile)
+      (eval-when (eval)
+        &lt;stuff&gt;))
+
+    When COMPLR sees the outer eval-when, it calls EVAL to process the
+    rest of the stuff.  Then EVAL sees the inner eval-when and, sure
+    enough, it's now EVAL-time so &lt;stuff&gt; gets evaluated!
+
+Well, when the compiler is evaluating stuff that was inside an
+(eval-when (compile) ...), SHOULD that be considered EVAL time or not?
+(Q: What time is it when the compiler evaluates something inside
+an (eval-when (eval) ...)?  A: Time to get a new compiler.)
+
+Actually I am not sure what is right.  We could simply award this case
+to the first person who is trying to do something reasonable and wants
+it a particular way...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00071.html">Re: character objects &amp; randomness</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00072.html">Re: Character objects</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00285.html">Re: eval-when</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00287.html">Re: eval-when</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00286"><strong>Date</strong></a></li>
+<li><a href="threads.html#00286"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

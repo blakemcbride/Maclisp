@@ -1,0 +1,105 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Casifying at output time doesn't win... -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Sun ,1 Feb 81 23:28:00 EDT -->
+<!--X-Message-Id: 9419dd860ee79cc722ebc2ed012baff6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Casifying at output time doesn't win...</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00044.html">Date Prev</a>][<a href="msg00371.html">Date Next</a>][<a href="msg00044.html">Thread Prev</a>][<a href="msg00371.html">Thread Next</a>][<a href="maillist.html#00046">Date Index</a>][<a href="threads.html#00046">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Casifying at output time doesn't win...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RMS at MIT-MC</li>
+<li><em>Subject</em>: Re: Casifying at output time doesn't win...</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun ,1 Feb 81 23:28:00 EDT</li>
+<li><em>Cc</em>: EAK at MIT-MC, LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>The following case comes up every time we have had to discuss this in GRINDEF
+bug mail. I don't think the I/O scenario you described will handle it...
+Consider:
+
+  (PRINT (READ))(X x |X| |x|)
+
+then,
+
+  X must be EQ to |X|
+  x must be EQ to |x|
+
+|X| must have a print property that says he needs vbars (or equiv) on output.
+ X  must have a print property that says he accepts the default case.
+|x| must have a print property that says he needs vbars (or equiv) on output.
+ x  must have a print property that says he accepts the default case.
+
+Actually, only 3 of the last 4 statements may need to hold at any given time.
+The first two are not jointly satisfiable, however, since the symbols are eq.
+The second two likewise. Hence, I don't see how you can make output do the
+right thing as you describe.
+
+The problem is harder for multi-character symbols.
+
+I don't think your scheme would hold up. If indeed it would, I would like to
+hear further details.
+
+I continue to uphold that case translation unless specifically requested a la
+/ or |...| should be done. The fact that Lisp happens to translate to uppercase
+rather than lowercase is probably unfortunate. But the fact that it translates
+is NOT unfortunate. It is quite definitely a useful and comfortable feature.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00044.html">Re: Question about case</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00371.html">Re: LET, LETF, etc. What do others think?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00044.html">Re: Question about case</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00371.html">Re: LET, LETF, etc. What do others think?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00046"><strong>Date</strong></a></li>
+<li><a href="threads.html#00046"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

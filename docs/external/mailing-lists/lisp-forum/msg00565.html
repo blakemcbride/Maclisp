@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: FIXNUM&#45;restricted versions of rational funs -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Sat ,24 Jan 81 06:43:00 EDT -->
+<!--X-Message-Id: b56e057044c9198eda2329e7901e2f41@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: FIXNUM-restricted versions of rational funs</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00564.html">Date Prev</a>][<a href="msg00566.html">Date Next</a>][<a href="msg00567.html">Thread Prev</a>][<a href="msg00566.html">Thread Next</a>][<a href="maillist.html#00565">Date Index</a>][<a href="threads.html#00565">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: FIXNUM-restricted versions of rational funs</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>Subject</em>: Re: FIXNUM-restricted versions of rational funs</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat ,24 Jan 81 06:43:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I'd like to say a word *for* names like IMIN, IMAX, and IGCD
+(or why not even MIN&amp;, MAX&amp; and GCD&amp; for fixnum functions; and
+MIN$ and MAX$ for flonum functions?)   Note: I'm not favoring 
+the change of / to \, but merely admitting some alternate naems. 
+If there are no objections, we should add some such names to the 
+initial MacLISP list structure, even if they only default to being 
+the same as MIN, MAX and \.
+   Now a word of caution about names like &quot;Ixxx&quot;.  INTERLISP uses
+this style to mean &quot;Arguments are to be 'integerized' and integer
+arithmetic is to be used&quot; (since INTERLISP doesn't have 'bignums',
+the restriction to 'integers' is the same as the restriction to
+'fixnums').  The problem with this is that each argument must still
+be run-time interpreted (i.e., decide if it is a number, check if
+it is floating, and convert to fixed if so, etc etc).  In short,
+the compiler can't fully open-code it.  Partly to avoid mnemonic
+conflict with the INTERLISP conventions, I'd not like to see
+IMIN, IMAX and IGCD used.
+    ** I strongly reccommend ** that some series of names be provided 
+merely to mean &quot;2's complement, computer rational arithmetic&quot;.  For 
+just gazillions of applications, the substitution of these operations 
+for integer operations is fully satisfactory.  The same can be
+said for &quot;2's complement, computer floating-point arithmetic&quot;.
+    At one time, MacLISP tried to out-do APL, so many of these functions
+got 1- or 2-character names;  but how about it, how about choosing
+the convention of suffixing a &amp; to mean fixnum-only, and suffixing
+a $ to mean flonum-only?  Even when there is no particular 
+machine instruction generall provided (e.g., what machine has
+a GCD instruction??), this is still worthwhile as a succinct way
+to locally declare arithmetic modes.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00564.html">Re: / and \</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00566.html">Re: \ and \\</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00567.html">Re: / =&gt; \</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00566.html">Re: \ and \\</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00565"><strong>Date</strong></a></li>
+<li><a href="threads.html#00565"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

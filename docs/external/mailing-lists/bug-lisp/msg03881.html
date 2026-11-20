@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: LOAD&#45;BYTE etc, and order of bit numbering -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 4 Dec 79 14:35:00 GMT -->
+<!--X-Message-Id: 2399b5c29cadfead92f785c0c6ca6525@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>LOAD-BYTE etc, and order of bit numbering</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03882.html">Date Prev</a>][<a href="msg03880.html">Date Next</a>][<a href="msg03882.html">Thread Prev</a>][<a href="msg03880.html">Thread Next</a>][<a href="maillist.html#03881">Date Index</a>][<a href="threads.html#03881">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>LOAD-BYTE etc, and order of bit numbering</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>Subject</em>: LOAD-BYTE etc, and order of bit numbering</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 4 Dec 79 14:35:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, NIL-IMPLEMENTATION at MIT-MC</li>
+<li><em>Original-date</em>: 4 DEC 1979 0935-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 3 December 1979 22:46-EST
+    From: David A. Moon &lt;MOON at MIT-MC&gt;
+    Subject: LOAD-BYTE and DEPOSIT-BYTE
+	. . . 
+    dependency is that the arithmetic value of a fixnum containing a
+    certain pattern of bits depends on the word length; if the bits were
+    numbered from right to left it would not depend, provided only that the
+    number of bits was small enough to fit in a word. 
+Yea, this is the critical point as to why one has to have LDB as well
+as LOAD-BYTE, namely that for READ/PRINT purposes one would like to have
+a word-size-independent means of representing &quot;bytes&quot; (if there is no I/O,
+using integers, why would one care what the numerical value of a &quot;byte&quot; is?)
+    In NIL, we have the BITS data type, which is the preferred means for I/O 
+of bytes;  only when converting from fixnums to BITS is there the ambiguity
+of &quot;scaling&quot; and &quot;ordering&quot; (right-to-left, or left-to-right).   Likely
+this means that LOAD-BYTE will be used only in explicitly machine-dependent
+code; there are no usages of it in the NIL system now (only in the maclisp
+virtual-machine support), but rather we depend on the conversions from
+BITS to integers and vice-versa.
+    By the bye, code is not made machine-independent merely by
+using only  machine-independent primitives -  your whole machine may
+be Godel'd into a bunch of numbers, to which you apply only standard
+arithmetic primitives.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03882.html">LOAD-BYTE and DEPOSIT-BYTE</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03880.html">[1] LIST* [2] LOAD-BYTE</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03882.html">LOAD-BYTE and DEPOSIT-BYTE</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03880.html">[1] LIST* [2] LOAD-BYTE</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03881"><strong>Date</strong></a></li>
+<li><a href="threads.html#03881"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

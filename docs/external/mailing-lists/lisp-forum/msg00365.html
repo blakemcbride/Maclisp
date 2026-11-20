@@ -1,0 +1,98 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: DEFMACRO incompatible -->
+<!--X-From-R13: [bba ng [WF&#45;OW (Rnivq O. [bba) -->
+<!--X-Date: Wed ,4 Feb 81 00:49:00 EDT -->
+<!--X-Message-Id: effa267248914e28a472defa224ceeac@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: DEFMACRO incompatible</title>
+<link rev="made" href="mailto:Moon at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00209.html">Date Prev</a>][<a href="msg00211.html">Date Next</a>][<a href="msg00364.html">Thread Prev</a>][<a href="msg00366.html">Thread Next</a>][<a href="maillist.html#00365">Date Index</a>][<a href="threads.html#00365">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: DEFMACRO incompatible</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: Re: DEFMACRO incompatible</li>
+<li><em>From</em>: Moon at MIT-AI (David A. Moon)</li>
+<li><em>Date</em>: Wed ,4 Feb 81 00:49:00 EDT</li>
+<li><em>Cc</em>: RMS at MIT-AI, LISP-FORUM at MIT-AI</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 1 February 1981 07:53-EST
+    From: Robert W. Kerns &lt;RWK at MIT-MC&gt;
+    
+	Date: 28 JAN 1981 0913-EST
+	From: RMS at MIT-AI (Richard M. Stallman)
+	
+	On the Lisp machine, a list as the first argument to DEFMACRO
+	is a function spec saying where to put the macro.
+	In Maclisp, a list as the first argument to DEFMACRO specifies
+	hairy options for how the macro should work.
+    Might I humbly suggest that the MacLisp form is more flexible, and
+    documented, whereas the LISPM one is not?  I have no idea as to the
+    relative difficulty of conversion.  The LISPM option could be subsumed
+    by a :WHERE option in the MacLisp scheme.
+It would be unreasonable to change the Lisp machine one, since that would
+make DEFMACRO incompatible with DEFUN and all other function-defining special
+forms.  Why can't DEFMACRO put its declarations in the body where all other
+function-defining things put them?
+
+I'm not sure in what sense the Maclisp one is documented and the Lisp machine
+one is not.  I know of no published Maclisp documentation that mentions
+DEFMACRO.  If you are talking about on-line files, of course the Lisp machine
+one is documented.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00209.html">Re: &amp; as reader syntax</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00211.html">Re: guess what.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00364.html">Re: DEFMACRO incompatible</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00366.html">Re: DEFMACRO incompatible</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00365"><strong>Date</strong></a></li>
+<li><a href="threads.html#00365"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

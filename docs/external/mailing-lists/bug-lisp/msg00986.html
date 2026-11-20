@@ -1,0 +1,86 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 9 Dec 81 22:19:00 GMT -->
+<!--X-Message-Id: ea9847eab9f83fbda300680b5086684e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00987.html">Date Prev</a>][<a href="msg00984.html">Date Next</a>][<a href="msg00987.html">Thread Prev</a>][<a href="msg00984.html">Thread Next</a>][<a href="maillist.html#00986">Date Index</a>][<a href="threads.html#00986">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: glr at MIT-AI</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 9 Dec 81 22:19:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 9 December 1981 17:19-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 9 December 1981 15:52-EST
+    From: Jerry Roylance &lt;GLR at MIT-AI&gt;
+    COMPLR does not compile the do loop correctly
+    (defun bug ()
+      (do ((i 0 j)
+	   (j 1 (1+ j)))
+	  ((&gt; j 10))
+	(print (list i j))))
+The bug is caused by the clause &quot;(i 0 j)&quot;, which involves parallel
+assignments -- you can completely get around this problem for now
+by declareing 'j' to be fixnum (you might as well declare 'i' too).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00987.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00984.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00987.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00984.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00986"><strong>Date</strong></a></li>
+<li><a href="threads.html#00986"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

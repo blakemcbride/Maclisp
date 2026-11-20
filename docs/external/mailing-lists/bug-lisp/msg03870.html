@@ -1,0 +1,118 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Un&#45;named arrays -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Fri, 7 Dec 79 03:59:00 GMT -->
+<!--X-Message-Id: 0c9c592f278fa4d28682e0ec1978b6f8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Un-named arrays</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03872.html">Date Prev</a>][<a href="msg03869.html">Date Next</a>][<a href="msg03872.html">Thread Prev</a>][<a href="msg03869.html">Thread Next</a>][<a href="maillist.html#03870">Date Index</a>][<a href="threads.html#03870">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Un-named arrays</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RIVEST at MIT-ML</li>
+<li><em>Subject</em>: Un-named arrays</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Fri, 7 Dec 79 03:59:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC, (FILE [AR1:KMP;NAMED ARRAYS]) at MIT-MC</li>
+<li><em>Original-date</em>: 6 DEC 1979 2259-EST</li>
+<li><em>Sent-by</em>: ___044 at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>You should not be using the (ARRAY &lt;name&gt; &lt;type&gt; &lt;subscript1&gt; ...)
+but instead use the syntax:
+
+		(SETQ MYARRAYVARIABLE (ARRAY NIL T n))
+
+is what you want. The idea of putting things on the property list
+is semantically hideous anyway since it cannot be bound. Put the object
+only in the value cell and you will be much better off...
+
+		(ARRAY () type dim1 dim2 ...)
+
+returns an array object rather than putting it on the property list.
+You can call this array by doing
+
+	(ARRAYCALL type arrayobject subscript1 subscript2 ...) and you can 
+
+store into it with
+
+	(STORE (ARRAYCALL type arrayobject subscript1 ...) val)
+
+If you dislike using arraycall, define a macro to handle the calling.
+Eg, here is a sample piece of code using this scheme...
+
+; Define (FOO sub1 sub2 ...)  to mean (ARRAYCALL T FOO sub1 sub2 ...)
+
+(DEFUN FOO MACRO (X) `(ARRAYCALL T ,@(CDR X))) 
+
+(DEFUN BAR ()
+       (LET ((FOO (ARRAY () T 10.))) ; Create a 10-length T-type array in FOO
+	    (BAZ FOO)		     ; Call some function BAZ with FOO array
+	    (DO ((I 0. (1+ I)))      ; Loop I 0,1,...
+		((= I 10.))	     ;  thru I=9
+		(PRINT (LIST I (FOO I)))))) ; Printing (i foo[i])
+
+;;; Initialize ARRAYOBJECT to a bunch of random values
+
+(DEFUN BAZ (ARRAYOBJECT)
+       (DO ((I 0. (1+ I)))
+	   ((= I 10.))
+	   (STORE (ARRAYCALL T ARRAYOBJECT I) (RANDOM))))
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03872.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03869.html">Oops.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03872.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03869.html">Oops.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03870"><strong>Date</strong></a></li>
+<li><a href="threads.html#03870"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

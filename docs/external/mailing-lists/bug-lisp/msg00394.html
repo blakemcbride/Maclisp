@@ -1,0 +1,92 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Settting readmacro characters -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 29 May 79 08:22:00 GMT -->
+<!--X-Message-Id: f3faca92ad0dd4204ffe36165f45918b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Settting readmacro characters</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00395.html">Date Prev</a>][<a href="msg00393.html">Date Next</a>][<a href="msg00395.html">Thread Prev</a>][<a href="msg00393.html">Thread Next</a>][<a href="maillist.html#00394">Date Index</a>][<a href="threads.html#00394">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Settting readmacro characters</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: touretzky at CMU-10A</li>
+<li><em>Subject</em>: Settting readmacro characters</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 29 May 79 08:22:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 29 MAY 1979 0422-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date:    28 May 1979 0253-EDT
+    From:    DAVE.TOURETZKY at CMU-10A 
+    Subject: COMPLR loses on sstatus splicing macro
+    
+    I have a little function that changes and restores the readmacro
+    property associated with &quot;;&quot;.  It restores it by doing
+      (sstatus macro 59 oldsemi splicing)
+    which is a perfectly legal call.  COMPLR complains that SPLICING was not
+    declared special.
+
+    ... &lt;barfage&gt; ...
+
+The accepted winning way to set readmacros is
+   (SETSYNTAX 59. 'SPLICING oldsemi)
+there would be no complaint from complr about that one.  The
+misleading thing is that there is no function GETSYNTAX.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00395.html">solution to RENAMEF losing on LIB:</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00393.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00395.html">solution to RENAMEF losing on LIB:</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00393.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00394"><strong>Date</strong></a></li>
+<li><a href="threads.html#00394"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

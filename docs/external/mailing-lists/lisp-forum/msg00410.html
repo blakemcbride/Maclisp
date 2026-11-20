@@ -1,0 +1,132 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: I suppose I have to put in my two cents about DEFSUBST -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Thu ,13 Nov 80 17:04:00 EDT -->
+<!--X-Message-Id: 1649bee08b2ac315ac38609101456510@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: I suppose I have to put in my two cents about DEFSUBST</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00409.html">Date Prev</a>][<a href="msg00411.html">Date Next</a>][<a href="msg00409.html">Thread Prev</a>][<a href="msg00027.html">Thread Next</a>][<a href="maillist.html#00410">Date Index</a>][<a href="threads.html#00410">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: I suppose I have to put in my two cents about DEFSUBST</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MOON at MIT-MC</li>
+<li><em>Subject</em>: Re: I suppose I have to put in my two cents about DEFSUBST</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu ,13 Nov 80 17:04:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Remember a while back when JONL objected to my suggestion
+(at the time directed at JKF and &amp;PROTECT), that open-coded
+functions simply LAMBDA-FY? He mentioned the same thing you
+do now, &quot;an unusably slow compiler&quot;. Well, since then we have
+talked about it a bit, and I showed him a way to &quot;cache&quot; information
+ from DEFUN's so that you can get very close to doing it *right* 
+without duplicating a lot of computations in the compiler.
+
+    Date: 13 NOV 1980 0234-EST
+    From: MOON at MIT-MC (David A. Moon)
+    To:   LISP-FORUM
+    Re:   I suppose I have to put in my two cents about DEFSUBST
+
+    There is, of course, a software engineering tradeoff as to whether
+    you want to have to be somewhat careful about defining your
+    open-codable functions so that simple textual substitution works,
+    or whether you would rather have an unusably slow compiler.  The
+    Lisp machine chose the former alternative although as the feasible
+    memory size and processor power for a personal computer gradually
+    increase the alternative of &quot;doing it right&quot; may become
+    attractive.  &quot;Doing it wrong&quot; is not VERY wrong of course or we
+    wouldn't have done it.
+
+Its simply that your &quot;engineering tradeoff&quot; is a false dilemma,
+the key is &quot;as to whether *you* want to ... be somewhat careful about
+defining your open codeable ...&quot;. Just who is *you*?
+
+Lets take one of the simple cases:
+
+(DEFUN FOOP (X) (NOT (MEMQ (TYPEP X) '(BAR BAZ))))
+
+Even the simplest meta evaluator can tell you that a simple substitution
+is 100% correct here.
+
+Given any open compilation there are 3 areas of analysis
+[1] Things you can say just by looking at the body of the defun.
+[2] Things you can say just by looking at the actual arguments.
+[3] Things which involve complicated interactions of body and arguments.
+
+Obviously the information of [1] is that which is done by &quot;people&quot;
+now, but it need not be. 
+
+A combination of a good [1], (which may *reject* some candidates for
+open compilation as being too complicated to be worth it), and
+a simpleminded [2] ( basic SIDE-EFFECTS-P, CONSTANT-P, DEPENDANT-P),
+seems to cover the existing uses for open compilation very well.
+
+=&gt; For each candidate for open compilation a decision method
+   for doing the open compilation is compiled.
+   [meta compilation]
+
+I think the engineering tradeoff is one of how much time you want
+to spend hacking the compiler vs. how fast it is vs. how good
+it is. (vs. of course how the compiler influences coding style througout
+the system).
+
+-gjc
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00409.html">Re: I suppose I have to put in my two cents about DEFSUBST</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00411.html">Re: DEFSUBST</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00409.html">Re: I suppose I have to put in my two cents about DEFSUBST</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00027.html">Re: LISP vs. APL</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00410"><strong>Date</strong></a></li>
+<li><a href="threads.html#00410"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

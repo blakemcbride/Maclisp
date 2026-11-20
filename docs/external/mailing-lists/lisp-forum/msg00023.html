@@ -1,0 +1,154 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Sifting thru the "good mud":  LISP vs APL -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Tue ,11 Nov 80 14:50:00 EDT -->
+<!--X-Message-Id: cdc1aafcaf06ac5d1007927573f09f71@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Sifting thru the &quot;good mud&quot;:  LISP vs APL</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00377.html">Date Prev</a>][<a href="msg00378.html">Date Next</a>][<a href="msg00378.html">Thread Prev</a>][<a href="msg00403.html">Thread Next</a>][<a href="maillist.html#00023">Date Index</a>][<a href="threads.html#00023">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Sifting thru the &quot;good mud&quot;:  LISP vs APL</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: shrage at WHARTON-10</li>
+<li><em>Subject</em>: Re: Sifting thru the &quot;good mud&quot;:  LISP vs APL</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue ,11 Nov 80 14:50:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC, LISP-DISCUSSION at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I'd like to offer some comments of the topic which Shrager brought
+up last week, and except for &quot;ditto&quot;ing RMS's remarks about the
+sensibility of labor division between EMACS and LISP, I hope these
+will be points which others haven't yet brought out.  It's worth
+noting that EMACS was brought up on MULTICS as a sub-system written
+in MacLISP, and a similar effort is under way now to bring it up in
+NIL (the NILE project, which is currently running to some degree on 
+the NIL emulators of the PDP10).
+    Date: 10 Nov 1980 (Monday) 0512-EDT
+    From: SHRAGE at WHARTON (Jeffrey Shrager)
+    Subject: Improving the LISP working environment by taking a lesson from...
+    APL!
+      1- When a programmer writes a function for his system it is &quot;eaten&quot; by
+	 LISP.  That is, it becomes a part of the workspace as if it had been
+	 there all along. .  .  .
+      2- The CONTINUE workspace feature of APL permits a user to logout and
+	 come back an hour later, the next day, etc with his environment
+	 intact as he left it .  .  .
+      3- LISP has this one real unfortunate feature; it is too flexible and
+	 too simple simultaneously.  This is the reason that it is soo hard
+	 to transport LISP systems from one machine to the next.  &quot;Basic LISP&quot;
+	 is so trivial that noone can write anything in it.  .  .  .
+Re poinst (1) and (2), we have had in MacLISP, for about 8 years, a division 
+of space into &quot;pure&quot; and &quot;impure&quot;;  initially it was for the benefit of 
+MACSYMA, and then for other &quot;dumped-out&quot; systems, so that as many as 
+possible of the pages of the dumped-out system could be shared among 
+simultaneous users.  This is not quite the same thing as the InterLISP
+MAKESYS facility, which generally gives you copy-on-write access to most of 
+the dumped pages, but is something which places a burden on the system-builder
+to distinguish at load-up time between functions and data-bases which are 
+essentially debugged, and those which are more volatile; redefinitions
+don't cause &quot;private&quot; copies of pages, but do consume address space
+since the pure stuff is never reclaimed.  Such a division has the happy 
+consequence that a &quot;check-point&quot; dump need write out only the pages 
+which are &quot;impure&quot;, and that when such a &quot;check-point&quot; dump is restored,
+it merely maps pages in (rather than trying to recreate the state of some 
+workspace).  In fact, we have several systems here (e.g., NACOMPLR the 
+&quot;NIL-aided COMPLR&quot;, and BXOWL on the ML machine) which are several levels 
+deep in a cascade of such dumpings.  That is, each level in the cascade 
+causes to be dumped only the marginal difference between itself and the 
+previous level;  at &quot;restore&quot;, or start-up, time the deeper level will 
+actually be mapping in pages from numerous files -- one or more files from 
+each level in the cascade.  I may be wrong about this, but it seems unlikely 
+that even a clever SYSOUT could do much better in terms of the size of the 
+marginal dump file;  it certainly could not be faster.   Needless to say, we 
+have similar facilities in NIL on the VAX.  The LISPM has an &quot;area&quot; facility, 
+rather than a &quot;pure&quot; and &quot;impure&quot; space concept, and from one point of view, 
+this is adequate, since it is not expected to have several simultaneous 
+users of a dumped-out LISP subsystem.
+
+This brings me up to point (3) -- LISP is too flexible.  Well, the blame
+can hardly be laid at the feet of the language LISP, for its first 
+incarnations were far too limiting!  In fact, the community which uses 
+LISP is a highly innovative group, and the decision to use LISP as a 
+systems programming language (by such a rapidly evolving community) may 
+be what gives it its appearant instability.  When the data structures
+of lisp proved to be competitively inferior, we extended them (fast
+arithmetic in MacLISP, record-structured use of data in InterLISP and
+now in MacLISP, character and bit strings, etc.);  when the control
+structures left something to be desired, we added them (after many
+groping experiments like MICRO-PLANNER, CONNIVER etc).  When SMALLTALK
+showed us something new, LISP was our vehicle of choice in which to try
+something new (CLASSes of LISPM, and the EXTEND of NIL over which a
+similar CLASS heirarchy is built).  Deutsch hit the nail on the head
+when he quoted Moses (approximately): &quot;APL is a diamond -- you can't 
+add anything to it, even another diamond, without ruining its beauty.  
+Lisp is a ball of mud: you can keep adding more and more mud to it and 
+its nature doesn't change.&quot;  It's this ability to absorb the &quot;good mud&quot;
+of other languages which makes LISP so powerful and enduring;  it will
+die if it ever fails to be &quot;too flexible&quot;.
+
+Lastly, I'd like to remind the community that LISP and APL are a lot
+more alike, in a very crucial aspect, than this discussion would have
+led one to believe.  What other languages besides machine language even 
+admit dynamic variables (who cares if some pedagogical logicians lambast 
+them as villains)?   How effectively do other languages/systems allow
+you to have dynamic loading?  Sure, BASIC is interactive, but who will 
+prefer it over APL or LISP (yes, Virginia, all prominent LISPs are 
+interactive, not just ...).
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00377.html">Re: Iteration Facilities</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00378.html">Re: iteration facilities</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00378.html">Re: iteration facilities</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00403.html">Re: Forgot to CC this</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00023"><strong>Date</strong></a></li>
+<li><a href="threads.html#00023"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

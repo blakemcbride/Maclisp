@@ -1,0 +1,111 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Loading the compiler loses -->
+<!--X-From-R13: Eevfj.Epbgg ng [WF&#45;JJ -->
+<!--X-Date: Tue, 29 Jan 80 12:32:00 GMT -->
+<!--X-Message-Id: 6b7b7b4ff260a77efd3366cffcb517f3@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Loading the compiler loses</title>
+<link rev="made" href="mailto:Srisw.Scott at MIT-XX">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03756.html">Date Prev</a>][<a href="msg03754.html">Date Next</a>][<a href="msg03756.html">Thread Prev</a>][<a href="msg03754.html">Thread Next</a>][<a href="maillist.html#03755">Date Index</a>][<a href="threads.html#03755">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Loading the compiler loses</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: bug-complr at MC</li>
+<li><em>Subject</em>: Loading the compiler loses</li>
+<li><em>From</em>: Srisw.Scott at MIT-XX</li>
+<li><em>Date</em>: Tue, 29 Jan 80 12:32:00 GMT</li>
+<li><em>Cc</em>: bug-lisp at MC</li>
+<li><em>Original-date</em>: 29 Jan 1980 0732-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>@l:
+[Keeping]
+
+LISP 1920
+Alloc? n
+
+
+* 
+(load '(ccload ini))
+;Loading DEFMAX 30 
+;Loading MACAID 63 
+;Loading BACKQ 39 
+  (In LISP version 1920)
+;Autoloading GCDEMN FASL for GC-DAEMON
+;(SSTATUS WHO1 52 (QUOTE %) 166 0) ILLEGAL REQUEST
+
+;BKPT FAIL-ACT
+
+(status ttytyp)
+5 
+
+*** Code from &lt;MACLISP&gt;GCDEMN.CGL ***
+		.
+		.
+		.
+
+if status(ttytype,tyo)=5.		% Check if we are on TV!  %
+   then (sstatus(who1,42.,&quot;%&quot;,118.,0.);	% Set up &quot;who&quot; line on tv's.  %
+	 sstatus(gcwho,3.);
+	 who3 := &quot;GCDEMN&quot;)
+
+		.
+		.
+		.
+-------
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03756.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03754.html">(status ttytyp) in gcdemn</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03756.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03754.html">(status ttytyp) in gcdemn</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03755"><strong>Date</strong></a></li>
+<li><a href="threads.html#03755"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

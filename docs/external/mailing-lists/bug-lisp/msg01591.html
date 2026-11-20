@@ -1,0 +1,101 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Lightening Strikes Twice! -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 10 Feb 81 22:53:00 GMT -->
+<!--X-Message-Id: e219fe7eac351583fcf99f69de2565b7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Lightening Strikes Twice!</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01592.html">Date Prev</a>][<a href="msg01590.html">Date Next</a>][<a href="msg01593.html">Thread Prev</a>][<a href="msg01586.html">Thread Next</a>][<a href="maillist.html#01591">Date Index</a>][<a href="threads.html#01591">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Lightening Strikes Twice!</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: WGD at MIT-MC, RLB at MIT-MC</li>
+<li><em>Subject</em>: Lightening Strikes Twice!</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 10 Feb 81 22:53:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 10 FEB 1981 1753-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 10 February 1981 03:31-EST
+    From: Richard L. Bryan &lt;RLB at MIT-MC&gt;
+    Hah! In a bare XC, look at (PLIST 'CLASS-CLASS) for only one of many such 
+    instances of lossage. .  .  .
+Sigh, remember the PUTPROP twice bug that has plagued us lo these
+6 years?  This is still another manifestation of it.  I've done some
+more work on PUTPROP, but it still isn't completely bug-free (will work
+more on it later tonite)
+   Since the problem in COMPLR is caused by INITIALIZE being called
+(which wants to SPECIALize some important systemic variables, but
+which had already been specialized by the loading of some files), then
+I've put out a COMPLR fix file which just remprop's them, and re-puts
+the properties (in impure space).
+   By the bye, remember how these problems didn't occur in NILAID
+and NACOMPLR?  well I remember last summer when first becoming aware
+of the PUTPROP-twice bug that the NALOADer file just did a lobotomy
+of some offenders:  
+   (mapc '(lambda (y) (mapc '(lambda (x) (putprop (car x) 
+						  (car (remprop (car x) y)) 
+						  y))
+			    SI:INITIAL-CLASSES))
+	 '(CLASS CLASS-SYMBOL))
+and sure enough, the SPECIAL propertie in NACOMPLR are the right thing.
+I guess this &quot;lobotomization&quot; can be removed when I finish with
+PUTPROP tonite.  (maybe PUTPROP shsould be removed??)
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01592.html">Re: Am I just a naive IO user, or is this a bug?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01590.html">Consistent lossage</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01593.html">explode is broken</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01586.html">Re: Lightening Strikes Twice!</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01591"><strong>Date</strong></a></li>
+<li><a href="threads.html#01591"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: C*R -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Sat ,5 Dec 81 01:47:00 EDT -->
+<!--X-Message-Id: 05Dec81 004759 GS70@CMU&#45;10A -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>C*R</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00694.html">Date Prev</a>][<a href="msg00692.html">Date Next</a>][<a href="msg00694.html">Thread Prev</a>][<a href="msg00692.html">Thread Next</a>][<a href="maillist.html#00693">Date Index</a>][<a href="threads.html#00693">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>C*R</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at MIT-MC</li>
+<li><em>Subject</em>: C*R</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Sat ,5 Dec 81 01:47:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>(1) It really should be C(AuD)*D hack, not C(AuD)+R.  As RMS first
+pointed out, CR should be the identity function.
+
+(2) As for computer-generated functions, it would seem to be much more
+in the spirit of LISP to generate (CAR (CDR (CDR X))) rather than
+(CADDR X) by a program.  If you must generate a function reference
+rather than a form, there is always (LAMBDA (X) (CAR (CDR (CDR X)))).
+Why do string hacking when lists suffice?
+
+My experience, again, is that the C*R hack gets re-invented frequently,
+usually by starry-eyed novices.  This is not an ad hominem attack, but
+an observation based on my experience.  While elegant, it is useless,
+or at least should not be used.  I once was a starry-eyed novice myself,
+and was quite pleased at inventing this cleverness; but the effort was
+totally wasted.
+
+I don't really care whether Franz retains the feature or not, but if you're
+going to go whole hog, go all the way and implement CR too.  (Then explain
+to everyone why CR doesn't do what TERPRI does!  But that's another story.)
+--Guy
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00694.html">Re:  c*r</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00692.html">Re:  C*R</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00694.html">Re:  c*r</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00692.html">Re:  C*R</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00693"><strong>Date</strong></a></li>
+<li><a href="threads.html#00693"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

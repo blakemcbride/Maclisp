@@ -1,0 +1,105 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Tue, 21 Aug 79 17:13:00 GMT -->
+<!--X-Message-Id: 31fe8e510a1241cbb4962a89646172cd@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02853.html">Date Prev</a>][<a href="msg02851.html">Date Next</a>][<a href="msg02853.html">Thread Prev</a>][<a href="msg02851.html">Thread Next</a>][<a href="maillist.html#02852">Date Index</a>][<a href="threads.html#02852">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GLS at MIT-MC, RICH at MIT-MC</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Tue, 21 Aug 79 17:13:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 21 AUG 1979 1313-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     RICH@MIT-AI
+Date: Mon, 21 Aug 79 15:00:38 GMT
+Original-Date: 08/21/79 11:00:38 EDT
+Subject: Re:  TYIPEEK bug
+    To: (BUG LISP) at MIT-AI
+       (PROGN (TYIPEEK)(PRINT (READ))(PRINT (READ)))A B
+       A
+       B
+       T
+    The A and B don't come out until the space after the B
+    is typed.
+This is a bona-fide bug in the interface to the TTYSCAN
+routine, and doesn't have anythin particular to do with
+TYIPEEK - I can make it happen in other ways, e.g.
+   (PROGN (REAL-TIME-ACTION) (PRINT (READ)) (PRINT (READ)))
+where &quot;(REAL-TIME-ACTION)&quot; causes something to be put on the
+buffer-back-list of the input file array;  then same behaviour 
+appears.  This is the same kind of situation which was at 
+the root of Jim Stansfield's bug, which was recently fixed - 
+a tty-interrupt function caused something to go on the 
+buffer-back-list, and the various input routines were &quot;unaware&quot;
+of this.  The problem in this case, however, is that the  main 
+&quot;TYI&quot; input routine ($DEVICE) interfaces badly to the rubout
+processor, i.e. the routine specified by (STATUS TTYSCAN).
+Rather than have $DEVICE call the tty-scanner, why not
+have READ call it?  This problem is due to the fact that
+the tty-scanner is not called until after READ gobbles
+up the character which was TYIPEEKd.  READ waits until
+$DEVICE decides to call it, but it is really READ that
+knows when it should be called.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02853.html">Re:  TYIPEEK bug</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02851.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02853.html">Re:  TYIPEEK bug</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02851.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02852"><strong>Date</strong></a></li>
+<li><a href="threads.html#02852"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Inconsistent and UnInformative Error Messages -->
+<!--X-From-R13: Y[B,OZO@ ng [WF&#45;[Q -->
+<!--X-Date: Tue, 11 Mar 80 07:21:00 GMT -->
+<!--X-Message-Id: 60a68945e89ea34fa204d96bb7fd861b@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Inconsistent and UnInformative Error Messages</title>
+<link rev="made" href="mailto:KMP">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg02073.html">Date Prev</a>][<a href="msg02071.html">Date Next</a>][<a href="msg02073.html">Thread Prev</a>][<a href="msg02070.html">Thread Next</a>][<a href="maillist.html#02072">Date Index</a>][<a href="threads.html#02072">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Inconsistent and UnInformative Error Messages</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Inconsistent and UnInformative Error Messages</li>
+<li><em>From</em>: KMP,ALAN at MIT-MC</li>
+<li><em>Date</em>: Tue, 11 Mar 80 07:21:00 GMT</li>
+<li><em>Cc</em>: TEACH at MIT-MC</li>
+<li><em>Original-date</em>: 11 MAR 1980 0221-EST</li>
+<li><em>Sent-by</em>: ___023 at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>((LAMBDA (X Y) (+ X Y)) 1 . 2)
+;((? 1 NIL NIL) (X Y)) TOO MANY ARGUMENTS SUPPLIED - APPLY
+
+((LAMBDA (X Y) (+ X Y)) 2 . 3)
+;#201300 UNEVALUABLE DATUM - EVAL
+
+((LAMBDA (X Y) (+ X Y)) 3 . 4)
+;LAMBDA UNDEFINED FUNCTION OBJECT
+
+((LAMBDA (X Y) (+ X Y)) 4 . 5)
+;((? 4 NIL NIL) (X Y)) TOO MANY ARGUMENTS SUPPLIED - APPLY
+
+((LAMBDA (X Y) (+ X Y)) 5 . 6)
+;((? 5 NIL NIL) (X Y)) TOO MANY ARGUMENTS SUPPLIED - APPLY
+
+(QUIT)
+:KILL
+
+: We suspect that this generalizes. Perhaps a bit of error checking on
+  the poor little actual args list would be in order? This bug was
+  uncovered by some poor guy in :TEACH;LISP who had just figured out
+  why (LAMBDA (X) X) didn't work and had FINALLY figured out that
+  ((LAMBDA (X) ...) ...) was the thing to do in order to suppress the
+  LAMBDA UNDEFINED FUNCTION message ... almost. Sigh. 
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg02073.html">For your convenience...</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg02071.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg02073.html">For your convenience...</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg02070.html">Inconsistent and UnInformative Error Messages</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#02072"><strong>Date</strong></a></li>
+<li><a href="threads.html#02072"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Bad ideas -->
+<!--X-From-R13: Urbetr X. Qneerggr &#60;UXQ ng [WF&#45;[Q> -->
+<!--X-Date: Wed, 16 Jul 80 04:42:00 GMT -->
+<!--X-Message-Id: b3a9bbdc44069ad7effda6d6e0b02444@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Bad ideas</title>
+<link rev="made" href="mailto:GJC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04006.html">Date Prev</a>][<a href="msg04003.html">Date Next</a>][<a href="msg04005.html">Thread Prev</a>][<a href="msg04003.html">Thread Next</a>][<a href="maillist.html#04004">Date Index</a>][<a href="threads.html#04004">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Bad ideas</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: PSZ at MIT-ML</li>
+<li><em>Subject</em>: Bad ideas</li>
+<li><em>From</em>: George J. Carrette &lt;GJC at MIT-MC&gt;</li>
+<li><em>Date</em>: Wed, 16 Jul 80 04:42:00 GMT</li>
+<li><em>Cc</em>: HIC at MIT-MC, BUG-LISP at MIT-MC, BUG-LISPM at MIT-MC</li>
+<li><em>Original-date</em>: 16 July 1980 00:42-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>From:     Date:
+Date: Tue, 16 Jul 80 03:22:16 GMT
+Original-Date: 07/15/80 23:22:16 EDT
+Subject:
+    From: PSZ at MIT-ML
+    To:   hic
+    cc:   (BUG LISP) at MIT-ML, (BUG LISPM) at MIT-ML, GJC at MIT-ML
+    Re:   Bad ideas
+
+    My a priori belief shows through in my phrasing, but I am by no means immune
+    to a good argument.  I was really just expressing a desire for some consensus
+    on it before it gets installed and I begin to see (dread the thought) things
+    like my perfectly reasonable
+    	(setq space 3000)
+    turn behind my back into
+    	(setq 40 3000),
+    as I think it likely that such &quot;expanding constants&quot; will be one plausible use
+    of the facility you are planning.  Please note that I am not yet prepared to
+    argue the details (e.g., whether expansion should happen in quoted contexts,
+    implicitly quoted contexts, whether it should be lexically or dynamically
+    specified, or any such meaty issues).  I am still searching for a good case
+    to be made for the fundamental idea.  Although I have at times had cravings for
+    just such a feature, some reflection has so-far dissuaded me (like some
+    cravings for giant anchovy pizzas).  Someone please step forward and
+    demonstrate a program in which having this feature is a big win, outweighing
+    the disadvantage of further weakening the transparency of Lisp.
+
+
+Well, what I was doing (just so happens in maclisp), was
+implementing closures with lexically scoped instance variables,
+as apposed to the special variables which the lisp machine uses.
+
+(defclosure foo (a b c d)
+	    ((sum 0)) ; def-struct like specs.
+     
+           ...body ...)
+
+(setq q (make-foo-closure ... defstruct-like specifications ...))
+
+(call q 1 2 3) =&gt;
+
+(lsubrcall t (pointer-slot q) (data-slot q) 1 2 3)
+
+simple eh? What actually gets defined for FOO is an
+lsubr which takes as its first argument a HUNK with the
+environment.  Since SUM is an instance variable you want
+SUM to expand into (CXR &lt;17&gt; DATA) and (SETQ SUM FOO) to
+go to (SETF (CXR &lt;17&gt; DATA) FOO). The defstruct-like
+instance variable specs are actually used as a defstruct
+to define the variable structure. (A HUNK in haclisp, oops, I
+mean maclisp)
+
+However, if in the body we have (LET ((SUM 34)) we DON'T want
+that to be (LET (((CXR 3 DATA) 34) ...) !!!! 
+
+To further complicate things, I want the so-called ATOM-MACRO
+properties to be in effect LOCAL to the BODY only. They
+do not want to be global properties.
+
+I know that using these atomic-macros-of-the-first-kind
+DOES NOT INTERFERE WITH THE TRANSPARENCY OF LISP.
+Note: any SETQ of a special variable does not qualify as
+being transparent lisp programming anyway.
+
+HIC may want to use atomic-macros-of-the-SECOND-kind, and so
+might I for other purposes. I don't think that one excludes
+the other. Although the ones I want would be harder to implement.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04006.html">suggested compiler feature.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04003.html">Atomic Macros</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04005.html">Re: Bad ideas</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04003.html">Atomic Macros</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04004"><strong>Date</strong></a></li>
+<li><a href="threads.html#04004"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

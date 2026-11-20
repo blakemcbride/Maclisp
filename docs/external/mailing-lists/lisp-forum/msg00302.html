@@ -1,0 +1,123 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: extended addressing -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;ejx ng [WF&#45;[Q> -->
+<!--X-Date: Sat ,10 Jan 81 13:12:00 EDT -->
+<!--X-Message-Id: fc295a8d0758ab002b465e07bed888e2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: extended addressing</title>
+<link rev="made" href="mailto:rwk at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00514.html">Date Prev</a>][<a href="msg00309.html">Date Next</a>][<a href="msg00301.html">Thread Prev</a>][<a href="msg00007.html">Thread Next</a>][<a href="maillist.html#00302">Date Index</a>][<a href="threads.html#00302">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: extended addressing</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: CPR at MIT-MC, LISP-FORUM at MIT-MC, action at SRI-KL,      geoff at SRI-KL, meyers at SRI-KL, frank at UTAH-20,      jonl at MIT-AI, admin.mrc at SU-SCORE, guy.steele at CMU-10A,      wactlar at CMU-10A, Rindfleisch at SUMEX-AIM,      HEDRICK at RUTGERS, amarel at RUTGERS, josh at RUTGERS,      levy at RUTGERS, bboard at RUTGERS</li>
+<li><em>Subject</em>: Re: extended addressing</li>
+<li><em>From</em>: Robert W. Kerns &lt;rwk at MIT-MC&gt;</li>
+<li><em>Date</em>: Sat ,10 Jan 81 13:12:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Sorry to take so long to getting around to reading your message.
+It sort of got buried in the depths of my mail file for a while.
+Anyway, you seem to not fully understand the VAX architecture in
+comparing the address space of the VAX with that of the 10.
+
+     
+     By the way, I am not clear why people think that VAX has a
+     larger	; address space than the 20 (or do people think that?) As far
+     as the architecture, the 20 has 30 bits and the VAX 31 (one bit is
+     used by the system).  But clearly 30 bits of 36-bit words are more
+     than 31 bits of 8-bit bytes.  Now the obvious reply is that the
+     existing 20 monitor does not support more than about 23 bits at the
+     moment.  However I have done the following calculation to see how much
+     one can actually use on the VAX.  The problem turns out to be page
+     tables.  The VAX has a 512 byte page size.  Suppose that one 32-bit
+     word is required in a page table for each page.  This means you need
+     almost 10% as much physical space for the page table as your virtual
+     memory (4 bytes per 512 bytes).  So with a 3 Mbyte machine you can get
+     only about 30Mbyte of virtual memory before filling up all of physical
+     memory with page tables.  Of course something is likely to give out
+     before that.  But suppose that you can really get 32Mbyte of virtual
+     memory.  That is in fact slightly less than the 23 bits that are
+     implemented on the 20 (assuming 2 words per cons cell on the 20 and 8
+     bytes on the VAX).  It seems to me that 512 bytes is a strange page
+     size for a machine intended to have 31 bits of virtual address space.
+
+First, you make a numerical error.  One 4-byte PTE for each page is
+the right number, but that only works out to 4/512 or 1/128, or almost
+1%, not 10%.  Second, Unlike on the -20, VAX page tables are not wired
+into memory, but can themselves be paged.  This may sound strangely
+recursive, but rest assured that it ends at one level; the page tables
+for the page tables are wired.  Thus physical memory is consumed at one
+longword (32 bits) for every 128 pages, for a ratio of 2^14 to 1.
+
+Now, 32 Mbytes is sort of a random number, and I'm not sure where it
+comes from.  I believe it may be a former or even current limit on
+what VMS will support.  But to compare with the -20:  2^23 36-bit
+words (8 MQ) or 2^30 36-bit words (1024 MQ) vs. 2^29 32-bit words,
+or 2^28 if you don't use P1 space (normally used for the stack, etc.,
+and allocated DOWNWARD).
+
+Now, lets consider the real problem.  For each user you have this big,
+you need a large disk drive.  On the -20, for example, a full 30-bit
+address space would require something like a 5 Gigabyte disk drive.
+(or smaller ones totalling that).  It seems clear to me that for the
+current time, the limit to address space in both the VAX and the -20,
+is not how many bits the processor uses, but rather how much disk space
+you can afford for paging.  Yes, folks, we're limited by the physical
+memory size again...
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00514.html">Re: modular arith.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00309.html">Re: Desirable macro</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00301.html">Re: extended addressing</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00007.html">Re: Add me to mailing list</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00302"><strong>Date</strong></a></li>
+<li><a href="threads.html#00302"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

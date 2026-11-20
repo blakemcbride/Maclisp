@@ -1,0 +1,104 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Function cells -->
+<!--X-From-R13: Sevp Prafba &#60;PS@EA@ ng EBO&#45;@vzohf> -->
+<!--X-Date: Thu ,1 Sep 83 18:35:00 EDT -->
+<!--X-Message-Id: ff967918be69a5607bfff9fcc3fdf82d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Function cells</title>
+<link rev="made" href="mailto:BENSON at SPA-Nimbus">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00635.html">Date Prev</a>][<a href="msg00633.html">Date Next</a>][<a href="msg00635.html">Thread Prev</a>][<a href="msg00633.html">Thread Next</a>][<a href="maillist.html#00634">Date Index</a>][<a href="threads.html#00634">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Function cells</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Bobrow.PA at PARC-MAXC.ARPA, TIM%MIT-OZ at MIT-MC.ARPA</li>
+<li><em>Subject</em>: Re: Function cells</li>
+<li><em>From</em>: Eric Benson &lt;BENSON at SPA-Nimbus&gt;</li>
+<li><em>Date</em>: Thu ,1 Sep 83 18:35:00 EDT</li>
+<li><em>Cc</em>: Deutsch.PA at PARC-MAXC.ARPA, lisp-forum at MIT-MC.ARPA,    Julian Padget &lt;PADGET at UTAH-20.ARPA&gt;,    Teitelman.PA at PARC-MAXC.ARPA</li>
+<li><em>In-reply-to</em>: The message of 1 Sep 83 14:30-PDT from Bobrow.PA at PARC-MAXC.ARPA</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: Thu, 1 Sep 83 14:30 PDT
+    From: Bobrow.PA@PARC-MAXC.ARPA
+
+    Tim,
+	    There is a difference in meaning between:
+		     (fun x y) and (FUNCALL fun x y).
+    In the former case, one expects the meaning of fun to be independent of
+    the context of the call.  In the latter, to be dependent of parameters
+    passed in to the environment.  One can take the point of view that one
+    doesn't want to distinguish these cases, but I maintain that the code is
+    clearer when you do make the distinction for the call.  Similarly, I
+    have seen proposals for doing object oriented programming by having the
+    function name evaluated in the context of the first argument to the
+    function (which would in fact be a closure on some functions and
+    variables).  I object to that as well.
+
+    So for me the question is not about efficiency and limitation of name
+    space, but of what distinctions you want to make apparent at a call.
+
+    danny bobrow
+
+By this reasoning you must object to the Common Lisp special forms
+LABELS and FLET, which define lexically scoped functions.  With the
+inclusion of these, function name evaluation is no longer independent of
+context.  It is only dependent on the static context, however; there is
+no dynamic binding of function names in Common Lisp.  Is it only
+dependence on dynamic context you object to, or dependence on any
+context?
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00635.html">Re: Function cells</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00633.html">Re: Function cells</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00635.html">Re: Function cells</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00633.html">Re: Function cells</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00634"><strong>Date</strong></a></li>
+<li><a href="threads.html#00634"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

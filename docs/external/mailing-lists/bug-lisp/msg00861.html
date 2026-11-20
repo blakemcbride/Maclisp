@@ -1,0 +1,90 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: ATSIGN -->
+<!--X-From-R13: Yra Vneerafgvra &#60;YZV ng [WF&#45;OW> -->
+<!--X-Date: Fri, 25 Jun 82 22:27:00 GMT -->
+<!--X-Message-Id: 6d5a79909b5552ff5f51a16cc45c60bf@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ATSIGN</title>
+<link rev="made" href="mailto:KLH at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00862.html">Date Prev</a>][<a href="msg00860.html">Date Next</a>][<a href="msg00863.html">Thread Prev</a>][<a href="msg00860.html">Thread Next</a>][<a href="maillist.html#00861">Date Index</a>][<a href="threads.html#00861">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>ATSIGN</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: MARTY at MIT-AI, GJC.Skef at MIT-OZ</li>
+<li><em>Subject</em>: ATSIGN</li>
+<li><em>From</em>: Ken Harrenstien &lt;KLH at MIT-AI&gt;</li>
+<li><em>Date</em>: Fri, 25 Jun 82 22:27:00 GMT</li>
+<li><em>Cc</em>: RICH at MIT-AI, GSB at MIT-AI, BUG-OZ at MIT-AI, BUG-LISP at MIT-AI,    BUG-ATSIGN at MIT-AI</li>
+<li><em>Original-date</em>: 25 June 1982 18:27-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>You must not have looked very closely at the code, since I was the one
+who converted ATSIGN to flush the PA1050 package when running on
+10X/20X systems.  That is not an issue; it is already TNX-ized. The
+6-char limitation on filename.ext is actually due to the format of LREC
+files and various other tables, which assume that filenames come in
+sixbit words.  You cannot fix this fundamental problem without
+changing the LREC file format at the very least.  It is possible, but
+it won't be easy.  The MIDAS code in TSRTNS contains one mechanism for
+manipulating long filenames internally; it may be worth a look.
+
+  I will FTP back my latest version of ATSIGN to make sure that
+all current mods are in the canonical copy.  You should put yourself
+on bug-atsign if you start hacking anything...
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00862.html">Re: Extension for Lisp files</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00860.html">ATSIGN</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00863.html">The ATSIGN program</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00860.html">ATSIGN</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00861"><strong>Date</strong></a></li>
+<li><a href="threads.html#00861"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

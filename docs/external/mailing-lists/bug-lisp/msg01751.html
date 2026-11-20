@@ -1,0 +1,99 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Yrag [. Bvgzna &#60;Y[B ng [WF&#45;[Q> -->
+<!--X-Date: Mon, 1 Dec 80 02:59:00 GMT -->
+<!--X-Message-Id: a1a891a1ce3d3011c0d5671b14f11050@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01752.html">Date Prev</a>][<a href="msg01750.html">Date Next</a>][<a href="msg01753.html">Thread Prev</a>][<a href="msg01750.html">Thread Next</a>][<a href="maillist.html#01751">Date Index</a>][<a href="threads.html#01751">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: WGD at MIT-MC</li>
+<li><em>From</em>: Kent M. Pitman &lt;KMP at MIT-MC&gt;</li>
+<li><em>Date</em>: Mon, 1 Dec 80 02:59:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, ALAN at MIT-MC, CWH at MIT-MC</li>
+<li><em>Original-date</em>: 30 November 1980 21:59-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 26 November 1980 22:58-EST
+    From: William G. Dubuque &lt;WGD&gt;
+    Sender: BIL
+    To:   BUG-LISP
+
+    (defmacro foo () nil) then do (foo) and you get infinite recursion.
+-----
+This is the result of a bad interaction between the NIL return value --
+which fights with the (OR (MACROFETCH ...) ; NIL falls through!
+			  (MACROMEMO ...)) ; expansion returned
+and the fact that the thing being memo-ized isn't CDR'd as it would be
+in (DEFMACRO FOO (X) ...) =&gt;
+   (DEFUN FOO MACRO (FOOMACROARG)
+      (OR ... (MACROMEMO ... (PROGN ... (LET (((X) (CDR FOOMACROARG))))) ...)))
+which ends up displacing the source form returning
+(MACROEXPANDED A (0 . 0) (A) (MACROEXPANDED A (0 . 0) (A) (MACROEXPANDED ...)))
+which is circular with respect to its expansion... I can't fathom enough of
+the code to suggest a fix or even to more precisely characterize the problem.
+I will point out that I was expecting (DEFUN FOO (&amp;WHOLE X) NIL) to manifest
+the same bug, but it doesn't -- you can't even DEFINE that one without getting
+a PDL-OVERFLOW ... 
+
+Something in the new DEFMAX is still losing badly.
+
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01752.html">Getting characters into Lisp</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01750.html">new DEFMACRO</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01753.html">DEFMACRO and DEFUN&amp;</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01750.html">new DEFMACRO</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01751"><strong>Date</strong></a></li>
+<li><a href="threads.html#01751"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Usage of "PURE" strings -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sun, 27 Apr 80 01:51:00 GMT -->
+<!--X-Message-Id: 1fa2c9ad1b1c10496c3146e5feff3dec@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Usage of &quot;PURE&quot; strings</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg04174.html">Date Prev</a>][<a href="msg04172.html">Date Next</a>][<a href="msg04172.html">Thread Prev</a>][<a href="msg04171.html">Thread Next</a>][<a href="maillist.html#04173">Date Index</a>][<a href="threads.html#04173">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Usage of &quot;PURE&quot; strings</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: Usage of &quot;PURE&quot; strings</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sun, 27 Apr 80 01:51:00 GMT</li>
+<li><em>Cc</em>: NIL-I at MIT-MC</li>
+<li><em>Original-date</em>: 26 APR 1980 2051-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>A number of bugs have arisen from trying to PURCOPY string
+(either in NILAID, NIL, or in a lisp with only the STRING
+package) - here's another to beware of:
+   If you call PURIFY with first argument signaling a general
+   clean-up and purification, then the system knows enough to
+   close out any remaing pure consing areas *** except for the
+   pure string areas.  You must close this out &quot;by hand&quot;, by
+   doing (SETQ STR/:NO/.PWDSF 0).  Remember that some &quot;dumpers&quot;
+   will implicitly call PURIFY thusly;  PURE-SUSPEND is one.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg04174.html">LISPT and EPRINT functions...</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg04172.html">LISPT and EPRINT functions...</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg04172.html">LISPT and EPRINT functions...</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg04171.html">Re: EQ-ness of fixnums</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#04173"><strong>Date</strong></a></li>
+<li><a href="threads.html#04173"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

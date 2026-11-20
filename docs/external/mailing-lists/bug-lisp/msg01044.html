@@ -1,0 +1,122 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Validity of your off&#45;the&#45;wall timing conjectures -->
+<!--X-From-R13: Xba Z Iuvgr &#60;XA@Z ng [WF&#45;[Q> -->
+<!--X-Date: Tue, 27 Oct 81 12:56:00 GMT -->
+<!--X-Message-Id: 04f62a7551c9b6062cc3ad4f0facb859@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Validity of your off-the-wall timing conjectures</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01043.html">Date Prev</a>][<a href="msg01042.html">Date Next</a>][<a href="msg01043.html">Thread Prev</a>][<a href="msg01042.html">Thread Next</a>][<a href="maillist.html#01044">Date Index</a>][<a href="threads.html#01044">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Validity of your off-the-wall timing conjectures</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: GJC at MIT-MC</li>
+<li><em>Subject</em>: Validity of your off-the-wall timing conjectures</li>
+<li><em>From</em>: Jon L White &lt;JONL at MIT-MC&gt;</li>
+<li><em>Date</em>: Tue, 27 Oct 81 12:56:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 27 October 1981 07:56-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 26 October 1981 14:38-EST
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    To: JONL at MIT-MC
+    I ran my timing tests with *RSET both on an off. You get a factor of 3
+    speed-up with *RSET off. Still not good enough. ... 
+
+The speed-up factor for typical NIL data-emulation functions is 40. to 70., 
+not 3 as your reply suggests (in particular, the CHAR and BIT1P functions).
+
+Apart from the fact that your &quot;timings&quot; were not accompanied by any numbers, 
+there is reason to believe you neglected to factor out the GC time:  the fact 
+that I had to remind you about the *RSET factor suggests this, but even more 
+critically, you were simply unaware of extensive amount of checking (in *RSET 
+mode) in the NIL-data-type emulation functions.  Long before you were around,
+RWK, REES, RLB and I insisted on the capability for full error checking
+in *RSET mode.
+
+Forgetting about your totally off-the-wall comparison between the VAX and the 
+PDP10 (&quot;apples&quot; and &quot;oranges&quot;, since PDP10 doesn't have load-byte-indexed),
+there is the question of why you mailed off your unsupported conjectures
+to the BUG-LISP community.   If you intended to press for faster emulation
+on the PDP10, then you completely blew it, for you didn't even make any 
+timings of the alternative emulation schemes.  Furthermore, you obviously 
+hadn't considered the memory constraints (*** and data size limitations ***) 
+imposed by the alternatives (for example, limitation of 512. chars for a 
+STRING, or consing n fixnums for a BITS in addition to the hunk space taken)
+
+    Date: 26 October 1981 18:12-EST
+    From: George J. Carrette &lt;GJC at MIT-MC&gt;
+    Subject: Timing worries.
+    ...
+    However, you are not one to talk about what most of the nil system
+    code needs, since you haven't written any of it. In particular the
+    assembler handles BITS in its own way.
+    ...
+
+WRONG!
+The assembler uses the emulation BITS package.  In particular, it needs
+NIBBLE and SET-NIBBLE, and for these, the emulation is efficient.
+During debugging of the assembler (a process which continued for at
+least a year), RLB appreciated the *RSET mode;  after that we ran it in 
+*RSET () mode without problem.
+
+I know code I've written -- if you've replaced it with your own version
+of things (as you generally seem to do), then that's just one more
+reason why the NIL project is one year and four months behind schedule.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01043.html">MacLisp with multiple structures</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01042.html">Use of *RSET, and your conjectures</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01043.html">MacLisp with multiple structures</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01042.html">Use of *RSET, and your conjectures</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01044"><strong>Date</strong></a></li>
+<li><a href="threads.html#01044"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

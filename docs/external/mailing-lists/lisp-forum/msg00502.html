@@ -1,0 +1,126 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: Once again a plea for slash -->
+<!--X-From-R13: Uhl.Egrryr ng Q[G&#45;10O -->
+<!--X-Date: Sun ,21 Dec 80 00:33:00 EDT -->
+<!--X-Message-Id: 73faba3885cd64fe65d7162dad0722d2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Once again a plea for slash</title>
+<link rev="made" href="mailto:Guy.Steele at CMU-10A">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00540.html">Date Prev</a>][<a href="msg00547.html">Date Next</a>][<a href="msg00540.html">Thread Prev</a>][<a href="msg00547.html">Thread Next</a>][<a href="maillist.html#00502">Date Index</a>][<a href="threads.html#00502">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Once again a plea for slash</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: lisp-forum at MIT-MC, Scott.Fahlman at CMU-10A, GJS at MIT-AI,      rwg at SU-AI, Fateman at Berkeley</li>
+<li><em>Subject</em>: Re: Once again a plea for slash</li>
+<li><em>From</em>: Guy.Steele at CMU-10A</li>
+<li><em>Date</em>: Sun ,21 Dec 80 00:33:00 EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I am firmly convinced that the MacLISP-and-sons community would be
+much better off if we were to change the &quot;slash&quot; character to something
+other than &quot;/&quot;.  The sooner we do it, the better.
+(1) Sussman and others report that the single greatest stumbling
+    block for novice LISP users trying to do numerical tasks is
+    remembering to double the &quot;/&quot; for the division operator.  This
+    is the only operator of the four standard arithmetic operators
+    that does not have the same name used in almost every other
+    programming language (&quot;+&quot;, &quot;-&quot;, &quot;*&quot;, &quot;/&quot;).
+(2) The &quot;/&quot; character is common in English text.  It looks odd to have
+    to double it in error messages, etc.  Have you ever written
+	(FORMAT T &quot;~S got an I/O error.&quot; FOO)
+    only to get the error message
+	FROBBOZ got an IO error.     ?
+    On the other hand, doesn't (FORMAT T &quot;~S got an I//O error.&quot; FOO)
+    look awfully silly?  (I observe that in a recent note KMP instead
+    wrote &quot;I\O&quot; for &quot;I/O&quot; to avoid this difficulty.  I suspect this
+    usage looks strange to all except users of APL\360.
+(3) I want to push for rational numbers as a standard part of LISP,
+    supported along with bignums and floating point, with appropriate
+    contagion rules and operations.  An obvious syntax for a rational
+    number -- the *only* obvious syntax -- is &lt;fixnum&gt;/&lt;fixnum&gt;,
+    for example, 43/17.  One might argue that this syntax could be
+    accommodated as an exception anyway, but it would be an awfully
+    kludgy exception.
+(4) At least one operating system, UNIX, uses the &quot;/&quot; character
+    in pathnames.  Other operating systems are likely to emulate
+    this, given the popularity of UNIX plus the lower-caseness of &quot;/&quot;!
+    For this reason, FRANZ LISP has used &quot;\&quot; as the quote character,
+    so that one may use file names like &quot;/usr/gls/win.lsp&quot; rather than
+    &quot;//usr//gls//win.lsp&quot;.
+
+For all these reasons, I propose that we switch -- and soon -- to &quot;\&quot;
+as the standard character quoter.  With the advent of &quot; strings
+and | symbols, I think you may be surprised at how few / characters
+actually appear in code nowadays.  This will ahve the following
+repercussions:
+(a) The name of the division function will be &quot;/&quot;.  (Actually,
+    I further propose that &quot;/&quot; be the universal *correct* division
+    operator, which floats (or uses rationals) if necessary to
+    give a correct result.  For example, (/ 7 2) =&gt; 3.5.  Then let
+    &quot;//&quot; be the one which produces integer results for integer
+    inputs (or maybe always produces an integer result??).
+    The name of remainder would change to &quot;\\&quot;, and why don't we
+    just flush integer GCD, as it is seldom used?
+(b) The #/ syntax would become #\.  Following KMP's recent suggestion,
+    #\ could take on the burden of both #/ and #\.
+(c) In other situations, / would become \ (for quoting characters).
+
+So how about it, people?  Maybe it's not worth changing MacLISP,
+but I predict it would be a well worthwhile investment for LISPM, NIL,
+and SPICE LISP.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00540.html">Re: Consistency: #\... and (FORMAT s &quot;~:C&quot; c)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00547.html">Re:  Once again a plea for slash</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00540.html">Re: Consistency: #\... and (FORMAT s &quot;~:C&quot; c)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00547.html">Re:  Once again a plea for slash</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00502"><strong>Date</strong></a></li>
+<li><a href="threads.html#00502"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

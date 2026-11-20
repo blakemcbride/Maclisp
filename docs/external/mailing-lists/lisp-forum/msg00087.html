@@ -1,0 +1,95 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Re: character objects &#38; representation issues -->
+<!--X-From-R13: Rnavry Z. Irvaero &#60;RZI ng [WF&#45;OW> -->
+<!--X-Date: Sat ,16 Aug 80 19:20:00 EDT -->
+<!--X-Message-Id: 34ef7c9be27cecda03a9f62155eb3f20@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: character objects &amp; representation issues</title>
+<link rev="made" href="mailto:DLW at MIT-AI">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00086.html">Date Prev</a>][<a href="msg00088.html">Date Next</a>][<a href="msg00085.html">Thread Prev</a>][<a href="msg00077.html">Thread Next</a>][<a href="maillist.html#00087">Date Index</a>][<a href="threads.html#00087">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: character objects &amp; representation issues</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: RWK at MIT-MC</li>
+<li><em>Subject</em>: Re: character objects &amp; representation issues</li>
+<li><em>From</em>: Daniel L. Weinreb &lt;DLW at MIT-AI&gt;</li>
+<li><em>Date</em>: Sat ,16 Aug 80 19:20:00 EDT</li>
+<li><em>Cc</em>: LISP-FORUM at MIT-MC</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>Ah.  I see.  You mention to motivations for character objects; one
+works fine in &quot;my&quot; proposal (the one I construed out of what I think
+GLS is saying; I take no credit), but the other has problems.
+
+First, you want character objects for debugging, so that when you see a
+capital A you can tell that it is a capital A rather than a 101 octal.
+With &quot;my&quot; proposal, you do indeed get this, so long as you do your
+debugging in NIL rather than on the Lisp Machine.  I don't think
+anyone has objections to this.
+
+Secondly, you want character objects to print differently.  Presumably
+a capital A prints as #/A, rather than as 101.  This would not work in
+&quot;my&quot; proposal.  If you ran the portable FOOBAR on the LispM, and it
+prints a data structure, and then you run FOOBAR in NIL and it reads it
+back in, then character objects can get converted to fixnums.  I don't
+see any solution to this problem, other than to meekly suggest that
+maybe it is just not a very common thing.  Code that wants to print
+character for human eyes can be made portable by going through a FORMAT
+control option whenever printing character objects, rather than ever
+using PRINT directly.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00086.html">Re: Bawden's remarks on characters</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00088.html">Re: Proposal #3 for MacLISP characters...</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00085.html">Re: character objects &amp; representation issues</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00077.html">Re: Bawden's remarks on characters</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#00087"><strong>Date</strong></a></li>
+<li><a href="threads.html#00087"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

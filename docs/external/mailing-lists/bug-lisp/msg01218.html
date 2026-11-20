@@ -1,0 +1,93 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: SETF -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Thu, 18 Sep 80 07:16:00 GMT -->
+<!--X-Message-Id: 6e8c7cfa23e4cf492fce703179baeb4d@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SETF</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01219.html">Date Prev</a>][<a href="msg01217.html">Date Next</a>][<a href="msg01283.html">Thread Prev</a>][<a href="msg01824.html">Thread Next</a>][<a href="maillist.html#01218">Date Index</a>][<a href="threads.html#01218">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>SETF</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC</li>
+<li><em>Subject</em>: SETF</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Thu, 18 Sep 80 07:16:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC</li>
+<li><em>Original-date</em>: 18 September 1980 03:16-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I have moved the DEFSETFs for LDB and LOAD-BYTE back to
+LODBYT where they belong.  There is nothing unsafe or hairy
+about this.  I also fixed the bug in the DEFSETFS where it
+tried to do stuff by hand rather than using the functions
+provided for the purpose, and did it wrong.
+
+I am NOT amazed that it requires that you CONS up a 12-hunk.
+It needs an intermediate datastructure, and that's what
+DEFVST uses.  The reason you end up with a (lambda (()) 'x)
+is simply that (setf (ldb 0603 (foo (bar))) y) has to turn into
+((LAMBDA (G0259)
+   (SETF (FOO G0259) (DPB 0603 (FOO G0259))))
+ (BAR))
+and the (lambda (()) 'x) is just a piece of code that
+returns the way to access the frob being SETF'd.  Normally
+it's just a piece of constant code, but for LDB it is consed
+on the fly.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01219.html">...</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01217.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01283.html">Re: SETF</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01824.html">SETF</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01218"><strong>Date</strong></a></li>
+<li><a href="threads.html#01218"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

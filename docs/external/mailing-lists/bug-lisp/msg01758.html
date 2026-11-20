@@ -1,0 +1,123 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: suckage -->
+<!--X-From-R13: Oyna Pnjqra &#60;OZO@ ng [WF&#45;[Q> -->
+<!--X-Date: Fri, 28 Nov 80 21:34:00 GMT -->
+<!--X-Message-Id: afe850acd3a56c682b997289aa5214a2@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>suckage</title>
+<link rev="made" href="mailto:ALAN at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01759.html">Date Prev</a>][<a href="msg01757.html">Date Next</a>][<a href="msg01752.html">Thread Prev</a>][<a href="msg03739.html">Thread Next</a>][<a href="maillist.html#01758">Date Index</a>][<a href="threads.html#01758">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>suckage</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: BUG-LISP at MIT-MC</li>
+<li><em>Subject</em>: suckage</li>
+<li><em>From</em>: Alan Bawden &lt;ALAN at MIT-MC&gt;</li>
+<li><em>Date</em>: Fri, 28 Nov 80 21:34:00 GMT</li>
+<li><em>Cc</em>: DLW at MIT-MC, MOON at MIT-MC</li>
+<li><em>Original-date</em>: 28 November 1980 16:34-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I have been working on some new features for defstruct and I compiled
+a version that should have run in MacLisp.  I asked DLW and Moon to
+try it out (in MacLisp) confident that it would work in anybody's
+SETF.  I was wrong of course:
+
+    Date: 28 November 1980 01:56-EST
+    From: Daniel L. Weinreb &lt;dlw at MIT-AI&gt;
+    Sender: dlw at CADR6 at MIT-AI
+
+    OK, I tried it, and found that *DPB was an undefined function.  I will
+    try this again when you give me a version that runs on the LispM; I'm
+    sorry, but I cannot deal with Maclisp; it's just too hard.
+
+Now I don't use *DPB, so it must be something that your SETF produces.
+So I tried:
+
+In the current LISP:
+
+(setq x 123456)
+123456 
+(setf (ldb 0303 x) 7)
+;Loading SETF 271 
+;Loading DEFMAX 63 
+;Loading LODBYT 38 
+;Loading LDBHLP 1 
+;Loading MACAID 97 
+;*:XREF UNDEFINED FUNCTION IN UUO CALL
+
+;BKPT UNDF-FNCTN
+
+In the current XLISP:
+
+(setq x 123456)
+123456 
+(setf (ldb 0303 x) 7)
+;Loading SETF 271 
+;Loading DEFMAX 63 
+;Loading MACAID 97 
+;(LDB 303 X) Obscure format - SETF
+
+;BKPT WRNG-TYPE-ARG
+
+I have no idea how DLW got the *DPB bug, but I am not surprised that
+the code that defstruct constructs causes a different set of bugs
+since it probably causes yet another set of packages to autoload.
+
+Sure makes me glad I have my own macrology!
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01759.html">Getting characters into Lisp</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01757.html">Re: defmacro</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01752.html">Getting characters into Lisp</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03739.html">suckage</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01758"><strong>Date</strong></a></li>
+<li><a href="threads.html#01758"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

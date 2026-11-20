@@ -1,0 +1,89 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: MPV; error -->
+<!--X-From-R13: VWQ ng [WF&#45;[Q (Vbjneq W. Qnaaba) -->
+<!--X-Date: Sat, 20 May 78 23:52:00 GMT -->
+<!--X-Message-Id: 4424f276d1a50e3ff5134de6a6c05a51@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>MPV; error</title>
+<link rev="made" href="mailto:HIC at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03387.html">Date Prev</a>][<a href="msg03385.html">Date Next</a>][<a href="msg03387.html">Thread Prev</a>][<a href="msg03385.html">Thread Next</a>][<a href="maillist.html#03386">Date Index</a>][<a href="threads.html#03386">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>MPV; error</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: KMP at MIT-MC, (BUG LISP) at MIT-MC</li>
+<li><em>Subject</em>: MPV; error</li>
+<li><em>From</em>: HIC at MIT-MC (Howard I. Cannon)</li>
+<li><em>Date</em>: Sat, 20 May 78 23:52:00 GMT</li>
+<li><em>Original-date</em>: 20 MAY 1978 1952-EDT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+    Date: 20 MAY 1978 1507-EDT
+    From: KMP at MIT-MC (Kent M. Pitman)
+    Subject: MPV; error
+    To: (BUG LISP) at MIT-MC
+
+    I don't know what STATUS-PURSI does, but I was randomly looking and
+    I did &quot;(STATUS PURSI)&quot; it said wrong # of args, so I did (STATUS PURSI NIL)
+    and it MPV;'d ... 1) This is probably a bug? 2) What does it do? Thanx, kmp
+--------
+(STATUS PURSI &lt;space-name&gt;) returns the PURSIZE (pure size) of that space.
+The error checking code for this particular space hacking function was very
+poor due to the fact that it hacked with the argument prematurely.  This
+has been fixed but not patched.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03387.html">MPV; error</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03385.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03387.html">MPV; error</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03385.html">[no subject]</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03386"><strong>Date</strong></a></li>
+<li><a href="threads.html#03386"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

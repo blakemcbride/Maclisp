@@ -1,0 +1,91 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: (SSTATUS FLUSH () ) interacting with SUSPEND -->
+<!--X-From-R13: XA@Z ng [WF&#45;[Q (Xba Z Iuvgr) -->
+<!--X-Date: Sat, 28 Feb 81 11:16:00 GMT -->
+<!--X-Message-Id: 52d472fc70903450c88f33f005cb863e@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>(SSTATUS FLUSH () ) interacting with SUSPEND</title>
+<link rev="made" href="mailto:JONL at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01491.html">Date Prev</a>][<a href="msg01489.html">Date Next</a>][<a href="msg01491.html">Thread Prev</a>][<a href="msg01489.html">Thread Next</a>][<a href="maillist.html#01490">Date Index</a>][<a href="threads.html#01490">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>(SSTATUS FLUSH () ) interacting with SUSPEND</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: EB at MIT-MC</li>
+<li><em>Subject</em>: (SSTATUS FLUSH () ) interacting with SUSPEND</li>
+<li><em>From</em>: JONL at MIT-MC (Jon L White)</li>
+<li><em>Date</em>: Sat, 28 Feb 81 11:16:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 28 FEB 1981 0616-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>I've patched the current LISP/XLISP for this problem
+    Date: 26 February 1981 17:05-EST
+    From: Edward Barton &lt;EB at MIT-AI&gt;
+    I had a file that was SUSPENDed and PDUMPed with (status flush) = NIL,
+    but when the PURQIO disappeared from SYS; the dump stopped working
+    (complained of not being able to find LISP pure pages).
+Trouble was that FLSSTA decided to die when it couldn't find the
+PURQIO file, but it didn't even bother to check if it already
+had the system pages &quot;in core&quot;.  (It still wants to TRY to find the
+PURQIO file so that sharing can be done when available, even if
+the lisp pages were dumped out).
+   EB: I've re-dumped your file AI:EB;TS BACKUP with this patch
+in it, and renamed the former version to TS OBACKUP.  As time 
+goes by, we can again delete the SYS;PURQIO 1997 file, and
+still have your BACKUP winning.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01491.html">MAKE-STRING now has optional 2nd arg</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01489.html">MC:BLIS11;DEFVST BUG</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01491.html">MAKE-STRING now has optional 2nd arg</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01489.html">MC:BLIS11;DEFVST BUG</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01490"><strong>Date</strong></a></li>
+<li><a href="threads.html#01490"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

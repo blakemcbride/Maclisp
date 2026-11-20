@@ -1,0 +1,97 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject: Get of a Hunk -->
+<!--X-From-R13: Y[B ng [WF&#45;[Q (Yrag [. Bvgzna) -->
+<!--X-Date: Mon, 16 Feb 81 06:47:00 GMT -->
+<!--X-Message-Id: d3a9d3d87bfb4a2c423a97f2dd3820a6@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Get of a Hunk</title>
+<link rev="made" href="mailto:KMP at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg01567.html">Date Prev</a>][<a href="msg01565.html">Date Next</a>][<a href="msg01569.html">Thread Prev</a>][<a href="msg01572.html">Thread Next</a>][<a href="maillist.html#01566">Date Index</a>][<a href="threads.html#01566">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Get of a Hunk</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: JONL at MIT-MC</li>
+<li><em>Subject</em>: Get of a Hunk</li>
+<li><em>From</em>: KMP at MIT-MC (Kent M. Pitman)</li>
+<li><em>Date</em>: Mon, 16 Feb 81 06:47:00 GMT</li>
+<li><em>Cc</em>: (BUG LISP) at MIT-MC</li>
+<li><em>Original-date</em>: 16 FEB 1981 0147-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    GET has never been advertised to do anything except return () when
+    applied to something other than a LIST or a SYMBOL....
+
+This is *not* true. GET has been advertised to work on symbols and
+disembodied property lists, which are lists of a certain form.
+Since HUNKs are advertised and have been for a long time to behave
+like lists, you are changing a documented behavior. No longer will
+simple rules tell us when HUNKs are lists and when they are not. We
+will have to remember tables of how each function works on them. I
+think this is very sad, for while I will agree that it is bad that
+for HUNKs to have behaved originally as non-atoms, there is a wealth
+of code that depends on this now and I don't want to see it broken.
+
+Why don't you admit you made a quick-and-easy patch instead of a
+correct one. There was a very straightforward albeit longer patch
+that would have been right: Make GET of a USRHUNK return () if you
+like -- or send the thing a GET message(?) -- and make GET on normal
+hunks still cdr the thing like all good list-like frobs have been
+defined to do.
+
+-kmp
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg01567.html">MacLISP recidivus!</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg01565.html">[no subject]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg01569.html">GET of a HUNK</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg01572.html">PURE-SUSPEND will mail note to LISP;LOCK MAIL</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#01566"><strong>Date</strong></a></li>
+<li><a href="threads.html#01566"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

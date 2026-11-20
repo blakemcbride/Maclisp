@@ -1,0 +1,110 @@
+<!-- MHonArc v2.6.19+ -->
+<!--X-Subject:  -->
+<!--X-From-R13: Dboreg I. Yreaf &#60;DIY ng [WF&#45;[Q> -->
+<!--X-Date: Sun, 18 Nov 79 14:51:00 GMT -->
+<!--X-Message-Id: fbf42a62226220a0178ba90a864655af@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>[no subject]</title>
+<link rev="made" href="mailto:RWK at MIT-MC">
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg03976.html">Date Prev</a>][<a href="msg03974.html">Date Next</a>][<a href="msg03976.html">Thread Prev</a>][<a href="msg03974.html">Thread Next</a>][<a href="maillist.html#03975">Date Index</a>][<a href="threads.html#03975">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[no subject]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: ALAN at MIT-MC, TLP at MIT-MC</li>
+<li><em>From</em>: Robert W. Kerns &lt;RWK at MIT-MC&gt;</li>
+<li><em>Date</em>: Sun, 18 Nov 79 14:51:00 GMT</li>
+<li><em>Cc</em>: BUG-LISP at MIT-MC, BUG-LISPM at MIT-AI</li>
+<li><em>Original-date</em>: 18 November 1979 09:51-EST</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>    Date: 14 November 1979 03:45-EST
+    From: Alan Bawden &lt;ALAN at MIT-MC&gt;
+    To:   BUG-LISPM at MIT-AI
+    cc:   BUG-LISP
+
+        Date: 13 NOV 1979 0925-EST
+        From: TLP at MIT-AI (Tomas Lozano-Perez)
+
+        Why doesn't ASSOC in LISPM LISP just ignore atoms in the
+        list argument (like MacLisp does) instead of barfing by
+        trying to take CAAR of them?
+
+    Is this really a feature of MacLisp? I can't seem to find
+    this in the moonual or in LISP NEWS or in the new MacLisp
+    manual.  It does behave this way on both ITS and Multics,
+    but I would have reported it as a bug if I had found out
+    about it on my own.  It really is a shame that the
+    LispMachine is forced to continue such lossages.  Another
+    example is the MacLisp definition of new-style DO in the
+    case where the second &quot;argument&quot; is nil, it executes the
+    body just once!  This one is documented at least, but it
+    sure is random!
+The DO feature is at least useful ...
+
+Anyway, ASSOC happens to behave this way, because it lets you use
+'((A . B) NIL (C . D)) and have the NIL entry ignored.  This
+ends up carrying over to symbols because it uses (ATOM X) instead
+of (NULL X).  Lose, lose.  I think MacLisp should be changed...
+even the feature of ignoring null entries is kind of marginal.
+It should just do a null-check, like ASSQ does.
+
+TLP:  If you're using ASSQ in MacLisp, it will LOOK like it's working, but
+will merely be taking the CAR of the symbol, which is unlikely to match
+your argument.  It is merely randomness that this isn't also true of
+ASSOC.  I.e. your code is bugous.
+</pre>
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg03976.html">[no subject]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg03974.html">ASSOQ and ASSQ and atoms</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg03976.html">[no subject]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg03974.html">ASSOQ and ASSQ and atoms</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="maillist.html#03975"><strong>Date</strong></a></li>
+<li><a href="threads.html#03975"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>
